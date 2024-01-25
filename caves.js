@@ -256,9 +256,13 @@ let type4Ores = {
 }
 let allCaves = [type1Ores, type2Ores, type3Ores, type4Ores];
 function getCaveType() {
+    let caveTypeLuck = 1;
+    if (currentPickaxe === 12)
+        caveTypeLuck = 2;
     let caveType = undefined;
     let summedProbability = 0;
     let chosenValue = Math.random();
+    chosenValue /= caveTypeLuck;
     for (let propertyName in caveTypes) {
         summedProbability += caveTypes[propertyName];
         if (chosenValue < summedProbability) {

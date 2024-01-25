@@ -125,8 +125,10 @@ function exportData() {
 function importData(data) {
     if (data === "") {
         if (confirm("You are importing nothing, this will perform a hard reset on your save file. Are you sure you want to do this?")) {
-            localStorage.clear();
-            location.reload();
+            if (confirm("YOUR SAVE FILE WILL BE ERASED. PLEASE BE SURE THIS IS WHAT YOU WANT.")) {
+                localStorage.clear();
+                location.reload();
+            }
         }
     } else {
         if (confirm("Are you sure you want to do this? Any mistakes in imported data will corrupt your savefile.")) {

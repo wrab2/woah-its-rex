@@ -20,7 +20,8 @@ let pickaxes = [
     [">:C", false],
     ["IM HERE NOW TOO", false],
     ["mrrp meow meow!", false],
-    ["cataxe", false]
+    ["cataxe", false],
+    ["sorry chat, felt evil", false]
 ];
 let gears = [
     false, //ORE TRACKER 0
@@ -103,7 +104,8 @@ function loadContent() {
 
 //MOVEMENT
 
-function movePlayer(dir) {
+function movePlayer(dir, reps) {
+    for (let i = 0; i < reps; i++) {
         if (canMine) {
             switch (dir) {
                 case "s":
@@ -145,10 +147,10 @@ function movePlayer(dir) {
                     lastDirection = "s";
                     break;
                 default:
-                    console.log("wrong key!!");
             }
-            displayArea();
             gearAbility3();
+        }
+        displayArea();
         }
 }
 
@@ -196,7 +198,7 @@ document.addEventListener('keydown', (event) => {
     if (validInput) {
         clearInterval(loopTimer);
         curDirection = "";
-        movePlayer(name);
+        movePlayer(name, 1);
         energySiphonerDirection = "";
     }
 }, false);
@@ -213,6 +215,7 @@ function goDirection(direction, speed) {
             ability1Active = false;
         }
     } else {
+        let reps = 1
         clearInterval(loopTimer);
         if (speed === undefined) {
             if (gears[2])
@@ -222,7 +225,9 @@ function goDirection(direction, speed) {
         } else {
             miningSpeed = speed;
         }
-        loopTimer = setInterval(movePlayer, miningSpeed, direction);
+        if (currentPickaxe === 12)
+            reps = 2;
+        loopTimer = setInterval(movePlayer, miningSpeed, direction, reps);
         curDirection = direction;
         energySiphonerDirection = direction;
     }
@@ -232,7 +237,7 @@ function moveOne(dir, button) {
     button.disabled = true;
     clearInterval(loopTimer);
     setTimeout(() => {
-        movePlayer(dir);
+        movePlayer(dir, 1);
     }, 15);
     curDirection = "";
     setTimeout(() => {

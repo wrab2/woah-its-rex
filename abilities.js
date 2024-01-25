@@ -86,6 +86,11 @@ async function rollAbilities() {
                 updateActiveRecipe();
             }
             break;
+        case 12:
+            if (Math.random() <= (1/150 * m)) {
+                canMine = await(pickaxeAbility13(curX, curY, boost));
+                updateActiveRecipe();
+            }
     }
 }
 
@@ -121,15 +126,12 @@ function gearAbility2() {
 
 function gearAbility3() {
     if (gears[3] && loggedFinds.length > 0) {
-        console.log(loggedFinds);
         for (let i = 0; i < loggedFinds.length; i++) {
             if (mine[loggedFinds[i][0]] !== undefined && mine[loggedFinds[i][0]][loggedFinds[i][1]] !== undefined) {
-                console.log("mined");
                 mineBlock(loggedFinds[i][1], loggedFinds[i][0], "ability", 1);
                 loggedFinds.splice(i, 1);
             }
         }
-        console.log(loggedFinds);
     }
 }
 function pickaxeAbility1(x, y, size, customLuck, boost) {
@@ -672,3 +674,51 @@ function pickaxeAbility12(x, y, boost) {
     }, 1);
     });
 }
+
+function pickaxeAbility13(x, y, boost) {
+    return new Promise((resolve) => {
+    let thisLuck = 75 * boost;
+    let startNums = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 5, 6, 6];
+    let endNums = [37, 36, 35, 34, 29, 31, 30, 29, 28, 27, 26, 24, 29, 28, 32, 31, 25, 24, 23, 16, 24, 23, 22, 24, 26, 28, 19, 31, 30, 24, 13, 20, 21];
+    let numSkips = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [28], [27], [], [], [], [], [19, 20], [21, 22], [], [], [], [], [], [24], [12, 25], [13], [], [15], [16]];
+    let i = 0;
+    for (let r = y - 16; r < y + 17; r++) {
+        if (mine[r] != undefined) {
+            for (let c = x + startNums[i]; c <= x + endNums[i]; c++) {
+                if (!(numSkips[i].includes(c - x))) {
+                    if (mine[r][c] === "⬜") {
+                        generated = generateBlock(thisLuck, [r, c]);
+                        mine[r][c] = generated[0];
+                        if (generated[1])
+                            verifiedOres.verifyLog(r, c);
+                    }
+                    mineBlock(c, r, "ability", thisLuck); 
+                }
+            }
+        }
+        i++;
+    }
+    i = 0;
+    for (let r = y - 16; r < y + 17; r++) {
+        if (mine[r] != undefined) {
+            for (let c = x - startNums[i]; c >= x - endNums[i]; c--) {
+                if (!(numSkips[i].includes(-(c - x)))) {
+                    if (mine[r][c] === "⬜") {
+                        generated = generateBlock(thisLuck, [r, c]);
+                        mine[r][c] = generated[0];
+                        if (generated[1])
+                            verifiedOres.verifyLog(r, c);
+                    }
+                    mineBlock(c, r, "ability", thisLuck); 
+                }
+            }
+        }
+        i++;
+    }
+    displayArea();
+    setTimeout(() => {
+        resolve(true);
+    }, 1);
+    });
+}
+

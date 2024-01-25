@@ -60,14 +60,17 @@
   display:flex;
   flex-flow:column;
   align-items:center;
-  gap:3px;
+  gap:1vh;
 }
 
 #pickaxeCrafts {
   display:flex;
   flex-flow:column;
   align-items:center;
-  gap:3px;
+  gap:1vh;
+}
+.craftingButton {
+  width: 50%;
 }
 #pressPlay {
   font-family: 'Arial', sans-serif;
@@ -101,6 +104,7 @@
   width: 100%;
   position: absolute;
   display: none;
+  overflow-y: scroll!important;
 }
 
 #dataText {
@@ -112,7 +116,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   justify-content: flex-end;
 }
 img.roundcat {
@@ -176,7 +180,7 @@ img.roundcat {
   padding: 0.5em;
   margin: 0;
   line-height: 1.8vw;
-  font-size: 1.7vw;
+  font-size: 1.55vw;
   user-select: none;
   text-wrap: nowrap;
   text-align: center;
@@ -249,7 +253,7 @@ button, .col-3 > div > button {
   width: 25%;
   height: 100vh;
   max-height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-style: solid;
   border-color: rgb(49, 49, 49);
   border-top: 0;
