@@ -8,6 +8,7 @@ let baseMineCapacity = 40000;
 let mineCapacity = 40000; // in case this ever needs to be raised
 let canMine = false;
 let lastDirection = "";
+let stopOnRare = false;
 let pickaxes = [
     ["is anyone gonna read these lol", true],
     ["hi!!! hii!!", false],
@@ -259,6 +260,30 @@ function changeCanDisplay(button) {
         displayArea();
     }
 }
+
+function changeStopOnRare(button) {
+    if (stopOnRare) {
+        stopOnRare = false;
+        button.style.backgroundColor = "red";
+    } else {
+        stopOnRare = true;
+        button.style.backgroundColor = "green";
+    }
+        
+}
+
+//TY TETRA FOR THE BACKGROUND CHANGING FUNCTION!!
+function changeBackgroundColor() {
+    // Get the input value
+    var hexColor = document.getElementById("colorInput").value;
+  
+    // Validate if the input is a valid hex color
+    if (/^#[0-9A-F]{6}$/i.test(hexColor)) {
+      // Set the background color
+      document.body.style.backgroundColor = hexColor;
+    }
+}
+
 function displayArea() {
     if (canDisplay) {
         let output ="";

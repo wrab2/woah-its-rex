@@ -18,7 +18,7 @@ function saveAllData() {
         dataStorage[0].push([propertyName, [oreList[propertyName][1]]]);
     dataStorage[1].push([pickaxes, currentPickaxe]);
     dataStorage[2].push(totalMined)
-    dataStorage[3].push(canPlay, Number(document.getElementById("musicVolume").value), Number(document.getElementById("spawnVolume").value), document.getElementById("musicButton").innerHTML, baseMineCapacity);
+    dataStorage[3].push(canPlay, Number(document.getElementById("musicVolume").value), Number(document.getElementById("spawnVolume").value), document.getElementById("musicButton").innerHTML, baseMineCapacity, stopOnRare, document.body.style.backgroundColor);
     dataStorage[4].push(gears);
     localStorage.setItem("playerData", JSON.stringify(dataStorage));
 }
@@ -71,6 +71,14 @@ function loadAllData() {
         if (data[3][4] != undefined && !(isNaN(data[3][4]) && data[3][4] > 0)) {
             baseMineCapacity = data[3][4];
             mineCapacity = data[3][4];
+        }
+        if (data[3][5] != undefined) {
+            stopOnRare = data[3][5];
+            if (stopOnRare)
+                document.getElementById("stopOnRare").style.backgroundColor = "green";
+        }
+        if (data[3][6] != undefined) {
+            document.body.style.backgroundColor = data[3][6];
         }
         if (data[4] !== undefined || data[4] !== null) {
             for (let i = 0; i < data[4][0].length; i++)

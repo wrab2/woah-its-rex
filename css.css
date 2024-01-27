@@ -17,6 +17,7 @@
   border-left: none;
   border-right: none;
   margin-top: 0.35em;
+  background-color: #1a1a1a;
 }
 
 #inventoryDisplay > * {
@@ -52,6 +53,7 @@
   font-size: 0.75vw;
   min-height: 4em;
   max-height: 16em;
+  background-color: #1a1a1a;
 }
 .itemDescription {
   font-size:1vw;

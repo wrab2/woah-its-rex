@@ -235,27 +235,39 @@ function generateBlock(luck, location) {
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("zenith");
+            if (stopOnRare)
+                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 1500000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("magnificent");
+            if (stopOnRare)
+                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 750000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("otherworldly");
+            if (stopOnRare)
+                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 160000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("unfathomable");
+            if (stopOnRare)
+                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 25000000) {
             spawnMessage(blockToGive, location);
             playSound("enigmatic");
+            if (stopOnRare)
+                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 5000000) {
             spawnMessage(blockToGive, location);
             playSound("transcendent");
+            if (stopOnRare)
+                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 750000) {
             spawnMessage(blockToGive, location);
             playSound("exotic");
@@ -264,6 +276,9 @@ function generateBlock(luck, location) {
     return [blockToGive, hasLog];
 }
 
+function stopMining() {
+    goDirection(curDirection);
+}
 //TELEPORTING
 
 let distanceMulti = 1;

@@ -202,6 +202,7 @@
         <button onclick="changeCanPlay(4, this)"id="mute4">Mute Otherworldlies</button>
         <button onclick="changeCanPlay(5, this)"id="mute5">Mute Metaversals</button>
         <button onclick="changeCanPlay(6, this)"id="mute6">Mute Zeniths</button>
+        <button onclick="changeStopOnRare(this)" style="background-color: red;" id="stopOnRare">Stop On Rare</button>
         <br>
         <br>
         <div id="masterVolume">
@@ -213,6 +214,8 @@
         <br>
         <input autocomplete = "off" type="text" id="mineCapacitySetter">
         <button onclick="updateCapacity(document.getElementById('mineCapacitySetter').value)">Update Capacity</button>
+        <input autocomplete = "off" type="text" id="colorInput">
+        <button onclick="changeBackgroundColor()">Change Background Color</button>
         <br>
         <button onclick="verifiedOres.showLogs()">Generate Ore Logs</button>
         <div id="logHolder"></div>
