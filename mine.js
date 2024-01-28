@@ -1,108 +1,70 @@
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
+
 //MINE CREATION
 
 function createMine() {
     for (let r = curY; r < curY + 51; r++) {
         mine.push([]);
-        for (let c = curX - 51; c < curX + 51; c++)
-            mine[r][c] = r === 0 ? "🟩" : "⬜";
     }
+    for (let c = curX - 25; c < curX + 25; c++) 
+        mine[curY][c] = "🟩";
     mine[0][1000000000] = "⛏️"; //trusty pickaxe
     displayArea();
     checkAllAround(curX, curY, 1);
     displayArea();
 }
 
-function prepareArea(facing) {
-    const constraints = getParams(50, 50);
-    switch(facing) {
-        case "a":
-            for (let r = curY - constraints[1]; r < curY + 50; r++) {
-                if (mine[r] === undefined) {
-                    mine[r] = [];
-                }
-                if (mine[r][curX - constraints[0]] === undefined) {
-                    if (r === 0) {
-                        mine[r][curX - constraints[0]] = "🟩";
-                    } else {
-                        mine[r][curX - constraints[0]] = "⬜";
-                    }
-                }
-            }
-            break;
-        case "s":
-            if (mine[curY + 50] === undefined)
-                mine[curY + 50] = [];
-            for (let c = curX - constraints[0]; c < curX + 50; c++) {
-                if (mine[curY + 50][c] === undefined) {
-                    mine[curY + 50][c] = "⬜"
-                }
-            }
-            break;
-        case "d":
-            for (let r = curY - constraints[1]; r < curY + 50; r++) {
-                if (mine[r] === undefined) {
-                    mine[r] = [];
-                }
-                if (mine[r][curX + 50] === undefined) {
-                    if (r === 0) {
-                        mine[r][curX + 50] = "🟩";
-                    } else {
-                        mine[r][curX + 50] = "⬜";
-                    }
-                }
-            }
-            break;
-        case "w":
-            if (mine[curY - constraints[1]] === undefined)
-                mine[curY - constraints[1]] = [];
-            for (let c = curX - constraints[0]; c < curX + 50; c++) {
-                if (mine[curY - constraints[1]][c] === undefined)
-                    mine[curY - constraints[1]][c] = curY - constraints[1] === 0 ? "🟩" : "⬜";
-            }
-            break;
-    }
-}
-
 function checkAllAround(x, y, luck) {
     let generated;
     if (x - 1 >= 0) {
-        if (mine[y][x - 1] === "⬜") {
-            generated = generateBlock(luck, [y, x-1]);
-            mine[y][x - 1] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y, x-1);
-            //blocksRevealedThisReset++;
+        if (mine[y] != undefined) {
+            if (mine[y][x - 1] === undefined) {
+                generated = generateBlock(luck, [y, x-1]);
+                mine[y][x - 1] = generated[0];
+                if (generated[1])
+                    verifiedOres.verifyLog(y, x+1);
+            }
+            
         }
     }
-    if (mine[y][x + 1] === "⬜") {
-        generated = generateBlock(luck, [y, x+1]);
+    if (mine[y] != undefined) {
+        if (mine[y][x + 1] === undefined) {
+            generated = generateBlock(luck, [y, x+1]);
             mine[y][x + 1] = generated[0];
             if (generated[1])
                 verifiedOres.verifyLog(y, x+1);
-            //blocksRevealedThisReset++;
         }
-    if (mine[y + 1][x] === "⬜") {
-        generated = generateBlock(luck, [y+1, x]);
+        }
+    if (mine[y + 1] === undefined) 
+        mine[y + 1] = [];
+        if (mine[y + 1][x] === undefined) {
+            generated = generateBlock(luck, [y+1, x]);
             mine[y + 1][x] = generated[0];
             if (generated[1])
                 verifiedOres.verifyLog(y+1, x);
-            //blocksRevealedThisReset++;
         }
+        
     if (y - 1 >= 0) {
-        if (mine[y - 1][x] === "⬜") {
-            generated = generateBlock(luck, [y-1, x]);
-            mine[y - 1][x] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y-1, x);
-            //blocksRevealedThisReset++;
-        }
+        if (mine[y - 1] === undefined) 
+            mine[y - 1] = [];
+            if (mine[y - 1][x] === undefined) {
+                generated = generateBlock(luck, [y-1, x]);
+                mine[y - 1][x] = generated[0];
+                if (generated[1])
+                    verifiedOres.verifyLog(y-1, x);
+            }
+        
     }
     if (blocksRevealedThisReset >= mineCapacity) {
         canMine = false;
         gearAbility3();
         clearInterval(loopTimer);
         blocksRevealedThisReset = 0;
-        
         setTimeout(() => {
             if (ability1Active) {
                 clearTimeout(ability1Timeout);
@@ -113,10 +75,22 @@ function checkAllAround(x, y, luck) {
     }
 }
 
+function createMineIndexes() {
+    if (mine[curY + 50] === undefined)
+        mine[curY + 50] = [];
+    if (curY > 50) {
+        if (mine[curY - 50] === undefined) 
+            mine[curY - 50] = [];
+    } else {
+        let constraints = getParams(0, 50);
+        if (mine[constraints[1]] === undefined)
+            mine[constraints[1]] = [];
+    }
+}
 //MINING
 
 function mineBlock(x, y, cause, luck) {
-    if (mine[y][x] !== "⚪" && mine[y][x] !== "⛏️" && mine[y][x] !== "⬜") {
+    if (mine[y][x] !== "⚪" && mine[y][x] !== "⛏️") {
         let ore = mine[y][x];
         if (checkFromCave([y, x])) {
             let adjMulti = getCaveMultiFromOre(mine[y][x]);
@@ -311,10 +285,6 @@ function toLocation() {
     for (let r = y - 50; r < y + 50; r++) {
         if(mine[r] === undefined)
             mine[r] = [];
-        for (let c = x - 50; c < x + 50; c++) {
-            if (mine[r][c] === undefined)
-                mine[r][c] = "⬜";
-        }
     }
     setLayer(y - 50);
     mine[curY][curX] = "⚪";

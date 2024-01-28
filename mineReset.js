@@ -1,3 +1,9 @@
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
 function resetMine() {
     clearInterval(loopTimer);
     curDirection = "";
@@ -106,10 +112,6 @@ function mineResetAid() {
         for (let r = y - 50; r < y + 50; r++) {
             if(r > -1 && mine[r] === undefined) {
                 mine[r] = [];
-            }
-            for (let c = x - 50; c < x + 50; c++) {
-                if (mine[r] != undefined)
-                    mine[r][c] = "⬜";
             }
         }
         checkAllAround(curX, curY, 1);

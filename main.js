@@ -1,3 +1,9 @@
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
 let mine = [];
 let curX = 1000000000;
 let curY = 0;
@@ -112,8 +118,8 @@ function movePlayer(dir, reps) {
                 case "s":
                     mineBlock(curX, curY + 1, "mining", 1);
                     mine[curY][curX] = "⚪";
-                    prepareArea("s");
                     curY++;
+                    createMineIndexes();
                     mine[curY][curX] = "⛏️";
                     setLayer(curY);
                     lastDirection = "s";
@@ -122,8 +128,8 @@ function movePlayer(dir, reps) {
                     if (curY > 0) {
                         mineBlock(curX, curY - 1, "mining", 1);
                         mine[curY][curX] = "⚪";
-                        prepareArea("w");
                         curY--;
+                        createMineIndexes();
                         mine[curY][curX] = "⛏️";
                         lastDirection = "w";
                         setLayer(curY);
@@ -133,7 +139,6 @@ function movePlayer(dir, reps) {
                     if (curX > 0) {
                         mineBlock(curX - 1, curY, "mining", 1);
                         mine[curY][curX] = "⚪";
-                        prepareArea("a");
                         curX--;
                         mine[curY][curX] = "⛏️";
                         lastDirection = "a";
@@ -142,7 +147,6 @@ function movePlayer(dir, reps) {
                 case "d":
                     mineBlock(curX + 1, curY, "mining", 1);
                     mine[curY][curX] = "⚪";
-                    prepareArea("d");
                     curX++;
                     mine[curY][curX] = "⛏️";
                     lastDirection = "s";
@@ -290,12 +294,11 @@ function displayArea() {
         let constraints = getParams(9, 9);
         for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) {
             for (let c = curX - constraints[0]; c <= curX + 9 + (9-constraints[0]); c++) {
-                /*if (mine[r][c] === "⚪") {
-                    output += "<span style='opacity:0;'>" + mine[r][c] + "</span>"
-                } else {
+                if (mine[r][c]) {
                     output += mine[r][c];
-                }*/
-                output += mine[r][c];
+                } else {
+                    output += r === 0 ? "🟩" : "⬜";
+                }
             }  
             output += "<br>";
         }

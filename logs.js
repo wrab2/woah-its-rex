@@ -1,3 +1,9 @@
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
 class secureLogs {
     #spawnLogs;
     #verifiedLogs;
@@ -16,7 +22,7 @@ class secureLogs {
             luckModifier *= 1.6;
         const maxLuck = (this.#maxLuck[currentPickaxe] * luckModifier) + 1;
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
-            if (mine[r][c] === "⬜")
+            if (mine[r][c] === undefined)
                 this.#spawnLogs.push([r, c, intended, luck]);
         } else {
             console.log("failed to create, ", obj.stack, luck, maxLuck);

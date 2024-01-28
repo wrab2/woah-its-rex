@@ -1,3 +1,9 @@
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
 let oreList = {
     "🐱": [1/Infinity, [0,0,0,0]],
     "🧌": [1/696969696969, [0,0,0,0]],

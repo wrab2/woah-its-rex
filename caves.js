@@ -1,3 +1,9 @@
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
 function generateCave(x, y, rate, reps, type) {
     let caveType;
     if (type === undefined) {
@@ -15,15 +21,13 @@ function generateCave(x, y, rate, reps, type) {
                 for (let c = x; c < x + distX; c++) {
                     if (Math.random() < (0.1 - rate))
                         newOrigins.push([c + (Math.round(Math.random() * 4)) - (5 + reps), r + (Math.round(Math.random() * 4)) - (5 + reps)]);
-                    
                         if (r > 0) {
-                            if (mine[r][c] === "⬜") {
+                            if (mine[r][c] === undefined) {
                                 let generated = generateCaveBlock(r, c, caveType);
                                 mine[r][c] = generated[0];
                                 if (generated[1])
                                     verifiedOres.verifyLog(r, c);
-                            }
-                            
+                            }  
                         }
                         mineCaveBlock(c, r, caveType);
                 }
@@ -42,7 +46,7 @@ function mineCaveBlock(c, r, type) {
     let block = mine[r][c];
     let caveMulti = getCaveMulti(type);
     if (block != undefined) {
-        if (block != "⚪" && block != "⬜" && block != "⛏️") {
+        if (block != "⚪" && block != "⛏️") {
             giveBlock(block, c, r, false, true, caveMulti);
             mine[r][c] = "⚪";
         }
@@ -59,9 +63,6 @@ function mineCaveBlock(c, r, type) {
         mine[r + 1] = [];
     }
     if (mine[r + 1][c] === undefined) {
-        mine[r + 1][c] = "⬜";
-    }
-    if (mine[r + 1][c] === "⬜") {
         generated = generateCaveBlock(r + 1, c, type);
         mine[r + 1][c] = generated[0];
         if (generated[1]) 
@@ -70,9 +71,6 @@ function mineCaveBlock(c, r, type) {
     }
     //CHECK TO THE RIGHT OF THE BLOCK
     if (mine[r][c + 1] === undefined) {
-        mine[r][c + 1] = "⬜";
-    }
-    if (mine[r][c + 1] === "⬜") {
         generated = generateCaveBlock(r, c + 1, type);
         mine[r][c + 1] = generated[0];
         if (generated[1]) 
@@ -81,9 +79,6 @@ function mineCaveBlock(c, r, type) {
     }
     //CHECK TO THE LEFT OF THE BLOCK
     if (mine[r][c - 1] === undefined) {
-        mine[r][c - 1] = "⬜";
-    }
-    if (mine[r][c - 1] === "⬜") {
         generated = generateCaveBlock(r, c - 1, type);
         mine[r][c - 1] = generated[0];
         if (generated[1]) 
@@ -95,9 +90,6 @@ function mineCaveBlock(c, r, type) {
         mine[r - 1] = [];
     }
     if (r - 1 > 0 && mine[r - 1][c] === undefined) {
-        mine[r - 1][c] = "⬜";
-    }
-    if (r - 1 > 0 && mine[r - 1][c] === "⬜") {
         generated = generateCaveBlock(r - 1, c, type);
         mine[r - 1][c] = generated[0];
         if (generated[1]) 

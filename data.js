@@ -1,4 +1,9 @@
-const debug = false;
+/* Copyright (C) Amber Blessing - All Rights Reserved
+ 
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
+*/
 function saveAllData() {
     localStorage.setItem("game2DataChanges", true);
     let dataStorage = [
