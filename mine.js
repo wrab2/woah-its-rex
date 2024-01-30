@@ -27,7 +27,7 @@ function checkAllAround(x, y, luck) {
                 generated = generateBlock(luck, [y, x-1]);
                 mine[y][x - 1] = generated[0];
                 if (generated[1])
-                    verifiedOres.verifyLog(y, x+1);
+                    verifiedOres.verifyLog(y, x-1);
             }
             
         }
