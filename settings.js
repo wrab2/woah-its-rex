@@ -265,7 +265,6 @@ function switchLayerIndex(num, overrideNum) {
     if (layerNum > 11) {
         layerNum = 0;
     }
-
     if (layerNum < 0)
         layerNum = 11;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
@@ -275,6 +274,8 @@ function switchLayerIndex(num, overrideNum) {
     } else {
         layerToIndex = allLayers[layerNum];
     }
+    layerToIndex = layerNum === 100 ? sillyLayer : layerToIndex;
+    layerToIndex = layerNum === 101 ? fluteLayer : layerToIndex;
     let layerMaterial = (Object.keys(layerToIndex));
     layerMaterial = layerMaterial[layerMaterial.length - 1];
     document.getElementById("indexSwitchButton").innerHTML = layerMaterial;
@@ -331,6 +332,9 @@ function randomFunction(text, cause) {
                 break;
             }
         }
+        num = num === 8 ? 100 : num;
+        num = num === 9 ? 101 : num;
+
         if (num < 1) {
             for (let i = allCaves.length - 1; i >= 0; i--) {
                 if (allCaves[i][ore] != undefined) {

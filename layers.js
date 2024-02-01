@@ -546,7 +546,7 @@ const customMessages = {
     "⚕️": "Gently materializing, a healing symbol radiates a serene energy, offering tranquility...",
     "💅": "GURLLLLLLL NO WAYYYYYYYY OMGGGGGGGGG...",
     "🌳": "CAKECORE13...",
-    "✈️": "There was a 2nd plane...",
+    "✈️": "THEY HIT THE PENTAGON😭...",
     "💵": "MONEY MONEY KACHINGGGG JACKPOT...",
     "🏰": "An essence of royalty graces the air of majestic opulence...",
     "🪢": "Halfheartedly sauntering into existence, a lackluster piece of twine makes a feeble attempt at garnering attention, or not...",
