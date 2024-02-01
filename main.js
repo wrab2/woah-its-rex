@@ -62,7 +62,9 @@ function init() {
         createPickaxeRecipes();
         createGearRecipes();
         document.getElementById('dataText').value = "";
-        createIndex();
+        //createIndex();
+        switchLayerIndex(0, 0)
+        console.log("meow");
     }
 }
 
@@ -74,8 +76,8 @@ let ow;
 let magnificent;
 let zenith;
 let keepRunningAudio;
+let allAudios = [];
 function loadContent() {
-    let allAudios = [];
     keepRunningAudio = new Audio("ambiencebyx2corp.mp3")
     keepRunningAudio.load();
     keepRunning();
@@ -93,14 +95,6 @@ function loadContent() {
     allAudios.push(ow);
     allAudios.push(magnificent);
     allAudios.push(zenith);
-    chill.volume = 1;
-    ringing.volume = 0.4;
-    visionblur.volume = 0.6;
-    unfath.volume = 0.6;
-    ow.volume = 0.6;
-    magnificent.volume = 1;
-    zenith.volume = 0.6;
-    
     for (let i = 0; i < allAudios.length; i++)
         allAudios[i].load();
     document.getElementById("pressPlay").style.display = "none";
@@ -197,7 +191,6 @@ document.addEventListener('keydown', (event) => {
             name = "d";
             break;
         default:
-            console.log("wrong key!");
             break;
     }
     if (validInput) {
@@ -230,6 +223,8 @@ function goDirection(direction, speed) {
         } else {
             miningSpeed = speed;
         }
+        if (miningSpeed < minMiningSpeed)
+            miningSpeed = minMiningSpeed;
         if (currentPickaxe === 12)
             reps = 2;
         loopTimer = setInterval(movePlayer, miningSpeed, direction, reps);
@@ -253,41 +248,6 @@ function moveOne(dir, button) {
 
 //DISPLAY
 
-let canDisplay = true;
-function changeCanDisplay(button) {
-    if (button.innerHTML.includes("Disable")) {
-        button.innerHTML = "Enable Display";
-        canDisplay = false;
-    } else {
-        button.innerHTML = "Disable Display";
-        canDisplay = true;
-        displayArea();
-    }
-}
-
-function changeStopOnRare(button) {
-    if (stopOnRare) {
-        stopOnRare = false;
-        button.style.backgroundColor = "red";
-    } else {
-        stopOnRare = true;
-        button.style.backgroundColor = "green";
-    }
-        
-}
-
-//TY TETRA FOR THE BACKGROUND CHANGING FUNCTION!!
-function changeBackgroundColor() {
-    // Get the input value
-    var hexColor = document.getElementById("colorInput").value;
-  
-    // Validate if the input is a valid hex color
-    if (/^#[0-9A-F]{6}$/i.test(hexColor)) {
-      // Set the background color
-      document.body.style.backgroundColor = hexColor;
-    }
-}
-
 function displayArea() {
     if (canDisplay) {
         let output ="";
@@ -297,14 +257,14 @@ function displayArea() {
                 if (mine[r][c]) {
                     output += mine[r][c];
                 } else {
-                    output += r === 0 ? "🟩" : "⬜";
+                    output += r === 0 ? "🟩" : "⬛";
                 }
             }  
             output += "<br>";
         }
         document.getElementById("blockDisplay").innerHTML = output;
     } else {
-        document.getElementById("blockDisplay").innerHTML = "D I S A B L E D";
+        document.getElementById("blockDisplay").innerHTML = "❌";
     }
     document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
     document.getElementById("blocksMined").innerHTML = totalMined.toLocaleString() + " Blocks Mined";
@@ -323,8 +283,6 @@ function switchInventory() {
         variant++;
     document.getElementById("inventory" + variant).style.display = "block";
     document.getElementById("switchInventory").innerHTML = names[variant - 1] + " Inventory"
-    document.getElementById("indexDisplay").style.display = "none";
-    document.getElementById("showIndex").innerHTML = "Show Index";
     showing = false;
 }
 
@@ -336,6 +294,7 @@ function createInventory() {
             tempElement.id = (propertyName + i);
             tempElement.classList = "oreDisplay";
             tempElement.style.display = "none";
+            tempElement.setAttribute("onclick", "randomFunction(this.innerHTML, 'inv')");
             tempElement.innerHTML = propertyName + " | 1/" + ((Math.round( 1 / oreList[propertyName][0])).toLocaleString() * multis[i - 1]).toLocaleString() + " | x" + oreNum.toLocaleString();
             document.getElementById(("inventory") + i).appendChild(tempElement);
         }
@@ -375,21 +334,6 @@ function createIndex() {
     document.getElementById("indexDisplay").innerHTML = output;
 }
 
-let showing = false;
-function showIndex() {
-    if (showing) {
-        document.getElementById("indexDisplay").style.display = "none";
-        document.getElementById("showIndex").innerHTML = "Show Index";
-        document.getElementById("inventory" + (variant)).style.display = "block";
-        showing = false;
-    } else {
-        document.getElementById("indexDisplay").style.display = "block";
-        document.getElementById("showIndex").innerHTML = "Show Inventory";
-        document.getElementById("inventory" + (variant)).style.display = "none";
-        showing = true;
-    }
-}
-
 let variant = 1;
 function updateInventory(type, inv) {
     document.getElementById(type + inv).innerHTML = type + " | 1/" + ((Math.round( 1 / oreList[type][0])) * multis[inv - 1]).toLocaleString() + " | x" + oreList[type][1][inv - 1].toLocaleString();
@@ -423,48 +367,25 @@ function spawnMessage(block, location, caveInfo) {
     if (caveInfo != undefined && caveInfo[0]) {
         fromCave = true
     }
-    if (currentPickaxe === 5) {
-    //IF PICKAXE IS 5, ADD LOCATION
-    if (fromCave)
-        //IF FROM CAVE ADD ADJUSTED RARITY
-        latestSpawns.push([block, location[1], location[0], true, caveInfo[1]]);
+    let temp = [block];
+    if (currentPickaxe === 5 || gears[0])
+        temp.push(location[1], location[0]);
     else
-        latestSpawns.push([block, location[1], location[0]]);
-    } else if (currentPickaxe < 7) {
-        if (gears[0]) {
-            //IF PICKAXE IS UNDER 7, BUT ORE TRACKER IS OWNED, ADD LOCATION
-            if (fromCave)
-                //IF FROM CAVE ADD ADJUSTED RARITY
-                latestSpawns.push([block, location[1], location[0], true, caveInfo[1]]);
-            else 
-                latestSpawns.push([block, location[1], location[0]]);
-        } else {
-            //IF NO TRACKER AND PICKAXE IS UNDER 5, DO NOT PUSH LOCATION
-            if (fromCave)
-                latestSpawns.push([block, undefined, undefined, true, caveInfo[1]]);
-            else
-                latestSpawns.push([block, undefined, undefined]);
-        }
-        
-    } else if (Math.round(1 / (oreList[block][0])) > 2000000) {
-        //IF CURRENT PICKAXE IS OVER 7, ONLY ADD ORES OVER 1/2M
-        if (gears[0]) {
-            //IF ORE TRACKER IS OWNED, ADD LOCATION
-            if (fromCave)
-                latestSpawns.push([block, location[1], location[0], true, caveInfo[1]]);
-            else
-                latestSpawns.push([block, location[1], location[0]]);
-        } else {
-            //IF NO ORE TRACKER, DO NOT ADD LOCATION
-            if (fromCave)
-            latestSpawns.push([block, undefined, undefined, true, caveInfo[1]]);
-            else
-            latestSpawns.push([block, undefined, undefined]);
-        }
-            
-        } else
-            //IF ORE IS <1/2M WITH A PICKAXE OVER 7, DO NOT ADD TO LATEST
+        temp.push(undefined, undefined);
+    if (fromCave) {
+        temp.push(true, caveInfo[1]);
+        latestSpawns.push(temp);
+    } else {
+        if (currentPickaxe > 10 && 1/oreList[block][0] < 16000000) {
             addToLatest = false;
+        } 
+        if (currentPickaxe > 6 && 1/oreList[block][0] < 3000000) {
+            addToLatest = false;
+        }
+        if (addToLatest)
+            latestSpawns.push(temp);
+    }
+
     if (gears[3]) {
         if (oreList[block][0] < 1/2000000)
         loggedFinds.push([location[0], location[1]]);
@@ -483,15 +404,24 @@ function spawnMessage(block, location, caveInfo) {
             output += "<br>"
         }
         document.getElementById("latestSpawns").innerHTML = output;
-        if (caveInfo != undefined && caveInfo[0])
-        document.getElementById("spawnMessage").innerHTML = block + " Has Spawned!<br>" + "1/" + (caveInfo[1]).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0])).toLocaleString():"");
-        else
-        document.getElementById("spawnMessage").innerHTML = block + " Has Spawned!<br>" + "1/" + (Math.round(1 / (oreList[block][0]))).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0])).toLocaleString():"");
-    }
-    clearTimeout(spawnOre);
+        let spawnText = "";
+        if (customMessages[block] != undefined) {
+            spawnText += "<i>" + customMessages[block] + "</i><br>";
+        } else {
+            spawnText += block + " Has Spawned!<br>"
+        }
+        if (caveInfo != undefined && caveInfo[0]) {
+            //spawnText += "1/" + (caveInfo[1]).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0])).toLocaleString():"");
+            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo[1]).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0])).toLocaleString():"");
+        } else {
+            //spawnText += "1/" + (Math.round(1 / (oreList[block][0]))).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0])).toLocaleString():"");
+            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (Math.round(1 / (oreList[block][0]))).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0])).toLocaleString():"");
+        }
+        clearTimeout(spawnOre);
     spawnOre = setTimeout(() => {
         document.getElementById("spawnMessage").innerHTML = "Spawn Messages Appear Here!"
     }, 20000);
+    }
 }
 
 let latestFinds = [];

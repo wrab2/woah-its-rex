@@ -97,7 +97,7 @@ function mineCaveBlock(c, r, type) {
         blocksRevealedThisReset++;
     }
 }
-//let caveLuck = 1;
+//let caveLuck = 1000000;
 function generateCaveBlock(y, x, type) {
     let hasLog;
     let probabilityTable = type;

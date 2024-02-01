@@ -107,9 +107,8 @@ function mineResetAid() {
     setTimeout(() => {
         mine = [[]];
         curX = 1000000000;
-        let x = 1000000000;
         let y = curY;
-        for (let r = y - 50; r < y + 50; r++) {
+        for (let r = y - 51; r < y + 51; r++) {
             if(r > -1 && mine[r] === undefined) {
                 mine[r] = [];
             }

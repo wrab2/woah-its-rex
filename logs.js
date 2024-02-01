@@ -30,6 +30,7 @@ class secureLogs {
     }
     verifyLog(r, c) {
         for (let i = 0; i < this.#spawnLogs.length; i++) {
+            //console.log(this.#spawnLogs[i][0], this.#spawnLogs[i][1], r, c);
             if (this.#spawnLogs[i][0] === r && this.#spawnLogs[i][1] === c) {
                 if (mine[r][c] === this.#spawnLogs[i][2]) {
                     const num = this.#spawnLogs[i][3];
@@ -59,7 +60,7 @@ class secureLogs {
         console.log(verified);
     }
     showLogs() {
-        if (document.getElementById("dataExport").style.display === "block") {
+        if (document.getElementById("settingsContainer").style.display === "block") {
                 clearInterval(this.#logsTimer);
                 this.#logsTimer = null;
                 let element = document.createElement("p");
@@ -72,7 +73,7 @@ class secureLogs {
                     let multi = multis[names.indexOf(this.#verifiedLogs[i][4])];
                     output += this.#verifiedLogs[i][0] + ", " + this.#verifiedLogs[i][2] + ", " + this.#verifiedLogs[i][3] + ", " + this.#verifiedLogs[i][4] + ", ";
                     output += this.#verifiedLogs[i][1][0] + ", ";
-                    output += Math.floor(((1 / oreList[this.#verifiedLogs[i][0]][0]) * multi) / this.#verifiedLogs[i][5]) + ", " + Math.log10(this.#verifiedLogs[i][5] * this.#verifiedLogs[i][1][0]) + "<br>";
+                    output += Math.floor(((1 / oreList[this.#verifiedLogs[i][0]][0]) * multi) / this.#verifiedLogs[i][5]) + ", " + Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1)) + "<br>";
                 }
                 this.#logsTimer = setInterval(this.#reloadLogs, 50, output!==""?output:"none");
         } else {
@@ -87,6 +88,9 @@ class secureLogs {
     }
     getLuckBoosts() {
         return this.#maxLuck;
+    }
+    getCurrentLuck() {
+        return (this.#maxLuck[currentPickaxe]) * (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
     }
 }
 let verifiedOres = new secureLogs();

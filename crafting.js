@@ -307,6 +307,7 @@ function createPickaxeRecipes() {
             let element = document.createElement('p');
             element.id = (pickaxeRecipes[i][j][0] + ("pickaxeRecipe" + (i+1) + "Display"));
             element.innerHTML = pickaxeRecipes[i][j][0] + " " + oreList[pickaxeRecipes[i][j][0]][1][0] + "/" + pickaxeRecipes[i][j][1];
+            element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
             if (oreList[pickaxeRecipes[i][j][0]][1][0] >= pickaxeRecipes[i][j][1])
                 element.style.color = "green";
             else
@@ -410,7 +411,7 @@ function craftPickaxe(num) {
         temp[temp.length - 1].innerHTML = "Equipped!";
         currentPickaxe = num;
     }
-    createIndex();
+    switchLayerIndex(0);
 }
 function craftGear(num) {
     canCraft = true;
@@ -432,7 +433,7 @@ function craftGear(num) {
             gears[num - 1] = true;
         }
     }
-    createIndex();
+    switchLayerIndex(0);
     if (num === 10)
         gearAbility2();
 }

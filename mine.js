@@ -27,7 +27,7 @@ function checkAllAround(x, y, luck) {
                 generated = generateBlock(luck, [y, x-1]);
                 mine[y][x - 1] = generated[0];
                 if (generated[1])
-                    verifiedOres.verifyLog(y, x+1);
+                    verifiedOres.verifyLog(y, x-1);
             }
             
         }
@@ -146,7 +146,10 @@ function giveBlock(type, x, y, fromReset, fromCave, caveInfo) {
         if (Math.round(1/oreList[type][0]) >= 750000) {
             if (gears[7])
                 gearAbility1();
-            if (currentPickaxe >= 7) {
+            if (currentPickaxe >= 10) {
+                if (Math.round(1/oreList[type][0]) > 15000000)
+                    logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);
+            } else if (currentPickaxe >= 7) {
                 if (Math.round(1/oreList[type][0]) > 2000000)
                     logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);
             } else
@@ -209,42 +212,44 @@ function generateBlock(luck, location) {
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("zenith");
-            if (stopOnRare)
+            if (stopOnRare && stopRareNum < 7)
                 stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 1500000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("magnificent");
-            if (stopOnRare)
+            if (stopOnRare && stopRareNum < 6)
                 stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 750000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("otherworldly");
-            if (stopOnRare)
+            if (stopOnRare && stopRareNum < 5)
                 stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 160000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("unfathomable");
-            if (stopOnRare)
+            if (stopOnRare && stopRareNum < 4)
                 stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 25000000) {
             spawnMessage(blockToGive, location);
             playSound("enigmatic");
-            if (stopOnRare)
+            if (stopOnRare && stopRareNum < 3)
                 stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 5000000) {
             spawnMessage(blockToGive, location);
             playSound("transcendent");
-            if (stopOnRare)
+            if (stopOnRare && stopRareNum < 2)
                 stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 750000) {
             spawnMessage(blockToGive, location);
             playSound("exotic");
+            if (stopOnRare && stopRareNum < 1)
+                stopMining();
         }
     }
     return [blockToGive, hasLog];
@@ -268,7 +273,10 @@ function switchDistance() {
         y = 1000;
         distanceMulti = 1;
     }
-    document.getElementById("meterDisplay").innerHTML = y.toLocaleString() + "m";
+    let layer = Object.keys(allLayers[Math.floor(y / 2000)]);
+    layer = layer[layer.length - 1];
+    console.log(layer);
+    document.getElementById("meterDisplay").innerHTML = layer + " " + y.toLocaleString() + "m";
 }
 
 async function teleport() {
@@ -317,11 +325,6 @@ function getParams(distanceX, distanceY, x, y) {
     return [displayLeft, displayUp];
 }
 
-function updateCapacity(value) {
-    value = Number(value);
-    if (!(isNaN(value)) && value > 0) {
-        baseMineCapacity = value;
-        mineCapacity = value;
-    }        
-}
+
+
 

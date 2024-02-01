@@ -19,21 +19,7 @@ function changeMusicVolume(percent) {
     }
     
 }
-function changeAllVolume(percent) {
-    percent = Number(percent);
-    if (!(isNaN(percent))) {
-        if (percent > 100)
-        percent = 100;
-    vol = (percent / 100);
-    chill.volume = 1*vol;
-    ringing.volume = 0.4*vol;
-    visionblur.volume = 0.6*vol;
-    unfath.volume = 0.6*vol;
-    ow.volume = 0.6*vol;
-    magnificent.volume = 1*vol;
-    zenith.volume = 0.6*vol;
-    }
-}
+
 
 function toggleMusic() {
     if (keepRunningAudio.paused) {

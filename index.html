@@ -18,6 +18,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--Importing JS Files-->
+    <script src="settings.js"></script>
     <script src="layers.js"></script>
     <script src="logs.js"></script>
     <script src="mine.js"></script>
@@ -44,7 +45,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   <ul>
     <b><li>UI by @catlover/@ZayedLovesCats on Discord! 😼</li></b>
     <b><li>Game made by @thecatofalltime on Discord! 😺</li></b>
-    <li>Some features made by @millabasset on Discord! 💖</li>
     <li>Background music made by @x2corp on Discord!</li>
     <li>Spawn sounds come from REx:R on Roblox</li>
     <li>Some sounds made by @tevv_ on Discord!</li>
@@ -75,7 +75,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <button onclick="moveOne('s', this)" class="movementButton">Down 1</button>
                 <button onclick="moveOne('w', this)" class="movementButton">Up 1</button>
                 <button onclick="moveOne('d', this)" class="movementButton">Right 1</button>
-                <button onclick="switchDistance()" class="movementButton" id="meterDisplay">1,000m</button>
+                <button onclick="switchDistance()" class="movementButton" id="meterDisplay">🟫 1,000m</button>
             </div>
             <p id="blockDisplay"></p>
             <div>
@@ -88,8 +88,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         <div class="col-2">
             <div>
                 <button id="resetMine" onclick="resetMine()">Reset Mine</button>
-                <button id="settings" onclick="showData()">Settings</button>
-                <button onclick="changeCanDisplay(this)">Disable Display</button>
+                <button id="settings" onclick="showSettings()">Settings</button>
             </div>
             <p id="mineResetProgress"></p>
             <p id="blocksMined">0 Blocks Mined</p>
@@ -167,23 +166,15 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             
         </div>
         <div class="col-3">
-            <div id="musicStuff">
-                <button id="musicButton" class="inventoryButtons" onclick="toggleMusic()">Mute Music</button>
-                <p>Music Volume</p>
-                <label class="slidecontainer">
-                    <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
-                </label>
-            </div>
+            
             <div>
                 <button id="switchInventory" class="inventoryButtons" onclick="switchInventory()">Normal Inventory</button>
-                <button id="showIndex" class="inventoryButtons" onclick="showIndex()">Show Index</button>
             </div>
             <div id="inventoryDisplay">
                 <p id="inventory1"   style="display:block;"></p>
                 <p id="inventory2"   style="display:none;"></p>
                 <p id="inventory3"   style="display:none;"></p>
                 <p id="inventory4"   style="display:none;"></p>
-                <p id="indexDisplay" style="display:none;"></p>
             </div>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
                 <img src="discord-logo.png" alt="Discord">
@@ -193,38 +184,154 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     </div>
 </div>
 </div>
-<div id="dataExport">
-    <div>
-        <input type="text" id="dataText">
-        <button onclick="exportData()">Export Data</button>
-        <button onclick="importData(document.getElementById('dataText').value)">Import Data</button>
-        <button onclick="hideData(); verifiedOres.showLogs()">Back to Game</button>
+
+<div id="settingsContainer" style="display: none;">
+    <h1 class="settingsTitle">Settings</h1>
+            <button class="settingsCategorySelector" onclick="hideSettings(); verifiedOres.showLogs()">Return to Game</button>
+            <button class="settingsCategorySelector" onclick="openFrame('index')">Ore Index</button>
+            <button class="settingsCategorySelector" onclick="openFrame('audio')">Audio Settings</button>
+            <button class="settingsCategorySelector" onclick="openFrame('game')">Game Settings</button>
+            <button class="settingsCategorySelector" onclick="openFrame('inventory')">Inventory Settings</button>
+            <button class="settingsCategorySelector" onclick="openFrame('color')">Color Settings</button>
+            <button class="settingsCategorySelector" onclick="openFrame('data')">Data Settings</button>
+    <div class="frame" id="audio-frame">
+      <h2>Audio Settings</h2>
+      <br>
+      <div id="musicStuff">
+        <button id="musicButton" class="inventoryButtons" onclick="toggleMusic()">Mute Music</button>
+        <p>Music Volume</p>
+        <label class="slidecontainer">
+            <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
+        </label>
+    </div>
+    <hr class="settingsSeparator">
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(0, this)" id="mute0">Mute Chills</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 0)" class="spawnVolume">
+        </label>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(1, this)"id="mute1">Mute Ringings</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 1)" class="spawnVolume">
+        </label>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(2, this)"id="mute2">Mute Blurs</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 2)" class="spawnVolume">
+        </label>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(3, this)"id="mute3">Mute Unfaths</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 3)" class="spawnVolume">
+        </label>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(4, this)"id="mute4">Mute Otherworldlies</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 4)" class="spawnVolume">
+        </label>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(5, this)"id="mute5">Mute Metaversals</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 5)" class="spawnVolume">
+        </label>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(6, this)"id="mute6">Mute Zeniths</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 6)" class="spawnVolume">
+        </label>
+    </div>
+    </div>
+    <div class="frame" id="inventory-frame">
+      <h2>Inventory Settings</h2>
+      <div class="inputAndButton">
+        <button class="invSettingButton fullyRounded" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
+      </div>
+      <div class="inputAndButton">
+        <button class="invSettingButton fullyRounded" onclick="switchToIndex(this, 1)" id="craftIndex">Travel to layer index on crafting click</button>
+      </div>
+      <h3></h3>
+    </div>
+
+    <div class="frame" id="game-frame">
+      <h2>Game Settings</h2>
+      <div class="inputAndButton">
+        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="minSpeedInput" placeholder="Default: 0">
+        <button class="inputButton roundedRight" onclick="changeMinMiningSpeed(document.getElementById('minSpeedInput'))">Set Min Speed</button>
+      </div>
+      <div class="inputAndButton">
+        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="mineCapacitySetter" placeholder="Default: 40000">
+        <button class="inputButton roundedRight" onclick="updateCapacity(document.getElementById('mineCapacitySetter'))">Update Capacity</button>
+      </div>
+      <div class="inputAndButton">
+        <button class="stopOnRareButton roundedLeft" onclick="changeStopOnRare(this)" id="stopOnRare">Stop On Rare</button>
+        <button class="stopOnRareSelector roundedRight" onclick="changeMinRarity(this)" id="stopOnRareDisplay">Chill+</button>
+      </div>
+      <div class="inputAndButton">
+        <button class="toggleDisplay fullyRounded" onclick="changeCanDisplay(this)" id="blockUpdates">Toggle Block Updates</button>
+      </div>
+      <div class="inputAndButton">
+        <button class="toggleDisplay fullyRounded" style="background-color: red;" onclick="changeUseNumbers(this)" id="useNumbers">Use Numbers for Pickaxe Names</button>
+      </div>
+    </div>
+
+    <div class="frame" id="color-frame">
+      <h2>Colour Settings</h2>
+      <div class="inputAndButton">
+        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="colorInput" placeholder="#1a1a1a">
+        <button class="inputButton roundedRight" onclick="changeBackgroundColor()">Change Background</button>
+      </div>
+      <div class="inputAndButton">
+        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Latest Finds" id="latestColor">
+        <button class="displayColorButton roundedRight"onclick="changeLatestColors(2)">Background</button>
+        <button class="displayColorButton" onclick="changeLatestColors(1)">Border</button>
+        <button class="displayColorButton" onclick="changeLatestColors(0)">Text Colour</button>
+      </div>
+      <div class="inputAndButton">
+        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Inventory" id="inventoryColors">
+        <button class="displayColorButton roundedRight twoButtons" onclick="changeInventoryColors(1)">Background</button>
+        <button class="displayColorButton twoButtons" onclick="changeInventoryColors(0)">Border</button>
+      </div>
+      <div class="inputAndButton">
+        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Crafting" id="craftingColors">
+        <button class="displayColorButton roundedRight twoButtons" onclick="changeCraftingColors(1)">Background</button>
+        <button class="displayColorButton twoButtons" onclick="changeCraftingColors(0)">Border</button>
+      </div>
+    </div>
+
+    <div class="frame" id="data-frame">
+    <h2>Data Settings</h2>
+    <br>
+    <div class="dataDiv">
+    <input type="text" id="dataText">
+    <button class="dataButton" onclick="exportData()">Export Data</button>
+    <button class="dataButton" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
+    
+      
         <br>
-        <br>
-        <button onclick="changeCanPlay(0, this)"id="mute0">Mute Chills</button>
-        <button onclick="changeCanPlay(1, this)"id="mute1">Mute Ringings</button>
-        <button onclick="changeCanPlay(2, this)"id="mute2">Mute Blurs</button>
-        <button onclick="changeCanPlay(3, this)"id="mute3">Mute Unfaths</button>
-        <button onclick="changeCanPlay(4, this)"id="mute4">Mute Otherworldlies</button>
-        <button onclick="changeCanPlay(5, this)"id="mute5">Mute Metaversals</button>
-        <button onclick="changeCanPlay(6, this)"id="mute6">Mute Zeniths</button>
-        <button onclick="changeStopOnRare(this)" style="background-color: red;" id="stopOnRare">Stop On Rare</button>
-        <br>
-        <br>
-        <div id="masterVolume">
-            <p>Spawn Volumes</p>
-            <label class="slidecontainer" style="max-width: 10vw;">
-                <input type="range" min="0" max="100" value="100" onchange="changeAllVolume(this.value)" id="spawnVolume">
-            </label>
-        </div>
-        <br>
-        <input autocomplete = "off" type="text" id="mineCapacitySetter">
-        <button onclick="updateCapacity(document.getElementById('mineCapacitySetter').value)">Update Capacity</button>
-        <input autocomplete = "off" type="text" id="colorInput">
-        <button onclick="changeBackgroundColor()">Change Background Color</button>
-        <br>
-        <button onclick="verifiedOres.showLogs()">Generate Ore Logs</button>
+        <button onclick="verifiedOres.showLogs()" class="dataButton">Generate Ore Logs</button>
         <div id="logHolder"></div>
     </div>
-</div>
+    </div>
+    <div class="frame" id="index-frame">
+        
+        <div id="indexDisplay">
+            <h2>Ore Index</h2>
+            <hr>
+            <p id="indexSwitchButton">Layer Placeholder</p>
+            <button class="indexDirectionButton" onclick="switchLayerIndex(-1)"><</button>
+            <button class="indexDirectionButton" onclick="switchLayerIndex(1)">></button>
+        </div>
+        
+        <div id="oreCardHolder">
+            
+        </div>
+    </div>
+  </div>
 </body>
