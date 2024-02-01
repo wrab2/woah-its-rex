@@ -165,7 +165,10 @@ function giveBlock(type, x, y, fromReset, fromCave, caveInfo) {
                 if (Math.round(1/oreList[type][0]) >= 750000) {
                     if (gears[7])
                     gearAbility1();
-                    if (currentPickaxe >= 7) {
+                    if (currentPickaxe >= 10) {
+                        if (Math.round(1/oreList[type][0]) > 15000000)
+                            logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);
+                    } else if (currentPickaxe >= 7) {
                         if (Math.round(1/oreList[type][0]) > 2000000)
                             logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);
                     } else
@@ -275,7 +278,6 @@ function switchDistance() {
     }
     let layer = Object.keys(allLayers[Math.floor(y / 2000)]);
     layer = layer[layer.length - 1];
-    console.log(layer);
     document.getElementById("meterDisplay").innerHTML = layer + " " + y.toLocaleString() + "m";
 }
 
