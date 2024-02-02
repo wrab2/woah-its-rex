@@ -6,12 +6,15 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 let oreList = {
     "🐱": [1/Infinity, [0,0,0,0]],
+    "🫶": [1/1000000000000, [0,0,0,0]],
     "🧌": [1/696969696969, [0,0,0,0]],
     "⚕️": [1/50000000000, [0,0,0,0]],
+    "💗": [1/150000000000, [0,0,0,0]],
     "🪔": [1/2000000000, [0,0,0,0]],
     "🎷": [1/2500000000, [0,0,0,0]],
     "🧫": [1/4000000000, [0,0,0,0]],
     "♾️": [1/75000000000, [0,0,0,0]],
+    "❤️‍🔥": [1/50000000000, [0,0,0,0]],
     "🩺": [1/800000000, [0,0,0,0]],
     "🌡️": [1/3000000000, [0,0,0,0]],
     "🛸": [1/1000000000, [0,0,0,0]],
@@ -294,6 +297,7 @@ brickLayer = {
 },
 
 foggyLayer = {
+    "❤️‍🔥" : 1/50000000000,
     "🚿": 1/6000000000,
     //"😻": 1/5000000005,
     "👁️": 1/1920000000,
@@ -375,9 +379,9 @@ rockLayer = {
     "🌈": 1/2750000000,
     "🧊": 1/583000000,
     "❄️": 1/386500000,
-    "🏝️": 1/275320000,
-    "✨": 1/240800000,
-    "⛄": 1/183640000,
+    //"🏝️": 1/275320000,
+    //"✨": 1/240800000,
+    //"⛄": 1/183640000,
     "💎": 1/170000000,
     "☄️": 1/72500000,
     "🔮": 1/60000000,
@@ -448,6 +452,7 @@ radioactiveLayer = {
 },
 
 cactusLayer = {
+    "💗": 1/150000000000,
     "🐪": 1/7800000000,
     //"😻": 1/5000000005,
     "🏵️": 1/2600000000,
@@ -535,12 +540,16 @@ sillyLayer = {
 },
 
 fluteLayer = {
+    "🫶": 1/1000000000000,
     "🪈": 1/1
 },
 
 allLayers = [dirtLayer, brickLayer, foggyLayer, waterLayer, rockLayer, radioactiveLayer, cactusLayer, paperLayer, sillyLayer, fluteLayer];
 
 const customMessages = {
+    "🫶": "A heartfelt gesture beckons you closer, both physically and mentally...",
+    "💗": "A distant pulse resonates with your heart, synchronising its beat with yours...",
+    "❤️‍🔥": "A compassionate warmth envelops your heart in a fiery yet comforting embrace...",
     "🧌": "WHAT ARE YOU DOING IN MY SWAMP?!!",
     "♾️": "life goes on and on and on and on and on and on and on and on...",
     "⚕️": "Gently materializing, a healing symbol radiates a serene energy, offering tranquility...",

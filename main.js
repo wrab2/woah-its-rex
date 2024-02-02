@@ -255,7 +255,10 @@ function displayArea() {
         for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) {
             for (let c = curX - constraints[0]; c <= curX + 9 + (9-constraints[0]); c++) {
                 if (mine[r][c]) {
-                    output += mine[r][c];
+                    if (usePathBlocks)
+                        output += mine[r][c];
+                    else
+                        output += mine[r][c] === "⚪" ? "<span style='opacity:0;'>" + "⚪" + "</span>" : mine[r][c];   
                 } else {
                     output += r === 0 ? "🟩" : "⬛";
                 }
@@ -295,7 +298,11 @@ function createInventory() {
             tempElement.classList = "oreDisplay";
             tempElement.style.display = "none";
             tempElement.setAttribute("onclick", "randomFunction(this.innerHTML, 'inv')");
-            tempElement.innerHTML = propertyName + " | 1/" + ((Math.round( 1 / oreList[propertyName][0])).toLocaleString() * multis[i - 1]).toLocaleString() + " | x" + oreNum.toLocaleString();
+            let rarity = Math.round( 1 / oreList[propertyName][0]);
+            if (allCaves.includes(getCaveTypeFromOre(propertyName))) {
+                rarity *= getCaveMultiFromOre(propertyName);
+            }
+            tempElement.innerHTML = propertyName + " | 1/" + rarity.toLocaleString() * multis[i - 1].toLocaleString() + " | x" + oreNum.toLocaleString();
             document.getElementById(("inventory") + i).appendChild(tempElement);
         }
     }
@@ -336,8 +343,13 @@ function createIndex() {
 
 let variant = 1;
 function updateInventory(type, inv) {
-    document.getElementById(type + inv).innerHTML = type + " | 1/" + ((Math.round( 1 / oreList[type][0])) * multis[inv - 1]).toLocaleString() + " | x" + oreList[type][1][inv - 1].toLocaleString();
-    if (oreList[type][1][inv - 1] > 0)
+    let rarity = (Math.round(1 / oreList[type][0])) * multis[inv - 1];
+    let amt = oreList[type][1][inv - 1];
+    let multi = 1 * rarity > 2000000 ? getCaveMultiFromOre(type) : 1;
+    rarity *= multi;
+    let ast = multi > 1 ? "*" : "";
+    document.getElementById(type + inv).innerHTML = type + " | " + ast + "1/" + rarity.toLocaleString() + " | x" + amt.toLocaleString();
+    if (amt)
         document.getElementById(type + inv).style.display = "block";
     else
         document.getElementById(type + inv).style.display = "none";
@@ -376,7 +388,7 @@ function spawnMessage(block, location, caveInfo) {
         temp.push(true, caveInfo[1]);
         latestSpawns.push(temp);
     } else {
-        if (currentPickaxe > 10 && 1/oreList[block][0] < 16000000) {
+        if (currentPickaxe >= 10 && 1/oreList[block][0] < 16000000) {
             addToLatest = false;
         } 
         if (currentPickaxe > 6 && 1/oreList[block][0] < 3000000) {

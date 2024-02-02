@@ -14,7 +14,6 @@ function createMine() {
     for (let c = curX - 25; c < curX + 25; c++) 
         mine[curY][c] = "🟩";
     mine[0][1000000000] = "⛏️"; //trusty pickaxe
-    displayArea();
     checkAllAround(curX, curY, 1);
     displayArea();
 }
@@ -259,7 +258,12 @@ function generateBlock(luck, location) {
 }
 
 function stopMining() {
-    goDirection(curDirection);
+    curDirection = "";
+    clearInterval(loopTimer);
+    if (ability1Active) {
+        clearTimeout(ability1Timeout);
+        ability1Active = false;
+    }
 }
 //TELEPORTING
 

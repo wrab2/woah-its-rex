@@ -6,6 +6,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 let invToIndex = true;
 let craftingToIndex = true;
+let usePathBlocks = true;
 
 function openFrame(frameId) {
     document.querySelectorAll('.frame').forEach(frame => {
@@ -370,4 +371,29 @@ function switchToIndex(button, num) {
         }
     }
     
+}
+function togglePathBlocks() {
+    if (usePathBlocks) {
+        document.getElementById("pathBlocks").style.backgroundColor = "green";
+        usePathBlocks = false;
+    } else {
+        document.getElementById("pathBlocks").style.backgroundColor = "red";
+        usePathBlocks = true;
+    }
+    displayArea();
+}
+function testSound(num) {
+    let element = document.getElementsByClassName("testButton")[num];
+    let time = (allAudios[num].duration * 1000);
+    if (allAudios[num].currentTime === 0) {
+        allAudios[num].play();
+        element.style.backgroundColor = "green";
+        setTimeout(() => {
+            element.style.backgroundColor = "red";
+        }, time);
+    } else {
+        allAudios[num].pause();
+        allAudios[num].currentTime = 0;
+        element.style.backgroundColor = "red";
+    }
 }

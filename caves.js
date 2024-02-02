@@ -39,7 +39,6 @@ function generateCave(x, y, rate, reps, type) {
         for (let i = 0; i < newOrigins.length; i++) {
             generateCave(newOrigins[i][0], newOrigins[i][1], rate, reps, caveType);
         }
-        displayArea();
 }
 
 function mineCaveBlock(c, r, type) {

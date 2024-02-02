@@ -40,6 +40,7 @@ function saveAllData() {
         getLatestColors(), //
         getInventoryColors(),
         getCraftingColors(),
+        usePathBlocks,
         );
     dataStorage[4].push(gears);
     localStorage.setItem("playerData", JSON.stringify(dataStorage));
@@ -85,8 +86,12 @@ function loadAllData() {
             }
             if (data[3][1] != undefined) {
                 let elements = document.getElementsByClassName("spawnVolume");
-                for (let i = 0; i < elements.length; i++)
+                for (let i = 0; i < elements.length; i++) {
                     elements[i].value = data[3][1][i];
+                    changeSpawnVolume(data[3][1][i], i)
+                }
+                   
+                    
             }
             if (data[3][2] != undefined) {
                 if (data[3][2])
@@ -169,6 +174,11 @@ function loadAllData() {
                     element.style.borderColor = data[3][15][0];
                 if (data[3][15][1] != "")
                     element.style.backgroundColor = data[3][15][1];
+            }
+            if (data[3][16] != undefined) {
+                usePathBlocks = data[3][16];
+                if (!usePathBlocks)
+                    document.getElementById("pathBlocks").style.backgroundColor = "green"
             }
         }
             if (data[4] !== undefined || data[4] !== null) {

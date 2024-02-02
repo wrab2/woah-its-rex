@@ -197,6 +197,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <div class="frame" id="audio-frame">
       <h2>Audio Settings</h2>
       <br>
+      <!--ADD TEST BUTTON-->
       <div id="musicStuff">
         <button id="musicButton" class="inventoryButtons" onclick="toggleMusic()">Mute Music</button>
         <p>Music Volume</p>
@@ -210,42 +211,49 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 0)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(0)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(1, this)"id="mute1">Mute Ringings</button>
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 1)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(1)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(2, this)"id="mute2">Mute Blurs</button>
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 2)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(2)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(3, this)"id="mute3">Mute Unfaths</button>
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 3)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(3)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(4, this)"id="mute4">Mute Otherworldlies</button>
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 4)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(4)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(5, this)"id="mute5">Mute Metaversals</button>
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 5)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(5)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(6, this)"id="mute6">Mute Zeniths</button>
         <label class="spawnSoundContainer">
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 6)" class="spawnVolume">
         </label>
+        <button class="testButton" onclick="testSound(6)"></button>
     </div>
     </div>
     <div class="frame" id="inventory-frame">
@@ -278,6 +286,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
       </div>
       <div class="inputAndButton">
         <button class="toggleDisplay fullyRounded" style="background-color: red;" onclick="changeUseNumbers(this)" id="useNumbers">Use Numbers for Pickaxe Names</button>
+      </div>
+      <div class="inputAndButton">
+        <button class="toggleDisplay fullyRounded" onclick="togglePathBlocks();" id="pathBlocks">Invisible Path Blocks</button>
       </div>
     </div>
 

@@ -188,6 +188,7 @@ img.roundcat {
 
 #blockDisplay {
   padding: 0.5em;
+  width: 100%;
   margin: 0;
   line-height: 1.8vw;
   font-size: 1.55vw;
@@ -195,6 +196,9 @@ img.roundcat {
   text-wrap: nowrap;
   text-align: center;
   letter-spacing: -0.2em;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #fff;
 }
 
 #spawnMessage {
@@ -380,13 +384,14 @@ button, .col-3 > div > button {
   display: block;
   margin: 10px 0;
   padding: 10px;
-  width: 20%;
+  width: 20em;
   background-color: #333;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 2vh;
+  height: 4em;
 }
 .settingsCategorySelector:hover {
   background-color: #2e2e2e;
@@ -396,6 +401,7 @@ button, .col-3 > div > button {
   margin-top: 2%;
   margin-left: 1%;
   width: 100%;
+
 }
 
 .frame h2 {
@@ -410,7 +416,7 @@ button, .col-3 > div > button {
 }
 .spawnSoundContainer {
   float: left;
-  width: 50%;
+  width: 25%;
   height:100%;
 }
 .muteButton {
@@ -421,11 +427,51 @@ button, .col-3 > div > button {
   color: #fff;
   border: none;
 }
+.muteButton:hover {
+  background-color: #2e2e2e;
+}
 .spawnVolume {
-  padding: 0px;
-  border-color: aliceblue;
-  margin-left: 5px;
+  margin-left: 2%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
   height: 100%;
+  background: #d3d3d3;
+  outline:#333;
+  border-style: solid;
+  border-color: #333;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.spawnVolume:hover {
+  opacity: 1; 
+}
+
+
+.spawnVolume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15%;
+  height: 100%;
+  background: #333;
+  cursor: pointer;
+}
+
+.spawnVolume::-moz-range-thumb {
+  width: 15%; 
+  height: 100%; 
+  background: #04AA6D; 
+  cursor: pointer;
+}
+.testButton {
+  float: left;
+  height: 100%;
+  margin-left: 1%;
+  width: 2%;
+  background-color: red;
+  border: none;
 }
 .settingsSeparator {
   width:50%;
@@ -530,19 +576,20 @@ button, .col-3 > div > button {
   vertical-align: middle;
 }
 #indexSwitchButton {
-  width: 12%;
-  height: 3%;
+  width: 10em;
+  height: 2em;
   border-radius: 0px;
-  background-color: #333;
+  background-color: #3d3c3c;
   border-style: solid;
   border-width: 2px;
   float: left;
   text-align: center;
   margin-left: 0.45%;
+  font-size: 100%;
 }
 .indexDirectionButton {
-  width: 3%;
-  height: 3%;
+  width: 4em;
+  height: 2em;
   border-radius: 0px;
   border-width: 2px;
   float: left;
@@ -568,8 +615,9 @@ button, .col-3 > div > button {
   margin: 5px;
   background-color: #333;
 }
-
-
+#pathBlocks {
+  background-color: red;
+}
 
 @keyframes flashGreen {
   0% {background-color:white;}
