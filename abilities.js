@@ -18,6 +18,7 @@ async function rollAbilities() {
         if (Math.random() < 1/750) {
             generateCave(curX, curY, 0, 0);
             displayArea();
+            gearAbility3();
         }
     }
     switch (currentPickaxe) {

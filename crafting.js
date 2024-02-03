@@ -335,6 +335,7 @@ function createGearRecipes() {
             let element = document.createElement('p');
             element.id = (gearRecipes[i][j][0] + ("gearRecipe" + (i+1) + "Display"));
             element.innerHTML = gearRecipes[i][j][0] + " " + oreList[gearRecipes[i][j][0]][1][0] + "/" + gearRecipes[i][j][1];
+            element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
             if (oreList[gearRecipes[i][j][0]][1][0] >= gearRecipes[i][j][1]) {
                 element.style.color = "green";
             } else {

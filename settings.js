@@ -344,7 +344,6 @@ function randomFunction(text, cause) {
                 }
             }
         }
-        console.log(num);
         if (num > -1) {
             switchLayerIndex(0, num);
             showSettings();
