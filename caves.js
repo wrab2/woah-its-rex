@@ -118,27 +118,27 @@ function generateCaveBlock(y, x, type) {
     if (allCaves.includes(type)) {
         if (adjRarity > 25000000) {
             if (adjRarity > 50000000000) { //50B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1);
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("zenith")
             } else if (adjRarity > 10000000000) { //10B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1);
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("magnificent")
             } else if (adjRarity > 1000000000) { //1B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1);
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("otherworldly")
             } else if (adjRarity > 500000000) { //500M
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1);
+                verifiedOres.createLog(r = y,x,blockToGive, new Error(), 1, true);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("unfathomable")
             } else if (adjRarity > 250000000) { // 250M
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1);
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("enigmatic");
@@ -147,22 +147,22 @@ function generateCaveBlock(y, x, type) {
     } else {
         let location = [y, x];
         if (Math.round(1 / (probabilityTable[blockToGive])) > 5000000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("zenith");
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 1500000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("magnificent");
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 750000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("otherworldly");
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 160000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("unfathomable");

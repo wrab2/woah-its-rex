@@ -14,7 +14,9 @@ class secureLogs {
         this.#verifiedLogs = [];
         this.#logsTimer = null;
     }
-    createLog(r, c, intended, obj, luck) {
+    createLog(r, c, intended, obj, luck, fromCave) {
+        fromCave = fromCave === undefined ? false : true;
+        console.log(fromCave)
         let luckModifier = 1;
         if (gears[1])
             luckModifier *= 1.1;
@@ -23,7 +25,7 @@ class secureLogs {
         const maxLuck = (this.#maxLuck[currentPickaxe] * luckModifier) + 1;
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
             if (mine[r][c] === undefined)
-                this.#spawnLogs.push([r, c, intended, luck]);
+                this.#spawnLogs.push([r, c, intended, luck, fromCave]);
         } else {
             console.log("failed to create, ", obj.stack, luck, maxLuck);
         }
@@ -34,8 +36,9 @@ class secureLogs {
             if (this.#spawnLogs[i][0] === r && this.#spawnLogs[i][1] === c) {
                 if (mine[r][c] === this.#spawnLogs[i][2]) {
                     const num = this.#spawnLogs[i][3];
+                    const fromCave = this.#spawnLogs[i][4];
                     this.#spawnLogs.splice(i, 1);
-                    this.#verifiedLogs.push([mine[r][c], [r, c], new Date(), false, "Normal", num]);
+                    this.#verifiedLogs.push([mine[r][c], [r, c], new Date(), false, "Normal", num, fromCave]);
                     break;
                 } else {
                     console.log('failed to verify', r, c);
@@ -45,13 +48,15 @@ class secureLogs {
     }
     verifyFind(block, r, c, variant) {
         let verified = false;
-        for (let i = 0; i < this.#verifiedLogs.length; i++) {
+        for (let i = this.#verifiedLogs.length - 1; i >= 0; i--) {
             if (this.#verifiedLogs[i][1][0] === r && this.#verifiedLogs[i][1][1] === c) {
                 if (block === this.#verifiedLogs[i][0]) {
-                    this.#verifiedLogs[i][3] = true;
-                    this.#verifiedLogs[i][4] = variant;
-                    verified = true;
-                    break;
+                    if (this.#verifiedLogs[i][3] != true) {
+                        this.#verifiedLogs[i][3] = true;
+                        this.#verifiedLogs[i][4] = variant;
+                        verified = true;
+                        break;
+                    }
                 } else {
                     console.log("failed to verify find", block, this.#verifiedLogs[i][0]);
                 }
@@ -71,9 +76,11 @@ class secureLogs {
                 let output = "";
                 for (let i = 0; i < this.#verifiedLogs.length; i++) {
                     let multi = multis[names.indexOf(this.#verifiedLogs[i][4])];
-                    output += this.#verifiedLogs[i][0] + ", " + this.#verifiedLogs[i][2] + ", " + this.#verifiedLogs[i][3] + ", " + this.#verifiedLogs[i][4] + ", ";
+                    output += this.#verifiedLogs[i][0] + ", " + this.#verifiedLogs[i][2] + ", " + this.#verifiedLogs[i][3] + ", " + this.#verifiedLogs[i][4];
+                    output += this.#verifiedLogs[i][6] === true ? ", Cave, " : ", "
                     output += this.#verifiedLogs[i][1][0] + ", ";
-                    output += Math.floor(((1 / oreList[this.#verifiedLogs[i][0]][0]) * multi) / this.#verifiedLogs[i][5]) + ", " + Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1)) + "<br>";
+                    output += Math.floor(((1 / oreList[this.#verifiedLogs[i][0]][0]) * multi) / this.#verifiedLogs[i][5]) + ", " + (Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1))) * 2 + "<br>";
+                    
                 }
                 this.#logsTimer = setInterval(this.#reloadLogs, 50, output!==""?output:"none");
         } else {
