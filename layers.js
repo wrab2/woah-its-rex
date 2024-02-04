@@ -10,6 +10,7 @@ let oreList = {
     "🧌": [1/696969696969, [0,0,0,0]],
     "⚕️": [1/50000000000, [0,0,0,0]],
     "💗": [1/150000000000, [0,0,0,0]],
+    "🌙": [1/150000000000, [0,0,0,0]],
     "🪔": [1/2000000000, [0,0,0,0]],
     "🎷": [1/2500000000, [0,0,0,0]],
     "🧫": [1/4000000000, [0,0,0,0]],
@@ -547,6 +548,7 @@ fluteLayer = {
 allLayers = [dirtLayer, brickLayer, foggyLayer, waterLayer, rockLayer, radioactiveLayer, cactusLayer, paperLayer, sillyLayer, fluteLayer];
 
 const customMessages = {
+    "🌙": "Lunar rays of light dance upon your iris, captivating your adoring gaze..",
     "🫶": "A heartfelt gesture beckons you closer, both physically and mentally...",
     "💗": "A distant pulse resonates with your heart, synchronising its beat with yours...",
     "❤️‍🔥": "A compassionate warmth envelops your heart in a fiery yet comforting embrace...",
@@ -638,3 +640,10 @@ function setLayer(y) {
             currentLayer = allLayers[Math.floor(Math.random() * 8)];
     }
 }
+/*
+for (let propertyName in temp) {
+    for (let j = 0; j < 4; j++) {
+        oreList[propertyName][1][j] = temp[propertyName][j]
+    }
+}
+*/
