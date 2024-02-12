@@ -613,7 +613,7 @@ function pickaxeAbility10(x, y, boost) {
 }
 
 function pickaxeAbility11(x, y, boost) {
-    const thisLuck = 17.5 * boost;
+    const thisLuck = 15 * boost;
     return new Promise((resolve) => {
     for (let i = -3; i < 4; i++) {
         for (let j = -3; j < 4; j++) {

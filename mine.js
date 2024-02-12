@@ -15,6 +15,8 @@ function createMine() {
     for (let c = curX - 25; c < curX + 25; c++) 
         mine[curY][c] = "🟩";
     mine[curY][1000000000] = "⛏️"; //trusty pickaxe
+    currentLayerNum = -1;
+    setLayer(curY);
     checkAllAround(curX, curY, 1);
     displayArea();
 }
@@ -356,9 +358,10 @@ function switchWorld() {
     if (currentWorld === 1) {
         currentWorld = 2;
         allLayers = worldTwoLayers;
-        currentLayer = allLayers[0];
         curX = 1000000000;
         curY = 2000; 
+        currentLayerNum = -1;
+        setLayer(curY);
         createMine();
         mine[curY + 1][curX] = "📺";
     } else {
@@ -367,6 +370,8 @@ function switchWorld() {
         currentLayer = allLayers[0];
         curX = 1000000000;
         curY = 0; 
+        currentLayerNum = -1;
+        setLayer(curY);
         createMine();
     }
     switchDistance();
