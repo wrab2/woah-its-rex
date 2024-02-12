@@ -8,19 +8,19 @@ class secureLogs {
     #spawnLogs;
     #verifiedLogs;
     #logsTimer;
-    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75];
+    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1];
     constructor() {
         this.#spawnLogs = [];
         this.#verifiedLogs = [];
         this.#logsTimer = null;
     }
     createLog(r, c, intended, obj, luck, fromCave) {
-        fromCave = fromCave === undefined ? false : true;
+        fromCave = fromCave === undefined ? [false, false] : fromCave;
         console.log(fromCave)
         let luckModifier = 1;
-        if (gears[1])
+        if (currentWorld === 1 && gears[1])
             luckModifier *= 1.1;
-        if (gears[5])
+        if (currentWorld === 1 && gears[5])
             luckModifier *= 1.6;
         const maxLuck = (this.#maxLuck[currentPickaxe] * luckModifier) + 1;
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
@@ -77,9 +77,16 @@ class secureLogs {
                 for (let i = 0; i < this.#verifiedLogs.length; i++) {
                     let multi = multis[names.indexOf(this.#verifiedLogs[i][4])];
                     output += this.#verifiedLogs[i][0] + ", " + this.#verifiedLogs[i][2] + ", " + this.#verifiedLogs[i][3] + ", " + this.#verifiedLogs[i][4];
-                    output += this.#verifiedLogs[i][6] === true ? ", Cave, " : ", "
+                    output += this.#verifiedLogs[i][6][0] === true ? ", Cave, " : ", "
                     output += this.#verifiedLogs[i][1][0] + ", ";
-                    output += Math.floor(((1 / oreList[this.#verifiedLogs[i][0]][0]) * multi) / this.#verifiedLogs[i][5]) + ", " + (Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1))) * 2 + "<br>";
+                    if (this.#verifiedLogs[i][6][1]) {
+                        let something = getCaveTypeFromOre(this.#verifiedLogs[i][0])[this.#verifiedLogs[i][0]];
+                        something /= getCaveMultiFromOre(this.#verifiedLogs[i][0]);
+                        output += Math.round(1/something).toLocaleString();
+                    } else {
+                        output += Math.floor(((1 / oreList[this.#verifiedLogs[i][0]][0]) * multi)/ this.#verifiedLogs[i][5]).toLocaleString();
+                    }
+                    output += ", " + (Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1))) * 2 + "<br>";
                     
                 }
                 this.#logsTimer = setInterval(this.#reloadLogs, 50, output!==""?output:"none");
@@ -97,7 +104,12 @@ class secureLogs {
         return this.#maxLuck;
     }
     getCurrentLuck() {
-        return (this.#maxLuck[currentPickaxe]) * (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
+        if (currentWorld === 1) {
+            return (this.#maxLuck[currentPickaxe]) * (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
+        } else {
+            return this.#maxLuck[currentPickaxe];
+        }
+        
     }
 }
 let verifiedOres = new secureLogs();

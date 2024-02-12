@@ -44,12 +44,21 @@ let allPickaxeNames = ["Mulch Mallet",
 "77 Leaf Destroyer", 
 "Planet Buster", 
 "Whirlpool of Fate", 
-"Wings of Glory"];
+"Wings of Glory",
+"The Key"
+];
 function changeUseNumbers(button) {
     if (!useNumbers) {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 1; i < elements.length; i++) {
-            elements[i].innerHTML = "Pickaxe " + i;
+            if (i === 13) {
+                elements[i].innerHTML = "Pickaxe " + i;
+                elements[i + 1].innerHTML = "Pickaxe " + i;
+                i++;
+            } else {
+                elements[i].innerHTML = "Pickaxe " + i;
+            }
+            
         }
         if (button != undefined) {
             button.style.backgroundColor = "green";
@@ -58,7 +67,13 @@ function changeUseNumbers(button) {
     } else {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 1; i < elements.length; i++) {
-            elements[i].innerHTML = allPickaxeNames[i - 1];
+            if (i === 13) {
+                elements[i].innerHTML = allPickaxeNames[i - 1];
+                elements[i + 1].innerHTML = allPickaxeNames[i - 1];
+                i++;
+            } else {
+                elements[i].innerHTML = allPickaxeNames[i - 1];
+            }
         }
         if (button != undefined) {
             button.style.backgroundColor = "red";
@@ -263,15 +278,17 @@ function switchLayerIndex(num, overrideNum) {
         document.getElementById("oreCardHolder").removeChild(document.getElementById("oreCardHolder").firstChild);
     }
     layerNum += num;
-    if (layerNum > 11) {
+    let add = currentWorld === 1 ? 8 : 5
+    if (layerNum > (add + 3)) {
         layerNum = 0;
     }
     if (layerNum < 0)
-        layerNum = 11;
+        layerNum = (add + 3);
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
     let layerToIndex;
-    if (layerNum > 7) {
-        layerToIndex = allCaves[layerNum - (5 + 2 * (layerNum - 8))];
+    if (layerNum > (add - 1)) {
+        let caveNum = currentWorld === 1 ? (layerNum - (5 + 2 * (layerNum - 8))) : (layerNum - 2 * (layerNum - 4));
+        layerToIndex = allCaves[caveNum];
     } else {
         layerToIndex = allLayers[layerNum];
     }
@@ -283,44 +300,50 @@ function switchLayerIndex(num, overrideNum) {
     let oreIndexCards = [];
     for (let propertyName in layerToIndex) {
         if (layerToIndex[propertyName] < 1/2000000) {
-            oreIndexCards.push(createIndexCards(layerToIndex, propertyName))
+            if (ignoreList.indexOf(propertyName) === -1) {
+                oreIndexCards.push(createIndexCards(layerToIndex, propertyName))
+            }
         }
     }
     for (let i = oreIndexCards.length - 1; i >= 0; i--) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
+let ignoreList = "🌳🏰❤️‍🔥🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀"
 function createIndexCards(layer, property) {
-    let parentObject = document.createElement("div");
-    parentObject.classList = "oreCard";
-    //ADD NAME TO CARD
-    let oreName = document.createElement("p");
-    oreName.style.fontSize = "2vw";
-    oreName.innerHTML = property;
-    parentObject.appendChild(oreName);
-    //ADD BASE RARITY TO CARD
-    let oreRarity = document.createElement("p");
-    oreRarity.style.fontSize = "1.25vw";
-    oreRarity.style.fontWeight = "bold";
-    oreRarity.innerHTML = "1/" + (Math.round(1/layer[property])).toLocaleString() + " base rarity.";
-    parentObject.appendChild(oreRarity);
-    //ADD RARITY WITH LUCK TO CARD
-    let oreRarityLuck;
-    oreRarityLuck = document.createElement("p");
-    oreRarityLuck.style.fontSize = "1.25vw";
-    oreRarityLuck.style.fontWeight = "bold";
-    if (allCaves.includes(layer)) {
-        let rarity = layer[property];
-        rarity /= getCaveMultiFromOre(property);
-        oreRarityLuck.innerHTML = "1/" + Math.round(1/rarity).toLocaleString() + " adjusted.";
-    } else {
-        oreRarityLuck.innerHTML = "1/" + (Math.round(1/(layer[property] * verifiedOres.getCurrentLuck()))).toLocaleString() + " with luck.";
-    }
+        let parentObject = document.createElement("div");
+        parentObject.classList = "oreCard";
+        if (oreList[property][1][0] > 0) {
+            parentObject.style.backgroundColor = "green";
+        } else {
+            parentObject.style.backgroundColor = "red"
+        }
+        //ADD NAME TO CARD
+        let oreName = document.createElement("p");
+        oreName.style.fontSize = "2vw";
+        oreName.innerHTML = property;
+        parentObject.appendChild(oreName);
+        //ADD BASE RARITY TO CARD
+        let oreRarity = document.createElement("p");
+        oreRarity.style.fontSize = "1.25vw";
+        oreRarity.style.fontWeight = "bold";
+        oreRarity.innerHTML = "1/" + (Math.round(1/layer[property])).toLocaleString() + " base rarity.";
+        parentObject.appendChild(oreRarity);
+        //ADD RARITY WITH LUCK TO CARD
+        let oreRarityLuck;
+        oreRarityLuck = document.createElement("p");
+        oreRarityLuck.style.fontSize = "1.25vw";
+        oreRarityLuck.style.fontWeight = "bold";
+        if (allCaves.includes(layer)) {
+            let rarity = layer[property];
+            rarity /= getCaveMultiFromOre(property);
+            oreRarityLuck.innerHTML = "1/" + Math.round(1/rarity).toLocaleString() + " adjusted.";
+        } else {
+            oreRarityLuck.innerHTML = "1/" + (Math.round(1/(layer[property] * verifiedOres.getCurrentLuck()))).toLocaleString() + " with luck.";
+        }
+        parentObject.appendChild(oreRarityLuck);
     
-    
-    parentObject.appendChild(oreRarityLuck);
-
-    return parentObject;
+        return parentObject;
 }
 
 function randomFunction(text, cause) {
