@@ -81,7 +81,9 @@ function init() {
         createPickaxeRecipes();
         createGearRecipes();
         document.getElementById('dataText').value = "";
-        switchLayerIndex(0, 0)
+        switchLayerIndex(0, 0);
+        if (Math.random() < 1/1000)
+            document.getElementById("cat").innerText = "CatAxe";
         console.log("meow");
     }
 }

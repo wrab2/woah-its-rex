@@ -8,7 +8,7 @@ class secureLogs {
     #spawnLogs;
     #verifiedLogs;
     #logsTimer;
-    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1];
+    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3];
     constructor() {
         this.#spawnLogs = [];
         this.#verifiedLogs = [];
@@ -107,7 +107,7 @@ class secureLogs {
         if (currentWorld === 1) {
             return (this.#maxLuck[currentPickaxe]) * (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
         } else {
-            return this.#maxLuck[currentPickaxe];
+            return (this.#maxLuck[currentPickaxe]) + (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
         }
         
     }

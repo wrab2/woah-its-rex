@@ -208,23 +208,55 @@ worldTwoPickaxes = [
     ],
     //STARBYS!!!!
     [
-        ["🥗", 1],
+        ["🌐", 500000],
+        ["⤵️", 1000],
+        ["↪️", 600],
+        ["⏮️", 10],
+        ["🔽", 60],
+        ["📕", 1],
     ],
     //HOLY SHIT IS THIS A REAL CAT
     [
-        ["🥗", 1],
+        ["♟️", 1000000],
+        ["🔂", 10000],
+        ["⏺️", 20],
+        ["⏏️", 10],
+        ["📗", 3],
+        ["📘", 1],
+        ["✏️", 1],
     ],
     //THE MOON!!!
     [
-        ["🥗", 1],
+        ["☁️", 2500000],
+        ["⬅️", 25000],
+        ["↖️", 5000],
+        ["➡️", 5000],
+        ["📙", 3],
+        ["🌧️", 1],
+        ["🌤️", 1],
     ],
     //REPEATING PRISM OF CHAOS NO WAY
     [
-        ["🥗", 1],
+        ["♟️", 5000000],
+        ["⬆️", 4000],
+        ["◀️", 500],
+        ["⏯️", 55],
+        ["⏸️", 50],
+        ["📗", 10],
+        ["🧠", 1],
+        ["📐", 1],
     ],
-    //TIC TAC TOE IN MINECRAFT (NOT CLICKBAIR)
+    //TIC TAC TOE IN MINECRAFT (NOT CLICKBAIT)
     [
-        ["🥗", 1],
+        ["❌", 500000],
+        ["📺", 5000000],
+        ["🔼", 850],
+        ["⏪", 250],
+        ["✴️", 5],
+        ["📙", 10],
+        ["🛡️", 1],
+        ["🪃", 2],
+        ["🪓", 1],
     ],
 ],
 worldOneGears = [
@@ -326,34 +358,60 @@ worldOneGears = [
 ],
 worldTwoGears = [
     [
-        ["🟫", 1]
+        ["🌐", 1000000],
+        ["🔄", 6000],
+        ["🔀", 2000],
+        ["💻", 1],
     ],
     [
-        ["🟫", 1]
+        ["☁️", 2500000],
+        ["📗", 10],
+        ["📘", 5],
+        ["🌧️", 3],
+        ["🌨️", 1]
     ],
     [
-        ["🟫", 1]
+        ["🚪", 3000000],
+        ["⏪", 50],
+        ["⏏️", 10],
+        ["🔒", 5],
+        ["🔑", 3],
+        ["🖇️", 1],
     ],
     [
-        ["🟫", 1]
+        ["🌐", 5000000],
+        ["🔃", 50000],
+        ["⤴️", 5000],
+        ["➡️", 500],
+        ["⏺️", 50],
+        ["💻", 3],
+        ["🖱️", 2],
     ],
     [
-        ["🟫", 1]
+        ["♟️", 7500000],
+        ["🔂", 30000],
+        ["↩️", 6000],
+        ["▶️", 30],
+        ["✏️", 10],
+        ["🧠", 5],
+        ["📖", 5],
+        ["📐", 2],
+        ["📚", 1],
     ],
     [
-        ["🟫", 1]
+        ["☘️", 100000]
     ],
     [
-        ["🟫", 1]
+        ["☘️", 100000]
     ],
     [
-        ["🟫", 1]
+        ["☘️", 100000]
     ],
     [
-        ["🟫", 1]
+        ["☘️", 100000]
     ],
     [
-        ["🟫", 1]
+        ["☘️", 100000]
     ],
     
 ];
@@ -526,7 +584,8 @@ function craftPickaxe(num) {
     let sub = currentWorld === 1 ? 1 : worldOnePickaxes.length;
     canCraft = true;
     if (!(pickaxes[num][1])) {
-        let recipeList = list[num - sub];
+        let recipeList = list[num - sub - 1];
+        console.log(recipeList);
         for (let i = 0; i < recipeList.length; i++) {
             if (!(oreList[recipeList[i][0]][1][0] >= recipeList[i][1])) {
                 canCraft = false;
@@ -564,17 +623,19 @@ function craftPickaxe(num) {
 function craftGear(num) {
     let list = currentWorld === 1 ? worldOneGears : worldTwoGears;
     canCraft = true;
+    let sub = currentWorld === 1 ? 0 : worldOneGears.length;
+    list = list[num - sub];
     if (!(gears[num])) {
-        for (let i = 0; i < list[num].length; i++) {
-            if (!(oreList[list[num][i][0]][1][0] >= list[num][i][1])) {
+        for (let i = 0; i < list[num - sub].length; i++) {
+            if (!(oreList[list[i][0]][1][0] >= list[i][1])) {
                 canCraft = false;
                 break;
             }
         }
         if (canCraft) {
-            for (let i = 0; i < list[num].length; i++) {
-                oreList[list[num][i][0]][1][0] -= list[num][i][1];
-                updateInventory(list[num][i][0], 1);
+            for (let i = 0; i < list[num - sub].length; i++) {
+                oreList[list[i][0]][1][0] -= list[i][1];
+                updateInventory(list[i][0], 1);
             }
             if (num === 9) {
                 document.getElementById("craftGear" + num).innerText = "SILLIFY!";

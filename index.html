@@ -115,12 +115,12 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe(10, this)">Whirlpool of Fate</button>
                     <button class="craftingButton" onclick="displayRecipe(11, this)">Wings of Glory</button>
                     <button class="craftingButton" onclick="displayRecipe(12, this)">The Key</button>
-                    <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;">Sonar Shrieker</button>
-                    <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;">Diamond Destroyer</button>
-                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;">Celestial Excavator</button>
-                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;">CatAxe</button>
-                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;">Lunar Annihilator</button>
-                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;">Gemstone Hammer</button>
+                    <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;">Extreme Echolocator</button>
+                    <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;">Corundum Caver</button>
+                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;">Starborne Slasher</button>
+                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;" id="cat">Nyabomb</button>
+                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;">Lunar Lightsabre</button>
+                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;">Gemstone Engraver</button>
                     <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;">Gambler's Fallacy</button>
                 </div>
                 <div id="gearCrafts" class="hidden">
@@ -140,11 +140,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe(12, this)" style="display: none;">Artifice Annihilator</button>
                     <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;">Repurposed Replicator</button>
                     <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;">Cavern Capacitator</button>
-                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;">High Powered Vacuum</button>
-                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;">Unlocked Speedcap</button>
-                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;">Infinity Collector II</button>
-                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;">Clover's Undoing</button>
-                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;">Fantastical Feather</button>
+                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;"disabled="true">High Powered Vacuum</button>
+                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;"disabled="true">Unlocked Speedcap</button>
+                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;"disabled="true">Infinity Collector II</button>
+                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;"disabled="true">Clover's Undoing</button>
+                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;"disabled="true">Fantastical Feather</button>
                 </div>
             </div>
             <hr>
@@ -168,12 +168,12 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.</p>
                 <p class="itemDescription" id="pickaxe12Description" style="display: none;">The Key to World 2.<br>Pressing "Teleport!" on this pickaxe will switch the current world.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker, and vice versa.</p>
                 <p class="itemDescription" id="pickaxe13Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.</p>
-                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a diamond around the player.</p>
-                <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a star around the player.</p>
-                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a cat around the player :3c.</p>
-                <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a crescent moon around the player.</p>
-                <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.</p>
-                <p class="itemDescription" id="pickaxe19Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.</p>
+                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.</p>
+                <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.</p>
+                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a cat around the player :3c.<br>Has an ability proc rate of 1/150.<br>Has 1x luck.</p>
+                <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a crescent moon around the player.<br>Has an ability proc rate of 1/150<br>Has 1.5x luck.</p>
+                <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.<br>Has an ability proc rate of 1/50.<br>Has 2x luck.</p>
+                <p class="itemDescription" id="pickaxe19Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.<br>Has an ability proc rate of 1/75.<br>Has 3x luck, but gains +0.02x luck for every winning line.</p>
                 <!--
                     Pickaxes above
                     Gears below
@@ -191,8 +191,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear10Description" style="display: none;">+0.25x Luck.<br>Stacks with all other luck additions.</p>
                 <p class="itemDescription" id="gear11Description" style="display: none;">-3ms Mining Speed.<br>Stacks with all other speed buffs.</p>
                 <p class="itemDescription" id="gear12Description" style="display: none;">+0.35x Luck.<br>Stacks with all other luck additions.</p>
-                <p class="itemDescription" id="gear13Description" style="display: none;">Has a 75% chance to duplicate any common ore (1 - 750,000)</p>
-                <p class="itemDescription" id="gear14Description" style="display: none;">Enables cave spawns in World 2.</p>
+                <p class="itemDescription" id="gear13Description" style="display: none;">Has a 75% chance to duplicate any common ore, (1 - 750,000)</p>
+                <p class="itemDescription" id="gear14Description" style="display: none;">Enables cave spawns in World 2.<br>Currently, this will allow miners to obtain ores from World 1 that spawn in caves, this will be a thing until new cave types are made for World 2.</p>
                 <p class="itemDescription" id="gear15Description" style="display: none;">Has a 50% chance to give you 2 extra layer blocks upon mining a layer block.</p>
                 <p class="itemDescription" id="gear16Description" style="display: none;">-5ms Mining Speed.<br>Stacks with all other speed buffs.</p>
                 <p class="itemDescription" id="gear17Description" style="display: none;">Wait... what do you mean its the same as the first? Why is it called the 2nd if its the exact same thing???</p>

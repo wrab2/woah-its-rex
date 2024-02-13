@@ -12,8 +12,6 @@ function createMine() {
         if (r > -1)
             mine[r] = [];
     }
-    for (let c = curX - 25; c < curX + 25; c++) 
-        mine[curY][c] = "🟩";
     mine[curY][1000000000] = "⛏️"; //trusty pickaxe
     currentLayerNum = -1;
     setLayer(curY);
@@ -292,8 +290,14 @@ function switchDistance() {
             y = 2000 * distanceMulti + 1000;
             distanceMulti++;
         } else if (y > (allLayers.length - 1) * 2000) {
-            y = 1000;
-            distanceMulti = 1;
+            if (currentWorld === 1) {
+                y = 1000;
+                distanceMulti = 1;
+            } else {
+                y = 3000;
+                distanceMulti = 2;
+            }
+           
         } else {
             y = 1000;
             distanceMulti = 1;
@@ -325,7 +329,6 @@ function toLocation() {
     curY = y;
     checkAllAround(curX, curY, 1);
     mine[curY][curX] = "⛏️";
-    
     setTimeout(() => {
         resolve(true);
     }, 1000);
@@ -343,10 +346,38 @@ function getParams(distanceX, distanceY, x, y) {
         displayLeft = distanceX;
     else
         displayLeft = x;
+    if (currentWorld === 1) { 
     if (y > distanceY)
         displayUp = distanceY;
     else
         displayUp = y;
+    } else {
+        if (curY < 2001) {
+            if (curY < 1991) {
+                if (y > distanceY)
+                    displayUp = distanceY;
+                else
+                    displayUp = y;
+            } else {
+                if (y > distanceY)
+                    displayUp = -1 * (y - 2000);
+                else
+                    displayUp = y;
+            }
+            return [displayLeft, displayUp];
+        }
+        if (curY > 2000) {
+            if (y < 2009 && y - 2000 > distanceY - 2000)
+                displayUp = y - 2000;
+            else
+                displayUp = distanceY;
+        } else {
+            if (y > distanceY)
+                displayUp = distanceY;
+            else
+                displayUp = y;
+        }
+    }
     return [displayLeft, displayUp];
 }
 function switchWorld() {
@@ -359,7 +390,7 @@ function switchWorld() {
         currentWorld = 2;
         allLayers = worldTwoLayers;
         curX = 1000000000;
-        curY = 2000; 
+        curY = 2001; 
         currentLayerNum = -1;
         setLayer(curY);
         createMine();
