@@ -4,16 +4,20 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-function resetMine() {
+function toSurface() {
     clearInterval(loopTimer);
     curDirection = "";
-    mine = [[]];
+    mine[curY][curX] = "⚪";
     curX = 1000000000;
-    curY = 0;
+    if (currentWorld === 1) {
+        curY = 0;
+    } else {
+        curY = 2001;
+    }
     blocksRevealedThisReset = 0;
-    currentLayer = allLayers[0];
-    createMine();
-    mineCapacity = baseMineCapacity;
+    setLayer(curY);
+    mine[curY][curX] = "⛏️";
+    displayArea();
     document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset + "/" + mineCapacity + " Blocks Revealed This Reset";
 }
 let resetting = false;

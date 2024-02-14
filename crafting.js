@@ -581,10 +581,10 @@ function updateActiveRecipe() {
 
 function craftPickaxe(num) {
     let list = currentWorld === 1 ? worldOnePickaxes : worldTwoPickaxes;
-    let sub = currentWorld === 1 ? 1 : worldOnePickaxes.length;
+    let sub = currentWorld === 1 ? 1 : worldOnePickaxes.length + 1;
     canCraft = true;
     if (!(pickaxes[num][1])) {
-        let recipeList = list[num - sub - 1];
+        let recipeList = list[num - sub];
         console.log(recipeList);
         for (let i = 0; i < recipeList.length; i++) {
             if (!(oreList[recipeList[i][0]][1][0] >= recipeList[i][1])) {

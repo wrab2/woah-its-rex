@@ -90,7 +90,7 @@ function createMineIndexes() {
 //MINING
 
 function mineBlock(x, y, cause, luck) {
-    if (mine[y][x] !== "⚪" && mine[y][x] !== "⛏️") {
+    if (mine[y][x] !== "⚪" && mine[y][x] !== "⛏️" && mine[y][x] !== "✖️") {
         let ore = mine[y][x];
         if (checkFromCave([y, x])) {
             let adjMulti = getCaveMultiFromOre(mine[y][x]);
@@ -230,44 +230,30 @@ function generateBlock(luck, location) {
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("zenith");
-            if (stopOnRare && stopRareNum < 7)
-                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 1500000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("magnificent");
-            if (stopOnRare && stopRareNum < 6)
-                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 750000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("otherworldly");
-            if (stopOnRare && stopRareNum < 5)
-                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 160000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("unfathomable");
-            if (stopOnRare && stopRareNum < 4)
-                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 25000000) {
             spawnMessage(blockToGive, location);
             playSound("enigmatic");
-            if (stopOnRare && stopRareNum < 3)
-                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 5000000) {
             spawnMessage(blockToGive, location);
             playSound("transcendent");
-            if (stopOnRare && stopRareNum < 2)
-                stopMining();
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 750000) {
             spawnMessage(blockToGive, location);
             playSound("exotic");
-            if (stopOnRare && stopRareNum < 1)
-                stopMining();
         }
     }
     return [blockToGive, hasLog];

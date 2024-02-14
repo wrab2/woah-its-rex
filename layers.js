@@ -541,7 +541,7 @@ chessLayer = {
 
 barrierLayer = {
     "☘️" : 1/33300000000000,
-    "✴️" : 1/200000,
+    "✴️" : 1/200,
     "✖️" : 1/1
 },
 
@@ -735,7 +735,7 @@ function setLayer(y) {
         }
     } else {
         let tempNum = y;
-        if (tempNum < 12000) {
+        if (tempNum < 10000) {
             tempNum = Math.floor(tempNum / 2000);
             if (tempNum !== currentLayerNum) {
                 currentLayerNum = tempNum;
@@ -750,6 +750,7 @@ function setLayer(y) {
         } else {
             if (currentLayer != borderLayer) {
                 currentLayer = borderLayer;
+                currentLayerNum = 5;
             }
         }
     }
