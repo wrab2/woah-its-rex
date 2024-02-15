@@ -45,7 +45,14 @@ let allPickaxeNames = ["Mulch Mallet",
 "Planet Buster", 
 "Whirlpool of Fate", 
 "Wings of Glory",
-"The Key"
+"The Key",
+"Extreme Echolocator",
+"Corundum Caver",
+"Starborne Slasher",
+"Nyabomb",
+"Lunar Lightsabre",
+"Gemstone Engraver",
+"Gambler's Fallacy",
 ];
 function changeUseNumbers(button) {
     if (!useNumbers) {
@@ -67,13 +74,7 @@ function changeUseNumbers(button) {
     } else {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 1; i < elements.length; i++) {
-            if (i === 13) {
-                elements[i].innerHTML = allPickaxeNames[i - 1];
-                elements[i + 1].innerHTML = allPickaxeNames[i - 1];
-                i++;
-            } else {
-                elements[i].innerHTML = allPickaxeNames[i - 1];
-            }
+            elements[i].innerHTML = allPickaxeNames[i - 1];
         }
         if (button != undefined) {
             button.style.backgroundColor = "red";
