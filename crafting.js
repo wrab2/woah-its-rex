@@ -585,7 +585,6 @@ function craftPickaxe(num) {
     canCraft = true;
     if (!(pickaxes[num][1])) {
         let recipeList = list[num - sub];
-        console.log(recipeList);
         for (let i = 0; i < recipeList.length; i++) {
             if (!(oreList[recipeList[i][0]][1][0] >= recipeList[i][1])) {
                 canCraft = false;
@@ -626,14 +625,14 @@ function craftGear(num) {
     let sub = currentWorld === 1 ? 0 : worldOneGears.length;
     list = list[num - sub];
     if (!(gears[num])) {
-        for (let i = 0; i < list[num - sub].length; i++) {
+        for (let i = 0; i < list.length; i++) {
             if (!(oreList[list[i][0]][1][0] >= list[i][1])) {
                 canCraft = false;
                 break;
             }
         }
         if (canCraft) {
-            for (let i = 0; i < list[num - sub].length; i++) {
+            for (let i = 0; i < list.length; i++) {
                 oreList[list[i][0]][1][0] -= list[i][1];
                 updateInventory(list[i][0], 1);
             }

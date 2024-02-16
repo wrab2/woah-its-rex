@@ -16,7 +16,6 @@ class secureLogs {
     }
     createLog(r, c, intended, obj, luck, fromCave) {
         fromCave = fromCave === undefined ? [false, false] : fromCave;
-        console.log(fromCave)
         let luckModifier = 1;
         if (currentWorld === 1 && gears[1])
             luckModifier *= 1.1;

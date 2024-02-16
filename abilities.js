@@ -829,8 +829,8 @@ function pickaxeAbility15(x, y, boost) {
                     if (generated[1])
                         verifiedOres.verifyLog(r, c);
                 }
+                mineBlock(c, r, "ability", thisLuck); 
             }
-            mineBlock(c, r, "ability", thisLuck); 
             if (mine[r2] != undefined) {
                 if (mine[r2][c] === undefined) {
                     generated = generateBlock(thisLuck, [r2, c]);
@@ -838,8 +838,8 @@ function pickaxeAbility15(x, y, boost) {
                     if (generated[1])
                         verifiedOres.verifyLog(r2, c);
                 }
+                mineBlock(c, r2, "ability", thisLuck); 
             }
-            mineBlock(c, r2, "ability", thisLuck); 
         }
         dist--;
     }
@@ -964,8 +964,9 @@ function pickaxeAbility19(x, y, reps, boost) {
                     if (generated[1])
                         verifiedOres.verifyLog(r, c);
                 }
+                mineBlock(c, r, "ability", thisLuck); 
             }
-            mineBlock(c, r, "ability", thisLuck); 
+           
             if (mine[r2] != undefined) {
                 if (mine[r2][c] === undefined) {
                     generated = generateBlock(thisLuck, [r2, c]);
@@ -973,8 +974,8 @@ function pickaxeAbility19(x, y, reps, boost) {
                     if (generated[1])
                         verifiedOres.verifyLog(r2, c);
                 }
+                mineBlock(c, r2, "ability", thisLuck); 
             }
-            mineBlock(c, r2, "ability", thisLuck); 
             if (r2 < y) {
                 if (c < x && Math.random() < 1/30)
                     newOrigins[0] = [y - 8, x - 8];

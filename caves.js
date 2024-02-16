@@ -102,7 +102,7 @@ function mineCaveBlock(c, r, type) {
 //let caveLuck = 10000000;
 function generateCaveBlock(y, x, type) {
     if (currentWorld === 2 && y === 10000) {
-        if (Math.random() < 1/20000) {
+        if (Math.random() < 1/200000) {
             return ["✴️", false, 1];
         } else {
             return ["✖️", false, 1];

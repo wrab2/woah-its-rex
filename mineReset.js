@@ -14,9 +14,13 @@ function toSurface() {
     } else {
         curY = 2001;
     }
+    for (let i = curY - 51; i < curY + 52; i++)
+        if (i > -1 && mine[i] === undefined) 
+            mine[i] = [];
     blocksRevealedThisReset = 0;
     setLayer(curY);
     mine[curY][curX] = "⛏️";
+    checkAllAround(curX, curY, 1);
     displayArea();
     document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset + "/" + mineCapacity + " Blocks Revealed This Reset";
 }

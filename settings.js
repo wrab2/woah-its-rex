@@ -288,9 +288,7 @@ function switchLayerIndex(num, overrideNum, world) {
     let layerToIndex;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
     if (layerNum > (add - 1)) {
-        console.log(layerNum);
         let caveNum = 11 - layerNum;
-        console.log(caveNum);
         layerToIndex = allCaves[caveNum];
     } else {
         if (world === 1) {
@@ -317,7 +315,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰❤️‍🔥🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀"
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀"
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
@@ -359,6 +357,8 @@ function randomFunction(text, cause) {
         let num = -1;
         let world = currentWorld;
         let ore = text.substring(0, text.indexOf(" "));
+        if (ore === "❤️‍🔥")
+            return;
         if (ignoreList.indexOf(ore) === -1) {
             for (let i = 0; i < worldOneLayers.length; i++) {
                 if (worldOneLayers[i][ore] != undefined) {
