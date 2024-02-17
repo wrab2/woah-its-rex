@@ -7,10 +7,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 async function rollAbilities() {
     let boost = 1;
     let m = 1;
-    if (currentWorld === 1 && gears[1])
-        boost *= 1.1;
-    if (currentWorld === 1 && gears[5])
-        boost *= 1.6;
     if (currentWorld === 1 && gears[8])
         m = 1.2;
     let temp;

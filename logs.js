@@ -16,12 +16,16 @@ class secureLogs {
     }
     createLog(r, c, intended, obj, luck, fromCave) {
         fromCave = fromCave === undefined ? [false, false] : fromCave;
-        let luckModifier = 1;
+        let luckModifier1 = 1;
         if (currentWorld === 1 && gears[1])
-            luckModifier *= 1.1;
+            luckModifier1 *= 1.1;
         if (currentWorld === 1 && gears[5])
-            luckModifier *= 1.6;
-        const maxLuck = (this.#maxLuck[currentPickaxe] * luckModifier) + 1;
+            luckModifier1 *= 1.6;
+        let luckModifier2 = 0;
+        if (currentWorld === 2)
+            luckModifier2 +=  (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
+
+        const maxLuck = (this.#maxLuck[currentPickaxe] * luckModifier1 + luckModifier2) + 1;
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
             if (mine[r][c] === undefined)
                 this.#spawnLogs.push([r, c, intended, luck, fromCave]);
@@ -31,7 +35,6 @@ class secureLogs {
     }
     verifyLog(r, c) {
         for (let i = 0; i < this.#spawnLogs.length; i++) {
-            //console.log(this.#spawnLogs[i][0], this.#spawnLogs[i][1], r, c);
             if (this.#spawnLogs[i][0] === r && this.#spawnLogs[i][1] === c) {
                 if (mine[r][c] === this.#spawnLogs[i][2]) {
                     const num = this.#spawnLogs[i][3];
@@ -61,7 +64,9 @@ class secureLogs {
                 }
             }
         }
-        console.log(verified);
+        if (!verified) {
+            console.log("log not found, failed to verify if found, block mined")
+        }
     }
     showLogs() {
         if (document.getElementById("settingsContainer").style.display === "block") {

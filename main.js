@@ -59,6 +59,7 @@ let gears = [
     false, //INFINITY COLLECTOR 2 17
     false, //LUCK 3 18
     false, //SPEED 3 19
+    false, //25% OF CURRENT PICKAXE LUCK 20
 ];
 let currentPickaxe = 0;
 let currentWorld = 1;

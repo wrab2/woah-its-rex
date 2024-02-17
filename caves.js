@@ -128,7 +128,7 @@ function generateCaveBlock(y, x, type) {
         adjRarity = Math.round(1/(type[blockToGive] / multi));
         if (adjRarity > 25000000) {
             let changeRarity = false;
-            if (oolOres.includes(blockToGive)) 
+            if (oolOres.indexOf(blockToGive) > -1) 
                 changeRarity = true;
             if ((!changeRarity && adjRarity > 50000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 5000000000)) { //50B
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
@@ -271,7 +271,7 @@ let type4Ores = {
     "🦠" : 1/1
 }
 let allCaves = [type1Ores, type2Ores, type3Ores, type4Ores];
-let oolOres = ["🥀", "💫", "⚠️", "💸", "🪩", "🌟", "🧵", "☄️", "⭐", "🔆"];
+let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 function getCaveType() {
     let caveTypeLuck = 1;
     if (currentPickaxe === 12)

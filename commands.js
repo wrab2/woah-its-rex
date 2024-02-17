@@ -67,6 +67,7 @@ let allGearNames = [
     "Infinity Collector II",
     "Clover's Undoing",
     "Fantastical Feather",
+    "NYI",
 ]
 function adminListNums() {
     let output = "";

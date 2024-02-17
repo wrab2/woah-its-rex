@@ -6,6 +6,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 let oreList = {
     "🐱": [1/Infinity, [0,0,0,0]],
+    "✈️": [1/Infinity, [0,0,0,0]],
     "🍀" : [1/444400000000000, [0,0,0,0]],
     "☘️" : [1/33300000000000, [0,0,0,0]],
     "🫶": [1/1000000000000, [0,0,0,0]],
@@ -30,7 +31,6 @@ let oreList = {
     "🪘": [1/500000000, [0,0,0,0]], //17.5b
     "💅": [1/11201200200, [0,0,0,0]],
     "🌳": [1/9250000000, [0,0,0,0]],
-    "✈️": [1/9110000000, [0,0,0,0]],
     "💱": [1/180000000, [0,0,0,0]], //9b
     "💵": [1/8900000000, [0,0,0,0]],
     "🏰": [1/8888888888, [0,0,0,0]],
@@ -464,7 +464,6 @@ sillyLayer = {
     "🧌": 1/696969696969,
     "♾️": 1/75000000000,
     "💅": 1/11201200200,
-    "✈️": 1/9110000000,
     "🪢": 1/8181818181,
     "🫃": 1/6600000000,
     //"⛄": 1/183640000,
@@ -630,7 +629,6 @@ const customMessages = {
     "⚕️": "Gently materializing, a healing symbol radiates a serene energy, offering tranquility...",
     "💅": "GURLLLLLLL NO WAYYYYYYYY OMGGGGGGGGG...",
     "🌳": "CAKECORE13...",
-    "✈️": "THEY HIT THE PENTAGON😭...",
     "💵": "MONEY MONEY KACHINGGGG JACKPOT...",
     "🏰": "An essence of royalty graces the air of majestic opulence...",
     "🪢": "Halfheartedly sauntering into existence, a lackluster piece of twine makes a feeble attempt at garnering attention, or not...",

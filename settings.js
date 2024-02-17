@@ -12,7 +12,7 @@ function openFrame(frameId) {
     document.querySelectorAll('.frame').forEach(frame => {
       frame.style.display = 'none';
     });
-
+    
     const selectedFrame = document.getElementById(frameId + "-frame");
     if (selectedFrame) {
       selectedFrame.style.display = 'block';

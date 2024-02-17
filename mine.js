@@ -193,8 +193,10 @@ function giveBlock(type, x, y, fromReset, fromCave, caveInfo) {
 }
 
 function generateBlock(luck, location) {
-    if (currentWorld === 2)
-        luck += (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
+    luck += (verifiedOres.getLuckBoosts()[currentPickaxe]) * 0.25;
+    luck += (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
+    if (currentWorld === 1)
+        luck *= (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
     blocksRevealedThisReset++;
     let hasLog = false;
     let probabilityTable = currentLayer;
