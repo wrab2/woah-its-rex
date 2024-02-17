@@ -37,6 +37,7 @@ let pickaxes = [
     ['LA LUNA', false], //18 11.6 consistency
     ['this is just lazy', false], //19 ~24 consistency
     ['knots...', false], //20 ~40 consistency
+    ['hey wait ive seen this one before', false], //21 ~75 consistency
 ];
 let gears = [
     false, //ORE TRACKER 0

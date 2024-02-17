@@ -16,7 +16,7 @@ function adminGivePickaxe(num) {
             pickaxes[i][1] = true;
         }
     } else {
-        pickaxes[num] = true;
+        pickaxes[num][1] = true;
     }
 }
 function adminGiveGear(num) {
@@ -34,7 +34,7 @@ function adminRemovePickaxe(num) {
             pickaxes[i][1] = false;
         }
     } else {
-        pickaxes[num] = false;
+        pickaxes[num][1] = false;
     }
 }
 function adminRemoveGear(num) {

@@ -138,6 +138,12 @@ async function rollAbilities() {
                 updateActiveRecipe();
             }
             break;
+        case 21:
+            if (Math.random() <= 1/75) {
+                canMine = await(pickaxeAbility21(curX, curY, boost));
+                updateActiveRecipe();
+            }
+            break;
     }
 }
 
@@ -183,20 +189,12 @@ function gearAbility3() {
 }
 function pickaxeAbility1(x, y, size, customLuck, boost) {
     return new Promise((resolve) => {
-    let generated;
     const thisLuck  = customLuck * boost;
     canMine = false;
     const constraints = getParams(size, size);
     for (let r = y - constraints[1]; r <= y + size; r++) {
         for (let c = x - constraints[0]; c <= x + size; c++) {
-            if (mine[r][c] === undefined) {
-                generated = generateBlock(thisLuck, [r, c]);
-                mine[r][c] = generated[0];
-                if (generated[1])
-                    verifiedOres.verifyLog(r, c);
-            }
-            if (mine[r][c] !== "⛏️")
-                mineBlock(c, r, "ability", thisLuck);
+            pickaxeAbilityMineBlock(c, r, thisLuck);
         }
         displayArea();
         setTimeout(() => {
@@ -214,25 +212,25 @@ function pickaxeAbility2(x, y, boost) {
     const origin = [y, x];
     for (let i = 0; i < constraints[0]; i++) {
         x--;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
         y++;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     x = origin[1];
     y = origin[0];
     for (let i = 0; i < constraints[0]; i++) {
         x++;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
         y++;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     x = origin[1];
     y = origin[0];
     for (let i = 0; i < constraints[1]; i++) {
         x++;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
         y--;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     x = origin[1];
     y = origin[0];
@@ -240,9 +238,9 @@ function pickaxeAbility2(x, y, boost) {
         constraints[0] = constraints[1];
     for (let i = 0; i < constraints[0]; i++) {
         x--;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
         y--;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     displayArea();
     setTimeout(() => {
@@ -259,22 +257,22 @@ function pickaxeAbility3(x, y, boost) {
     const origin = [y, x];
     for (let i = 0; i < 6; i++) {
         x++;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     x = origin[1];
     for (let i = 0; i < constraints[0]; i++) {
         x--;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     x = origin[1];
     for (let i = 0; i < 6; i++) {
         y++;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     y = origin[0];
     for (let i = 0; i < constraints[1]; i++) {
         y--;
-        mineBlock(x, y, "ability", thisLuck);
+        pickaxeAbilityMineBlock(x, y, thisLuck);
     }
     setTimeout(() => {
         resolve(true);
@@ -298,45 +296,23 @@ function pickaxeAbility4(x, y, boost) {
 
 function pickaxeAbility5(x, y, boost) {
     return new Promise((resolve) => {
-    let generated;
     const thisLuck  = 5 * boost;
     const area1 = Math.round((Math.random() * 40) - 20);
     const area2 = Math.round((Math.random() * 40) - 20);
     let r = y + area2;
     let c = x + area1;
     for (let i = c; i < c + 5; i++) {
-        if (mine[r] !== undefined && mine[r][i] === undefined) {
-            generated = generateBlock(thisLuck, [r, i]);
-                    mine[r][i] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(r, c);
-        }
-        if (mine[r] !== undefined && mine[r][i] !== "⛏️")
-            mineBlock(i, r, "ability", thisLuck);
+        pickaxeAbilityMineBlock(r, i, thisLuck);
     }
     r++;
     for (let i = 0; i < 5; i++) {
         for (let j = c - 1; j < c+6; j++) {
-            if (mine[r] !== undefined && mine[r][j] === undefined) {
-                generated = generateBlock(thisLuck, [r, j]);
-                    mine[r][j] = generated[0];
-                if (generated[1])
-                    verifiedOres.verifyLog(r, j);
-            }
-            if (mine[r] !== undefined && mine[r][j] !== "⛏️")
-                mineBlock(j, r, "ability", thisLuck);
+            pickaxeAbilityMineBlock(j, r, thisLuck);
         }
         r++;
     }
     for (let i = c; i < c + 5; i++) {
-        if (mine[r] !== undefined && mine[r][i] === undefined) {
-            generated = generateBlock(thisLuck, [r, i]);
-            mine[r][i] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(r, i);
-        }
-        if (mine[r] !== undefined && mine[r][i] !== "⛏️")
-            mineBlock(i, r, "ability", thisLuck);
+        pickaxeAbilityMineBlock(i, r, thisLuck);
     }
     displayArea();
     setTimeout(() => {
@@ -347,21 +323,13 @@ function pickaxeAbility5(x, y, boost) {
 
 function pickaxeAbility6(x, y, boost) {
     return new Promise((resolve) => {
-    let generated;
     const thisLuck  = 10 * boost;
     const constraints  = getParams(9, 9);
     let dist = 9;
     for (let r = y + 6; r >= y - constraints[1]; r--) {
         for (let c = x - dist; c <= x + dist; c++) {
             if (c >= x - constraints[0]) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                if (mine[r][c] !== "⛏️")
-                    mineBlock(c, r, "ability", thisLuck);
+                pickaxeAbilityMineBlock(c, r, thisLuck);
             }
         }
         dist--;
@@ -375,21 +343,13 @@ function pickaxeAbility6(x, y, boost) {
 
 function pickaxeAbility7(x, y, boost) {
     return new Promise((resolve) => {
-    let generated;
     const thisLuck  = 10 * boost;
     const constraints = getParams(4, 3);
     let reps = 1;
     for (let r = y - constraints[1]; r < y; r++) {
         for (let c = x - constraints[0]; c < x + 5; c++) {
             if (reps !== 4 && reps !== 6) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                if (mine[r][c] !== "⛏️")
-                    mineBlock(c, r, "ability", thisLuck);
+                pickaxeAbilityMineBlock(c, r, thisLuck);
             }
             reps++; 
         }
@@ -399,14 +359,7 @@ function pickaxeAbility7(x, y, boost) {
     for (let r = y; r < y+4; r++) {
         for (let c = x - dist; c <= x + dist; c++) {
             if (c >= x - constraints[0]) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                if (mine[r][c] !== "⛏️")
-                    mineBlock(c, r, "ability", thisLuck);
+                pickaxeAbilityMineBlock(c, r, thisLuck);
             }
         }
         dist--;
@@ -433,21 +386,21 @@ function pickaxeAbility8(x, y, reps, boost) {
         const origin = [y, x];
         for (let i = 0; i < 8; i++) {
             x++;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[0] = [x, y, true];
         x = origin[1];
         for (let i = 0; i < constraints[0]; i++) {
             x--;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[1] = [x, y, true];
         x = origin[1];
         for (let i = 0; i < 8; i++) {
             y++;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75) {
             procs[2] = [x, y, true]
@@ -455,7 +408,7 @@ function pickaxeAbility8(x, y, reps, boost) {
         y = origin[0];
         for (let i = 0; i < constraints[1]; i++) {
             y--;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[3] = [x, y, true];
@@ -490,9 +443,9 @@ function pickaxeAbility9(x, y, reps, boost) {
         const origin = [y, x];
         for (let i = 0; i < constraints[0]; i++) {
             x--;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
             y++;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[0] = [x, y, true];
@@ -500,9 +453,9 @@ function pickaxeAbility9(x, y, reps, boost) {
         y = origin[0];
         for (let i = 0; i < constraints[0]; i++) {
             x++;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
             y++;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[1] = [x, y, true];
@@ -510,9 +463,9 @@ function pickaxeAbility9(x, y, reps, boost) {
         y = origin[0];
         for (let i = 0; i < constraints[1]; i++) {
             x++;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
             y--;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[2] = [x, y, true];
@@ -522,9 +475,9 @@ function pickaxeAbility9(x, y, reps, boost) {
             constraints[0] = constraints[1];
         for (let i = 0; i < constraints[0]; i++) {
             x--;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
             y--;
-            mineBlock(x, y, "ability", thisLuck);
+            pickaxeAbilityMineBlock(x, y, thisLuck);
         }
         if (Math.random() <= 0.75)
             procs[3] = [x, y, true];
@@ -547,7 +500,6 @@ function pickaxeAbility9(x, y, reps, boost) {
 function pickaxeAbility10(x, y, boost) {
     return new Promise((resolve) => {
     const thisLuck  = 20 * boost;
-    let generated;
     let skips = [
         [0, 4, 12, 16],
         [5, 11],
@@ -565,14 +517,7 @@ function pickaxeAbility10(x, y, boost) {
         for (let r = y - 8; r < y + 9; r++) {
             if (mine[r] !== undefined) {
                 if (!(skips[reps].includes(i))) {
-                    if (mine[r][c] === undefined) {
-                        generated = generateBlock(thisLuck, [r, c]);
-                        mine[r][c] = generated[0];
-                        if (generated[1])
-                            verifiedOres.verifyLog(r, c);
-                    }
-                    if (mine[r][c] !== "⛏️")
-                        mineBlock(c, r, "ability", thisLuck);
+                    pickaxeAbilityMineBlock(c, r, thisLuck);
                 }
             }
             i++;
@@ -586,14 +531,7 @@ function pickaxeAbility10(x, y, boost) {
         for (let c = x - 8; c < x + 9; c++) {
             if (mine[r] !== undefined) {
                 if (!(skips[reps].includes(i))) {
-                    if (mine[r][c] === undefined) {
-                        generated = generateBlock(thisLuck, [r, c]);
-                        mine[r][c] = generated[0];
-                        if (generated[1])
-                            verifiedOres.verifyLog(r, c);
-                    }
-                    if (mine[r][c] !== "⛏️")
-                        mineBlock(c, r, "ability", thisLuck);
+                    pickaxeAbilityMineBlock(c, r, thisLuck);
                 }
             }
             i++;
@@ -616,16 +554,7 @@ function pickaxeAbility11(x, y, boost) {
             if (!(i === 0 && j === 0) && Math.random() <= 0.5) {
                     for (let r = 7 * j; r < (7 * j + 7); r++) {
                         for (let c = 7 * i; c < (7 * i + 7); c++) {
-                            if (mine[y + r] !== undefined) {
-                                if (mine[y + r][x + c] === undefined) {
-                                    generated = generateBlock(thisLuck, [y + r, x + c]);
-                                    mine[y + r][x + c] = generated[0];
-                                    if (generated[1])
-                                        verifiedOres.verifyLog(r, c);
-                                }
-                                if (mine[y + r] !== undefined && mine[y + r][ x + c] !== undefined)
-                                    mineBlock(x + c, y + r, "ability", thisLuck);
-                            }
+                            pickaxeAbilityMineBlock(c + x, r + y, thisLuck);
                         }
                     }
             }
@@ -650,62 +579,27 @@ function pickaxeAbility12(x, y, boost) {
         switch(direction) {
             case "down":
                 for (let r = y; r <= y + nums[i]; r++) {
-                    if (mine[r] != undefined) {
-                        if (mine[r][x] === undefined) {
-                            generated = generateBlock(thisLuck, [r, x]);
-                            mine[r][x] = generated[0];
-                            if (generated[1])
-                                verifiedOres.verifyLog(r, x);
-                        }
-                        if (mine[r][x] != undefined) {
-                            mineBlock(x, r, "ability", thisLuck);
-                    }   
-                    } 
+                    pickaxeAbilityMineBlock(x, r, thisLuck);
             }
             y += nums[i];
             break;
             case "left":
                 for (let c = x; c >= x - nums[i]; c--) {
-                    if (mine[y] != undefined && mine[y][c] != undefined) {
-                        if (mine[y][c] === undefined) {
-                            generated = generateBlock(thisLuck, [y, c]);
-                            mine[y][c] = generated[0];
-                            if (generated[1])
-                                verifiedOres.verifyLog(y, c);
-                        }
-                        mineBlock(c, y, "ability", thisLuck);
-                        
-                    }
+                    pickaxeAbilityMineBlock(c, y, thisLuck);
                 }
                 x -= nums[i];
                 break;
             case "up":
                 for (let r = y; r >= y - nums[i]; r--) {
                     if (mine[r] != undefined) {
-                        if (mine[r][x] === undefined) {
-                            generated = generateBlock(thisLuck, [r, x]);
-                            mine[r][x] = generated[0];
-                            if (generated[1])
-                                verifiedOres.verifyLog(r, x);
-                        }
-                        if (mine[r][x] != undefined) {
-                            mineBlock(x, r, "ability", thisLuck);
-                        }
+                        pickaxeAbilityMineBlock(x, r, thisLuck);
                     }
                 }
                 y -= nums[i];
                 break;
             case "right":
                 for (let c = x; c <= x + nums[i]; c++) {
-                    if (mine[y] != undefined && mine[y][c] != undefined) {
-                        if (mine[y][c] === undefined) {
-                            generated = generateBlock(thisLuck, [y, c]);
-                            mine[y][c] = generated[0];
-                            if (generated[1])
-                                verifiedOres.verifyLog(y, c);
-                        }
-                        mineBlock(c, y, "ability", thisLuck); 
-                    }
+                    pickaxeAbilityMineBlock(c, y, thisLuck);
                 }
                 x += nums[i];
                 break;
@@ -733,13 +627,7 @@ function pickaxeAbility13(x, y, boost) {
         if (mine[r] != undefined) {
             for (let c = x + startNums[i]; c <= x + endNums[i]; c++) {
                 if (!(numSkips[i].includes(c - x))) {
-                    if (mine[r][c] === undefined) {
-                        generated = generateBlock(thisLuck, [r, c]);
-                        mine[r][c] = generated[0];
-                        if (generated[1])
-                            verifiedOres.verifyLog(r, c);
-                    }
-                    mineBlock(c, r, "ability", thisLuck); 
+                    pickaxeAbilityMineBlock(c, r, thisLuck);
                 }
             }
         }
@@ -750,13 +638,7 @@ function pickaxeAbility13(x, y, boost) {
         if (mine[r] != undefined) {
             for (let c = x - startNums[i]; c >= x - endNums[i]; c--) {
                 if (!(numSkips[i].includes(-(c - x)))) {
-                    if (mine[r][c] === undefined) {
-                        generated = generateBlock(thisLuck, [r, c]);
-                        mine[r][c] = generated[0];
-                        if (generated[1])
-                            verifiedOres.verifyLog(r, c);
-                    }
-                    mineBlock(c, r, "ability", thisLuck); 
+                    pickaxeAbilityMineBlock(c, r, thisLuck);
                 }
             }
         }
@@ -775,7 +657,6 @@ function pickaxeAbility14(translatex, translatey, boost) {
     let a = 0; //FAKE CENTER POINT
     let x = 0; //START POINT
     let nums = [];
-    let generated;
     while (x <= r) {
         let num1 = Math.sqrt(Math.pow(r, 2) - Math.pow((x - a), 2));
         nums.push(Math.floor(num1));
@@ -783,24 +664,8 @@ function pickaxeAbility14(translatex, translatey, boost) {
     }
     for (let i = 0; i < nums.length; i++) {
         for (let r = translatey + nums[i]; r >= translatey - nums[i]; r--) {
-            if (mine[r] != undefined) {
-                if (mine[r][translatex + i] === undefined) {
-                    generated = generateBlock(thisLuck, [r, translatex + i]);
-                    mine[r][translatex + i] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, translatex + i);
-                }
-                mineBlock(translatex + i, r, "ability", thisLuck); 
-                if (mine[r][translatex - i] === undefined) {
-                    generated = generateBlock(thisLuck, [r, translatex - i]);
-                    mine[r][translatex - i] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, translatex - i);
-                }
-                mineBlock(translatex - i, r, "ability", thisLuck); 
-                
-
-            }
+            pickaxeAbilityMineBlock(x, translatex + i, thisLuck);
+            pickaxeAbilityMineBlock(translatex - i, r, thisLuck);
         }
     }
     displayArea();
@@ -812,30 +677,13 @@ function pickaxeAbility14(translatex, translatey, boost) {
 //pickaxeAbility14(curX, curY, 5, 1);
 function pickaxeAbility15(x, y, boost) {
     return new Promise((resolve) => {
-        let generated;
     let thisLuck = 1.075 * boost;
     let dist = 7;
     for (let r = y; r < y + 8; r++) {
         let r2 = y - (r - y)
         for (let c = x - dist; c <= x + dist; c++) {
-            if (mine[r] != undefined) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                mineBlock(c, r, "ability", thisLuck); 
-            }
-            if (mine[r2] != undefined) {
-                if (mine[r2][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r2, c]);
-                    mine[r2][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r2, c);
-                }
-                mineBlock(c, r2, "ability", thisLuck); 
-            }
+            pickaxeAbilityMineBlock(c, r, thisLuck)
+            pickaxeAbilityMineBlock(c, r2, thisLuck)
         }
         dist--;
     }
@@ -855,20 +703,8 @@ function pickaxeAbility16(x, y, boost) {
         for (let c = x - startNums[i]; c < x - startNums[i] + endNums[i]; c++) {
             let c2 = x + (x - c);
             if (mine[r] != undefined) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                mineBlock(c, r, "ability", thisLuck); 
-                if (mine[r][c2] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c2]);
-                    mine[r][c2] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c2);
-                }
-                mineBlock(c2, r, "ability", thisLuck); 
+                pickaxeAbilityMineBlock(c, r, thisLuck);
+                pickaxeAbilityMineBlock(c2, r, thisLuck);
             }
         }
         i++;
@@ -889,25 +725,12 @@ function pickaxeAbility17(x, y, boost) {
         let c2 = x + (x - c)
         for (let r = y - startNums[i]; r < y - (startNums[i] - endNums[i]); r++) {
             if (mine[r] != undefined) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                mineBlock(c, r, "ability", thisLuck); 
-                if (mine[r][c2] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c2]);
-                    mine[r][c2] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c2);
-                }
-                mineBlock(c2, r, "ability", thisLuck); 
+                pickaxeAbilityMineBlock(c, r, thisLuck);
+                pickaxeAbilityMineBlock(c2, r, thisLuck);
             }
         }
         i++;
     }
-
     displayArea();
     setTimeout(() => {
         resolve(true);
@@ -919,23 +742,15 @@ function pickaxeAbility18(x, y, boost) {
         let startNums = [-13, -17, -20, -22, -24, -26, -28, -30, -31, -32, -22, -18, -15, -12, -10, -8, -6, -5, -3, -2, -1, 0, 1, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9, 9, 10, 10, 11, 11, 11, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14];
         let endNums = [8, 16, 23, 27, 31, 35, 38, 41, 43, 45, 36, 33, 31, 29, 28, 26, 25, 24, 23, 22, 22, 21, 21, 20, 19, 19, 18, 18, 17, 17, 17, 16, 15, 15, 14, 14, 13, 12, 12, 11, 10, 10, 9, 9, 8, 8, 6, 6, 5, 5, 4, 4, 3, 2, 1];
         let i = 0;
-        let generated;
         let thisLuck = 1.5 * boost;
         for (let r = y + 22; r > y - 33; r--) {
             if (mine[r] != undefined) {
                 for (let c = x - startNums[i]; c > x - (startNums[i] + endNums[i]); c--) {
-                    if (mine[r][c] === undefined) {
-                        generated = generateBlock(thisLuck, [r, c]);
-                        mine[r][c] = generated[0];
-                        if (generated[1])
-                            verifiedOres.verifyLog(r, c);
-                    }
-                    mineBlock(c, r, "ability", thisLuck); 
+                    pickaxeAbilityMineBlock(c, r, thisLuck);
                 }
             }
             i++;
         }
-        //pickaxeAbility17(curX, curY, 1)
     displayArea();
     setTimeout(() => {
         resolve(true);
@@ -946,32 +761,14 @@ function pickaxeAbility19(x, y, reps, boost) {
     return new Promise((resolve) => {
     if (reps > 5)
         return;
-    let generated;
     let newOrigins = [];
     let thisLuck = 2 * boost;
     let dist = 7;
     for (let r = y; r < y + 8; r++) {
         for (let c = x - dist; c <= x + dist; c++) {
             let r2 = y - (r - y)
-            if (mine[r] != undefined) {
-                if (mine[r][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r, c]);
-                    mine[r][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r, c);
-                }
-                mineBlock(c, r, "ability", thisLuck); 
-            }
-           
-            if (mine[r2] != undefined) {
-                if (mine[r2][c] === undefined) {
-                    generated = generateBlock(thisLuck, [r2, c]);
-                    mine[r2][c] = generated[0];
-                    if (generated[1])
-                        verifiedOres.verifyLog(r2, c);
-                }
-                mineBlock(c, r2, "ability", thisLuck); 
-            }
+            pickaxeAbilityMineBlock(c, r, thisLuck);
+            pickaxeAbilityMineBlock(c, r2, thisLuck);
             if (r2 < y) {
                 if (c < x && Math.random() < 1/30)
                     newOrigins[0] = [y - 8, x - 8];
@@ -1049,15 +846,7 @@ function pickaxeAbility20(x, y, boost) {
             if (toMine[i][j]) {
                 for (let r = yStart; r < yStart + 15; r++) {
                     for (let c = xStart; c < xStart + 15; c++) {
-                        if (mine[r] != undefined) {
-                            if (mine[r][c] === undefined) {
-                                generated = generateBlock(thisLuck, [r, c]);
-                                mine[r][c] = generated[0];
-                                if (generated[1])
-                                    verifiedOres.verifyLog(r, c);
-                            }
-                            mineBlock(c, r, "ability", thisLuck); 
-                        }
+                        pickaxeAbilityMineBlock(c, r, thisLuck);
                     }
                 }
             } else if (board[i][j] === "X") {
@@ -1117,4 +906,86 @@ function pickaxeAbility20(x, y, boost) {
         resolve(true);
     }, 1);
     });
+}
+
+function pickaxeAbility21(x, y, boost) {
+    return new Promise((resolve) => {
+    let reps = 0;
+    let increaseNum = 2;
+    let thisLuck = 1.25 * boost;
+    for (let cat = 0; cat < 12; cat++) {
+    for (let i = 0; i < increaseNum; i++) {
+        x--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        y++
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        
+    }
+    while (reps < increaseNum) {
+        x--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        reps++;
+    }
+    reps = 0;
+    for (let i = 0; i < increaseNum; i++) {
+        y--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        x--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        
+    }
+    while (reps < increaseNum) {
+        y--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        reps++;
+    }
+    reps = 0;
+    increaseNum++;
+
+    for (let i = 0; i < increaseNum; i++) {
+        x++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        y--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        
+    }
+    while (reps < increaseNum) {
+        x++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        reps++;
+    }
+    reps = 0;
+    for (let i = 0; i < increaseNum; i++) {
+        y++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        x++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        
+    }
+    while (reps < increaseNum) {
+        y++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+        reps++;
+    }
+    reps = 0;
+    increaseNum++;
+    }
+    displayArea();
+    setTimeout(() => {
+        displayArea();
+        resolve(true);
+    }, 1);
+    });
+}
+function pickaxeAbilityMineBlock(x, y, luck) {
+    let generated;
+    if (mine[y] != undefined) {
+        if (mine[y][x] === undefined) {
+            generated = generateBlock(luck, [y, x]);
+            mine[y][x] = generated[0];
+            if (generated[1])
+                verifiedOres.verifyLog(y, x);
+        }
+        mineBlock(x, y, "ability", luck); 
+    }
 }
