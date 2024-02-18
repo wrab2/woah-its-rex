@@ -22,9 +22,8 @@ class secureLogs {
         if (currentWorld === 1 && gears[5])
             luckModifier1 *= 1.6;
         let luckModifier2 = 0;
-        if (currentWorld === 2)
-            luckModifier2 +=  (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
-
+        luckModifier2 +=  (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
+        luckModifier1 *= gears[20] ? ((verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) >= 1 ? (verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) : 1) : 1;
         const maxLuck = (this.#maxLuck[currentPickaxe] * luckModifier1 + luckModifier2) + 1;
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
             if (mine[r][c] === undefined)
@@ -108,12 +107,7 @@ class secureLogs {
         return this.#maxLuck;
     }
     getCurrentLuck() {
-        if (currentWorld === 1) {
-            return (this.#maxLuck[currentPickaxe]) * (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
-        } else {
-            return (this.#maxLuck[currentPickaxe]) + (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
-        }
-        
+        return ((this.#maxLuck[currentPickaxe]) + (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0)) * ((gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1)) * (gears[20] ? (((verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) >= 1 ? (verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) : 1)) : 1);
     }
 }
 let verifiedOres = new secureLogs();

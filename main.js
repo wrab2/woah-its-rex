@@ -38,6 +38,7 @@ let pickaxes = [
     ['this is just lazy', false], //19 ~24 consistency
     ['knots...', false], //20 ~40 consistency
     ['hey wait ive seen this one before', false], //21 ~75 consistency
+    ['jesus christ what is it with world 2 and circles', false], //22 ~113 consistency
 ];
 let gears = [
     false, //ORE TRACKER 0
@@ -60,7 +61,7 @@ let gears = [
     false, //INFINITY COLLECTOR 2 17
     false, //LUCK 3 18
     false, //SPEED 3 19
-    false, //25% OF CURRENT PICKAXE LUCK 20
+    false, //5% OF CURRENT PICKAXE LUCK 20
 ];
 let currentPickaxe = 0;
 let currentWorld = 1;

@@ -144,6 +144,13 @@ async function rollAbilities() {
                 updateActiveRecipe();
             }
             break;
+        case 22:
+            if (Math.random() <= 1/150) {
+                canMine = await(pickaxeAbility22(curX, curY, boost));
+                updateActiveRecipe();
+            }
+            break;
+    
     }
 }
 
@@ -664,7 +671,7 @@ function pickaxeAbility14(translatex, translatey, boost) {
     }
     for (let i = 0; i < nums.length; i++) {
         for (let r = translatey + nums[i]; r >= translatey - nums[i]; r--) {
-            pickaxeAbilityMineBlock(x, translatex + i, thisLuck);
+            pickaxeAbilityMineBlock(translatex + i, r, thisLuck);
             pickaxeAbilityMineBlock(translatex - i, r, thisLuck);
         }
     }
@@ -977,6 +984,46 @@ function pickaxeAbility21(x, y, boost) {
     }, 1);
     });
 }
+
+function pickaxeAbility22(translatex, translatey, boost) {
+    return new Promise((resolve) => {
+    let thisLuck = 3 * boost;
+    let r = 1;
+    
+    for (let reps = 0; reps < 21; reps++) {
+        let a = 0; //FAKE CENTER POINT
+        let x = 0; //START POINT
+        let y = 0;
+        let nums1 = [];
+        let nums2 = [];
+        while (x <= r) {
+            let num1 = Math.sqrt(Math.pow(r, 2) - Math.pow((x - a), 2));
+            let num2 = Math.sqrt(Math.pow(r, 2) - Math.pow((y - a), 2));
+            nums1.push(Math.round(num1));
+            nums2.push(Math.round(num2));
+            x++;
+            y++;
+        }
+        for (let i = 0; i < nums1.length; i++) {
+            pickaxeAbilityMineBlock(translatex + i, translatey + nums1[i], thisLuck);
+            pickaxeAbilityMineBlock(translatex + i, translatey - nums1[i], thisLuck);
+            pickaxeAbilityMineBlock(translatex - i, translatey + nums1[i], thisLuck);
+            pickaxeAbilityMineBlock(translatex - i, translatey - nums1[i], thisLuck);
+            pickaxeAbilityMineBlock(translatex + nums2[i], translatey + i, thisLuck);
+            pickaxeAbilityMineBlock(translatex + nums2[i], translatey - i, thisLuck);
+            pickaxeAbilityMineBlock(translatex - nums2[i], translatey + i, thisLuck);
+            pickaxeAbilityMineBlock(translatex - nums2[i], translatey - i, thisLuck);
+        }
+        r += 2;
+    }
+    
+    displayArea();
+    setTimeout(() => {
+        resolve(true);
+    }, 1);
+    });
+}
+
 function pickaxeAbilityMineBlock(x, y, luck) {
     let generated;
     if (mine[y] != undefined) {

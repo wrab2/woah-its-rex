@@ -53,19 +53,14 @@ let allPickaxeNames = ["Mulch Mallet",
 "Lunar Lightsabre",
 "Gemstone Engraver",
 "Gambler's Fallacy",
+"Swirly Subjugator",
+"Singularity Slammer"
 ];
 function changeUseNumbers(button) {
     if (!useNumbers) {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 1; i < elements.length; i++) {
-            if (i === 13) {
-                elements[i].innerHTML = "Pickaxe " + i;
-                elements[i + 1].innerHTML = "Pickaxe " + i;
-                i++;
-            } else {
-                elements[i].innerHTML = "Pickaxe " + i;
-            }
-            
+            elements[i].innerHTML = "Pickaxe " + i;
         }
         if (button != undefined) {
             button.style.backgroundColor = "green";

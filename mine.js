@@ -148,16 +148,15 @@ function giveBlock(type, x, y, fromReset, fromCave, caveInfo) {
                 oreList[block][1][0]++;
                 updateInventory(block, 1);
             }
-            if (currentWorld === 2) {
-                if (gears[15]) {
-                    if (oreRarity === 1 && (Math.random() < 0.5));
-                        oreList[type][1][0] += 2;
-                }
-                if (gears[13]) {
-                    if (oreRarity < 750000 && oreRarity > 1)
-                        if (Math.random < 0.75)
-                            oreList[block][1][0]++;
-                }
+           
+            if (gears[15]) {
+                 if (oreRarity === 1 && (Math.random() < 0.5));
+                    oreList[type][1][0] += 2;
+            }
+            if (gears[13]) {
+                if (oreRarity < 750000 && oreRarity > 1)
+                    if (Math.random < 0.75)
+                        oreList[block][1][0]++;
             }
             if (oreRarity >= 160000000)
                 verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
@@ -193,8 +192,8 @@ function giveBlock(type, x, y, fromReset, fromCave, caveInfo) {
 }
 
 function generateBlock(luck, location) {
-    luck += (verifiedOres.getLuckBoosts()[currentPickaxe]) * 0.25;
     luck += (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
+    luck *= gears[20] ? ((verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) >= 1 ? (verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) : 1) : 1;
     if (currentWorld === 1)
         luck *= (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
     blocksRevealedThisReset++;
