@@ -25,7 +25,6 @@ class secureLogs {
         luckModifier2 +=  (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
         luckModifier1 *= gears[20] ? ((verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) >= 1 ? (verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) : 1) : 1;
         const maxLuck = ((this.#maxLuck[currentPickaxe] + luckModifier2) * luckModifier1) + 1;
-        console.log(maxLuck);
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
             if (mine[r][c] === undefined)
                 this.#spawnLogs.push([r, c, intended, luck, fromCave]);
