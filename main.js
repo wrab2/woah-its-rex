@@ -39,7 +39,7 @@ let pickaxes = [
     ['knots...', false], //20 ~40 consistency
     ['hey wait ive seen this one before', false], //21 ~75 consistency
     ['jesus christ what is it with world 2 and circles', false], //22 ~113 consistency
-    ['man this ability sucks', false], //22 unknown consistency
+    ['man this ability sucks', false], //23 ~215 consistency
 ];
 let gears = [
     false, //ORE TRACKER 0

@@ -14,7 +14,7 @@ function toSurface() {
     } else {
         curY = 2001;
     }
-    for (let i = curY - 51; i < curY + 52; i++)
+    for (let i = curY - 101; i < curY + 101; i++)
         if (i > -1 && mine[i] === undefined) 
             mine[i] = [];
     blocksRevealedThisReset = 0;
@@ -110,7 +110,7 @@ function mineResetAid() {
         mine = [[]];
         curX = 1000000000;
         let y = curY;
-        for (let r = y - 51; r < y + 51; r++) {
+        for (let r = y - 101; r < y + 101; r++) {
             if(r > -1 && mine[r] === undefined) {
                 mine[r] = [];
             }

@@ -8,7 +8,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 //MINE CREATION
 
 function createMine() {
-    for (let r = curY - 51; r < curY + 51; r++) {
+    for (let r = curY - 101; r < curY + 101; r++) {
         if (r > -1)
             mine[r] = [];
     }
@@ -76,13 +76,13 @@ function checkAllAround(x, y, luck) {
 }
 
 function createMineIndexes() {
-    if (mine[curY + 50] === undefined)
-        mine[curY + 50] = [];
+    if (mine[curY + 100] === undefined)
+        mine[curY + 100] = [];
     if (curY >= 50) {
-        if (mine[curY - 50] === undefined) 
-            mine[curY - 50] = [];
+        if (mine[curY - 100] === undefined) 
+            mine[curY - 100] = [];
     } else {
-        let constraints = getParams(0, 50);
+        let constraints = getParams(0, 100);
         if (mine[constraints[1]] === undefined)
             mine[constraints[1]] = [];
     }
@@ -302,7 +302,7 @@ async function teleport() {
 function toLocation() {
     return new Promise((resolve) => {
     let x = curX;
-    for (let r = y - 51; r < y + 51; r++) {
+    for (let r = y - 101; r < y + 101; r++) {
         if(mine[r] === undefined)
             mine[r] = [];
     }
@@ -314,7 +314,7 @@ function toLocation() {
     mine[curY][curX] = "⛏️";
     setTimeout(() => {
         resolve(true);
-    }, 1000);
+    }, 5);
     });
 }
 

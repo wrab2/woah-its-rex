@@ -151,7 +151,7 @@ async function rollAbilities() {
             }
             break;
          case 23:
-            if (Math.random() <= 1/100) {
+            if (Math.random() <= 1/75) {
                 canMine = await(pickaxeAbility23(curX, curY, boost));
                 updateActiveRecipe();
             }
@@ -1037,23 +1037,24 @@ let pa4 = [];
 let pickaxeAbility23Num = 0;
 
 function pickaxeAbility23(x, y, boost) {
-    let thisLuck = 1 * boost;
+    let thisLuck = 4 * boost;
     return new Promise((resolve) => {
     if (pickaxeAbility23Num === 0) {
-        pa1[0] = x - Math.round(Math.random() * 400) + 100;
-        pa1[1] = y - Math.round(Math.random() * 30);
-        pa2[0] = x + Math.round(Math.random() * 400) + 100;
-        pa2[1] = y - Math.round(Math.random() * 30);
+        pa1[0] = x - Math.round(Math.random() * 600) + 350;
+        pa1[1] = y - Math.round(Math.random() * 75) + 10;
+        pa2[0] = x + Math.round(Math.random() * 600) + 350;
+        pa2[1] = y - Math.round(Math.random() * 75) + 10;
         pickaxeAbility23Num++;
     } else {
         pickaxeAbility23Num = 0;
-        pa3[0] = x - Math.round(Math.random() * 400) + 100;
-        pa3[1] = y + Math.round(Math.random() * 30);
-        pa4[0] = x + Math.round(Math.random() * 400) + 100;
-        pa4[1] = y + Math.round(Math.random() * 30);
+        pa3[0] = x - Math.round(Math.random() * 600) + 350;
+        pa3[1] = y + Math.round(Math.random() * 75) + 10;
+        pa4[0] = x + Math.round(Math.random() * 600) + 350;
+        pa4[1] = y + Math.round(Math.random() * 75) + 10;
         //ARRAY ORDER IS X, Y
         let dist1 = [Math.abs(pa1[0] - pa4[0]), Math.abs(pa1[1] - pa4[1])];
         let dist2 = [Math.abs(pa2[0] - pa3[0]), Math.abs(pa2[1] - pa3[1])];
+        dist1[1] = dist1[1] === 0 ? 1 : dist1[1];
         let xIncrease = dist1[0]/dist1[1];
         let startNumY = pa1[1] < pa4[1] ? pa1[1] : pa4[1];
         let endNumY = pa1[1] > pa4[1] ? pa1[1] : pa4[1];
@@ -1087,6 +1088,7 @@ function pickaxeAbility23(x, y, boost) {
             }
             startNumX += xIncrease;
         }
+        dist2[1] = dist2[1] === 0 ? 1 : dist2[1];
         xIncrease = dist2[0]/dist2[1];
         startNumY = pa2[1] > pa3[1] ? pa2[1] : pa3[1];
         endNumY = pa2[1] < pa3[1] ? pa2[1] : pa3[1];
