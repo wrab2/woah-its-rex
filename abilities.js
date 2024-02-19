@@ -151,7 +151,7 @@ async function rollAbilities() {
             }
             break;
          case 23:
-            if (Math.random() <= 1/50) {
+            if (Math.random() <= 1/100) {
                 canMine = await(pickaxeAbility23(curX, curY, boost));
                 updateActiveRecipe();
             }
@@ -1040,16 +1040,16 @@ function pickaxeAbility23(x, y, boost) {
     let thisLuck = 1 * boost;
     return new Promise((resolve) => {
     if (pickaxeAbility23Num === 0) {
-        pa1[0] = x - Math.round(Math.random() * 30);
+        pa1[0] = x - Math.round(Math.random() * 400) + 100;
         pa1[1] = y - Math.round(Math.random() * 30);
-        pa2[0] = x + Math.round(Math.random() * 30);
+        pa2[0] = x + Math.round(Math.random() * 400) + 100;
         pa2[1] = y - Math.round(Math.random() * 30);
         pickaxeAbility23Num++;
     } else {
         pickaxeAbility23Num = 0;
-        pa3[0] = x - Math.round(Math.random() * 30);
+        pa3[0] = x - Math.round(Math.random() * 400) + 100;
         pa3[1] = y + Math.round(Math.random() * 30);
-        pa4[0] = x + Math.round(Math.random() * 30);
+        pa4[0] = x + Math.round(Math.random() * 400) + 100;
         pa4[1] = y + Math.round(Math.random() * 30);
         //ARRAY ORDER IS X, Y
         let dist1 = [Math.abs(pa1[0] - pa4[0]), Math.abs(pa1[1] - pa4[1])];
