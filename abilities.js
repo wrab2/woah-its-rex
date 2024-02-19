@@ -150,6 +150,12 @@ async function rollAbilities() {
                 updateActiveRecipe();
             }
             break;
+         case 23:
+            if (Math.random() <= 1/50) {
+                canMine = await(pickaxeAbility23(curX, curY, boost));
+                updateActiveRecipe();
+            }
+            break;
     
     }
 }
@@ -1017,6 +1023,103 @@ function pickaxeAbility22(translatex, translatey, boost) {
         r += 2;
     }
     
+    displayArea();
+    setTimeout(() => {
+        resolve(true);
+    }, 1);
+    });
+}
+//IN ARRAY, ORDER IS X, Y
+let pa1 = [];
+let pa2 = [];
+let pa3 = [];
+let pa4 = [];
+let pickaxeAbility23Num = 0;
+
+function pickaxeAbility23(x, y, boost) {
+    let thisLuck = 1 * boost;
+    return new Promise((resolve) => {
+    if (pickaxeAbility23Num === 0) {
+        pa1[0] = x - Math.round(Math.random() * 30);
+        pa1[1] = y - Math.round(Math.random() * 30);
+        pa2[0] = x + Math.round(Math.random() * 30);
+        pa2[1] = y - Math.round(Math.random() * 30);
+        pickaxeAbility23Num++;
+    } else {
+        pickaxeAbility23Num = 0;
+        pa3[0] = x - Math.round(Math.random() * 30);
+        pa3[1] = y + Math.round(Math.random() * 30);
+        pa4[0] = x + Math.round(Math.random() * 30);
+        pa4[1] = y + Math.round(Math.random() * 30);
+        //ARRAY ORDER IS X, Y
+        let dist1 = [Math.abs(pa1[0] - pa4[0]), Math.abs(pa1[1] - pa4[1])];
+        let dist2 = [Math.abs(pa2[0] - pa3[0]), Math.abs(pa2[1] - pa3[1])];
+        let xIncrease = dist1[0]/dist1[1];
+        let startNumY = pa1[1] < pa4[1] ? pa1[1] : pa4[1];
+        let endNumY = pa1[1] > pa4[1] ? pa1[1] : pa4[1];
+        let startNumX = pa1[0] < pa4[0] ? pa1[0] : pa4[0];
+        let lastChangeX = startNumX;
+        let lastChangeY = startNumY;
+        let useX;
+        if (xIncrease >= 1)
+            useX = true;
+        else
+            useX = false;
+        for (let r = startNumY; r < endNumY; r++) {  
+            if (!useX && r > lastChangeY + 1) {
+                for (let r2 = r - 2; r2 <= r + 1; r2++) {
+                    for (let c = startNumX - 2; c <= startNumX + 1; c++) {
+                        pickaxeAbilityMineBlock(Math.floor(c), r2, thisLuck);
+                    }
+                }
+                lastChangeY++;
+            } else {
+                for (let c = startNumX; c < startNumX + xIncrease; c++) {
+                    if (c > lastChangeX + 1) {
+                        for (let r2 = r - 2; r2 <= r + 1; r2++) {
+                            for (let c2 = c - 2; c2 <= c + 1; c2++) {
+                                pickaxeAbilityMineBlock(Math.floor(c2), r2, thisLuck);
+                            }
+                        }
+                        lastChangeX++;
+                    }
+                }
+            }
+            startNumX += xIncrease;
+        }
+        xIncrease = dist2[0]/dist2[1];
+        startNumY = pa2[1] > pa3[1] ? pa2[1] : pa3[1];
+        endNumY = pa2[1] < pa3[1] ? pa2[1] : pa3[1];
+        startNumX = pa2[0] < pa3[0] ? pa2[0] : pa3[0];
+        lastChangeX = startNumX;
+        lastChangeY = startNumY;
+        if (xIncrease >= 1)
+            useX = true;
+        else
+            useX = false;
+        for (let r = startNumY; r > endNumY; r--) { 
+            if (!useX && r < lastChangeY - 1) {
+                for (let r2 = r - 2; r2 <= r + 1; r2++) {
+                    for (let c = startNumX - 2; c <= startNumX + 1; c++) {
+                        pickaxeAbilityMineBlock(Math.floor(c), r2, thisLuck);
+                    }
+                }
+                lastChangeY--;
+            } else {
+                for (let c = startNumX; c < startNumX + xIncrease; c++) {
+                    if (c < lastChangeX + 1) {
+                        for (let r2 = r - 2; r2 <= r + 1; r2++) {
+                            for (let c2 = c - 2; c2 <= c + 1; c2++) {
+                                pickaxeAbilityMineBlock(Math.floor(c2), r2, thisLuck);
+                            }
+                        }
+                        lastChangeX++;
+                    }
+                }
+            }
+            startNumX += xIncrease;
+        }
+    }
     displayArea();
     setTimeout(() => {
         resolve(true);

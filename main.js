@@ -39,6 +39,7 @@ let pickaxes = [
     ['knots...', false], //20 ~40 consistency
     ['hey wait ive seen this one before', false], //21 ~75 consistency
     ['jesus christ what is it with world 2 and circles', false], //22 ~113 consistency
+    ['man this ability sucks', false], //22 unknown consistency
 ];
 let gears = [
     false, //ORE TRACKER 0
@@ -135,12 +136,12 @@ function movePlayer(dir, reps) {
                 case "s":
                     if (currentWorld === 1 || (currentWorld === 2 && currentPickaxe > 12)) {
                         if (mine[curY + 1][curX] != "✖️") {
-                            mineBlock(curX, curY + 1, "mining", 1);
                             mine[curY][curX] = "⚪";
                             curY++;
+                            setLayer(curY);
+                            mineBlock(curX, curY, "mining", 1);
                             createMineIndexes();
                             mine[curY][curX] = "⛏️";
-                            setLayer(curY);
                             lastDirection = "s";
                         }
                         break;
@@ -149,13 +150,13 @@ function movePlayer(dir, reps) {
                     if (curY > 0) {
                         if (currentWorld === 1 || (currentWorld === 2 && currentPickaxe > 12)) {
                             if (mine[curY - 1][curX] != "✖️") {
-                                mineBlock(curX, curY - 1, "mining", 1);
                                 mine[curY][curX] = "⚪";
                                 curY--;
+                                setLayer(curY);
+                                mineBlock(curX, curY, "mining", 1);
                                 createMineIndexes();
                                 mine[curY][curX] = "⛏️";
-                                lastDirection = "w";
-                                setLayer(curY);
+                                lastDirection = "w";   
                         }
                     }
                     }

@@ -285,6 +285,9 @@ worldTwoPickaxes = [
         ["🪓", 5],
         ["🔕", 1],
     ],
+    [
+        ["☘️", 100000]
+    ],
 ],
 worldOneGears = [
     //ORE TRACKER
