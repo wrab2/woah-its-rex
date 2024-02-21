@@ -79,7 +79,7 @@ function init() {
     else
         canContinue = true;
     if (canContinue) {
-        repeatDataSave();
+        //repeatDataSave();
         localStorage.setItem("playedBefore", true);
         localStorage.setItem("game2DataChanges", true);
         createPickaxeRecipes();
@@ -229,6 +229,12 @@ document.addEventListener('keydown', (event) => {
             event.preventDefault();
             validInput = true;
             name = "d";
+            break;
+        case "escape":
+            if (document.getElementById("settingsContainer").style.display === "block") 
+                hideSettings();
+            else
+                showSettings();
             break;
         default:
             break;
@@ -492,11 +498,40 @@ function logFind(type, x, y, variant, atMined, fromReset) {
         latestFinds.splice(0, 1);
     let sub = currentWorld === 1 ? 0 : 2000;
     for (let i = latestFinds.length - 1; i >= 0; i--) {
+        output += "<span onclick='goToOre(\"" + latestFinds[i][0] + "\", \"" + latestFinds[i][3] + "\")'>";
         output += latestFinds[i][3] + " ";
         if (latestFinds[i][5])
             output += latestFinds[i][0] + " | X: " + (latestFinds[i][1] - 1000000000).toLocaleString() + ", Y: " + (-(latestFinds[i][2] - sub)).toLocaleString() + " | FROM RESET<br>"
         else
             output += latestFinds[i][0] + " | X: " + (latestFinds[i][1] - 1000000000).toLocaleString() + ", Y: " + (-(latestFinds[i][2] - sub)).toLocaleString() + " | At " + latestFinds[i][4].toLocaleString() +  " Mined.<br>";
+        output += "</span>";
     }
     document.getElementById("latestFinds").innerHTML = output;
+}
+
+function goToOre(block, variantType) {
+    let variantNum = namesemojis.indexOf(variantType) + 1;
+    document.getElementById("inventory" + variant).style.display = "none";
+    variant = variantNum;
+    document.getElementById("inventory" + variant).style.display = "block";
+    document.getElementById("switchInventory").innerHTML = names[variant - 1] + " Inventory"
+    let inventoryElements = document.getElementById("inventory" + variantNum).children;
+    let total = 0;
+    for (let i = 0; i < inventoryElements.length; i++) {
+        let ore = inventoryElements[i].innerText.substring(0, inventoryElements[i].innerText.indexOf(" "));
+        let element = inventoryElements[i];
+        if (element.style.display === "block") {
+            if (ore === block) {
+                document.getElementById("inventoryDisplay").scrollTop = total;
+                element.style.animation = "inventoryFlash 500ms linear 1";
+                setTimeout(() => {
+                    element.style.animation = "";
+                    element.value = "";
+                }, 500);
+                return;
+            } else {
+                total += element.getBoundingClientRect()["height"];
+            }
+        }
+    }
 }

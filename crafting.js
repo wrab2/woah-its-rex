@@ -550,6 +550,7 @@ function displayRecipe(num, element) {
             recipeDisplay.appendChild(currentRecipe[1]);
         } 
     }
+    updateActiveRecipe();
 }
 
 function createPickaxeRecipes() {

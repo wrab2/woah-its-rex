@@ -5,9 +5,12 @@ function adminGiveOres(block, amt) {
     if (block === undefined) {
         for (let propertyName in oreList) {
             oreList[propertyName][1][0] += amt;
+            updateInventory(propertyName, 1);
+            
         }
     } else {
         oreList[block][1][0] += amt;
+        updateInventory(block, 1);
     }
 }
 function adminGivePickaxe(num) {
