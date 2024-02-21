@@ -79,7 +79,7 @@ function init() {
     else
         canContinue = true;
     if (canContinue) {
-        //repeatDataSave();
+        repeatDataSave();
         localStorage.setItem("playedBefore", true);
         localStorage.setItem("game2DataChanges", true);
         createPickaxeRecipes();
