@@ -493,11 +493,7 @@ function displayRecipe(num, element) {
     description = description.cloneNode(description);
     if (currentRecipe[0] === null) {
         if (type === "pickaxe" && pickaxes[num + 1][1] && currentPickaxe === num + 1) {
-            if (num === 12) {
-                recipe.lastChild.innerText = "Teleport!"
-            } else {
-                recipe.lastChild.innerText = "Equipped!";
-            }
+            recipe.lastChild.innerText = "Equipped!";
         } else if (type === "pickaxe" && pickaxes[num + 1][1]) {
             recipe.lastChild.innerText = "Equip!"
         }
@@ -525,12 +521,7 @@ function displayRecipe(num, element) {
             currentRecipe[1] = null;
         } else {
             if (type === "pickaxe" && pickaxes[num + 1][1] && currentPickaxe === num + 1) {
-                if (num === 12) {
-                    recipe.lastChild.innerText = "Teleport!"
-                } else {
-                    recipe.lastChild.innerText = "Equipped!";
-                }
-                
+                recipe.lastChild.innerText = "Equipped!";
             } else if (type === "pickaxe" && pickaxes[num + 1][1]) {
                 recipe.lastChild.innerText = "Equip!"
             }
@@ -579,6 +570,12 @@ function createPickaxeRecipes() {
             tempElement.appendChild(element);
         });
         let tempButton = document.createElement('button');
+        if (j === 12) {
+            tempButton.innerText = "Teleport!";
+            tempButton.setAttribute("onclick", "attemptSwitchWorld()");
+            tempElement.appendChild(tempButton);
+        }
+        tempButton = document.createElement('button');
         tempButton.id="craftPickaxe" + (j + 1);
         tempButton.setAttribute("onclick", "craftPickaxe(" + (j + 1) + ")");
         if (pickaxes[j + 1][1]) {
@@ -586,6 +583,7 @@ function createPickaxeRecipes() {
         } else
             tempButton.innerHTML = "Craft!";
         tempElement.appendChild(tempButton);
+        
         recipeElements[0].push(tempElement);
     }
    }
@@ -631,16 +629,19 @@ for (let i = 0; i < worlds.length; i++) {
 function updateActiveRecipe() {
     if (currentRecipe[0] != undefined) {
         let recipe = currentRecipe[0].children;
-        for (let i = 0; i < recipe.length - 1; i++) {
+        for (let i = 0; i < recipe.length; i++) {
             let text = recipe[i].innerText;
-            let needed = Number(text.substring(text.indexOf("/") + 1).replaceAll(",", ""));
             let ore = text.substring(0, text.indexOf(" "));
-            let amtOwned = oreList[ore][1][0];
-            recipe[i].innerText = ore + " " + amtOwned.toLocaleString() + "/" + needed.toLocaleString();
-            if(amtOwned >= needed)
-                recipe[i].style.color = "green";
-            else
-                recipe[i].style.color = "red";
+            if (oreList[ore] != undefined) {
+                let identifier = ((1000).toLocaleString()[1]);
+                let needed = Number(text.substring(text.indexOf("/") + 1).replaceAll(identifier, ""));
+                let amtOwned = oreList[ore][1][0];
+                recipe[i].innerText = ore + " " + amtOwned.toLocaleString() + "/" + needed.toLocaleString();
+                if(amtOwned >= needed)
+                    recipe[i].style.color = "green";
+                else
+                    recipe[i].style.color = "red";
+            }
         }
     }
     
@@ -664,11 +665,7 @@ function craftPickaxe(num) {
                 updateInventory(recipeList[i][0], 1);
             }
             let temp = document.getElementById("craftPickaxe" + num);
-            if (num === 13) {
-                temp.innerText = "Teleport!";
-            } else {
-                temp.innerText = "Equipped!";
-            }
+            temp.innerText = "Equipped!";
             
             updateActiveRecipe();
             pickaxes[num][1] = true;
@@ -676,13 +673,7 @@ function craftPickaxe(num) {
         }
     } else {
         document.getElementById("craftPickaxe" + num).innerText = "Equipped!";
-        if (num === 13) {
-            document.getElementById("craftPickaxe" + num).innerText = "Teleport!";
-            if (currentPickaxe === 13)
-                switchWorld();
-        }
         currentPickaxe = num;
-  
     }
     switchLayerIndex(0);
 }

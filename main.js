@@ -510,18 +510,29 @@ function logFind(type, x, y, variant, atMined, fromReset) {
 }
 
 function goToOre(block, variantType) {
+    //SET INVENTORY
     let variantNum = namesemojis.indexOf(variantType) + 1;
     document.getElementById("inventory" + variant).style.display = "none";
     variant = variantNum;
     document.getElementById("inventory" + variant).style.display = "block";
     document.getElementById("switchInventory").innerHTML = names[variant - 1] + " Inventory"
     let inventoryElements = document.getElementById("inventory" + variantNum).children;
-    let total = 0;
+    let oreHeightValue
+    if (inventoryElements[0].style.display === "block")
+        oreHeightValue = inventoryElements[0].getBoundingClientRect()["height"];
+    else {
+        inventoryElements[0].style.display = "block";
+        oreHeightValue = inventoryElements[0].getBoundingClientRect()["height"];
+        inventoryElements[0].style.display = "none";
+    }
+    console.log(oreHeightValue);
+    let multi = 0;
     for (let i = 0; i < inventoryElements.length; i++) {
         let ore = inventoryElements[i].innerText.substring(0, inventoryElements[i].innerText.indexOf(" "));
         let element = inventoryElements[i];
         if (element.style.display === "block") {
             if (ore === block) {
+                let total = oreHeightValue * multi;
                 document.getElementById("inventoryDisplay").scrollTop = total;
                 element.style.animation = "inventoryFlash 500ms linear 1";
                 setTimeout(() => {
@@ -530,7 +541,7 @@ function goToOre(block, variantType) {
                 }, 500);
                 return;
             } else {
-                total += element.getBoundingClientRect()["height"];
+                multi++;
             }
         }
     }

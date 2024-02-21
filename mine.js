@@ -362,6 +362,11 @@ function getParams(distanceX, distanceY, x, y) {
     }
     return [displayLeft, displayUp];
 }
+function attemptSwitchWorld() {
+    if (pickaxes[13][1]) {
+        switchWorld();
+    }
+}
 function switchWorld() {
     distanceMulti = 1;
     y = 1000;
