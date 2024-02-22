@@ -475,7 +475,7 @@ worldTwoGears = [
 ];
 
 let recipeElements = [[], []];
-let currentRecipe = [null, null];
+let currentRecipe = [null, null, null];
 function displayRecipe(num, element) {
     let type = element.parentElement.id === "pickaxeCrafts" ? "pickaxe" : "gear";
     let recipeElementNum = type === "pickaxe" ? 0 : 1;
@@ -484,18 +484,34 @@ function displayRecipe(num, element) {
     let description = document.getElementById((type + num) + "Description");
     description = description.cloneNode(description);
     if (currentRecipe[0] === null) {
-        if (type === "pickaxe" && pickaxes[num + 1][1] && currentPickaxe === num + 1) {
-            recipe.lastChild.innerText = "Equipped!";
-        } else if (type === "pickaxe" && pickaxes[num + 1][1]) {
-            recipe.lastChild.innerText = "Equip!"
+        if (type === "pickaxe") {
+            if (pickaxes[num + 1][1] && currentPickaxe === num + 1) {
+                recipe.lastChild.innerText = "Equipped!";
+            } else if (pickaxes[num + 1][1]) {
+                recipe.lastChild.innerText = "Equip!"
+            }
+            if (num > worldOnePickaxes.length - 1) {
+                currentRecipe[2] = worldTwoPickaxes[num - worldOnePickaxes.length];
+                
+            } else {
+                currentRecipe[2] = worldOnePickaxes[num];
+            }
         }
-            
-            if (type === "gear" && gears[num]) {
+        
+        if (type === "gear") {
+            if (gears[num]) {
                 if (num === 9)
                     recipe.lastChild.innerText = "SILLIFY!"
                 else
                     recipe.lastChild.innerText = "Owned!"
             }
+            if (num > worldOneGears.length - 1) {
+                currentRecipe[2] = worldTwoGears[num - worldOneGears.length];
+                
+            } else {
+                currentRecipe[2] = worldOneGears[num];
+            }
+        }
         currentRecipe[0] = recipe;
         currentRecipe[1] = description;
         currentRecipe[0].style.display = "block";
@@ -511,20 +527,36 @@ function displayRecipe(num, element) {
         if (currentRecipe[0] === recipe) {
             currentRecipe[0] = null;
             currentRecipe[1] = null;
+            currentRecipe[2] = null;
         } else {
-            if (type === "pickaxe" && pickaxes[num + 1][1] && currentPickaxe === num + 1) {
-                recipe.lastChild.innerText = "Equipped!";
-            } else if (type === "pickaxe" && pickaxes[num + 1][1]) {
-                recipe.lastChild.innerText = "Equip!"
+            if (type === "pickaxe") {
+                if (pickaxes[num + 1][1] && currentPickaxe === num + 1) {
+                    recipe.lastChild.innerText = "Equipped!";
+                } else if (pickaxes[num + 1][1]) {
+                    recipe.lastChild.innerText = "Equip!"
+                }
+                if (num > worldOnePickaxes.length - 1) {
+                    currentRecipe[2] = worldTwoPickaxes[num - worldOnePickaxes.length];
+                    
+                } else {
+                    currentRecipe[2] = worldOnePickaxes[num];
+                }
             }
-                
-            if (type === "gear" && gears[num]) {
-                if (num === 9)
-                    recipe.lastChild.innerText = "SILLIFY!"
-                else
-                    recipe.lastChild.innerText = "Owned!"
-            }
-                
+            
+            if (type === "gear") {
+                if (gears[num]) {
+                    if (num === 9)
+                        recipe.lastChild.innerText = "SILLIFY!"
+                    else
+                        recipe.lastChild.innerText = "Owned!"
+                }
+                if (num > worldOneGears.length - 1) {
+                    currentRecipe[2] = worldTwoGears[num - worldOneGears.length];
+                    
+                } else {
+                    currentRecipe[2] = worldOneGears[num];
+                }
+            } 
             currentRecipe[0] = recipe;
             currentRecipe[1] = description;
             currentRecipe[0].style.display = "block";
@@ -621,12 +653,10 @@ for (let i = 0; i < worlds.length; i++) {
 function updateActiveRecipe() {
     if (currentRecipe[0] != undefined) {
         let recipe = currentRecipe[0].children;
-        for (let i = 0; i < recipe.length; i++) {
-            let text = recipe[i].innerText;
-            let ore = text.substring(0, text.indexOf(" "));
+        for (let i = 0; i < currentRecipe[2].length; i++) {
+            let ore = currentRecipe[2][i][0];
             if (oreList[ore] != undefined) {
-                let identifier = ((1000).toLocaleString()[1]);
-                let needed = Number(text.substring(text.indexOf("/") + 1).replaceAll(identifier, ""));
+                let needed = currentRecipe[2][i][1];
                 let amtOwned = oreList[ore][1][0];
                 recipe[i].innerText = ore + " " + amtOwned.toLocaleString() + "/" + needed.toLocaleString();
                 if(amtOwned >= needed)
@@ -642,7 +672,11 @@ function updateActiveRecipe() {
 function craftPickaxe(num) {
     let list = currentWorld === 1 ? worldOnePickaxes : worldTwoPickaxes;
     let sub = currentWorld === 1 ? 1 : worldOnePickaxes.length + 1;
-    canCraft = true;
+    let canCraft = true;
+    if (num === 13) {
+        if (!(pickaxes[9][1]))
+            canCraft = false;
+    }
     if (!(pickaxes[num][1])) {
         let recipeList = list[num - sub];
         for (let i = 0; i < recipeList.length; i++) {
@@ -671,7 +705,7 @@ function craftPickaxe(num) {
 }
 function craftGear(num) {
     let list = currentWorld === 1 ? worldOneGears : worldTwoGears;
-    canCraft = true;
+    let canCraft = true;
     let sub = currentWorld === 1 ? 0 : worldOneGears.length;
     list = list[num - sub];
     if (!(gears[num])) {

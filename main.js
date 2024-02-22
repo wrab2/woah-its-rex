@@ -525,7 +525,6 @@ function goToOre(block, variantType) {
         oreHeightValue = inventoryElements[0].getBoundingClientRect()["height"];
         inventoryElements[0].style.display = "none";
     }
-    console.log(oreHeightValue);
     let multi = 0;
     for (let i = 0; i < inventoryElements.length; i++) {
         let ore = inventoryElements[i].innerText.substring(0, inventoryElements[i].innerText.indexOf(" "));
