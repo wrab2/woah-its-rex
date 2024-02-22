@@ -63,7 +63,8 @@ function loadAllData() {
                 oreList[data[0][i][0]][1] = data[0][i][1][0];
         }
         for (let i = 0; i < data[1][0][0].length; i++)
-            pickaxes[i][1] = data[1][0][0][i][1];
+            if(pickaxes[i] != undefined)
+                pickaxes[i][1] = data[1][0][0][i][1];
         currentPickaxe = data[1][0][1];
         totalMined = data[2];
         document.getElementById("blocksMined").innerHTML = totalMined.toLocaleString() + " Blocks Mined";

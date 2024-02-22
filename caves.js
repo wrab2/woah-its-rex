@@ -43,6 +43,9 @@ function generateCave(x, y, rate, reps, type) {
 
 function mineCaveBlock(c, r, type) {
     let block = mine[r][c];
+    if (currentWorld === 2 && block === "✖️") {
+        return;
+    }
     let caveMulti = getCaveMulti(type);
     if (block != undefined) {
         if (block != "⚪" && block != "⛏️") {
@@ -96,8 +99,15 @@ function mineCaveBlock(c, r, type) {
         blocksRevealedThisReset++;
     }
 }
-//let caveLuck = 1000000;
+//let caveLuck = 10000000;
 function generateCaveBlock(y, x, type) {
+    if (currentWorld === 2 && y === 10000) {
+        if (Math.random() < 1/200000) {
+            return ["✴️", false, 1];
+        } else {
+            return ["✖️", false, 1];
+        }
+    }
     let hasLog;
     let probabilityTable = type;
     let summedProbability = 0;
@@ -112,33 +122,36 @@ function generateCaveBlock(y, x, type) {
     }
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
-    
-    //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     let adjRarity = (1/oreList[blockToGive][0]) * multi;
+    //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     if (allCaves.includes(type)) {
+        adjRarity = Math.round(1/(type[blockToGive] / multi));
         if (adjRarity > 25000000) {
-            if (adjRarity > 50000000000) { //50B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
+            let changeRarity = false;
+            if (oolOres.indexOf(blockToGive) > -1) 
+                changeRarity = true;
+            if ((!changeRarity && adjRarity > 50000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 5000000000)) { //50B
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("zenith")
-            } else if (adjRarity > 10000000000) { //10B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
+            } else if ((!changeRarity && adjRarity > 10000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 1500000000)) { //10B
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("magnificent")
-            } else if (adjRarity > 1000000000) { //1B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
+            } else if ((!changeRarity && adjRarity > 1000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 750000000)) { //1B
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("otherworldly")
-            } else if (adjRarity > 500000000) { //500M
-                verifiedOres.createLog(r = y,x,blockToGive, new Error(), 1, true);
+            } else if ((!changeRarity && adjRarity > 500000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) >= 160000000)) { //500M
+                verifiedOres.createLog(r = y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("unfathomable")
-            } else if (adjRarity > 250000000) { // 250M
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, true);
+            } else if ((!changeRarity && adjRarity > 250000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 25000000)) { // 250M
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
                 playSound("enigmatic");
@@ -147,22 +160,23 @@ function generateCaveBlock(y, x, type) {
     } else {
         let location = [y, x];
         if (Math.round(1 / (probabilityTable[blockToGive])) > 5000000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("zenith");
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 1500000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("magnificent");
         } else if (Math.round(1 / (probabilityTable[blockToGive])) > 750000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("otherworldly");
         } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 160000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, true);
+
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
             hasLog = true;
             spawnMessage(blockToGive, location);
             playSound("unfathomable");
@@ -216,8 +230,13 @@ let caveMultis = [50, 35, 20, 10];
 let type1Ores = {
     "🌙" : 1/2626262626,
     "🪔" : 1/2000000000,
+    "💫" : 1/1500000000,
     "🩺" : 1/800000000,
     "💱" : 1/180000000,
+    "🌟" : 1/150000000,
+    "☄️" : 1/40000000,
+    "⭐" : 1/30000000,
+    "🔆" : 1/25000000,
     "🔭" : 1/15000000,
     "📡" : 1/8000000,
     "❓" : 1/1
@@ -225,6 +244,7 @@ let type1Ores = {
 let type2Ores = {
     "🎷" : 1/2500000000,
     "🪘" : 1/500000000,
+    "🪩" : 1/450000000,
     "🥁" : 1/100000000,
     "🪇" : 1/20000000,
     "🎹" : 1/10000000,
@@ -232,7 +252,9 @@ let type2Ores = {
 }
 let type3Ores = {
     "🧫" : 1/4000000000,
+    "⚠️" : 1/3500000000,
     "🛸" : 1/1000000000,
+    "🥀" : 1/420000000,
     "🍄" : 1/250000000,
     "🕸️" : 1/40000000,
     "💉" : 1/17500000,
@@ -242,11 +264,14 @@ let type4Ores = {
     "⚕️" : 1/50000000000,
     "🌡️" : 1/3000000000,
     "💊" : 1/800000000,
+    "💸" : 1/560000000,
+    "🧵" : 1/100000000,
     "🧬" : 1/70000000,
     "🍥" : 1/27500000,
     "🦠" : 1/1
 }
 let allCaves = [type1Ores, type2Ores, type3Ores, type4Ores];
+let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 function getCaveType() {
     let caveTypeLuck = 1;
     if (currentPickaxe === 12)

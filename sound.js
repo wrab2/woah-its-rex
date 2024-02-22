@@ -52,42 +52,56 @@ function playSound(type) {
                 chill.currentTime = 0;
                 chill.play();
             }
+            if (stopOnRare && stopRareNum < 1)
+                stopMining();
             break;
         case "transcendent":
             if (canPlay[1]) {
             ringing.currentTime = 0;
             ringing.play();
             }
+            if (stopOnRare && stopRareNum < 2)
+                stopMining();
             break;
         case "enigmatic":
             if (canPlay[2]) {
             visionblur.currentTime = 0;
             visionblur.play();
             }
+            if (stopOnRare && stopRareNum < 3)
+                stopMining();
             break;
         case "unfathomable":
             if (canPlay[3]) {
             unfath.currentTime = 0;
             unfath.play();
             }
+            if (stopOnRare && stopRareNum < 4)
+                stopMining();
             break;
         case "otherworldly":
             if (canPlay[4]) {
                 ow.currentTime = 0;
                 ow.play();
             }
+            if (stopOnRare && stopRareNum < 5)
+                stopMining();
             break;
         case "zenith":
             if (canPlay[6]) {
             zenith.currentTime = 0;
             zenith.play();
             }
+            if (stopOnRare && stopRareNum < 7)
+                stopMining();
             break;
         case "magnificent":
             if (canPlay[5]) {
                 magnificent.currentTime = 0;
                 magnificent.play();
             }
+            if (stopOnRare && stopRareNum < 6)
+                stopMining();
             break;
     }
 }

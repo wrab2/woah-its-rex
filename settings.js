@@ -12,7 +12,7 @@ function openFrame(frameId) {
     document.querySelectorAll('.frame').forEach(frame => {
       frame.style.display = 'none';
     });
-
+    
     const selectedFrame = document.getElementById(frameId + "-frame");
     if (selectedFrame) {
       selectedFrame.style.display = 'block';
@@ -44,7 +44,18 @@ let allPickaxeNames = ["Mulch Mallet",
 "77 Leaf Destroyer", 
 "Planet Buster", 
 "Whirlpool of Fate", 
-"Wings of Glory"];
+"Wings of Glory",
+"The Key",
+"Extreme Echolocator",
+"Corundum Caver",
+"Starborne Slasher",
+"Nyabomb",
+"Lunar Lightsabre",
+"Gemstone Engraver",
+"Gambler's Fallacy",
+"Swirly Subjugator",
+"Singularity Slammer"
+];
 function changeUseNumbers(button) {
     if (!useNumbers) {
         let elements = document.getElementById("pickaxeCrafts").children;
@@ -109,15 +120,12 @@ function changeLatestColors(num) {
         if (num === 0) {
             toChange[0].style.color = value;
             toChange[1].style.color = value;
-            console.log(0);
         } else if (num === 1) {
             toChange[0].style.borderColor = value;
             toChange[1].style.borderColor = value;
-            console.log(1);
         } else if (num === 2) {
             toChange[0].style.backgroundColor = value;
             toChange[1].style.backgroundColor = value;
-            console.log(2);
         }
     flashGreen(element);
     } else {
@@ -199,6 +207,7 @@ function showSettings() {
     canMine = false;
     document.getElementById("mainContent").style.display = "none";
     document.getElementById("settingsContainer").style.display = "block";
+    switchLayerIndex(0, 0)
 }
 
 function hideSettings() {
@@ -248,7 +257,6 @@ function updateCapacity(element) {
     elementValue = element.value;
     let value = elementValue === "" ? "none" : elementValue;
     value = Number(value);
-    console.log(value)
     if (!(isNaN(value)) && value > 0) {
         baseMineCapacity = value;
         mineCapacity = value;
@@ -258,96 +266,131 @@ function updateCapacity(element) {
     }        
 }
 let layerNum = 0;
-function switchLayerIndex(num, overrideNum) {
+function switchLayerIndex(num, overrideNum, world) {
     while (document.getElementById("oreCardHolder").firstChild) {
         document.getElementById("oreCardHolder").removeChild(document.getElementById("oreCardHolder").firstChild);
     }
+    if (world === undefined) {
+        world = currentWorld;
+    }
     layerNum += num;
-    if (layerNum > 11) {
+    let add = currentWorld === 1 ? 8 : 5;
+    if (layerNum > (add + 3)) {
         layerNum = 0;
     }
     if (layerNum < 0)
-        layerNum = 11;
-    layerNum = overrideNum === undefined ? layerNum : overrideNum;
+        layerNum = (add + 3);
     let layerToIndex;
-    if (layerNum > 7) {
-        layerToIndex = allCaves[layerNum - (5 + 2 * (layerNum - 8))];
+    layerNum = overrideNum === undefined ? layerNum : overrideNum;
+    if (layerNum > (add - 1)) {
+        let caveNum = 11 - layerNum;
+        layerToIndex = allCaves[caveNum];
     } else {
-        layerToIndex = allLayers[layerNum];
+        if (world === 1) {
+            layerToIndex = worldOneLayers[layerNum];
+        } else {
+            layerToIndex = worldTwoLayers[layerNum];
+        }
     }
-    layerToIndex = layerNum === 100 ? sillyLayer : layerToIndex;
-    layerToIndex = layerNum === 101 ? fluteLayer : layerToIndex;
+    
+    layerToIndex = layerNum === 101 ? worldOneCommons : layerToIndex;
+    layerToIndex = layerNum === 102 ? worldTwoCommons : layerToIndex;
     let layerMaterial = (Object.keys(layerToIndex));
     layerMaterial = layerMaterial[layerMaterial.length - 1];
     document.getElementById("indexSwitchButton").innerHTML = layerMaterial;
     let oreIndexCards = [];
     for (let propertyName in layerToIndex) {
-        if (layerToIndex[propertyName] < 1/2000000) {
-            oreIndexCards.push(createIndexCards(layerToIndex, propertyName))
+        if (layerToIndex[propertyName] < 1/1) {
+            if (ignoreList.indexOf(propertyName) === -1) {
+                oreIndexCards.push(createIndexCards(layerToIndex, propertyName))
+            }
         }
     }
     for (let i = oreIndexCards.length - 1; i >= 0; i--) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀"
 function createIndexCards(layer, property) {
-    let parentObject = document.createElement("div");
-    parentObject.classList = "oreCard";
-    //ADD NAME TO CARD
-    let oreName = document.createElement("p");
-    oreName.style.fontSize = "2vw";
-    oreName.innerHTML = property;
-    parentObject.appendChild(oreName);
-    //ADD BASE RARITY TO CARD
-    let oreRarity = document.createElement("p");
-    oreRarity.style.fontSize = "1.25vw";
-    oreRarity.style.fontWeight = "bold";
-    oreRarity.innerHTML = "1/" + (Math.round(1/layer[property])).toLocaleString() + " base rarity.";
-    parentObject.appendChild(oreRarity);
-    //ADD RARITY WITH LUCK TO CARD
-    let oreRarityLuck;
-    oreRarityLuck = document.createElement("p");
-    oreRarityLuck.style.fontSize = "1.25vw";
-    oreRarityLuck.style.fontWeight = "bold";
-    if (allCaves.includes(layer)) {
-        let rarity = layer[property];
-        rarity /= getCaveMultiFromOre(property);
-        oreRarityLuck.innerHTML = "1/" + Math.round(1/rarity).toLocaleString() + " adjusted.";
-    } else {
-        oreRarityLuck.innerHTML = "1/" + (Math.round(1/(layer[property] * verifiedOres.getCurrentLuck()))).toLocaleString() + " with luck.";
-    }
+        let parentObject = document.createElement("div");
+        parentObject.classList = "oreCard";
+        if (oreList[property][1][0] > 0) {
+            parentObject.style.backgroundColor = "green";
+        } else {
+            parentObject.style.backgroundColor = "red"
+        }
+        //ADD NAME TO CARD
+        let oreName = document.createElement("p");
+        oreName.style.fontSize = "2vw";
+        oreName.innerHTML = property;
+        parentObject.appendChild(oreName);
+        //ADD BASE RARITY TO CARD
+        let oreRarity = document.createElement("p");
+        oreRarity.style.fontSize = "1.25vw";
+        oreRarity.style.fontWeight = "bold";
+        oreRarity.innerHTML = "1/" + (Math.round(1/layer[property])).toLocaleString() + " base rarity.";
+        parentObject.appendChild(oreRarity);
+        //ADD RARITY WITH LUCK TO CARD
+        let oreRarityLuck;
+        oreRarityLuck = document.createElement("p");
+        oreRarityLuck.style.fontSize = "1.25vw";
+        oreRarityLuck.style.fontWeight = "bold";
+        if (allCaves.includes(layer)) {
+            let rarity = layer[property];
+            rarity /= getCaveMultiFromOre(property);
+            oreRarityLuck.innerHTML = "1/" + Math.round(1/rarity).toLocaleString() + " adjusted.";
+        } else {
+            oreRarityLuck.innerHTML = "1/" + (Math.round(1/(layer[property] * verifiedOres.getCurrentLuck()))).toLocaleString() + " with luck.";
+        }
+        parentObject.appendChild(oreRarityLuck);
     
-    
-    parentObject.appendChild(oreRarityLuck);
-
-    return parentObject;
+        return parentObject;
 }
 
 function randomFunction(text, cause) {
     if ((cause === "inv" && invToIndex) || (cause === "crafting" && craftingToIndex)) {
         let num = -1;
+        let world = currentWorld;
         let ore = text.substring(0, text.indexOf(" "));
-        for (let i = 0; i < allLayers.length; i++) {
-            if (allLayers[i][ore] != undefined) {
-                num = i;
-                break;
-            }
-        }
-        num = num === 8 ? 100 : num;
-        num = num === 9 ? 101 : num;
-
-        if (num < 1) {
-            for (let i = allCaves.length - 1; i >= 0; i--) {
-                if (allCaves[i][ore] != undefined) {
-                    num = 11 - i;
+        if (ore === "❤️‍🔥")
+            return;
+        if (ignoreList.indexOf(ore) === -1) {
+            for (let i = 0; i < worldOneLayers.length; i++) {
+                if (worldOneLayers[i][ore] != undefined) {
+                    num = i;
+                    world = 1;
                     break;
                 }
             }
-        }
-        if (num > -1) {
-            switchLayerIndex(0, num);
-            showSettings();
-            openFrame('index');
+            if (num < 0) {
+                for (let i = 0; i < worldTwoLayers.length; i++) {
+                    if (worldTwoLayers[i][ore] != undefined) {
+                        num = i;
+                        world = 2;
+                        break;
+                    }
+                }
+            }
+            if (num < 1) {
+                for (let i = allCaves.length - 1; i >= 0; i--) {
+                    if (allCaves[i][ore] != undefined) {
+                        num = 11 - i;
+                        break;
+                    }
+                }
+            }
+            if (worldOneCommons[ore] != undefined) {
+                num = 101;
+            }
+            if (worldTwoCommons[ore] != undefined) {
+                num = 102;
+            }
+            
+            if (num > -1) {
+                showSettings();
+                openFrame('index');
+                switchLayerIndex(0, num, world);
+            }
         }
     }
 }

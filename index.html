@@ -29,6 +29,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <script src="crafting.js"></script>
     <script src="data.js"></script>
     <script src="caves.js"></script>
+    <script src="commands.js"></script>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
@@ -87,7 +88,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         </div>
         <div class="col-2">
             <div>
-                <button id="resetMine" onclick="resetMine()">Reset Mine</button>
+                <button id="resetMine" onclick="toSurface()">To Surface</button>
                 <button id="settings" onclick="showSettings()">Settings</button>
             </div>
             <p id="mineResetProgress"></p>
@@ -102,31 +103,53 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 </div>
                 <div id="pickaxeCrafts">
                     <br>
-                    <button class="craftingButton" onclick="displayRecipe(0)">Mulch Mallet</button>
-                    <button class="craftingButton" onclick="displayRecipe(1)">Mud Sickle</button>
-                    <button class="craftingButton" onclick="displayRecipe(2)">Dirt Ravager</button>
-                    <button class="craftingButton" onclick="displayRecipe(3)">Void Crusher</button>
-                    <button class="craftingButton" onclick="displayRecipe(4)">Geode Staff</button>
-                    <button class="craftingButton" onclick="displayRecipe(5)">Earth Soiler</button>
-                    <button class="craftingButton" onclick="displayRecipe(6)">Crypt Smasher</button>
-                    <button class="craftingButton" onclick="displayRecipe(7)">Labyrinthian Tide</button>
-                    <button class="craftingButton" onclick="displayRecipe(8)">77 Leaf Destroyer</button>
-                    <button class="craftingButton" onclick="displayRecipe(9)">Planet Buster</button>
-                    <button class="craftingButton" onclick="displayRecipe(10)">Whirlpool of Fate</button>
-                    <button class="craftingButton" onclick="displayRecipe(11)">Wings of Glory</button>
+                    <button class="craftingButton" onclick="displayRecipe(0, this)">Mulch Mallet</button>
+                    <button class="craftingButton" onclick="displayRecipe(1, this)">Mud Sickle</button>
+                    <button class="craftingButton" onclick="displayRecipe(2, this)">Dirt Ravager</button>
+                    <button class="craftingButton" onclick="displayRecipe(3, this)">Void Crusher</button>
+                    <button class="craftingButton" onclick="displayRecipe(4, this)">Geode Staff</button>
+                    <button class="craftingButton" onclick="displayRecipe(5, this)">Earth Soiler</button>
+                    <button class="craftingButton" onclick="displayRecipe(6, this)">Crypt Smasher</button>
+                    <button class="craftingButton" onclick="displayRecipe(7, this)">Labyrinthian Tide</button>
+                    <button class="craftingButton" onclick="displayRecipe(8, this)">77 Leaf Destroyer</button>
+                    <button class="craftingButton" onclick="displayRecipe(9, this)">Planet Buster</button>
+                    <button class="craftingButton" onclick="displayRecipe(10, this)">Whirlpool of Fate</button>
+                    <button class="craftingButton" onclick="displayRecipe(11, this)">Wings of Glory</button>
+                    <button class="craftingButton" onclick="displayRecipe(12, this)">The Key</button>
+                    <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;">Extreme Echolocator</button>
+                    <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;">Corundum Caver</button>
+                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;">Starborne Slasher</button>
+                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;" id="cat">Nyabomb</button>
+                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;">Lunar Lightsabre</button>
+                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;">Gemstone Engraver</button>
+                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;">Gambler's Fallacy</button>
+                    <button class="craftingButton" onclick="displayRecipe(20, this)" style="display: none;">Exponential Centrifuge</button>
+                    <button class="craftingButton" onclick="displayRecipe(21, this)" style="display: none;">Singularity Slammer</button>
+                    <button class="craftingButton" onclick="displayRecipe(22, this)" style="display: none;">Staff of Binding</button>
                 </div>
                 <div id="gearCrafts" class="hidden">
                     <br>
-                    <button class="craftingButton" onclick="displayRecipe(0)">Ore Tracker</button>
-                    <button class="craftingButton" onclick="displayRecipe(1)">Real Candilium</button>
-                    <button class="craftingButton" onclick="displayRecipe(2)">Real Vitriol</button>
-                    <button class="craftingButton" onclick="displayRecipe(7)">Energy Siphoner</button>
-                    <button class="craftingButton" onclick="displayRecipe(8)">Sugar Rush</button>
-                    <button class="craftingButton" onclick="displayRecipe(3)">Infinity Collector</button>
-                    <button class="craftingButton" onclick="displayRecipe(4)">Layer Materializer</button>
-                    <button class="craftingButton" onclick="displayRecipe(5)">Fortune III Book</button>
-                    <button class="craftingButton" onclick="displayRecipe(6)">Haste II Beacon</button>
-                    <button class="craftingButton" onclick="displayRecipe(9)" id="sillyRecipe" style="display: none;">SILLYYYY</button>
+                    <button class="craftingButton" onclick="displayRecipe(0, this)">Ore Tracker</button>
+                    <button class="craftingButton" onclick="displayRecipe(1, this)">Real Candilium</button>
+                    <button class="craftingButton" onclick="displayRecipe(2, this)">Real Vitriol</button>
+                    <button class="craftingButton" onclick="displayRecipe(7, this)">Energy Siphoner</button>
+                    <button class="craftingButton" onclick="displayRecipe(8, this)">Sugar Rush</button>
+                    <button class="craftingButton" onclick="displayRecipe(3, this)">Infinity Collector</button>
+                    <button class="craftingButton" onclick="displayRecipe(4, this)">Layer Materializer</button>
+                    <button class="craftingButton" onclick="displayRecipe(5, this)">Fortune III Book</button>
+                    <button class="craftingButton" onclick="displayRecipe(6, this)">Haste II Beacon</button>
+                    <button class="craftingButton" onclick="displayRecipe(9, this)" id="sillyRecipe" style="display: none;">SILLYYYY</button>
+                    <button class="craftingButton" onclick="displayRecipe(10, this)" style="display: none;">Logical Randomiser</button>
+                    <button class="craftingButton" onclick="displayRecipe(11, this)" style="display: none;">Storm Sneakers</button>
+                    <button class="craftingButton" onclick="displayRecipe(12, this)" style="display: none;">Artifice Annihilator</button>
+                    <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;">Repurposed Replicator</button>
+                    <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;">Cavern Capacitator</button>
+                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;">High Powered Vacuum</button>
+                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;">Unlocked Speedcap</button>
+                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;">Infinity Collector II</button>
+                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;"disabled="true">Clover's Undoing</button>
+                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;"disabled="true">Fantastical Feather</button>
+                    <button class="craftingButton" onclick="displayRecipe(20, this)" style="display: none;"disabled="true">Statistical Analyzer</button>
                 </div>
             </div>
             <hr>
@@ -144,10 +167,21 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe5Description" style="display: none;">Has 2 abilities.<br>Ability 1 mines a triangle around the player.<br>Ability 2 mines a heart around the player.<br>Ability 1 has a 1/60 proc rate.<br>Ability 2 has a 1/40 proc rate.<br>Both abilities have 10x luck.</p>
                 <p class="itemDescription" id="pickaxe6Description" style="display: none;">Mines a few blocks in every direction. However, each line has a chance to re-activate the ability from the end of said line with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 3x luck.</p>
                 <p class="itemDescription" id="pickaxe7Description" style="display: none;">Mines blocks in an X shape around the player, with each end having a chance to re-activate the ability at that position with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 4x luck.</p>
-                <p class="itemDescription" id="pickaxe8Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/30.<br>Has 20x luck. </p>
+                <p class="itemDescription" id="pickaxe8Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/30.<br>Has 20x luck.<br><i>The pickaxe resonates with a distant entity. The recognised aura beckons you, giving you the urge to draw closer to an unfamiliar world..</i></p>
                 <p class="itemDescription" id="pickaxe9Description" style="display: none;">Has a 50% chance to mine a 7x7 square in a 49x49 area around the player, with an average of 24 7x7 squares being mined each activation.<br>Has an ability proc rate of 1/50.<br>Has 17.5x luck.</p>
                 <p class="itemDescription" id="pickaxe10Description" style="display: none;">Mines an extremely large spiral around the player.<br>Has an ability proc rate of 1/100.<br>Has 30x luck.</p>
                 <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.</p>
+                <p class="itemDescription" id="pickaxe12Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Pressing "Teleport!" on this pickaxe will switch the current world.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>Certain World 2 gears will work in World 1, including all luck related gears, Repurposed Replicator, and High Powered Vacuum.</p>
+                <p class="itemDescription" id="pickaxe13Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.</p>
+                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.</p>
+                <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.</p>
+                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a cat around the player :3c.<br>Has an ability proc rate of 1/150.<br>Has 1x luck.</p>
+                <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a crescent moon around the player.<br>Has an ability proc rate of 1/150<br>Has 1.5x luck.</p>
+                <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.<br>Has an ability proc rate of 1/50.<br>Has 2x luck.</p>
+                <p class="itemDescription" id="pickaxe19Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.<br>Has an ability proc rate of 1/75.<br>Has 3x luck, but gains +0.02x luck for every winning line.</p>
+                <p class="itemDescription" id="pickaxe20Description" style="display: none;">Mines swirls around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.25x luck.</p>
+                <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/150.<br>Has 3x luck.</p>
+                <p class="itemDescription" id="pickaxe22Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 4x luck.</p>
                 <!--
                     Pickaxes above
                     Gears below
@@ -161,7 +195,18 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear4Description" style="display: none;">For every block mined, gives you an additional layer block from the current layer.<br>Can duplicate layer blocks.</p>
                 <p class="itemDescription" id="gear5Description" style="display: none;">Increases ability luck by 1.6x. Stacks with Real Candilium.</p>
                 <p class="itemDescription" id="gear6Description" style="display: none;">Sets mining speed delay to 10ms from 25ms.<br>Takes priority over Real Vitriol.</p>
-                <p class="itemDescription" id="gear9Description" style="display: none;">When crafted, clicking on the Owned! button will set the current layer to the SILLY LAYER!!! :P<br>Moving up or down or teleporting will reset the layer back to its original layer.</p>
+                <p class="itemDescription" id="gear9Description" style="display: none;">When crafted, clicking on the SILLIFY! button will set the current layer to the SILLY LAYER!!! :P<br>Moving up or down or teleporting will reset the layer back to its original layer.</p>
+                <p class="itemDescription" id="gear10Description" style="display: none;">+0.25x Luck.<br>Stacks with all other luck additions.</p>
+                <p class="itemDescription" id="gear11Description" style="display: none;">-3ms Mining Speed.<br>Stacks with all other speed buffs.</p>
+                <p class="itemDescription" id="gear12Description" style="display: none;">+0.35x Luck.<br>Stacks with all other luck additions.</p>
+                <p class="itemDescription" id="gear13Description" style="display: none;">Has a 75% chance to duplicate any common ore, (1 - 750,000)</p>
+                <p class="itemDescription" id="gear14Description" style="display: none;">Enables cave spawns in World 2.<br>Currently, this will allow miners to obtain ores from World 1 that spawn in caves, this will be a thing until new cave types are made for World 2.</p>
+                <p class="itemDescription" id="gear15Description" style="display: none;">Has a 50% chance to give you 2 extra layer blocks upon mining a layer block.</p>
+                <p class="itemDescription" id="gear16Description" style="display: none;">-5ms Mining Speed.<br>Stacks with all other speed buffs.</p>
+                <p class="itemDescription" id="gear17Description" style="display: none;">Wait... what do you mean its the same as the first? Why is it called the 2nd if its the exact same thing???</p>
+                <p class="itemDescription" id="gear18Description" style="display: none;">+0.75x Luck.<br>Stacks with all other luck additions.</p>
+                <p class="itemDescription" id="gear19Description" style="display: none;">-7ms Mining Speed.<br>Stacks with all other speed buffs.</p>
+                <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 5% of your current pickaxes luck +1. (Cannot lower luck)</p>
             </div>
             
         </div>
@@ -192,7 +237,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <button class="settingsCategorySelector" onclick="openFrame('audio')">Audio Settings</button>
             <button class="settingsCategorySelector" onclick="openFrame('game')">Game Settings</button>
             <button class="settingsCategorySelector" onclick="openFrame('inventory')">Inventory Settings</button>
-            <button class="settingsCategorySelector" onclick="openFrame('color')">Color Settings</button>
+            <button class="settingsCategorySelector" onclick="openFrame('color')">Colour Settings</button>
             <button class="settingsCategorySelector" onclick="openFrame('data')">Data Settings</button>
     <div class="frame" id="audio-frame">
       <h2>Audio Settings</h2>

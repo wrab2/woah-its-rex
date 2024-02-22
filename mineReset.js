@@ -4,16 +4,24 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-function resetMine() {
+function toSurface() {
     clearInterval(loopTimer);
     curDirection = "";
-    mine = [[]];
+    mine[curY][curX] = "⚪";
     curX = 1000000000;
-    curY = 0;
+    if (currentWorld === 1) {
+        curY = 0;
+    } else {
+        curY = 2001;
+    }
+    for (let i = curY - 101; i < curY + 101; i++)
+        if (i > -1 && mine[i] === undefined) 
+            mine[i] = [];
     blocksRevealedThisReset = 0;
-    currentLayer = allLayers[0];
-    createMine();
-    mineCapacity = baseMineCapacity;
+    setLayer(curY);
+    mine[curY][curX] = "⛏️";
+    checkAllAround(curX, curY, 1);
+    displayArea();
     document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset + "/" + mineCapacity + " Blocks Revealed This Reset";
 }
 let resetting = false;
@@ -36,12 +44,6 @@ async function mineReset() {
 
 function collectOres(temp) {
     return new Promise((resolve) => {
-    /*if (gears[3]) {
-        for (let i = 0; i < loggedFinds.length; i++) {
-            if (mine[loggedFinds[i][0]] !== undefined && mine[loggedFinds[i][0]][loggedFinds[i][1]] !== undefined)
-                mineBlock(loggedFinds[i][1], loggedFinds[i][0], "reset", 1);
-        }
-    }*/
         let direction = "";
         if (temp !== "")
             direction = temp;
@@ -108,7 +110,7 @@ function mineResetAid() {
         mine = [[]];
         curX = 1000000000;
         let y = curY;
-        for (let r = y - 51; r < y + 51; r++) {
+        for (let r = y - 101; r < y + 101; r++) {
             if(r > -1 && mine[r] === undefined) {
                 mine[r] = [];
             }
