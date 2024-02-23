@@ -99,7 +99,7 @@ function mineCaveBlock(c, r, type) {
         blocksRevealedThisReset++;
     }
 }
-//let caveLuck = 10000000;
+let caveLuck = 10000000;
 function generateCaveBlock(y, x, type) {
     if (currentWorld === 2 && y === 10000) {
         if (Math.random() < 1/200000) {
@@ -112,7 +112,7 @@ function generateCaveBlock(y, x, type) {
     let probabilityTable = type;
     let summedProbability = 0;
     let chosenValue = Math.random();
-    //chosenValue /= caveLuck;
+    chosenValue /= caveLuck;
     for (let propertyName in probabilityTable) {
         summedProbability += probabilityTable[propertyName];
         if (chosenValue < summedProbability) {
