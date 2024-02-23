@@ -282,8 +282,9 @@ function switchLayerIndex(num, overrideNum, world) {
         layerNum = (add + 3);
     let layerToIndex;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
+    let caveNumAdd = currentWorld === 1 ? 0 : 3;
     if (layerNum > (add - 1)) {
-        let caveNum = 11 - layerNum;
+        let caveNum = 11 - (layerNum + caveNumAdd);
         layerToIndex = allCaves[caveNum];
     } else {
         if (world === 1) {
@@ -314,10 +315,16 @@ let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
-        if (oreList[property][1][0] > 0) {
+        if (oreList[property][1][3]) {
+            parentObject.style.backgroundImage = "linear-gradient(to right, #ff722b, #383838)";
+        } else if (oreList[property][1][2]) {
+            parentObject.style.backgroundImage = "linear-gradient(to right, #9af743, #062404)";
+        } else if (oreList[property][1][1]) {
+            parentObject.style.backgroundImage = "linear-gradient(to right, #fff830, #d081e6)";
+        } else if (oreList[property][1][0]) {
             parentObject.style.backgroundColor = "green";
         } else {
-            parentObject.style.backgroundColor = "red"
+            parentObject.style.backgroundColor = "red";
         }
         //ADD NAME TO CARD
         let oreName = document.createElement("p");
