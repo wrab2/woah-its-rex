@@ -210,7 +210,6 @@ worldTwoPickaxes = [
     //HOLY SHIT IS THIS A REAL CAT
     [
         ["♟️", 6000000],
-        ["♟️", 6000000],
         ["🔂", 8000],
         ["⏺️", 150],
         ["⏏️", 50],
