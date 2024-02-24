@@ -1,3 +1,4 @@
+
 /*Copyright (C) Amber Blessing - All Rights Reserved
  
 Unauthorized copying of this file, via any medium is strictly prohibited
@@ -626,6 +627,19 @@ button, .col-3 > div > button {
 }
 @keyframes flashGreen {
   0% {background-color:white;}
+  50% {background-color:lightgreen;}
+  100% {background-color:white;}
+}
+@keyframes flashRed {
+  0% {background-color:white;}
+  50% {background-color:red;}
+  100% {background-color:white;}
+}
+@keyframes inventoryFlash {
+  0% {background-color:#1a1a1a;}
+  50% {background-color:lightgreen;}
+  100% {background-color:#1a1a1a;}
+
   50% {background-color:lightgreen;}
   100% {background-color:white;}
 }

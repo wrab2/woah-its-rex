@@ -111,7 +111,6 @@ function mineBlock(x, y, cause, luck) {
             totalMined++;
             if (cause !== "ability") {
                 rollAbilities();
-                updateActiveRecipe();
             }
         }
         }
@@ -221,7 +220,12 @@ function generateBlock(luck, location) {
         }
     }
     if (Math.round(1 / (probabilityTable[blockToGive])) >= 750000) {
-        if (Math.round(1 / (probabilityTable[blockToGive])) > 5000000000) {
+        if (Math.round(1 / (probabilityTable[blockToGive])) >= 100000000000) {
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
+            hasLog = true;
+            spawnMessage(blockToGive, location);
+            playSound("ethereal");
+        } else if (Math.round(1 / (probabilityTable[blockToGive])) > 5000000000) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
             hasLog = true;
             spawnMessage(blockToGive, location);

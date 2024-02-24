@@ -99,6 +99,7 @@ let unfath;
 let ow;
 let magnificent;
 let zenith;
+let ethereal;
 let keepRunningAudio;
 let allAudios = [];
 function loadContent() {
@@ -112,6 +113,7 @@ function loadContent() {
     ow = new Audio("Otherworldly.mp3");
     zenith = new Audio("Zenithsound.mp3");
     magnificent = new Audio("magnificent.mp3")
+    ethereal = new Audio("ethereal sound by elysia.mp3")
     allAudios.push(chill);
     allAudios.push(ringing);
     allAudios.push(visionblur);
@@ -119,6 +121,7 @@ function loadContent() {
     allAudios.push(ow);
     allAudios.push(magnificent);
     allAudios.push(zenith);
+    allAudios.push(ethereal);
     for (let i = 0; i < allAudios.length; i++)
         allAudios[i].load();
     document.getElementById("pressPlay").style.display = "none";
@@ -187,6 +190,7 @@ function movePlayer(dir, reps) {
                     }
                 default:
             }
+            updateActiveRecipe();
             gearAbility3();
         }
         displayArea();
@@ -342,7 +346,30 @@ function switchInventory() {
 }
 
 function createInventory() {
+    let arr = [];
     for (let propertyName in oreList) {
+        arr.push(propertyName);
+    }
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            let rarity1 = 1/oreList[arr[j]][0];
+            let rarity2 = 1/oreList[arr[j + 1]][0];
+            if (allCaves.includes(getCaveTypeFromOre(arr[j]))) {
+                if (!oolOres.includes(arr[j]))
+                    rarity1 *= getCaveMultiFromOre(arr[j]);
+            }
+            if (allCaves.includes(getCaveTypeFromOre(arr[j + 1]))) {
+                if (!oolOres.includes(arr[j + 1]))
+                    rarity2 *= getCaveMultiFromOre(arr[j + 1]);
+            }
+          if (rarity1 < rarity2) {
+            const lesser = arr[j + 1];
+            arr[j + 1] = arr[j];
+            arr[j] = lesser;
+          }
+        }
+    }
+    arr.forEach(propertyName => {
         for (let i = 1; i < 5; i++) {
             let oreNum = oreList[propertyName][1][i - 1];
             let tempElement = document.createElement('p');
@@ -352,13 +379,13 @@ function createInventory() {
             tempElement.setAttribute("onclick", "randomFunction(this.innerHTML, 'inv')");
             let rarity = Math.round( 1 / oreList[propertyName][0]);
             if (allCaves.includes(getCaveTypeFromOre(propertyName))) {
-                if (!oolOres.includes(propertyName));
+                if (!oolOres.includes(propertyName))
                     rarity *= getCaveMultiFromOre(propertyName);
             }
             tempElement.innerHTML = propertyName + " | 1/" + rarity.toLocaleString() * multis[i - 1].toLocaleString() + " | x" + oreNum.toLocaleString();
             document.getElementById(("inventory") + i).appendChild(tempElement);
         }
-    }
+    });  
 }
 
 function createIndex() {

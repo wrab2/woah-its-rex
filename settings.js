@@ -77,11 +77,11 @@ function changeUseNumbers(button) {
         useNumbers = false;
     }
 }
-let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+"];
+let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+"];
 let stopRareNum = 0;
 function changeMinRarity(button) {
     stopRareNum++;
-    if (stopRareNum > 6) {
+    if (stopRareNum > 7) {
         stopRareNum = 0;
     }
     button.innerHTML = stopRareValues[stopRareNum];
@@ -311,7 +311,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀"
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚧🚽🎓"
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
@@ -431,18 +431,22 @@ function togglePathBlocks() {
     }
     displayArea();
 }
+let testSoundTimeout = null;
 function testSound(num) {
     let element = document.getElementsByClassName("testButton")[num];
     let time = (allAudios[num].duration * 1000);
     if (allAudios[num].currentTime === 0) {
         allAudios[num].play();
         element.style.backgroundColor = "green";
-        setTimeout(() => {
+        testSoundTimeout = setTimeout(() => {
             element.style.backgroundColor = "red";
+            allAudios[num].currentTime = 0;
+            clearTimeout(testSoundTimeout);
         }, time);
     } else {
         allAudios[num].pause();
         allAudios[num].currentTime = 0;
         element.style.backgroundColor = "red";
+        clearTimeout(testSoundTimeout);
     }
 }
