@@ -300,6 +300,13 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         </label>
         <button class="testButton" onclick="testSound(6)"></button>
     </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(7, this)"id="mute6">Mute Ethereals</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="25" value="10" onchange="changeSpawnVolume(this.value, 7)" class="spawnVolume">
+        </label>
+        <button class="testButton" onclick="testSound(7)"></button>
+    </div>
     </div>
     <div class="frame" id="inventory-frame">
       <h2>Inventory Settings</h2>

@@ -1128,7 +1128,50 @@ function pickaxeAbility23(x, y, boost) {
     }, 1);
     });
 }
-
+/*
+let pick24Procs = 0;
+function p24(x, y, boost) {
+    let thisLuck = 1 * boost;
+    let tempY = y;
+    for (let c = 0; c < 15; c++) {
+        for (let r = tempY; r >= tempY - 5; r--) {
+            pickaxeAbilityMineBlock(x + c, r, thisLuck);
+            pickaxeAbilityMineBlock(x - c, r, thisLuck);
+        }
+        tempY -= 5;
+    }
+    let downY = [0, 20, 40, 60, 80];
+    if (pick24Procs > 9) {
+        pick24Procs = 0;
+    }
+    
+    for (let i = downY.length - 1; i >= 0; i--) {
+        let tempY;
+        let tempX1 = x;
+        let tempX2 = x;
+        for (let r = y; r < y + (downY[i] + pick24Procs + 2); r++) {
+            for (let c = tempX1; c < tempX1 + (5 - i); c++) {
+                pickaxeAbilityMineBlock(c, r, thisLuck);
+            }
+            for (let c = tempX2; c > tempX2 - (5 - i); c--) {
+                pickaxeAbilityMineBlock(c, r, thisLuck);
+            }
+            tempX1 += (5 - i)
+            tempY = r;
+            tempX2 -= (5 - i);
+            tempY = r;
+        }
+        if (i > 0) {
+            for (let c = 0; c < 250; c++) {
+                pickaxeAbilityMineBlock(tempX1 + c, tempY, thisLuck);
+                pickaxeAbilityMineBlock(tempX2 - c, tempY, thisLuck);
+            }
+        }
+    }
+    pick24Procs++;
+    displayArea();
+}
+*/
 function pickaxeAbilityMineBlock(x, y, luck) {
     let generated;
     if (mine[y] != undefined) {

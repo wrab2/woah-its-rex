@@ -77,11 +77,11 @@ function changeUseNumbers(button) {
         useNumbers = false;
     }
 }
-let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+"];
+let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+"];
 let stopRareNum = 0;
 function changeMinRarity(button) {
     stopRareNum++;
-    if (stopRareNum > 6) {
+    if (stopRareNum > 7) {
         stopRareNum = 0;
     }
     button.innerHTML = stopRareValues[stopRareNum];
@@ -274,7 +274,7 @@ function switchLayerIndex(num, overrideNum, world) {
         world = currentWorld;
     }
     layerNum += num;
-    let add = currentWorld === 1 ? 8 : 5;
+    let add = world === 1 ? 8 : 5;
     if (layerNum > (add + 3)) {
         layerNum = 0;
     }
@@ -282,8 +282,9 @@ function switchLayerIndex(num, overrideNum, world) {
         layerNum = (add + 3);
     let layerToIndex;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
+    let caveNumAdd = world === 1 ? 0 : 3;
     if (layerNum > (add - 1)) {
-        let caveNum = 11 - layerNum;
+        let caveNum = 11 - (layerNum + caveNumAdd);
         layerToIndex = allCaves[caveNum];
     } else {
         if (world === 1) {
@@ -310,14 +311,20 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀"
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚧🚽🎓"
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
-        if (oreList[property][1][0] > 0) {
+        if (oreList[property][1][3]) {
+            parentObject.style.backgroundImage = "linear-gradient(to bottom right, #c91800, #ff722b, #383838)";
+        } else if (oreList[property][1][2]) {
+            parentObject.style.backgroundImage = "linear-gradient(to bottom right, #062404, #c9fc3a, #062404)";
+        } else if (oreList[property][1][1]) {
+            parentObject.style.backgroundImage = "linear-gradient(to bottom right, #f7f368, #ffc629, #e365fc)";
+        } else if (oreList[property][1][0]) {
             parentObject.style.backgroundColor = "green";
         } else {
-            parentObject.style.backgroundColor = "red"
+            parentObject.style.backgroundColor = "red";
         }
         //ADD NAME TO CARD
         let oreName = document.createElement("p");
@@ -424,18 +431,22 @@ function togglePathBlocks() {
     }
     displayArea();
 }
+let testSoundTimeout = null;
 function testSound(num) {
     let element = document.getElementsByClassName("testButton")[num];
     let time = (allAudios[num].duration * 1000);
     if (allAudios[num].currentTime === 0) {
         allAudios[num].play();
         element.style.backgroundColor = "green";
-        setTimeout(() => {
+        testSoundTimeout = setTimeout(() => {
             element.style.backgroundColor = "red";
+            allAudios[num].currentTime = 0;
+            clearTimeout(testSoundTimeout);
         }, time);
     } else {
         allAudios[num].pause();
         allAudios[num].currentTime = 0;
         element.style.backgroundColor = "red";
+        clearTimeout(testSoundTimeout);
     }
 }

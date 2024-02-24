@@ -31,7 +31,7 @@ function toggleMusic() {
     }
 }
 
-let canPlay = [true, true, true, true, true, true, true];
+let canPlay = [true, true, true, true, true, true, true, true];
 function changeCanPlay(num, button) {
     let text = button.innerHTML;
     text = text.substring(text.indexOf(" "));
@@ -101,6 +101,14 @@ function playSound(type) {
                 magnificent.play();
             }
             if (stopOnRare && stopRareNum < 6)
+                stopMining();
+            break;
+        case "ethereal":
+            if (canPlay[7]) {
+                ethereal.currentTime = 0;
+                ethereal.play();
+            }
+            if (stopOnRare && stopRareNum < 8)
                 stopMining();
             break;
     }
