@@ -168,10 +168,12 @@ let oreList = {
     "🌥️": [1/14400000, [0,0,0,0]],
     "🌤️": [1/7800000, [0,0,0,0]],
     "🌧️": [1/7000000, [0,0,0,0]],
-
+    "🎐": [1/5500000, [0,0,0,0]],
+ 
     //TV
 
     "🔫": [1/61500000000, [0,0,0,0]],
+    "👾": [1/9000000000, [0,0,0,0]],
     "🏹": [1/4210000000, [0,0,0,0]],
     "💣": [1/771100000, [0,0,0,0]],
     "🔨": [1/540000000, [0,0,0,0]],
@@ -182,8 +184,10 @@ let oreList = {
     //DOOR
 
     "🗝️": [1/420000000000, [0,0,0,0]],
-    "🚧": [1/23000000000, [0,0,0,0]],
+    "🪝": [1/75000000000, [0,0,0,0]],
+    "🪡": [1/23000000000, [0,0,0,0]],
     "🛎️": [1/4730000000, [0,0,0,0]],
+    "🚧": [1/1100000000, [0,0,0,0]],
     "⛓️": [1/345000000, [0,0,0,0]],
     "🔏": [1/243800000, [0,0,0,0]],
     "🖇️": [1/31337000, [0,0,0,0]],
@@ -222,6 +226,7 @@ let oreList = {
     "🩸": [1/13000000000000, [0,0,0,0]],
     "🚫": [1/666666666666, [0,0,0,0]],
     "💢": [1/26000000000, [0,0,0,0]],
+    "🔇": [1/3300000000, [0,0,0,0]],
     "🛑": [1/1000000000, [0,0,0,0]],
     "⭕": [1/600000000, [0,0,0,0]],
     "🔕": [1/225000000, [0,0,0,0]],
@@ -552,7 +557,7 @@ fluteLayer = {
 cloudLayer = {
     "☘️" : 1/33300000000000,
     "🪽" : 1/260000000000,
-    "🍃" : 1/13500000000, //13.5b
+    "🍃" : 1/13500000000,
     "🪶" : 1/2060000000,
     "🌦️" : 1/275000000,
     "🌩️" : 1/175000000,
@@ -563,12 +568,14 @@ cloudLayer = {
     "🌥️" : 1/14400000,
     "🌤️" : 1/7800000,
     "🌧️" : 1/7000000,
+    "🎐" : 1/5500000,
     "☁️" : 1/1,
 },
 
 tvLayer = {
     "☘️" : 1/33300000000000,
     "🔫" : 1/615000000000,
+    "👾" : 1/9000000000,
     "🏹" : 1/4210000000,
     "💣" : 1/771100000,
     "🔨" : 1/540000000,
@@ -581,8 +588,10 @@ tvLayer = {
 doorLayer = {
     "☘️" : 1/33300000000000,
     "🗝️" : 1/420000000000,
-    "🚧" : 1/23000000000, //23b
+    "🪝" : 1/75000000000, //75b
+    "🪡" : 1/23000000000, //23b
     "🛎️" : 1/4730000000,
+    "🚧" : 1/1100000000,
     "⛓️" : 1/345000000,
     "🔏" : 1/243800000,
     "🖇️" : 1/31337000,
@@ -608,7 +617,7 @@ globeLayer = {
 
 chessLayer = {
     "☘️" : 1/33300000000000,
-    "⚖️" : 1/123321000000,
+    "⚖️" : 1/123456654321,
     "🎓" : 1/7900000000, //7.9b
     "📍" : 1/4321000000,
     "📌" : 1/1230000000,
@@ -633,6 +642,7 @@ borderLayer = {
     "🩸" : 1/13000000000000,
     "🚫" : 1/666666666666,
     "💢" : 1/26000000000,
+    "🔇" : 1/3300000000,
     "🛑" : 1/1000000000,
     "⭕" : 1/600000000,
     "🔕" : 1/225000000,
@@ -680,10 +690,15 @@ let specialLayers = [sillyLayer, fluteLayer, dirtLayer2, barrierLayer, borderLay
 let allLayers = [dirtLayer, brickLayer, foggyLayer, waterLayer, rockLayer, radioactiveLayer, cactusLayer, paperLayer];
 //
 const customMessages = {
-    "📽️" : "Words...",
-    "🎓" : "Words...",
-    "🔎" : "Words...",
-    "🚧" : "Words...",
+    "📽️" : "You're alone, and yet you feel the eyes of millions stare upon you through a peculiar lens...",
+    "🎓" : "An influx of knowledge passes by you as you reap the reward of years of turmoil...",
+    "🔎" : "Through the glass, the minute details of all in its sight are made apparent...",
+    "🚧" : "A feeling of authorisation stops you in your tracks, giving you the inclination to turn back...",
+    "🍃" : "Leaves of green elegantly glide through the sky to wherever their aerial current leads...",
+    "👾" : "A wave of nostalgia sweeps over you as 8-bit sound effects take you back to where it all began...",
+    "🪡" : "Why did you make a key to this world when you could've just lockpicked it? Minimal brain cells I swear...",
+    "🪝" : "As graceful as a key may look, breaking a lock with this is infinitely cooler...",
+    "🔇" : "Do not speak further, for I know your determination will falter...",
     "📍" : "Mark after mark, record after record, the earth below unfolds its interior on paper before you...",
     "🧂" : "As if on the seaside, the air tastes of salt, yet there's the faint sound of yelling and profanity in the distance...",
     "🎉" : "YIPPEEEE YIPEYIPEYIPEYIPE YIIIPPPPEEEEEEEEEE!!!...",

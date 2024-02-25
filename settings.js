@@ -54,7 +54,8 @@ let allPickaxeNames = ["Mulch Mallet",
 "Gemstone Engraver",
 "Gambler's Fallacy",
 "Swirly Subjugator",
-"Singularity Slammer"
+"Singularity Slammer",
+"Staff of Binding",
 ];
 function changeUseNumbers(button) {
     if (!useNumbers) {
@@ -311,7 +312,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚧🚽🎓"
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡"
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
