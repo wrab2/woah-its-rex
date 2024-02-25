@@ -691,12 +691,12 @@ let allLayers = [dirtLayer, brickLayer, foggyLayer, waterLayer, rockLayer, radio
 //
 const customMessages = {
     "📽️" : "You're alone, and yet you feel the eyes of millions stare upon you through a peculiar lens...",
-    "🎓" : "An influx of knowledge passes by you as you reap the reward of years of turmoil...",
-    "🔎" : "Through the glass, the minute details of all in its sight are made apparent...",
+    "🎓" : "An influx of knowledge passes you by as you reap the reward of years of turmoil...",
+    "🔎" : "Through the glass, you gain a feeling of omniscience as your vision achieves clarity...",
     "🚧" : "A feeling of authorisation stops you in your tracks, giving you the inclination to turn back...",
     "🍃" : "Leaves of green elegantly glide through the sky to wherever their aerial current leads...",
     "👾" : "A wave of nostalgia sweeps over you as 8-bit sound effects take you back to where it all began...",
-    "🪡" : "Why did you make a key to this world when you could've just lockpicked it? Minimal brain cells I swear...",
+    "🪡" : "Why did you make a lacklustre key to this world when you could've just lockpicked it? Minimal brain cells I swear...",
     "🪝" : "As graceful as a key may look, breaking a lock with this is infinitely cooler...",
     "🔇" : "Do not speak further, for I know your determination will falter...",
     "📍" : "Mark after mark, record after record, the earth below unfolds its interior on paper before you...",
