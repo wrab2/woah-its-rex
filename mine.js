@@ -129,8 +129,8 @@ function giveBlock(type, x, y, fromReset, fromCave, caveInfo) {
             type = "🟫";
         //CREATE VARIABLES
         let oreRarity = Math.round(1 / (oreList[type][0]));
-        let pickaxeLevel1 = currentWorld === 1 ? 9 : 20
-        let pickaxeLevel2 = currentWorld === 1 ? 6 : 17
+        let pickaxeLevel1 = currentWorld === 1 ? 9 : 100
+        let pickaxeLevel2 = currentWorld === 1 ? 6 : 100
         let minRarity = (currentPickaxe > pickaxeLevel1 ? 15000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
         inv = 1;
         //SELECT VARIANT
