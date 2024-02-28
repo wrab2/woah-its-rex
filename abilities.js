@@ -20,19 +20,19 @@ async function rollAbilities() {
     switch (currentPickaxe) {
         case 1:
             if (Math.random() < (1/30 * m)) {
-                canMine = await(pickaxeAbility3(curX, curY, boost));
+                canMine = await(pickaxeAbility1(curX, curY, boost));
                 updateActiveRecipe();
             }
             break;
         case 2:
             if (Math.random() <= (1/35 * m)) {
-                canMine = await(pickaxeAbility1(curX, curY, 3, 1.35, boost));
+                canMine = await(pickaxeAbility2(curX, curY, 3, 1.35, boost));
                 updateActiveRecipe();
             }
             break;
         case 3:
             if (Math.random() <= (1/30 * m)) {
-                canMine = await(pickaxeAbility2(curX, curY, boost));
+                canMine = await(pickaxeAbility3(curX, curY, boost));
                 updateActiveRecipe();
             }
             break;
@@ -200,7 +200,39 @@ function gearAbility3() {
         }
     }
 }
-function pickaxeAbility1(x, y, size, customLuck, boost) {
+
+function pickaxeAbility1(x, y, boost) {
+    return new Promise((resolve) => {
+    const thisLuck  = 1.2 * boost;
+    const constraints  = getParams(6, 6, x, y);
+    canMine = false;
+    const origin = [y, x];
+    for (let i = 0; i < 6; i++) {
+        x++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+    }
+    x = origin[1];
+    for (let i = 0; i < constraints[0]; i++) {
+        x--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+    }
+    x = origin[1];
+    for (let i = 0; i < 6; i++) {
+        y++;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+    }
+    y = origin[0];
+    for (let i = 0; i < constraints[1]; i++) {
+        y--;
+        pickaxeAbilityMineBlock(x, y, thisLuck);
+    }
+    setTimeout(() => {
+        resolve(true);
+    }, 1);
+    });
+}
+
+function pickaxeAbility2(x, y, size, customLuck, boost) {
     return new Promise((resolve) => {
     const thisLuck  = customLuck * boost;
     canMine = false;
@@ -217,7 +249,7 @@ function pickaxeAbility1(x, y, size, customLuck, boost) {
     });
 }
 
-function pickaxeAbility2(x, y, boost) {
+function pickaxeAbility3(x, y, boost) {
     return new Promise((resolve) => {
     const thisLuck  = 1.8 * boost;
     const constraints  = getParams(6, 6);
@@ -262,36 +294,6 @@ function pickaxeAbility2(x, y, boost) {
     });
 }
 
-function pickaxeAbility3(x, y, boost) {
-    return new Promise((resolve) => {
-    const thisLuck  = 1.2 * boost;
-    const constraints  = getParams(6, 6, x, y);
-    canMine = false;
-    const origin = [y, x];
-    for (let i = 0; i < 6; i++) {
-        x++;
-        pickaxeAbilityMineBlock(x, y, thisLuck);
-    }
-    x = origin[1];
-    for (let i = 0; i < constraints[0]; i++) {
-        x--;
-        pickaxeAbilityMineBlock(x, y, thisLuck);
-    }
-    x = origin[1];
-    for (let i = 0; i < 6; i++) {
-        y++;
-        pickaxeAbilityMineBlock(x, y, thisLuck);
-    }
-    y = origin[0];
-    for (let i = 0; i < constraints[1]; i++) {
-        y--;
-        pickaxeAbilityMineBlock(x, y, thisLuck);
-    }
-    setTimeout(() => {
-        resolve(true);
-    }, 1);
-    });
-}
 
 function pickaxeAbility4(x, y, boost) {
     return new Promise((resolve) => {
@@ -299,7 +301,7 @@ function pickaxeAbility4(x, y, boost) {
     const constraints  = getParams(7, 7);
     const area1 = Math.round((Math.random() * (-(constraints[0]) - 7)) + 7);
     const area2 = Math.round((Math.random() * (-(constraints[1]) - 7)) + 7);
-    pickaxeAbility1((x + area1), (y + area2), 4, thisLuck, 1);
+    pickaxeAbility2((x + area1), (y + area2), 4, thisLuck, 1);
     displayArea();
     setTimeout(() => {
         resolve(true);
@@ -315,11 +317,11 @@ function pickaxeAbility5(x, y, boost) {
     let r = y + area2;
     let c = x + area1;
     for (let i = c; i < c + 5; i++) {
-        pickaxeAbilityMineBlock(r, i, thisLuck);
+        pickaxeAbilityMineBlock(i, r, thisLuck);
     }
     r++;
     for (let i = 0; i < 5; i++) {
-        for (let j = c - 1; j < c+6; j++) {
+        for (let j = c - 1; j < c + 6; j++) {
             pickaxeAbilityMineBlock(j, r, thisLuck);
         }
         r++;

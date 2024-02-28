@@ -312,7 +312,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡"
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚👽🪤🤖🦴🎩";
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
@@ -441,6 +441,7 @@ function testSound(num) {
         element.style.backgroundColor = "green";
         testSoundTimeout = setTimeout(() => {
             element.style.backgroundColor = "red";
+            allAudios[num].pause();
             allAudios[num].currentTime = 0;
             clearTimeout(testSoundTimeout);
         }, time);

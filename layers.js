@@ -19,7 +19,8 @@ let oreList = {
     "⛄": [1/183640000, [0,0,0,0]],
 
     //DIRT
-
+    
+    //"🍓": [1/560000000000, [0,0,0,0]],
     "🌳": [1/9250000000, [0,0,0,0]],
     "💐": [1/3750000000, [0,0,0,0]],
     "🥬": [1/2000000000, [0,0,0,0]],
@@ -33,9 +34,180 @@ let oreList = {
     "🪵": [1/10000000,[0,0,0,0]], 
     "🌻": [1/9500000,[0,0,0,0]],
     "🍁": [1/8900000,[0,0,0,0]],
-
+    /*
+"🌳" : {
+        "decimalRarity" : 1/9250000000,
+        "numRarity" : 9250000000,
+        "hasLog" : true,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "CAKECORE13...",
+        "oreTier" : "Zenith",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "💐" : {
+        "decimalRarity" : 1/3750000000,
+        "numRarity" : 3750000000,
+        "hasLog" : true,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "From the depths of nature's embrace, a delicate bloom unfurls, casting a fragrant aura upon its surroundings...",
+        "oreTier" : "Metaversal",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🥬" : {
+        "decimalRarity" : 1/2000000000,
+        "numRarity" : 2000000000,
+        "hasLog" : true,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "",
+        "oreTier" : "Zenith",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🥗" : {
+        "decimalRarity" : 1/800000000,
+        "numRarity" : 800000000,
+        "hasLog" : true,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "",
+        "oreTier" : "Otherworldly",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🌪️" : {
+        "decimalRarity" : 1/247010000,
+        "numRarity" : 247010000,
+        "hasLog" : true,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "",
+        "oreTier" : "Unfathomable",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🌏" : {
+        "decimalRarity" : 1/213200000,
+        "numRarity" : 213200000,
+        "hasLog" : true,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "",
+        "oreTier" : "Unfathomable",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🌲" : {
+        "decimalRarity" : 1/71000000,
+        "numRarity" : 71000000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🌲 Has Spawned!",
+        "oreTier" : "Enigmatic",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🎃" : {
+        "decimalRarity" : 1/69000000,
+        "numRarity" : 69000000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🎃 Has Spawned!",
+        "oreTier" : "Enigmatic",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🎍" : {
+        "decimalRarity" : 1/35000000,
+        "numRarity" : 35000000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🎍 Has Spawned!",
+        "oreTier" : "Enigmatic",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🎄" : {
+        "decimalRarity" : 1/12500000,
+        "numRarity" : 12500000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🎄 Has Spawned!",
+        "oreTier" : "Transcendent",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🪵" : {
+        "decimalRarity" : 1/10000000,
+        "numRarity" : 10000000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🪵 Has Spawned!",
+        "oreTier" : "Transcendent",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    "🌻" : {
+        "decimalRarity" : 1/9500000,
+        "numRarity" : 9500000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🌻 Has Spawned!",
+        "oreTier" : "Transcendent",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+     "🍁" : {
+        "decimalRarity" : 1/8900000,
+        "numRarity" : 8900000,
+        "hasLog" : false,
+        "isBreakable" : true,
+        "caveExclusive" : false,
+        "spawnMessage" : "🍁 Has Spawned!",
+        "oreTier" : "Transcendent",
+        "normalAmt" : 0,
+        "electrifiedAmt" : 0,
+        "radioactiveAmt" : 0,
+        "explosiveAmt" : 0,
+    },
+    */
     //BRICK
 
+    //"🏯": [1/430000000000,  [0,0,0,0]],
     "🏰": [1/8888888888, [0,0,0,0]],
     "🌇": [1/4300000000, [0,0,0,0]],
     "🥉": [1/444444444, [0,0,0,0]], 
@@ -52,6 +224,7 @@ let oreList = {
     
     //FOG
 
+    //"🦚": [1/245000000000, [0,0,0,0]],
     "🚿": [1/6000000000, [0,0,0,0]],
     "👁️": [1/1920000000, [0,0,0,0]],
     "💸": [1/754000000, [0,0,0,0]], 
@@ -67,6 +240,7 @@ let oreList = {
 
     //WATER
 
+    //"👽": [1/750000000000, [0,0,0,0]],
     "🐋": [1/8000000000, [0,0,0,0]],
     "💫": [1/2000000000, [0,0,0,0]],
     "🪩": [1/999999999, [0,0,0,0]],
@@ -82,6 +256,7 @@ let oreList = {
 
     //STONE
 
+    //"🪤": [1/800000000000, [0,0,0,0]],
     "🏔️": [1/5500000000, [0,0,0,0]],
     "🌈": [1/2750000000, [0,0,0,0]],
     "🧊": [1/583000000, [0,0,0,0]], 
@@ -97,6 +272,7 @@ let oreList = {
 
     //RADIOACTIVE
 
+    //"🤖": [1/640000000000, [0,0,0,0]],
     "⚠️": [1/6666666666, [0,0,0,0]],
     "🎆": [1/3000000000, [0,0,0,0]],
     "🧀": [1/618000001, [0,0,0,0]],
@@ -112,6 +288,7 @@ let oreList = {
 
     //CACTUS
 
+    //"🦴": [1/175000000000, [0,0,0,0]],
     "🐪": [1/7800000000, [0,0,0,0]],
     "🏵️": [1/2600000000, [0,0,0,0]],
     "🪐": [1/709000750, [0,0,0,0]], 
@@ -127,6 +304,7 @@ let oreList = {
 
     //PAPER
 
+    //"🎩": [1/300500000000, [0,0,0,0]],
     "💵": [1/8900000000, [0,0,0,0]],
     "🪅": [1/3250000000, [0,0,0,0]],
     "👀": [1/955200890, [0,0,0,0]],
@@ -348,6 +526,7 @@ let oreList = {
 }
 //ALL LAYERS
 const dirtLayer = {
+    //"🍓": 1/560000000000,
     "🌳": 1/9250000000,
     //"😻": 1/5000000005,
     "💐": 1/3750000000,
@@ -366,6 +545,7 @@ const dirtLayer = {
 },
 
 dirtLayer2 = {
+    //"🍓": 1/560000000000,
     "🌳": 1/9250000000,
     //"😻": 1/5000000005,
     "💐": 1/3750000000,
@@ -385,6 +565,7 @@ dirtLayer2 = {
 },
 
 brickLayer = {
+    //"🏯": 1/430000000000,
     "🏰": 1/8888888888,
     //"😻": 1/5000000005,
     "🌇": 1/4300000000,
@@ -404,6 +585,7 @@ brickLayer = {
 },
 
 foggyLayer = {
+    //"🦚": 1/245000000000,
     "❤️‍🔥" : 1/50000000000,
     "🚿": 1/6000000000,
     //"😻": 1/5000000005,
@@ -423,6 +605,7 @@ foggyLayer = {
 },
 
 waterLayer = {
+    //"👽": 1/750000000000,
     "🐋": 1/8000000000,
     //"😻": 1/5000000005,
     "💫": 1/2000000000,
@@ -441,6 +624,7 @@ waterLayer = {
 },
 
 rockLayer = {
+    //"🪤": 1/800000000000,
     "🏔️": 1/5500000000,
     //"😻": 1/5000000005,
     "🌈": 1/2750000000,
@@ -461,6 +645,7 @@ rockLayer = {
 },
 
 radioactiveLayer = {
+    //"🤖": 1/640000000000,
     "⚠️": 1/6666666666,
     //"😻": 1/5000000005,
     "🎆": 1/3000000000,
@@ -479,6 +664,7 @@ radioactiveLayer = {
 },
 
 cactusLayer = {
+    //"🦴" : 1/175000000000,
     "💗": 1/150000000000,
     "🐪": 1/7800000000,
     //"😻": 1/5000000005,
@@ -498,6 +684,7 @@ cactusLayer = {
 },
 
 paperLayer = {
+    //"🎩" : 1/300500000000,
     "💵": 1/8900000000,
     //"😻": 1/5000000005,
     "🪅": 1/3250000000,
