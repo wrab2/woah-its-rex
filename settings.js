@@ -54,7 +54,8 @@ let allPickaxeNames = ["Mulch Mallet",
 "Gemstone Engraver",
 "Gambler's Fallacy",
 "Swirly Subjugator",
-"Singularity Slammer"
+"Singularity Slammer",
+"Staff of Binding",
 ];
 function changeUseNumbers(button) {
     if (!useNumbers) {
@@ -282,9 +283,8 @@ function switchLayerIndex(num, overrideNum, world) {
         layerNum = (add + 3);
     let layerToIndex;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
-    let caveNumAdd = world === 1 ? 0 : 3;
     if (layerNum > (add - 1)) {
-        let caveNum = 11 - (layerNum + caveNumAdd);
+        let caveNum = 11 - layerNum;
         layerToIndex = allCaves[caveNum];
     } else {
         if (world === 1) {
@@ -311,7 +311,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚧🚽🎓"
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚👽🪤🤖🦴🎩";
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
@@ -440,6 +440,7 @@ function testSound(num) {
         element.style.backgroundColor = "green";
         testSoundTimeout = setTimeout(() => {
             element.style.backgroundColor = "red";
+            allAudios[num].pause();
             allAudios[num].currentTime = 0;
             clearTimeout(testSoundTimeout);
         }, time);
