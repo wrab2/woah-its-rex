@@ -283,9 +283,8 @@ function switchLayerIndex(num, overrideNum, world) {
         layerNum = (add + 3);
     let layerToIndex;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
-    let caveNumAdd = world === 1 ? 0 : 3;
     if (layerNum > (add - 1)) {
-        let caveNum = 11 - (layerNum + caveNumAdd);
+        let caveNum = 11 - layerNum;
         layerToIndex = allCaves[caveNum];
     } else {
         if (world === 1) {
