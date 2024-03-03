@@ -603,13 +603,13 @@ function createPickaxeRecipes() {
         if (j === 12) {
             tempButton.innerText = "Teleport!";
             tempButton.setAttribute("onclick", "attemptSwitchWorld()");
-            tempButton.style.width = "100%";
+            tempButton.style.width = "50%";
             tempElement.appendChild(tempButton);
         }
         tempButton = document.createElement('button');
         tempButton.id="craftPickaxe" + (j + 1);
         tempButton.setAttribute("onclick", "craftPickaxe(" + (j + 1) + ")");
-        tempButton.style.width = "100%";
+        tempButton.style.width = j === 12 ? "50%" : "100%";
         if (pickaxes[j + 1][1]) {
             tempButton.innerHTML = "Equip!";
         } else

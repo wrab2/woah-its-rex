@@ -49,6 +49,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   border-color: white;
   width: 55%;
   text-align: center;
+  margin: auto;
 }
 .recipeOreDisplay {
   align-self: center;

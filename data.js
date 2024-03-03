@@ -58,10 +58,8 @@ function loadAllData() {
     localStorage.setItem("dataBackup", localStorage.getItem("playerData"));
     try {
         const data = JSON.parse(localStorage.getItem("playerData"));
-        console.log(data);
         for (let i = 0; i < data[0].length; i++) {
             if (oreList[data[0][i][0]] !== undefined) {
-                console.log(data[0][i][1][0]);
                 oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];
                 oreList[data[0][i][0]]["electrifiedAmt"] = data[0][i][1][0][1];
                 oreList[data[0][i][0]]["radioactiveAmt"] = data[0][i][1][0][2];
