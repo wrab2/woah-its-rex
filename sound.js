@@ -46,6 +46,7 @@ function changeCanPlay(num, button) {
 //SOUND PLAYING
 
 function playSound(type) {
+    type = type.toLowerCase();
     switch (type) {
         case "exotic":
             if (canPlay[0]) {

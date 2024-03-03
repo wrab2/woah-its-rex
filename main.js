@@ -70,7 +70,7 @@ let currentLayerNum = 0;
 //IMPORTANT
 
 function init() {
-    let canContinue = false;
+    let canContinue = true;
     createInventory();
     createMine();
     let playedBefore = localStorage.getItem("playedBefore");
@@ -78,6 +78,7 @@ function init() {
         canContinue = loadAllData();
     else
         canContinue = true;
+    
     if (canContinue) {
         repeatDataSave();
         localStorage.setItem("playedBefore", true);
@@ -137,8 +138,8 @@ function movePlayer(dir, reps) {
         if (canMine) {
             switch (dir) {
                 case "s":
-                    if (currentWorld === 1 || (currentWorld === 2 && currentPickaxe > 12)) {
-                        if (mine[curY + 1][curX] != "✖️") {
+                    if (currentWorld === 1 || currentPickaxe > 12) {
+                        if (oreList[mine[curY + 1][curX]]["isBreakable"]) {
                             mine[curY][curX] = "⚪";
                             curY++;
                             setLayer(curY);
@@ -151,8 +152,8 @@ function movePlayer(dir, reps) {
                     }
                 case "w":
                     if (curY > 0) {
-                        if (currentWorld === 1 || (currentWorld === 2 && currentPickaxe > 12)) {
-                            if (mine[curY - 1][curX] != "✖️") {
+                        if (currentWorld === 1 || currentPickaxe > 12) {
+                            if (oreList[mine[curY - 1][curX]]["isBreakable"]) {
                                 mine[curY][curX] = "⚪";
                                 curY--;
                                 setLayer(curY);
@@ -166,8 +167,8 @@ function movePlayer(dir, reps) {
                     break;
                 case "a":
                     if (curX > 0) {
-                        if (currentWorld === 1 || (currentWorld === 2 && currentPickaxe > 12)) {
-                            if (mine[curY][curX - 1] != "✖️") {
+                        if (currentWorld === 1 || currentPickaxe > 12) {
+                            if (oreList[mine[curY][curX - 1]]["isBreakable"]) {
                                 mineBlock(curX - 1, curY, "mining", 1);
                                 mine[curY][curX] = "⚪";
                                 curX--;
@@ -178,8 +179,8 @@ function movePlayer(dir, reps) {
                     }
                     break;
                 case "d":
-                    if (currentWorld === 1 || (currentWorld === 2 && currentPickaxe > 12)) {
-                        if (mine[curY][curX + 1] != "✖️") {
+                    if (currentWorld === 1 || currentPickaxe > 12) {
+                        if (oreList[mine[curY][curX + 1]]["isBreakable"]) {
                             mineBlock(curX + 1, curY, "mining", 1);
                             mine[curY][curX] = "⚪";
                             curX++;
@@ -352,16 +353,12 @@ function createInventory() {
     }
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
-            let rarity1 = 1/oreList[arr[j]][0];
-            let rarity2 = 1/oreList[arr[j + 1]][0];
-            if (allCaves.includes(getCaveTypeFromOre(arr[j]))) {
-                if (!oolOres.includes(arr[j]))
-                    rarity1 *= getCaveMultiFromOre(arr[j]);
-            }
-            if (allCaves.includes(getCaveTypeFromOre(arr[j + 1]))) {
-                if (!oolOres.includes(arr[j + 1]))
-                    rarity2 *= getCaveMultiFromOre(arr[j + 1]);
-            }
+            let rarity1 = oreList[arr[j]]["numRarity"];
+            let rarity2 = oreList[arr[j + 1]]["numRarity"];
+            if (oreList[arr[j]]["caveExclusive"])
+                rarity1 *= getCaveMultiFromOre(arr[j]);
+            if (oreList[arr[j + 1]]["caveExclusive"])
+                rarity2 *= getCaveMultiFromOre(arr[j + 1]);
           if (rarity1 < rarity2) {
             const lesser = arr[j + 1];
             arr[j + 1] = arr[j];
@@ -371,62 +368,31 @@ function createInventory() {
     }
     arr.forEach(propertyName => {
         for (let i = 1; i < 5; i++) {
-            let oreNum = oreList[propertyName][1][i - 1];
+            let oreNum = oreList[propertyName][variantInvNames[i - 1]];
             let tempElement = document.createElement('p');
             tempElement.id = (propertyName + i);
             tempElement.classList = "oreDisplay";
             tempElement.style.display = "none";
             tempElement.setAttribute("onclick", "randomFunction(this.innerHTML, 'inv')");
-            let rarity = Math.round( 1 / oreList[propertyName][0]);
-            if (allCaves.includes(getCaveTypeFromOre(propertyName))) {
-                if (!oolOres.includes(propertyName))
-                    rarity *= getCaveMultiFromOre(propertyName);
-            }
+            let colors = getBackgroundColor(oreList[propertyName]["oreTier"]);
+            tempElement.style.backgroundColor = colors["backgroundColor"];
+            tempElement.style.color = colors["textColor"];
+            let rarity = oreList[propertyName]["numRarity"];
+            if (oreList[propertyName]["caveExclusive"])
+                rarity *= getCaveMultiFromOre(propertyName);
             tempElement.innerHTML = propertyName + " | 1/" + rarity.toLocaleString() * multis[i - 1].toLocaleString() + " | x" + oreNum.toLocaleString();
             document.getElementById(("inventory") + i).appendChild(tempElement);
         }
     });  
 }
 
-function createIndex() {
-    document.getElementById("indexDisplay").innerHTML = "";
-    let num = 0;
-    let output = "";
-    let multi = verifiedOres.getLuckBoosts()[currentPickaxe];
-    if (currentWorld === 1 && gears[1])
-        multi *= 1.1;
-    if (currentWorld === 1 && gears[5]) 
-        multi *= 1.6;
-    for (let i = 0; i < allLayers.length - 2; i++) {
-        for (let propertyName in allLayers[i]) {
-            num = (Math.round(1/(oreList[propertyName][0])));
-            if (num > 2000000 && num < 5000000000)
-                output += propertyName + " | 1/" + (Math.round(1/(oreList[propertyName][0] * multi))).toLocaleString() + " | " + (i * 2000) + "-" + ((i+1) * 2000) + "m<br>";
-        }
-        output += "--------------<br>";
-    }
-    for (let i = 0; i < allCaves.length; i++) {
-        let caveOres = Object.keys(allCaves[i]);
-        output += caveOres[5] + " Cave, 1/" + caveMultis[i] + "<br>";
-        for (let j = 0; j < caveOres.length - 1; j++) {
-            num = Math.round(1/allCaves[i][caveOres[j]]);
-            output += caveOres[j] + " | 1/" + num.toLocaleString() + " in caves.<br>";
-        }
-        output += "--------------<br>";
-    }
-    for (let propertyName in oreList) {
-        if (Math.round(1/(oreList[propertyName][0]) <= 2000000 && Math.round(1/(oreList[propertyName][0]) > 1)))
-            output += propertyName + " | 1/" + (Math.round(1/(oreList[propertyName][0] * multi))).toLocaleString() + " | Everywhere<br>";
-    }
-    document.getElementById("indexDisplay").innerHTML = output;
-}
-
 let variant = 1;
 function updateInventory(type, inv) {
-    let rarity = (Math.round(1 / oreList[type][0])) * multis[inv - 1];
-    let amt = oreList[type][1][inv - 1];
-    let multi = 1 * rarity > 2000000 ? getCaveMultiFromOre(type) : 1;
-    multi = multi > 1 ? (oolOres.includes(type) ? 1 : multi) : 1;
+    let rarity = oreList[type]["numRarity"] * multis[inv - 1];
+    let amt = oreList[type][variantInvNames[inv - 1]];
+    let multi = 1;
+    if (oreList[type]["caveExclusive"])
+        multi *= getCaveMultiFromOre(type);
     rarity *= multi;
     let ast = multi > 1 ? "*" : "";
     document.getElementById(type + inv).innerHTML = type + " | " + ast + "1/" + rarity.toLocaleString() + " | x" + amt.toLocaleString();
@@ -460,7 +426,7 @@ function spawnMessage(block, location, caveInfo) {
     let pickaxeLevel1 = currentWorld === 1 ? 9 : 100
     let pickaxeLevel2 = currentWorld === 1 ? 6 : 100
     let minRarity = (currentPickaxe > pickaxeLevel1 ? 15000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
-    let oreRarity = 1/oreList[block][0];
+    let oreRarity = oreList[block]["numRarity"];
     if (caveInfo != undefined && caveInfo[0]) {
         fromCave = true
     }
@@ -491,7 +457,7 @@ function spawnMessage(block, location, caveInfo) {
             if (latestSpawns[i][3]) {
                 output += latestSpawns[i][0] + " 1/" + (latestSpawns[i][4]).toLocaleString() + " Adjusted.";
             } else {
-                output += latestSpawns[i][0] + " 1/" + (Math.round(1 / (oreList[latestSpawns[i][0]][0]))).toLocaleString();
+                output += latestSpawns[i][0] + " 1/" + oreList[latestSpawns[i][0]]["numRarity"].toLocaleString();
             }
             if (latestSpawns[i][1] !== undefined)
                 output += " | X: " + (latestSpawns[i][1] - 1000000000).toLocaleString() + ", Y: " + (-(latestSpawns[i][2] - sub)).toLocaleString();
@@ -508,7 +474,7 @@ function spawnMessage(block, location, caveInfo) {
             
             document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo[1]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0] - sub)).toLocaleString():"");
         } else {
-            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (Math.round(1 / (oreList[block][0]))).toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0] - sub)).toLocaleString():"");
+            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + oreList[block]["numRarity"].toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0] - sub)).toLocaleString():"");
         }
         clearTimeout(spawnOre);
     spawnOre = setTimeout(() => {
@@ -570,5 +536,36 @@ function goToOre(block, variantType) {
                 multi++;
             }
         }
+    }
+}
+
+function getBackgroundColor(tier) {
+    switch(tier) {
+        case "Ethereal" :
+            return {"backgroundColor" : "#ac47ff", "textColor" : "#ffffff"};
+        case "Zenith" :
+            return {"backgroundColor" : "#000000", "textColor" : "#ffffff"};
+        case "Metaversal" :
+            return {"backgroundColor" : "#fffeab", "textColor" : "#000000"};
+        case "Otherworldly" :
+            return {"backgroundColor" : "#a64d79", "textColor" : "#ffffff"};
+        case "Unfathomable" :
+            return {"backgroundColor" : "#003487", "textColor" : "#ffffff"};
+        case "Enigmatic" :
+            return {"backgroundColor" : "#c0ff1d", "textColor" : "#000000"};
+        case "Transcendent" :
+            return {"backgroundColor" : "#6d9eeb", "textColor" : "#ffffff"};
+        case "Exotic" :
+            return {"backgroundColor" : "#ffd966", "textColor" : "#000000"};
+        case "Surreal" :
+            return {"backgroundColor" : "#1cd4a7", "textColor" : "#ffffff"};
+        case "Master" :
+            return {"backgroundColor" : "#9800e3", "textColor" : "#ffffff"};
+        case "Rare" :
+            return {"backgroundColor" : "#fe8001", "textColor" : "#ffffff"};
+        case "Uncommon" :
+            return {"backgroundColor" : "#ff0000", "textColor" : "#ffffff"};
+        case "Common" :
+            return {"backgroundColor" : "#c1c1c1", "textColor" : "#ffffff"};
     }
 }

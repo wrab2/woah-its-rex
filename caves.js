@@ -48,7 +48,7 @@ function mineCaveBlock(c, r, type) {
     }
     let caveMulti = getCaveMulti(type);
     if (block != undefined) {
-        if (block != "⚪" && block != "⛏️") {
+        if (oreList[block]["isBreakable"]) {
             giveBlock(block, c, r, false, true, caveMulti);
             mine[r][c] = "⚪";
         }
@@ -122,79 +122,32 @@ function generateCaveBlock(y, x, type) {
     }
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
-    let adjRarity = (1/oreList[blockToGive][0]) * multi;
+    let adjRarity = oreList[blockToGive]["numRarity"] * multi;
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     if (allCaves.includes(type)) {
-        adjRarity = Math.round(1/(type[blockToGive] / multi));
-        if (adjRarity > 25000000) {
+        if (adjRarity >= 25000000) {
             let changeRarity = false;
             if (oolOres.indexOf(blockToGive) > -1) 
                 changeRarity = true;
-            if ((!changeRarity && adjRarity > 50000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 5000000000)) { //50B
+            if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) { //50B
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
-                playSound("zenith")
-            } else if ((!changeRarity && adjRarity > 10000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 1500000000)) { //10B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, [y, x], [true, adjRarity]);
-                hasLog = true;
-                playSound("magnificent")
-            } else if ((!changeRarity && adjRarity > 1000000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 750000000)) { //1B
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, [y, x], [true, adjRarity]);
-                hasLog = true;
-                playSound("otherworldly")
-            } else if ((!changeRarity && adjRarity > 500000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) >= 160000000)) { //500M
-                verifiedOres.createLog(r = y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, [y, x], [true, adjRarity]);
-                hasLog = true;
-                playSound("unfathomable")
-            } else if ((!changeRarity && adjRarity > 250000000) || (changeRarity && Math.round(1/(oreList[blockToGive][0])) > 25000000)) { // 250M
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, [y, x], [true, adjRarity]);
-                hasLog = true;
-                playSound("enigmatic");
+                playSound(oreList[blockToGive]["oreTier"])
             }
         }
     } else {
-        let location = [y, x];
-        if (Math.round(1 / (probabilityTable[blockToGive])) > 5000000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
-            hasLog = true;
-            spawnMessage(blockToGive, location);
-            playSound("zenith");
-        } else if (Math.round(1 / (probabilityTable[blockToGive])) > 1500000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
-            hasLog = true;
-            spawnMessage(blockToGive, location);
-            playSound("magnificent");
-        } else if (Math.round(1 / (probabilityTable[blockToGive])) > 750000000) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
-            hasLog = true;
-            spawnMessage(blockToGive, location);
-            playSound("otherworldly");
-        } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 160000000) {
-
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), 1, [true, false]);
-            hasLog = true;
-            spawnMessage(blockToGive, location);
-            playSound("unfathomable");
-        } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 25000000) {
-            spawnMessage(blockToGive, location);
-            playSound("enigmatic");
-        } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 5000000) {
-            spawnMessage(blockToGive, location);
-            playSound("transcendent");
-        } else if (Math.round(1 / (probabilityTable[blockToGive])) >= 750000) {
-            spawnMessage(blockToGive, location);
-            playSound("exotic");
+        if (oreList[blockToGive]["numRarity"] >= 750000) {
+            hasLog = oreList[blockToGive]["hasLog"];
+            if (hasLog)
+                verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, false]);
+            spawnMessage(blockToGive, [y, x]);
+            playSound(oreList[blockToGive]["oreTier"]);
         }
     }
-    if (oreList[blockToGive][0] < 1/1) {
+    if (oreList[blockToGive]["decimalRarity"] < 1/1) {
         caveOreLocations.push([y, x, adjRarity]);
     }
-    
     return [blockToGive, hasLog, adjRarity];
 }
 

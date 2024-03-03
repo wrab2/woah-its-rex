@@ -1,15 +1,15 @@
-/*
+
 function adminGiveOres(block, amt) {
     if (amt === undefined)
         amt = 100;
     if (block === undefined) {
         for (let propertyName in oreList) {
-            oreList[propertyName][1][0] += amt;
+            oreList[propertyName]["normalAmt"] += amt;
             updateInventory(propertyName, 1);
             
         }
     } else {
-        oreList[block][1][0] += amt;
+        oreList[block]["normalAmt"] += amt;
         updateInventory(block, 1);
     }
 }
@@ -91,4 +91,3 @@ function adminGetHelp() {
     console.log("adminRemoveGear(num) - Num is the gear you want to delete, leave blank for all.");
     console.log("adminListNums() - Lists all the numbers for specific pickaxes and gears.")
 }
-*/

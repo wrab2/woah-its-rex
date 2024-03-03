@@ -576,38 +576,45 @@ function createPickaxeRecipes() {
     for (let j = 0 + add; j < list.length + add; j++) {
         let tempElement = document.createElement('div');
         tempElement.id = "pickaxeRecipe" + (j);
-        tempElement.style.display = "none";
         tempElement.classList = "craftingAmountsDisplay";
         let recipeList = list[j - add];
         recipeList.forEach(relation => {
             let ore = relation[0];
             let amtNeeded = relation[1];
-            let amtHave = oreList[ore][1][0];
+            let amtHave = oreList[ore]["normalAmt"];
+
             let element = document.createElement('p');
             element.id = (ore + ("pickaxeRecipe" + (j + 1) + "Display"));
+            element.classList = "recipeOreDisplay";
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
             element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
+            let colors = getBackgroundColor(oreList[ore]["oreTier"]);
+            element.style.backgroundColor = colors["backgroundColor"];
+            element.style.margin = "0px";
+
             if (amtHave >= amtNeeded)
                 element.style.color = "green";
             else
                 element.style.color = "red";
             tempElement.appendChild(element);
         });
+
         let tempButton = document.createElement('button');
         if (j === 12) {
             tempButton.innerText = "Teleport!";
             tempButton.setAttribute("onclick", "attemptSwitchWorld()");
+            tempButton.style.width = "100%";
             tempElement.appendChild(tempButton);
         }
         tempButton = document.createElement('button');
         tempButton.id="craftPickaxe" + (j + 1);
         tempButton.setAttribute("onclick", "craftPickaxe(" + (j + 1) + ")");
+        tempButton.style.width = "100%";
         if (pickaxes[j + 1][1]) {
             tempButton.innerHTML = "Equip!";
         } else
             tempButton.innerHTML = "Craft!";
         tempElement.appendChild(tempButton);
-        
         recipeElements[0].push(tempElement);
     }
    }
@@ -626,11 +633,14 @@ for (let i = 0; i < worlds.length; i++) {
         recipeList.forEach(relation => {
             let ore = relation[0];
             let amtNeeded = relation[1];
-            let amtHave = oreList[ore][1][0];
+            let amtHave = oreList[ore]["normalAmt"];
             let element = document.createElement('p');
             element.id = (ore + ("gearRecipe" + (j) + "Display"));
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
             element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
+            let colors = getBackgroundColor(oreList[ore]["oreTier"]);
+            element.style.backgroundColor = colors["backgroundColor"];
+            element.style.margin = "0px";
             if (amtHave >= amtNeeded)
                 element.style.color = "green";
             else
@@ -644,6 +654,7 @@ for (let i = 0; i < worlds.length; i++) {
             tempButton.innerHTML = "Owned!";
         else
             tempButton.innerHTML = "Craft!";
+        tempButton.style.width = "100%";
         tempElement.appendChild(tempButton);
         recipeElements[1].push(tempElement);
     }
@@ -657,7 +668,7 @@ function updateActiveRecipe() {
             let ore = currentRecipe[2][i][0];
             if (oreList[ore] != undefined) {
                 let needed = currentRecipe[2][i][1];
-                let amtOwned = oreList[ore][1][0];
+                let amtOwned = oreList[ore]["normalAmt"];
                 recipe[i].innerText = ore + " " + amtOwned.toLocaleString() + "/" + needed.toLocaleString();
                 if(amtOwned >= needed)
                     recipe[i].style.color = "green";
@@ -680,14 +691,14 @@ function craftPickaxe(num) {
     if (!(pickaxes[num][1])) {
         let recipeList = list[num - sub];
         for (let i = 0; i < recipeList.length; i++) {
-            if (!(oreList[recipeList[i][0]][1][0] >= recipeList[i][1])) {
+            if (!(oreList[recipeList[i][0]]["normalAmt"] >= recipeList[i][1])) {
                 canCraft = false;
                 break;
             }
         }
         if (canCraft) {
             for (let i = 0; i < recipeList.length; i++) {
-                oreList[recipeList[i][0]][1][0] -= recipeList[i][1];
+                oreList[recipeList[i][0]]["normalAmt"] -= recipeList[i][1];
                 updateInventory(recipeList[i][0], 1);
             }
             let temp = document.getElementById("craftPickaxe" + num);
@@ -710,14 +721,14 @@ function craftGear(num) {
     list = list[num - sub];
     if (!(gears[num])) {
         for (let i = 0; i < list.length; i++) {
-            if (!(oreList[list[i][0]][1][0] >= list[i][1])) {
+            if (!(oreList[list[i][0]]["normalAmt"] >= list[i][1])) {
                 canCraft = false;
                 break;
             }
         }
         if (canCraft) {
             for (let i = 0; i < list.length; i++) {
-                oreList[list[i][0]][1][0] -= list[i][1];
+                oreList[list[i][0]]["normalAmt"] -= list[i][1];
                 updateInventory(list[i][0], 1);
             }
             if (num === 9) {
@@ -769,7 +780,7 @@ function switchWorldCraftables() {
         }
         for (let i = gearStartNum; i < gearStartNum + worldOneGears.length; i++) {
             if (i - gearStartNum === 9) {
-                if (oreList["🎂"][1][0] > 0 || gears[9]) 
+                if (oreList["🎂"]["normalAmt"] > 0 || gears[9]) 
                     elements[i].style.display = "block";
             } else {
                 elements[i].style.display = "block";

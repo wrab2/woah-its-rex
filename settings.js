@@ -315,13 +315,13 @@ let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";
-        if (oreList[property][1][3]) {
+        if (oreList[property]["explosiveAmt"]) {
             parentObject.style.backgroundImage = "linear-gradient(to bottom right, #c91800, #ff722b, #383838)";
-        } else if (oreList[property][1][2]) {
+        } else if (oreList[property]["radioactiveAmt"]) {
             parentObject.style.backgroundImage = "linear-gradient(to bottom right, #062404, #c9fc3a, #062404)";
-        } else if (oreList[property][1][1]) {
+        } else if (oreList[property]["electrifiedAmt"]) {
             parentObject.style.backgroundImage = "linear-gradient(to bottom right, #f7f368, #ffc629, #e365fc)";
-        } else if (oreList[property][1][0]) {
+        } else if (oreList[property]["normalAmt"]) {
             parentObject.style.backgroundColor = "green";
         } else {
             parentObject.style.backgroundColor = "red";
@@ -335,7 +335,7 @@ function createIndexCards(layer, property) {
         let oreRarity = document.createElement("p");
         oreRarity.style.fontSize = "1.25vw";
         oreRarity.style.fontWeight = "bold";
-        oreRarity.innerHTML = "1/" + (Math.round(1/layer[property])).toLocaleString() + " base rarity.";
+        oreRarity.innerHTML = "1/" + oreList[property]["numRarity"].toLocaleString() + " base rarity.";
         parentObject.appendChild(oreRarity);
         //ADD RARITY WITH LUCK TO CARD
         let oreRarityLuck;
@@ -343,11 +343,11 @@ function createIndexCards(layer, property) {
         oreRarityLuck.style.fontSize = "1.25vw";
         oreRarityLuck.style.fontWeight = "bold";
         if (allCaves.includes(layer)) {
-            let rarity = layer[property];
-            rarity /= getCaveMultiFromOre(property);
-            oreRarityLuck.innerHTML = "1/" + Math.round(1/rarity).toLocaleString() + " adjusted.";
+            let rarity = oreList[property]["numRarity"];
+            rarity *= getCaveMultiFromOre(property);
+            oreRarityLuck.innerHTML = "1/" + rarity.toLocaleString() + " adjusted.";
         } else {
-            oreRarityLuck.innerHTML = "1/" + (Math.round(1/(layer[property] * verifiedOres.getCurrentLuck()))).toLocaleString() + " with luck.";
+            oreRarityLuck.innerHTML = "1/" + (oreList[property]["numRarity"] * verifiedOres.getCurrentLuck()).toLocaleString() + " with luck.";
         }
         parentObject.appendChild(oreRarityLuck);
     

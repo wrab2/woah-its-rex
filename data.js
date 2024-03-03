@@ -20,7 +20,7 @@ function saveAllData() {
     ];
     
     for (let propertyName in oreList)
-        dataStorage[0].push([propertyName, [oreList[propertyName][1]]]);
+        dataStorage[0].push([propertyName, [[oreList[propertyName]["normalAmt"], oreList[propertyName]["electrifiedAmt"], oreList[propertyName]["radioactiveAmt"], oreList[propertyName]["explosiveAmt"]]]]);
     dataStorage[1].push([pickaxes, currentPickaxe]);
     dataStorage[2].push(totalMined);
     dataStorage[3].push(
@@ -58,9 +58,16 @@ function loadAllData() {
     localStorage.setItem("dataBackup", localStorage.getItem("playerData"));
     try {
         const data = JSON.parse(localStorage.getItem("playerData"));
+        console.log(data);
         for (let i = 0; i < data[0].length; i++) {
-            if (oreList[data[0][i][0]] !== undefined)
-                oreList[data[0][i][0]][1] = data[0][i][1][0];
+            if (oreList[data[0][i][0]] !== undefined) {
+                console.log(data[0][i][1][0]);
+                oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];
+                oreList[data[0][i][0]]["electrifiedAmt"] = data[0][i][1][0][1];
+                oreList[data[0][i][0]]["radioactiveAmt"] = data[0][i][1][0][2];
+                oreList[data[0][i][0]]["explosiveAmt"] = data[0][i][1][0][3];
+            }
+                
         }
         for (let i = 0; i < data[1][0][0].length; i++)
             if(pickaxes[i] != undefined)
@@ -71,8 +78,9 @@ function loadAllData() {
         for (let propertyName in oreList) {
             if (document.getElementById(propertyName + "1") !== null) {
                 for (let i = 1; i < 5; i++) {
+                    console.log(propertyName);
                     updateInventory(propertyName, i);
-                    if (oreList[propertyName][1][i - 1] > 0)
+                    if (oreList[propertyName][variantInvNames[i-1]] > 0)
                         document.getElementById(propertyName + i).style.display = "block";
                 }
             }
@@ -186,7 +194,7 @@ function loadAllData() {
                 for (let i = 0; i < data[4][0].length; i++)
                     gears[i] = data[4][0][i];
             }
-        if (oreList["🎂"][1][0] > 0 || gears[9])
+        if (oreList["🎂"]["normalAmt"] > 0 || gears[9])
             document.getElementById("sillyRecipe").style.display = "block";
         localStorage.removeItem("dataBackup");
         return true;
