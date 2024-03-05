@@ -802,7 +802,7 @@ function pickaxeAbility19(x, y, reps, boost) {
     for (let i = 0; i < 4; i++) {
         if (newOrigins[i] != undefined) {
             reps++;
-            pickaxeAbility16(newOrigins[i][1], newOrigins[i][0], reps, boost)
+            pickaxeAbility19(newOrigins[i][1], newOrigins[i][0], reps, boost)
         }
     }
     setTimeout(() => {
