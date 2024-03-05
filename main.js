@@ -143,7 +143,7 @@ function movePlayer(dir, reps) {
                             mine[curY][curX] = "⚪";
                             curY++;
                             setLayer(curY);
-                            mineBlock(curX, curY, "mining", 1);
+                            mineBlock(curX, curY, "mining", 1000000);
                             createMineIndexes();
                             mine[curY][curX] = "⛏️";
                             lastDirection = "s";
@@ -217,24 +217,20 @@ document.addEventListener('keydown', (event) => {
             break;
         case "arrowup":
             event.preventDefault();
-            validInput = true;
-            name = "w";
-            break;
+            goDirection('w')
+            return;
         case "arrowleft":
             event.preventDefault();
-            validInput = true;
-            name = "a";
-            break;
+            goDirection('w')
+            return;
         case "arrowdown":
             event.preventDefault();
-            validInput = true;
-            name = "s";
-            break;
+            goDirection('s')
+            return;
         case "arrowright":
             event.preventDefault();
-            validInput = true;
-            name = "d";
-            break;
+            goDirection('d')
+            return;
         case "escape":
             if (document.getElementById("settingsContainer").style.display === "block") 
                 hideSettings();

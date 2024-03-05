@@ -396,27 +396,28 @@ button, .col-3 > div > button {
   color: #fff;
 }
 .settingsCategorySelector {
-  display: block;
-  margin: 10px 0;
-  padding: 10px;
-  width: 20em;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 2vh;
-  height: 4em;
+   display: block;
+   padding: 10px;
+   width: 25em;
+   background-color: #333;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 2vh;
+   height: 3em;
+   margin: auto;
+   margin-top: 14px;
 }
 .settingsCategorySelector:hover {
   background-color: #2e2e2e;
 }
 .frame {
+  text-align: center;
   display: none;
-  margin-top: 2%;
-  margin-left: 1%;
   width: 100%;
-
+  margin: auto;
+  margin-top: 35px;
 }
 
 .frame h2 {
@@ -502,15 +503,15 @@ button, .col-3 > div > button {
 }
 
 .inputAndButton {
-  vertical-align: middle;
-  border-style: solid;
-  border-color: white;
-  height: 3%;
-  margin: 10px;
-  width: 25%;
-  background-color: white;
-  border-radius: 20px;
-  border-width:1px;
+   border-style: solid;
+   border-color: white;
+   height: 4%;
+   margin: auto;
+   width: 37.5%;
+   background-color: white;
+   border-radius: 20px;
+   border-width: 1px;
+   margin-top: 0.5em;
 }
 .inputButton {
   width: 50%;
@@ -562,6 +563,7 @@ button, .col-3 > div > button {
   height:100%;
   text-align: center;
   padding: 1px;
+  font-size: 0.85vw;
 }
 .roundedLeft {
   float:left;
@@ -578,6 +580,7 @@ button, .col-3 > div > button {
   border-radius: 20px;
   border-style: solid;
   padding: 1px;
+  font-size: 16px
 }
 .twoButtons {
   width: 37.5%!important;
@@ -591,25 +594,27 @@ button, .col-3 > div > button {
   vertical-align: middle;
 }
 #indexSwitchButton {
-  width: 10em;
-  height: 2em;
+  width: 11.9em;
+  height: 2.4em;
   border-radius: 0px;
   background-color: #3d3c3c;
   border-style: solid;
   border-width: 2px;
-  float: left;
-  text-align: center;
-  margin-left: 0.45%;
-  font-size: 100%;
+  font-size: 125%;
+  margin: auto;
+  padding: 0.38em;
 }
 .indexDirectionButton {
-  width: 4em;
-  height: 2em;
-  border-radius: 0px;
-  border-width: 2px;
-  float: left;
-  font-size: 100%;
-  background-color: #333;
+   width: 5em;
+   height: 3em;
+   border-radius: 0px;
+   border-width: 2px;
+   font-size: 100%;
+   background-color: #333;
+   margin-left: 7.25em;
+   margin-right: 6.625em;
+   position: relative;
+   top: -47.5;
 }
 .indexDirectionButton:hover {
   background-color: #2e2e2e;
@@ -651,14 +656,4 @@ button, .col-3 > div > button {
 
   50% {background-color:lightgreen;}
   100% {background-color:white;}
-}
-@keyframes flashRed {
-  0% {background-color:white;}
-  50% {background-color:red;}
-  100% {background-color:white;}
-}
-@keyframes inventoryFlash {
-  0% {background-color:#1a1a1a;}
-  50% {background-color:lightgreen;}
-  100% {background-color:#1a1a1a;}
 }

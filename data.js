@@ -76,7 +76,6 @@ function loadAllData() {
         for (let propertyName in oreList) {
             if (document.getElementById(propertyName + "1") !== null) {
                 for (let i = 1; i < 5; i++) {
-                    console.log(propertyName);
                     updateInventory(propertyName, i);
                     if (oreList[propertyName][variantInvNames[i-1]] > 0)
                         document.getElementById(propertyName + i).style.display = "block";

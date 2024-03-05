@@ -7,6 +7,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 let invToIndex = true;
 let craftingToIndex = true;
 let usePathBlocks = true;
+let useDisguisedChills = false;
 
 function openFrame(frameId) {
     document.querySelectorAll('.frame').forEach(frame => {
@@ -302,7 +303,7 @@ function switchLayerIndex(num, overrideNum, world) {
     let oreIndexCards = [];
     for (let propertyName in layerToIndex) {
         if (layerToIndex[propertyName] < 1/1) {
-            if (ignoreList.indexOf(propertyName) === -1) {
+            if (ignoreList.indexOf(propertyName) === -1 || indexHasOre(propertyName)) {
                 oreIndexCards.push(createIndexCards(layerToIndex, propertyName))
             }
         }
@@ -361,7 +362,7 @@ function randomFunction(text, cause) {
         let ore = text.substring(0, text.indexOf(" "));
         if (ore === "❤️‍🔥")
             return;
-        if (ignoreList.indexOf(ore) === -1) {
+        if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {
             for (let i = 0; i < worldOneLayers.length; i++) {
                 if (worldOneLayers[i][ore] != undefined) {
                     num = i;
@@ -400,6 +401,10 @@ function randomFunction(text, cause) {
             }
         }
     }
+}
+
+function indexHasOre(ore) {
+    return (oreList[ore]["normalAmt"] || oreList[ore]["electrifiedAmt"] || oreList[ore]["radioactiveAmt"] || oreList[ore]["explosiveAmt"]);
 }
 function switchToIndex(button, num) {
     if (num === 0) {
