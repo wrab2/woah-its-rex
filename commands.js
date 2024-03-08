@@ -1,5 +1,6 @@
 
 function adminGiveOres(block, amt) {
+if (debug) {
     if (amt === undefined)
         amt = 100;
     if (block === undefined) {
@@ -13,7 +14,9 @@ function adminGiveOres(block, amt) {
         updateInventory(block, 1);
     }
 }
+}
 function adminGivePickaxe(num) {
+if (debug) {
     if (num === undefined) {
         for (let i = 0; i < pickaxes.length; i++) {
             pickaxes[i][1] = true;
@@ -22,7 +25,9 @@ function adminGivePickaxe(num) {
         pickaxes[num][1] = true;
     }
 }
+}
 function adminGiveGear(num) {
+if (debug) {
     if (num === undefined) {
         for (let i = 0; i < gears.length; i++) {
             gears[i] = true;
@@ -31,7 +36,9 @@ function adminGiveGear(num) {
         gears[num] = true;
     }
 }
+}
 function adminRemovePickaxe(num) {
+if (debug) {
     if (num === undefined) {
         for (let i = 0; i < pickaxes.length; i++) {
             pickaxes[i][1] = false;
@@ -40,7 +47,9 @@ function adminRemovePickaxe(num) {
         pickaxes[num][1] = false;
     }
 }
+}
 function adminRemoveGear(num) {
+if (debug) {
     if (num === undefined) {
         for (let i = 0; i < gears.length; i++) {
             gears[i] = false;
@@ -48,6 +57,7 @@ function adminRemoveGear(num) {
     } else {
         gears[num] = false;
     }
+}
 }
 let allGearNames = [
     "Ore Tracker",
@@ -73,6 +83,7 @@ let allGearNames = [
     "NYI",
 ]
 function adminListNums() {
+    if (debug) {
     let output = "";
     for (let i = 0; i < allPickaxeNames.length; i++) {
         output += allPickaxeNames[i] + " " + (i+1) + "\n";
@@ -82,12 +93,14 @@ function adminListNums() {
         output += allGearNames[i] + " " + i + "\n";
     }
     console.log(output);
+    }
 }
 function adminGetHelp() {
+    if (debug) {
     console.log("adminGiveOres(block, amt) - Block is the block you want, enter undefined without quotes for all blocks, else put block in quotes. Amt is the amount, leave blank for 100.");
     console.log("adminGivePickaxe(num) - Num is the pickaxe you want to receive, leave blank for all.");
     console.log("adminRemovePickaxe(num) - Num is the pickaxe you want to delete, leave blank for all.");
     console.log("adminGiveGear(num) - Num is the gear you want to receive, leave blank for all.");
     console.log("adminRemoveGear(num) - Num is the gear you want to delete, leave blank for all.");
     console.log("adminListNums() - Lists all the numbers for specific pickaxes and gears.")
-}
+}}

@@ -62,7 +62,7 @@ function checkAllAround(x, y, luck) {
     }
     if (blocksRevealedThisReset >= mineCapacity) {
         canMine = false;
-        gearAbility3();
+        //gearAbility3();
         clearInterval(loopTimer);
         blocksRevealedThisReset = 0;
         setTimeout(() => {
@@ -140,8 +140,7 @@ function giveBlock(type, x, y, fromReset, fromCave) {
             inv = 4;
         if (!fromCave) {
             if (currentWorld === 1 && gears[4]) {
-                let block = Object.keys(currentLayer);
-                block = block[block.length - 1];
+                let block = currentLayer.slice(-1);
                 oreList[block][variantInvNames[inv - 1]]++;
                 updateInventory(block, 1);
             }
@@ -176,33 +175,28 @@ function giveBlock(type, x, y, fromReset, fromCave) {
     }
 }
 
+let cat = 1;
+let generationProbabilities;
+let cumulativeGenerations;
 function generateBlock(luck, location) {
-    luck += (gears[18] ? 0.75 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
-    luck *= gears[20] ? ((verifiedOres.getLuckBoosts()[currentPickaxe] * 0.05) + 1) : 1;
-    if (currentWorld === 1)
-        luck *= (gears[1] ? 1.1 : 1) * (gears[5] ? 1.6 : 1);
     blocksRevealedThisReset++;
     let probabilityTable = currentLayer;
-    if (location[0] === 1 && currentWorld === 1)
-        probabilityTable = specialLayers[2];
-    if (currentWorld === 2) {
-        if (Math.random < 1/444400000000000)
-            return ["🍀", true]
-        if (location[0] === 10000 && currentWorld === 2)
-            probabilityTable = specialLayers[3];
+    if (location[0] === 1 && currentWorld === 1) {
+        probabilityTable = layerList[specialLayers[2]];
     }
-    let blockToGive = "";
-    let summedProbability = 0;
-    let chosenValue = Math.random();
-    chosenValue /= luck;
+    if (currentWorld === 2) {
+        if (location[0] === 10000 && currentWorld === 2)
+            probabilityTable = layerList[specialLayers[3]];
+    }
     if ((location[0] === 0 && currentWorld === 1) || (location[0] === 2000 && currentWorld === 2))
         return ["🟩", false];
-    
-    for (let propertyName in probabilityTable) {
-        summedProbability += oreList[propertyName]["decimalRarity"];
-        //summedProbability += probabilityTable[propertyName];
-        if (chosenValue < summedProbability) {
-            blockToGive = propertyName;
+
+    let blockToGive = "";
+    let chosenValue = Math.random();
+    chosenValue /= debug ? cat : luck;
+    for (let i = 0; i < probabilityTable.length; i++) {
+        if (chosenValue <= oreList[probabilityTable[i]]["decimalRarity"]) {
+            blockToGive = probabilityTable[i];
             break;
         }
     }
@@ -218,6 +212,24 @@ function generateBlock(luck, location) {
     return [blockToGive, hasLog];
 }
 
+function calculateCumulativeProbabilities() {
+    let cumulativeProbability = 0;
+    let cumulativeProbabilities = [];
+    let j = 0; 
+    for (let i = currentLayer.length - 1; i >= 0; i--) {
+        cumulativeProbability -= (oreList[currentLayer[i]]["decimalRarity"]);
+        cumulativeProbabilities[j] = cumulativeProbability;
+        j++;
+    }
+
+    const totalProbability = cumulativeProbability;
+    for (let i = 0; i < cumulativeProbabilities.length; i++) {
+        cumulativeProbabilities[i] /= totalProbability;
+    }
+    
+    cumulativeGenerations = totalProbability;
+    return cumulativeProbabilities;
+} 
 function stopMining() {
     curDirection = "";
     clearInterval(loopTimer);
@@ -247,7 +259,7 @@ function switchDistance() {
             y = 1000;
             distanceMulti = 1;
         }
-        let layer = Object.keys(allLayers[Math.floor(y / 2000)]);
+        let layer = layerList[allLayers[Math.floor(y / 2000)]].slice(-1);
         layer = layer[layer.length - 1];   
         let sub = currentWorld === 2 ? 2000 : 0;
         document.getElementById("meterDisplay").innerHTML = layer + " " + (y - sub).toLocaleString() + "m";
@@ -358,6 +370,7 @@ function switchWorld() {
     switchDistance();
     displayArea();
     switchWorldCraftables();
+    calculateCat();
     canMine = true;
 }
 

@@ -14,9 +14,10 @@ let oreList = {
     '✨': { 'decimalRarity': 1 / 240800000, 'numRarity': 240800000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Unfathomable', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '⛄': { 'decimalRarity': 1 / 183640000, 'numRarity': 183640000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Unfathomable', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
-    '🌳': { 'decimalRarity': 1 / 9250000000, 'numRarity': 9250000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 1, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+
+
+    '🍓': { 'decimalRarity': 1 / 560000000000, 'numRarity': 560000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🌳': { 'decimalRarity': 1 / 9250000000, 'numRarity': 9250000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '💐': { 'decimalRarity': 1 / 3750000000, 'numRarity': 3750000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🥬': { 'decimalRarity': 1 / 2000000000, 'numRarity': 2000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🥗': { 'decimalRarity': 1 / 800000000, 'numRarity': 800000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Otherworldly', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -30,8 +31,9 @@ let oreList = {
     '🌻': { 'decimalRarity': 1 / 9500000, 'numRarity': 9500000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🌻 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🍁': { 'decimalRarity': 1 / 8900000, 'numRarity': 8900000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🍁 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+
+
+    "🏯": { 'decimalRarity': 1 / 430000000000, 'numRarity': 430000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🏰': { 'decimalRarity': 1 / 8888888888, 'numRarity': 8888888888, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🌇': { 'decimalRarity': 1 / 4300000000, 'numRarity': 4300000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🥉': { 'decimalRarity': 1 / 444444444, 'numRarity': 444444444, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Unfathomable', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -46,8 +48,9 @@ let oreList = {
     '🪚': { 'decimalRarity': 1 / 9600000, 'numRarity': 9600000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🪚 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🪜': { 'decimalRarity': 1 / 7950000, 'numRarity': 7950000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🪜 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+
+
+    "🦚": { 'decimalRarity': 1 / 245000000000, 'numRarity': 245000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🚿': { 'decimalRarity': 1 / 6000000000, 'numRarity': 6000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '👁️': { 'decimalRarity': 1 / 1920000000, 'numRarity': 1920000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '💸': { 'decimalRarity': 1 / 754000000, 'numRarity': 754000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Otherworldly', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -61,8 +64,9 @@ let oreList = {
     '🪄': { 'decimalRarity': 1 / 9460000, 'numRarity': 9460000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🪄 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🎭': { 'decimalRarity': 1 / 7650000, 'numRarity': 7650000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎭 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+
+
+    "👽": { 'decimalRarity': 1 / 750000000000, 'numRarity': 750000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🐋': { 'decimalRarity': 1 / 8000000000, 'numRarity': 8000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '💫': { 'decimalRarity': 1 / 2000000000, 'numRarity': 2000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🪩': { 'decimalRarity': 1 / 999999999, 'numRarity': 999999999, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Otherworldly', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -76,8 +80,9 @@ let oreList = {
     '🎣': { 'decimalRarity': 1 / 8230000, 'numRarity': 8230000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎣 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '⛵': { 'decimalRarity': 1 / 7895000, 'numRarity': 7895000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⛵ Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+
+
+    "🪤": { 'decimalRarity': 1 / 800000000000, 'numRarity': 800000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🏔️': { 'decimalRarity': 1 / 5500000000, 'numRarity': 5500000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🌈': { 'decimalRarity': 1 / 2750000000, 'numRarity': 2750000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🧊': { 'decimalRarity': 1 / 583000000, 'numRarity': 583000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Unfathomable', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -91,8 +96,9 @@ let oreList = {
     '⚜️': { 'decimalRarity': 1 / 6250000, 'numRarity': 6250000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⚜️ Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '💠': { 'decimalRarity': 1 / 6000000, 'numRarity': 6000000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '💠 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+
+
+    "🤖": { 'decimalRarity': 1 / 640000000000, 'numRarity': 640000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '⚠️': { 'decimalRarity': 1 / 6666666666, 'numRarity': 6666666666, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🎆': { 'decimalRarity': 1 / 3000000000, 'numRarity': 3000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🧀': { 'decimalRarity': 1 / 618000001, 'numRarity': 618000001, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Unfathomable', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -106,8 +112,7 @@ let oreList = {
     '⚗️': { 'decimalRarity': 1 / 9750000, 'numRarity': 9750000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⚗️ Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🧪': { 'decimalRarity': 1 / 7500000, 'numRarity': 7500000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🧪 Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+    "🦴": { 'decimalRarity': 1 / 175000000000, 'numRarity': 175000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🐪': { 'decimalRarity': 1 / 7800000000, 'numRarity': 7800000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🏵️': { 'decimalRarity': 1 / 2600000000, 'numRarity': 2600000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🪐': { 'decimalRarity': 1 / 709000750, 'numRarity': 709000750, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Unfathomable', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -121,8 +126,9 @@ let oreList = {
     '⚱️': { 'decimalRarity': 1 / 7467000, 'numRarity': 7467000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⚱️ Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🖍️': { 'decimalRarity': 1 / 6800000, 'numRarity': 6800000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🖍️ Has Spawned!', 'oreTier': 'Transcendent', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
-    
-    
+
+
+    "🎩": { 'decimalRarity': 1 / 300500000000, 'numRarity': 300500000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '💵': { 'decimalRarity': 1 / 8900000000, 'numRarity': 8900000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🪅': { 'decimalRarity': 1 / 3250000000, 'numRarity': 3250000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '👀': { 'decimalRarity': 1 / 955200890, 'numRarity': 955200890, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Otherworldly', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -342,356 +348,32 @@ let oreList = {
 }
 let variantInvNames = ["normalAmt", "electrifiedAmt", "radioactiveAmt", "explosiveAmt"];
 //ALL LAYERS
-const dirtLayer = {
-    //"🍓": 1/560000000000,
-    "🌳": 1/9250000000,
-    //"😻": 1/5000000005,
-    "💐": 1/3750000000,
-    "🥗": 1/800000000,
-    "🌪️": 1/247010000,
-    "🌏": 1/213200000,
-    //"⛄": 1/183640000,
-    "🌲": 1/71000000,
-    "🎃": 1/69000000,
-    "🎍": 1/35000000,
-    "🎄": 1/12500000,
-    "🪵": 1/10000000,
-    "🌻": 1/9500000,
-    "🍁": 1/8900000,
-    "🟫": 1/1
-},
-
-dirtLayer2 = {
-    //"🍓": 1/560000000000,
-    "🌳": 1/9250000000,
-    //"😻": 1/5000000005,
-    "💐": 1/3750000000,
-    "🥬": 1/2000000000,
-    "🥗": 1/800000000,
-    "🌪️": 1/247010000,
-    "🌏": 1/213200000,
-    //"⛄": 1/183640000,
-    "🌲": 1/71000000,
-    "🎃": 1/69000000,
-    "🎍": 1/35000000,
-    "🎄": 1/12500000,
-    "🪵": 1/10000000,
-    "🌻": 1/9500000,
-    "🍁": 1/8900000,
-    "🟫": 1/1
-},
-
-brickLayer = {
-    //"🏯": 1/430000000000,
-    "🏰": 1/8888888888,
-    //"😻": 1/5000000005,
-    "🌇": 1/4300000000,
-    "🥉": 1/444444444,
-    "🪞": 1/426800050,
-    "🔩": 1/420836000,
-    //"⛄": 1/183640000,
-    "🧲": 1/43500000,
-    "🪬": 1/37000000,
-    "🧨": 1/31500000,
-    "🔗": 1/25000000,
-    "🪙": 1/15000000,
-    "🗿": 1/12000000,
-    "🪚": 1/9600000,
-    "🪜": 1/7950000,
-    "🧱": 1/1
-},
-
-foggyLayer = {
-    //"🦚": 1/245000000000,
-    "❤️‍🔥" : 1/50000000000,
-    "🚿": 1/6000000000,
-    //"😻": 1/5000000005,
-    "👁️": 1/1920000000,
-    "💸": 1/754000000,
-    "⌛": 1/750000000,
-    "🧵": 1/201061929,
-    //"⛄": 1/183640000,
-    "🕯️": 1/62500000,
-    "🕋": 1/55000000,
-    "🎨": 1/44000000,
-    "🎴": 1/13450000,
-    "🥽": 1/12350000,
-    "🪄": 1/9460000,
-    "🎭": 1/7650000,
-    "🌫️": 1/1
-},
-
-waterLayer = {
-    //"👽": 1/750000000000,
-    "🐋": 1/8000000000,
-    //"😻": 1/5000000005,
-    "💫": 1/2000000000,
-    "🪩": 1/999999999,
-    "👿": 1/750000000,
-    "🌀": 1/618000000,
-    //"⛄": 1/183640000,
-    "🔱": 1/70000000,
-    "👑": 1/65000000,
-    "🐟": 1/26000000,
-    "🫧": 1/8750000,
-    "🤿": 1/8670000,
-    "🎣": 1/8230000,
-    "⛵": 1/7895000,
-    "🌊": 1/1
-},
-
-rockLayer = {
-    //"🪤": 1/800000000000,
-    "🏔️": 1/5500000000,
-    //"😻": 1/5000000005,
-    "🌈": 1/2750000000,
-    "🧊": 1/583000000,
-    "❄️": 1/386500000,
-    //"🏝️": 1/275320000,
-    //"✨": 1/240800000,
-    //"⛄": 1/183640000,
-    "💎": 1/170000000,
-    "☄️": 1/72500000,
-    "🔮": 1/60000000,
-    "🔋": 1/36000000,
-    "💍": 1/15000000,
-    "🥏": 1/8000000,
-    "⚜️": 1/6250000,
-    "💠": 1/6000000,
-    "🪨": 1/1
-},
-
-radioactiveLayer = {
-    //"🤖": 1/640000000000,
-    "⚠️": 1/6666666666,
-    //"😻": 1/5000000005,
-    "🎆": 1/3000000000,
-    "🧀": 1/618000001,
-    "🌌": 1/550000000,
-    "🥀": 1/538000000,
-    //"⛄": 1/183640000,
-    "🎇": 1/67500000,
-    "🔳": 1/46000000,
-    "⏹️": 1/29000000,
-    "🧩": 1/14500000,
-    "🔔": 1/12250000,
-    "⚗️": 1/9750000,
-    "🧪": 1/7500000,
-    "☢️": 1/1
-},
-
-cactusLayer = {
-    //"🦴" : 1/175000000000,
-    "💗": 1/150000000000,
-    "🐪": 1/7800000000,
-    //"😻": 1/5000000005,
-    "🏵️": 1/2600000000,
-    "🪐": 1/709000750,
-    "💥": 1/375000000,
-    //"⛄": 1/183640000,
-    "🔥": 1/160000000,
-    "🔆": 1/75000000,
-    "⭐": 1/70600600,
-    "🎀": 1/31000000,
-    "🗡️": 1/13000000,
-    "📟": 1/8750000,
-    "⚱️": 1/7467000,
-    "🖍️": 1/6800000,
-    "🌵": 1/1
-},
-
-paperLayer = {
-    //"🎩" : 1/300500000000,
-    "💵": 1/8900000000,
-    //"😻": 1/5000000005,
-    "🪅": 1/3250000000,
-    "👀": 1/955200890,
-    "🌟": 1/257280000,
-    "📝": 1/200000000,
-    //"⛄": 1/183640000,
-    "⌚": 1/52000000,
-    "🗜️": 1/42000000,
-    "🏆": 1/38000000,
-    "🎲": 1/7777777,
-    "✂️": 1/7000000,
-    "🃏": 1/5500000,
-    "⚙️": 1/5000000,
-    "📰": 1/1
-},
-
-worldOneCommons = {
-    "🤍": 1/2000000,
-    "🖤": 1/1750000,
-    "🤎": 1/1500000,
-    "💜": 1/1250000,
-    "❤️": 1/1000000,
-    "🧡": 1/950000,
-    "💛": 1/900000,
-    "💙": 1/800000,
-    "💚": 1/750000,
-    "⚫": 1/100,
-    "🟤": 1/90,
-    "🟣": 1/80,
-    "🔴": 1/70,
-    "🟠": 1/60,
-    "🟡": 1/55,
-    "🔵": 1/50,
-    "🟢": 1/45,
-    "🟪": 1/40,
-    "🟥": 1/35,
-    "🟧": 1/30,
-},
-
-sillyLayer = {
-    "🎉" : 1/1000000000000,
-    "🧌": 1/696969696969,
-    "♾️": 1/75000000000,
-    "💅": 1/11201200200,
-    "😁": 1/9000000000,
-    "🪢": 1/8181818181,
-    "🫃": 1/6600000000,
-    //"⛄": 1/183640000,
-    "🎂": 1/1
-},
-
-fluteLayer = {
-    "🫶": 1/1000000000000,
-    "🪈": 1/1
-},
-cloudLayer = {
-    "☘️" : 1/33300000000000,
-    "🪽" : 1/260000000000,
-    "🍃" : 1/13500000000,
-    "🪶" : 1/2060000000,
-    "🌦️" : 1/275000000,
-    "🌩️" : 1/175000000,
-    "⛈️" : 1/74000000,
-    "🪁" : 1/45500000,
-    "🪂" : 1/30000000,
-    "🌨️" : 1/25000000,
-    "🌥️" : 1/14400000,
-    "🌤️" : 1/7800000,
-    "🌧️" : 1/7000000,
-    "🎐" : 1/5500000,
-    "☁️" : 1/1,
-},
-
-tvLayer = {
-    "☘️" : 1/33300000000000,
-    "🔫" : 1/615000000000,
-    "👾" : 1/9000000000,
-    "🏹" : 1/4210000000,
-    "💣" : 1/771100000,
-    "🔨" : 1/540000000,
-    "🪓" : 1/82000000,
-    "🪃" : 1/12210000,
-    "🛡️" : 1/9980000,
-    "📺" : 1/1,
-},
-
-doorLayer = {
-    "☘️" : 1/33300000000000,
-    "🗝️" : 1/420000000000,
-    "🪝" : 1/75000000000, //75b
-    "🪡" : 1/23000000000, //23b
-    "🛎️" : 1/4730000000,
-    "🚧" : 1/1100000000,
-    "⛓️" : 1/345000000,
-    "🔏" : 1/243800000,
-    "🖇️" : 1/31337000,
-    "🔑" : 1/12700000,
-    "🔒" : 1/9900000,
-    "🚪" : 1/1,
-},
-
-globeLayer = {
-    "☘️" : 1/33300000000000,
-    "💰" : 1/857000000000,
-    "🚽" : 1/20240000000,
-    "📽️" : 1/3780000000,
-    "🧂" : 1/1337000000,
-    "🔪" : 1/632000000,
-    "💔" : 1/155000000,
-    "🍆" : 1/69696969,
-    "🖱️" : 1/11101000,
-    "⌨️" : 1/10010000,
-    "💻" : 1/6320000,
-    "🌐" : 1/1,
-}, 
-
-chessLayer = {
-    "☘️" : 1/33300000000000,
-    "⚖️" : 1/123456654321,
-    "🎓" : 1/7900000000, //7.9b
-    "📍" : 1/4321000000,
-    "📌" : 1/1230000000,
-    "🔎" : 1/725000000,
-    "🖊️" : 1/165000000,
-    "📚" : 1/48100000,
-    "📐" : 1/34000000,
-    "📖" : 1/16000000,
-    "🧠" : 1/15500000,
-    "✏️" : 1/8200000,
-    "♟️" : 1/1,
-},
-
-barrierLayer = {
-    "☘️" : 1/33300000000000,
-    "✴️" : 1/20000,
-    "✖️" : 1/1
-},
-
-borderLayer = {
-    "☘️" : 1/33300000000000,
-    "🩸" : 1/13000000000000,
-    "🚫" : 1/666666666666,
-    "💢" : 1/26000000000,
-    "🔇" : 1/3300000000,
-    "🛑" : 1/1000000000,
-    "⭕" : 1/600000000,
-    "🔕" : 1/225000000,
-    "❌" : 1/1,
-},  
-
-worldTwoCommons = {
-    "📘" : 1/1900000,
-    "📙" : 1/1500500,
-    "📕" : 1/1230560,
-    "📗" : 1/854000,
-    "⏏️" : 1/300000,
-    "▶️" : 1/250000,
-    "⏸️" : 1/200000,
-    "⏯️" : 1/175000,
-    "⏺️" : 1/100000,
-    "⏭️" : 1/90000,
-    "⏮️" : 1/75000,
-    "⏩" : 1/70000,
-    "⏪" : 1/60000,
-    "⏬" : 1/50000,
-    "⏫" : 1/25000,
-    "◀️" : 1/20000,
-    "🔼" : 1/17500,
-    "🔽" : 1/15000,
-    "➡️" : 1/10000,
-    "↖️" : 1/9000,
-    "↘️" : 1/5000,
-    "⬇️" : 1/3000,
-    "⬆️" : 1/2500,
-    "⬅️" : 1/1750,
-    "↪️" : 1/1500,
-    "↩️" : 1/1250,
-    "⤴️" : 1/1000,
-    "⤵️" : 1/750,
-    "🔀" : 1/500,
-    "🔁" : 1/300,
-    "🔂" : 1/250,
-    "🔄" : 1/175,
-    "🔃" : 1/100
-};
-let worldOneLayers = [dirtLayer, brickLayer, foggyLayer, waterLayer, rockLayer, radioactiveLayer, cactusLayer, paperLayer];
-let worldTwoLayers = [cloudLayer, tvLayer, doorLayer, globeLayer, chessLayer];
-let specialLayers = [sillyLayer, fluteLayer, dirtLayer2, barrierLayer, borderLayer];
-let allLayers = [dirtLayer, brickLayer, foggyLayer, waterLayer, rockLayer, radioactiveLayer, cactusLayer, paperLayer];
+const layerList = {
+"dirtLayer" : ["🍓", "🌳", "💐", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
+"dirtLayer2" : ["🍓", "🌳", "💐", "🥬", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
+"brickLayer" : ["🏯", "🏰", "🌇", "🥉", "🪞", "🔩", "🧲", "🪬", "🧨", "🔗", "🪙", "🗿", "🪚", "🪜", "🧱"],
+"foggyLayer" : ["🦚", "❤️‍🔥", "🚿", "👁️", "💸", "⌛", "🧵", "🕯️", "🕋", "🎨", "🎴", "🥽", "🪄", "🎭", "🌫️"],
+"waterLayer" : ["👽", "🐋", "💫", "🪩", "👿", "🌀", "🔱", "👑", "🐟", "🫧", "🤿", "🎣", "⛵", "🌊"],
+"rockLayer" : ["🪤", "🏔️", "🌈", "🧊", "❄️", "💎", "☄️", "🔮", "🔋", "💍", "🥏", "⚜️", "💠", "🪨"],
+"radioactiveLayer" : ["🤖", "⚠️", "🎆", "🧀", "🌌", "🥀", "🎇", "🔳", "⏹️", "🧩", "🔔", "⚗️", "🧪", "☢️"],
+"cactusLayer" : ["🦴", "💗", "🐪", "🏵️", "🪐", "💥", "🔥", "🔆", "⭐", "🎀", "🗡️", "📟", "⚱️", "🖍️", "🌵"],
+"paperLayer" : ["🎩", "💵", "🪅", "👀", "🌟", "📝", "⌚", "🗜️", "🏆", "🎲", "✂️", "🃏", "⚙️", "📰"],
+"worldOneCommons" : ["🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "⚫", "🟤", "🟣", "🔴", "🟠", "🟡", "🔵", "🟢", "🟪", "🟥", "🟧"],
+"sillyLayer" : ["🎉", "🧌", "♾️", "💅", "😁", "🪢", "🫃", "🎂"],
+"fluteLayer" : ["🫶", "🪈"],
+"cloudLayer" : ["🪽", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
+"tvLayer" : ["🔫", "👾", "🏹", "💣", "🔨", "🪓", "🪃", "🛡️", "📺"],
+"doorLayer" : ["🗝️", "🪝", "🪡", "🛎️", "🚧", "⛓️", "🔏", "🖇️", "🔑", "🔒", "🚪"],
+"globeLayer" : ["💰", "🚽", "📽️", "🧂", "🔪", "💔", "🍆", "🖱️", "⌨️", "💻", "🌐"],
+"chessLayer" : ["⚖️", "🎓", "📍", "📌", "🔎", "🖊️", "📚", "📐", "📖", "🧠", "✏️", "♟️"],
+"barrierLayer" : ["✴️", "✖️"],
+"borderLayer" : ["🩸", "🚫", "💢", "🔇", "🛑", "⭕", "🔕", "❌"],
+"worldTwoCommons" : ["🍀", "☘️", "📘", "📙", "📕", "📗", "⏏️", "▶️", "⏸️", "⏯️", "⏺️", "⏭️", "⏮️", "⏩", "⏪", "⏬", "⏫", "◀️", "🔼", "🔽", "➡️", "↖️", "↘️", "⬇️", "⬆️", "⬅️", "↪️", "↩️", "⤴️", "⤵️", "🔀", "🔁", "🔂", "🔄", "🔃"]
+}
+let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
+let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
+let specialLayers = ["sillyLayer", "fluteLayer", "dirtLayer2", "barrierLayer", "borderLayer"];
+let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
 //
 const customMessages = {
     "📽️" : "You're alone, and yet you feel the eyes of millions stare upon you through a peculiar lens...",
@@ -816,32 +498,22 @@ function setLayer(y) {
             tempNum = Math.floor(tempNum / 2000);
             if (tempNum !== currentLayerNum) {
                 currentLayerNum = tempNum;
-                let layerMaterial = Object.keys(allLayers[tempNum]);
-                layerMaterial = layerMaterial[layerMaterial.length - 1];
-                let craftedLayer = {...allLayers[tempNum]};
-                delete craftedLayer[layerMaterial];
-                Object.assign(craftedLayer, worldOneCommons);
-                craftedLayer[layerMaterial] = 1/1;
-                currentLayer = craftedLayer;
+                currentLayer = createLayer([layerList[allLayers[tempNum]], layerList["worldOneCommons"]]);
+                generationProbabilities = calculateCumulativeProbabilities();
             }
         } else {
             if (tempNum > (lastLayerChange + 10000)) {
                 lastLayerChange += 10000;
                 if (Math.round(Math.random() * 77) === 33)
-                    currentLayer = specialLayers[0];
+                    currentLayer = layerList[specialLayers[0]];
                 else if (Math.round(Math.random() * 40) === 20)
-                    currentLayer = specialLayers[1];
+                    currentLayer = layerList[specialLayers[1]];
                 else {
                     let num = Math.floor(Math.random() * 8)
                     currentLayerNum = num;
-                    let layerMaterial = Object.keys(allLayers[num]);
-                    layerMaterial = layerMaterial[layerMaterial.length - 1];
-                    let craftedLayer = {...allLayers[tempNum]};
-                    delete craftedLayer[layerMaterial];
-                    Object.assign(craftedLayer, worldOneCommons);
-                    craftedLayer[layerMaterial] = 1/1;
-                    currentLayer = craftedLayer;
+                    currentLayer = createLayer([layerList[allLayers[num]], layerList["worldOneCommons"]]);
                 }
+                generationProbabilities = calculateCumulativeProbabilities();
             }
         }
     } else {
@@ -850,23 +522,45 @@ function setLayer(y) {
             tempNum = Math.floor(tempNum / 2000);
             if (tempNum !== currentLayerNum) {
                 currentLayerNum = tempNum;
-                let layerMaterial = Object.keys(allLayers[tempNum]);
-                layerMaterial = layerMaterial[layerMaterial.length - 1];
-                let craftedLayer = {...allLayers[tempNum]};
-                delete craftedLayer[layerMaterial];
-                Object.assign(craftedLayer, worldTwoCommons);
-                craftedLayer[layerMaterial] = 1/1;
-                currentLayer = craftedLayer;
+                currentLayer = createLayer([layerList[allLayers[tempNum]], layerList["worldTwoCommons"]]);
+                generationProbabilities = calculateCumulativeProbabilities();
             }
         } else {
             if (currentLayer != borderLayer) {
-                currentLayer = borderLayer;
+                currentLayer = layerList["borderLayer"];
                 currentLayerNum = 5;
+                generationProbabilities = calculateCumulativeProbabilities();
             }
         }
     }
-
 }
+
+function createLayer(layers) {
+    let output = [];
+    for (let i = 0; i < layers.length; i++) {
+        output = output.concat(layers[i]);
+    }
+    output = sortLayerRarities(output);
+    return output;
+}
+function sortLayerRarities(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (oreList[arr[j]]["numRarity"] < oreList[arr[j + 1]]["numRarity"]) {
+                let lesser = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = lesser;
+            }
+        }
+    }
+    return arr;
+}
+let lettuceLayerProbabilities;
+function createSpecialLayers() {
+    layerList["dirtLayer2"] = createLayer([layerList["dirtLayer2"], layerList["worldOneCommons"]]);
+}
+
+
 /*
 for (let propertyName in temp) {
     for (let j = 0; j < 4; j++) {

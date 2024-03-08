@@ -4,6 +4,7 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
+const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'))
 let mine = [];
 let curX = 1000000000;
 let curY = 0;
@@ -71,6 +72,7 @@ let currentLayerNum = 0;
 
 function init() {
     let canContinue = true;
+    createSpecialLayers();
     createInventory();
     createMine();
     let playedBefore = localStorage.getItem("playedBefore");
@@ -80,15 +82,20 @@ function init() {
         canContinue = true;
     
     if (canContinue) {
-        repeatDataSave();
+        if (!debug) 
+            repeatDataSave();
         localStorage.setItem("playedBefore", true);
         localStorage.setItem("game2DataChanges", true);
+        
         createPickaxeRecipes();
         createGearRecipes();
         document.getElementById('dataText').value = "";
         switchLayerIndex(0, 0);
         if (Math.random() < 1/1000)
             document.getElementById("cat").innerText = "CatAxe";
+        for (let propertyName in caveList) {
+            sortCaveRarities(caveList[propertyName]);
+        }
         console.log("meow");
     }
 }
@@ -143,7 +150,7 @@ function movePlayer(dir, reps) {
                             mine[curY][curX] = "⚪";
                             curY++;
                             setLayer(curY);
-                            mineBlock(curX, curY, "mining", 1000000);
+                            mineBlock(curX, curY, "mining", 1);
                             createMineIndexes();
                             mine[curY][curX] = "⛏️";
                             lastDirection = "s";
@@ -192,7 +199,7 @@ function movePlayer(dir, reps) {
                 default:
             }
             updateActiveRecipe();
-            gearAbility3();
+            //gearAbility3();
         }
         displayArea();
         }

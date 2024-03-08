@@ -286,26 +286,24 @@ function switchLayerIndex(num, overrideNum, world) {
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
     if (layerNum > (add - 1)) {
         let caveNum = 11 - layerNum;
-        layerToIndex = allCaves[caveNum];
+        layerToIndex = caveList[allCaves[caveNum]];
     } else {
         if (world === 1) {
-            layerToIndex = worldOneLayers[layerNum];
+            layerToIndex = layerList[worldOneLayers[layerNum]];
         } else {
-            layerToIndex = worldTwoLayers[layerNum];
+            layerToIndex = layerList[worldTwoLayers[layerNum]];
         }
     }
     
     layerToIndex = layerNum === 101 ? worldOneCommons : layerToIndex;
     layerToIndex = layerNum === 102 ? worldTwoCommons : layerToIndex;
-    let layerMaterial = (Object.keys(layerToIndex));
-    layerMaterial = layerMaterial[layerMaterial.length - 1];
+    let layerMaterial = layerToIndex.slice(-1);
     document.getElementById("indexSwitchButton").innerHTML = layerMaterial;
     let oreIndexCards = [];
-    for (let propertyName in layerToIndex) {
-        if (layerToIndex[propertyName] < 1/1) {
-            if (ignoreList.indexOf(propertyName) === -1 || indexHasOre(propertyName)) {
-                oreIndexCards.push(createIndexCards(layerToIndex, propertyName))
-            }
+    for (let i = 0; i < layerToIndex.length; i++) {
+        if (oreList[layerToIndex[i]]["numRarity"] > 1) {
+            if (ignoreList.indexOf(layerToIndex[i]) === -1 || indexHasOre(layerToIndex[i]))
+                oreIndexCards.push(createIndexCards(layerToIndex, layerToIndex[i]))
         }
     }
     for (let i = oreIndexCards.length - 1; i >= 0; i--) {
@@ -343,13 +341,17 @@ function createIndexCards(layer, property) {
         oreRarityLuck = document.createElement("p");
         oreRarityLuck.style.fontSize = "1.25vw";
         oreRarityLuck.style.fontWeight = "bold";
-        if (allCaves.includes(layer)) {
-            let rarity = oreList[property]["numRarity"];
-            rarity *= getCaveMultiFromOre(property);
-            oreRarityLuck.innerHTML = "1/" + rarity.toLocaleString() + " adjusted.";
-        } else {
-            oreRarityLuck.innerHTML = "1/" + (oreList[property]["numRarity"] * verifiedOres.getCurrentLuck()).toLocaleString() + " with luck.";
+        let tempBool = true;
+        if (getCaveTypeFromOre(property) != currentLayer) {
+            if (getCaveMulti(layer) > 1) {
+                let rarity = oreList[property]["numRarity"];
+                rarity *= getCaveMultiFromOre(property);
+                oreRarityLuck.innerHTML = "1/" + rarity.toLocaleString() + " adjusted.";
+                tempBool = false;
+            }
         }
+        if (tempBool)
+            oreRarityLuck.innerHTML = "1/" + Math.floor(oreList[property]["numRarity"] / verifiedOres.getCurrentLuck()).toLocaleString() + " with luck.";
         parentObject.appendChild(oreRarityLuck);
     
         return parentObject;

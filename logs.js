@@ -83,9 +83,9 @@ class secureLogs {
                     output += this.#verifiedLogs[i][6][0] === true ? ", Cave, " : ", "
                     output += this.#verifiedLogs[i][1][0] + ", ";
                     if (this.#verifiedLogs[i][6][1]) {
-                        let something = getCaveTypeFromOre(this.#verifiedLogs[i][0])[this.#verifiedLogs[i][0]];
-                        something /= getCaveMultiFromOre(this.#verifiedLogs[i][0]);
-                        output += (Math.round(1/something) * multi).toLocaleString();
+                        let something = oreList[this.#verifiedLogs[i][0]]["numRarity"];
+                        something *= getCaveMultiFromOre(this.#verifiedLogs[i][0]);
+                        output += (something * multi).toLocaleString();
                     } else {
                         output += Math.floor(((oreList[this.#verifiedLogs[i][0]]["numRarity"]) * multi)/ this.#verifiedLogs[i][5]).toLocaleString();
                     }

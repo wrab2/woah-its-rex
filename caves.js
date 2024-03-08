@@ -11,6 +11,8 @@ function generateCave(x, y, rate, reps, type) {
         if (type === undefined) {
             type = currentLayer;
         }
+        type = sortCaveRarities(type);
+        console.log(type);
     }
     caveType = type;
         let distX = Math.round(Math.random() * 10) + 3;
@@ -99,7 +101,30 @@ function mineCaveBlock(c, r, type) {
         blocksRevealedThisReset++;
     }
 }
-//let caveLuck = 10000000;
+
+
+function sortCaveRarities(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            let rarity1 = oreList[arr[j]]["numRarity"];
+            let rarity2 = oreList[arr[j + 1]]["numRarity"];
+
+            if (oolProbabilities[arr[j]] != undefined)
+                rarity1 = oolProbabilities[arr[j]];
+
+            if (oolProbabilities[arr[j + 1]] != undefined)
+                rarity2 = oolProbabilities[arr[j + 1]];
+
+            if (oreList[arr[j]]["numRarity"] < oreList[arr[j + 1]]["numRarity"]) {
+                let lesser = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = lesser;
+            }
+        }
+    }
+    return arr;
+}
+let caveLuck = 1;
 function generateCaveBlock(y, x, type) {
     if (currentWorld === 2 && y === 10000) {
         if (Math.random() < 1/20000) {
@@ -109,14 +134,13 @@ function generateCaveBlock(y, x, type) {
         }
     }
     let hasLog;
-    let probabilityTable = type;
-    let summedProbability = 0;
     let chosenValue = Math.random();
-    //chosenValue /= caveLuck;
-    for (let propertyName in probabilityTable) {
-        summedProbability += probabilityTable[propertyName];
+    chosenValue /= debug ? caveLuck : 1;
+    let summedProbability = 0;
+    for (let i = 0; i < type.length; i++) {
+        summedProbability += 1/oreList[type[i]]["numRarity"];
         if (chosenValue < summedProbability) {
-            blockToGive = propertyName;
+            blockToGive = type[i];
             break;
         }
     }
@@ -126,7 +150,6 @@ function generateCaveBlock(y, x, type) {
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     if (allCaves.includes(type)) {
         if (adjRarity >= 25000000) {
-            let changeRarity = false;
             if (oolOres.indexOf(blockToGive) > -1) 
                 changeRarity = true;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) { //50B
@@ -151,19 +174,21 @@ function generateCaveBlock(y, x, type) {
     return [blockToGive, hasLog, adjRarity];
 }
 
+
+
 function getCaveMulti(type) {
     let multi;
     switch(type) {
-        case type1Ores:
+        case caveList["type1Ores"]:
             multi = caveMultis[0];
             break;
-        case type2Ores:
+        case caveList["type2Ores"]:
             multi = caveMultis[1];
             break;
-        case type3Ores:
+        case caveList["type3Ores"]:
             multi = caveMultis[2];
             break;
-        case type4Ores:
+        case caveList["type4Ores"]:
             multi = caveMultis[3];
             break;
         default:
@@ -176,55 +201,31 @@ let caveTypes = {
     "1": 1/50,
     "2": 1/35,
     "3": 1/20,
-    "4": 1/10
+    "4": 1/1
 }
 let caveMultis = [50, 35, 20, 10];
+let caveList = {
+"type1Ores" : ["🌙", "🪔", "💫", "🩺", "💱", "🌟", "☄️", "⭐", "🔆", "🔭", "📡", "❓"],
+"type2Ores" : ["🎷", "🪘", "🪩", "🥁", "🪇", "🎹", "🎵"],
+"type3Ores" : ["🧫", "⚠️", "🛸", "🥀", "🍄", "🕸️", "💉", "☣️"],
+"type4Ores" : ["⚕️", "🌡️", "💊", "💸", "🧵", "🧬", "🍥", "🦠"]
+}
 
-let type1Ores = {
-    "🌙" : 1/2626262626,
-    "🪔" : 1/2000000000,
-    "💫" : 1/1500000000,
-    "🩺" : 1/800000000,
-    "💱" : 1/180000000,
-    "🌟" : 1/150000000,
-    "☄️" : 1/40000000,
-    "⭐" : 1/30000000,
-    "🔆" : 1/25000000,
-    "🔭" : 1/15000000,
-    "📡" : 1/8000000,
-    "❓" : 1/1
-}
-let type2Ores = {
-    "🎷" : 1/2500000000,
-    "🪘" : 1/500000000,
-    "🪩" : 1/450000000,
-    "🥁" : 1/100000000,
-    "🪇" : 1/20000000,
-    "🎹" : 1/10000000,
-    "🎵" : 1/1
-}
-let type3Ores = {
-    "🧫" : 1/4000000000,
-    "⚠️" : 1/3500000000,
-    "🛸" : 1/1000000000,
-    "🥀" : 1/420000000,
-    "🍄" : 1/250000000,
-    "🕸️" : 1/40000000,
-    "💉" : 1/17500000,
-    "☣️" : 1/1
-}
-let type4Ores = {
-    "⚕️" : 1/50000000000,
-    "🌡️" : 1/3000000000,
-    "💊" : 1/800000000,
-    "💸" : 1/560000000,
-    "🧵" : 1/100000000,
-    "🧬" : 1/70000000,
-    "🍥" : 1/27500000,
-    "🦠" : 1/1
-}
-let allCaves = [type1Ores, type2Ores, type3Ores, type4Ores];
+
+let allCaves = ["type1Ores", "type2Ores", "type3Ores", "type4Ores"];
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
+let oolProbabilities = {
+    "🥀" : 1/420000000,
+    "💫" : 1/1500000000,
+    "⚠️" : 1/3500000000,
+    "💸" : 1/560000000,
+    "🪩" : 1/450000000,
+    "🌟" : 1/150000000,
+    "🧵" : 1/100000000,
+    "☄️" : 1/40000000,
+    "⭐" : 1/25000000,
+    "🔆" : 1/25000000,
+}
 function getCaveType() {
     let caveTypeLuck = 1;
     if (currentPickaxe === 12)
@@ -236,7 +237,7 @@ function getCaveType() {
     for (let propertyName in caveTypes) {
         summedProbability += caveTypes[propertyName];
         if (chosenValue < summedProbability) {
-            caveType = allCaves[Number(propertyName) - 1];
+            caveType = caveList[allCaves[Number(propertyName) - 1]];
             break;
         }
     }
@@ -255,16 +256,15 @@ function checkFromCave(location) {
 }
 function getCaveMultiFromOre(ore) {
     for (let i = 0; i < allCaves.length; i++) {
-        if (allCaves[i][ore] != undefined) {
-            return getCaveMulti(allCaves[i]);
-        } 
+        if (caveList[allCaves[i]].includes(ore))
+            return getCaveMulti(caveList[allCaves[i]]);
     }
     return 1;
 }
 function getCaveTypeFromOre(ore) {
     for (let i = 0; i < allCaves.length; i++) {
-        if (allCaves[i][ore] != undefined) {
-            return allCaves[i];
+        if (caveList[allCaves[i]].includes(ore)) {
+            return caveList[allCaves[i]];
         } 
     }
     return currentLayer;

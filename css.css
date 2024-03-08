@@ -39,7 +39,32 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
 .movementButton {
   width: 7vw!important;
+  height: 2vw;
   font-size: 1vw!important;
+}
+#leftAutoMine {
+ background-image:url('leftautomine.png'); 
+ background-size:contain;
+ background-repeat:no-repeat;
+ background-position: center;
+}
+#rightAutoMine {
+  background-image:url('rightautomine.png'); 
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+#upAutoMine {
+  background-image:url('upautomine.png'); 
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+#downAutoMine {
+  background-image:url('downautomine.png'); 
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position: center;
 }
 
 .craftingAmountsDisplay {
