@@ -255,6 +255,17 @@ function changeMinMiningSpeed(element) {
     }
 }
 
+function toggleCaves() {
+    if (cavesEnabled) {
+        cavesEnabled = false;
+        document.getElementById("caveToggle").style.backgroundColor = "red";
+    }
+    else {
+        cavesEnabled = true;
+        document.getElementById("caveToggle").style.backgroundColor = "green";
+    }
+}
+
 function updateCapacity(element) {
     elementValue = element.value;
     let value = elementValue === "" ? "none" : elementValue;

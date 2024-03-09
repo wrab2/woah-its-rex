@@ -342,6 +342,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
       <div class="inputAndButton">
         <button class="toggleDisplay fullyRounded" onclick="togglePathBlocks();" id="pathBlocks">Invisible Path Blocks</button>
       </div>
+      <div class="inputAndButton">
+        <button class="toggleDisplay fullyRounded" onclick="toggleCaves();" id="caveToggle">Toggle Caves</button>
+      </div>
     </div>
 
     <div class="frame" id="color-frame">
@@ -387,8 +390,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         <div id="indexDisplay">
             <h2>Ore Index</h2>
             <hr>
-            <div class="container-fluid">
-                <div class="row">
+            <div class="container-fluid h-10 d-flex flex-column">
+                <div class="row h-25">
                     <div class="col-md-5" style="z-index: 1;">
                         <button class="indexDirectionButton" onclick="switchLayerIndex(-1)" style="float: right; margin-right: -4vh;"><</button>
                     </div>

@@ -103,4 +103,12 @@ function adminGetHelp() {
     console.log("adminGiveGear(num) - Num is the gear you want to receive, leave blank for all.");
     console.log("adminRemoveGear(num) - Num is the gear you want to delete, leave blank for all.");
     console.log("adminListNums() - Lists all the numbers for specific pickaxes and gears.")
-}}
+    console.log("adminChangeLuck(value) - Changes the luck used for block generation to the chosen value.")
+    }
+}
+function adminChangeLuck(value) {
+    if (debug) {
+        cat = value;
+        applyLuckToLayer(currentLayer, cat);
+    }
+}

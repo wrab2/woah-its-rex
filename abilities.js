@@ -4,6 +4,7 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
+let cavesEnabled = true;
 async function rollAbilities() {
     let boost = 1;
     let m = 1;
@@ -11,7 +12,7 @@ async function rollAbilities() {
         m = 1.2;
     let temp;
     if (!resetting && ((currentWorld === 1 && currentPickaxe > 5)||(currentWorld === 2 && gears[14]))) {
-        if (Math.random() < 1/750) {
+        if (Math.random() < 1/750 && cavesEnabled) {
             generateCave(curX, curY, 0, 0);
             displayArea();
             gearAbility3();

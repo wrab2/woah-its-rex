@@ -69,7 +69,7 @@ let currentPickaxe = 0;
 let currentWorld = 1;
 let currentLayerNum = 0;
 //IMPORTANT
-
+const date = new Date().getDay();
 function init() {
     let canContinue = true;
     createSpecialLayers();
@@ -97,6 +97,7 @@ function init() {
             sortCaveRarities(caveList[propertyName]);
         }
         applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+
         console.log("meow");
     }
 }
@@ -200,7 +201,7 @@ function movePlayer(dir, reps) {
                 default:
             }
             updateActiveRecipe();
-            //gearAbility3();
+            gearAbility3();
         }
         displayArea();
         }

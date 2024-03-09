@@ -12,7 +12,6 @@ function generateCave(x, y, rate, reps, type) {
             type = currentLayer;
         }
         type = sortCaveRarities(type);
-        console.log(type);
     }
     caveType = type;
         let distX = Math.round(Math.random() * 10) + 3;
@@ -135,7 +134,7 @@ function generateCaveBlock(y, x, type) {
     }
     let hasLog;
     let chosenValue = Math.random();
-    chosenValue /= (debug ? caveLuck : 1);
+    if (debug) chosenValue /= caveLuck;
     let summedProbability = 0;
     for (let i = 0; i < type.length; i++) {
         summedProbability += (oolProbabilities[type[i]] === undefined) ? (1/oreList[type[i]]["numRarity"]) : (oolProbabilities[type[i]]);
@@ -144,7 +143,6 @@ function generateCaveBlock(y, x, type) {
             break;
         }
     }
-    console.log(blockToGive);
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;

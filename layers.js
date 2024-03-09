@@ -352,11 +352,11 @@ const layerList = {
 "dirtLayer" : ["🍓", "🌳", "💐", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
 "dirtLayer2" : ["🍓", "🌳", "💐", "🥬", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
 "brickLayer" : ["🏯", "🏰", "🌇", "🥉", "🪞", "🔩", "🧲", "🪬", "🧨", "🔗", "🪙", "🗿", "🪚", "🪜", "🧱"],
-"foggyLayer" : ["🦚", "❤️‍🔥", "🚿", "👁️", "💸", "⌛", "🧵", "🕯️", "🕋", "🎨", "🎴", "🥽", "🪄", "🎭", "🌫️"],
+"foggyLayer" : ["🦚", "🚿", "👁️", "💸", "⌛", "🧵", "🕯️", "🕋", "🎨", "🎴", "🥽", "🪄", "🎭", "🌫️"],
 "waterLayer" : ["👽", "🐋", "💫", "🪩", "👿", "🌀", "🔱", "👑", "🐟", "🫧", "🤿", "🎣", "⛵", "🌊"],
 "rockLayer" : ["🪤", "🏔️", "🌈", "🧊", "❄️", "💎", "☄️", "🔮", "🔋", "💍", "🥏", "⚜️", "💠", "🪨"],
 "radioactiveLayer" : ["🤖", "⚠️", "🎆", "🧀", "🌌", "🥀", "🎇", "🔳", "⏹️", "🧩", "🔔", "⚗️", "🧪", "☢️"],
-"cactusLayer" : ["🦴", "💗", "🐪", "🏵️", "🪐", "💥", "🔥", "🔆", "⭐", "🎀", "🗡️", "📟", "⚱️", "🖍️", "🌵"],
+"cactusLayer" : ["🦴", "🐪", "🏵️", "🪐", "💥", "🔥", "🔆", "⭐", "🎀", "🗡️", "📟", "⚱️", "🖍️", "🌵"],
 "paperLayer" : ["🎩", "💵", "🪅", "👀", "🌟", "📝", "⌚", "🗜️", "🏆", "🎲", "✂️", "🃏", "⚙️", "📰"],
 "worldOneCommons" : ["🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "⚫", "🟤", "🟣", "🔴", "🟠", "🟡", "🔵", "🟢", "🟪", "🟥", "🟧"],
 "sillyLayer" : ["🎉", "🧌", "♾️", "💅", "😁", "🪢", "🫃", "🎂"],
@@ -555,6 +555,7 @@ function sortLayerRarities(arr) {
 let commons = ["Common","Uncommon","Rare","Master","Surreal"];
 function applyLuckToLayer(layer, luck) {
     for (let i = 0; i < layer.length; i++) {
+        luck = debug ? cat : luck;
         let newRarity = oreList[layer[i]]["numRarity"] / luck;
         if (commons.indexOf(oreList[layer[i]]["oreTier"]) < 0)
             oreList[layer[i]]["decimalRarity"] = 1/newRarity;
@@ -573,6 +574,73 @@ function updateSpecialLayers() {
     applyLuckToLayer(layerList["dirtLayer2"], verifiedOres.getCurrentLuck());
 }
 
+const limitedOres = {
+    "❤️‍🔥" : {
+        "layers" : ["foggyLayer"],
+        "timeType" : "month",
+        "timeValues" : [1]
+    },
+    "💗" : {
+        "layers" : ["cactusLayer"],
+        "timeType" : "month",
+        "timeValues" : [1]
+    },
+    "😻" : {
+        "layers" : ["dirtLayer"],
+        "timeType" : "day",
+        "timeValues" : [3]
+    },
+    "🏝️" : {
+        "layers" : ["rockLayer"],
+        "timeType" : "month",
+        "timeValues" : [11]
+    } ,
+    "✨" : {
+        "layers" : ["rockLayer"],
+        "timeType" : "month",
+        "timeValues" : [11]
+    },
+    "⛄": {
+        "layers" : ["rockLayer"],
+        "timeType" : "month",
+        "timeValues" : [11]
+    }
+}
+
+function checkLimitedOres() {
+    let time = new Date();
+    for (let propertyName in limitedOres) {
+        let type = limitedOres[propertyName]["timeType"];
+        let timeValue;
+        if (type === "month") {
+            timeValue = time.getMonth();
+        } else if (type === "day") {
+            timeValue = time.getDay();
+        }
+        if (limitedOres[propertyName]["timeValues"].includes(timeValue))
+            makeOreAvailable(propertyName);
+        else
+            makeOreUnavailable(propertyName);
+    }
+}
+
+function makeOreAvailable(ore) {
+    let layers = limitedOres[ore]["layers"];
+    for (let i = 0; i < layers.length; i++) {
+        layerList[layers[i]].push(ore);
+        applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
+    }
+}
+
+function makeOreUnavailable(ore) {
+    let layers = limitedOres[ore]["layers"];
+    for (let i = 0; i < layers.length; i++) {
+        let index = layerList[layers[i]].indexOf(ore);
+        if (index > -1)
+            layerList[layers[i]].splice(index, 1);
+        applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
+    }
+}
 
 /*
 for (let propertyName in temp) {

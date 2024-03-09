@@ -202,12 +202,14 @@ function generateBlock(luck, location) {
     }
     let hasLog;
     if (oreList[blockToGive]["numRarity"] >= 750000) {
+        /*
         hasLog = oreList[blockToGive]["hasLog"];
         if (hasLog) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), verifiedOres.getCurrentLuck());
         }
         spawnMessage(blockToGive, location);
         playSound(oreList[blockToGive]["oreTier"]);
+        */
     }
     return [blockToGive, hasLog];
 }

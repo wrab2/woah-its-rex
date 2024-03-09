@@ -41,9 +41,11 @@ function saveAllData() {
         getInventoryColors(),
         getCraftingColors(),
         usePathBlocks,
+        cavesEnabled
         );
     dataStorage[4].push(gears);
     localStorage.setItem("playerData", JSON.stringify(dataStorage));
+    checkLimitedOres();
 }
 function getAllSpawnVolumes() {
     let volumes = document.getElementsByClassName("spawnVolume");
@@ -186,6 +188,11 @@ function loadAllData() {
                 if (!usePathBlocks)
                     document.getElementById("pathBlocks").style.backgroundColor = "green"
             }
+            if (data[3][17] != undefined) {
+                cavesEnabled = data[3][17];
+                if (!cavesEnabled)
+                    document.getElementById("caveToggle").style.backgroundColor = "red";
+            }
         }
             if (data[4] !== undefined || data[4] !== null) {
                 for (let i = 0; i < data[4][0].length; i++)
@@ -194,6 +201,7 @@ function loadAllData() {
         if (oreList["🎂"]["normalAmt"] > 0 || gears[9])
             document.getElementById("sillyRecipe").style.display = "block";
         localStorage.removeItem("dataBackup");
+        checkLimitedOres();
         return true;
     } catch(error) {
         console.log(error);
