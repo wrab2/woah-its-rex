@@ -110,10 +110,10 @@ function sortCaveRarities(arr) {
             let rarity2 = oreList[arr[j + 1]]["numRarity"];
 
             if (oolProbabilities[arr[j]] != undefined)
-                rarity1 = oolProbabilities[arr[j]];
+                rarity1 = 1/oolProbabilities[arr[j]];
 
             if (oolProbabilities[arr[j + 1]] != undefined)
-                rarity2 = oolProbabilities[arr[j + 1]];
+                rarity2 = 1/oolProbabilities[arr[j + 1]];
 
             if (oreList[arr[j]]["numRarity"] < oreList[arr[j + 1]]["numRarity"]) {
                 let lesser = arr[j + 1];
@@ -135,24 +135,25 @@ function generateCaveBlock(y, x, type) {
     }
     let hasLog;
     let chosenValue = Math.random();
-    chosenValue /= debug ? caveLuck : 1;
+    chosenValue /= (debug ? caveLuck : 1);
     let summedProbability = 0;
     for (let i = 0; i < type.length; i++) {
-        summedProbability += 1/oreList[type[i]]["numRarity"];
+        summedProbability += (oolProbabilities[type[i]] === undefined) ? (1/oreList[type[i]]["numRarity"]) : (oolProbabilities[type[i]]);
         if (chosenValue < summedProbability) {
             blockToGive = type[i];
             break;
         }
     }
+    console.log(blockToGive);
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
-    if (allCaves.includes(type)) {
+    if (getCaveMulti(type) > 1) {
         if (adjRarity >= 25000000) {
-            if (oolOres.indexOf(blockToGive) > -1) 
-                changeRarity = true;
-            if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) { //50B
+            if (oolProbabilities[blockToGive] != undefined)
+                adjRarity = (1/oolProbabilities[blockToGive]) * multi;
+            if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
                 spawnMessage(blockToGive, [y, x], [true, adjRarity]);
                 hasLog = true;
@@ -201,7 +202,7 @@ let caveTypes = {
     "1": 1/50,
     "2": 1/35,
     "3": 1/20,
-    "4": 1/1
+    "4": 1/10
 }
 let caveMultis = [50, 35, 20, 10];
 let caveList = {

@@ -96,6 +96,7 @@ function init() {
         for (let propertyName in caveList) {
             sortCaveRarities(caveList[propertyName]);
         }
+        applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
         console.log("meow");
     }
 }

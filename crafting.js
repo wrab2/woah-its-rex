@@ -445,10 +445,10 @@ worldTwoGears = [
     [
         ["🌐", 90000000],
         ["➡️", 37500],
-        ["⏩", 30000],
+        ["⏩", 5000],
         ["⏭️", 4500],
         ["▶️", 1500],
-        ["🖱️", 40],
+        ["🖱️", 30],
         ["🍆", 3],
         ["💔", 1],
     ],
@@ -712,6 +712,7 @@ function craftPickaxe(num) {
         document.getElementById("craftPickaxe" + num).innerText = "Equipped!";
         currentPickaxe = num;
     }
+    applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
     switchLayerIndex(0);
 }
 function craftGear(num) {
@@ -736,7 +737,7 @@ function craftGear(num) {
             } else {
                 document.getElementById("craftGear" + num).innerText = "Owned!";
             }
-            
+            applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
             updateActiveRecipe();
             gears[num] = true;
         }

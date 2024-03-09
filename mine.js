@@ -174,7 +174,6 @@ function giveBlock(type, x, y, fromReset, fromCave) {
         updateInventory(type, inv);
     }
 }
-
 let cat = 1;
 let generationProbabilities;
 let cumulativeGenerations;
@@ -193,9 +192,10 @@ function generateBlock(luck, location) {
 
     let blockToGive = "";
     let chosenValue = Math.random();
-    chosenValue /= debug ? cat : luck;
+    let summedProbability = 0;
     for (let i = 0; i < probabilityTable.length; i++) {
-        if (chosenValue <= oreList[probabilityTable[i]]["decimalRarity"]) {
+        summedProbability += oreList[probabilityTable[i]]["decimalRarity"];
+        if (chosenValue < summedProbability) {
             blockToGive = probabilityTable[i];
             break;
         }
@@ -204,13 +204,19 @@ function generateBlock(luck, location) {
     if (oreList[blockToGive]["numRarity"] >= 750000) {
         hasLog = oreList[blockToGive]["hasLog"];
         if (hasLog) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), luck);
+            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), verifiedOres.getCurrentLuck());
         }
         spawnMessage(blockToGive, location);
         playSound(oreList[blockToGive]["oreTier"]);
     }
     return [blockToGive, hasLog];
 }
+/*
+let totalSpeeds = 0;
+for (let i = 0; i < 30000; i++) {
+    generateBlock(1, [curY + 1, curX]);
+}
+*/
 
 function calculateCumulativeProbabilities() {
     let cumulativeProbability = 0;
@@ -370,7 +376,7 @@ function switchWorld() {
     switchDistance();
     displayArea();
     switchWorldCraftables();
-    calculateCat();
+    applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
     canMine = true;
 }
 

@@ -186,7 +186,7 @@ function gearAbility1() {
 
 function gearAbility2() {
     if (currentWorld === 1 && gears[9]) {
-        currentLayer = sillyLayer;
+        currentLayer = createLayer([layerList["sillyLayer"]]);
     }
 }
 

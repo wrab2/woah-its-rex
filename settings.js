@@ -295,8 +295,8 @@ function switchLayerIndex(num, overrideNum, world) {
         }
     }
     
-    layerToIndex = layerNum === 101 ? worldOneCommons : layerToIndex;
-    layerToIndex = layerNum === 102 ? worldTwoCommons : layerToIndex;
+    layerToIndex = layerNum === 101 ? layerList["worldOneCommons"] : layerToIndex;
+    layerToIndex = layerNum === 102 ? layerList["worldTwoCommons"] : layerToIndex;
     let layerMaterial = layerToIndex.slice(-1);
     document.getElementById("indexSwitchButton").innerHTML = layerMaterial;
     let oreIndexCards = [];
@@ -366,7 +366,7 @@ function randomFunction(text, cause) {
             return;
         if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {
             for (let i = 0; i < worldOneLayers.length; i++) {
-                if (worldOneLayers[i][ore] != undefined) {
+                if (layerList[worldOneLayers[i]].includes(ore)) {
                     num = i;
                     world = 1;
                     break;
@@ -374,7 +374,7 @@ function randomFunction(text, cause) {
             }
             if (num < 0) {
                 for (let i = 0; i < worldTwoLayers.length; i++) {
-                    if (worldTwoLayers[i][ore] != undefined) {
+                    if (layerList[worldTwoLayers[i]].includes(ore)) {
                         num = i;
                         world = 2;
                         break;
@@ -389,10 +389,10 @@ function randomFunction(text, cause) {
                     }
                 }
             }
-            if (worldOneCommons[ore] != undefined) {
+            if (layerList["worldOneCommons"].includes(ore)) {
                 num = 101;
             }
-            if (worldTwoCommons[ore] != undefined) {
+            if (layerList["worldTwoCommons"].includes(ore)) {
                 num = 102;
             }
             

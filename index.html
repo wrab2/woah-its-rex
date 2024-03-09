@@ -387,9 +387,19 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         <div id="indexDisplay">
             <h2>Ore Index</h2>
             <hr>
-            <p id="indexSwitchButton">Layer Placeholder</p>
-            <button class="indexDirectionButton" onclick="switchLayerIndex(-1)"><</button>
-            <button class="indexDirectionButton" onclick="switchLayerIndex(1)">></button>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5" style="z-index: 1;">
+                        <button class="indexDirectionButton" onclick="switchLayerIndex(-1)" style="float: right; margin-right: -4vh;"><</button>
+                    </div>
+                    <div class="col-md-2" style="z-index: 0;">
+                            <p id="indexSwitchButton">Layer Placeholder</p>
+                    </div>
+                    <div class="col-md-5" style="z-index: 1;">
+                        <button class="indexDirectionButton" onclick="switchLayerIndex(1)" style="float: left; margin-left: -4vh;">></button>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div id="oreCardHolder">

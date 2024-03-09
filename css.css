@@ -619,27 +619,22 @@ button, .col-3 > div > button {
   vertical-align: middle;
 }
 #indexSwitchButton {
-  width: 11.9em;
-  height: 2.4em;
+  width: 100%;
+  height: 2.3em;
   border-radius: 0px;
   background-color: #3d3c3c;
   border-style: solid;
   border-width: 2px;
   font-size: 125%;
-  margin: auto;
-  padding: 0.38em;
 }
 .indexDirectionButton {
-   width: 5em;
+   width: 20%;
    height: 3em;
    border-radius: 0px;
    border-width: 2px;
    font-size: 100%;
    background-color: #333;
-   margin-left: 7.25em;
-   margin-right: 6.625em;
-   position: relative;
-   top: -47.5;
+   vertical-align: middle;
 }
 .indexDirectionButton:hover {
   background-color: #2e2e2e;
