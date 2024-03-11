@@ -97,7 +97,7 @@ function init() {
             sortCaveRarities(caveList[propertyName]);
         }
         applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
-
+        let limitedTimer = setInterval(checkLimitedOres, 10000);
         console.log("meow");
     }
 }
@@ -113,17 +113,17 @@ let ethereal;
 let keepRunningAudio;
 let allAudios = [];
 function loadContent() {
-    keepRunningAudio = new Audio("ambiencebyx2corp.mp3")
+    keepRunningAudio = new Audio("audios/ambiencebyx2corp.mp3")
     keepRunningAudio.load();
     keepRunning();
-    chill = new Audio("spinechill.mp3");
-    ringing = new Audio("Transcendent.mp3");
-    visionblur = new Audio("visionblur.mp3");
-    unfath = new Audio("Unfathsound.mp3");
-    ow = new Audio("Otherworldly.mp3");
-    zenith = new Audio("Zenithsound.mp3");
-    magnificent = new Audio("magnificent.mp3")
-    ethereal = new Audio("ethereal sound by elysia.mp3")
+    chill = new Audio("audios/spinechill.mp3");
+    ringing = new Audio("audios/Transcendent.mp3");
+    visionblur = new Audio("audios/visionblur.mp3");
+    unfath = new Audio("audios/Unfathsound.mp3");
+    ow = new Audio("audios/Otherworldly.mp3");
+    zenith = new Audio("audios/Zenithsound.mp3");
+    magnificent = new Audio("audios/magnificent.mp3")
+    ethereal = new Audio("audios/ethereal sound by elysia.mp3")
     allAudios.push(chill);
     allAudios.push(ringing);
     allAudios.push(visionblur);

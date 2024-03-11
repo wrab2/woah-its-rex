@@ -8,7 +8,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Woah It's Rex!</title>
-    <link rel="icon" type="image/x-icon" href="game-icon.png">
+    <link rel="icon" type="image/x-icon" href="media/game-icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
@@ -39,7 +39,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         </div>
     </noscript>
     <div id="pressPlay">
-        <img class="roundcat" src="roundcat.png" alt="Round Cat Image">
+        <img class="roundcat" src="media/roundcat.png" alt="Round Cat Image">
 
 <div class="credits">
   <h2>Credits:</h2>
@@ -52,7 +52,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <li>Thanks to all the spreadsheet editors!</li>
   </ul>
   <a class="server-link" href="https://discord.gg/qxBBvAm2bM" target="_blank">
-    <img src="discord-logo.png" alt="Discord Logo">
+    <img src="media/discord-logo.png" alt="Discord Logo">
     Join the Server
   </a>
 
@@ -65,18 +65,17 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <div class="row">
         <div class="col-7">
             <div class="mobile">
-                <button onclick="goDirection('a')" class="movementButton" id="leftAutoMine"></button>
-                <button onclick="goDirection('s')" class="movementButton" id="downAutoMine"></button>
-                <button onclick="goDirection('w')" class="movementButton" id="upAutoMine"></button>
-                <button onclick="goDirection('d')" class="movementButton" id="rightAutoMine"></button>
-                <button onclick="teleport()" class="movementButton">Teleport</button>
-            </div>
-            <div class="mobile">
-                <button onclick="moveOne('a', this)" class="movementButton">◀️ 1</button>
-                <button onclick="moveOne('s', this)" class="movementButton">🔽 1</button>
-                <button onclick="moveOne('w', this)" class="movementButton">🔼 1</button>
-                <button onclick="moveOne('d', this)" class="movementButton">▶️ 1</button>
-                <button onclick="switchDistance()" class="movementButton" id="meterDisplay">🟫 1,000m</button>
+                    <button onclick="goDirection('a')" class="movementButton horizontalArrow" id="leftAutoMine"></button>
+                    <button onclick="goDirection('s')" class="movementButton verticalArrow" id="downAutoMine"></button>
+                    <button onclick="goDirection('w')" class="movementButton verticalArrow" id="upAutoMine"></button>
+                    <button onclick="goDirection('d')" class="movementButton horizontalArrow" id="rightAutoMine"></button>
+                    <button onclick="teleport()" class="movementButton">Teleport</button>
+                    <br>
+                    <button onclick="moveOne('a', this)" class="movementButton horizontalArrow" id="leftOne"></button>
+                    <button onclick="moveOne('s', this)" class="movementButton verticalArrow" id="downOne"></button>
+                    <button onclick="moveOne('w', this)" class="movementButton verticalArrow" id="upOne"></button>
+                    <button onclick="moveOne('d', this)" class="movementButton horizontalArrow" id="rightOne"></button>
+                    <button onclick="switchDistance()" class="movementButton" id="meterDisplay">🟫 1,000m</button>
             </div>
             <p id="blockDisplay"></p>
             <div>
@@ -222,7 +221,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p id="inventory4"   style="display:none;"></p>
             </div>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
-                <img src="discord-logo.png" alt="Discord">
+                <img src="media/discord-logo.png" alt="Discord">
                 <u><p>Join the Discord!</p></u>
             </a>
         </div>

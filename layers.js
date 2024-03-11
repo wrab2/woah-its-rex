@@ -282,6 +282,7 @@ let oreList = {
     
     
     
+    '❔' : { 'decimalRarity': 1 / 1111111111, 'numRarity': 1111111111, 'hasLog': true, 'isBreakable': false, 'caveExclusive': false, 'spawnMessage': ':trol:', 'oreTier': 'Otherworldly', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '📘': { 'decimalRarity': 1 / 1900000, 'numRarity': 1900000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '📘 Has Spawned!', 'oreTier': 'Exotic', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '📙': { 'decimalRarity': 1 / 1500500, 'numRarity': 1500500, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '📙 Has Spawned!', 'oreTier': 'Exotic', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '📕': { 'decimalRarity': 1 / 1230560, 'numRarity': 1230560, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '📕 Has Spawned!', 'oreTier': 'Exotic', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -366,7 +367,7 @@ const layerList = {
 "doorLayer" : ["🗝️", "🪝", "🪡", "🛎️", "🚧", "⛓️", "🔏", "🖇️", "🔑", "🔒", "🚪"],
 "globeLayer" : ["💰", "🚽", "📽️", "🧂", "🔪", "💔", "🍆", "🖱️", "⌨️", "💻", "🌐"],
 "chessLayer" : ["⚖️", "🎓", "📍", "📌", "🔎", "🖊️", "📚", "📐", "📖", "🧠", "✏️", "♟️"],
-"barrierLayer" : ["✴️", "✖️"],
+"barrierLayer" : ["❔", "✴️", "✖️"],
 "borderLayer" : ["🩸", "🚫", "💢", "🔇", "🛑", "⭕", "🔕", "❌"],
 "worldTwoCommons" : ["🍀", "☘️", "📘", "📙", "📕", "📗", "⏏️", "▶️", "⏸️", "⏯️", "⏺️", "⏭️", "⏮️", "⏩", "⏪", "⏬", "⏫", "◀️", "🔼", "🔽", "➡️", "↖️", "↘️", "⬇️", "⬆️", "⬅️", "↪️", "↩️", "⤴️", "⤵️", "🔀", "🔁", "🔂", "🔄", "🔃"]
 }
@@ -376,6 +377,14 @@ let specialLayers = ["sillyLayer", "fluteLayer", "dirtLayer2", "barrierLayer", "
 let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
 //
 const customMessages = {
+    "🍓" : "A sweet aroma guides you to one of nature's finest delicacies...",
+    "🏯" : "Past architecture laughs in the face of the present and its lack of grandeur...",
+    "🦚" : "Through the mist, the brief glint of a hundred eyes freezes you dead in your tracks...",
+    "👽" : "Once travelling the vast vacuum of outer space, extraterrestrial life made its way to the abyssal hadopelagic zone...",
+    "🪤" : "An extermination held through a siege, as success is just one stakeout away...",
+    "🤖" : "Come to think of it, robots and humans aren't so unalike.. their wires for our veins, their electric current for our bloodstream and their CPU for our brains...",
+    "🦴" : "Deep within the arid sands lay fossils of an olden age, one can only wonder what beasts roamed the earth back then...",
+    "🎩" : "wanna see a magic trick ^w^...",
     "📽️" : "You're alone, and yet you feel the eyes of millions stare upon you through a peculiar lens...",
     "🎓" : "An influx of knowledge passes you by as you reap the reward of years of turmoil...",
     "🔎" : "Through the glass, you gain a feeling of omniscience as your vision achieves clarity...",
@@ -499,6 +508,7 @@ function setLayer(y) {
             if (tempNum !== currentLayerNum) {
                 currentLayerNum = tempNum;
                 currentLayer = createLayer([layerList[allLayers[tempNum]], layerList["worldOneCommons"]]);
+                generationProbabilities = calculateCumulativeProbabilities();
             }
         } else {
             if (tempNum > (lastLayerChange + 10000)) {
@@ -511,6 +521,7 @@ function setLayer(y) {
                     let num = Math.floor(Math.random() * 8)
                     currentLayerNum = num;
                     currentLayer = createLayer([layerList[allLayers[num]], layerList["worldOneCommons"]]);
+                    generationProbabilities = calculateCumulativeProbabilities();
                 }
             }
         }
@@ -587,8 +598,8 @@ const limitedOres = {
     },
     "😻" : {
         "layers" : ["dirtLayer"],
-        "timeType" : "day",
-        "timeValues" : [3]
+        "timeType" : "minute",
+        "timeValues" : [27]
     },
     "🏝️" : {
         "layers" : ["rockLayer"],
@@ -616,6 +627,8 @@ function checkLimitedOres() {
             timeValue = time.getMonth();
         } else if (type === "day") {
             timeValue = time.getDay();
+        } else if (type === "minute") {
+            timeValue = time.getMinutes()
         }
         if (limitedOres[propertyName]["timeValues"].includes(timeValue))
             makeOreAvailable(propertyName);
@@ -627,8 +640,10 @@ function checkLimitedOres() {
 function makeOreAvailable(ore) {
     let layers = limitedOres[ore]["layers"];
     for (let i = 0; i < layers.length; i++) {
-        layerList[layers[i]].push(ore);
-        applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
+        if (!(layerList[layers[i]].includes(ore))) {
+            layerList[layers[i]].push(ore);
+            applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
+        }
     }
 }
 

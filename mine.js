@@ -176,7 +176,6 @@ function giveBlock(type, x, y, fromReset, fromCave) {
 }
 let cat = 1;
 let generationProbabilities;
-let cumulativeGenerations;
 function generateBlock(luck, location) {
     blocksRevealedThisReset++;
     let probabilityTable = currentLayer;
@@ -192,24 +191,26 @@ function generateBlock(luck, location) {
 
     let blockToGive = "";
     let chosenValue = Math.random();
-    let summedProbability = 0;
-    for (let i = 0; i < probabilityTable.length; i++) {
-        summedProbability += oreList[probabilityTable[i]]["decimalRarity"];
-        if (chosenValue < summedProbability) {
-            blockToGive = probabilityTable[i];
-            break;
-        }
+    let low = 0;
+    let high = probabilityTable.length;
+    while (low < high) {
+    const mid = (low + high) >> 1; // Use bitwise shift for integer division
+    if (chosenValue >= generationProbabilities[mid]) {
+      low = mid + 1;
+    } else {
+      high = mid;
     }
+  }
+  low = probabilityTable.length - 1 - low;
+  blockToGive = probabilityTable[low];
     let hasLog;
     if (oreList[blockToGive]["numRarity"] >= 750000) {
-        /*
         hasLog = oreList[blockToGive]["hasLog"];
         if (hasLog) {
             verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), verifiedOres.getCurrentLuck());
         }
         spawnMessage(blockToGive, location);
         playSound(oreList[blockToGive]["oreTier"]);
-        */
     }
     return [blockToGive, hasLog];
 }
@@ -277,6 +278,11 @@ async function teleport() {
     canMine = false;
     clearInterval(loopTimer);
     curDirection = "";
+    pa1 = [];
+    pa2 = [];
+    pa3 = [];
+    pa4 = [];
+    pickaxeAbility23Num = 0;
     canMine = await toLocation();
     displayArea();
 }
