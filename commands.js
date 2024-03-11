@@ -109,6 +109,7 @@ function adminGetHelp() {
 function adminChangeLuck(value) {
     if (debug) {
         cat = value;
-        applyLuckToLayer(currentLayer, cat);
+        currentLayer = applyLuckToLayer(currentLayer, cat);
+        generationProbabilities = calculateCumulativeProbabilities();
     }
 }

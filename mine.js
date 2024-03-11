@@ -196,21 +196,27 @@ function generateBlock(luck, location) {
     while (low < high) {
     const mid = (low + high) >> 1; // Use bitwise shift for integer division
     if (chosenValue >= generationProbabilities[mid]) {
-      low = mid + 1;
-    } else {
-      high = mid;
-    }
-  }
-  low = probabilityTable.length - 1 - low;
-  blockToGive = probabilityTable[low];
-    let hasLog;
-    if (oreList[blockToGive]["numRarity"] >= 750000) {
-        hasLog = oreList[blockToGive]["hasLog"];
-        if (hasLog) {
-            verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), verifiedOres.getCurrentLuck());
+        low = mid + 1;
+        } else {
+            high = mid;
         }
-        spawnMessage(blockToGive, location);
-        playSound(oreList[blockToGive]["oreTier"]);
+    }
+    low = probabilityTable.length - 1 - low;
+    blockToGive = probabilityTable[low];
+    let oreRarity = oreList[blockToGive]["numRarity"];
+    let hasLog;
+    if (oreRarity >= 750000) {
+        let pickaxeLevel1 = currentWorld === 1 ? 9 : 100
+        let pickaxeLevel2 = currentWorld === 1 ? 6 : 100
+        let minRarity = (currentPickaxe > pickaxeLevel1 ? 15000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
+        if (oreRarity >= minRarity) {
+            hasLog = oreList[blockToGive]["hasLog"];
+            if (hasLog) {
+                verifiedOres.createLog(location[0],location[1],blockToGive, new Error(), verifiedOres.getCurrentLuck());
+            }
+            spawnMessage(blockToGive, location);
+            playSound(oreList[blockToGive]["oreTier"]);
+        }
     }
     return [blockToGive, hasLog];
 }

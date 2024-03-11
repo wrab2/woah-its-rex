@@ -428,9 +428,6 @@ function spawnMessage(block, location, caveInfo) {
     let output = "";
     let addToLatest = true;
     let fromCave = false;
-    let pickaxeLevel1 = currentWorld === 1 ? 9 : 100
-    let pickaxeLevel2 = currentWorld === 1 ? 6 : 100
-    let minRarity = (currentPickaxe > pickaxeLevel1 ? 15000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
     let oreRarity = oreList[block]["numRarity"];
     if (caveInfo != undefined && caveInfo[0]) {
         fromCave = true
@@ -442,13 +439,8 @@ function spawnMessage(block, location, caveInfo) {
         temp.push(undefined, undefined);
     if (fromCave) {
         temp.push(true, caveInfo[1]);
-        latestSpawns.push(temp);
-    } else {
-        if (oreRarity > minRarity)
-            latestSpawns.push(temp);
-        else
-            addToLatest = false;
     }
+    latestSpawns.push(temp);
 
     if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) {
         if (oreRarity > 2000000)
@@ -469,14 +461,8 @@ function spawnMessage(block, location, caveInfo) {
             output += "<br>"
         }
         document.getElementById("latestSpawns").innerHTML = output;
-        let spawnText = "";
-        if (customMessages[block] != undefined) {
-            spawnText += "<i>" + customMessages[block] + "</i><br>";
-        } else {
-            spawnText += block + " Has Spawned!<br>"
-        }
+        let spawnText = oreList[block]["spawnMessage"] + "<br>";
         if (caveInfo != undefined && caveInfo[0]) {
-            
             document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo[1]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0] - sub)).toLocaleString():"");
         } else {
             document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + oreList[block]["numRarity"].toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location[1] - 1000000000).toLocaleString() + "<br>Y: " + (-(location[0] - sub)).toLocaleString():"");
