@@ -1,4 +1,3 @@
-
 function adminGiveOres(block, amt) {
 if (debug) {
     if (amt === undefined)
@@ -13,6 +12,8 @@ if (debug) {
         oreList[block]["normalAmt"] += amt;
         updateInventory(block, 1);
     }
+} else {
+    window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
 function adminGivePickaxe(num) {
@@ -24,6 +25,8 @@ if (debug) {
     } else {
         pickaxes[num][1] = true;
     }
+} else {
+    window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
 function adminGiveGear(num) {
@@ -35,6 +38,8 @@ if (debug) {
     } else {
         gears[num] = true;
     }
+} else {
+    window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
 function adminRemovePickaxe(num) {
@@ -46,6 +51,8 @@ if (debug) {
     } else {
         pickaxes[num][1] = false;
     }
+} else {
+    window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
 function adminRemoveGear(num) {
@@ -57,6 +64,8 @@ if (debug) {
     } else {
         gears[num] = false;
     }
+} else {
+    window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
 let allGearNames = [
@@ -93,6 +102,8 @@ function adminListNums() {
         output += allGearNames[i] + " " + i + "\n";
     }
     console.log(output);
+    } else {
+        window.alert("INSUFFICIENT PERMISSIONS")
     }
 }
 function adminGetHelp() {
@@ -104,11 +115,15 @@ function adminGetHelp() {
     console.log("adminRemoveGear(num) - Num is the gear you want to delete, leave blank for all.");
     console.log("adminListNums() - Lists all the numbers for specific pickaxes and gears.")
     console.log("adminChangeLuck(value) - Changes the luck used for block generation to the chosen value.")
+    } else {
+        window.alert("INSUFFICIENT PERMISSIONS")
     }
 }
 function adminChangeLuck(value) {
     if (debug) {
         cat = value;
         currentLayer = applyLuckToLayer(currentLayer, cat);
+    } else {
+        window.alert("INSUFFICIENT PERMISSIONS")
     }
 }

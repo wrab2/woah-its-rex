@@ -44,7 +44,8 @@ function saveAllData() {
         cavesEnabled
         );
     dataStorage[4].push(gears);
-    localStorage.setItem("playerData", JSON.stringify(dataStorage));
+    if (!debug) localStorage.setItem("playerData", JSON.stringify(dataStorage));
+    else localStorage.setItem("testingData", JSON.stringify(dataStorage));
     checkLimitedOres();
 }
 function getAllSpawnVolumes() {
@@ -59,7 +60,9 @@ function getAllSpawnVolumes() {
 function loadAllData() {
     localStorage.setItem("dataBackup", localStorage.getItem("playerData"));
     try {
-        const data = JSON.parse(localStorage.getItem("playerData"));
+        let data;
+        if (!debug) data = JSON.parse(localStorage.getItem("playerData"));
+        else data = JSON.parse(localStorage.getItem("testingData"));
         for (let i = 0; i < data[0].length; i++) {
             if (oreList[data[0][i][0]] !== undefined) {
                 oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];

@@ -74,16 +74,18 @@ function init() {
     createSpecialLayers();
     createInventory();
     createMine();
-    let playedBefore = localStorage.getItem("playedBefore");
+    let playedBefore
+    if (!debug) playedBefore = localStorage.getItem("playedBefore");
+    else playedBefore = localStorage.getItem("testingPlayedBefore");
     if (playedBefore)
         canContinue = loadAllData();
     else
         canContinue = true;
     
     if (canContinue) {
-        if (!debug) 
-            repeatDataSave();
-        localStorage.setItem("playedBefore", true);
+        repeatDataSave();
+        if (!debug) localStorage.setItem("playedBefore", true);
+        else localStorage.setItem("testingPlayedBefore", true);
         localStorage.setItem("game2DataChanges", true);
         
         createPickaxeRecipes();
