@@ -530,6 +530,7 @@ function displayRecipe(num, element) {
         recipeDisplay.appendChild(title);
         recipeDisplay.appendChild(currentRecipe[1]);
         document.getElementById("craftingRecipeTitle").style.display = "block";
+        lastCount = 0;
     } else {
         while (recipeDisplay.firstChild) {
             recipeDisplay.removeChild(recipeDisplay.firstChild);
@@ -581,6 +582,7 @@ function displayRecipe(num, element) {
             recipeDisplay.appendChild(currentRecipe[1]);
             document.getElementById("craftingRecipeTitle").style.display = "block";
         } 
+        lastCount = 0;
     }
     updateActiveRecipe();
 }
@@ -705,7 +707,7 @@ const buttonGradients = {
     "craftPickaxe23" : {"gradient" : "linear-gradient(to right, #F5F5F5, #0D0D0D, #FFFDAF, #0D0D0D, #F5F5F5)","applied" : false},
 }
 
-
+let lastCount = 0;
 function updateActiveRecipe() {
     let count = 0;
     if (currentRecipe[0] != undefined) {
@@ -731,7 +733,8 @@ function updateActiveRecipe() {
                 button.style.backgroundImage = buttonGradients[button.id]["gradient"];
                 buttonGradients[button.id]["applied"] = true;
             }
-        } else {
+        } else if (count > lastCount){
+            lastCount = count;
             let percent = 100 * (count/length);
             button.style.backgroundImage = "linear-gradient(to right, green " + percent + "%, red " + (percent + 5) + "%)";
         }
@@ -771,6 +774,10 @@ function craftPickaxe(num) {
         document.getElementById("craftPickaxe" + num).innerText = "Equipped!";
         currentPickaxe = num;
     }
+    utilitySwitchActions();
+}
+function utilitySwitchActions() {
+    updateStats();
     changeLayerOres();
     applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
     switchLayerIndex(0);
@@ -802,7 +809,7 @@ function craftGear(num) {
             gears[num] = true;
         }
     }
-    switchLayerIndex(0);
+    utilitySwitchActions();
     if (currentWorld === 1 && num === 9)
         gearAbility2();
 }

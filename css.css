@@ -49,6 +49,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 .movementButton:hover {
   background-color: gray;
 }
+.latestFind {
+  margin: 0;
+}
 
 #leftAutoMine {
  background-image:url('media/leftautomine.png'); 
@@ -164,13 +167,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   border-style: solid;
   border-color: white;
   border-radius: 1px;
-  padding-left: 0.1em;
-  padding-right: 0.1em;
   float: left;
   width: 50%;
   font-size: 0.8vw;
-  min-height: 4em;
-  max-height: 16em;
   background-color: #1a1a1a;
   position: relative;
   top: 8px;
