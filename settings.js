@@ -61,8 +61,8 @@ let allPickaxeNames = ["Mulch Mallet",
 function changeUseNumbers(button) {
     if (!useNumbers) {
         let elements = document.getElementById("pickaxeCrafts").children;
-        for (let i = 1; i < elements.length; i++) {
-            elements[i].innerHTML = "Pickaxe " + i;
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].firstChild.innerText = "Pickaxe " + i;
         }
         if (button != undefined) {
             button.style.backgroundColor = "green";
@@ -79,11 +79,11 @@ function changeUseNumbers(button) {
         useNumbers = false;
     }
 }
-let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+"];
+let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+", "Interdimensional+"];
 let stopRareNum = 0;
 function changeMinRarity(button) {
     stopRareNum++;
-    if (stopRareNum > 7) {
+    if (stopRareNum > 8) {
         stopRareNum = 0;
     }
     button.innerHTML = stopRareValues[stopRareNum];
@@ -294,9 +294,10 @@ function switchLayerIndex(num, overrideNum, world) {
     if (layerNum < 0)
         layerNum = (add + 3);
     let layerToIndex;
+    let caveBase = currentWorld === 1 ? 11 : 8;
     layerNum = overrideNum === undefined ? layerNum : overrideNum;
     if (layerNum > (add - 1)) {
-        let caveNum = 11 - layerNum;
+        let caveNum = caveBase - layerNum;
         layerToIndex = caveList[allCaves[caveNum]];
     } else {
         if (world === 1) {

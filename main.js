@@ -4,7 +4,6 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'))
 let mine = [];
 let curX = 1000000000;
 let curY = 0;
@@ -96,6 +95,7 @@ function init() {
         for (let propertyName in caveList) {
             sortCaveRarities(caveList[propertyName]);
         }
+        cat = verifiedOres.getCurrentLuck();
         applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
         let limitedTimer = setInterval(checkLimitedOres, 10000);
         console.log("meow");
@@ -153,7 +153,6 @@ function movePlayer(dir, reps) {
                             curY++;
                             setLayer(curY);
                             mineBlock(curX, curY, "mining", 1);
-                            createMineIndexes();
                             mine[curY][curX] = "⛏️";
                             lastDirection = "s";
                         }
@@ -167,7 +166,6 @@ function movePlayer(dir, reps) {
                                 curY--;
                                 setLayer(curY);
                                 mineBlock(curX, curY, "mining", 1);
-                                createMineIndexes();
                                 mine[curY][curX] = "⛏️";
                                 lastDirection = "w";   
                         }
@@ -305,7 +303,7 @@ function moveOne(dir, button) {
 }
 
 //DISPLAY
-
+const invisibleBlock = "<span class='invisible'>⚪</span>";
 function displayArea() {
     if (canDisplay) {
         let output ="";
@@ -314,12 +312,13 @@ function displayArea() {
         if (currentWorld === 2)
             grass = 2000;
         for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) {
+            mine[r] ??= [];
             for (let c = curX - constraints[0]; c <= curX + 9 + (9-constraints[0]); c++) {
                 if (mine[r][c]) {
                     if (usePathBlocks)
                         output += mine[r][c];
                     else
-                        output += mine[r][c] === "⚪" ? "<span style='opacity:0;'>" + "⚪" + "</span>" : mine[r][c];   
+                        output += mine[r][c] === "⚪" ? invisibleBlock : mine[r][c];   
                 } else {
                     output += r === grass ? "🟩" : "⬛";
                 }
@@ -340,12 +339,11 @@ function displayArea() {
 
 const names = ["Normal", "Electrified", "Radioactive", "Explosive"];
 const namesemojis = ["", "⚡️", "☢️", "💥"]
-function switchInventory() {
+function switchInventory(amt) {
     document.getElementById(("inventory") + variant).style.display = "none";
-    if (variant === 4)
-        variant = 1;
-    else
-        variant++;
+    variant += amt;
+    if (variant > 4) variant = 1;
+    else if (variant < 1) variant = 4
     document.getElementById("inventory" + variant).style.display = "block";
     document.getElementById("switchInventory").innerHTML = names[variant - 1] + " Inventory"
     showing = false;
@@ -536,6 +534,8 @@ function getBackgroundColor(tier) {
             return {"backgroundColor" : "#ac47ff", "textColor" : "#ffffff"};
         case "Zenith" :
             return {"backgroundColor" : "#000000", "textColor" : "#ffffff"};
+        case "Interdimensional" :
+            return {"backgroundColor" : "#870000", "textColor" : "#ffffff"};
         case "Metaversal" :
             return {"backgroundColor" : "#fffeab", "textColor" : "#000000"};
         case "Otherworldly" :

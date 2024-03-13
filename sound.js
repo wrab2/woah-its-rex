@@ -31,7 +31,7 @@ function toggleMusic() {
     }
 }
 
-let canPlay = [true, true, true, true, true, true, true, true];
+let canPlay = [true, true, true, true, true, true, true, true, true];
 function changeCanPlay(num, button) {
     let text = button.innerHTML;
     text = text.substring(text.indexOf(" "));
@@ -145,6 +145,19 @@ function playSound(type) {
                 }
             }
             if (stopOnRare && stopRareNum < 8)
+                stopMining();
+            break;
+        case "interdimensional":
+            if (canPlay[8]) {
+                if (useDisguisedChills) {
+                    chill.currentTime = 0;
+                    chill.play();
+                } else {
+                    ethereal.currentTime = 0;
+                    ethereal.play();
+                }
+            }
+            if (stopOnRare && stopRareNum < 9)
                 stopMining();
             break;
     }

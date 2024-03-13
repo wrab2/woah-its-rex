@@ -196,6 +196,7 @@ let oreList = {
     
     
     '💰': { 'decimalRarity': 1 / 857000000000, 'numRarity': 857000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A silky bag showers you with money, scattering riches all around...', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    "💞": { 'decimalRarity': 1 / 96300000000, 'numRarity': 96300000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Though it was thought impossible, an intertwining aura of love blesses two lucky individuals...', 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🚽': { 'decimalRarity': 1 / 20240000000, 'numRarity': 20240000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "Don't even THINK about it...", 'oreTier': 'Zenith', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '📽️': { 'decimalRarity': 1 / 3780000000, 'numRarity': 3780000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "You're alone, and yet you feel the eyes of millions stare upon you through a peculiar lens...", 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🧂': { 'decimalRarity': 1 / 1337000000, 'numRarity': 1337000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "As if on the seaside, the air tastes of salt, yet there's the faint sound of yelling and profanity in the distance...", 'oreTier': 'Otherworldly', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -343,6 +344,7 @@ let oreList = {
     '❌': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
 
 
+    "☯️" : { 'decimalRarity': 1 / 987656789, 'numRarity': 987656789, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Through light and darkness, only one may guide you to the truth...', 'oreTier': 'Interdimensional', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     "⛏️": { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': false, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     "⚪": { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     "🟩": { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 }
@@ -365,7 +367,7 @@ const layerList = {
 "cloudLayer" : ["🪽", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
 "tvLayer" : ["🔫", "👾", "🏹", "💣", "🔨", "🪓", "🪃", "🛡️", "📺"],
 "doorLayer" : ["🗝️", "🪝", "🪡", "🛎️", "🚧", "⛓️", "🔏", "🖇️", "🔑", "🔒", "🚪"],
-"globeLayer" : ["💰", "🚽", "📽️", "🧂", "🔪", "💔", "🍆", "🖱️", "⌨️", "💻", "🌐"],
+"globeLayer" : ["💰", "💞", "🚽", "📽️", "🧂", "🔪", "💔", "🍆", "🖱️", "⌨️", "💻", "🌐"],
 "chessLayer" : ["⚖️", "🎓", "📍", "📌", "🔎", "🖊️", "📚", "📐", "📖", "🧠", "✏️", "♟️"],
 "barrierLayer" : ["❔", "✴️", "✖️"],
 "borderLayer" : ["🩸", "🚫", "💢", "🔇", "🛑", "⭕", "🔕", "❌"],
@@ -388,7 +390,6 @@ function setLayer(y) {
             if (tempNum !== currentLayerNum) {
                 currentLayerNum = tempNum;
                 currentLayer = createLayer([layerList[allLayers[tempNum]], layerList["worldOneCommons"]]);
-                generationProbabilities = calculateCumulativeProbabilities();
             }
         } else {
             if (tempNum > (lastLayerChange + 10000)) {
@@ -401,7 +402,6 @@ function setLayer(y) {
                     let num = Math.floor(Math.random() * 8)
                     currentLayerNum = num;
                     currentLayer = createLayer([layerList[allLayers[num]], layerList["worldOneCommons"]]);
-                    generationProbabilities = calculateCumulativeProbabilities();
                 }
             }
         }
@@ -412,13 +412,11 @@ function setLayer(y) {
             if (tempNum !== currentLayerNum) {
                 currentLayerNum = tempNum;
                 currentLayer = createLayer([layerList[allLayers[tempNum]], layerList["worldTwoCommons"]]);
-                generationProbabilities = calculateCumulativeProbabilities();
             }
         } else {
             if (currentLayer != layerList["borderLayer"]) {
                 currentLayer = layerList["borderLayer"];
                 currentLayerNum = 5;
-                generationProbabilities = calculateCumulativeProbabilities();
             }
         }
     }
@@ -426,11 +424,11 @@ function setLayer(y) {
 
 function createLayer(layers) {
     let output = [];
+    if (currentPickaxe === 13 && currentWorld === 1) output.push("☯️");
     for (let i = 0; i < layers.length; i++) {
         output = output.concat(layers[i]);
     }
-    output = sortLayerRarities(output);
-    applyLuckToLayer(output, verifiedOres.getCurrentLuck());
+    output = applyLuckToLayer(output, verifiedOres.getCurrentLuck());
     return output;
 }
 function sortLayerRarities(arr) {
@@ -449,14 +447,29 @@ let commons = ["Common","Uncommon","Rare","Master","Surreal"];
 function applyLuckToLayer(layer, luck) {
     for (let i = 0; i < layer.length; i++) {
         luck = debug ? cat : luck;
-        let newRarity = oreList[layer[i]]["numRarity"] / luck;
+        let newRarity = (oreList[layer[i]]["numRarity"] / luck);
         if (commons.indexOf(oreList[layer[i]]["oreTier"]) < 0)
-            oreList[layer[i]]["decimalRarity"] = 1/newRarity;
+            oreList[layer[i]]["decimalRarity"] = (1/newRarity);
     }
     if (layer != layerList["dirtLayer2"])
         updateSpecialLayers();
     layer = sortLayerRarities(layer);
     return layer;
+}
+
+function changeLayerOres() {
+    if (currentPickaxe === 13 && currentWorld === 1) {
+        if (currentLayer.indexOf("☯️") < 0) {
+            currentLayer.push("☯️");
+            applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+        }
+    } else {
+        if (currentLayer.indexOf("☯️") > -1) {
+            currentLayer.splice(currentLayer.indexOf("☯️"), 1);
+            applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+        }
+    }
+    
 }
 
 let lettuceLayerProbabilities;
@@ -533,9 +546,10 @@ function makeOreUnavailable(ore) {
     let layers = limitedOres[ore]["layers"];
     for (let i = 0; i < layers.length; i++) {
         let index = layerList[layers[i]].indexOf(ore);
-        if (index > -1)
+        if (index > -1) {
             layerList[layers[i]].splice(index, 1);
-        applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
+            applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
+        }
     }
 }
 

@@ -6,7 +6,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 
 //MINE CREATION
-
+const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'));
 function createMine() {
     for (let r = curY - 101; r < curY + 101; r++) {
         if (r > -1)
@@ -21,43 +21,37 @@ function createMine() {
 
 function checkAllAround(x, y, luck) {
     let generated;
+    mine[y] ??= [];
     if (x - 1 >= 0) {
-        if (mine[y] != undefined) {
-            if (mine[y][x - 1] === undefined) {
-                generated = generateBlock(luck, [y, x-1]);
-                mine[y][x - 1] = generated[0];
-                if (generated[1])
-                    verifiedOres.verifyLog(y, x-1);
-            }
-            
+        if (mine[y][x - 1] === undefined) {
+            generated = generateBlock(luck, [y, x-1]);
+            mine[y][x - 1] = generated[0];
+            if (generated[1])
+                verifiedOres.verifyLog(y, x-1);
         }
     }
-    if (mine[y] != undefined) {
-        if (mine[y][x + 1] === undefined) {
-            generated = generateBlock(luck, [y, x+1]);
-            mine[y][x + 1] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y, x+1);
-        }
-        }
-    if (mine[y + 1] === undefined) 
-        mine[y + 1] = [];
-        if (mine[y + 1][x] === undefined) {
-            generated = generateBlock(luck, [y+1, x]);
-            mine[y + 1][x] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y+1, x);
-        }
+    if (mine[y][x + 1] === undefined) {
+        generated = generateBlock(luck, [y, x+1]);
+        mine[y][x + 1] = generated[0];
+        if (generated[1])
+            verifiedOres.verifyLog(y, x+1);
+    }
+    mine[y + 1] ??= [];
+    if (mine[y + 1][x] === undefined) {
+        generated = generateBlock(luck, [y+1, x]);
+        mine[y + 1][x] = generated[0];
+        if (generated[1])
+            verifiedOres.verifyLog(y+1, x);
+    }
         
     if (y - 1 >= 0) {
-        if (mine[y - 1] === undefined) 
-            mine[y - 1] = [];
-            if (mine[y - 1][x] === undefined) {
-                generated = generateBlock(luck, [y-1, x]);
-                mine[y - 1][x] = generated[0];
-                if (generated[1])
-                    verifiedOres.verifyLog(y-1, x);
-            }
+        mine[y - 1] ??= [];
+        if (mine[y - 1][x] === undefined) {
+            generated = generateBlock(luck, [y-1, x]);
+            mine[y - 1][x] = generated[0];
+            if (generated[1])
+                verifiedOres.verifyLog(y-1, x);
+        }
         
     }
     if (blocksRevealedThisReset >= mineCapacity) {
@@ -72,19 +66,6 @@ function checkAllAround(x, y, luck) {
             }
             mineReset();
         }, 250);
-    }
-}
-
-function createMineIndexes() {
-    if (mine[curY + 100] === undefined)
-        mine[curY + 100] = [];
-    if (curY >= 50) {
-        if (mine[curY - 100] === undefined) 
-            mine[curY - 100] = [];
-    } else {
-        let constraints = getParams(0, 100);
-        if (mine[constraints[1]] === undefined)
-            mine[constraints[1]] = [];
     }
 }
 //MINING
@@ -191,18 +172,14 @@ function generateBlock(luck, location) {
 
     let blockToGive = "";
     let chosenValue = Math.random();
-    let low = 0;
-    let high = probabilityTable.length;
-    while (low < high) {
-    const mid = (low + high) >> 1; // Use bitwise shift for integer division
-    if (chosenValue >= generationProbabilities[mid]) {
-        low = mid + 1;
-        } else {
-            high = mid;
+    let summedProbability = 0;
+    for (let i = 0; i < probabilityTable.length; i++) {
+        summedProbability += oreList[probabilityTable[i]]["decimalRarity"];
+        if (chosenValue < summedProbability) {
+            blockToGive = probabilityTable[i];
+            break;
         }
     }
-    low = probabilityTable.length - 1 - low;
-    blockToGive = probabilityTable[low];
     let oreRarity = oreList[blockToGive]["numRarity"];
     let hasLog;
     if (oreRarity >= 750000) {
@@ -226,33 +203,6 @@ for (let i = 0; i < 30000; i++) {
     generateBlock(1, [curY + 1, curX]);
 }
 */
-
-function calculateCumulativeProbabilities() {
-    let cumulativeProbability = 0;
-    let cumulativeProbabilities = [];
-    let j = 0; 
-    for (let i = currentLayer.length - 1; i >= 0; i--) {
-        cumulativeProbability -= (oreList[currentLayer[i]]["decimalRarity"]);
-        cumulativeProbabilities[j] = cumulativeProbability;
-        j++;
-    }
-
-    const totalProbability = cumulativeProbability;
-    for (let i = 0; i < cumulativeProbabilities.length; i++) {
-        cumulativeProbabilities[i] /= totalProbability;
-    }
-    
-    cumulativeGenerations = totalProbability;
-    return cumulativeProbabilities;
-} 
-function stopMining() {
-    curDirection = "";
-    clearInterval(loopTimer);
-    if (ability1Active) {
-        clearTimeout(ability1Timeout);
-        ability1Active = false;
-    }
-}
 //TELEPORTING
 
 let distanceMulti = 1;
@@ -392,6 +342,14 @@ function switchWorld() {
     switchWorldCraftables();
     applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
     canMine = true;
+}
+function stopMining() {
+    curDirection = "";
+    clearInterval(loopTimer);
+    if (ability1Active) {
+        clearTimeout(ability1Timeout);
+        ability1Active = false;
+    }
 }
 
 
