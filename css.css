@@ -799,7 +799,20 @@ button, .col-3 > div > button {
 .h-10 {
   height: 10%;
 }
-
+#largeDisplay {
+  padding: 0.5em;
+  width: 100%;
+  margin: 0;
+  line-height: 1.8vw;
+  font-size: 1.55vw;
+  user-select: none;
+  text-wrap: nowrap;
+  text-align: center;
+  letter-spacing: -0.2em;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #fff;
+}
 
 @keyframes flashGreen {
   0% {background-color:white;}

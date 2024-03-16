@@ -147,7 +147,7 @@ function displayLarge() {
             }
             output += "<br>"
         }
-        element.id = "blockDisplay";
+        element.id = "largeDisplay";
         element.style.maxWidth = "10000vw";
         element.style.fontSize = "0.3vw"
         element.style.lineHeight = "0.3vw";

@@ -417,7 +417,7 @@ let variant = 1;
 function updateInventory(type, inv) {
     let amt = oreList[type][variantInvNames[inv - 1]];
     let element = document.getElementById((type + "amt" + (inv)));
-    element.innerText = amt;
+    element.innerText = amt.toLocaleString();
     if (amt > 0) element.parentElement.style.display = "block";
     else element.parentElement.style.display = "none";
 }
