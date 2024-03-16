@@ -300,8 +300,6 @@ function goDirection(direction, speed) {
         if (currentPickaxe === 12)
             reps++;
         reps += gears[19] ? 2 : 0;
-        miningSpeed = 0;
-        reps = 250;
         loopTimer = setInterval(movePlayer, miningSpeed, direction, reps);
         curDirection = direction;
         energySiphonerDirection = direction;
