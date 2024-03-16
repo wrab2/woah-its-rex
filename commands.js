@@ -127,3 +127,35 @@ function adminChangeLuck(value) {
         window.alert("INSUFFICIENT PERMISSIONS")
     }
 }
+function displayLarge() {
+    if (confirm("PERFORMING THIS ACTION WILL REQUIRE YOU TO RESTART YOUR GAME AFTER")) {
+        let element = document.createElement("div");
+        element.width = "10000px";
+        element.height = "10000px";
+        document.body.innerHTML = "";
+        document.body.style.overflow = "scroll"
+        let text = document.createElement('p');
+        let output = "";
+        for (let y = curY - 150; y < curY + 150; y++) {
+            mine[y] ??= [];
+            for (let x = curX - 150; x < curX + 150; x++) {
+                if (mine[y][x]) {
+                    output += mine[y][x];
+                } else {
+                    output += "⬛";
+                }
+            }
+            output += "<br>"
+        }
+        element.id = "blockDisplay";
+        element.style.maxWidth = "10000vw";
+        element.style.fontSize = "0.3vw"
+        element.style.lineHeight = "0.3vw";
+        element.style.border = "none";
+        text.innerHTML = output;
+        clearInterval(dataTimer);
+        clearInterval(limitedTimer);
+        element.appendChild(text);
+        document.body.appendChild(element);
+    }
+}

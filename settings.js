@@ -34,7 +34,8 @@ function changeCanDisplay(button) {
     }
 }
 let useNumbers = false;
-let allPickaxeNames = ["Mulch Mallet", 
+let allPickaxeNames = 
+["Mulch Mallet", 
 "Mud Sickle", 
 "Dirt Ravager", 
 "Void Crusher", 
@@ -57,12 +58,14 @@ let allPickaxeNames = ["Mulch Mallet",
 "Swirly Subjugator",
 "Singularity Slammer",
 "Staff of Binding",
+"Stormseer's Superspark Sceptre",
+"Coronary Catastrophe"
 ];
 function changeUseNumbers(button) {
     if (!useNumbers) {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 0; i < elements.length; i++) {
-            elements[i].firstChild.innerText = "Pickaxe " + i;
+            elements[i].firstChild.innerText = "Pickaxe " + (i + 1);
         }
         if (button != undefined) {
             button.style.backgroundColor = "green";
@@ -70,8 +73,8 @@ function changeUseNumbers(button) {
         useNumbers = true;
     } else {
         let elements = document.getElementById("pickaxeCrafts").children;
-        for (let i = 1; i < elements.length; i++) {
-            elements[i].innerHTML = allPickaxeNames[i - 1];
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].firstChild.innerText = allPickaxeNames[i];
         }
         if (button != undefined) {
             button.style.backgroundColor = "red";
@@ -322,7 +325,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚👽🪤🤖🦴🎩";
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚👽🪤🤖🦴🎩💘💞";
 function createIndexCards(layer, property) {
         let parentObject = document.createElement("div");
         parentObject.classList = "oreCard";

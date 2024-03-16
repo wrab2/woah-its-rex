@@ -4,6 +4,17 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
+const pixelcoordinate = (x, y, width) => {
+    const red = y * (width * 4) + x * 4;
+    return [red, red + 1, red + 2, red + 3];
+  };
+  const azeiclopiff = function(x, y){
+      const index = pixelcoordinate(x, y,this.canvas.width);
+      const data = this.getImageData(0,0,this.canvas.width,this.canvas.height).data;
+      return data[index[0]];
+  }
+  CanvasRenderingContext2D.prototype.getPixelColor = azeiclopiff;
+  OffscreenCanvasRenderingContext2D.prototype.getPixelColor = azeiclopiff;
 let mine = [];
 let curX = 1000000000;
 let curY = 0;
@@ -40,6 +51,8 @@ let pickaxes = [
     ['hey wait ive seen this one before', false], //21 ~75 consistency
     ['jesus christ what is it with world 2 and circles', false], //22 ~113 consistency
     ['man this ability sucks', false], //23 ~215 consistency
+    ["NOBODY WILL SURVIVE THIS ABILITY ACTIVATING", false],
+    ['ITS HUGE WHAT', false]
 ];
 let gears = [
     false, //ORE TRACKER 0
@@ -62,13 +75,14 @@ let gears = [
     false, //INFINITY COLLECTOR 2 17
     false, //LUCK 3 18
     false, //SPEED 3 19
-    false, //5% OF CURRENT PICKAXE LUCK 20
+    false, //15% OF CURRENT PICKAXE LUCK 20
 ];
 let currentPickaxe = 0;
 let currentWorld = 1;
 let currentLayerNum = 0;
 //IMPORTANT
 const date = new Date().getDay();
+let limitedTimer;
 function init() {
     let canContinue = true;
     createSpecialLayers();
@@ -99,7 +113,7 @@ function init() {
         }
         cat = verifiedOres.getCurrentLuck();
         utilitySwitchActions();
-        let limitedTimer = setInterval(checkLimitedOres, 10000);
+        limitedTimer = setInterval(checkLimitedOres, 10000);
         console.log("meow");
     }
 }
@@ -284,7 +298,8 @@ function goDirection(direction, speed) {
         if (miningSpeed < minMiningSpeed)
             miningSpeed = minMiningSpeed;
         if (currentPickaxe === 12)
-            reps = 2;
+            reps++;
+        reps += gears[19] ? 2 : 0;
         loopTimer = setInterval(movePlayer, miningSpeed, direction, reps);
         curDirection = direction;
         energySiphonerDirection = direction;
@@ -305,8 +320,8 @@ function moveOne(dir, button) {
 }
 
 function updateStats() {
-    let pickaxeLevel1 = currentWorld === 1 ? 9 : 100
-    let pickaxeLevel2 = currentWorld === 1 ? 6 : 100
+    let pickaxeLevel1 = currentWorld === 1 ? 9 : 22;
+    let pickaxeLevel2 = currentWorld === 1 ? 6 : 20;
     minRarity = (currentPickaxe > pickaxeLevel1 ? 15000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
 }
 
@@ -333,7 +348,7 @@ function displayArea() {
             }  
             output += "<br>";
         }
-        document.getElementById("blockDisplay").innerHTML = output;
+        document.getElementById("blockDisplay").innerHTML = (output.substring(0, output.length - 4));
     } else {
         document.getElementById("blockDisplay").innerHTML = "❌";
     }
@@ -391,7 +406,6 @@ function createInventory() {
             let rarity = oreList[propertyName]["numRarity"];
             if (oreList[propertyName]["caveExclusive"])
                 rarity *= getCaveMultiFromOre(propertyName);
-            console.log(rarity);
             tempElement.innerText = propertyName + " | 1/" + (rarity * multis[i - 1]).toLocaleString() + " | x";
             tempElement.innerHTML += "<span id=\"" + propertyName + "amt" + i + "\">" + oreNum.toLocaleString() + "</span>"
             document.getElementById(("inventory") + i).appendChild(tempElement);
@@ -449,7 +463,7 @@ function spawnMessage(block, location, caveInfo) {
     }
     if (spawnElement.children.length > 9) spawnElement.removeChild(spawnElement.lastChild);
 
-        let spawnText = oreList[block]["spawnMessage"] + "<br>";
+        let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
         if (caveInfo != undefined && caveInfo[0]) {
             document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo[1]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
         } else {
@@ -555,5 +569,31 @@ function getBackgroundColor(tier) {
             return {"backgroundColor" : "#ff0000", "textColor" : "#ffffff"};
         case "Common" :
             return {"backgroundColor" : "#c1c1c1", "textColor" : "#ffffff"};
+    }
+}
+//TY @marbelynrye FOR MAKING THESE IMAGE DATA GATHERERS UR SO COOL FOR THAT
+//IT WORKS SO WELL!!!!
+let pickaxe24Nums = [];
+const az = new Image()
+az.src = "ability1.jpg"
+        az.onload = () => {
+            const c = new OffscreenCanvas(az.width,az.height)
+            const cc = c.getContext("2d")
+            cc.drawImage(az,0,0)
+            const data = cc.getImageData(0,0,c.width,c.height).data
+            for (let i = 0; i < data.length; i+=4) {
+                data[i]>125?null:pickaxe24Nums.push({"x":(i / 4) % c.width,"y":Math.floor((i / 4) / c.width)})
+            }
+    }
+let pickaxe25Nums = [];
+const ay = new Image();
+ay.src = "coronalheart.png"
+ay.onload = () => {
+    const c = new OffscreenCanvas(ay.width,ay.height)
+    const cc = c.getContext("2d")
+    cc.drawImage(ay,0,0)
+    const data = cc.getImageData(0,0,c.width,c.height).data
+    for (let i = 0; i < data.length; i+=4) {
+        data[i]>125?null:pickaxe25Nums.push({"x":(i / 4) % c.width,"y":Math.floor((i / 4) / c.width)})
     }
 }

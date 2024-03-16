@@ -36,12 +36,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 }
 
 .movementButton {
-  width: 7vw!important;
-  height: 2vw!important;
+  width:20%;
+  height:100%;
   font-size: 1vw!important;
   background: none;
   border: none;
-  margin-left: -0.5%;
   margin-right: 0px;
   padding: 0%;
   float: left;
@@ -55,90 +54,63 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
 #leftAutoMine {
  background-image:url('media/leftautomine.png'); 
- border-left: 1px solid #fff;
- border-top: 1px solid #fff;
- border-bottom: 1px solid white;
 }
 
 #rightAutoMine {
   background-image:url('media/rightautomine.png'); 
-  border-right: 1px solid #fff;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid white;
 }
 
 #upAutoMine {
   background-image:url('media/upautomine.png'); 
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid white;
 }
 
 #downAutoMine {
   background-image:url('media/downautomine.png'); 
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid white;
 }
 
 #leftOne {
   background-image:url('media/leftone.png'); 
-  border-left: 1px solid #fff;
-  border-bottom: 1px solid #fff;
   background-size: 100% 70%;
-  border-top: 1px solid white;
 }
 
 #rightOne {
   background-image:url('media/rightone.png'); 
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
   background-size: 100% 70%;
-  border-top: 1px solid white;
 }
 
 #upOne {
   background-image:url('media/upone.png'); 
-  border-bottom: 1px solid #fff;
   background-size: 60% 110%;
-  border-top: 1px solid white;
 }
 
 #downOne {
   background-image:url('media/downone.png'); 
-  border-bottom: 1px solid #fff;
   background-size: 60% 110%;
-  border-top: 1px solid white;
 }
 
 .horizontalArrow {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 80% 70%;
+    background-size: 100% 100%;
 }
 
 .verticalArrow {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 70% 95%;
+    background-size: 50% 100%;
+}
+.craftingButton span {
+  font-size: 1.5vw;
 }
 .mobile {
   display: inline-block;
   cursor:default;
   width: 100%;
-  height: 2.5%;
+  height: 3%;
   vertical-align: middle;
-  margin-left: 15.8%;
-  margin-top: 2%;
+  
 }
-#teleportButton {
-    border-top: 1px solid white;
-    border-right: 1px solid white;
-    border-bottom: 1px solid white;
-}
-#meterDisplay {
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
-  border-top: 1px solid white;
-}
+
 
 .craftingAmountsDisplay {
   font-size: 1vw;
@@ -164,9 +136,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
 .latestDisplay {
   text-align: center !important;
-  border-style: solid;
-  border-color: white;
-  border-radius: 1px;
   float: left;
   width: 50%;
   font-size: 0.8vw;
@@ -176,7 +145,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 }
 
 .itemDescription {
-  font-size: 100%;
+  font-size: 1.5vw;
   font-family:'Times New Roman', Times, serif
 }
 #gearCrafts {
@@ -205,7 +174,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   background: none;
   border: none;
   border-top:3px solid #333;
-  height: 4%;
+  height: 3vw;
   font-size: 1.6vw;
   color: white;
   font-weight: 1000;
@@ -269,9 +238,13 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 #crafting {
   border-top:1px solid #333; 
   padding-bottom: 5%;
+  font-size: 2.5vw;
+}
+#craftingRecipeTitle {
+  font-size: 2.5vw;
 }
 .middleTitle {
-  height:5%;
+  height:4vw;
   font-size: 1.7vw;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-bottom: 0%!important;
@@ -296,6 +269,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 #descriptionTitle {
   border-bottom:1px solid #333; 
   margin-bottom: 2%!important;
+  font-size: 2.5vw;
 }
 #pressPlay {
   font-family: 'Arial', sans-serif;
@@ -389,7 +363,6 @@ img.roundcat {
 .row {
   display: flex;
   height: 100%;
-  /*padding-top: 0.5em;*/
 }
 
 .row > * > *:first-child {
@@ -402,20 +375,21 @@ img.roundcat {
 
 
 #blockDisplay {
-  padding: 0.5em;
+  margin-bottom: 0;
+}
+#blockContainer {
+  padding: 0;
   width: 100%;
-  margin: 0;
+  margin-bottom: 1vw;
   line-height: 1.8vw;
   font-size: 1.55vw;
   user-select: none;
   text-wrap: nowrap;
   text-align: center;
   letter-spacing: -0.2em;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: #fff;
   position: relative;
-  top: 18px;
+  border-top:5px solid #333;
+  border-bottom:3px solid #333;
 }
 
 #spawnMessage {
@@ -427,10 +401,6 @@ img.roundcat {
 p {
   color: white;
 }
-
-/*.col-3 > br {
-  display: none;
-}*/
 
 button, .col-3 > div > button {
   font-size: 1vw;
@@ -463,6 +433,8 @@ button, .col-3 > div > button {
   width: 50%;
   float: left;
   text-align: center;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .col-2 {
@@ -477,9 +449,6 @@ button, .col-3 > div > button {
   padding-left: 0%;
   padding-right: 0%;
 }
-/*
-
-*/
 ::-webkit-scrollbar {
   width: 0;
 }
@@ -489,6 +458,7 @@ button, .col-3 > div > button {
   height: 100%;
   max-height: 100vh;
   padding: 0px;
+  border-left:3px solid #333;
 }
 
 #musicStuff > label {
@@ -506,7 +476,6 @@ button, .col-3 > div > button {
   display: flex;
   align-items: center;
   text-decoration: none;
-  /*border: 2px dashed;*/
 }
 
 #discord > img {
@@ -522,31 +491,18 @@ button, .col-3 > div > button {
   text-wrap: nowrap;
 }
 
-/*.col-3 > p:first-of-type {
-  margin-bottom: 0.5rem;
-}*/
-
-
 #latestSpawns  #latestFinds {
   height: 100%;
   font-size: 0.3vh;
+  border:none;
+}
+#latestSpawns {
+  
+}
+#latestFinds {
+
 }
 
-/*.col-3 > a {
-  display: none;
-}
-
-.col-3 > p {
-  display: none;
-}
-
-.col-3 > hr {
-  display: none;
-}
-
-.col-2 > hr {
-  display: none;
-}*/
 
 .container-fluid {
   height: 100%;
@@ -836,6 +792,7 @@ button, .col-3 > div > button {
 .h-10 {
   height: 10%;
 }
+
 
 @keyframes flashGreen {
   0% {background-color:white;}

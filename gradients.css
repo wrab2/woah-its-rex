@@ -113,3 +113,63 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#oreTracker span{
+    background: linear-gradient(to right, #005820, #00FF23);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#realCandilium span{
+    background: linear-gradient(to right,#FFF1C0, #FF9E40);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#realVitriol span{
+    background: linear-gradient(to right,#F9F9F9, #FFFB48);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#energySiphoner span{
+    background: linear-gradient(to right,#62FF96, #F9F9F9, #FF9FDF);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#sugarRush span{
+    background: linear-gradient(to right,#FF5609, #D7C100, #A8FF21);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#infinityCollector span{
+    background: linear-gradient(to right,#2E2486, #45FFF2, #45A5FF);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#layerMaterializer span{
+    background: linear-gradient(to right,#AEAEAE, #AEAEAE, #49C6FF, #6DD700, #F7F7F7, #AD7F57, #FF6312);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#fortuneIIIBook span{
+    background: linear-gradient(to right,#CA18FF, #5D6BDC, #00ED2D, #5D6BDC, #CA18FF);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#hasteIIBeacon span{
+    background: linear-gradient(to right,#CDAE35, #FFF584, #5DFBFF, #FFF584, #CDAE35);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#sillyRecipe span{
+    background: linear-gradient(to right,#FFEFD8, #FF5FE4, #FF2727, #FF5FE4, #FFEFD8);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#stormseersSupersparkSceptre span{
+    background: linear-gradient(to right, #F6FF58 7%, #0030F1, #676767, #57FDFF, #FC5EFF 93%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#text span{
+    background: linear-gradient(to right,);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

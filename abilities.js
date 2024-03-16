@@ -156,6 +156,18 @@ async function rollAbilities() {
                 updateActiveRecipe();
             }
             break;
+        case 24:
+            if (Math.random() <= 1/300) {
+                pickaxeAbility24(curX, curY);
+                updateActiveRecipe();
+            }
+            break;
+        case 25:
+            if (Math.random() <= 1/400) {
+                pickaxeAbility25(curX, curY);
+                updateActiveRecipe();
+            }
+            break;
     
     }
 }
@@ -755,7 +767,7 @@ function pickaxeAbility18(x, y) {
 }
 function pickaxeAbility19(x, y, reps) {
     return new Promise((resolve) => {
-    if (reps > 5)
+    if (reps > 10)
         return;
     let newOrigins = [];
     let dist = 7;
@@ -1070,49 +1082,23 @@ function pickaxeAbility23(x, y) {
     }, 1);
     });
 }
-/*
-let pick24Procs = 0;
-function p24(x, y) {
-    let tempY = y;
-    for (let c = 0; c < 15; c++) {
-        for (let r = tempY; r >= tempY - 5; r--) {
-            pickaxeAbilityMineBlock(x + c, r);
-            pickaxeAbilityMineBlock(x - c, r);
-        }
-        tempY -= 5;
+function pickaxeAbility24(x, y) {
+    x = x - 60;
+    y = y - 110;
+    for (let i = 0; i < pickaxe24Nums.length; i++) {
+        pickaxeAbilityMineBlock(pickaxe24Nums[i]["x"] + x, pickaxe24Nums[i]["y"] + y)
     }
-    let downY = [0, 20, 40, 60, 80];
-    if (pick24Procs > 9) {
-        pick24Procs = 0;
-    }
-    
-    for (let i = downY.length - 1; i >= 0; i--) {
-        let tempY;
-        let tempX1 = x;
-        let tempX2 = x;
-        for (let r = y; r < y + (downY[i] + pick24Procs + 2); r++) {
-            for (let c = tempX1; c < tempX1 + (5 - i); c++) {
-                pickaxeAbilityMineBlock(c, r);
-            }
-            for (let c = tempX2; c > tempX2 - (5 - i); c--) {
-                pickaxeAbilityMineBlock(c, r);
-            }
-            tempX1 += (5 - i)
-            tempY = r;
-            tempX2 -= (5 - i);
-            tempY = r;
-        }
-        if (i > 0) {
-            for (let c = 0; c < 250; c++) {
-                pickaxeAbilityMineBlock(tempX1 + c, tempY);
-                pickaxeAbilityMineBlock(tempX2 - c, tempY);
-            }
-        }
-    }
-    pick24Procs++;
     displayArea();
 }
-*/
+function pickaxeAbility25(x, y) {
+    x = x - 130;
+    y = y - 110;
+    for (let i = 0; i < pickaxe25Nums.length; i++) {
+        pickaxeAbilityMineBlock(pickaxe25Nums[i]["x"] + x, pickaxe25Nums[i]["y"] + y)
+    }
+    displayArea();
+}
+
 function pickaxeAbilityMineBlock(x, y) {
     let generated;
     if (y > 0) {
@@ -1126,3 +1112,4 @@ function pickaxeAbilityMineBlock(x, y) {
         mineBlock(x, y, "ability"); 
     }
 }
+//GET THIS HELL SPAWN AWAY FROM ME PLEASE

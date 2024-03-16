@@ -297,6 +297,34 @@ worldTwoPickaxes = [
         ["🔏", 1],
         ["⛓️", 1],
     ],
+    [
+        ["☁️", 1250000000],
+        ["🔃", 25000000],
+        ["⏬", 50000],
+        ["⏺️", 25000],
+        ["⏏️", 8400],
+        ["📙", 17500],
+        ["📘", 15000],
+        ["🌨️", 300],
+        ["🪁", 200],
+        ["⛈️", 120],
+        ["🌩️", 50],
+        ["🪶", 10]
+    ],
+    [
+        ["🌐", 3000000000],
+        ["🔂", 26000000],
+        ["⬇️", 2200000],
+        ["◀️", 325000],
+        ["⏫", 260000],
+        ["🖱️", 8500],
+        ["💔", 600],
+        ["🔪", 150],
+        ["🧂", 70],
+        ["📽️", 25],
+        ["💘", 1]
+    ]
+    
 ],
 worldOneGears = [
     //ORE TRACKER
@@ -659,6 +687,7 @@ for (let i = 0; i < worlds.length; i++) {
             element.id = (ore + ("gearRecipe" + (j) + "Display"));
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
             element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
+            element.classList = "recipeOreDisplay";
             let colors = getBackgroundColor(oreList[ore]["oreTier"]);
             element.style.backgroundColor = colors["backgroundColor"];
             element.style.margin = "0px";
@@ -676,6 +705,7 @@ for (let i = 0; i < worlds.length; i++) {
         else
             tempButton.innerHTML = "Craft!";
         tempButton.style.width = "100%";
+        tempButton.classList = "craftPickaxeButton";
         tempElement.appendChild(tempButton);
         recipeElements[1].push(tempElement);
     }
@@ -705,6 +735,29 @@ const buttonGradients = {
     "craftPickaxe21" : {"gradient" : "linear-gradient(135deg, #FFE200, #464646, #FFE200, #464646, #FFE200, #464646, #FFE200)","applied" : false},
     "craftPickaxe22" : {"gradient" : "linear-gradient(to right, #C20000, #FF5300, #0D0D0D, #0D0D0D, #0D0D0D, #0D0D0D, #FF5300, #C20000)","applied" : false},
     "craftPickaxe23" : {"gradient" : "linear-gradient(to right, #F5F5F5, #0D0D0D, #FFFDAF, #0D0D0D, #F5F5F5)","applied" : false},
+    "craftPickaxe24" : {"gradient" : "linear-gradient(to right, #F6FF58 7%, #0030F1, #676767, #57FDFF, #FC5EFF 93%","applied" : false},
+    "craftPickaxe25" : {"gradient" : "linear-gradient(to right, #FF2454, #600018, #FF8DCC, #121212, #FF8DCC, #600018, #FF2454","applied" : false},
+
+    "craftGear0" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
+    "craftGear1" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
+    "craftGear2" : {"gradient" : "linear-gradient(to right, #F9F9F9, #FFFB48","applied" : false},
+    "craftGear3" : {"gradient" : "linear-gradient(to right, #2E2486, #45FFF2, #45A5FF","applied" : false},
+    "craftGear4" : {"gradient" : "linear-gradient(to right, #AEAEAE, #AEAEAE, #49C6FF, #6DD700, #F7F7F7, #AD7F57, #FF6312","applied" : false},
+    "craftGear5" : {"gradient" : "linear-gradient(to right, #CA18FF, #5D6BDC, #00ED2D, #5D6BDC, #CA18FF","applied" : false},
+    "craftGear6" : {"gradient" : "linear-gradient(to right, #CDAE35, #FFF584, #5DFBFF, #FFF584, #CDAE35","applied" : false},
+    "craftGear7" : {"gradient" : "linear-gradient(to right, #62FF96, #F9F9F9, #FF9FDF","applied" : false},
+    "craftGear8" : {"gradient" : "linear-gradient(to right, #FF5609, #D7C100, #A8FF21","applied" : false},
+    "craftGear9" : {"gradient" : "linear-gradient(to right, #FFEFD8, #FF5FE4, #FF2727, #FF5FE4, #FFEFD8)","applied" : false},
+    "craftGear10" : {"gradient" : "linear-gradient(to right, #8BEFFF, #44CDFF","applied" : false},
+    "craftGear11" : {"gradient" : "linear-gradient(to right, #0016AD, #616161, #616161, #FFEF32","applied" : false},
+    "craftGear12" : {"gradient" : "linear-gradient(to right, #931A1C 30%, #9CC400 80%","applied" : false},
+    "craftGear13" : {"gradient" : "linear-gradient(to right, #7AFF1F, #FFEB00, #FF0B0B","applied" : false},
+    "craftGear14" : {"gradient" : "linear-gradient(to right, #856447, #B2B2B2, #585858","applied" : false},
+    "craftGear15" : {"gradient" : "linear-gradient(to right, #DFCE21, #F1F1F1, #0C1656 90%","applied" : false},
+    "craftGear16" : {"gradient" : "linear-gradient(to right, #DCD56B, #550000, #00551F","applied" : false},
+    "craftGear17" : {"gradient" : "linear-gradient(to right, #2E2486, #45FFF2, #45A5FF ","applied" : false},
+    
+    
 }
 
 let lastCount = 0;
