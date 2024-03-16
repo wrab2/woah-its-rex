@@ -14,7 +14,6 @@ async function rollAbilities() {
         if (Math.random() < 1/750 && cavesEnabled) {
             generateCave(curX, curY, 0, 0);
             displayArea();
-            gearAbility3();
         }
     }
     switch (currentPickaxe) {
@@ -199,17 +198,6 @@ function gearAbility1() {
 function gearAbility2() {
     if (currentWorld === 1 && gears[9]) {
         currentLayer = createLayer([layerList["sillyLayer"]]);
-    }
-}
-
-function gearAbility3() {
-    if (loggedFinds.length > 0 && ((currentWorld === 1 && gears[3]) || (currentWorld === 2 && gears[17]))) {
-        for (let i = 0; i < loggedFinds.length; i++) {
-            if (mine[loggedFinds[i][0]] !== undefined && mine[loggedFinds[i][0]][loggedFinds[i][1]] !== undefined) {
-                mineBlock(loggedFinds[i][1], loggedFinds[i][0], "ability", 1);
-                loggedFinds.splice(i, 1);
-            }
-        }
     }
 }
 
@@ -1103,12 +1091,8 @@ function pickaxeAbilityMineBlock(x, y) {
     let generated;
     if (y > 0) {
         mine[y] ??= [];
-        if (mine[y][x] === undefined) {
-            generated = generateBlock({"Y":y, "X":x});
-            mine[y][x] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y, x);
-        }
+        if (mine[y][x] === undefined) 
+            generateBlock({"Y":y, "X":x});
         mineBlock(x, y, "ability"); 
     }
 }

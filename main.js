@@ -215,7 +215,6 @@ function movePlayer(dir, reps) {
                 default:
             }
             updateActiveRecipe();
-            gearAbility3();
         }
         displayArea();
         }
@@ -436,12 +435,15 @@ function spawnMessage(block, location, caveInfo) {
     //ADD TO MINE CAPACITY IF NEAR RESET
     //CAVEINFO[0] = TRUE/FALSE
     //CAVEINFO[1] = ADJUSTED RARITY
-    if ((!(gears[3] || gears[17]) && blocksRevealedThisReset > mineCapacity - 10000 && mineCapacity < 120000) || currentWorld === 2)
+    if ((currentWorld === 1 && !gears[3]) && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
+        mineCapacity += 10000;
+    else if (!gears[17] && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
         mineCapacity += 10000;
     let oreRarity = oreList[block]["numRarity"];
+    if (oreList[block]["hasLog"] || (caveInfo != undefined && caveInfo[0]))
+        verifiedOres.verifyLog(location["Y"], location["X"]);
     if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) {
-        if (oreRarity > 2000000)
-        loggedFinds.push([location["Y"], location["X"]]);
+        mineBlock(location["X"], location["Y"], "ability");
     }
     let spawnElement = document.getElementById("latestSpawns");
     let sub = currentWorld === 1 ? 0 : 2000;

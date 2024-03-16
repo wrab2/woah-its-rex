@@ -24,10 +24,7 @@ function generateCave(x, y, rate, reps, type) {
                         newOrigins.push([c + (Math.round(Math.random() * 4)) - (5 + reps), r + (Math.round(Math.random() * 4)) - (5 + reps)]);
                         if (r > 0) {
                             if (mine[r][c] === undefined) {
-                                let generated = generateCaveBlock(r, c, caveType);
-                                mine[r][c] = generated[0];
-                                if (generated[1])
-                                    verifiedOres.verifyLog(r, c);
+                                generateCaveBlock(r, c, caveType);
                             }  
                         }
                         mineCaveBlock(c, r, caveType);
@@ -66,26 +63,17 @@ function mineCaveBlock(c, r, type) {
         mine[r + 1] = [];
     }
     if (mine[r + 1][c] === undefined) {
-        generated = generateCaveBlock(r + 1, c, type);
-        mine[r + 1][c] = generated[0];
-        if (generated[1]) 
-            verifiedOres.verifyLog(r + 1, c);
+        generateCaveBlock(r + 1, c, type);
         blocksRevealedThisReset++;
     }
     //CHECK TO THE RIGHT OF THE BLOCK
     if (mine[r][c + 1] === undefined) {
-        generated = generateCaveBlock(r, c + 1, type);
-        mine[r][c + 1] = generated[0];
-        if (generated[1]) 
-            verifiedOres.verifyLog(r, c + 1);
+        generateCaveBlock(r, c + 1, type);
         blocksRevealedThisReset++;
     }
     //CHECK TO THE LEFT OF THE BLOCK
     if (mine[r][c - 1] === undefined) {
-        generated = generateCaveBlock(r, c - 1, type);
-        mine[r][c - 1] = generated[0];
-        if (generated[1]) 
-            verifiedOres.verifyLog(r, c - 1);
+        generateCaveBlock(r, c - 1, type);
         blocksRevealedThisReset++;
     }
     //CHECK ABOVE THE BLOCK 
@@ -93,10 +81,7 @@ function mineCaveBlock(c, r, type) {
         mine[r - 1] = [];
     }
     if (r - 1 > 0 && mine[r - 1][c] === undefined) {
-        generated = generateCaveBlock(r - 1, c, type);
-        mine[r - 1][c] = generated[0];
-        if (generated[1]) 
-            verifiedOres.verifyLog(r - 1, c);
+        generateCaveBlock(r - 1, c, type)
         blocksRevealedThisReset++;
     }
 }
@@ -127,12 +112,13 @@ let caveLuck = 1;
 function generateCaveBlock(y, x, type) {
     if (currentWorld === 2 && y === 10000) {
         if (Math.random() < 1/20000) {
-            return ["✴️", false, 1];
+            mine[y][x] = "✴️";
+            return;
         } else {
-            return ["✖️", false, 1];
+            mine[y][x] = "✖️";
+            return;
         }
     }
-    let hasLog;
     let chosenValue = Math.random();
     if (debug) chosenValue /= caveLuck;
     let summedProbability = 0;
@@ -147,30 +133,28 @@ function generateCaveBlock(y, x, type) {
     let multi = getCaveMulti(type);
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
+    mine[y][x] = blockToGive;
     if (getCaveMulti(type) > 1) {
         if (adjRarity >= 25000000) {
             if (oolProbabilities[blockToGive] != undefined)
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, [y, x], [true, adjRarity]);
-                hasLog = true;
+                spawnMessage(blockToGive, {"Y" : y, "X" : x}, [true, adjRarity]);
                 playSound(oreList[blockToGive]["oreTier"])
             }
         }
     } else {
-        if (oreList[blockToGive]["numRarity"] >= 750000) {
-            hasLog = oreList[blockToGive]["hasLog"];
-            if (hasLog)
+        if (oreList[blockToGive]["numRarity"] > minRarity) {
+            if (oreList[blockToGive]["hasLog"]);
                 verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, false]);
-            spawnMessage(blockToGive, [y, x]);
+            spawnMessage(blockToGive, {"Y" : y, "X" : x});
             playSound(oreList[blockToGive]["oreTier"]);
         }
     }
     if (oreList[blockToGive]["decimalRarity"] < 1/1) {
         caveOreLocations.push([y, x, adjRarity]);
     }
-    return [blockToGive, hasLog, adjRarity];
 }
 
 

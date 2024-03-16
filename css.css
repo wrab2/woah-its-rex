@@ -825,10 +825,5 @@ button, .col-3 > div > button {
   100% {background-color:white;}
 }
 @keyframes inventoryFlash {
-  0% {background-color:#1a1a1a;}
-  50% {background-color:lightgreen;}
-  100% {background-color:#1a1a1a;}
-
-  50% {background-color:lightgreen;}
-  100% {background-color:white;}
+  50% {background-color:green;}
 }

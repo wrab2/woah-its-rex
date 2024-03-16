@@ -24,39 +24,26 @@ function checkAllAround(x, y, luck) {
     mine[y] ??= [];
     if (x - 1 >= 0) {
         if (mine[y][x - 1] === undefined) {
-            generated = generateBlock({"Y" : y, "X" : x-1});
-            mine[y][x - 1] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y, x-1);
+            generateBlock({"Y" : y, "X" : x-1});
         }
     }
     if (mine[y][x + 1] === undefined) {
-        generated = generateBlock({"Y" : y, "X" : x+1});
-        mine[y][x + 1] = generated[0];
-        if (generated[1])
-            verifiedOres.verifyLog(y, x+1);
+        generateBlock({"Y" : y, "X" : x+1});
     }
     mine[y + 1] ??= [];
     if (mine[y + 1][x] === undefined) {
-        generated = generateBlock({"Y" : y+1, "X" : x});
-        mine[y + 1][x] = generated[0];
-        if (generated[1])
-            verifiedOres.verifyLog(y+1, x);
+        generateBlock({"Y" : y + 1, "X" : x}); 
     }
         
     if (y - 1 >= 0) {
         mine[y - 1] ??= [];
         if (mine[y - 1][x] === undefined) {
-            generated = generateBlock({"Y" : y-1, "X" : x});
-            mine[y - 1][x] = generated[0];
-            if (generated[1])
-                verifiedOres.verifyLog(y-1, x);
+            generateBlock({"Y" : y - 1, "X" : x});
         }
         
     }
     if (blocksRevealedThisReset >= mineCapacity) {
         canMine = false;
-        //gearAbility3();
         clearInterval(loopTimer);
         blocksRevealedThisReset = 0;
         setTimeout(() => {
@@ -71,7 +58,12 @@ function checkAllAround(x, y, luck) {
 //MINING
 
 function mineBlock(x, y, cause) {
-    let ore = mine[y][x];
+    let ore;
+    try {
+        ore = mine[y][x];
+    } catch {
+        return;
+    }
     if (ore === "🟩") ore = "🟫";
     if (ore === "⚪") return;
     if (oreList[ore]["isBreakable"]) {
@@ -163,8 +155,11 @@ function generateBlock(location) {
         if (location["Y"] === 10000 && currentWorld === 2)
             probabilityTable = layerList[specialLayers[3]];
     }
-    if ((location["Y"] === 0 && currentWorld === 1) || (location["Y"] === 2000 && currentWorld === 2))
-        return ["🟩", false];
+    if ((location["Y"] === 0 && currentWorld === 1) || (location["Y"] === 2000 && currentWorld === 2)) {
+        mine[location["Y"]][location["X"]] = "🟩";
+        return;
+    }
+        
 
     let blockToGive = "";
     let chosenValue = Math.random();
@@ -178,6 +173,7 @@ function generateBlock(location) {
     }
     let oreRarity = oreList[blockToGive]["numRarity"];
     let hasLog = false;
+    mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity > minRarity) {
         hasLog = oreList[blockToGive]["hasLog"];
         if (hasLog) {
@@ -186,12 +182,14 @@ function generateBlock(location) {
         spawnMessage(blockToGive, location);
         playSound(oreList[blockToGive]["oreTier"]);
     }
-    return [blockToGive, hasLog];
 }
 /*
 let totalSpeeds = 0;
-for (let i = 0; i < 30000; i++) {
-    generateBlock(1, [curY + 1, curX]);
+for (let i = 0; i < 100000; i++) {
+    let num1 = Date.now();
+    generateBlock({"Y" : curY + 1, "X" : curX});
+    let num2 = Date.now();
+    totalSpeeds += (num2 - num1);
 }
 */
 //TELEPORTING
