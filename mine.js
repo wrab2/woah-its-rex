@@ -178,7 +178,7 @@ function generateBlock(location) {
     }
     let oreRarity = oreList[blockToGive]["numRarity"];
     let hasLog = false;
-    if (oreRarity >= minRarity) {
+    if (oreRarity > minRarity) {
         hasLog = oreList[blockToGive]["hasLog"];
         if (hasLog) {
             verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());

@@ -168,6 +168,56 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#logicalRandomiser span{
+    background: linear-gradient(to right, #8BEFFF, #44CDFF);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#stormSneakers span{
+    background: linear-gradient(to right, #0016AD, #616161, #616161, #FFEF32);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#artificeAnnihilator span{
+    background: linear-gradient(to right,#931A1C 30%, #9CC400 80%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#repurposedReplicator span{
+    background: linear-gradient(to right,#7AFF1F, #FFEB00, #FF0B0B);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#cavernCapacitator span{
+    background: linear-gradient(to right,#856447, #B2B2B2, #585858);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#highPoweredVacuum span{
+    background: linear-gradient(to right,#DFCE21, #F1F1F1, #0C1656 90%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#unlockedSpeedcap span{
+    background: linear-gradient(to right,#DCD56B, #550000, #00551F);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#coronaryCatastrophe span{
+    background: linear-gradient(to right,#FF2454, #600018, #FF8DCC, #121212, #FF8DCC, #600018, #FF2454);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#text span{
+    background: linear-gradient(to right,);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#text span{
+    background: linear-gradient(to right,);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

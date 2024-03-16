@@ -50,6 +50,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <li>Background music made by @x2corp on Discord!</li>
     <li>Spawn sounds made by @monocrexy on Discord!</li>
     <li>Some sounds made by @tevv_  & @etherealelysia on Discord!</li>
+    <li>Many ideas by @viridescentluna on Discord!</li>
     <li>Thanks to all the spreadsheet editors!</li>
   </ul>
   <a class="server-link" href="https://discord.gg/qxBBvAm2bM" target="_blank">
@@ -118,17 +119,17 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe(5, this)" id="fortuneIIIBook"><span>Fortune III Book</span></button>
                     <button class="craftingButton" onclick="displayRecipe(6, this)" id="hasteIIBeacon"><span>Haste II Beacon</span></button>
                     <button class="craftingButton" onclick="displayRecipe(9, this)" id="sillyRecipe" style="display: none;"><span>SILLYYYY</span></button>
-                    <button class="craftingButton" onclick="displayRecipe(10, this)" style="display: none;">Logical Randomiser</button>
-                    <button class="craftingButton" onclick="displayRecipe(11, this)" style="display: none;">Storm Sneakers</button>
-                    <button class="craftingButton" onclick="displayRecipe(12, this)" style="display: none;">Artifice Annihilator</button>
-                    <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;">Repurposed Replicator</button>
-                    <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;">Cavern Capacitator</button>
-                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;">High Powered Vacuum</button>
-                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;">Unlocked Speedcap</button>
-                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;">Infinity Collector II</button>
-                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;"disabled="true">Clover's Undoing</button>
-                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;"disabled="true">Fantastical Feather</button>
-                    <button class="craftingButton" onclick="displayRecipe(20, this)" style="display: none;"disabled="true">Statistical Analyzer</button>
+                    <button class="craftingButton" onclick="displayRecipe(10, this)" style="display: none;" id="logicalRandomiser"><span>Logical Randomiser</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(11, this)" style="display: none;" id=stormSneakers><span>Storm Sneakers</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(12, this)" style="display: none;" id="artificeAnnihilator"><span>Artifice Annihilator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(13, this)" style="display: none;" id="repurposedReplicator"><span>Repurposed Replicator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(14, this)" style="display: none;" id="cavernCapacitator"><span>Cavern Capacitator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;" id="highPoweredVacuum"><span>High Powered Vacuum</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;" id="unlockedSpeedcap"><span>Unlocked Speedcap</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;" id="infinityCollector"><span>Infinity Collector II</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;"disabled="true"><span>Clover's Undoing</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;"disabled="true"><span>Fantastical Feather</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(20, this)" style="display: none;"disabled="true"><span>Statistical Analyzer</span></button>
                 </div>
             </div>
             <p id = "craftingRecipeTitle" class="middleTitle" style="display: none;">Recipe</p>
@@ -184,19 +185,18 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear17Description" style="display: none;">Wait... what do you mean its the same as the first? Why is it called the 2nd if its the exact same thing???</p>
                 <p class="itemDescription" id="gear18Description" style="display: none;">+2.5x Luck.<br>Stacks with all other luck additions.</p>
                 <p class="itemDescription" id="gear19Description" style="display: none;">-7ms Mining Speed and each movement with automine gains +2 blocks moved.<br>Stacks with all other speed buffs.</p>
-                <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 15% of your current pickaxes luck +1. (Cannot lower luck)</p>
+                <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 10% of your current pickaxes luck +1. (Cannot lower luck)</p>
             </div>
             
         </div>
         <div class="col-7">
-            <div class="mobile" style="margin-top:0.4vw; border-bottom:3px solid #333;">
+            <div class="mobile">
                     <button onclick="goDirection('a')" class="movementButton horizontalArrow" id="leftAutoMine"></button>
                     <button onclick="goDirection('s')" class="movementButton verticalArrow" id="downAutoMine"></button>
                     <button onclick="goDirection('w')" class="movementButton verticalArrow" id="upAutoMine"></button>
                     <button onclick="goDirection('d')" class="movementButton horizontalArrow" id="rightAutoMine"></button>
                     <button onclick="teleport()" class="movementButton"id="teleportButton">Teleport!</button>
-                    </div>  
-                    <div class="mobile">
+                    <br>
                     <button onclick="moveOne('a', this)" class="movementButton horizontalArrow"id="leftOne"></button>
                     <button onclick="moveOne('s', this)" class="movementButton verticalArrow"id="downOne"></button>
                     <button onclick="moveOne('w', this)" class="movementButton verticalArrow"id="upOne"></button>
@@ -206,16 +206,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div id="blockContainer">
                 <p id="blockDisplay"></p>
             </div>
-                
-        <div id="latestContainer">
-            <div>
                 <p id="latestSpawns" class="latestDisplay">Latest Spawns Will Appear Here</p>
-            </div>
-            <div>
                 <p id="latestFinds" class="latestDisplay">Latest Finds Will Appear Here</p>
-            </div>
         </div>
-        </div>
+        
         <div class="col-3">
             
             <div style="height: 3%;">
@@ -358,24 +352,24 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <div class="frame" id="color-frame">
       <h2>Colour Settings</h2>
       <div class="inputAndButton">
-        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="colorInput" placeholder="#1a1a1a">
-        <button class="inputButton roundedRight" onclick="changeBackgroundColor()">Change Background</button>
+        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="colorInput" placeholder="Currently Disabled">
+        <button class="inputButton roundedRight" onclick="changeBackgroundColor()" disabled="true">Change Background</button>
       </div>
       <div class="inputAndButton">
-        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Latest Finds" id="latestColor">
-        <button class="displayColorButton roundedRight"onclick="changeLatestColors(2)">Background</button>
-        <button class="displayColorButton" onclick="changeLatestColors(1)">Border</button>
-        <button class="displayColorButton" onclick="changeLatestColors(0)">Text Colour</button>
+        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Currently Disabled" id="latestColor">
+        <button class="displayColorButton roundedRight"onclick="changeLatestColors(2)"disabled="true">Background</button>
+        <button class="displayColorButton" onclick="changeLatestColors(1)"disabled="true">Border</button>
+        <button class="displayColorButton" onclick="changeLatestColors(0)"disabled="true">Text Colour</button>
       </div>
       <div class="inputAndButton">
-        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Inventory" id="inventoryColors">
-        <button class="displayColorButton roundedRight twoButtons" onclick="changeInventoryColors(1)">Background</button>
-        <button class="displayColorButton twoButtons" onclick="changeInventoryColors(0)">Border</button>
+        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Currently Disabled" id="inventoryColors">
+        <button class="displayColorButton roundedRight twoButtons" onclick="changeInventoryColors(1)"disabled="true">Background</button>
+        <button class="displayColorButton twoButtons" onclick="changeInventoryColors(0)"disabled="true">Border</button>
       </div>
       <div class="inputAndButton">
-        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Crafting" id="craftingColors">
-        <button class="displayColorButton roundedRight twoButtons" onclick="changeCraftingColors(1)">Background</button>
-        <button class="displayColorButton twoButtons" onclick="changeCraftingColors(0)">Border</button>
+        <input autocomplete ="off" type="text" class="displayValueInput roundedLeft" placeholder="Currently Disabled" id="craftingColors">
+        <button class="displayColorButton roundedRight twoButtons" onclick="changeCraftingColors(1)" disabled="true">Background</button>
+        <button class="displayColorButton twoButtons" onclick="changeCraftingColors(0)"disabled="true">Border</button>
       </div>
     </div>
 

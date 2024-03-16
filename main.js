@@ -300,6 +300,8 @@ function goDirection(direction, speed) {
         if (currentPickaxe === 12)
             reps++;
         reps += gears[19] ? 2 : 0;
+        miningSpeed = 0;
+        reps = 250;
         loopTimer = setInterval(movePlayer, miningSpeed, direction, reps);
         curDirection = direction;
         energySiphonerDirection = direction;
@@ -461,7 +463,7 @@ function spawnMessage(block, location, caveInfo) {
         spawnElement.innerText = "";
         spawnElement.appendChild(element)
     }
-    if (spawnElement.children.length > 9) spawnElement.removeChild(spawnElement.lastChild);
+    if (spawnElement.children.length > 10) spawnElement.removeChild(spawnElement.lastChild);
 
         let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
         if (caveInfo != undefined && caveInfo[0]) {
@@ -499,7 +501,7 @@ function logFind(type, x, y, variant, atMined, fromReset) {
         spawnElement.innerText = "";
         spawnElement.appendChild(element)
     }
-    if (spawnElement.children.length > 9) spawnElement.removeChild(spawnElement.lastChild);
+    if (spawnElement.children.length > 10) spawnElement.removeChild(spawnElement.lastChild);
 }
 
 function goToOre(block, variantType) {
