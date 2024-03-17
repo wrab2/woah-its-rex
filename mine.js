@@ -62,6 +62,7 @@ function mineBlock(x, y, cause) {
     try {
         ore = mine[y][x];
     } catch {
+        checkAllAround(x, y, 1)
         return;
     }
     if (ore === "🟩") ore = "🟫";

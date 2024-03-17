@@ -7,7 +7,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cat Mining Company</title>
+    <title>The Silly Caverns</title>
     <link rel="icon" type="image/x-icon" href="media/game-icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -160,7 +160,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/150.<br>Has 3x luck.</p>
                 <p class="itemDescription" id="pickaxe22Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 4x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i></p>
                 <p class="itemDescription" id="pickaxe23Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/300.<br>Has 15x luck.</p>
-                <p class="itemDescription" id="pickaxe24Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/400.<br>Has 20x luck.</p>
+                <p class="itemDescription" id="pickaxe24Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/400.<br>Has 20x luck.<br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i></p>
                 <!--
                     Pickaxes above
                     Gears below
@@ -308,6 +308,13 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <input type="range" min="0" max="25" value="10" onchange="changeSpawnVolume(this.value, 7)" class="spawnVolume">
         </label>
         <button class="testButton" onclick="testSound(7)"></button>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(8, this)"id="mute6">Mute Celestials</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 8)" class="spawnVolume">
+        </label>
+        <button class="testButton" onclick="testSound(8)"></button>
     </div>
     </div>
     <div class="frame" id="inventory-frame">

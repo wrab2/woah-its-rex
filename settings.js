@@ -82,7 +82,7 @@ function changeUseNumbers(button) {
         useNumbers = false;
     }
 }
-let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+", "Interdimensional+"];
+let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+", "Celestial+"];
 let stopRareNum = 0;
 function changeMinRarity(button) {
     stopRareNum++;

@@ -81,7 +81,7 @@ let currentPickaxe = 0;
 let currentWorld = 1;
 let currentLayerNum = 0;
 //IMPORTANT
-const date = new Date().getDay();
+const date = new Date();
 let limitedTimer;
 function init() {
     let canContinue = true;
@@ -114,6 +114,9 @@ function init() {
         cat = verifiedOres.getCurrentLuck();
         utilitySwitchActions();
         limitedTimer = setInterval(checkLimitedOres, 10000);
+        if (date.getMonth() === 3 && date.getDate() === 1) {
+            document.title = "The Sily Caverns";
+        }
         console.log("meow");
     }
 }
@@ -126,6 +129,7 @@ let ow;
 let magnificent;
 let zenith;
 let ethereal;
+let celestial;
 let keepRunningAudio;
 let allAudios = [];
 function loadContent() {
@@ -138,8 +142,9 @@ function loadContent() {
     unfath = new Audio("audios/Unfathsound.mp3");
     ow = new Audio("audios/Otherworldly.mp3");
     zenith = new Audio("audios/Zenithsound.mp3");
-    magnificent = new Audio("audios/magnificent.mp3")
-    ethereal = new Audio("audios/ethereal sound by elysia.mp3")
+    magnificent = new Audio("audios/magnificent.mp3");
+    ethereal = new Audio("audios/ethereal sound by elysia.mp3");
+    celestial = new Audio("audios/celestial.mp3");
     allAudios.push(chill);
     allAudios.push(ringing);
     allAudios.push(visionblur);
@@ -148,6 +153,7 @@ function loadContent() {
     allAudios.push(magnificent);
     allAudios.push(zenith);
     allAudios.push(ethereal);
+    allAudios.push(celestial);
     for (let i = 0; i < allAudios.length; i++)
         allAudios[i].load();
     document.getElementById("pressPlay").style.display = "none";
@@ -547,7 +553,7 @@ function getBackgroundColor(tier) {
             return {"backgroundColor" : "#ac47ff", "textColor" : "#ffffff"};
         case "Zenith" :
             return {"backgroundColor" : "#000000", "textColor" : "#ffffff"};
-        case "Interdimensional" :
+        case "Celestial" :
             return {"backgroundColor" : "#870000", "textColor" : "#ffffff"};
         case "Metaversal" :
             return {"backgroundColor" : "#fffeab", "textColor" : "#000000"};

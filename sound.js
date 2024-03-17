@@ -147,14 +147,14 @@ function playSound(type) {
             if (stopOnRare && stopRareNum < 8)
                 stopMining();
             break;
-        case "interdimensional":
+        case "celestial":
             if (canPlay[8]) {
                 if (useDisguisedChills) {
                     chill.currentTime = 0;
                     chill.play();
                 } else {
-                    ethereal.currentTime = 0;
-                    ethereal.play();
+                    celestial.currentTime = 0;
+                    celestial.play();
                 }
             }
             if (stopOnRare && stopRareNum < 9)

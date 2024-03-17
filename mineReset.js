@@ -30,7 +30,9 @@ async function mineReset() {
         mineCapacity = baseMineCapacity;
         const temp = curDirection;
         curDirection = "";
-        const temp2 = await collectOres(temp);
+        let temp2;
+        if ((currentWorld === 1 && !gears[3]) || (currentWorld === 1 && !gears[17]))
+            temp2 = await collectOres(temp);
         canMine = await mineResetAid();
         checkAllAround(curX, curY, 1);
         mine[curY][curX] = "⛏️";
@@ -99,7 +101,7 @@ function collectOres(temp) {
         }
     setTimeout(() => {
         resolve(true);
-    }, 1000);
+    }, 250);
     });
 }
 
@@ -115,9 +117,9 @@ function mineResetAid() {
             }
         }
         checkAllAround(curX, curY, 1);
-    }, 125);
+    }, 5);
     setTimeout(() => {
         resolve(true);
-    }, 250);
+    }, 10);
     });
 }
