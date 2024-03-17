@@ -406,7 +406,7 @@ function createInventory() {
             tempElement.style.display = "none";
             tempElement.setAttribute("onclick", "randomFunction(this.innerHTML, 'inv')");
             let colors = getBackgroundColor(oreList[propertyName]["oreTier"]);
-            tempElement.style.backgroundColor = colors["backgroundColor"];
+            tempElement.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)"
             tempElement.style.color = colors["textColor"];
             let rarity = oreList[propertyName]["numRarity"];
             if (oreList[propertyName]["caveExclusive"])
@@ -460,7 +460,7 @@ function spawnMessage(block, location, caveInfo) {
     else output += block + " 1/" + oreRarity.toLocaleString();
     if (gears[0] || currentPickaxe === 5) output += " | X: " + (location["X"] - 1000000000).toLocaleString() + ", Y: " + (-(location["Y"] - sub)).toLocaleString();
     let colors = getBackgroundColor(oreList[block]["oreTier"]);
-    element.style.backgroundColor = colors["backgroundColor"];
+    element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 30%)";
     element.style.color = colors["textColor"];
     element.innerText = output;
     if (spawnElement.children.length > 0) {
@@ -492,7 +492,7 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     let element = document.createElement("p");
     element.classList = "latestFind";
     let colors = getBackgroundColor(oreList[type]["oreTier"]);
-    element.style.backgroundColor = colors["backgroundColor"];
+    element.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 30%, black)";
     element.style.color = colors["textColor"];
     output += "<span onclick='goToOre(\"" + type + "\", \"" + variant + "\")'>";
     output += variant + " ";

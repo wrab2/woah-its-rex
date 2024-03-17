@@ -127,9 +127,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe(15, this)" style="display: none;" id="highPoweredVacuum"><span>High Powered Vacuum</span></button>
                     <button class="craftingButton" onclick="displayRecipe(16, this)" style="display: none;" id="unlockedSpeedcap"><span>Unlocked Speedcap</span></button>
                     <button class="craftingButton" onclick="displayRecipe(17, this)" style="display: none;" id="infinityCollector"><span>Infinity Collector II</span></button>
-                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;"disabled="true"><span>Clover's Undoing</span></button>
-                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;"disabled="true"><span>Fantastical Feather</span></button>
-                    <button class="craftingButton" onclick="displayRecipe(20, this)" style="display: none;"disabled="true"><span>Statistical Analyzer</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(18, this)" style="display: none;" id="cloversUndoing"><span>Clover's Undoing</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(19, this)" style="display: none;" id="structuralService"><span>Structural Service</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(20, this)" style="display: none;" id="statisticalAmplifier"><span>Statistical Amplifier</span></button>
                 </div>
             </div>
             <p id = "craftingRecipeTitle" class="middleTitle" style="display: none;">Recipe</p>
@@ -147,7 +147,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe8Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/30.<br>Has 20x luck.<br><i>The pickaxe resonates with a distant entity.. a signal sent from far beyond these lands. Further traces of it are found within the blueprint for a particular craft of a key, one designed to open the lock to a completely new world..</i></p>
                 <p class="itemDescription" id="pickaxe9Description" style="display: none;">Has a 50% chance to mine a 7x7 square in a 49x49 area around the player, with an average of 24 7x7 squares being mined each activation.<br>Has an ability proc rate of 1/50.<br>Has 17.5x luck.</p>
                 <p class="itemDescription" id="pickaxe10Description" style="display: none;">Mines an extremely large spiral around the player.<br>Has an ability proc rate of 1/100.<br>Has 30x luck.</p>
-                <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.</p>
+                <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
                 <p class="itemDescription" id="pickaxe12Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Pressing "Teleport!" on this pickaxe will switch the current world.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>Certain World 2 gears will work in World 1, including all luck related gears, Repurposed Replicator, and High Powered Vacuum.</p>
                 <p class="itemDescription" id="pickaxe13Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.</p>
                 <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.</p>
@@ -159,8 +159,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe20Description" style="display: none;">Mines swirls around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.25x luck.</p>
                 <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/150.<br>Has 3x luck.</p>
                 <p class="itemDescription" id="pickaxe22Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 4x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i></p>
-                <p class="itemDescription" id="pickaxe23Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/300.<br>Has 15x luck.</p>
-                <p class="itemDescription" id="pickaxe24Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/400.<br>Has 20x luck.<br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i></p>
+                <p class="itemDescription" id="pickaxe23Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/300.<br>Has 15x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
+                <p class="itemDescription" id="pickaxe24Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/400.<br>Has 20x luck.<br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
                 <!--
                     Pickaxes above
                     Gears below
@@ -185,7 +185,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear17Description" style="display: none;">Wait... what do you mean its the same as the first? Why is it called the 2nd if its the exact same thing???</p>
                 <p class="itemDescription" id="gear18Description" style="display: none;">+2.5x Luck.<br>Stacks with all other luck additions.</p>
                 <p class="itemDescription" id="gear19Description" style="display: none;">-7ms Mining Speed and each movement with automine gains +2 blocks moved.<br>Stacks with all other speed buffs.</p>
-                <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 10% of your current pickaxes luck +1. (Cannot lower luck)</p>
+                <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 10% of your current pickaxe's luck +1. (Cannot lower luck)</p>
             </div>
             
         </div>
@@ -252,67 +252,71 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
         </label>
     </div>
+    ["#ffd966", "#6d9eeb", "#c0ff1d", "#003487", "#a64d79", "#fffeab", "#000000", "#ac47ff", "#870000"]
     <hr class="settingsSeparator">
+    <div class="inputAndButton" style="width: 30%; margin-left: 0; margin-bottom: 1%;">
+        <button class="toggleDisplay fullyRounded" onclick="enableDisguisedChills();" id="disguisedChills" style="background-color: red; float: left;">Disguised Chills</button>
+      </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(0, this)" id="mute0">Mute Chills</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 0)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 0)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ffd966 50%);">
         </label>
         <button class="testButton" onclick="testSound(0)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(1, this)"id="mute1">Mute Ringings</button>
+        <button class="muteButton" onclick="changeCanPlay(1, this)"id="mute1">Mute Transcendents</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="40" value="20" onchange="changeSpawnVolume(this.value, 1)" class="spawnVolume">
+            <input type="range" min="0" max="40" value="20" onchange="changeSpawnVolume(this.value, 1)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6d9eeb 50%);">
         </label>
         <button class="testButton" onclick="testSound(1)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(2, this)"id="mute2">Mute Blurs</button>
+        <button class="muteButton" onclick="changeCanPlay(2, this)"id="mute2">Mute Enigmatics</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 2)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 2)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #c0ff1d 50%);">
         </label>
         <button class="testButton" onclick="testSound(2)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(3, this)"id="mute3">Mute Unfaths</button>
+        <button class="muteButton" onclick="changeCanPlay(3, this)"id="mute3">Mute Unfathomables</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 3)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 3)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #003487 50%);">
         </label>
         <button class="testButton" onclick="testSound(3)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(4, this)"id="mute4">Mute Otherworldlies</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 4)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 4)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #a64d79 50%);">
         </label>
         <button class="testButton" onclick="testSound(4)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(5, this)"id="mute5">Mute Metaversals</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 5)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 5)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #fffeab 50%);">
         </label>
         <button class="testButton" onclick="testSound(5)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(6, this)"id="mute6">Mute Zeniths</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 6)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 6)" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, white 50%);">
         </label>
         <button class="testButton" onclick="testSound(6)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(7, this)"id="mute6">Mute Ethereals</button>
+        <button class="muteButton" onclick="changeCanPlay(7, this)"id="mute7">Mute Ethereals</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="25" value="10" onchange="changeSpawnVolume(this.value, 7)" class="spawnVolume">
+            <input type="range" min="0" max="25" value="10" onchange="changeSpawnVolume(this.value, 7)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ac47ff 50%);">
         </label>
         <button class="testButton" onclick="testSound(7)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(8, this)"id="mute6">Mute Celestials</button>
+        <button class="muteButton" onclick="changeCanPlay(8, this)"id="mute8">Mute Celestials</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 8)" class="spawnVolume">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 8)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #870000 50%);">
         </label>
         <button class="testButton" onclick="testSound(8)"></button>
     </div>

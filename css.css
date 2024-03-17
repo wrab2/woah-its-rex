@@ -644,7 +644,7 @@ button, .col-3 > div > button {
   border: none;
 }
 .settingsSeparator {
-  width:50%;
+  width:100%;
   height: 3px!important;
   color:white;
 }
@@ -681,6 +681,10 @@ button, .col-3 > div > button {
   width:50%;
   background-color: #333;
   padding: 1px;
+}
+#stopOnRareDisplay {
+  font-size: 100%;
+  font-weight: 750;
 }
 .toggleDisplay {
   width: 100%;
@@ -765,14 +769,14 @@ button, .col-3 > div > button {
 }
 .indexDirectionButton {
    width: 9.5%;
-   height: 3.58em;
+   height: 3.7em;
    border-radius: 10px;
    border-width: 2px;
    font-size: 100%;
    background-color: #333;
    vertical-align: middle;
    position: relative;
-   top: 0px;
+   top: -0.17vw;
 }
 .indexDirectionButton:hover {
   background-color: #2e2e2e;

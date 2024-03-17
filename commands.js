@@ -89,7 +89,7 @@ let allGearNames = [
     "Infinity Collector II",
     "Clover's Undoing",
     "Fantastical Feather",
-    "NYI",
+    "Statistical Analyzer",
 ]
 function adminListNums() {
     if (debug) {

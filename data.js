@@ -41,7 +41,8 @@ function saveAllData() {
         getInventoryColors(),
         getCraftingColors(),
         usePathBlocks,
-        cavesEnabled
+        cavesEnabled,
+        useDisguisedChills
         );
     dataStorage[4].push(gears);
     if (!debug) localStorage.setItem("playerData", JSON.stringify(dataStorage));
@@ -126,8 +127,8 @@ function loadAllData() {
                     document.getElementById("stopOnRare").style.backgroundColor = "green";
             }
             if (data[3][7] != undefined) {
-                stopRareNum = data[3][7];
-                document.getElementById("stopOnRareDisplay").innerHTML = stopRareValues[stopRareNum];
+                stopRareNum = data[3][7] - 1;
+                changeMinRarity(document.getElementById("stopOnRareDisplay"));
             }
             if (data[3][8] != undefined) {
                 canDisplay = data[3][8];
@@ -203,6 +204,11 @@ function loadAllData() {
                 cavesEnabled = data[3][17];
                 if (!cavesEnabled)
                     document.getElementById("caveToggle").style.backgroundColor = "red";
+            }
+            if (data[3][18] != undefined) {
+                if (data[3][18]) {
+                    enableDisguisedChills();
+                }
             }
         }
             if (data[4] !== undefined || data[4] !== null) {

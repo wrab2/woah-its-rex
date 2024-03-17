@@ -208,13 +208,18 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#text span{
-    background: linear-gradient(to right,);
+#cloversUndoing span{
+    background: linear-gradient(to right, #FF7C00 10%, #032A00, #11E900, #032A00, #FF7C00 90%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#text span{
-    background: linear-gradient(to right,);
+#structuralService span{
+    background: linear-gradient(to right, #CDCDCD 5%, #F55D2F, #474747, #EFD754, #474747, #F55D2F, #CDCDCD 95%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#statisticalAmplifier span{
+    background: linear-gradient(to right,#000000 5%, #FF3636, #E94585, #000ACE, #FFFFFF 95%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }

@@ -82,14 +82,18 @@ function changeUseNumbers(button) {
         useNumbers = false;
     }
 }
-let stopRareValues = ["Chill+", "Ringing+", "Blur+", "Unfath+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+", "Celestial+"];
+let stopRareValues = ["Exotic+", "Transcendent+", "Enigmatic+", "Unfathomable+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+", "Celestial+"];
+let stopRareColors = ["#ffd966", "#6d9eeb", "#c0ff1d", "#003487", "#a64d79", "#fffeab", "#000000", "#ac47ff", "#870000"]
 let stopRareNum = 0;
 function changeMinRarity(button) {
     stopRareNum++;
     if (stopRareNum > 8) {
         stopRareNum = 0;
     }
-    button.innerHTML = stopRareValues[stopRareNum];
+    button.innerText = stopRareValues[stopRareNum];
+    const color2 = (stopRareNum === 2 || stopRareNum === 5 || stopRareNum === 0) ? "black" : "white";
+    button.style.color = color2;
+    button.style.backgroundImage = "linear-gradient(to right, " + stopRareColors[stopRareNum] + " 70%, black)";
 }
 function changeStopOnRare(button) {
     if (stopOnRare) {
@@ -471,5 +475,14 @@ function testSound(num) {
         allAudios[num].currentTime = 0;
         element.style.backgroundColor = "red";
         clearTimeout(testSoundTimeout);
+    }
+}
+function enableDisguisedChills() {
+    if (useDisguisedChills) {
+        useDisguisedChills = false;
+        document.getElementById("disguisedChills").style.backgroundColor = "red";
+    } else {
+        useDisguisedChills = true;
+        document.getElementById("disguisedChills").style.backgroundColor = "green";
     }
 }
