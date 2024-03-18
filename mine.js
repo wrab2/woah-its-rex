@@ -95,7 +95,7 @@ function mineBlock(x, y, cause) {
 
 let multis = [1, 50, 250, 500];
 let inv;
-function giveBlock(type, x, y, fromReset, fromCave) {
+function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
     if (type !== "⛏️") {
         if (type === "⚪") return;
         //CREATE VARIABLES
@@ -130,7 +130,8 @@ function giveBlock(type, x, y, fromReset, fromCave) {
             logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
         }
         } else {
-                if (oreList[type]["hasLog"]) {
+                oreRarity *= caveMulti;
+                if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
                     verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
                 }
                 if (oreRarity > minRarity) {

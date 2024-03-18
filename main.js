@@ -439,24 +439,26 @@ function disappear(element){
 let spawnOre;
 function spawnMessage(block, location, caveInfo) {
     //ADD TO MINE CAPACITY IF NEAR RESET
-    //CAVEINFO[0] = TRUE/FALSE
-    //CAVEINFO[1] = ADJUSTED RARITY
     if ((currentWorld === 1 && !gears[3]) && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
         mineCapacity += 10000;
     else if (!gears[17] && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
         mineCapacity += 10000;
     let oreRarity = oreList[block]["numRarity"];
-    if (oreList[block]["hasLog"] || (caveInfo != undefined && caveInfo[0]))
+    if (oreList[block]["hasLog"] || caveInfo != undefined) {
         verifiedOres.verifyLog(location["Y"], location["X"]);
+    }
     if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) {
-        mineBlock(location["X"], location["Y"], "ability");
+        if (caveInfo === undefined)
+            mineBlock(location["X"], location["Y"], "ability");
+        else
+            mineCaveBlock(location["X"], location["Y"], caveInfo["caveType"])
     }
     let spawnElement = document.getElementById("latestSpawns");
     let sub = currentWorld === 1 ? 0 : 2000;
     let output = "";
     let element = document.createElement("p");
     element.classList = "latestFind";
-    if (caveInfo != undefined && caveInfo[0]) output += block + " 1/" + caveInfo[1].toLocaleString() + " Adjusted.";
+    if (caveInfo != undefined) output += block + " 1/" + caveInfo["adjRarity"].toLocaleString() + " Adjusted.";
     else output += block + " 1/" + oreRarity.toLocaleString();
     if (gears[0] || currentPickaxe === 5) output += " | X: " + (location["X"] - 1000000000).toLocaleString() + ", Y: " + (-(location["Y"] - sub)).toLocaleString();
     let colors = getBackgroundColor(oreList[block]["oreTier"]);
@@ -472,8 +474,8 @@ function spawnMessage(block, location, caveInfo) {
     if (spawnElement.children.length > 10) spawnElement.removeChild(spawnElement.lastChild);
 
         let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
-        if (caveInfo != undefined && caveInfo[0]) {
-            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo[1]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
+        if (caveInfo != undefined) {
+            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo["adjRarity"]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
         } else {
             document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + oreRarity.toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
         }

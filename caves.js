@@ -140,7 +140,7 @@ function generateCaveBlock(y, x, type) {
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, {"Y" : y, "X" : x}, [true, adjRarity]);
+                spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
                 playSound(oreList[blockToGive]["oreTier"])
             }
         }
