@@ -486,3 +486,21 @@ function enableDisguisedChills() {
         document.getElementById("disguisedChills").style.backgroundColor = "green";
     }
 }
+let usingNewEmojis = false;
+function switchFont() {
+    if (usingNewEmojis) {
+        usingNewEmojis = false;
+        document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"")
+        document.getElementById("switchFont").style.backgroundColor = "red";
+        distanceMulti--;
+        y -= 2000;
+        switchDistance();
+    } else {
+        usingNewEmojis = true;
+        document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Noto Color Emoji\",\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"");
+        document.getElementById("switchFont").style.backgroundColor = "green";
+        distanceMulti--;
+        y -= 2000;
+        switchDistance();
+    }
+}

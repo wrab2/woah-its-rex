@@ -160,7 +160,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/150.<br>Has 3x luck.</p>
                 <p class="itemDescription" id="pickaxe22Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 4x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i></p>
                 <p class="itemDescription" id="pickaxe23Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/300.<br>Has 15x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
-                <p class="itemDescription" id="pickaxe24Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/400.<br>Has 20x luck.<br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
+                <p class="itemDescription" id="pickaxe24Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/400.<br>Has 20x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
                 <!--
                     Pickaxes above
                     Gears below
@@ -252,11 +252,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
         </label>
     </div>
-    ["#ffd966", "#6d9eeb", "#c0ff1d", "#003487", "#a64d79", "#fffeab", "#000000", "#ac47ff", "#870000"]
     <hr class="settingsSeparator">
-    <div class="inputAndButton" style="width: 30%; margin-left: 0; margin-bottom: 1%;">
+    <div class="inputAndButton2" style="width: 30%; margin-left: 0; margin-bottom: 1%;">
         <button class="toggleDisplay fullyRounded" onclick="enableDisguisedChills();" id="disguisedChills" style="background-color: red; float: left;">Disguised Chills</button>
       </div>
+    
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(0, this)" id="mute0">Mute Chills</button>
         <label class="spawnSoundContainer">
@@ -334,6 +334,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
     <div class="frame" id="game-frame">
       <h2>Game Settings</h2>
+      <hr class="settingsSeparator">
       <div class="inputAndButton">
         <input autocomplete ="off" type="text" class="textInput roundedLeft" id="minSpeedInput" placeholder="Default: 0">
         <button class="inputButton roundedRight" onclick="changeMinMiningSpeed(document.getElementById('minSpeedInput'))">Set Min Speed</button>
@@ -351,6 +352,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
       </div>
       <div class="inputAndButton">
         <button class="toggleDisplay fullyRounded" style="background-color: red;" onclick="changeUseNumbers(this)" id="useNumbers">Use Numbers for Pickaxe Names</button>
+      </div>
+      <div class="inputAndButton">
+        <button class="toggleDisplay fullyRounded" onclick="switchFont();" id="switchFont" style="background-color: red;">Use Different Emojis (for improper display)</button>
       </div>
       <div class="inputAndButton">
         <button class="toggleDisplay fullyRounded" onclick="togglePathBlocks();" id="pathBlocks">Invisible Path Blocks</button>

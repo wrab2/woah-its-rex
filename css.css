@@ -661,7 +661,21 @@ button, .col-3 > div > button {
    border-color: white;
    height: 4%;
    margin: auto;
-   width: 37.5%;
+   width: 33%;
+   background-color: white;
+   border-radius: 20px;
+   border-width: 1px;
+   margin-top: 0.5em;
+   margin-left: 0;
+   margin-right: 0;
+   float: left;
+}
+.inputAndButton2 {
+  border-style: solid;
+   border-color: white;
+   height: 4%;
+   margin: auto;
+   width: 33%;
    background-color: white;
    border-radius: 20px;
    border-width: 1px;
@@ -738,7 +752,7 @@ button, .col-3 > div > button {
   border-radius: 20px;
   border-style: solid;
   padding: 1px;
-  font-size: 16px
+  font-size: 1vw;
 }
 .twoButtons {
   width: 37.5%!important;

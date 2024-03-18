@@ -1,4 +1,4 @@
-function adminGiveOres(block, amt) {
+const adminGiveOres = function(block, amt) {
 if (debug) {
     if (amt === undefined)
         amt = 100;
@@ -16,7 +16,7 @@ if (debug) {
     window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
-function adminGivePickaxe(num) {
+const adminGivePickaxe = function(num) {
 if (debug) {
     if (num === undefined) {
         for (let i = 0; i < pickaxes.length; i++) {
@@ -29,7 +29,7 @@ if (debug) {
     window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
-function adminGiveGear(num) {
+const adminGiveGear = function(num) {
 if (debug) {
     if (num === undefined) {
         for (let i = 0; i < gears.length; i++) {
@@ -42,7 +42,7 @@ if (debug) {
     window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
-function adminRemovePickaxe(num) {
+const adminRemovePickaxe = function(num) {
 if (debug) {
     if (num === undefined) {
         for (let i = 0; i < pickaxes.length; i++) {
@@ -55,7 +55,7 @@ if (debug) {
     window.alert("INSUFFICIENT PERMISSIONS")
 }
 }
-function adminRemoveGear(num) {
+const adminRemoveGear = function(num) {
 if (debug) {
     if (num === undefined) {
         for (let i = 0; i < gears.length; i++) {
@@ -91,7 +91,7 @@ let allGearNames = [
     "Fantastical Feather",
     "Statistical Analyzer",
 ]
-function adminListNums() {
+const adminListNums = function() {
     if (debug) {
     let output = "";
     for (let i = 0; i < allPickaxeNames.length; i++) {
@@ -106,7 +106,7 @@ function adminListNums() {
         window.alert("INSUFFICIENT PERMISSIONS")
     }
 }
-function adminGetHelp() {
+const adminGetHelp = function() {
     if (debug) {
     console.log("adminGiveOres(block, amt) - Block is the block you want, enter undefined without quotes for all blocks, else put block in quotes. Amt is the amount, leave blank for 100.");
     console.log("adminGivePickaxe(num) - Num is the pickaxe you want to receive, leave blank for all.");
@@ -119,7 +119,7 @@ function adminGetHelp() {
         window.alert("INSUFFICIENT PERMISSIONS")
     }
 }
-function adminChangeLuck(value) {
+const adminChangeLuck = function(value) {
     if (debug) {
         cat = value;
         currentLayer = applyLuckToLayer(currentLayer, cat);
@@ -127,7 +127,7 @@ function adminChangeLuck(value) {
         window.alert("INSUFFICIENT PERMISSIONS")
     }
 }
-function displayLarge() {
+const displayLarge = function() {
     if (confirm("PERFORMING THIS ACTION WILL REQUIRE YOU TO RESTART YOUR GAME AFTER")) {
         let element = document.createElement("div");
         element.width = "10000px";

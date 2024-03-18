@@ -42,7 +42,8 @@ function saveAllData() {
         getCraftingColors(),
         usePathBlocks,
         cavesEnabled,
-        useDisguisedChills
+        useDisguisedChills,
+        usingNewEmojis
         );
     dataStorage[4].push(gears);
     if (!debug) localStorage.setItem("playerData", JSON.stringify(dataStorage));
@@ -208,6 +209,11 @@ function loadAllData() {
             if (data[3][18] != undefined) {
                 if (data[3][18]) {
                     enableDisguisedChills();
+                }
+            }
+            if (data[3][18] != undefined) {
+                if (data[3][19]) {
+                    switchFont();
                 }
             }
         }
