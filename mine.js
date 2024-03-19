@@ -146,10 +146,10 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
 }
 let minRarity = 750000;
 let cat = 1;
-let generationProbabilities;
+let probabilityTable;
 function generateBlock(location) {
     blocksRevealedThisReset++;
-    let probabilityTable = currentLayer;
+    probabilityTable = currentLayer;
     if (location["Y"] === 1 && currentWorld === 1) {
         probabilityTable = layerList[specialLayers[2]];
     }
@@ -176,13 +176,16 @@ function generateBlock(location) {
     let oreRarity = oreList[blockToGive]["numRarity"];
     let hasLog = false;
     mine[location["Y"]][location["X"]] = blockToGive;
-    if (oreRarity > minRarity) {
-        hasLog = oreList[blockToGive]["hasLog"];
-        if (hasLog) {
-            verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());
-        }
-        spawnMessage(blockToGive, location);
+    if (oreRarity >= 750000) {
         playSound(oreList[blockToGive]["oreTier"]);
+        if (oreRarity > minRarity) {
+            hasLog = oreList[blockToGive]["hasLog"];
+            if (hasLog) {
+                verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());
+            }
+            spawnMessage(blockToGive, location);
+            
+        }
     }
 }
 /*
