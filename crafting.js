@@ -591,7 +591,7 @@ function displayRecipe(num, element) {
         recipeDisplay.appendChild(title);
         recipeDisplay.appendChild(currentRecipe[1]);
         document.getElementById("craftingRecipeTitle").style.display = "block";
-        lastCount = 0;
+        lastCount = -1;
     } else {
         while (recipeDisplay.firstChild) {
             recipeDisplay.removeChild(recipeDisplay.firstChild);
@@ -643,7 +643,7 @@ function displayRecipe(num, element) {
             recipeDisplay.appendChild(currentRecipe[1]);
             document.getElementById("craftingRecipeTitle").style.display = "block";
         } 
-        lastCount = 0;
+        lastCount = -1;
     }
     updateActiveRecipe();
 }
@@ -796,7 +796,7 @@ const buttonGradients = {
     
 }
 
-let lastCount = 0;
+let lastCount = -1;
 function updateActiveRecipe() {
     let count = 0;
     if (currentRecipe[0] != undefined) {

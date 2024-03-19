@@ -462,7 +462,7 @@ function spawnMessage(block, location, caveInfo) {
     else output += block + " 1/" + oreRarity.toLocaleString();
     if (gears[0] || currentPickaxe === 5) output += " | X: " + (location["X"] - 1000000000).toLocaleString() + ", Y: " + (-(location["Y"] - sub)).toLocaleString();
     let colors = getBackgroundColor(oreList[block]["oreTier"]);
-    element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 30%)";
+    element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
     element.innerText = output;
     if (spawnElement.children.length > 0) {
@@ -494,7 +494,7 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     let element = document.createElement("p");
     element.classList = "latestFind";
     let colors = getBackgroundColor(oreList[type]["oreTier"]);
-    element.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 30%, black)";
+    element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
     output += "<span onclick='goToOre(\"" + type + "\", \"" + variant + "\")'>";
     output += variant + " ";
