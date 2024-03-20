@@ -1088,7 +1088,6 @@ function pickaxeAbility25(x, y) {
 }
 
 function pickaxeAbilityMineBlock(x, y) {
-    let generated;
     if (y > 0) {
         mine[y] ??= [];
         if (mine[y][x] === undefined) 
