@@ -5,7 +5,6 @@ Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 function saveAllData() {
-    localStorage.setItem("game2DataChanges", true);
     let dataStorage = [
         //ORES, 0
         [],
@@ -256,7 +255,8 @@ function fromBinary(encoded) {
 }
 
 function exportData() {
-    const data = toBinary(JSON.stringify(JSON.parse(localStorage.getItem("playerData"))));
+    let data;
+    data = debug ? (toBinary(localStorage.getItem("playerData"))) : (toBinary(localStorage.getItem("testingData")));
     let textField = document.getElementById("dataText");
     textField.value = data;
     if (confirm("Download save data as file?"))
@@ -272,7 +272,14 @@ function importData(data) {
     if (data === "") {
         if (confirm("You are importing nothing, this will perform a hard reset on your save file. Are you sure you want to do this?")) {
             if (confirm("YOUR SAVE FILE WILL BE ERASED. PLEASE BE SURE THIS IS WHAT YOU WANT.")) {
-                localStorage.clear();
+                if (debug) {
+                    localStorage.removeItem("testingData");
+                    localStorage.removeItem("testingPlayedBefore");
+                }
+                else  {
+                    localStorage.removeItem("playerData");
+                    localStorage.removeItem("playedBefore");
+                }
                 location.reload();
             }
         }

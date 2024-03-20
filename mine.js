@@ -58,13 +58,7 @@ function checkAllAround(x, y, luck) {
 //MINING
 
 function mineBlock(x, y, cause) {
-    let ore;
-    try {
-        ore = mine[y][x];
-    } catch {
-        checkAllAround(x, y, 1)
-        return;
-    }
+    let ore = mine[y][x];
     if (ore === "🟩") ore = "🟫";
     if (ore === "⚪") return;
     if (oreList[ore]["isBreakable"]) {

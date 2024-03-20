@@ -100,8 +100,6 @@ function init() {
         repeatDataSave();
         if (!debug) localStorage.setItem("playedBefore", true);
         else localStorage.setItem("testingPlayedBefore", true);
-        localStorage.setItem("game2DataChanges", true);
-        
         createPickaxeRecipes();
         createGearRecipes();
         document.getElementById('dataText').value = "";
@@ -327,7 +325,7 @@ function moveOne(dir, button) {
 function updateStats() {
     let pickaxeLevel1 = currentWorld === 1 ? 9 : 22;
     let pickaxeLevel2 = currentWorld === 1 ? 6 : 20;
-    minRarity = (currentPickaxe > pickaxeLevel1 ? 15000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
+    minRarity = (currentPickaxe > pickaxeLevel1 ? 20000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
 }
 
 //DISPLAY
@@ -448,10 +446,12 @@ function spawnMessage(block, location, caveInfo) {
         verifiedOres.verifyLog(location["Y"], location["X"]);
     }
     if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) {
-        if (caveInfo === undefined)
+        if (caveInfo === undefined) {
             mineBlock(location["X"], location["Y"], "ability");
-        else
+        }
+        else {
             mineCaveBlock(location["X"], location["Y"], caveInfo["caveType"])
+        }
     }
     let spawnElement = document.getElementById("latestSpawns");
     let sub = currentWorld === 1 ? 0 : 2000;
