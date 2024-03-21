@@ -418,6 +418,7 @@ function setLayer(y) {
         } else {
             if (currentLayer != layerList["borderLayer"]) {
                 currentLayer = layerList["borderLayer"];
+                applyLuckToLayer(layerList["borderLayer"], verifiedOres.getCurrentLuck());
                 currentLayerNum = 5;
             }
         }
