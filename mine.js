@@ -93,7 +93,7 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
     if (type !== "⛏️") {
         if (type === "⚪") return;
         //CREATE VARIABLES
-        let oreRarity = Math.round(oreList[type]["numRarity"]);
+        let oreRarity = oreList[type]["numRarity"];
         let inv = 1;
         //SELECT VARIANT
         if (Math.floor(Math.random() * 50) === 25)

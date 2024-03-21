@@ -150,7 +150,7 @@ async function rollAbilities() {
             }
             break;
          case 23:
-            if (Math.random() <= 1/75) {
+            if (Math.random() <= 1/60) {
                 canMine = await(pickaxeAbility23(curX, curY));
                 updateActiveRecipe();
             }
