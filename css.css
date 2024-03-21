@@ -33,6 +33,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
 .oreDisplay {
   margin: 0;
+  font-weight: 500;
 }
 
 .movementButton {
@@ -282,6 +283,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 #pressPlay {
   font-family: 'Arial', sans-serif;
   overflow-y: hidden;
+  background-image:url("media/silly caverns picture.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
 }
 
 .hidden{display: none !important;}
@@ -335,26 +340,29 @@ img.roundcat {
   max-height: 40vh;
 }
 .credits {
-  position: absolute;
-  bottom: 2%;
-  left: 3%;
-  color: #fff;
-  width: 80vw;
-  line-height: 2.5;
-  font-size: 1.2vw;
+  color: black;
+  float: left;
+  width: 33%;
+  font-size: 100%;
+  text-align: center;
+  font-weight: 1000;
 }
 .play-button {
   position: absolute;
-  top: 50%;
+  top: 28%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #333333;
-  color: #fff;
+  color: black;
   padding: 0.25vw 1.2vw;
-  font-size: 1.75vw;
+  font-size: 5vw;
+  font-weight: 750;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  animation: playButton 1.25s infinite;
+}
+@keyframes playButton {
+  50% {font-size: 4vw;}
 }
 .server-link {
   color: #3498db;
@@ -509,8 +517,12 @@ button, .col-3 > div > button {
 #latestFinds {
   border-left:1px solid #333;
 }
-
-
+.tempOreDisplay {
+  color: white;
+}
+.latestSpawnHolder td{
+  font-weight: 500;
+}
 
 .container-fluid {
   height: 100%;
@@ -851,7 +863,4 @@ button, .col-3 > div > button {
   0% {background-color:white;}
   50% {background-color:red;}
   100% {background-color:white;}
-}
-@keyframes inventoryFlash {
-  50% {background-color:green;}
 }

@@ -40,27 +40,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         </div>
     </noscript>
     <div id="pressPlay">
-        <p id="gameTitle">The Silly Caverns</p>
-        <img class="roundcat" src="media/roundcat.png" alt="Round Cat Image">
-
-<div class="credits">
-  <h2>Credits:</h2>
-  <ul>
-    <b><li>UI by @catlover/@ZayedLovesCats on Discord! 😼</li></b>
-    <b><li>Game made by @thecatofalltime on Discord! 😺</li></b>
-    <li>Background music made by @x2corp on Discord!</li>
-    <li>Spawn sounds made by @monocrexy on Discord!</li>
-    <li>Some sounds made by @tevv_  & @etherealelysia on Discord!</li>
-    <li>Many ideas by @viridescentluna on Discord!</li>
-    <li>Thanks to all the spreadsheet editors!</li>
-  </ul>
-  <a class="server-link" href="https://discord.gg/qxBBvAm2bM" target="_blank">
-    <img src="media/discord-logo.png" alt="Discord Logo">
-    Join the Server
-  </a>
-</div>
-
-<button class="play-button" onclick="loadContent()">Play</button>
+        <p class="credits"><b>UI by @catlover/@ZayedLovesCats on Discord! 😼</b><br><b>Game made by @thecatofalltime on Discord! 😺</b></p>
+        <p class="credits">Background music made by @x2corp on Discord!<br>Spawn sounds made by @monocrexy on Discord!<br>Thank you to all the spreadsheet editors!</p>
+        <p class="credits">Some sounds made by @tevv_  & @etherealelysia on Discord!<br>Many ideas by @viridescentluna on Discord!</p>
+        <p class="play-button" onclick="loadContent()">Play!</p>
     </div>
     <div id="mainContent">
     <div class="container-fluid">
@@ -207,8 +190,16 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div id="blockContainer">
                 <p id="blockDisplay"></p>
             </div>
-                <p id="latestSpawns" class="latestDisplay">Latest Spawns Will Appear Here</p>
-                <p id="latestFinds" class="latestDisplay">Latest Finds Will Appear Here</p>
+            <table id="latestSpawns" class="latestDisplay">
+                <tr class="latestSpawnHolder">
+                        <td class="tempOreDisplay">Latest Spawns Will Appear Here!</td>
+                </tr>
+            </table>
+            <table id="latestFinds" class="latestDisplay">
+                <tr class="latestFindHolder">
+                    <td class="tempOreDisplay">Latest Finds Will Appear Here!</td>
+                </tr>
+            </table>
         </div>
         
         <div class="col-3">
