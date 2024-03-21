@@ -318,6 +318,7 @@ function switchWorld() {
         setLayer(curY);
         createMine();
         mine[curY + 1][curX] = "📺";
+        if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     } else {
         currentWorld = 1;
         allLayers = worldOneLayers;
@@ -327,6 +328,7 @@ function switchWorld() {
         currentLayerNum = -1;
         setLayer(curY);
         createMine();
+        if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     }
     switchDistance();
     displayArea();

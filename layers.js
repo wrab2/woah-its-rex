@@ -516,7 +516,7 @@ const limitedOres = {
     "🦋": {
         "layers" : ["dirtLayer"],
         "timeType" : "hour",
-        "timeValues" : [16]
+        "timeValues" : [Math.round(Math.random() * 23)]
     }
 }
 
