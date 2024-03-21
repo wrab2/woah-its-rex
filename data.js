@@ -256,7 +256,7 @@ function fromBinary(encoded) {
 
 function exportData() {
     let data;
-    data = debug ? (toBinary(localStorage.getItem("playerData"))) : (toBinary(localStorage.getItem("testingData")));
+    data = !debug ? (toBinary(localStorage.getItem("playerData"))) : (toBinary(localStorage.getItem("testingData")));
     let textField = document.getElementById("dataText");
     textField.value = data;
     if (confirm("Download save data as file?"))

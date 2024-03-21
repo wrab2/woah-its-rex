@@ -46,6 +46,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   padding: 0%;
   float: left;
   border:0.1vw solid #2e2e2e;
+  z-index: 9999;
 }
 .movementButton:hover {
   background-color: gray;
@@ -113,7 +114,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   display: inline-block;
   cursor:default;
   width: 100%;
-  height: 6%;
+  height: 4vw;
   vertical-align: middle;
   
 }
@@ -204,24 +205,26 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   border-color: #333;
 }
 #switchInventory {
-  width: 75%;
+  width: 70%;
   float: left;
   background: none;
   cursor: default;
 }
 #inventoryLeft {
-  width: 12.5%;
+  width: 15%;
   float: left;
   background: none;
 }
 #inventoryRight {
-  width: 12.5%;
+  width: 15%;
   float: left;
   background: none;
 }
 .inventoryButtons {
   height: 100%;
   font-weight: 750;
+  font-size: 1vw;
+  margin: 0;
 }
 #inventoryRight:hover {
   background-color: gray;
@@ -343,7 +346,7 @@ img.roundcat {
   color: black;
   float: left;
   width: 33%;
-  font-size: 100%;
+  font-size: 1vw;
   text-align: center;
   font-weight: 1000;
 }
@@ -402,7 +405,7 @@ img.roundcat {
   text-align: center;
   letter-spacing: -0.2em;
   position: relative;
-  border-top:5px solid #333;
+  border-top:3px solid #333;
   border-bottom:3px solid #333;
 }
 
@@ -565,16 +568,16 @@ button, .col-3 > div > button {
 .settingsCategorySelector {
    display: block;
    padding: 10px;
-   width: 25em;
+   width: 25%;
    background-color: #333;
    color: #fff;
    border: none;
    border-radius: 5px;
    cursor: pointer;
-   font-size: 2vh;
-   height: 3em;
+   font-size: 1vw;
+   height: 4vw;
    margin: auto;
-   margin-top: 14px;
+   margin-top: 1vw;
 }
 .settingsCategorySelector:hover {
   background-color: #2e2e2e;
@@ -779,34 +782,39 @@ button, .col-3 > div > button {
   vertical-align: middle;
 }
 #indexSwitchButton {
-  width: 100%;
-  height: 2.35em;
+  width: 50%;
+  height: 3vw;
   border-radius: 0px;
   background-color: #3d3c3c;
   border-style: solid;
   border-width: 2px;
-  font-size: 150%;
-  display: flex;
+  font-size: 1vw;
+  display: inline-flex;
   position: relative;
-  top: -1.5px;
   align-content: space-around;   
   flex-wrap: wrap;
   justify-content: center;
   line-height: 5em;
+  margin-right: -5%;
+  margin-left: -5%;
 }
 .indexDirectionButton {
-   width: 9.5%;
-   height: 3.7em;
+   width: 30%;
+   height: 3vw;
    border-radius: 10px;
    border-width: 2px;
-   font-size: 100%;
+   font-size: 1vw;
    background-color: #333;
-   vertical-align: middle;
    position: relative;
-   top: -0.17vw;
+   margin: 0;
+   z-index: 99999;
 }
 .indexDirectionButton:hover {
   background-color: #2e2e2e;
+}
+#indexButtonHolder {
+  display: inline-block;
+  width: 30%;
 }
 
 #oreCardHolder {
@@ -829,6 +837,7 @@ button, .col-3 > div > button {
 }
 .h-10 {
   height: 10%;
+  align-items: center;
 }
 #largeDisplay {
   padding: 0.5em;

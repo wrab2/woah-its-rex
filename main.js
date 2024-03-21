@@ -250,7 +250,7 @@ document.addEventListener('keydown', (event) => {
             return;
         case "arrowleft":
             event.preventDefault();
-            goDirection('w')
+            goDirection('a')
             return;
         case "arrowdown":
             event.preventDefault();
@@ -326,7 +326,7 @@ function moveOne(dir, button) {
 }
 
 function updateStats() {
-    let pickaxeLevel1 = currentWorld === 1 ? 9 : 22;
+    let pickaxeLevel1 = currentWorld === 1 ? 9 : 23;
     let pickaxeLevel2 = currentWorld === 1 ? 6 : 20;
     minRarity = (currentPickaxe > pickaxeLevel1 ? 20000000 : (currentPickaxe > pickaxeLevel2 ? 2000000 : 750000));
 }

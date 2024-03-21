@@ -180,7 +180,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button onclick="goDirection('w')" class="movementButton verticalArrow" id="upAutoMine"></button>
                     <button onclick="goDirection('d')" class="movementButton horizontalArrow" id="rightAutoMine"></button>
                     <button onclick="teleport()" class="movementButton"id="teleportButton">Teleport!</button>
-                    <br>
                     <button onclick="moveOne('a', this)" class="movementButton horizontalArrow"id="leftOne"></button>
                     <button onclick="moveOne('s', this)" class="movementButton verticalArrow"id="downOne"></button>
                     <button onclick="moveOne('w', this)" class="movementButton verticalArrow"id="upOne"></button>
@@ -217,7 +216,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             </div>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
                 <img src="media/discord-logo.png" alt="Discord">
-                <u><p>Join the Discord!</p></u>
+                <u><p style="font-size: 1vw;">Join the Discord!</p></u>
             </a>
         </div>
     </div>
@@ -399,20 +398,12 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         <div id="indexDisplay">
             <h2>Ore Index</h2>
             <hr>
-            <div class="container-fluid h-10 d-flex flex-column">
-                <div class="row h-25">
-                    <div class="col-md-5" style="z-index: 1;">
-                        <button class="indexDirectionButton" onclick="switchLayerIndex(-1)" style="float: right; margin-right: -4vh;"><</button>
+                    <div id="indexButtonHolder">
+                    <button class="indexDirectionButton" onclick="switchLayerIndex(-1)" style="float: left;"><</button>
+                     <p id="indexSwitchButton">Layer Placeholder</p>
+                    <button class="indexDirectionButton" onclick="switchLayerIndex(1)" style="float: right;">></button>
                     </div>
-                    <div class="col-md-2" style="z-index: 0;">
-                            <p id="indexSwitchButton">Layer Placeholder</p>
                     </div>
-                    <div class="col-md-5" style="z-index: 1;">
-                        <button class="indexDirectionButton" onclick="switchLayerIndex(1)" style="float: left; margin-left: -4vh;">></button>
-                    </div>
-                </div>
-            </div>
-        </div>
         
         <div id="oreCardHolder">
             

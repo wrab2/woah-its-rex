@@ -64,16 +64,16 @@ function mineBlock(x, y, cause) {
     if (oreList[ore]["isBreakable"]) {
         if (checkFromCave([y, x])) {
             let adjMulti = getCaveMultiFromOre(mine[y][x]);
-            giveBlock(mine[y][x], x, y, false, true, adjMulti);
+            giveBlock(ore, x, y, false, true, adjMulti);
             mine[y][x] = "⚪";
             checkAllAround(x, y, 1);
             totalMined++;
         } else {
         if (cause === "reset") {
-            giveBlock(mine[y][x], x, y, true);
+            giveBlock(ore, x, y, true);
             mine[y][x] = "⚪";
         } else {
-            giveBlock(mine[y][x], x, y);
+            giveBlock(ore, x, y);
             mine[y][x] = "⚪";
             checkAllAround(x, y);
             totalMined++;
