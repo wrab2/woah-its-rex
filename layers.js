@@ -548,7 +548,7 @@ function makeOreAvailable(ore) {
         if (!(layerList[layers[i]].includes(ore))) {
             layerList[layers[i]].push(ore);
             applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
-            if (currentLayerNum === allLayers.indexOf(layers[i])) currentLayer = createLayer(layerList[layers[i]], (currentWorld === 1 ? layerList["worldOneCommons"] : layerList["worldTwoCommons"]));
+            if (currentLayerNum === allLayers.indexOf(layers[i])) currentLayer = createLayer([layerList[layers[i]], (currentWorld === 1 ? layerList["worldOneCommons"] : layerList["worldTwoCommons"])]);
         }
     }
 }
@@ -560,7 +560,7 @@ function makeOreUnavailable(ore) {
         if (index > -1) {
             layerList[layers[i]].splice(index, 1);
             applyLuckToLayer(layerList[layers[i]], verifiedOres.getCurrentLuck());
-            if (currentLayerNum === allLayers.indexOf(layers[i])) currentLayer = createLayer(layerList[layers[i]], (currentWorld === 1 ? layerList["worldOneCommons"] : layerList["worldTwoCommons"]));
+            if (currentLayerNum === allLayers.indexOf(layers[i])) currentLayer = createLayer([layerList[layers[i]], (currentWorld === 1 ? layerList["worldOneCommons"] : layerList["worldTwoCommons"])]);
         }
     }
 }
