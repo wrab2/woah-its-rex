@@ -5,7 +5,6 @@ Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 function saveAllData() {
-    localStorage.setItem("game2DataChanges", true);
     let dataStorage = [
         //ORES, 0
         [],
@@ -20,7 +19,7 @@ function saveAllData() {
     ];
     
     for (let propertyName in oreList)
-        dataStorage[0].push([propertyName, [oreList[propertyName][1]]]);
+        dataStorage[0].push([propertyName, [[oreList[propertyName]["normalAmt"], oreList[propertyName]["electrifiedAmt"], oreList[propertyName]["radioactiveAmt"], oreList[propertyName]["explosiveAmt"]]]]);
     dataStorage[1].push([pickaxes, currentPickaxe]);
     dataStorage[2].push(totalMined);
     dataStorage[3].push(
@@ -41,9 +40,14 @@ function saveAllData() {
         getInventoryColors(),
         getCraftingColors(),
         usePathBlocks,
+        cavesEnabled,
+        useDisguisedChills,
+        usingNewEmojis
         );
     dataStorage[4].push(gears);
-    localStorage.setItem("playerData", JSON.stringify(dataStorage));
+    if (!debug) localStorage.setItem("playerData", JSON.stringify(dataStorage));
+    else localStorage.setItem("testingData", JSON.stringify(dataStorage));
+    checkLimitedOres();
 }
 function getAllSpawnVolumes() {
     let volumes = document.getElementsByClassName("spawnVolume");
@@ -57,10 +61,17 @@ function getAllSpawnVolumes() {
 function loadAllData() {
     localStorage.setItem("dataBackup", localStorage.getItem("playerData"));
     try {
-        const data = JSON.parse(localStorage.getItem("playerData"));
+        let data;
+        if (!debug) data = JSON.parse(localStorage.getItem("playerData"));
+        else data = JSON.parse(localStorage.getItem("testingData"));
         for (let i = 0; i < data[0].length; i++) {
-            if (oreList[data[0][i][0]] !== undefined)
-                oreList[data[0][i][0]][1] = data[0][i][1][0];
+            if (oreList[data[0][i][0]] !== undefined) {
+                oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];
+                oreList[data[0][i][0]]["electrifiedAmt"] = data[0][i][1][0][1];
+                oreList[data[0][i][0]]["radioactiveAmt"] = data[0][i][1][0][2];
+                oreList[data[0][i][0]]["explosiveAmt"] = data[0][i][1][0][3];
+            }
+                
         }
         for (let i = 0; i < data[1][0][0].length; i++)
             if(pickaxes[i] != undefined)
@@ -72,7 +83,7 @@ function loadAllData() {
             if (document.getElementById(propertyName + "1") !== null) {
                 for (let i = 1; i < 5; i++) {
                     updateInventory(propertyName, i);
-                    if (oreList[propertyName][1][i - 1] > 0)
+                    if (oreList[propertyName][variantInvNames[i-1]] > 0)
                         document.getElementById(propertyName + i).style.display = "block";
                 }
             }
@@ -116,8 +127,8 @@ function loadAllData() {
                     document.getElementById("stopOnRare").style.backgroundColor = "green";
             }
             if (data[3][7] != undefined) {
-                stopRareNum = data[3][7];
-                document.getElementById("stopOnRareDisplay").innerHTML = stopRareValues[stopRareNum];
+                stopRareNum = data[3][7] - 1;
+                changeMinRarity(document.getElementById("stopOnRareDisplay"));
             }
             if (data[3][8] != undefined) {
                 canDisplay = data[3][8];
@@ -148,6 +159,7 @@ function loadAllData() {
                     document.getElementById("mainContent").style.backgroundColor = data[3][12];
             } 
             if (data[3][13] != undefined) {
+                /*
                 let toChange = document.getElementsByClassName("latestDisplay");
                 if (data[3][13][0] != "") {
                     toChange[0].style.color = data[3][13][0];
@@ -157,38 +169,61 @@ function loadAllData() {
                     toChange[0].style.borderColor = data[3][13][1];
                     toChange[1].style.borderColor = data[3][13][1];
                 }
+                
                 if (data[3][13][2] != "") {
                     toChange[0].style.backgroundColor = data[3][13][2];
                     toChange[1].style.backgroundColor = data[3][13][2];
                 }
+                */
             }
             if (data[3][14] != undefined) {
+                /*
                 let element = document.getElementById("inventoryDisplay");
                 if (data[3][14][0] != "")
                     element.style.borderColor = data[3][14][0];
+                
                 if (data[3][14][1] != "")
-                    element.style.backgroundColor = data[3][14][1];
+                    element.style.borderColor = data[3][14][0];
+                */
             }
             if (data[3][15] != undefined) {
+                /*
                 let element = document.getElementsByClassName("col-2")[0];
                 if (data[3][15][0] != "")
                     element.style.borderColor = data[3][15][0];
                 if (data[3][15][1] != "")
                     element.style.backgroundColor = data[3][15][1];
+                */
             }
             if (data[3][16] != undefined) {
                 usePathBlocks = data[3][16];
                 if (!usePathBlocks)
                     document.getElementById("pathBlocks").style.backgroundColor = "green"
             }
+            if (data[3][17] != undefined) {
+                cavesEnabled = data[3][17];
+                if (!cavesEnabled)
+                    document.getElementById("caveToggle").style.backgroundColor = "red";
+            }
+            if (data[3][18] != undefined) {
+                if (data[3][18]) {
+                    enableDisguisedChills();
+                }
+            }
+            if (data[3][18] != undefined) {
+                if (data[3][19]) {
+                    switchFont();
+                }
+            }
         }
             if (data[4] !== undefined || data[4] !== null) {
                 for (let i = 0; i < data[4][0].length; i++)
                     gears[i] = data[4][0][i];
             }
-        if (oreList["🎂"][1][0] > 0 || gears[9])
+        if (oreList["🎂"]["normalAmt"] > 0 || gears[9])
             document.getElementById("sillyRecipe").style.display = "block";
         localStorage.removeItem("dataBackup");
+        checkLimitedOres();
         return true;
     } catch(error) {
         console.log(error);
@@ -220,7 +255,8 @@ function fromBinary(encoded) {
 }
 
 function exportData() {
-    const data = toBinary(JSON.stringify(JSON.parse(localStorage.getItem("playerData"))));
+    let data;
+    data = debug ? (toBinary(localStorage.getItem("playerData"))) : (toBinary(localStorage.getItem("testingData")));
     let textField = document.getElementById("dataText");
     textField.value = data;
     if (confirm("Download save data as file?"))
@@ -236,7 +272,14 @@ function importData(data) {
     if (data === "") {
         if (confirm("You are importing nothing, this will perform a hard reset on your save file. Are you sure you want to do this?")) {
             if (confirm("YOUR SAVE FILE WILL BE ERASED. PLEASE BE SURE THIS IS WHAT YOU WANT.")) {
-                localStorage.clear();
+                if (debug) {
+                    localStorage.removeItem("testingData");
+                    localStorage.removeItem("testingPlayedBefore");
+                }
+                else  {
+                    localStorage.removeItem("playerData");
+                    localStorage.removeItem("playedBefore");
+                }
                 location.reload();
             }
         }
@@ -246,13 +289,15 @@ function importData(data) {
             clearInterval(dataTimer);
             try {
                 data = fromBinary(data);
-                localStorage.setItem("playerData", data);
+                if (!debug) localStorage.setItem("playerData", data);
+                else localStorage.setItem("testingData", data);
                 setTimeout(() => {
                     location.reload();
                 }, 1000);
             } catch(error) {
                 console.log(error);
-                localStorage.setItem("playerData", localStorage.getItem("dataBackup"));
+                if (!debug) localStorage.setItem("playerData", localStorage.getItem("dataBackup"));
+                else localStorage.setItem("testingData", localStorage.getItem("dataBackup"));
                 window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");
             }
         }

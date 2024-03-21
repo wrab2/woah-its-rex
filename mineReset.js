@@ -17,12 +17,11 @@ function toSurface() {
     for (let i = curY - 101; i < curY + 101; i++)
         if (i > -1 && mine[i] === undefined) 
             mine[i] = [];
-    blocksRevealedThisReset = 0;
     setLayer(curY);
     mine[curY][curX] = "⛏️";
     checkAllAround(curX, curY, 1);
     displayArea();
-    document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset + "/" + mineCapacity + " Blocks Revealed This Reset";
+    document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
 }
 let resetting = false;
 async function mineReset() {
@@ -31,7 +30,9 @@ async function mineReset() {
         mineCapacity = baseMineCapacity;
         const temp = curDirection;
         curDirection = "";
-        const temp2 = await collectOres(temp);
+        let temp2;
+        if ((currentWorld === 1 && !gears[3]) || (currentWorld === 1 && !gears[17]))
+            temp2 = await collectOres(temp);
         canMine = await mineResetAid();
         checkAllAround(curX, curY, 1);
         mine[curY][curX] = "⛏️";
@@ -100,7 +101,7 @@ function collectOres(temp) {
         }
     setTimeout(() => {
         resolve(true);
-    }, 1000);
+    }, 250);
     });
 }
 
@@ -116,9 +117,9 @@ function mineResetAid() {
             }
         }
         checkAllAround(curX, curY, 1);
-    }, 125);
+    }, 5);
     setTimeout(() => {
         resolve(true);
-    }, 250);
+    }, 10);
     });
 }
