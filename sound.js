@@ -31,7 +31,7 @@ function toggleMusic() {
     }
 }
 
-let canPlay = [true, true, true, true, true, true, true, true, true];
+let canPlay = [true, true, true, true, true, true, true, true, true, true];
 function changeCanPlay(num, button) {
     let text = button.innerHTML;
     text = text.substring(text.indexOf(" "));
@@ -47,6 +47,7 @@ function changeCanPlay(num, button) {
 
 function playSound(type) {
     type = type.toLowerCase();
+    type = type === "imaginary" ? "ethereal" : type;
     switch (type) {
         case "exotic":
             if (canPlay[0]) {

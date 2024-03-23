@@ -90,7 +90,6 @@ function mineBlock(x, y, cause) {
 let multis = [1, 50, 250, 500];
 let inv;
 function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
-    if (type !== "⛏️") {
         if (type === "⚪") return;
         //CREATE VARIABLES
         let oreRarity = oreList[type]["numRarity"];
@@ -122,7 +121,7 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
                 if (currentWorld === 1 && gears[7])
                     gearAbility1();
             logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
-        }
+            }
         } else {
                 oreRarity *= caveMulti;
                 if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
@@ -136,7 +135,6 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
         }
         oreList[type][variantInvNames[inv - 1]]++;
         updateInventory(type, inv);
-    }
 }
 let minRarity = 750000;
 let cat = 1;
@@ -317,7 +315,17 @@ function switchWorld() {
         currentLayerNum = -1;
         setLayer(curY);
         createMine();
-        mine[curY + 1][curX] = "📺";
+        if (currentPickaxe === 25) {
+            if (Math.random() < 1/10000) {
+                mine[curY + 1][curX] = "🩷";
+                playSound(oreList["🩷"]["oreTier"])
+            } else {
+                mine[curY + 1][curX] = "📺";
+            }
+
+        } else {
+            mine[curY + 1][curX] = "📺";
+        }
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     } else {
         currentWorld = 1;
@@ -328,6 +336,14 @@ function switchWorld() {
         currentLayerNum = -1;
         setLayer(curY);
         createMine();
+        if (currentPickaxe === 1) {
+            if (Math.random() < 1/10000) {
+                mine[curY + 1][curX] = "🩶";
+                playSound(oreList["🩶"]["oreTier"])
+            } else {
+                mine[curY + 1][curX] = "🟫";
+            }
+        }
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     }
     switchDistance();

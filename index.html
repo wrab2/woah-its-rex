@@ -36,7 +36,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 <body>
     <noscript>
         <div id="noscript">
-            <p>Enable javascript dumbass</p>
+            <p>Enable javascript to mrrp meow like a cat!!</p>
         </div>
     </noscript>
     <div id="pressPlay">
@@ -189,16 +189,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div id="blockContainer">
                 <p id="blockDisplay"></p>
             </div>
-            <table id="latestSpawns" class="latestDisplay">
-                <tr class="latestSpawnHolder">
-                        <td class="tempOreDisplay">Latest Spawns Will Appear Here!</td>
-                </tr>
-            </table>
-            <table id="latestFinds" class="latestDisplay">
-                <tr class="latestFindHolder">
-                    <td class="tempOreDisplay">Latest Finds Will Appear Here!</td>
-                </tr>
-            </table>
+            
+            <p id="latestSpawns" class="latestDisplay">Latest Spawns Will Appear Here</p>
+                <p id="latestFinds" class="latestDisplay">Latest Finds Will Appear Here</p>
         </div>
         
         <div class="col-3">
@@ -209,10 +202,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <button id="inventoryRight" onclick="switchInventory(1)" class="inventoryButtons">></button>
             </div>
             <div id="inventoryDisplay">
-                <p id="inventory1"   style="display:block;"></p>
-                <p id="inventory2"   style="display:none;"></p>
-                <p id="inventory3"   style="display:none;"></p>
-                <p id="inventory4"   style="display:none;"></p>
+                <table id="inventory1" class="inventoryHolder" style="display:block;"></table>
+                <table id="inventory2" class="inventoryHolder" style="display:none;"></table>
+                <table id="inventory3" class="inventoryHolder" style="display:none;"></table>
+                <table id="inventory4" class="inventoryHolder" style="display:none;"></table>
             </div>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
                 <img src="media/discord-logo.png" alt="Discord">
@@ -249,51 +242,51 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
       </div>
     
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(0, this)" id="mute0">Mute Chills</button>
+        <button class="muteButton" onclick="changeCanPlay(0, this)" id="mute0">Mute Antiques</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 0)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ffd966 50%);">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 0)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #5A865A 50%);">
         </label>
         <button class="testButton" onclick="testSound(0)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(1, this)"id="mute1">Mute Transcendents</button>
+        <button class="muteButton" onclick="changeCanPlay(1, this)"id="mute1">Mute Mysticals</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="40" value="20" onchange="changeSpawnVolume(this.value, 1)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6d9eeb 50%);">
+            <input type="range" min="0" max="40" value="20" onchange="changeSpawnVolume(this.value, 1)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6F40B0 50%);">
         </label>
         <button class="testButton" onclick="testSound(1)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(2, this)"id="mute2">Mute Enigmatics</button>
+        <button class="muteButton" onclick="changeCanPlay(2, this)"id="mute2">Mute Divines</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 2)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #c0ff1d 50%);">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 2)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFFEAB 50%);">
         </label>
         <button class="testButton" onclick="testSound(2)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(3, this)"id="mute3">Mute Unfathomables</button>
+        <button class="muteButton" onclick="changeCanPlay(3, this)"id="mute3">Mute Flawless</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 3)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #003487 50%);">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 3)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #31E8FF 50%);">
         </label>
         <button class="testButton" onclick="testSound(3)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(4, this)"id="mute4">Mute Otherworldlies</button>
+        <button class="muteButton" onclick="changeCanPlay(4, this)"id="mute4">Mute Interstellars</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 4)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #a64d79 50%);">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 4)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFA124 50%);">
         </label>
         <button class="testButton" onclick="testSound(4)"></button>
     </div>
     <div class="spawnSoundSettings">
         <button class="muteButton" onclick="changeCanPlay(5, this)"id="mute5">Mute Metaversals</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 5)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #fffeab 50%);">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 5)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #3BD216 50%);">
         </label>
         <button class="testButton" onclick="testSound(5)"></button>
     </div>
     <div class="spawnSoundSettings">
-        <button class="muteButton" onclick="changeCanPlay(6, this)"id="mute6">Mute Zeniths</button>
+        <button class="muteButton" onclick="changeCanPlay(6, this)"id="mute6">Mute Sacreds</button>
         <label class="spawnSoundContainer">
-            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 6)" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, white 50%);">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 6)" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, #FF3C3C  50%);">
         </label>
         <button class="testButton" onclick="testSound(6)"></button>
     </div>
@@ -310,6 +303,13 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 8)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #870000 50%);">
         </label>
         <button class="testButton" onclick="testSound(8)"></button>
+    </div>
+    <div class="spawnSoundSettings">
+        <button class="muteButton" onclick="changeCanPlay(9, this)"id="mute8" disabled="true">Mute Imaginaries (Sound NYI)</button>
+        <label class="spawnSoundContainer">
+            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 9)" class="spawnVolume" style="background-image:linear-gradient(to right, black, #41FF6D 50%);" disabled="true">
+        </label>
+        <button class="testButton" onclick="testSound(9)"></button>
     </div>
     </div>
     <div class="frame" id="inventory-frame">
@@ -336,7 +336,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
       </div>
       <div class="inputAndButton">
         <button class="stopOnRareButton roundedLeft" onclick="changeStopOnRare(this)" id="stopOnRare">Stop On Rare</button>
-        <button class="stopOnRareSelector roundedRight" onclick="changeMinRarity(this)" id="stopOnRareDisplay">Chill+</button>
+        <button class="stopOnRareSelector roundedRight" onclick="changeMinRarity(this)" id="stopOnRareDisplay">Antique+</button>
       </div>
       <div class="inputAndButton">
         <button class="toggleDisplay fullyRounded" onclick="changeCanDisplay(this)" id="blockUpdates">Toggle Block Updates</button>

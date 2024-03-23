@@ -82,18 +82,18 @@ function changeUseNumbers(button) {
         useNumbers = false;
     }
 }
-let stopRareValues = ["Exotic+", "Transcendent+", "Enigmatic+", "Unfathomable+", "Otherworldly+", "Metaversal+", "Zenith+", "Ethereal+", "Celestial+"];
-let stopRareColors = ["#ffd966", "#6d9eeb", "#c0ff1d", "#003487", "#a64d79", "#fffeab", "#000000", "#ac47ff", "#870000"]
+
 let stopRareNum = 0;
 function changeMinRarity(button) {
     stopRareNum++;
-    if (stopRareNum > 8) {
+    if (stopRareNum > 9) {
         stopRareNum = 0;
     }
-    button.innerText = stopRareValues[stopRareNum];
-    const color2 = (stopRareNum === 2 || stopRareNum === 5 || stopRareNum === 0) ? "black" : "white";
-    button.style.color = color2;
-    button.style.backgroundImage = "linear-gradient(to right, " + stopRareColors[stopRareNum] + " 70%, black)";
+    let tier = oreInformation.getTierAt(stopRareNum + 5);
+    button.innerText = tier + "+";
+    const colors = oreInformation.getColors(tier);
+    button.style.color = colors["textColor"]
+    button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
 }
 function changeStopOnRare(button) {
     if (stopOnRare) {
@@ -380,7 +380,7 @@ function randomFunction(text, cause) {
     if ((cause === "inv" && invToIndex) || (cause === "crafting" && craftingToIndex)) {
         let num = -1;
         let world = currentWorld;
-        let ore = text.substring(0, text.indexOf(" "));
+        let ore = text.substring(0, text.indexOf("1") - 1);
         if (ore === "❤️‍🔥")
             return;
         if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {

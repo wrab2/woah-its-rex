@@ -668,7 +668,7 @@ function createPickaxeRecipes() {
             element.classList = "recipeOreDisplay";
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
             element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
-            let colors = getBackgroundColor(oreList[ore]["oreTier"]);
+            let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundColor = colors["backgroundColor"];
             element.style.margin = "0px";
 
@@ -721,7 +721,7 @@ for (let i = 0; i < worlds.length; i++) {
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
             element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
             element.classList = "recipeOreDisplay";
-            let colors = getBackgroundColor(oreList[ore]["oreTier"]);
+            let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundColor = colors["backgroundColor"];
             element.style.margin = "0px";
             if (amtHave >= amtNeeded)
@@ -866,10 +866,10 @@ function craftPickaxe(num) {
     utilitySwitchActions();
 }
 function utilitySwitchActions() {
-    updateStats();
     changeLayerOres();
     applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
     switchLayerIndex(0);
+    updateStats();
 }
 function craftGear(num) {
     let list = currentWorld === 1 ? worldOneGears : worldTwoGears;
