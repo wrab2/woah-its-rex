@@ -117,21 +117,23 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
             }
             if (oreList[type]["hasLog"])
                 verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
-            if (oreRarity > minRarity) {
+            if (oreRarity >= 750000) {
                 if (currentWorld === 1 && gears[7])
                     gearAbility1();
-            logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
+                if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
+                    logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
             }
         } else {
                 oreRarity *= caveMulti;
-                if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
+                if (oreList[type]["hasLog"]) {
                     verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
                 }
-                if (oreRarity > minRarity) {
-                    logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);
+                if (oreRarity >= 750000) {
+                    if (currentWorld === 1 && gears[7])
+                        gearAbility1();
+                    if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
+                        logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
                 }
-                if (currentWorld === 1 && gears[7] && oreRarity >= 750000)
-                    gearAbility1();
         }
         oreList[type][variantInvNames[inv - 1]]++;
         updateInventory(type, inv);
@@ -150,8 +152,7 @@ function generateBlock(location) {
             probabilityTable = layerList[specialLayers[3]];
     }
     if ((location["Y"] === 0 && currentWorld === 1) || (location["Y"] === 2000 && currentWorld === 2)) {
-        mine[location["Y"]][location["X"]] = "🟩";
-        return;
+        probabilityTable = layerList[specialLayers[5]]
     }
         
 
@@ -166,18 +167,15 @@ function generateBlock(location) {
         }
     }
     let oreRarity = oreList[blockToGive]["numRarity"];
-    let hasLog = false;
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
-        playSound(oreList[blockToGive]["oreTier"]);
-        if (oreRarity > minRarity) {
-            hasLog = oreList[blockToGive]["hasLog"];
-            if (hasLog) {
-                verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());
-            }
-            spawnMessage(blockToGive, location);
-            
+        const tier = oreList[blockToGive]["oreTier"];
+        if (oreList[blockToGive]["hasLog"]) {
+            verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());
+            verifiedOres.verifyLog(location["Y"], location["X"]);
         }
+        playSound(oreList[blockToGive]["oreTier"]);
+        if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage(blockToGive, location);
     }
 }
 /*

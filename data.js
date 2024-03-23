@@ -42,7 +42,8 @@ function saveAllData() {
         usePathBlocks,
         cavesEnabled,
         useDisguisedChills,
-        usingNewEmojis
+        usingNewEmojis,
+        minRarityNum
         );
     dataStorage[4].push(gears);
     if (!debug) localStorage.setItem("playerData", JSON.stringify(dataStorage));
@@ -208,10 +209,15 @@ function loadAllData() {
                     enableDisguisedChills();
                 }
             }
-            if (data[3][18] != undefined) {
+            if (data[3][19] != undefined) {
                 if (data[3][19]) {
                     switchFont();
                 }
+            }
+            if (data[3][20] != undefined) {
+                    minRarityNum = data[3][20];
+                    minRarityNum--;
+                    changeSpawnMessageRarity(document.getElementById("changeSMrarityDisplay"));
             }
         }
             if (data[4] !== undefined || data[4] !== null) {

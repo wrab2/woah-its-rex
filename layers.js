@@ -13,7 +13,8 @@ let oreList = {
     '🏝️': { 'decimalRarity': 1 / 275320000, 'numRarity': 275320000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Huge, beaming crystals emerge from the ground, creating an ephemeral atmosphere...', 'oreTier': 'Flawless', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '✨': { 'decimalRarity': 1 / 240800000, 'numRarity': 240800000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'From every corner of festive depths, bursts of color erupt like fireworks against the velvet sky...', 'oreTier': 'Flawless', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '⛄': { 'decimalRarity': 1 / 183640000, 'numRarity': 183640000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'In the quiet solitude of a winter landscape, a seed of ice blossoms into a testament to resilience and renewal...', 'oreTier': 'Flawless', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
-    '🦋': { 'decimalRarity': 1 / 12240000000, 'numRarity': 12240000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🦋': { 'decimalRarity': 1 / 12240000000, 'numRarity': 12240000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Deep in the temporal limbo where the threads of time coincide, a mystical figure lay guarding their integrity...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🌹': { 'decimalRarity': 1 / 194308600, 'numRarity': 194308600, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'In the grass swaying in the breeze far above the caverns lay a beautiful gift from nature herself...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
 
 
@@ -376,11 +377,12 @@ const layerList = {
 "chessLayer" : ["⚖️", "🎓", "📍", "📌", "🔎", "🖊️", "📚", "📐", "📖", "🧠", "✏️", "♟️"],
 "barrierLayer" : ["❔", "✴️", "✖️"],
 "borderLayer" : ["🩸", "🚫", "💢", "🔇", "🛑", "⭕", "🔕", "❌"],
-"worldTwoCommons" : ["🍀", "☘️", "📘", "📙", "📕", "📗", "⏏️", "▶️", "⏸️", "⏯️", "⏺️", "⏭️", "⏮️", "⏩", "⏪", "⏬", "⏫", "◀️", "🔼", "🔽", "➡️", "↖️", "↘️", "⬇️", "⬆️", "⬅️", "↪️", "↩️", "⤴️", "⤵️", "🔀", "🔁", "🔂", "🔄", "🔃"]
+"worldTwoCommons" : ["🍀", "☘️", "📘", "📙", "📕", "📗", "⏏️", "▶️", "⏸️", "⏯️", "⏺️", "⏭️", "⏮️", "⏩", "⏪", "⏬", "⏫", "◀️", "🔼", "🔽", "➡️", "↖️", "↘️", "⬇️", "⬆️", "⬅️", "↪️", "↩️", "⤴️", "⤵️", "🔀", "🔁", "🔂", "🔄", "🔃"],
+"grassLayer" : ["🌹", "🟩"]
 }
 let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
-let specialLayers = ["sillyLayer", "fluteLayer", "dirtLayer2", "barrierLayer", "borderLayer"];
+let specialLayers = ["sillyLayer", "fluteLayer", "dirtLayer2", "barrierLayer", "borderLayer", "grassLayer"];
 let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
 
 //SETTING LAYERS
@@ -430,7 +432,7 @@ function setLayer(y) {
 
 function createLayer(layers) {
     let output = [];
-    if (currentPickaxe === 13 && currentWorld === 1) output.push("☯️");
+    if (currentPickaxe === 13 && currentWorld === 2) output.push("☯️");
     for (let i = 0; i < layers.length; i++) {
         output = output.concat(layers[i]);
     }
@@ -464,7 +466,7 @@ function applyLuckToLayer(layer, luck) {
 }
 
 function changeLayerOres() {
-    if (currentPickaxe === 13 && currentWorld === 1) {
+    if (currentPickaxe === 13 && currentWorld === 2) {
         if (currentLayer.indexOf("☯️") < 0) {
             currentLayer.push("☯️");
             applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
@@ -656,6 +658,18 @@ class ores {
         if (num < 0) return tierNames[0];
         if (num > 14) return tierNames[14];
         return tierNames[num];
+    }
+    isCommon(tier) {
+        let tierNames = Object.keys(this.oreTiers);
+        if (tierNames.indexOf(tier > 4)) return false;
+        return true;
+    }
+    tierGrOrEqTo(tiers) {
+        if (tiers["tier1"] === tiers["tier2"]) return true;
+        for (let propertyName in this.oreTiers) {
+            if (propertyName === tiers["tier1"]) return false;
+            if (propertyName === tiers["tier2"]) return true;
+        }
     }
 }
 const oreInformation = new ores();

@@ -438,7 +438,6 @@ function createInventory() {
     for (let propertyName in oreInformation.oreTiers) {
         arr.push(oreInformation.getOresByTier(propertyName));
     }
-    console.log(arr);
     for (let k = arr.length - 1; k >= 0; k--) {
         for (let i = 0; i < arr[k].length; i++) {
             for (let j = 0; j < arr[k].length - i - 1; j++) {
@@ -512,7 +511,7 @@ function disappear(element){
 
 //SPAWNS AND FINDS
 
-let spawnOre;
+let spawnOre = null;
 function spawnMessage(block, location, caveInfo) {
     //ADD TO MINE CAPACITY IF NEAR RESET
     if ((currentWorld === 1 && !gears[3]) && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
@@ -520,9 +519,6 @@ function spawnMessage(block, location, caveInfo) {
     else if (!gears[17] && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
         mineCapacity += 10000;
     let oreRarity = oreList[block]["numRarity"];
-    if (oreList[block]["hasLog"] || caveInfo != undefined) {
-        verifiedOres.verifyLog(location["Y"], location["X"]);
-    }
     if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) {
         if (caveInfo === undefined) {
             mineBlock(location["X"], location["Y"], "ability");
@@ -550,17 +546,26 @@ function spawnMessage(block, location, caveInfo) {
         spawnElement.appendChild(element)
     }
     if (spawnElement.children.length > 10) spawnElement.removeChild(spawnElement.lastChild);
-
-        let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
-        if (caveInfo != undefined) {
-            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo["adjRarity"]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
-        } else {
-            document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + oreRarity.toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
+        let createSpawnMessage = false;
+        if (spawnOre === null) 
+            createSpawnMessage = true;
+        else if (document.getElementById("spawnMessage").innerText.indexOf(" Has Spawned!") > -1) 
+            createSpawnMessage = true;
+        else if (oreList[block]["spawnMessage"].indexOf(" Has Spawned!") < 0)
+            createSpawnMessage = true;
+        if (createSpawnMessage) {
+            let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
+            if (caveInfo != undefined) {
+                document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo["adjRarity"]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
+            } else {
+                document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + oreRarity.toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
+            }
         }
         clearTimeout(spawnOre);
-    spawnOre = setTimeout(() => {
-        document.getElementById("spawnMessage").innerHTML = "Spawn Messages Appear Here!"
-    }, 20000);
+        spawnOre = setTimeout(() => {
+            document.getElementById("spawnMessage").innerHTML = "Spawn Messages Appear Here!";
+            spawnOre = null;
+        }, 20000);
 }
 
 let loggedFinds = [];

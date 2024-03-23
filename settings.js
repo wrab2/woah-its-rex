@@ -102,8 +102,7 @@ function changeStopOnRare(button) {
     } else {
         stopOnRare = true;
         button.style.backgroundColor = "green";
-    }
-        
+    }   
 }
 
 //TY TETRA FOR THE BACKGROUND CHANGING FUNCTION!!
@@ -503,4 +502,15 @@ function switchFont() {
         y -= 2000;
         switchDistance();
     }
+}
+let minTier = "Antique";
+let minRarityNum = 0
+function changeSpawnMessageRarity(button) {
+    minRarityNum++;
+    if (minRarityNum > 9) minRarityNum = 0;
+    minTier = oreInformation.getTierAt(minRarityNum + 5);
+    button.innerText = "Minimum Spawn Message Tier: " + minTier + "+";
+    let colors = oreInformation.getColors(minTier);
+    button.style.color = colors["textColor"]
+    button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
 }

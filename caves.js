@@ -30,7 +30,7 @@ function generateCave(x, y, rate, reps, type) {
                         mineCaveBlock(c, r, caveType);
                 }
             }
-            let newRate = Math.round(Math.random() * 10) / 450;
+            let newRate = Math.round(Math.random() * 12) / 375;
             rate += newRate;
             reps++;
         }
@@ -47,7 +47,8 @@ function mineCaveBlock(c, r, type) {
     let caveMulti = getCaveMulti(type);
     if (block != undefined) {
         if (oreList[block]["isBreakable"]) {
-            giveBlock(block, c, r, false, true, caveMulti);
+            if (checkFromCave([r, c])) giveBlock(block, c, r, false, true, caveMulti);
+            else giveBlock(block, c, r);
             mine[r][c] = "⚪";
         }
         for (let i = 0; i < caveOreLocations.length; i++) {
@@ -139,17 +140,22 @@ function generateCaveBlock(y, x, type) {
             if (oolProbabilities[blockToGive] != undefined)
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
                 playSound(oreList[blockToGive]["oreTier"])
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
+                verifiedOres.verifyLog(location["Y"], location["X"]);
             }
+            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
+                spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
         }
     } else {
-        if (oreList[blockToGive]["numRarity"] > minRarity) {
-            if (oreList[blockToGive]["hasLog"]);
-                verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, false]);
-            spawnMessage(blockToGive, {"Y" : y, "X" : x});
+        if (oreList[blockToGive]["numRarity"] >= 750000) {
             playSound(oreList[blockToGive]["oreTier"]);
+            if (oreList[blockToGive]["hasLog"]) {
+                verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, false]);
+                verifiedOres.verifyLog(location["Y"], location["X"]);
+            }
+            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
+                spawnMessage(blockToGive, {"Y" : y, "X" : x});
         }
     }
     if (oreList[blockToGive]["decimalRarity"] < 1/1) {
