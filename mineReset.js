@@ -26,6 +26,7 @@ function toSurface() {
 let resetting = false;
 async function mineReset() {
     if (!resetting) {
+        caveOreLocations = [];
         resetting = true;
         mineCapacity = baseMineCapacity;
         const temp = curDirection;

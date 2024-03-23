@@ -115,8 +115,10 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
                     if (Math.random < 0.75)
                         oreList[type]["normalAmt"]++;
             }
-            if (oreList[type]["hasLog"])
+            if (oreList[type]["hasLog"]) {
                 verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
+            }
+                
             if (oreRarity >= 750000) {
                 if (currentWorld === 1 && gears[7])
                     gearAbility1();
@@ -125,7 +127,7 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
             }
         } else {
                 oreRarity *= caveMulti;
-                if (oreList[type]["hasLog"]) {
+                if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
                     verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
                 }
                 if (oreRarity >= 750000) {

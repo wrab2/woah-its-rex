@@ -51,12 +51,6 @@ function mineCaveBlock(c, r, type) {
             else giveBlock(block, c, r);
             mine[r][c] = "⚪";
         }
-        for (let i = 0; i < caveOreLocations.length; i++) {
-            if (r === caveOreLocations[i][0] && c === caveOreLocations[i][1]) {
-                caveOreLocations.splice(i, 1);
-                break;
-            }    
-        }
     }
     //CHECK BELOW THE BLOCK
     let generated;
@@ -135,6 +129,9 @@ function generateCaveBlock(y, x, type) {
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     mine[y][x] = blockToGive;
+    if (oreList[blockToGive]["numRarity"] >= 750000) {
+        caveOreLocations.push([y, x, adjRarity]);
+    }
     if (getCaveMulti(type) > 1) {
         if (adjRarity >= 25000000) {
             if (oolProbabilities[blockToGive] != undefined)
@@ -142,7 +139,7 @@ function generateCaveBlock(y, x, type) {
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 playSound(oreList[blockToGive]["oreTier"])
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
-                verifiedOres.verifyLog(location["Y"], location["X"]);
+                verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
                 spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
@@ -152,15 +149,14 @@ function generateCaveBlock(y, x, type) {
             playSound(oreList[blockToGive]["oreTier"]);
             if (oreList[blockToGive]["hasLog"]) {
                 verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, false]);
-                verifiedOres.verifyLog(location["Y"], location["X"]);
+                verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
                 spawnMessage(blockToGive, {"Y" : y, "X" : x});
         }
     }
-    if (oreList[blockToGive]["decimalRarity"] < 1/1) {
-        caveOreLocations.push([y, x, adjRarity]);
-    }
+    
+    
 }
 
 
@@ -237,7 +233,6 @@ let caveOreLocations = [];
 function checkFromCave(location) {
     for (let i = 0; i < caveOreLocations.length; i++) {
         if (location[0] === caveOreLocations[i][0] && location[1] === caveOreLocations[i][1]) {
-            caveOreLocations.splice(i, 1);
             return true;
         }    
     }
