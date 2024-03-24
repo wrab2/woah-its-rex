@@ -667,7 +667,7 @@ function createPickaxeRecipes() {
             element.id = (ore + ("pickaxeRecipe" + (j + 1) + "Display"));
             element.classList = "recipeOreDisplay";
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
-            element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
+            element.setAttribute("onclick", "randomFunction(\"" + ore + "\", 'crafting')");
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundColor = colors["backgroundColor"];
             element.style.margin = "0px";
@@ -719,7 +719,7 @@ for (let i = 0; i < worlds.length; i++) {
             let element = document.createElement('p');
             element.id = (ore + ("gearRecipe" + (j) + "Display"));
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
-            element.setAttribute("onclick", "randomFunction(this.innerHTML, 'crafting')");
+            element.setAttribute("onclick", "randomFunction(\"" + ore + "\", 'crafting')");
             element.classList = "recipeOreDisplay";
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundColor = colors["backgroundColor"];

@@ -464,7 +464,7 @@ function createInventory() {
                 let tempElement = document.createElement('tr');
                 tempElement.id = (propertyName + i);
                 tempElement.classList = "oreDisplay";
-                tempElement.setAttribute("onclick", "randomFunction(this.innerText, 'inv')");
+                tempElement.setAttribute("onclick", "randomFunction(\"" + propertyName + "\", 'inv')");
                 let colors = oreInformation.getColors(oreList[propertyName]["oreTier"]);
                 tempElement.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 90%, black)"
                 tempElement.style.color = colors["textColor"];

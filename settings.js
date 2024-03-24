@@ -375,11 +375,10 @@ function createIndexCards(layer, property) {
         return parentObject;
 }
 
-function randomFunction(text, cause) {
+function randomFunction(ore, cause) {
     if ((cause === "inv" && invToIndex) || (cause === "crafting" && craftingToIndex)) {
         let num = -1;
         let world = currentWorld;
-        let ore = text.substring(0, text.indexOf("1") - 1);
         if (ore === "❤️‍🔥")
             return;
         if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {
@@ -401,7 +400,7 @@ function randomFunction(text, cause) {
             }
             if (num < 1) {
                 for (let i = allCaves.length - 1; i >= 0; i--) {
-                    if (allCaves[i][ore] != undefined) {
+                    if (caveList[allCaves[i]].includes(ore)) {
                         num = 11 - i;
                         break;
                     }
