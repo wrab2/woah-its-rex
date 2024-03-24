@@ -381,10 +381,8 @@ function pickaxeAbility8(x, y, reps) {
             if (procs[i][1])
                 pickaxeAbility8(procs[i][0], procs[i][1], reps);
         }
-        resolve(true);
     } else {
         displayArea();
-        resolve(true);
     }
 }
 
@@ -443,10 +441,8 @@ function pickaxeAbility9(x, y, reps) {
             if (procs[i][1])
                 pickaxeAbility9(procs[i][0], procs[i][1], reps);
         }
-        resolve(true);
     } else {
         displayArea();
-        resolve(true);
     }
 }
 
