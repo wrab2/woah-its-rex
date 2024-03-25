@@ -118,6 +118,7 @@ function init() {
         if (date.getMonth() === 3 && date.getDate() === 1) {
             document.title = "The Sily Caverns";
         }
+        insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
         console.log("meow");
     }
 }
@@ -326,6 +327,7 @@ document.addEventListener('keydown', (event) => {
     }
     if (validInput) {
         clearInterval(loopTimer);
+        insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
         curDirection = "";
         movePlayer(name, 1);
         energySiphonerDirection = "";
@@ -338,6 +340,7 @@ let miningSpeed = 25;
 function goDirection(direction, speed) {
     if (curDirection === direction) {
         clearInterval(loopTimer);
+        insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
         curDirection = "";
         if (ability1Active) {
             clearTimeout(ability1Timeout);
@@ -346,6 +349,7 @@ function goDirection(direction, speed) {
     } else {
         let reps = 1
         clearInterval(loopTimer);
+        removeFromLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"]})
         if (speed === undefined) {
         if (currentWorld === 1 && gears[2])
             miningSpeed = 15;
@@ -361,6 +365,10 @@ function goDirection(direction, speed) {
         if (currentPickaxe === 12)
             reps++;
         reps += gears[19] ? 2 : 0;
+        if (a13) {
+            reps = 1;
+            miningSpeed = 35;
+        }
         loopTimer = setInterval(movePlayer, miningSpeed, direction, reps);
         curDirection = direction;
         energySiphonerDirection = direction;
@@ -370,13 +378,12 @@ function goDirection(direction, speed) {
 function moveOne(dir, button) {
     button.disabled = true;
     clearInterval(loopTimer);
-    setTimeout(() => {
-        movePlayer(dir, 1);
-    }, 15);
+    insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
+    movePlayer(dir, 1);
     curDirection = "";
     setTimeout(() => {
         button.disabled = false;
-    }, 100);
+    }, 50);
     energySiphonerDirection = "";
 }
 
@@ -462,7 +469,6 @@ function createInventory() {
             for (let i = 1; i < 5; i++) {
                 let oreNum = oreList[propertyName][variantInvNames[i - 1]];
                 let tempElement = document.createElement('tr');
-                tempElement.id = (propertyName + i);
                 tempElement.classList = "oreDisplay";
                 tempElement.setAttribute("onclick", "randomFunction(\"" + propertyName + "\", 'inv')");
                 let colors = oreInformation.getColors(oreList[propertyName]["oreTier"]);
@@ -480,11 +486,12 @@ function createInventory() {
                 oreRarityBlock.classList = "inventoryElement2";
                 let oreAmountBlock = document.createElement("td");
                 oreAmountBlock.id = (propertyName + "amt" + i);
-                oreAmountBlock.innerText = oreNum.toLocaleString();
+                oreAmountBlock.innerText = "x" + oreNum.toLocaleString();
                 oreAmountBlock.classList = "inventoryElement3";
+                oreList[propertyName][names[i - 1]] = oreAmountBlock;
                 tempElement.appendChild(oreNameBlock);
                 tempElement.appendChild(oreRarityBlock);
-                tempElement.appendChild(oreAmountBlock);
+                tempElement.appendChild(oreList[propertyName][names[i - 1]]);
                 document.getElementById(("inventory") + i).appendChild(tempElement);
             }
         }
@@ -495,11 +502,12 @@ function createInventory() {
 
 let variant = 1;
 function updateInventory(type, inv) {
-    let amt = oreList[type][variantInvNames[inv - 1]];
-    let element = document.getElementById((type + "amt" + (inv)));
-    element.innerText = "x" + amt.toLocaleString();
-    if (amt > 0) element.parentElement.style.display = "table";
-    else element.parentElement.style.display = "none";
+    
+   
+   oreList[type][names[inv - 1]].innerText = "x" + oreList[type][variantInvNames[inv - 1]];
+   if (oreList[type][variantInvNames[inv - 1]] > 0) (oreList[type][names[inv - 1]].parentElement).style.display = "table";
+   else (oreList[type][names[inv - 1]].parentElement).style.display = "none";
+   
 }
 
 function appear(element){

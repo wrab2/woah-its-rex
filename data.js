@@ -81,11 +81,9 @@ function loadAllData() {
         totalMined = data[2];
         document.getElementById("blocksMined").innerHTML = totalMined.toLocaleString() + " Blocks Mined";
         for (let propertyName in oreList) {
-            if (document.getElementById(propertyName + "1") !== null) {
                 for (let i = 1; i < 5; i++) {
                     updateInventory(propertyName, i);
                 }
-            }
         }
         if (data[3].length > 14) {
             if (data[3][0] != undefined) {

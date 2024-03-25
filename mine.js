@@ -221,6 +221,7 @@ function switchDistance() {
 
 async function teleport() {
     canMine = false;
+    insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
     curDirection = "";
     pa1 = [];
@@ -350,10 +351,16 @@ function switchWorld() {
     displayArea();
     switchWorldCraftables();
     utilitySwitchActions();
+    removeFromLayers({"ore":"🐢","layers":["paperLayer"]})
+    removeFromLayers({"ore":"🐰","layers":["paperLayer"]});
+    a12 = 0;
+    a13 = false;
+    document.getElementById("teleportButton").disabled = false;
     canMine = true;
 }
 function stopMining() {
     curDirection = "";
+    insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
     if (ability1Active) {
         clearTimeout(ability1Timeout);
