@@ -541,6 +541,16 @@ worldTwoGears = [
         ["📍", 10],
         ["🎓", 5]
     ],
+    [
+        ["🦠", 70000000],
+        ["☣️", 40000000],
+        ["🎵", 20000000],
+        ["❓", 15000000],
+        ["🪇", 1],
+        ["🧬", 1],
+        ["🔭", 1],
+        ["🕸️", 1],
+    ]
     
 ];
 
@@ -792,6 +802,7 @@ const buttonGradients = {
     "craftGear18" : {"gradient" : "linear-gradient(to right, #FF7C00 10%, #032A00, #11E900, #032A00, #FF7C00 90%","applied" : false},
     "craftGear19" : {"gradient" : "linear-gradient(to right, #CDCDCD 5%, #F55D2F, #474747, #EFD754, #474747, #F55D2F, #CDCDCD 95%","applied" : false},
     "craftGear20" : {"gradient" : "linear-gradient(to right, #000000 5%, #FF3636, #E94585, #000ACE, #FFFFFF 95%","applied" : false},
+    "craftGear21" : {"gradient" : "linear-gradient(to right,#44533D, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, #236B4B)","applied" : false},
 
     
 }
@@ -902,14 +913,18 @@ function craftGear(num) {
     if (currentWorld === 1 && num === 9)
         gearAbility2();
 }
-
+let m87 = 0;
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
     disappear(document.getElementById("gearCrafts"));
+    m87 = 0;
+    document.getElementById("oblivionFracturer").style.display = "none";
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
     appear(document.getElementById("gearCrafts"));
+    m87++;
+    if (m87 === 3 && currentWorld === 2) document.getElementById("oblivionFracturer").style.display = "block";
 }
 function switchWorldCraftables() {
     let elements = document.getElementsByClassName("craftingButton");
@@ -960,5 +975,6 @@ function switchWorldCraftables() {
             elements[i].style.display = "block";
         }
         elements[worldOnePickaxes.length - 1].style.display = "block";
+        document.getElementById("oblivionFracturer").style.display = "none";
     }
 }

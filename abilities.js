@@ -19,152 +19,151 @@ async function rollAbilities() {
         case 1:
             if (Math.random() < (1/30 * m)) {
                 pickaxeAbility1(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 2:
             if (Math.random() <= (1/35 * m)) {
                 pickaxeAbility2(curX, curY, 3, 1.35);
-                updateActiveRecipe();
+                
             }
             break;
         case 3:
             if (Math.random() <= (1/30 * m)) {
                 pickaxeAbility3(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 4:
             if (Math.random() <= (1/25 * m)) {
                 pickaxeAbility4(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 5:
             if (Math.random() <= (1/17 * m)) {
                 pickaxeAbility5(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 6:
             if (Math.random() <= (1/60 * m)) {
                 pickaxeAbility6(curX, curY);
-                updateActiveRecipe();
+                
             } else if (Math.random() <= (1/40 * m)) {
                 pickaxeAbility7(curX, curY);
-                updateActiveRecipe();
+                
             }
             
             break;
         case 7:
             if (Math.random() <= (1/50 * m)) {
                 pickaxeAbility8(curX, curY, 0);
-                updateActiveRecipe();
+                
             }
             break;
         case 8:
             if (Math.random() <= (1/50 * m)) {
                 pickaxeAbility9(curX, curY, 0);
-                updateActiveRecipe();
+                
             }
             break;
         case 9:
             if (Math.random() <= (1/30 * m)) {
                 pickaxeAbility10(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 10:
             if (Math.random() <= (1/50 * m)) {
                 pickaxeAbility11(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 11:
             if (Math.random() <= (1/100 * m)) {
                 pickaxeAbility12(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 12:
             if (Math.random() <= (1/150 * m)) {
                 pickaxeAbility13(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 14:
             if (Math.random() <= 1/45) {
                 pickaxeAbility14(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 15:
             if (Math.random() <= 1/75) {
                 pickaxeAbility15(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 16:
             if (Math.random() <= 1/100) {
                 pickaxeAbility16(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 17:
             if (Math.random() <= 1/150) {
                 pickaxeAbility17(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 18:
             if (Math.random() <= 1/150) {
                 pickaxeAbility18(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 19:
             if (Math.random() <= 1/50) {
                 pickaxeAbility19(curX, curY, 0);
-                updateActiveRecipe();
+                
             }
             break;
         case 20:
             if (Math.random() <= 1/75) {
                 pickaxeAbility20(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 21:
             if (Math.random() <= 1/75) {
                 pickaxeAbility21(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 22:
             if (Math.random() <= 1/150) {
                 pickaxeAbility22(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
          case 23:
             if (Math.random() <= 1/60) {
                 pickaxeAbility23(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 24:
             if (Math.random() <= 1/300) {
                 pickaxeAbility24(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
         case 25:
             if (Math.random() <= 1/400) {
                 pickaxeAbility25(curX, curY);
-                updateActiveRecipe();
+                
             }
             break;
-    
     }
 }
 
@@ -195,6 +194,7 @@ function gearAbility1() {
 function gearAbility2() {
     if (currentWorld === 1 && gears[9]) {
         currentLayer = createLayer([layerList["sillyLayer"]]);
+        currentLayerNum = 7777;
     }
 }
 

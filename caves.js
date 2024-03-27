@@ -9,9 +9,15 @@ function generateCave(x, y, rate, reps, type) {
     if (type === undefined) {
         type = getCaveType();
         if (type === undefined) {
-            type = currentLayer;
+            type = "currentLayer";
         }
-        type = sortCaveRarities(type);
+        if (type !== "type5Ores" && type !== "currentLayer")
+            sortCaveRarities(type);
+        else {
+            if (type !== "currentLayer" && caveList[type].length < 2)
+                caveList[type] = createGsCave();
+        }
+            
     }
     caveType = type;
         let distX = Math.round(Math.random() * 10) + 3;
@@ -82,7 +88,8 @@ function mineCaveBlock(c, r, type) {
 }
 
 
-function sortCaveRarities(arr) {
+function sortCaveRarities(type) {
+    let arr = caveList[type];
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
             let rarity1 = oreList[arr[j]]["numRarity"];
@@ -94,15 +101,48 @@ function sortCaveRarities(arr) {
             if (oolProbabilities[arr[j + 1]] != undefined)
                 rarity2 = 1/oolProbabilities[arr[j + 1]];
 
-            if (oreList[arr[j]]["numRarity"] < oreList[arr[j + 1]]["numRarity"]) {
+            if (rarity1 < rarity2) {
                 let lesser = arr[j + 1];
                 arr[j + 1] = arr[j];
                 arr[j] = lesser;
             }
         }
     }
-    return arr;
 }
+function createGsCave() {
+    let outputArr = [];
+    for (let i = 0; i < worldOneLayers.length; i++) {
+        for (let j = 0; j < layerList[worldOneLayers[i]].length; j++) {
+            if (oreList[layerList[worldOneLayers[i]][j]]["numRarity"] > 1)
+                outputArr.push(layerList[worldOneLayers[i]][j]);
+        }
+    }
+    for (let i = 0; i < worldTwoLayers.length; i++) {
+        for (let j = 0; j < layerList[worldTwoLayers[i]].length; j++) {
+            if (oreList[layerList[worldTwoLayers[i]][j]]["numRarity"] > 1)
+                outputArr.push(layerList[worldTwoLayers[i]][j]);
+        }
+    }
+    let toRemove = oreInformation.getOresByTier("Celestial");
+    for (let i = 0; i < toRemove.length; i++) {
+        while (outputArr.indexOf(toRemove[i]) > -1)
+            outputArr.splice(outputArr.indexOf(toRemove[i]), 1);
+    }
+    outputArr.push("🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "📘", "📙", "📕", "📗", "✡️");
+    for (let i = 0; i < outputArr.length; i++) {
+        for (let j = 0; j < outputArr.length - i - 1; j++) {
+            if (oreList[outputArr[j]]["numRarity"] < oreList[outputArr[j + 1]]["numRarity"]) {
+                let lesser = outputArr[j + 1];
+                outputArr[j + 1] = outputArr[j];
+                outputArr[j] = lesser;
+            }
+        }
+    }
+    outputArr.push("🕳️");
+    return outputArr;
+}
+//caveList["type5Ores"] = createGsCave(); generateCave(curX, curY, 0, 0, 'type5Ores');
+
 let caveLuck = 1;
 function generateCaveBlock(y, x, type) {
     if (currentWorld === 2 && y === 10000) {
@@ -116,29 +156,36 @@ function generateCaveBlock(y, x, type) {
     }
     let chosenValue = Math.random();
     if (debug) chosenValue /= caveLuck;
-    let summedProbability = 0;
-    for (let i = 0; i < type.length; i++) {
-        summedProbability += (oolProbabilities[type[i]] === undefined) ? (1/oreList[type[i]]["numRarity"]) : (oolProbabilities[type[i]]);
-        if (chosenValue < summedProbability) {
-            blockToGive = type[i];
-            break;
+    let arr = type === "currentLayer" ? currentLayer : caveList[type];
+    let blockToGive = "";
+        let low = 0;
+        let high = arr.length;
+        while (low < high) {
+            const mid = (low + high) >> 1; // Use bitwise shift for integer division
+            if (chosenValue >= 1/(oreList[arr[mid]]["numRarity"])) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
         }
-    }
+        blockToGive = arr[low];
+    
+    
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     mine[y][x] = blockToGive;
     if (oreList[blockToGive]["numRarity"] >= 750000) {
-        caveOreLocations.push([y, x, adjRarity]);
+        caveOreLocations.push({"X":x, "Y":y, "type":type, "caveMulti":multi});
     }
-    if (getCaveMulti(type) > 1) {
+    if (multi > 1) {
         if (adjRarity >= 25000000) {
-            if (oolProbabilities[blockToGive] != undefined)
+            if (oolProbabilities[blockToGive] != undefined && type !== "type5Ores")
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 playSound(oreList[blockToGive]["oreTier"])
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, true]);
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, getCaveMulti(type)]);
                 verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
@@ -148,7 +195,7 @@ function generateCaveBlock(y, x, type) {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
             playSound(oreList[blockToGive]["oreTier"]);
             if (oreList[blockToGive]["hasLog"]) {
-                verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, false]);
+                verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, 1]);
                 verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
@@ -164,17 +211,20 @@ function generateCaveBlock(y, x, type) {
 function getCaveMulti(type) {
     let multi;
     switch(type) {
-        case caveList["type1Ores"]:
+        case "type1Ores":
             multi = caveMultis[0];
             break;
-        case caveList["type2Ores"]:
+        case "type2Ores":
             multi = caveMultis[1];
             break;
-        case caveList["type3Ores"]:
+        case "type3Ores":
             multi = caveMultis[2];
             break;
-        case caveList["type4Ores"]:
+        case "type4Ores":
             multi = caveMultis[3];
+            break;
+        case "type5Ores":
+            multi = caveMultis[4];
             break;
         default:
             multi = 1;
@@ -183,21 +233,23 @@ function getCaveMulti(type) {
 }
 
 let caveTypes = {
-    "1": 1/50,
-    "2": 1/35,
-    "3": 1/20,
-    "4": 1/10
+    "c5": 1/1000,
+    "c1": 1/50,
+    "c2": 1/35,
+    "c3": 1/20,
+    "c4": 1/10
 }
-let caveMultis = [50, 35, 20, 10];
+let caveMultis = [50, 35, 20, 10, 1000];
 let caveList = {
 "type1Ores" : ["🌙", "🪔", "💫", "🩺", "💱", "🌟", "☄️", "⭐", "🔆", "🔭", "📡", "❓"],
 "type2Ores" : ["🎷", "🪘", "🪩", "🥁", "🪇", "🎹", "🎵"],
 "type3Ores" : ["🧫", "⚠️", "🛸", "🥀", "🍄", "🕸️", "💉", "☣️"],
-"type4Ores" : ["⚕️", "🌡️", "💊", "💸", "🧵", "🧬", "🍥", "🦠"]
+"type4Ores" : ["⚕️", "🌡️", "💊", "💸", "🧵", "🧬", "🍥", "🦠"],
+"type5Ores" : [],
 }
 
 
-let allCaves = ["type1Ores", "type2Ores", "type3Ores", "type4Ores"];
+let allCaves = ["type1Ores", "type2Ores", "type3Ores", "type4Ores", "type5Ores"];
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 let oolProbabilities = {
     "🥀" : 1/420000000,
@@ -222,26 +274,27 @@ function getCaveType() {
     for (let propertyName in caveTypes) {
         summedProbability += caveTypes[propertyName];
         if (chosenValue < summedProbability) {
-            caveType = caveList[allCaves[Number(propertyName) - 1]];
+            caveType = allCaves[Number(propertyName.substring(1)) - 1];
             break;
         }
     }
+    if (!gears[21] && caveType === "type5Ores") caveType = "type4Ores";
     return caveType;
 }
 
 let caveOreLocations = [];
 function checkFromCave(location) {
     for (let i = 0; i < caveOreLocations.length; i++) {
-        if (location[0] === caveOreLocations[i][0] && location[1] === caveOreLocations[i][1]) {
-            return true;
+        if (location[0] === caveOreLocations["Y"] && location[1] === caveOreLocations["X"]) {
+            return {"fromCave":true, "multi":caveOreLocations["caveMulti"]};
         }    
     }
-    return false;
+    return {"fromCave":false};
 }
 function getCaveMultiFromOre(ore) {
     for (let i = 0; i < allCaves.length; i++) {
         if (caveList[allCaves[i]].includes(ore))
-            return getCaveMulti(caveList[allCaves[i]]);
+            return getCaveMulti(allCaves[i]);
     }
     return 1;
 }

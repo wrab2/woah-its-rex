@@ -223,6 +223,17 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#oblivionFracturer {
+    margin-top: 5vw;
+}
+#oblivionFracturer span {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(to right,#44533D, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, #236B4B);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

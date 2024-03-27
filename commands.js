@@ -5,12 +5,12 @@ if (debug) {
     if (block === undefined) {
         for (let propertyName in oreList) {
             oreList[propertyName]["normalAmt"] += amt;
-            updateInventory(propertyName, 1);
+            inventoryObj[propertyName] = 0;
             
         }
     } else {
         oreList[block]["normalAmt"] += amt;
-        updateInventory(block, 1);
+        inventoryObj[block] = 0;
     }
 } else {
     window.alert("INSUFFICIENT PERMISSIONS")
@@ -90,6 +90,7 @@ let allGearNames = [
     "Clover's Undoing",
     "Fantastical Feather",
     "Statistical Analyzer",
+    "Oblivion Fracturer"
 ]
 const adminListNums = function() {
     if (debug) {

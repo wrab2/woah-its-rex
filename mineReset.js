@@ -14,6 +14,8 @@ function toSurface() {
         a13 = true;
         document.getElementById("spawnMessage").innerText = "The air becomes hard to breathe as particle flow slows to a halt...";
         document.getElementById("teleportButton").disabled = true;
+        eventSpawn.currentTime = 0;
+        eventSpawn.play();
     }
     clearInterval(loopTimer);
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})

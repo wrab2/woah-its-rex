@@ -76,14 +76,30 @@ let gears = [
     false, //LUCK 3 18
     false, //SPEED 3 19
     false, //15% OF CURRENT PICKAXE LUCK 20
+    false, //ABYSSTONE CAVES 21
 ];
 let currentPickaxe = 0;
 let currentWorld = 1;
 let currentLayerNum = 0;
+const birthdays = {
+    "3/28" : "Draedon",
+    "5/21" : "Jade",
+    "12/16" : "ThatBotCook",
+    "12/23" : "Amber"
+}
 //IMPORTANT
 const date = new Date();
 let limitedTimer;
+let inventoryTimer;
+let minedElement;
+let revealedElement;
+let locationElement;
+let blockElement;
 function init() {
+    minedElement = document.getElementById("blocksMined");
+    revealedElement = document.getElementById("mineResetProgress");
+    locationElement = document.getElementById("location");
+    blockElement = document.getElementById("blockDisplay");
     let canContinue = true;
     createSpecialLayers();
     createInventory();
@@ -109,16 +125,19 @@ function init() {
         switchLayerIndex(0, 0);
         if (Math.random() < 1/1000)
             document.getElementById("cat").innerText = "CatAxe";
-        for (let propertyName in caveList) {
-            sortCaveRarities(caveList[propertyName]);
-        }
         cat = verifiedOres.getCurrentLuck();
         utilitySwitchActions();
         limitedTimer = setInterval(checkLimitedOres, 10000);
+        inventoryTimer = setInterval(updateInventory, 500);
         if (date.getMonth() === 3 && date.getDate() === 1) {
             document.title = "The Sily Caverns";
         }
         insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
+        for (let propertyName in birthdays) {
+            if ((date.getMonth() + 1 === Number(propertyName.substring(0, propertyName.indexOf("/")))) && (date.getDate() === Number(propertyName.substring(propertyName.indexOf("/") + 1)))) {
+                document.getElementById("spawnMessage").innerText = "Happy Birthday " + birthdays[propertyName] + "!!!";
+            }
+        }
         console.log("meow");
     }
 }
@@ -134,11 +153,14 @@ let ethereal;
 let celestial;
 let imaginary;
 let keepRunningAudio;
+let eventSpawn;
 let allAudios = [];
 function loadContent() {
     keepRunningAudio = new Audio("audios/ambiencebyx2corp.mp3")
     keepRunningAudio.load();
     keepRunning();
+    eventSpawn = new Audio("audios/Glitch.mp3");
+    eventSpawn.volume = 0.1;
     chill = new Audio("audios/spinechill.mp3");
     ringing = new Audio("audios/Transcendent.mp3");
     visionblur = new Audio("audios/visionblur.mp3");
@@ -277,7 +299,6 @@ function movePlayer(dir, reps) {
                     }
                 default:
             }
-            updateActiveRecipe();
         }
         displayArea();
         }
@@ -416,14 +437,14 @@ function displayArea() {
             }  
             output += "<br>";
         }
-        document.getElementById("blockDisplay").innerHTML = (output.substring(0, output.length - 4));
+        blockElement.innerHTML = (output.substring(0, output.length - 4));
     } else {
-        document.getElementById("blockDisplay").innerHTML = "❌";
+        blockElement.innerText = "❌";
     }
-    document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
-    document.getElementById("blocksMined").innerHTML = totalMined.toLocaleString() + " Blocks Mined";
+    revealedElement.innerText = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
+    minedElement.innerText = totalMined.toLocaleString() + " Blocks Mined";
     let sub = currentWorld === 2 ? 2000 : 0;
-    document.getElementById("location").innerHTML = "X: " + (curX - 1000000000).toLocaleString() + " | Y: " + (-(curY - sub)).toLocaleString();
+    locationElement.innerText = "X: " + (curX - 1000000000).toLocaleString() + " | Y: " + (-(curY - sub)).toLocaleString();
 }
 
 //HTML EDITING
@@ -480,9 +501,12 @@ function createInventory() {
                 oreNameBlock.classList = "inventoryElement1";
                 let oreRarityBlock = document.createElement("td");
                 let rarity = oreList[propertyName]["numRarity"];
-                if (oreList[propertyName]["caveExclusive"])
+                if (oreList[propertyName]["caveExclusive"]) {
                     rarity *= getCaveMultiFromOre(propertyName);
-                oreRarityBlock.innerText = "1/" + (rarity * multis[i - 1]).toLocaleString();
+                    oreRarityBlock.innerText = "1/" + (rarity * multis[i - 1]).toLocaleString() + "*";
+                } else {
+                    oreRarityBlock.innerText = "1/" + (rarity * multis[i - 1]).toLocaleString();
+                }
                 oreRarityBlock.classList = "inventoryElement2";
                 let oreAmountBlock = document.createElement("td");
                 oreAmountBlock.id = (propertyName + "amt" + i);
@@ -501,13 +525,17 @@ function createInventory() {
 }
 
 let variant = 1;
-function updateInventory(type, inv) {
-    
-   
-   oreList[type][names[inv - 1]].innerText = "x" + oreList[type][variantInvNames[inv - 1]];
-   if (oreList[type][variantInvNames[inv - 1]] > 0) (oreList[type][names[inv - 1]].parentElement).style.display = "table";
-   else (oreList[type][names[inv - 1]].parentElement).style.display = "none";
-   
+let inventoryObj = {};
+function updateInventory() {
+    for (let propertyName in inventoryObj) {
+        for (let i = 1; i < 5; i++) {
+            oreList[propertyName][names[i - 1]].innerText = "x" + oreList[propertyName][variantInvNames[i - 1]].toLocaleString();
+            if (oreList[propertyName][variantInvNames[i - 1]] > 0) (oreList[propertyName][names[i - 1]].parentElement).style.display = "table";
+            else (oreList[propertyName][names[i - 1]].parentElement).style.display = "none";
+        }
+    }
+   inventoryObj = {};
+   updateActiveRecipe();
 }
 
 function appear(element){

@@ -59,12 +59,10 @@ function checkAllAround(x, y, luck) {
 
 function mineBlock(x, y, cause) {
     let ore = mine[y][x];
-    if (ore === "🟩") ore = "🟫";
     if (ore === "⚪") return;
     if (oreList[ore]["isBreakable"]) {
-        if (checkFromCave([y, x])) {
-            let adjMulti = getCaveMultiFromOre(mine[y][x]);
-            giveBlock(ore, x, y, false, true, adjMulti);
+        if (checkFromCave([y, x])["fromCave"]) {
+            giveBlock(ore, x, y, false, true, checkFromCave([y, x])["multi"]);
             mine[y][x] = "⚪";
             checkAllAround(x, y, 1);
             totalMined++;
@@ -103,8 +101,7 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
             inv = 4;
         if (!fromCave) {
             if (currentWorld === 1 && gears[4]) {
-                oreList[currentLayer.slice(-1)][variantInvNames[inv - 1]]++;
-                updateInventory(currentLayer.slice(-1), 1);
+                oreList[currentLayer.slice(-1)]["normalAmt"]++;
             }
             if (gears[15]) {
                  if (oreRarity === 1 && (Math.random() < 0.5))
@@ -138,7 +135,7 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
                 }
         }
         oreList[type][variantInvNames[inv - 1]]++;
-        updateInventory(type, inv);
+        inventoryObj[type] = 0;
 }
 let minRarity = 750000;
 let cat = 1;
@@ -303,11 +300,10 @@ function attemptSwitchWorld() {
     }
 }
 function switchWorld() {
-    distanceMulti = 1;
-    y = 1000;
     canMine = false;
     stopMining();
     mine = [];
+    m87 = 0;
     if (currentWorld === 1) {
         currentWorld = 2;
         allLayers = worldTwoLayers;
@@ -316,6 +312,8 @@ function switchWorld() {
         currentLayerNum = -1;
         setLayer(curY);
         createMine();
+        distanceMulti = 1;
+        y = 1000;
         if (currentPickaxe === 25) {
             if (Math.random() < 1/10000) {
                 mine[curY + 1][curX] = "🩷";
@@ -329,6 +327,8 @@ function switchWorld() {
         }
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     } else {
+        distanceMulti = 0;
+        y = 1000;
         currentWorld = 1;
         allLayers = worldOneLayers;
         currentLayer = allLayers[0];
