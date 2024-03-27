@@ -53,7 +53,7 @@ function mineCaveBlock(c, r, type) {
     let caveMulti = getCaveMulti(type);
     if (block != undefined) {
         if (oreList[block]["isBreakable"]) {
-            if (checkFromCave([r, c])) giveBlock(block, c, r, false, true, caveMulti);
+            if (checkFromCave([r, c])["fromCave"]) giveBlock(block, c, r, false, true, caveMulti);
             else giveBlock(block, c, r);
             mine[r][c] = "⚪";
         }
@@ -109,6 +109,8 @@ function sortCaveRarities(type) {
         }
     }
 }
+let gsProbabilities = [];
+let sgsProbability;
 function createGsCave() {
     let outputArr = [];
     for (let i = 0; i < worldOneLayers.length; i++) {
@@ -139,6 +141,12 @@ function createGsCave() {
         }
     }
     outputArr.push("🕳️");
+    let temp = 0;
+    for (let i = 0; i < outputArr.length; i++) {
+        temp += 1/oreList[outputArr[i]]["numRarity"];
+        gsProbabilities[i] = temp;
+    }
+    sgsProbability = temp;
     return outputArr;
 }
 //caveList["type5Ores"] = createGsCave(); generateCave(curX, curY, 0, 0, 'type5Ores');
@@ -160,17 +168,28 @@ function generateCaveBlock(y, x, type) {
     let blockToGive = "";
         let low = 0;
         let high = arr.length;
-        while (low < high) {
-            const mid = (low + high) >> 1; // Use bitwise shift for integer division
-            if (chosenValue >= 1/(oreList[arr[mid]]["numRarity"])) {
-                low = mid + 1;
-            } else {
-                high = mid;
+        if (type !== "type5Ores") {
+            while (low < high) {
+                const mid = (low + high) >> 1; // Use bitwise shift for integer division
+                if (chosenValue >= 1/(oreList[arr[mid]]["numRarity"])) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
             }
+            blockToGive = arr[low];
+        } else {
+            while (low < high) {
+                const mid = (low + high) >> 1; // Use bitwise shift for integer division
+                if (chosenValue >= gsProbabilities[mid]) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            blockToGive = arr[low];
         }
-        blockToGive = arr[low];
-    
-    
+        
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
@@ -184,7 +203,8 @@ function generateCaveBlock(y, x, type) {
             if (oolProbabilities[blockToGive] != undefined && type !== "type5Ores")
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
-                playSound(oreList[blockToGive]["oreTier"])
+                playSound(oreList[blockToGive]["oreTier"]);
+                
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, getCaveMulti(type)]);
                 verifiedOres.verifyLog(y, x);
             }
