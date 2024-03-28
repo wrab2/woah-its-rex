@@ -305,7 +305,6 @@ function switchLayerIndex(num, overrideNum, world) {
     if (layerNum > (add - 1)) {
         let caveNum = caveBase - layerNum;
         layerToIndex = allCaves[caveNum];
-        console.log(caveNum)
     } else {
         if (world === 1) {
             layerToIndex = worldOneLayers[layerNum];

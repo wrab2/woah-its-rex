@@ -652,7 +652,7 @@ function pickaxeAbility18(x, y) {
     displayArea();
 }
 function pickaxeAbility19(x, y, reps) {
-    if (reps > 10)
+    if (reps > 7)
         return;
     let newOrigins = [];
     let dist = 7;
