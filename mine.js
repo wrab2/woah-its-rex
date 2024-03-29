@@ -61,8 +61,8 @@ function mineBlock(x, y, cause) {
     let ore = mine[y][x];
     if (ore === "⚪") return;
     if (oreList[ore]["isBreakable"]) {
-        if (checkFromCave([y, x])["fromCave"]) {
-            giveBlock(ore, x, y, false, true, checkFromCave([y, x])["multi"]);
+        if (checkFromCave({"X":x, "Y":y})["fromCave"]) {
+            giveBlock(ore, x, y, false, true, checkFromCave({"X":x, "Y":y})["multi"]);
             mine[y][x] = "⚪";
             checkAllAround(x, y, 1);
             totalMined++;
@@ -100,6 +100,12 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
         else if (Math.floor(Math.random() * 500) === 250)
             inv = 4;
         if (!fromCave) {
+            if (oreRarity >= 750000) {
+                if (currentWorld === 1 && gears[7])
+                    gearAbility1();
+                if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
+                    logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
+            }
             if (currentWorld === 1 && gears[4]) {
                 oreList[currentLayer.slice(-1)]["normalAmt"]++;
             }
@@ -115,24 +121,18 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
             if (oreList[type]["hasLog"]) {
                 verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
             }
-                
-            if (oreRarity >= 750000) {
-                if (currentWorld === 1 && gears[7])
-                    gearAbility1();
-                if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
-                    logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
-            }
         } else {
                 oreRarity *= caveMulti;
-                if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
-                    verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
-                }
-                if (oreRarity >= 750000) {
+                if (oreRarity >= 750000) { 
                     if (currentWorld === 1 && gears[7])
                         gearAbility1();
                     if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
                         logFind(type, x, y, namesemojis[inv - 1], totalMined, fromReset);     
                 }
+                if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
+                    verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
+                }
+                
         }
         oreList[type][variantInvNames[inv - 1]]++;
         inventoryObj[type] = 0;
@@ -168,6 +168,10 @@ function generateBlock(location) {
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
+        if (blockToGive === "💙" && Math.random() < 1/1000 && curDirection === "") {
+            blockToGive = "🩵";
+            mine[location["Y"]][location["X"]] = blockToGive;
+        }
         const tier = oreList[blockToGive]["oreTier"];
         if (oreList[blockToGive]["hasLog"]) {
             verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());
@@ -304,6 +308,7 @@ function switchWorld() {
     stopMining();
     mine = [];
     m87 = 0;
+    m88 = 0;
     if (currentWorld === 1) {
         currentWorld = 2;
         allLayers = worldTwoLayers;
@@ -317,7 +322,8 @@ function switchWorld() {
         if (currentPickaxe === 25) {
             if (Math.random() < 1/10000) {
                 mine[curY + 1][curX] = "🩷";
-                playSound(oreList["🩷"]["oreTier"])
+                playSound(oreList["🩷"]["oreTier"]);
+                document.getElementById("spawnMessage").innerHTML = "🩷 Has Spawned!";
             } else {
                 mine[curY + 1][curX] = "📺";
             }
@@ -327,6 +333,8 @@ function switchWorld() {
         }
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     } else {
+        let children = document.getElementById("pickaxeCrafts").children;
+        for (let i = worldOnePickaxes.length - 1; i < worldOnePickaxes.length + worldTwoPickaxes.length; i++) children[i].style.display = "block";
         distanceMulti = 0;
         y = 1000;
         currentWorld = 1;
@@ -340,7 +348,8 @@ function switchWorld() {
         if (currentPickaxe === 1) {
             if (Math.random() < 1/10000) {
                 mine[curY + 1][curX] = "🩶";
-                playSound(oreList["🩶"]["oreTier"])
+                playSound(oreList["🩶"]["oreTier"]);
+                document.getElementById("spawnMessage").innerHTML = "🩶 Has Spawned!";
             } else {
                 mine[curY + 1][curX] = "🟫";
             }
@@ -350,6 +359,7 @@ function switchWorld() {
     switchDistance();
     displayArea();
     switchWorldCraftables();
+    document.getElementById("nullChroma").style.display = "none";
     utilitySwitchActions();
     removeFromLayers({"ore":"🐢","layers":["paperLayer"]})
     removeFromLayers({"ore":"🐰","layers":["paperLayer"]});

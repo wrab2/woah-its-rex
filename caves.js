@@ -53,7 +53,7 @@ function mineCaveBlock(c, r, type) {
     let caveMulti = getCaveMulti(type);
     if (block != undefined) {
         if (oreList[block]["isBreakable"]) {
-            if (checkFromCave([r, c])["fromCave"]) giveBlock(block, c, r, false, true, caveMulti);
+            if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock(block, c, r, false, true, caveMulti);
             else giveBlock(block, c, r);
             mine[r][c] = "⚪";
         }
@@ -205,7 +205,7 @@ function generateCaveBlock(y, x, type) {
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 playSound(oreList[blockToGive]["oreTier"]);
                 
-                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, getCaveMulti(type)]);
+                verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, getCaveMulti(type), type]);
                 verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
@@ -305,8 +305,8 @@ function getCaveType() {
 let caveOreLocations = [];
 function checkFromCave(location) {
     for (let i = 0; i < caveOreLocations.length; i++) {
-        if (location[0] === caveOreLocations["Y"] && location[1] === caveOreLocations["X"]) {
-            return {"fromCave":true, "multi":caveOreLocations["caveMulti"]};
+        if (location["Y"] === caveOreLocations[i]["Y"] && location["X"] === caveOreLocations[i]["X"]) {
+            return {"fromCave":true, "multi":caveOreLocations[i]["caveMulti"], "type":caveOreLocations[i]["type"]};
         }    
     }
     return {"fromCave":false};

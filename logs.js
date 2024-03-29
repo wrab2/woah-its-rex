@@ -8,14 +8,14 @@ class secureLogs {
     #spawnLogs;
     #verifiedLogs;
     #logsTimer;
-    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3.16, 1.25, 3, 5, 15, 20];
+    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3.16, 1.25, 3, 5, 15, 20, 150];
     constructor() {
         this.#spawnLogs = [];
         this.#verifiedLogs = [];
         this.#logsTimer = null;
     }
     createLog(r, c, intended, obj, luck, fromCave) {
-        fromCave = fromCave === undefined ? [false, false] : fromCave;
+        fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
         let luckModifier1 = 1;
         if (currentWorld === 1 && gears[1])
             luckModifier1 *= 1.1;

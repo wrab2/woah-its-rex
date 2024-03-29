@@ -52,7 +52,8 @@ let pickaxes = [
     ['jesus christ what is it with world 2 and circles', false], //22 ~113 consistency
     ['man this ability sucks', false], //23 ~215 consistency
     ["NOBODY WILL SURVIVE THIS ABILITY ACTIVATING", false],
-    ['ITS HUGE WHAT', false]
+    ['ITS HUGE WHAT', false],
+    ['the final one... or is it?', false]
 ];
 let gears = [
     false, //ORE TRACKER 0
@@ -338,6 +339,7 @@ document.addEventListener('keydown', (event) => {
             goDirection('d')
             return;
         case "escape":
+            //toggleCelestials(false)
             if (document.getElementById("settingsContainer").style.display === "block") 
                 hideSettings();
             else
@@ -376,8 +378,8 @@ function goDirection(direction, speed) {
             miningSpeed = 15;
         if (currentWorld === 1 && gears[6])
             miningSpeed = 10;
-        if (currentWorld === 2)
-            miningSpeed = 25 - (gears[11] ? 3 : 0) - (gears[13] ? 5 : 0) - (gears[19] ? 7 : 0);
+        if (currentWorld === 2 || (gears[13] && gears[19]))
+            miningSpeed = 25 - (gears[11] ? 3 : 0) - (gears[13] ? 5 : 0) - (gears[19] ? 15 : 0);
         } else {
             miningSpeed = speed;
         }
@@ -662,7 +664,21 @@ function goToOre(block, variantType) {
         }
     }
 }
-
+/*
+function toggleCelestials(state) {
+    let element = document.getElementById("celestialContainer");
+    if (!state) {
+        document.getElementById("mainContent").style.display = "block";
+        element.style.display = "none";
+        canMine = true
+    } 
+    else {
+        element.style.display = "block";
+        document.getElementById("mainContent").style.display = "none";
+        canMine = false;
+    }
+}
+*/
 //TY @marbelynrye FOR MAKING THESE IMAGE DATA GATHERERS UR SO COOL FOR THAT
 //IT WORKS SO WELL!!!!
 let pickaxe24Nums = [];

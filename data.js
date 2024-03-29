@@ -122,7 +122,7 @@ function loadAllData() {
             if (data[3][6] != undefined) {
                 stopOnRare = data[3][6];
                 if (stopOnRare)
-                    document.getElementById("stopOnRare").style.backgroundColor = "green";
+                    document.getElementById("stopOnRare").style.backgroundColor = "#6BC267";
             }
             if (data[3][7] != undefined) {
                 stopRareNum = data[3][7] - 1;
@@ -131,7 +131,7 @@ function loadAllData() {
             if (data[3][8] != undefined) {
                 canDisplay = data[3][8];
                 if (!canDisplay) {
-                    document.getElementById("blockUpdates").style.backgroundColor = "red";
+                    document.getElementById("blockUpdates").style.backgroundColor = "#FF3D3D";
                     document.getElementById("blockDisplay").innerHTML = "❌"
                 }
             }
@@ -139,18 +139,18 @@ function loadAllData() {
                 if (data[3][9]) {
                     changeUseNumbers();
                     useNumbers = data[3][9]; 
-                    document.getElementById("useNumbers").style.backgroundColor = "green";
+                    document.getElementById("useNumbers").style.backgroundColor = "#6BC267";
                 }
             }
             if (data[3][10] != undefined) {
                 invToIndex = data[3][10];
                 if (!invToIndex)
-                    document.getElementById("invIndex").style.backgroundColor = "red";
+                    document.getElementById("invIndex").style.backgroundColor = "#FF3D3D";
             }
             if (data[3][11] != undefined) {
                 craftingToIndex = data[3][11];
                 if (!craftingToIndex)
-                    document.getElementById("craftIndex").style.backgroundColor = "red";
+                    document.getElementById("craftIndex").style.backgroundColor = "#FF3D3D";
             }
             if (data[3][12] != undefined) {
                 if (data[3][12] != "")
@@ -196,7 +196,7 @@ function loadAllData() {
             if (data[3][16] != undefined) {
                 usePathBlocks = data[3][16];
                 if (!usePathBlocks)
-                    document.getElementById("pathBlocks").style.backgroundColor = "green"
+                    document.getElementById("pathBlocks").style.backgroundColor = "#6BC267"
             }
             if (data[3][17] != undefined) {
                 cavesEnabled = data[3][17];

@@ -673,7 +673,7 @@ button, .col-3 > div > button {
   height: 100%;
   margin-left: 1%;
   width: 2%;
-  background-color: red;
+  background-color: #FF3D3D;
   border: none;
 }
 .settingsSeparator {
@@ -722,7 +722,7 @@ button, .col-3 > div > button {
 .stopOnRareButton {
   width: 50%;
   border-style: solid;
-  background-color: red;
+  background-color: #FF3D3D;
 }
 .stopOnRareSelector {
   width:50%;
@@ -736,14 +736,14 @@ button, .col-3 > div > button {
 .toggleDisplay {
   width: 100%;
   background-color: #333;
-  background-color: green;
+  background-color: #6BC267;
 }
 .inputButton:hover {
   background-color: #2e2e2e;
 }
 .invSettingButton {
   width: 100%;
-  background-color: green;
+  background-color: #6BC267;
   border-radius: 20px;
 }
 .displayColorButton {
@@ -899,7 +899,7 @@ button, .col-3 > div > button {
   background-clip: content-box, border-box;
 }
 #pathBlocks {
-  background-color: red;
+  background-color: #FF3D3D;
 }
 .h-10 {
   height: 10%;
@@ -933,13 +933,26 @@ button, .col-3 > div > button {
   font-size:1vw;
   font-weight: 750;
 }
+#secretButton {
+  background: none;
+  width: 4vw;
+  height: 4vw;
+  border: none;
+  position: fixed;
+  top: 50%;
+}
+#celestialContainer {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
 @keyframes flashGreen {
   0% {background-color:white;}
-  50% {background-color:lightgreen;}
+  50% {background-color:#6BC267;}
   100% {background-color:white;}
 }
 @keyframes flashRed {
   0% {background-color:white;}
-  50% {background-color:red;}
+  50% {background-color:#FF3D3D;}
   100% {background-color:white;}
 }

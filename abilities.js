@@ -93,77 +93,81 @@ async function rollAbilities() {
             }
             break;
         case 14:
-            if (Math.random() <= 1/45) {
+            if (Math.random() <= 1/45 * m) {
                 pickaxeAbility14(curX, curY);
                 
             }
             break;
         case 15:
-            if (Math.random() <= 1/75) {
+            if (Math.random() <= 1/75 * m) {
                 pickaxeAbility15(curX, curY);
                 
             }
             break;
         case 16:
-            if (Math.random() <= 1/100) {
+            if (Math.random() <= 1/100 * m) {
                 pickaxeAbility16(curX, curY);
                 
             }
             break;
         case 17:
-            if (Math.random() <= 1/150) {
+            if (Math.random() <= 1/150 * m) {
                 pickaxeAbility17(curX, curY);
                 
             }
             break;
         case 18:
-            if (Math.random() <= 1/150) {
+            if (Math.random() <= 1/150 * m) {
                 pickaxeAbility18(curX, curY);
                 
             }
             break;
         case 19:
-            if (Math.random() <= 1/50) {
+            if (Math.random() <= 1/50 * m) {
                 pickaxeAbility19(curX, curY, 0);
                 
             }
             break;
         case 20:
-            if (Math.random() <= 1/75) {
+            if (Math.random() <= 1/75 * m) {
                 pickaxeAbility20(curX, curY);
                 
             }
             break;
         case 21:
-            if (Math.random() <= 1/75) {
+            if (Math.random() <= 1/75 * m) {
                 pickaxeAbility21(curX, curY);
                 
             }
             break;
         case 22:
-            if (Math.random() <= 1/150) {
+            if (Math.random() <= 1/150 * m) {
                 pickaxeAbility22(curX, curY);
                 
             }
             break;
          case 23:
-            if (Math.random() <= 1/60) {
+            if (Math.random() <= 1/60 * m) {
                 pickaxeAbility23(curX, curY);
                 
             }
             break;
         case 24:
-            if (Math.random() <= 1/300) {
+            if (Math.random() <= 1/300 * m) {
                 pickaxeAbility24(curX, curY);
                 
             }
             break;
         case 25:
-            if (Math.random() <= 1/400) {
+            if (Math.random() <= 1/400 * m) {
                 pickaxeAbility25(curX, curY);
                 
             }
             break;
+        case 26:
+            if (Math.random() < 1/150 * m) {
+                pickaxeAbility26(curX, curY);
+            }
     }
 }
 
@@ -493,11 +497,11 @@ function pickaxeAbility11(x, y) {
     for (let i = -3; i < 4; i++) {
         for (let j = -3; j < 4; j++) {
             if (!(i === 0 && j === 0) && Math.random() <= 0.5) {
-                    for (let r = 7 * j; r < (7 * j + 7); r++) {
-                        for (let c = 7 * i; c < (7 * i + 7); c++) {
-                            pickaxeAbilityMineBlock(c + x, r + y);
-                        }
-                    }
+                let startX = x + 7 * j;
+                let startY = y + 7 * i
+                for (let r = startY; r < startY + 7; r++)
+                    for (let c = startX; c < startX + 7; c++)
+                        pickaxeAbilityMineBlock(c, r);
             }
         }
     }
@@ -883,22 +887,25 @@ function pickaxeAbility23(x, y) {
         else
             useX = false;
         for (let r = startNumY; r < endNumY; r++) {  
-            if (!useX && r > lastChangeY + 1) {
-                for (let r2 = r - 2; r2 <= r + 1; r2++) {
-                    for (let c = startNumX - 2; c <= startNumX + 1; c++) {
-                        pickaxeAbilityMineBlock(Math.floor(c), r2);
+            if (!useX) {
+                if (r > lastChangeY + 3) {
+                    lastChangeY += 3;
+                    for (let r2 = r - 2; r2 <= r + 1; r2++) {
+                        for (let c = startNumX - 2; c <= startNumX + 1; c++) {
+                            pickaxeAbilityMineBlock(Math.floor(c), r2);
+                        }
                     }
                 }
-                lastChangeY++;
+                
             } else {
                 for (let c = startNumX; c < startNumX + xIncrease; c++) {
-                    if (c > lastChangeX + 1) {
+                    if (c > lastChangeX + 3) {
+                        lastChangeX += 3;
                         for (let r2 = r - 2; r2 <= r + 1; r2++) {
                             for (let c2 = c - 2; c2 <= c + 1; c2++) {
                                 pickaxeAbilityMineBlock(Math.floor(c2), r2);
                             }
                         }
-                        lastChangeX++;
                     }
                 }
             }
@@ -916,22 +923,24 @@ function pickaxeAbility23(x, y) {
         else
             useX = false;
         for (let r = startNumY; r > endNumY; r--) { 
-            if (!useX && r < lastChangeY - 1) {
-                for (let r2 = r - 2; r2 <= r + 1; r2++) {
-                    for (let c = startNumX - 2; c <= startNumX + 1; c++) {
-                        pickaxeAbilityMineBlock(Math.floor(c), r2);
+            if (!useX) {
+                if (r > lastChangeY - 3) {
+                    for (let r2 = r - 2; r2 <= r + 1; r2++) {
+                        for (let c = startNumX - 2; c <= startNumX + 1; c++) {
+                            pickaxeAbilityMineBlock(Math.floor(c), r2);
+                        }
                     }
+                    lastChangeY -= 3;
                 }
-                lastChangeY--;
             } else {
                 for (let c = startNumX; c < startNumX + xIncrease; c++) {
-                    if (c < lastChangeX + 1) {
+                    if (c < lastChangeX + 3) {
+                        lastChangeX += 3;
                         for (let r2 = r - 2; r2 <= r + 1; r2++) {
                             for (let c2 = c - 2; c2 <= c + 1; c2++) {
                                 pickaxeAbilityMineBlock(Math.floor(c2), r2);
                             }
                         }
-                        lastChangeX++;
                     }
                 }
             }
@@ -956,6 +965,136 @@ function pickaxeAbility25(x, y) {
     }
     displayArea();
 }
+const abilityTable = {
+    " 22" : 1/78,
+    " 19" : 1/75,
+    " 20" : 1/61,
+    " 18" : 1/58,
+    " 17" : 1/55,
+    " 21" : 1/52,
+    " 13" : 1/49,
+    " 24" : 1/46,
+    " 25" : 1/43,
+    " 16" : 1/40,
+    " 15" : 1/37,
+    " 14" : 1/34,
+    " 7" : 1/31,
+    " 11" : 1/28,
+    " 12" : 1/25,
+    " 23" : 1/22,
+    " 1" : 1/19,
+    " 2" : 1/16,
+    " 3" : 1/13,
+    " 5" : 1/10,
+    " 9" : 1/9,
+    " 8" : 1/7,
+    " 6" : 1/5,
+    " 4" : 1/3,
+    " 10" : 1/1,
+}
+const abilityTableArray = [" 22", " 19", " 20", " 18", " 17", " 21", " 13", " 24", " 25", " 16", " 15", " 14", " 7", " 11", " 12", " 23", " 1", " 2", " 3", " 5", " 9", " 8", " 6", " 4", " 10"];
+function pickaxeAbility26(x, y) {
+    const points = {
+        "a" : {"X":x, "Y":y},
+        "b" : {"X":x + 300, "Y":y - 300},
+        "c" : {"X":x - 300, "Y":y - 300},
+        "d" : {"X":x + 300, "Y":y + 300},
+        "e" : {"X":x - 300, "Y":y + 300}
+    }
+    for (let propertyName in points) {
+        let low = 0;
+        let high = abilityTableArray.length;
+        let chosenValue = Math.random();
+        while (low < high) {
+            const mid = (low + high) >> 1; // Use bitwise shift for integer division
+            if (chosenValue >= abilityTable[abilityTableArray[mid]]) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        let num = Number(abilityTableArray[low].substring(1));
+        switch (num) {
+            case 1:
+                pickaxeAbility1(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 2:
+                pickaxeAbility2(points[propertyName]["X"], points[propertyName]["Y"], 3);
+                break;
+            case 3:
+                pickaxeAbility3(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 4:
+                pickaxeAbility4(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 5:
+                pickaxeAbility5(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 6:
+                if (Math.random() < 1/2) {
+                    pickaxeAbility6(points[propertyName]["X"], points[propertyName]["Y"]);
+                } else {
+                    pickaxeAbility7(points[propertyName]["X"], points[propertyName]["Y"]);
+                }
+                break;
+            case 7:
+                pickaxeAbility8(points[propertyName]["X"], points[propertyName]["Y"], 0);
+                break;
+            case 8:
+                pickaxeAbility9(points[propertyName]["X"], points[propertyName]["Y"], 0);
+                break;
+            case 9:
+                pickaxeAbility10(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 10:
+                pickaxeAbility11(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 11:
+                pickaxeAbility12(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 12:
+                pickaxeAbility13(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 14:
+                pickaxeAbility14(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 15:
+                pickaxeAbility15(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 16:
+                pickaxeAbility16(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 17:
+                pickaxeAbility17(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 18:
+                pickaxeAbility18(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 19:
+                pickaxeAbility19(points[propertyName]["X"], points[propertyName]["Y"], 0);
+                break;
+            case 20:
+                pickaxeAbility20(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 21:
+                pickaxeAbility21(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 22:
+                pickaxeAbility22(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+             case 23:
+                pickaxeAbility23(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 24:
+                pickaxeAbility24(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+            case 25:
+                pickaxeAbility25(points[propertyName]["X"], points[propertyName]["Y"]);
+                break;
+        }
+    }
+}
+
 
 function pickaxeAbilityMineBlock(x, y) {
     if (y > 0) {

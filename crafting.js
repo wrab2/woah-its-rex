@@ -307,8 +307,8 @@ worldTwoPickaxes = [
         ["⤵️", 2800000],
         ["⏬", 33000],
         ["⏺️", 21000],
-        ["📙", 10000],
-        ["📘", 7500],
+        ["📙", 5000],
+        ["📘", 4000],
         ["🌨️", 300],
         ["🪁", 200],
         ["⛈️", 120],
@@ -327,6 +327,31 @@ worldTwoPickaxes = [
         ["🧂", 35],
         ["📽️", 15],
         ["💘", 1]
+    ],
+    [
+        ["❌", 15000000000],
+        ["🕳️", 50000],
+        ["⛏️", 1],
+        ["🌳", 20],
+        ["🏰", 20],
+        ["🚿", 20],
+        ["🐋", 20],
+        ["🏔️", 20],
+        ["⚠️", 20],
+        ["🐪", 20],
+        ["💵", 20],
+        ["🍃", 10],
+        ["👾", 10],
+        ["🪡", 10],
+        ["🚽", 5],
+        ["🎓", 10],
+        ["⚡", 5],
+        ["💘", 20],
+        ["💢", 30],
+        ["⛔", 1],
+        ["🪽", 1],
+        ["🗝️", 1]
+        
     ]
     
 ],
@@ -566,7 +591,8 @@ function displayRecipe(num, element) {
     if (currentRecipe[0] === null) {
         if (type === "pickaxe") {
             if (pickaxes[num + 1][1] && currentPickaxe === num + 1) {
-                recipe.lastChild.innerText = "Equipped!";
+                if (num !== 25) recipe.lastChild.innerText = "Equipped!";
+                else recipe.lastChild.innerText = "Equipped..?";
             } else if (pickaxes[num + 1][1]) {
                 recipe.lastChild.innerText = "Equip!"
             }
@@ -616,7 +642,8 @@ function displayRecipe(num, element) {
         } else {
             if (type === "pickaxe") {
                 if (pickaxes[num + 1][1] && currentPickaxe === num + 1) {
-                    recipe.lastChild.innerText = "Equipped!";
+                    if (num !== 25) recipe.lastChild.innerText = "Equipped!";
+                    else recipe.lastChild.innerText = "Equipped..?";
                 } else if (pickaxes[num + 1][1]) {
                     recipe.lastChild.innerText = "Equip!"
                 }
@@ -679,13 +706,13 @@ function createPickaxeRecipes() {
             element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
             element.setAttribute("onclick", "randomFunction(\"" + ore + "\", 'crafting')");
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
-            element.style.backgroundColor = colors["backgroundColor"];
+            element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
             element.style.margin = "0px";
 
             if (amtHave >= amtNeeded)
-                element.style.color = "green";
+                element.style.color = "#6BC267";
             else
-                element.style.color = "red";
+                element.style.color = "#FF3D3D";
             tempElement.appendChild(element);
         });
 
@@ -705,7 +732,7 @@ function createPickaxeRecipes() {
         if (pickaxes[j + 1][1]) {
             tempButton.innerHTML = "Equip!";
         } else
-            tempButton.innerHTML = "Craft!";
+            tempButton.innerHTML = j === 25 ? "Sacrifice..." : "Craft!";
         tempElement.appendChild(tempButton);
         recipeElements[0].push(tempElement);
     }
@@ -732,12 +759,12 @@ for (let i = 0; i < worlds.length; i++) {
             element.setAttribute("onclick", "randomFunction(\"" + ore + "\", 'crafting')");
             element.classList = "recipeOreDisplay";
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
-            element.style.backgroundColor = colors["backgroundColor"];
+            element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
             element.style.margin = "0px";
             if (amtHave >= amtNeeded)
-                element.style.color = "green";
+                element.style.color = "#6BC267";
             else
-                element.style.color = "red";
+                element.style.color = "#FF3D3D";
             tempElement.appendChild(element);
         });
         let tempButton = document.createElement('button');
@@ -780,7 +807,8 @@ const buttonGradients = {
     "craftPickaxe23" : {"gradient" : "linear-gradient(to right, #F5F5F5, #0D0D0D, #FFFDAF, #0D0D0D, #F5F5F5)","applied" : false},
     "craftPickaxe24" : {"gradient" : "linear-gradient(to right, #F6FF58 7%, #0030F1, #676767, #57FDFF, #FC5EFF 93%","applied" : false},
     "craftPickaxe25" : {"gradient" : "linear-gradient(to right, #FF2454, #600018, #FF8DCC, #121212, #FF8DCC, #600018, #FF2454","applied" : false},
-
+    "craftPickaxe26" : {"gradient" : "linear-gradient(to right, #000000, #5D0000, #734600, #807A00, #074D00, #006564, #021652 , #3B0076, #460038, #5D0000, #000000)","applied" : false},
+    
     "craftGear0" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "craftGear1" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
     "craftGear2" : {"gradient" : "linear-gradient(to right, #F9F9F9, #FFFB48","applied" : false},
@@ -802,7 +830,7 @@ const buttonGradients = {
     "craftGear18" : {"gradient" : "linear-gradient(to right, #FF7C00 10%, #032A00, #11E900, #032A00, #FF7C00 90%","applied" : false},
     "craftGear19" : {"gradient" : "linear-gradient(to right, #CDCDCD 5%, #F55D2F, #474747, #EFD754, #474747, #F55D2F, #CDCDCD 95%","applied" : false},
     "craftGear20" : {"gradient" : "linear-gradient(to right, #000000 5%, #FF3636, #E94585, #000ACE, #FFFFFF 95%","applied" : false},
-    "craftGear21" : {"gradient" : "linear-gradient(to right,#44533D, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, #236B4B)","applied" : false},
+    "craftGear21" : {"gradient" : "linear-gradient(to right, #44533D, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, #236B4B)","applied" : false},
 
     
 }
@@ -820,11 +848,11 @@ function updateActiveRecipe() {
                 let amtOwned = oreList[ore]["normalAmt"];
                 recipe[i].innerText = ore + " " + amtOwned.toLocaleString() + "/" + needed.toLocaleString();
                 if(amtOwned >= needed) {
-                    recipe[i].style.color = "green";
+                    recipe[i].style.color = "#6BC267";
                     count++;
                 }
                 else
-                    recipe[i].style.color = "red";
+                    recipe[i].style.color = "#FF3D3D";
             }
         }
         let button = currentRecipe[0].lastChild;
@@ -836,7 +864,7 @@ function updateActiveRecipe() {
         } else if (count > lastCount){
             lastCount = count;
             let percent = 100 * (count/length);
-            button.style.backgroundImage = "linear-gradient(to right, green " + percent + "%, red " + (percent + 5) + "%)";
+            button.style.backgroundImage = "linear-gradient(to right, #6BC267 " + percent + "%, #FF3D3D " + (percent + 5) + "%)";
         }
         
     }
@@ -865,13 +893,15 @@ function craftPickaxe(num) {
                 updateInventory(recipeList[i][0], 1);
             }
             let temp = document.getElementById("craftPickaxe" + num);
-            temp.innerText = "Equipped!";
+            if (num !== 26) temp.innerText = "Equipped!";
+            else temp.innerText = "Equipped..?";
             updateActiveRecipe();
             pickaxes[num][1] = true;
             currentPickaxe = num;
         }
     } else {
-        document.getElementById("craftPickaxe" + num).innerText = "Equipped!";
+        if (num !== 26) document.getElementById("craftPickaxe" + num).innerText = "Equipped!";
+        else document.getElementById("craftPickaxe" + num).innerText = "Equipped..?";
         currentPickaxe = num;
     }
     utilitySwitchActions();
@@ -914,17 +944,36 @@ function craftGear(num) {
         gearAbility2();
 }
 let m87 = 0;
+let m88 = 0;
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
     disappear(document.getElementById("gearCrafts"));
     m87 = 0;
+    m88++;
+    if (m88 === 6 && currentWorld === 2) {
+        let show = true;
+        for (let i = 0; i < gears.length; i++) if(!gears[i]) show = false;
+        for (let i = 0; i < pickaxes.length - 1; i++) if (!pickaxes[i][1]) show = false;
+        if (show) {
+            let children = document.getElementById("pickaxeCrafts").children;
+            for (let i = 0; i < children.length; i++) children[i].style.display = "none";
+            document.getElementById("nullChroma").style.display = "block";
+        } else m88 = 0;
+        
+    }
     document.getElementById("oblivionFracturer").style.display = "none";
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
     appear(document.getElementById("gearCrafts"));
     m87++;
+    m88 = 0;
     if (m87 === 3 && currentWorld === 2) document.getElementById("oblivionFracturer").style.display = "block";
+    if (currentWorld === 2) {
+        let children = document.getElementById("pickaxeCrafts").children;
+        for (let i = worldOnePickaxes.length - 1; i < worldOnePickaxes.length + worldTwoPickaxes.length; i++) children[i].style.display = "block";
+        document.getElementById("nullChroma").style.display = "none";
+    }
 }
 function switchWorldCraftables() {
     let elements = document.getElementsByClassName("craftingButton");

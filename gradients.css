@@ -234,6 +234,19 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#nullChroma {
+    height: 26vw;
+    padding-top: 0;
+}
+#nullChroma span {
+    padding-top: 7vw;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    background: linear-gradient(to right, #000000, #5D0000, #734600, #807A00, #074D00, #006564, #021652 , #3B0076, #460038, #5D0000, #000000);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

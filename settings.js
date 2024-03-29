@@ -24,11 +24,11 @@ function openFrame(frameId) {
 let canDisplay = true;
 function changeCanDisplay(button) {
     if (canDisplay) {
-        button.style.backgroundColor = "red";
+        button.style.backgroundColor = "#FF3D3D";
         document.getElementById("blockDisplay").innerHTML = "❌";
         canDisplay = false;
     } else {
-        button.style.backgroundColor = "green";
+        button.style.backgroundColor = "#6BC267";
         canDisplay = true;
         displayArea();
     }
@@ -68,7 +68,7 @@ function changeUseNumbers(button) {
             elements[i].firstChild.innerText = "Pickaxe " + (i + 1);
         }
         if (button != undefined) {
-            button.style.backgroundColor = "green";
+            button.style.backgroundColor = "#6BC267";
         }
         useNumbers = true;
     } else {
@@ -77,7 +77,7 @@ function changeUseNumbers(button) {
             elements[i].firstChild.innerText = allPickaxeNames[i];
         }
         if (button != undefined) {
-            button.style.backgroundColor = "red";
+            button.style.backgroundColor = "#FF3D3D";
         }
         useNumbers = false;
     }
@@ -98,10 +98,10 @@ function changeMinRarity(button) {
 function changeStopOnRare(button) {
     if (stopOnRare) {
         stopOnRare = false;
-        button.style.backgroundColor = "red";
+        button.style.backgroundColor = "#FF3D3D";
     } else {
         stopOnRare = true;
-        button.style.backgroundColor = "green";
+        button.style.backgroundColor = "#6BC267";
     }   
 }
 
@@ -264,11 +264,11 @@ function changeMinMiningSpeed(element) {
 function toggleCaves() {
     if (cavesEnabled) {
         cavesEnabled = false;
-        document.getElementById("caveToggle").style.backgroundColor = "red";
+        document.getElementById("caveToggle").style.backgroundColor = "#FF3D3D";
     }
     else {
         cavesEnabled = true;
-        document.getElementById("caveToggle").style.backgroundColor = "green";
+        document.getElementById("caveToggle").style.backgroundColor = "#6BC267";
     }
 }
 
@@ -326,7 +326,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸";
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡";
 function createIndexCards(layer) {
         let toReturn = [];
         let isCave = false;
@@ -446,28 +446,28 @@ function switchToIndex(button, num) {
     if (num === 0) {
         if (invToIndex) {
             invToIndex = false;
-            button.style.backgroundColor = "red";
+            button.style.backgroundColor = "#FF3D3D";
         } else {
             invToIndex = true;
-            button.style.backgroundColor = "green";
+            button.style.backgroundColor = "#6BC267";
         }
     } else if (num === 1) {
         if (craftingToIndex) {
             craftingToIndex = false;
-            button.style.backgroundColor = "red";
+            button.style.backgroundColor = "#FF3D3D";
         } else {
             craftingToIndex = true;
-            button.style.backgroundColor = "green";
+            button.style.backgroundColor = "#6BC267";
         }
     }
     
 }
 function togglePathBlocks() {
     if (usePathBlocks) {
-        document.getElementById("pathBlocks").style.backgroundColor = "green";
+        document.getElementById("pathBlocks").style.backgroundColor = "#6BC267";
         usePathBlocks = false;
     } else {
-        document.getElementById("pathBlocks").style.backgroundColor = "red";
+        document.getElementById("pathBlocks").style.backgroundColor = "#FF3D3D";
         usePathBlocks = true;
     }
     displayArea();
@@ -478,9 +478,9 @@ function testSound(num) {
     let time = (allAudios[num].duration * 1000);
     if (allAudios[num].currentTime === 0) {
         allAudios[num].play();
-        element.style.backgroundColor = "green";
+        element.style.backgroundColor = "#6BC267";
         testSoundTimeout = setTimeout(() => {
-            element.style.backgroundColor = "red";
+            element.style.backgroundColor = "#FF3D3D";
             allAudios[num].pause();
             allAudios[num].currentTime = 0;
             clearTimeout(testSoundTimeout);
@@ -488,17 +488,17 @@ function testSound(num) {
     } else {
         allAudios[num].pause();
         allAudios[num].currentTime = 0;
-        element.style.backgroundColor = "red";
+        element.style.backgroundColor = "#FF3D3D";
         clearTimeout(testSoundTimeout);
     }
 }
 function enableDisguisedChills() {
     if (useDisguisedChills) {
         useDisguisedChills = false;
-        document.getElementById("disguisedChills").style.backgroundColor = "red";
+        document.getElementById("disguisedChills").style.backgroundColor = "#FF3D3D";
     } else {
         useDisguisedChills = true;
-        document.getElementById("disguisedChills").style.backgroundColor = "green";
+        document.getElementById("disguisedChills").style.backgroundColor = "#6BC267";
     }
 }
 let usingNewEmojis = false;
@@ -506,14 +506,14 @@ function switchFont() {
     if (usingNewEmojis) {
         usingNewEmojis = false;
         document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"")
-        document.getElementById("switchFont").style.backgroundColor = "red";
+        document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
         distanceMulti--;
         y -= 2000;
         switchDistance();
     } else {
         usingNewEmojis = true;
         document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Noto Color Emoji\",\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"");
-        document.getElementById("switchFont").style.backgroundColor = "green";
+        document.getElementById("switchFont").style.backgroundColor = "#6BC267";
         distanceMulti--;
         y -= 2000;
         switchDistance();
