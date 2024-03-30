@@ -565,7 +565,6 @@ function createStats() {
             if (oreList[ores[j]]["explosiveAmt"] > 0) isOwned[j] = true;
         }
         let totalExisting = 0;
-        console.log(isOwned)
         for (let j = 0; j < isOwned.length; j++) if (isOwned[j]) totalExisting++;
         output += currentTotal.toLocaleString() + " explosive " + tier + " ores.";
         elements[i].innerText = output;
