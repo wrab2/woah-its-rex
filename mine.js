@@ -140,6 +140,7 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
 let minRarity = 750000;
 let cat = 1;
 let probabilityTable;
+const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸";
 function generateBlock(location) {
     blocksRevealedThisReset++;
     probabilityTable = currentLayer;
@@ -168,8 +169,8 @@ function generateBlock(location) {
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
-        if (blockToGive === "💙" && Math.random() < 1/1000 && curDirection === "") {
-            blockToGive = "🩵";
+        if (specialCases.indexOf(blockToGive) > -1) {
+            blockToGive = checkSpecials(blockToGive);
             mine[location["Y"]][location["X"]] = blockToGive;
         }
         const tier = oreList[blockToGive]["oreTier"];
@@ -179,7 +180,76 @@ function generateBlock(location) {
         }
         playSound(oreList[blockToGive]["oreTier"]);
         if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage(blockToGive, location);
+        if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) mineBlock(location["X"], location["Y"], "ability");
     }
+}
+
+const checkSpecials = function(block) {
+    if (Math.random() < 1/1000)
+    switch(block) {
+        case "💙" : 
+        if (curDirection === "")
+            block = "🩵";
+        break;
+        case "⌛" : 
+        block = "⏳";
+        break;
+        case "🍃" : 
+        block = "🍂";
+        break;
+        case "🦾" : 
+        if (curDirection === "")
+            block = "🦿";
+        break;
+        case "👀" : 
+        block = "👁‍🗨";
+        break;
+        case "🔋" : 
+        if (curDirection === "")
+            block = "🪫";
+        break;
+        case "⛔" : 
+        block = "📛";
+        break;
+        case "🌻" : 
+        if (curDirection === "")
+            block = "🌼";
+        break;
+        case "🌈" : 
+        block = "🏳️‍🌈";
+        break;
+        case "🎉" : 
+        block = "🎊";
+        break;
+        case "🔒" : 
+        if (curDirection === "")
+            block = "🔓";
+        break;
+        case "📽️" : 
+        block = "🎥";
+        break;
+        case "🧂" : 
+        block = "🌶️";
+        break;
+        case "🏯" : 
+        block = "⛩️";
+        break;
+        case "🖊️" : 
+        block = "🖋️";
+        break;
+        case "🏔️" : 
+        block = "🌋";
+        break;
+        case "💔" : 
+        if (curDirection === "")
+            block = "❤️‍🩹";
+        break;
+        case "🩸" : 
+        block = "💧";
+        break;
+            
+    }
+    return block;
 }
 /*
 let totalSpeeds = 0;

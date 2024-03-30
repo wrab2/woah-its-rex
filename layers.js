@@ -19,10 +19,26 @@ let oreList = {
     '🐰': { 'decimalRarity': 1 / 17800000, 'numRarity': 17800000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🐰 Has Spawned!', 'oreTier': 'Mystical', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🦾': { 'decimalRarity': 1 / 875000000, 'numRarity': 875000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'You must have an arm of steel to have found this, go and try to use it for something more useful...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🥇': { 'decimalRarity': 1 / 44444444444, 'numRarity': 44444444444, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'turn the shower on PLEASE...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
-    '🩵': { 'decimalRarity': 1 / 750000000, 'numRarity': 750000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🩵 Has Spawned!', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🩵': { 'decimalRarity': 1 / 750000000, 'numRarity': 750000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🩵 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '⏳': { 'decimalRarity': 1 / 750000000000, 'numRarity': 750000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⏳ Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🍂': { 'decimalRarity': 1 / 13500000000000, 'numRarity': 13500000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🍂 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🦿': { 'decimalRarity': 1 / 875000000000, 'numRarity': 875000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🦿 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '👁‍🗨': { 'decimalRarity': 1 / 955200890000, 'numRarity': 955200890000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '👁‍🗨 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🪫': { 'decimalRarity': 1 / 36000000000, 'numRarity': 36000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🪫 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '📛': { 'decimalRarity': 1 / 256000000000000, 'numRarity': 256000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '📛 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🌼': { 'decimalRarity': 1 / 9500000000, 'numRarity': 9500000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🌼 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🏳️‍🌈': { 'decimalRarity': 1 / 2750000000000, 'numRarity': 2750000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🏳️‍🌈 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🎊': { 'decimalRarity': 1 / 1000000000000000, 'numRarity': 1000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎊 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },    
+    '💧': { 'decimalRarity': 1 / 13000000000000000, 'numRarity': 13000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '💧 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },    
+    '❤️‍🩹': { 'decimalRarity': 1 / 155000000000, 'numRarity': 155000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '❤️‍🩹 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🌋': { 'decimalRarity': 1 / 5500000000000, 'numRarity': 5500000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🌋 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🖋️': { 'decimalRarity': 1 / 165000000000, 'numRarity': 165000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🖋️ Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '⛩️': { 'decimalRarity': 1 / 430000000000000, 'numRarity': 430000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⛩️ Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🌶️': { 'decimalRarity': 1 / 1337000000000, 'numRarity': 1337000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🌶️ Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🎥': { 'decimalRarity': 1 / 3780000000000, 'numRarity': 3780000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎥 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🔓': { 'decimalRarity': 1 / 9900000000, 'numRarity': 9900000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🔓 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+
     
-
-
 
     '🐞': { 'decimalRarity': 1 / 241200000000, 'numRarity': 241200000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "In this alternate earth, the keeper of time dons new wings, and sacrifices beauty for survivability...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🍓': { 'decimalRarity': 1 / 560000000000, 'numRarity': 560000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "A sweet aroma guides you to one of nature's finest delicacies...", 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -706,7 +722,7 @@ class ores {
             case "Sacred" :
                 return {"backgroundColor" : "#FF3C3C", "textColor" : "#ffffff"};
             case "Celestial" :
-                return {"backgroundColor" : "#870000", "textColor" : "#ffffff"};
+                return {"backgroundColor" : "#6C0000", "textColor" : "#ffffff"};
             case "Metaversal" :
                 return {"backgroundColor" : "#3BD216", "textColor" : "#ffffff"};
             case "Interstellar" :

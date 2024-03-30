@@ -141,25 +141,25 @@ async function rollAbilities() {
             }
             break;
         case 22:
-            if (Math.random() <= 1/150 * m) {
+            if (Math.random() <= 1/120 * m) {
                 pickaxeAbility22(curX, curY);
                 
             }
             break;
          case 23:
-            if (Math.random() <= 1/60 * m) {
+            if (Math.random() <= 1/75 * m) {
                 pickaxeAbility23(curX, curY);
                 
             }
             break;
         case 24:
-            if (Math.random() <= 1/300 * m) {
+            if (Math.random() <= 1/175 * m) {
                 pickaxeAbility24(curX, curY);
                 
             }
             break;
         case 25:
-            if (Math.random() <= 1/400 * m) {
+            if (Math.random() <= 1/350 * m) {
                 pickaxeAbility25(curX, curY);
                 
             }

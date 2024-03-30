@@ -16,8 +16,10 @@ function openFrame(frameId) {
     
     const selectedFrame = document.getElementById(frameId + "-frame");
     if (selectedFrame) {
-      selectedFrame.style.display = 'block';
+      selectedFrame
+      .style.display = 'block';
     }
+    if (frameId === "stats") createStats();
 }
 
 
@@ -215,6 +217,7 @@ function showSettings() {
     canMine = false;
     document.getElementById("mainContent").style.display = "none";
     document.getElementById("settingsContainer").style.display = "block";
+    createStats();
     switchLayerIndex(0, 0)
 }
 
@@ -326,7 +329,7 @@ function switchLayerIndex(num, overrideNum, world) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡";
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡🌱";
 function createIndexCards(layer) {
         let toReturn = [];
         let isCave = false;
@@ -529,4 +532,45 @@ function changeSpawnMessageRarity(button) {
     let colors = oreInformation.getColors(minTier);
     button.style.color = colors["textColor"]
     button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
+}
+function createStats() {
+    let elements = document.getElementsByClassName("oreStats")
+    let tier = "Flawless";
+    let i = 0;
+    while (tier !== "Common") {
+        let ores = oreInformation.getOresByTier(tier);
+        let isOwned = new Array(ores.length - 1)
+        let output = "";
+        let currentTotal = 0;
+        for (let j = 0; j < ores.length; j++) {
+            currentTotal += oreList[ores[j]]["normalAmt"];
+            if (oreList[ores[j]]["normalAmt"] > 0) isOwned[j] = true;
+        }
+        output += "You have " + currentTotal.toLocaleString() + " normal " + tier + " ores, ";
+        currentTotal = 0;
+        for (let j = 0; j < ores.length; j++) {
+            currentTotal += oreList[ores[j]]["electrifiedAmt"];
+            if (oreList[ores[j]]["electrifiedAmt"] > 0) isOwned[j] = true;
+        }
+        output += currentTotal.toLocaleString() + " electrified " + tier + " ores, ";
+        currentTotal = 0;
+        for (let j = 0; j < ores.length; j++) {
+            currentTotal += oreList[ores[j]]["radioactiveAmt"];
+            if (oreList[ores[j]]["radioactiveAmt"] > 0) isOwned[j] = true;
+        }
+        output += currentTotal.toLocaleString() + " radioactive " + tier + " ores, and ";
+        currentTotal = 0;
+        for (let j = 0; j < ores.length; j++) {
+            currentTotal += oreList[ores[j]]["explosiveAmt"];
+            if (oreList[ores[j]]["explosiveAmt"] > 0) isOwned[j] = true;
+        }
+        let totalExisting = 0;
+        console.log(isOwned)
+        for (let j = 0; j < isOwned.length; j++) if (isOwned[j]) totalExisting++;
+        output += currentTotal.toLocaleString() + " explosive " + tier + " ores.";
+        elements[i].innerText = output;
+        elements[i + 1].innerText = "You have " + totalExisting + "/" + ores.length + " of the ores in this tier."
+        i+= 2;
+        tier = oreInformation.getNextTier(tier);
+    }
 }

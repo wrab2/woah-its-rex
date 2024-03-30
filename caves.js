@@ -204,12 +204,11 @@ function generateCaveBlock(y, x, type) {
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 playSound(oreList[blockToGive]["oreTier"]);
-                
                 verifiedOres.createLog(y,x,blockToGive, new Error(), 1, [true, getCaveMulti(type), type]);
                 verifiedOres.verifyLog(y, x);
             }
-            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
-                spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
+            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
+            if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) mineCaveBlock(location["X"], location["Y"], type);
         }
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
@@ -218,8 +217,8 @@ function generateCaveBlock(y, x, type) {
                 verifiedOres.createLog(y, x, blockToGive, new Error(), 1, [true, 1]);
                 verifiedOres.verifyLog(y, x);
             }
-            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier}))
-                spawnMessage(blockToGive, {"Y" : y, "X" : x});
+            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage(blockToGive, {"Y" : y, "X" : x});
+            if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) mineCaveBlock(location["X"], location["Y"], type);
         }
     }
     

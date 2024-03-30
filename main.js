@@ -557,14 +557,6 @@ function spawnMessage(block, location, caveInfo) {
     else if (!gears[17] && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
         mineCapacity += 10000;
     let oreRarity = oreList[block]["numRarity"];
-    if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) {
-        if (caveInfo === undefined) {
-            mineBlock(location["X"], location["Y"], "ability");
-        }
-        else {
-            mineCaveBlock(location["X"], location["Y"], caveInfo["caveType"])
-        }
-    }
     let spawnElement = document.getElementById("latestSpawns");
     let sub = currentWorld === 1 ? 0 : 2000;
     let output = "";
@@ -591,19 +583,20 @@ function spawnMessage(block, location, caveInfo) {
             createSpawnMessage = true;
         else if (oreList[block]["spawnMessage"].indexOf(" Has Spawned!") < 0)
             createSpawnMessage = true;
-        if (createSpawnMessage) {
+        if (createSpawnMessage || oreInformation.tierGrOrEqTo({"tier1":oreList[block]["oreTier"], "tier2":"Flawless"})) {
             let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
             if (caveInfo != undefined) {
                 document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo["adjRarity"]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
             } else {
                 document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + oreRarity.toLocaleString() + (currentPickaxe === 5 || gears[0]?"<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
             }
-        }
-        clearTimeout(spawnOre);
-        spawnOre = setTimeout(() => {
+            clearTimeout(spawnOre);
+            spawnOre = setTimeout(() => {
             document.getElementById("spawnMessage").innerHTML = "Spawn Messages Appear Here!";
             spawnOre = null;
-        }, 20000);
+        }, 30000);
+        }
+        
 }
 
 let loggedFinds = [];

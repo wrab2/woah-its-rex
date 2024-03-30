@@ -890,7 +890,7 @@ function craftPickaxe(num) {
         if (canCraft) {
             for (let i = 0; i < recipeList.length; i++) {
                 oreList[recipeList[i][0]]["normalAmt"] -= recipeList[i][1];
-                updateInventory(recipeList[i][0], 1);
+                inventoryObj[recipeList[i][0]] = 0;
             }
             let temp = document.getElementById("craftPickaxe" + num);
             if (num !== 26) temp.innerText = "Equipped!";
@@ -927,7 +927,7 @@ function craftGear(num) {
         if (canCraft) {
             for (let i = 0; i < list.length; i++) {
                 oreList[list[i][0]]["normalAmt"] -= list[i][1];
-                updateInventory(list[i][0], 1);
+                inventoryObj[recipeList[i][0]] = 0;
             }
             if (num === 9) {
                 document.getElementById("craftGear" + num).innerText = "SILLIFY!";
