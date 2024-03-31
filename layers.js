@@ -783,7 +783,7 @@ class ores {
     }
     isCommon(tier) {
         let tierNames = Object.keys(this.oreTiers);
-        if (tierNames.indexOf(tier > 4)) return false;
+        if (tierNames.indexOf(tier) > 4) return false;
         return true;
     }
     tierGrOrEqTo(tiers) {

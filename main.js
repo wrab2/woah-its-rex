@@ -105,29 +105,14 @@ function init() {
     createSpecialLayers();
     createInventory();
     createMine();
-    let playedBefore
-    if (!debug) playedBefore = localStorage.getItem("playedBefore");
-    else playedBefore = localStorage.getItem("testingPlayedBefore");
-    if (playedBefore)
-        canContinue = loadAllData();
-    else {
-        canContinue = true;
-        saveAllData();
-    }
-        
-    
-    if (canContinue) {
-        repeatDataSave();
-        if (!debug) localStorage.setItem("playedBefore", true);
-        else localStorage.setItem("testingPlayedBefore", true);
-        createPickaxeRecipes();
-        createGearRecipes();
+    createGearRecipes();
+    createPickaxeRecipes();
         document.getElementById('dataText').value = "";
-        switchLayerIndex(0, 0);
+        switchLayerIndex(0, "dirtLayer", 1);
         if (Math.random() < 1/1000)
             document.getElementById("cat").innerText = "CatAxe";
-        cat = verifiedOres.getCurrentLuck();
-        utilitySwitchActions();
+        
+        
         limitedTimer = setInterval(checkLimitedOres, 10000);
         inventoryTimer = setInterval(updateInventory, 500);
         if (date.getMonth() === 3 && date.getDate() === 1) {
@@ -139,6 +124,21 @@ function init() {
                 document.getElementById("spawnMessage").innerText = "Happy Birthday " + birthdays[propertyName] + "!!!";
             }
         }
+    let playedBefore;
+    if (!debug) playedBefore = localStorage.getItem("playedBefore");
+    else playedBefore = localStorage.getItem("testingPlayedBefore");
+    if (playedBefore)
+        canContinue = loadAllData();
+    else {
+        canContinue = true;
+        saveAllData();
+    }
+    if (canContinue) {
+        repeatDataSave();
+        if (!debug) localStorage.setItem("playedBefore", true);
+        else localStorage.setItem("testingPlayedBefore", true);
+        cat = verifiedOres.getCurrentLuck();
+        utilitySwitchActions();
         console.log("meow");
     }
 }
@@ -515,6 +515,16 @@ function createInventory() {
                 oreAmountBlock.innerText = "x" + oreNum.toLocaleString();
                 oreAmountBlock.classList = "inventoryElement3";
                 oreList[propertyName][names[i - 1]] = oreAmountBlock;
+                if (colors["textColor"] === "#ffffff") 
+                {
+                    oreRarityBlock.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+                    oreAmountBlock.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+                }
+                else
+                {
+                    oreRarityBlock.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
+                    oreAmountBlock.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
+                } 
                 tempElement.appendChild(oreNameBlock);
                 tempElement.appendChild(oreRarityBlock);
                 tempElement.appendChild(oreList[propertyName][names[i - 1]]);
@@ -568,6 +578,8 @@ function spawnMessage(block, location, caveInfo) {
     let colors = oreInformation.getColors(oreList[block]["oreTier"]);
     element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
+    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+    else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
     element.innerText = output;
     if (spawnElement.children.length > 0) {
         spawnElement.insertBefore(element, spawnElement.firstChild);
@@ -610,6 +622,8 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     let colors = oreInformation.getColors(oreList[type]["oreTier"]);
     element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
+    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
+    else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
     output += "<span onclick='goToOre(\"" + type + "\", \"" + variant + "\")'>";
     output += variant + " ";
     output += type + " | X: " + (x - 1000000000).toLocaleString() + ", Y: " + (-(y - sub)).toLocaleString();

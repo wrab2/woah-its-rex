@@ -24,32 +24,33 @@ function saveAllData() {
     dataStorage[2].push(totalMined);
     dataStorage[3].push(
         canPlay, 
-        getAllSpawnVolumes(), //
-        keepRunningAudio.paused, //
-        Number(document.getElementById("musicVolume").value), //
-        baseMineCapacity, //
-        minMiningSpeed, //
-        stopOnRare, //
-        stopRareNum, //
-        canDisplay, //
-        useNumbers, //
-        invToIndex, //
-        craftingToIndex, //
-        document.getElementById("mainContent").style.backgroundColor, //
-        getLatestColors(), //
+        getAllSpawnVolumes(), 
+        keepRunningAudio.paused, 
+        Number(document.getElementById("musicVolume").value), 
+        baseMineCapacity, 
+        minMiningSpeed, 
+        stopOnRare, 
+        stopRareNum, 
+        canDisplay, 
+        useNumbers, 
+        invToIndex, 
+        craftingToIndex, 
+        document.getElementById("mainContent").style.backgroundColor, 
+        getLatestColors(), 
         getInventoryColors(),
         getCraftingColors(),
         usePathBlocks,
         cavesEnabled,
         useDisguisedChills,
         usingNewEmojis,
-        minRarityNum
+        minRarityNum,
         );
     dataStorage[4].push(gears);
     if (!debug) localStorage.setItem("playerData", JSON.stringify(dataStorage));
     else localStorage.setItem("testingData", JSON.stringify(dataStorage));
     checkLimitedOres();
 }
+
 function getAllSpawnVolumes() {
     let volumes = document.getElementsByClassName("spawnVolume");
     let values = []
@@ -65,6 +66,16 @@ function loadAllData() {
         let data;
         if (!debug) data = JSON.parse(localStorage.getItem("playerData"));
         else data = JSON.parse(localStorage.getItem("testingData"));
+        /*
+        if (data[3][21] != undefined)
+                if (data[3][21]) {
+                    window.top.postMessage({
+                        action: "load",
+                        slot: 0,
+                    }, "https://galaxy.click");
+                    return false;
+                }
+        */
         for (let i = 0; i < data[0].length; i++) {
             if (oreList[data[0][i][0]] !== undefined) {
                 oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];
@@ -157,41 +168,13 @@ function loadAllData() {
                     document.getElementById("mainContent").style.backgroundColor = data[3][12];
             } 
             if (data[3][13] != undefined) {
-                /*
-                let toChange = document.getElementsByClassName("latestDisplay");
-                if (data[3][13][0] != "") {
-                    toChange[0].style.color = data[3][13][0];
-                    toChange[1].style.color = data[3][13][0];
-                }
-                if (data[3][13][1] != "") {
-                    toChange[0].style.borderColor = data[3][13][1];
-                    toChange[1].style.borderColor = data[3][13][1];
-                }
-                
-                if (data[3][13][2] != "") {
-                    toChange[0].style.backgroundColor = data[3][13][2];
-                    toChange[1].style.backgroundColor = data[3][13][2];
-                }
-                */
+                //disabled
             }
             if (data[3][14] != undefined) {
-                /*
-                let element = document.getElementById("inventoryDisplay");
-                if (data[3][14][0] != "")
-                    element.style.borderColor = data[3][14][0];
-                
-                if (data[3][14][1] != "")
-                    element.style.borderColor = data[3][14][0];
-                */
+                //disabled
             }
             if (data[3][15] != undefined) {
-                /*
-                let element = document.getElementsByClassName("col-2")[0];
-                if (data[3][15][0] != "")
-                    element.style.borderColor = data[3][15][0];
-                if (data[3][15][1] != "")
-                    element.style.backgroundColor = data[3][15][1];
-                */
+                //disabled
             }
             if (data[3][16] != undefined) {
                 usePathBlocks = data[3][16];
@@ -226,7 +209,6 @@ function loadAllData() {
         if (oreList["🎂"]["normalAmt"] > 0 || gears[9])
             document.getElementById("sillyRecipe").style.display = "block";
         localStorage.removeItem("dataBackup");
-        checkLimitedOres();
         return true;
     } catch(error) {
         console.log(error);
@@ -236,12 +218,18 @@ function loadAllData() {
     }
 }
 
+
 let dataTimer = null;
 let dataLooping = false;
 function repeatDataSave() {
     dataTimer = setInterval(saveAllData, 3000);
 }
-
+/*
+let galaxyDataTimer = null;
+function repeatGalaxySave() {
+    galaxyDataTimer = setInterval(saveGalaxyData, 60000);
+}
+*/
 function toBinary(string) {
     const codeUnits = new Uint16Array(string.length);
     for (let i = 0; i < codeUnits.length; i++)
@@ -321,5 +309,224 @@ function exportDataAsFile(textToWrite, fileNameToSaveAs, fileType) {
     }
     downloadLink.click();
 }
-
-
+/*
+let useGalaxyData = true;
+window.addEventListener("message", e => {
+	if (e.origin === "https://galaxy.click") {
+        if (e.data["action"] === "save") {
+            if (e.data["error"]) {
+                window.alert("Galaxy Cloud Save resulted in an error! Data autosave disabled, try refreshing and if the issue persists ask for assistance in the Discord. Error Type:" + e.data["message"]);
+                dataTimer = undefined;
+            }
+        } else {
+            if (e.data["error"]) {
+                window.alert("Galaxy Cloud Load resulted in an error! Data autosave disabled, try refreshing and if the issue persists ask for assistance in the Discord. Error Type:" + e.data["message"]);
+            } else {
+                if (loadGalaxyData(e.data["content"])) {
+                    repeatGalaxySave();
+                    cat = verifiedOres.getCurrentLuck();
+                    utilitySwitchActions();
+                    console.log("meow");
+                }
+            }
+        }
+	} else {
+		// It may be an impostor! Probably best to ignore it.
+	}
+});
+function loadGalaxyData(content) {
+    try {
+        let data = JSON.stringify(content);
+        if (!debug) data = JSON.parse(localStorage.getItem("playerData"));
+        else data = JSON.parse(localStorage.getItem("testingData"));
+        for (let i = 0; i < data[0].length; i++) {
+            if (oreList[data[0][i][0]] !== undefined) {
+                oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];
+                oreList[data[0][i][0]]["electrifiedAmt"] = data[0][i][1][0][1];
+                oreList[data[0][i][0]]["radioactiveAmt"] = data[0][i][1][0][2];
+                oreList[data[0][i][0]]["explosiveAmt"] = data[0][i][1][0][3];
+            }
+                
+        }
+        for (let i = 0; i < data[1][0][0].length; i++)
+            if(pickaxes[i] != undefined)
+                pickaxes[i][1] = data[1][0][0][i][1];
+        currentPickaxe = data[1][0][1];
+        totalMined = data[2];
+        document.getElementById("blocksMined").innerHTML = totalMined.toLocaleString() + " Blocks Mined";
+        for (let propertyName in oreList) {
+                for (let i = 1; i < 5; i++) {
+                    inventoryObj[propertyName] = 0;
+                    updateInventory();
+                }
+        }
+        if (data[3].length > 14) {
+            if (data[3][0] != undefined) {
+                let elements = document.getElementsByClassName("muteButton");
+                for (let i = 0; i < data[3][0].length; i++) {
+                    if (!data[3][0][i])
+                        elements[i].click();
+                }
+            }
+            if (data[3][1] != undefined) {
+                let elements = document.getElementsByClassName("spawnVolume");
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].value = data[3][1][i];
+                    changeSpawnVolume(data[3][1][i], i)
+                }
+            }
+            if (data[3][2] != undefined) {
+                if (data[3][2])
+                    document.getElementById("musicButton").click()
+            }
+            if (data[3][3] != undefined) {
+                document.getElementById("musicVolume").value = data[3][3];
+                changeMusicVolume(data[3][3]);
+            }
+            if (data[3][4] != undefined) {
+                baseMineCapacity = data[3][4];
+                mineCapacity = data[3][4];
+                document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
+            }
+            if (data[3][5] != undefined) {
+                minMiningSpeed = data[3][5];
+            }
+            if (data[3][6] != undefined) {
+                stopOnRare = data[3][6];
+                if (stopOnRare)
+                    document.getElementById("stopOnRare").style.backgroundColor = "#6BC267";
+            }
+            if (data[3][7] != undefined) {
+                stopRareNum = data[3][7] - 1;
+                changeMinRarity(document.getElementById("stopOnRareDisplay"));
+            }
+            if (data[3][8] != undefined) {
+                canDisplay = data[3][8];
+                if (!canDisplay) {
+                    document.getElementById("blockUpdates").style.backgroundColor = "#FF3D3D";
+                    document.getElementById("blockDisplay").innerHTML = "❌"
+                }
+            }
+            if (data[3][9] != undefined) {
+                if (data[3][9]) {
+                    changeUseNumbers();
+                    useNumbers = data[3][9]; 
+                    document.getElementById("useNumbers").style.backgroundColor = "#6BC267";
+                }
+            }
+            if (data[3][10] != undefined) {
+                invToIndex = data[3][10];
+                if (!invToIndex)
+                    document.getElementById("invIndex").style.backgroundColor = "#FF3D3D";
+            }
+            if (data[3][11] != undefined) {
+                craftingToIndex = data[3][11];
+                if (!craftingToIndex)
+                    document.getElementById("craftIndex").style.backgroundColor = "#FF3D3D";
+            }
+            if (data[3][12] != undefined) {
+                if (data[3][12] != "")
+                    document.getElementById("mainContent").style.backgroundColor = data[3][12];
+            } 
+            if (data[3][13] != undefined) {
+                //disabled
+            }
+            if (data[3][14] != undefined) {
+                //disabled
+            }
+            if (data[3][15] != undefined) {
+                //disabled
+            }
+            if (data[3][16] != undefined) {
+                usePathBlocks = data[3][16];
+                if (!usePathBlocks)
+                    document.getElementById("pathBlocks").style.backgroundColor = "#6BC267"
+            }
+            if (data[3][17] != undefined) {
+                cavesEnabled = data[3][17];
+                if (!cavesEnabled)
+                    document.getElementById("caveToggle").style.backgroundColor = "red";
+            }
+            if (data[3][18] != undefined) {
+                if (data[3][18]) {
+                    enableDisguisedChills();
+                }
+            }
+            if (data[3][19] != undefined) {
+                if (data[3][19]) {
+                    switchFont();
+                }
+            }
+            if (data[3][20] != undefined) {
+                    minRarityNum = data[3][20];
+                    minRarityNum--;
+                    changeSpawnMessageRarity(document.getElementById("changeSMrarityDisplay"));
+            }
+        }
+            if (data[4] !== undefined || data[4] !== null) {
+                for (let i = 0; i < data[4][0].length; i++)
+                    gears[i] = data[4][0][i];
+            }
+        if (oreList["🎂"]["normalAmt"] > 0 || gears[9])
+            document.getElementById("sillyRecipe").style.display = "block";
+        return true;
+    } catch(error) {
+        console.log(error);
+        window.alert("DATA CORRUPTION DETECTED, EXPORT YOUR SAVE FILE AND CONTACT A MODERATOR IN THE DISCORD");
+        dataTimer = null;
+        galaxyDataTimer = null;
+        return false;
+    }
+    
+}
+function saveGalaxyData() {
+    if (useGalaxyData && window.self.location.ancestorOrigins[0].includes("galaxy.click"))  {
+        let dataStorage = [
+            //ORES, 0
+            [],
+            //PICKAXES, 1
+            [],
+            //STATS, 2
+            [],
+            //SETTINGS, 3
+            [],
+            //GEARS, 4
+            []
+        ];
+        for (let propertyName in oreList)
+            dataStorage[0].push([propertyName, [[oreList[propertyName]["normalAmt"], oreList[propertyName]["electrifiedAmt"], oreList[propertyName]["radioactiveAmt"], oreList[propertyName]["explosiveAmt"]]]]);
+        dataStorage[1].push([pickaxes, currentPickaxe]);
+        dataStorage[2].push(totalMined);
+        dataStorage[3].push(
+            canPlay, 
+            getAllSpawnVolumes(), 
+            keepRunningAudio.paused, 
+            Number(document.getElementById("musicVolume").value), 
+            baseMineCapacity, 
+            minMiningSpeed, 
+            stopOnRare, 
+            stopRareNum, 
+            canDisplay, 
+            useNumbers, 
+            invToIndex, 
+            craftingToIndex, 
+            document.getElementById("mainContent").style.backgroundColor, 
+            getLatestColors(), 
+            getInventoryColors(),
+            getCraftingColors(),
+            usePathBlocks,
+            cavesEnabled,
+            useDisguisedChills,
+            usingNewEmojis,
+            minRarityNum
+            );
+        dataStorage[4].push(gears);
+        window.top.postMessage({
+            action: "save",
+            slot: 0,
+            label: "Silly Caverns Data",
+            data: JSON.stringify(dataStorage),
+        }, "https://galaxy.click");
+    }
+}
+*/

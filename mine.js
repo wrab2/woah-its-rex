@@ -402,6 +402,8 @@ function switchWorld() {
             mine[curY + 1][curX] = "📺";
         }
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
+        layerNum = 1;
+        switchLayerIndex(0, "tvLayer", 2)
     } else {
         let children = document.getElementById("pickaxeCrafts").children;
         for (let i = worldOnePickaxes.length - 1; i < worldOnePickaxes.length + worldTwoPickaxes.length; i++) children[i].style.display = "block";
@@ -425,6 +427,8 @@ function switchWorld() {
             }
         }
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
+        layerNum = 0;
+        switchLayerIndex(0, "dirtLayer", 1);
     }
     switchDistance();
     displayArea();

@@ -218,7 +218,6 @@ function showSettings() {
     document.getElementById("mainContent").style.display = "none";
     document.getElementById("settingsContainer").style.display = "block";
     createStats();
-    switchLayerIndex(0, 0)
 }
 
 function hideSettings() {
@@ -287,38 +286,55 @@ function updateCapacity(element) {
         flashRed(element);
     }        
 }
+const indexOrder = {
+    "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"],
+    "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"],
+}
 let layerNum = 0;
-function switchLayerIndex(num, overrideNum, world) {
+function switchLayerIndex(num, overrideLayer, world) {
     while (document.getElementById("oreCardHolder").firstChild) {
         document.getElementById("oreCardHolder").removeChild(document.getElementById("oreCardHolder").firstChild);
     }
-    if (world === undefined) {
-        world = currentWorld;
-    }
-    layerNum += num;
-    let add = world === 1 ? 8 : 5;
-    if (layerNum > (add + 3)) {
-        layerNum = 0;
-    }
-    if (layerNum < 0)
-        layerNum = (add + 3);
     let layerToIndex;
-    let caveBase = currentWorld === 1 ? 11 : 8;
-    layerNum = overrideNum === undefined ? layerNum : overrideNum;
-    if (layerNum > (add - 1)) {
-        let caveNum = caveBase - layerNum;
-        layerToIndex = allCaves[caveNum];
+    let worldLayer;
+    if (world === undefined) {
+        worldLayer = currentWorld === 1 ? indexOrder["worldOne"] : indexOrder["worldTwo"];
     } else {
-        if (world === 1) {
-            layerToIndex = worldOneLayers[layerNum];
-        } else {
-            layerToIndex = worldTwoLayers[layerNum];
-        }
+        worldLayer = world === 1 ? indexOrder["worldOne"] : indexOrder["worldTwo"];
+    }
+    if (overrideLayer === undefined) {
+        layerNum += num;
+        if (layerNum < 0) layerNum = worldLayer.length - 1;
+        else if (layerNum > worldLayer.length - 1) layerNum = 0;
+        layerToIndex = worldLayer[layerNum];
+    } else {
+        layerToIndex = overrideLayer;
     }
     
-    layerToIndex = layerNum === 101 ? "worldOneCommons" : layerToIndex;
-    layerToIndex = layerNum === 102 ? "worldTwoCommons" : layerToIndex;
-    let layerMaterial
+    if (layerToIndex === "sillyLayer") if (oreList["🎂"]["normalAmt"] < 1000000) {
+        if (num === undefined) return; else {
+            switchLayerIndex(num);
+            return;
+        }
+    }
+    if (layerToIndex === "borderLayer") if (oreList["❌"]["normalAmt"] < 1000000) {
+        if (num === undefined) return; else {
+            switchLayerIndex(num);
+            return;
+        }
+    }
+    if (layerToIndex === "fluteLayer") if (oreList["🪈"]["normalAmt"] < 1000000) {
+        if (num === undefined) return; else {
+            switchLayerIndex(num);
+            return;
+        }
+    }
+    if (layerToIndex === "grassLayer") if (oreList["🟩"]["normalAmt"] < 1000000) {
+        if (num === undefined) return; else {
+            switchLayerIndex(num);
+            return;
+        }
+    }
     if (layerList[layerToIndex] != undefined) layerMaterial = layerList[layerToIndex].slice(-1);
     if (caveList[layerToIndex] != undefined) layerMaterial = caveList[layerToIndex].slice(-1);
     document.getElementById("indexSwitchButton").innerText = layerMaterial;
@@ -328,14 +344,17 @@ function switchLayerIndex(num, overrideNum, world) {
     for (let i = oreIndexCards.length - 1; i >= 0; i--) {
         document.getElementById("oreCardHolder").appendChild(oreIndexCards[i]);
     }
+    return 0;
 }
 let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡🌱";
+let noLuck = "✴️🌹";
 function createIndexCards(layer) {
         let toReturn = [];
         let isCave = false;
         let caveMulti;
         let spawnMessage = true;
         let minIndexRarity = 2;
+        let affectedByLuck = true;
         if (layer === "worldOneCommons" || layer === "worldTwoCommons") {
             layer = layerList[layer];
             spawnMessage = false;
@@ -350,28 +369,31 @@ function createIndexCards(layer) {
         }
         for (let i = 0; i < layer.length; i++) {
         let property = layer[i];
-        if ((ignoreList.indexOf(property) < 0 || indexHasOre(property)) && oreList[property]["numRarity"] >= minIndexRarity) {
+        if ((ignoreList.indexOf(property) < 0 || indexHasOre(property)) && (oreList[property]["numRarity"] >= minIndexRarity || property === "✴️")) {
+            if (oreInformation.isCommon(oreList[property]["oreTier"])) affectedByLuck = false;
+            if (noLuck.indexOf(property) > -1) affectedByLuck = false;
             let parentObject = document.createElement("div");
             let parentWrapper = document.createElement("div");
             parentObject.classList = "oreCard";
-            parentWrapper.classList = "indexWrapper"
+            parentWrapper.classList = "indexWrapper";
             
             let output = "<span class='indexOre'>" + property + "</span>"
-            output += "<span class='indexRarity'>1/"
+            output += "<span class='indexRarity indexTextOutline'>1/"
             if (isCave) {
                 let rarity = oreList[property]["numRarity"];
                 if (oolProbabilities[property] != undefined) rarity = Math.round(1/oolProbabilities[property]);
                 output += rarity.toLocaleString();
                 output += " Base Rarity.</span>";
                 rarity *= caveMulti;
-                output += "<span class='indexWithLuck'>1/" + rarity.toLocaleString() + " Adjusted.</span>";
+                output += "<span class='indexWithLuck indexTextOutline'>1/" + rarity.toLocaleString() + " Adjusted.</span>";
             } else {
                 output += oreList[property]["numRarity"].toLocaleString();
                 output += " Base Rarity.</span>";
-                output += "<span class='indexWithLuck'>1/" + Math.round((oreList[property]["numRarity"] / verifiedOres.getCurrentLuck())).toLocaleString() + " With Luck.</span>";
+                if (affectedByLuck) output += "<span class='indexWithLuck indexTextOutline'>1/" + Math.round((oreList[property]["numRarity"] / verifiedOres.getCurrentLuck())).toLocaleString() + " With Luck.</span>";
+                else  output += "<span class='indexWithLuck indexTextOutline'>Unaffected By Luck</span>";
             }
             if (oreList[property]["spawnMessage"] !== "") {
-                output += "<span class='indexSpawnMessage'>" + oreList[property]["spawnMessage"] + "</span>";
+                output += "<span class='indexSpawnMessage indexTextOutline'>" + oreList[property]["spawnMessage"] + "</span>";
             }
             let colors = oreInformation.getColors(oreList[property]["oreTier"]);
             if (oreList[property]["explosiveAmt"]) {
@@ -397,46 +419,56 @@ function createIndexCards(layer) {
 
 function randomFunction(ore, cause) {
     if ((cause === "inv" && invToIndex) || (cause === "crafting" && craftingToIndex)) {
-        let num = -1;
+        let layer = undefined;
         let world = currentWorld;
         if (ore === "❤️‍🔥")
             return;
         if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {
             for (let i = 0; i < worldOneLayers.length; i++) {
                 if (layerList[worldOneLayers[i]].includes(ore)) {
-                    num = i;
+                    layer = worldOneLayers[i];
                     world = 1;
                     break;
                 }
             }
-            if (num < 0) {
+            if (layer === undefined) {
                 for (let i = 0; i < worldTwoLayers.length; i++) {
                     if (layerList[worldTwoLayers[i]].includes(ore)) {
-                        num = i;
+                        layer = worldTwoLayers[i];
                         world = 2;
                         break;
                     }
                 }
             }
-            if (num < 1) {
+            if (layer === undefined) {
                 for (let i = allCaves.length - 1; i >= 0; i--) {
                     if (caveList[allCaves[i]].includes(ore)) {
-                        num = currentWorld === 1 ? (11 - i) : (8 - i);
+                        layer = allCaves[i];
+                        break;
+                    }
+                }
+            }
+            if (layer === undefined) {
+                for (let i = specialLayers.length - 1; i >= 0; i--) {
+                    if (layerList[specialLayers[i]].includes(ore)) {
+                        layer = specialLayers[i];
                         break;
                     }
                 }
             }
             if (layerList["worldOneCommons"].includes(ore)) {
-                num = 101;
+                layer = "worldOneCommons";
+                world = 1;
             }
             if (layerList["worldTwoCommons"].includes(ore)) {
-                num = 102;
+                layer = "worldTwoCommons";
+                world = 2;
             }
             
-            if (num > -1) {
+            if (layer != undefined) {
                 showSettings();
                 openFrame('index');
-                switchLayerIndex(0, num, world);
+                switchLayerIndex(0, layer, world);
             }
         }
     }
