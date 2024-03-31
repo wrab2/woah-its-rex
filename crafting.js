@@ -927,7 +927,7 @@ function craftGear(num) {
         if (canCraft) {
             for (let i = 0; i < list.length; i++) {
                 oreList[list[i][0]]["normalAmt"] -= list[i][1];
-                inventoryObj[recipeList[i][0]] = 0;
+                inventoryObj[list[i][0]] = 0;
             }
             if (num === 9) {
                 document.getElementById("craftGear" + num).innerText = "SILLIFY!";
