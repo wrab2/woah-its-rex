@@ -847,7 +847,7 @@ function updateActiveRecipe() {
             if (oreList[ore] != undefined) {
                 let needed = currentRecipe[2][i][1];
                 let amtOwned = oreList[ore]["normalAmt"];
-                recipe[i].innerHTML = ore + " <span style='text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;'>" + amtOwned.toLocaleString() + "/" + needed.toLocaleString() + "</span>";
+                recipe[i].innerHTML = ore + " <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>" + amtOwned.toLocaleString() + "/" + needed.toLocaleString() + "</span>";
                 if(amtOwned >= needed) {
                     recipe[i].style.color = "#6BC267";
                     count++;
