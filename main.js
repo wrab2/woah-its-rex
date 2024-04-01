@@ -509,6 +509,7 @@ function createInventory() {
                 } else {
                     oreRarityBlock.innerText = "1/" + (rarity * multis[i - 1]).toLocaleString();
                 }
+                if (propertyName === "🎖️") oreRarityBlock.innerText = "1/" + (100000000000000 * multis[i - 1]).toLocaleString();
                 oreRarityBlock.classList = "inventoryElement2";
                 let oreAmountBlock = document.createElement("td");
                 oreAmountBlock.id = (propertyName + "amt" + i);
@@ -567,6 +568,7 @@ function spawnMessage(block, location, caveInfo) {
     else if (!gears[17] && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < baseMineCapacity + 50000)
         mineCapacity += 10000;
     let oreRarity = oreList[block]["numRarity"];
+    if (block === "🎖️") oreRarity = 100000000000000;
     let spawnElement = document.getElementById("latestSpawns");
     let sub = currentWorld === 1 ? 0 : 2000;
     let output = "";

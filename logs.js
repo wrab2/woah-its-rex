@@ -86,12 +86,14 @@ class secureLogs {
                         something *= this.#verifiedLogs[i][6][1];
                         output += (something * multi).toLocaleString();
                     } else {
-                        output += Math.floor(((oreList[this.#verifiedLogs[i][0]]["numRarity"]) * multi)/ this.#verifiedLogs[i][5]).toLocaleString();
+                        let rarity = oreList[this.#verifiedLogs[i][0]]["numRarity"] * multi;
+                        if (this.#verifiedLogs[i][0] === "🎖️") rarity = 100000000000000 * multi;
+                        output += Math.floor(rarity / this.#verifiedLogs[i][5]).toLocaleString();
                     }
                     output += ", " + (Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1))) * 2 + "<br>";
                     
                 }
-                this.#logsTimer = setInterval(this.#reloadLogs, 50, output!==""?output:"none");
+                this.#logsTimer = setInterval(this.#reloadLogs, 500, output!==""?output:"none");
         } else {
             clearInterval(this.#logsTimer);
             this.#logsTimer = null;

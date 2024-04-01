@@ -158,6 +158,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 }
 #displayRecipe {
   margin:auto;
+  height: auto;
   width: 100%;
   margin: 0%;
   text-align: center;
@@ -176,7 +177,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 }
 
 .itemDescription {
-  font-size: 1.5vw;
+  font-size:1.5vw;
   font-family:'Times New Roman', Times, serif
 }
 #gearCrafts {
@@ -513,8 +514,8 @@ border-bottom:1px solid #333;
   overscroll-behavior-y: contain;
   overflow-y: auto;
   width: 100%;
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 75vh;
+  max-height: 75vh;
   border-bottom:1px solid #333; 
   border-right:1px solid #333; 
 }

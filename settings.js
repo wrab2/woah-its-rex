@@ -387,9 +387,11 @@ function createIndexCards(layer) {
                 rarity *= caveMulti;
                 output += "<span class='indexWithLuck indexTextOutline'>1/" + rarity.toLocaleString() + " Adjusted.</span>";
             } else {
-                output += oreList[property]["numRarity"].toLocaleString();
+                let rarity = oreList[property]["numRarity"]
+                if (property === "🎖️") rarity = 100000000000000;
+                output += rarity.toLocaleString();
                 output += " Base Rarity.</span>";
-                if (affectedByLuck) output += "<span class='indexWithLuck indexTextOutline'>1/" + Math.round((oreList[property]["numRarity"] / verifiedOres.getCurrentLuck())).toLocaleString() + " With Luck.</span>";
+                if (affectedByLuck) output += "<span class='indexWithLuck indexTextOutline'>1/" + Math.round(rarity / verifiedOres.getCurrentLuck()).toLocaleString() + " With Luck.</span>";
                 else  output += "<span class='indexWithLuck indexTextOutline'>Unaffected By Luck</span>";
             }
             if (oreList[property]["spawnMessage"] !== "") {
