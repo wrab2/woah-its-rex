@@ -703,7 +703,8 @@ function createPickaxeRecipes() {
             let element = document.createElement('p');
             element.id = (ore + ("pickaxeRecipe" + (j + 1) + "Display"));
             element.classList = "recipeOreDisplay";
-            element.innerHTML = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString();
+            let tempText = ore + " " + amtHave.toLocaleString() + "/" + amtNeeded.toLocaleString() + "";
+            element.innerHTML = tempText;
             element.setAttribute("onclick", "randomFunction(\"" + ore + "\", 'crafting')");
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
@@ -846,7 +847,7 @@ function updateActiveRecipe() {
             if (oreList[ore] != undefined) {
                 let needed = currentRecipe[2][i][1];
                 let amtOwned = oreList[ore]["normalAmt"];
-                recipe[i].innerText = ore + " " + amtOwned.toLocaleString() + "/" + needed.toLocaleString();
+                recipe[i].innerHTML = ore + " <span style='text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;'>" + amtOwned.toLocaleString() + "/" + needed.toLocaleString() + "</span>";
                 if(amtOwned >= needed) {
                     recipe[i].style.color = "#6BC267";
                     count++;

@@ -154,7 +154,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   font-size: 1.25vw;
   font-weight: 1000;
   border: none;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  
 }
 #displayRecipe {
   margin:auto;
