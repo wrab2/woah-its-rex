@@ -473,6 +473,8 @@ function createInventory() {
             for (let j = 0; j < arr[k].length - i - 1; j++) {
                 let rarity1 = oreList[arr[k][j]]["numRarity"];
                 let rarity2 = oreList[arr[k][j + 1]]["numRarity"];
+                if (arr[k][j] === "🎖️") rarity1 = 100000000000000;
+                if (arr[k][j + 1] === "🎖️") rarity1 = 100000000000000;
                     if (oreList[arr[k][j]]["caveExclusive"])
                 rarity1 *= getCaveMultiFromOre(arr[k][j]);
                 if (oreList[arr[k][j + 1]]["caveExclusive"])
