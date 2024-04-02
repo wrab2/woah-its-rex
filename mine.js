@@ -180,7 +180,7 @@ function generateBlock(location) {
         }
         playSound(oreList[blockToGive]["oreTier"]);
         if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage(blockToGive, location);
-        if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) mineBlock(location["X"], location["Y"], "ability");
+        if (((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) && tier !== "Celestial") mineBlock(location["X"], location["Y"], "ability");
     }
 }
 

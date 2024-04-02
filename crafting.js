@@ -838,34 +838,46 @@ const buttonGradients = {
 
 let lastCount = -1;
 function updateActiveRecipe() {
+    let totalCount = 0;
     let count = 0;
     if (currentRecipe[0] != undefined) {
         let recipe = currentRecipe[0].children;
         let length = currentRecipe[2].length;
+        let totalRarity = 0;
+        let currentRarity = 0;
         for (let i = 0; i < length; i++) {
             let ore = currentRecipe[2][i][0];
             if (oreList[ore] != undefined) {
+                totalCount++;
                 let needed = currentRecipe[2][i][1];
                 let amtOwned = oreList[ore]["normalAmt"];
+                totalRarity += oreList[ore]["numRarity"] * needed;
+                currentRarity
                 recipe[i].innerHTML = ore + " <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>" + amtOwned.toLocaleString() + "/" + needed.toLocaleString() + "</span>";
                 if(amtOwned >= needed) {
-                    recipe[i].style.color = "#6BC267";
                     count++;
+                    recipe[i].style.color = "#6BC267";
+                    currentRarity += oreList[ore]["numRarity"] * needed;
                 }
-                else
+                else {
                     recipe[i].style.color = "#FF3D3D";
+                    currentRarity += oreList[ore]["numRarity"] * amtOwned;
+                }  
             }
         }
         let button = currentRecipe[0].lastChild;
-        if (button.innerText != "Craft!") {
+        if (button.innerText.includes("Equip")) {
             if (!(buttonGradients[button.id]["applied"])) {
                 button.style.backgroundImage = buttonGradients[button.id]["gradient"];
                 buttonGradients[button.id]["applied"] = true;
             }
-        } else if (count > lastCount){
-            lastCount = count;
-            let percent = 100 * (count/length);
+        } else {
+            let percent = 100 * (currentRarity/totalRarity);
+            percent = Math.round(percent * 100) / 100;
+            if (count < totalCount && percent === 100) percent = 99.99; 
             button.style.backgroundImage = "linear-gradient(to right, #6BC267 " + percent + "%, #FF3D3D " + (percent + 5) + "%)";
+            if (percent < 100) button.innerText = percent + "%";
+            else button.innerText = "Craft!"
         }
         
     }
