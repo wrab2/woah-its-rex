@@ -87,7 +87,6 @@ class secureLogs {
                         output += (something * multi).toLocaleString();
                     } else {
                         let rarity = oreList[this.#verifiedLogs[i][0]]["numRarity"] * multi;
-                        if (this.#verifiedLogs[i][0] === "🎖️") rarity = 100000000000000 * multi;
                         output += Math.floor(rarity / this.#verifiedLogs[i][5]).toLocaleString();
                     }
                     output += ", " + (Math.log10(this.#verifiedLogs[i][5] * (this.#verifiedLogs[i][1][0] + 1))) * 2 + "<br>";

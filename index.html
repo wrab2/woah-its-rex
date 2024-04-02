@@ -217,6 +217,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <table id="inventory3" class="inventoryHolder" style="display:none;"></table>
                 <table id="inventory4" class="inventoryHolder" style="display:none;"></table>
             </div>
+            <button id="conversionButton" onclick="toggleVariantConversions()">To Variant Conversions</button>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
                 <img src="media/discord-logo.png" alt="Discord" style="width: 25%; height: 25%;">
                 <p style="font-size: 1.5vw; font-weight: 750;">Join Our Community!<br><span style="font-size: 0.75vw; font-weight: 100;">Updates, Leaks, and Secrets Included!</span></p>
@@ -224,6 +225,25 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         </div>
     </div>
 </div>
+</div>
+<div id="conversionContainer" style="display: none;">
+    <p id="conversionTitle">Variant Conversion Machine!</p>
+    <p id="conversionDescription">How to use: Insert ore into the left container, insert amount to convert next to it, select variant you wish to convert an ore from, and then press convert!<br>
+    Current Rates: One Explosive Ore -> 8 Normal Ores | One Radioactive Ore -> 6 Normal Ores | One Electrified Ore -> 4 Normal Ores.</p>
+    <div id="machineHolder">
+        <form id="machineForm">
+            <input type="text" id="oreInput" maxlength="99" autocomplete="off" >
+            <input type="text" id="amtInput" maxlength="4" autocomplete="off">
+            <select name="variants" id="variantSelect">
+                <option value="Electrified">Electrified</option>
+                <option value="Radioactive">Radioactive</option>
+                <option value="Explosive">Explosive</option>
+            </select>
+        </form>
+        <button id="variantConvert" onclick="convertVariants()">Convert!</button>
+        <button id="leaveConversion" onclick="toggleVariantConversions()">Back To Mine!</button>
+    </div>
+    <p id="machineError"></p>
 </div>
 <!--
 <div id="celestialContainer" style="display: none;">

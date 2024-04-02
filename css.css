@@ -986,6 +986,121 @@ border-bottom:1px solid #333;
   width: 100%;
   height: 100%;
 }
+#conversionContainer {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+}
+#conversionTitle {
+  font-size: 2.5vw;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+#conversionDescription {
+  font-size: 1vw;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+#machineHolder {
+  height: 10vw;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+#machineForm {
+  display: inline-flex;
+  margin:0;
+}
+#oreInput {
+  float: left;
+  height: 6vw;
+  width: 6vw;
+  font-size: 4vw;
+  align-self: center;
+  background: none;
+  color: white;
+  text-shadow:1px 1px 5px white;
+  border-left:0.1em solid white;
+  border-bottom:0.1em solid white;
+  border-top:0.1em solid white;
+  border-right:0.1em solid white;
+}
+#oreInput:focus {
+  outline: none;
+}
+#amtInput {
+  float: left;
+  height: 6vw;
+  width: 10vw;
+  font-size: 4vw;
+  align-self: center;
+  background: none;
+  color: white;
+  border-bottom:0.1em solid white;
+  border-top:0.1em solid white;
+  border-left: none;
+  text-shadow:1px 1px 5px white;
+}
+#amtInput:focus {
+  outline: none;
+}
+#variantSelect {
+  align-self: center;
+  text-align: center;
+  height: 6vw;
+  background: white;
+  font-size: 3vw;
+  color: white;
+  background-color: black;
+  border-bottom:0.1em solid white;
+  border-top:0.1em solid white;
+  border-left: 0.1em solid white;
+}
+#variantConvert {
+  align-self: center;
+  height: 6vw;
+  width: 12vw;
+  font-size: 2vw;
+  border-bottom:0.2em solid white;
+  border-top:0.2em solid white;
+  border-left: 0.2em solid white;
+  font-weight: bolder;
+  background: none;
+}
+#variantConvert:hover {
+  background-color: #494949;
+}
+#leaveConversion {
+  height: 6vw;
+  font-size: 2vw;
+  width: 15vw;
+  align-self: center;
+  background: none;
+  border:0.2em solid white;
+}
+#leaveConversion:hover {
+  background-color: #494949;
+}
+#machineError {
+  font-size: 3vw;
+  text-align: center;
+  font-weight: 1000;
+}
+#conversionButton {
+  height: 3vw;
+  font-size: 1vw;
+  width: 100%;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-color: #2e2e2e;
+  border-width: 0.25em;
+}
+#conversionButton:hover {
+  background-color: #494949;
+}
 #statsTitle {
   font-size: 3vw;
   font-weight: 750;

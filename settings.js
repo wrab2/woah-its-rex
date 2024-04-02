@@ -388,7 +388,6 @@ function createIndexCards(layer) {
                 output += "<span class='indexWithLuck indexTextOutline'>1/" + rarity.toLocaleString() + " Adjusted.</span>";
             } else {
                 let rarity = oreList[property]["numRarity"]
-                if (property === "🎖️") rarity = 100000000000000;
                 output += rarity.toLocaleString();
                 output += " Base Rarity.</span>";
                 if (affectedByLuck) output += "<span class='indexWithLuck indexTextOutline'>1/" + Math.round(rarity / verifiedOres.getCurrentLuck()).toLocaleString() + " With Luck.</span>";
@@ -424,6 +423,8 @@ function randomFunction(ore, cause) {
         let layer = undefined;
         let world = currentWorld;
         if (ore === "❤️‍🔥")
+            return;
+        if (ore === "🕳️")
             return;
         if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {
             for (let i = 0; i < worldOneLayers.length; i++) {
@@ -607,3 +608,60 @@ function createStats() {
         tier = oreInformation.getNextTier(tier);
     }
 }
+function toggleVariantConversions() {
+    let element = document.getElementById("conversionContainer")
+    if (element.style.display === "block") {
+        element.style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+    } else {
+        element.style.display = "block";
+        document.getElementById("mainContent").style.display = "none";
+    }
+}
+function convertVariants() {
+    let ore = document.getElementById("oreInput").value;
+    let variant = document.getElementById("variantSelect").value;
+    let amt = document.getElementById("amtInput").value;
+    document.getElementById("amtInput").value = "";
+    document.getElementById("oreInput").value = "";
+    if (oreList[ore] === undefined) {
+        document.getElementById("machineError").innerText = "Error! Ore Doesn't Exist!";
+        document.getElementById("machineError").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("machineError").innerText = "";
+        }, 2000);
+        return;
+    }
+    amt = Number(amt);
+    if (isNaN(amt) || amt <= 0) {
+        document.getElementById("machineError").innerText = "Error! Invalid Amount!";
+        document.getElementById("machineError").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("machineError").innerText = "";
+        }, 2000);
+        return;
+    }
+    const obj = {"ore":ore, "variant":variant, "amt":amt};
+    let amtToGive = 0;
+    if (obj["variant"] === "Explosive") amtToGive = 8;
+    else if (obj["variant"] === "Radioactive") amtToGive = 6;
+    else if (obj["variant"] === "Electrified") amtToGive = 4;
+    let name = variantInvNames[names.indexOf(obj["variant"])];
+    if (oreList[obj["ore"]][name] >= obj["amt"]) {
+        oreList[obj["ore"]][name] -= obj["amt"];
+        oreList[obj["ore"]]["normalAmt"] += (obj["amt"] * amtToGive);
+        inventoryObj[obj["ore"]] = 0;
+        document.getElementById("machineError").innerText = "Success!";
+        document.getElementById("machineError").style.color = "green";
+        setTimeout(() => {
+            document.getElementById("machineError").innerText = "";
+        }, 2000);
+    } else {
+        document.getElementById("machineError").innerText = "Error! You do not own enough of this ore to perform this action!";
+        document.getElementById("machineError").style.color = "red";
+        setTimeout(() => {
+            document.getElementById("machineError").innerText = "";
+        }, 2000);
+    }
+}
+//convertVariants({"ore":"", "variant":"Explosive", "amt":1})
