@@ -96,6 +96,7 @@ let minedElement;
 let revealedElement;
 let locationElement;
 let blockElement;
+let emojiNames;
 function init() {
     minedElement = document.getElementById("blocksMined");
     revealedElement = document.getElementById("mineResetProgress");
@@ -108,11 +109,8 @@ function init() {
     createGearRecipes();
     createPickaxeRecipes();
         document.getElementById('dataText').value = "";
-        switchLayerIndex(0, "dirtLayer", 1);
         if (Math.random() < 1/1000)
             document.getElementById("cat").innerText = "CatAxe";
-        
-        
         limitedTimer = setInterval(checkLimitedOres, 10000);
         inventoryTimer = setInterval(updateInventory, 500);
         if (date.getMonth() === 3 && date.getDate() === 1) {
@@ -133,6 +131,12 @@ function init() {
         canContinue = true;
         saveAllData();
     }
+        fetch("https://emoji-api.com/emojis?access_key=36b14ad7d39798bc141d9374790856665fe0045c")
+        .then((response) => response.json())
+        .then((json) => setEmojiNames(json))
+        .catch(error => {
+            failedFetch();
+        });
     if (canContinue) {
         repeatDataSave();
         if (!debug) localStorage.setItem("playedBefore", true);
@@ -141,6 +145,47 @@ function init() {
         utilitySwitchActions();
         console.log("meow");
     }
+}
+function failedFetch() {
+    for (let ore in oreList) oreList[ore]["oreName"] = "FAILED TO FETCH NAMES";
+    switchLayerIndex(0, "dirtLayer", 1);
+    for (let ore in oreList) {
+        oreList[ore]["Normal"].parentElement.setAttribute("title", oreList[ore]["oreName"]);
+        oreList[ore]["Electrified"].parentElement.setAttribute("title", oreList[ore]["oreName"]);
+        oreList[ore]["Radioactive"].parentElement.setAttribute("title", oreList[ore]["oreName"]);
+        oreList[ore]["Explosive"].parentElement.setAttribute("title", oreList[ore]["oreName"]);
+    }
+    for (let i = 0; i < recipeElements.length; i++) {
+        for (let j = 0; j < recipeElements[i].length; j++) {
+            let elements = recipeElements[i][j].children;
+            for (let k = 0; k < elements.length; k++) {
+                let text = elements[k].innerText;
+                if (oreList[text.substring(0, text.indexOf(" "))] != undefined) elements[k].setAttribute("title", oreList[text.substring(0, text.indexOf(" "))]["oreName"]);
+            }
+        }
+    }
+}
+function setEmojiNames(emojis) {
+    for (let i = 0; i < emojis.length; i++) {
+        if (oreList[emojis[i]["character"]] != undefined) {
+            oreList[emojis[i]["character"]]["oreName"] = emojis[i]["unicodeName"].substring(emojis[i]["unicodeName"].indexOf(" ") + 1);
+            oreList[emojis[i]["character"]]["Normal"].parentElement.setAttribute("title", oreList[emojis[i]["character"]]["oreName"]);
+            oreList[emojis[i]["character"]]["Electrified"].parentElement.setAttribute("title", oreList[emojis[i]["character"]]["oreName"]);
+            oreList[emojis[i]["character"]]["Radioactive"].parentElement.setAttribute("title", oreList[emojis[i]["character"]]["oreName"]);
+            oreList[emojis[i]["character"]]["Explosive"].parentElement.setAttribute("title", oreList[emojis[i]["character"]]["oreName"]);
+        }
+    }
+    for (let i = 0; i < recipeElements.length; i++) {
+        for (let j = 0; j < recipeElements[i].length; j++) {
+            let elements = recipeElements[i][j].children;
+            for (let k = 0; k < elements.length; k++) {
+                let text = elements[k].innerText;
+                if (oreList[text.substring(0, text.indexOf(" "))] != undefined) elements[k].setAttribute("title", oreList[text.substring(0, text.indexOf(" "))]["oreName"]);
+            }
+        }
+    }
+    document.getElementById("meterDisplay").setAttribute("title", oreList["🟫"]["oreName"]);
+    switchLayerIndex(0, "dirtLayer", 1);
 }
 
 let chill;
@@ -571,16 +616,17 @@ function spawnMessage(block, location, caveInfo) {
     let sub = currentWorld === 1 ? 0 : 2000;
     let output = "";
     let element = document.createElement("p");
+    element.setAttribute("title", oreList[block]["oreName"]);
     element.classList = "latestFind";
-    if (caveInfo != undefined) output += block + " 1/" + caveInfo["adjRarity"].toLocaleString() + " Adjusted.";
-    else output += block + " 1/" + oreRarity.toLocaleString();
+    if (caveInfo != undefined) output += + block + " 1/" + caveInfo["adjRarity"].toLocaleString() + " Adjusted.";
+    else output += `<span title="${oreList[block]["oreName"]}">` + block + "</span> 1/" + oreRarity.toLocaleString();
     if (gears[0] || currentPickaxe === 5) output += " | X: " + (location["X"] - 1000000000).toLocaleString() + ", Y: " + (-(location["Y"] - sub)).toLocaleString();
     let colors = oreInformation.getColors(oreList[block]["oreTier"]);
     element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
     if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
     else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
-    element.innerText = output;
+    element.innerHTML = output;
     if (spawnElement.children.length > 0) {
         spawnElement.insertBefore(element, spawnElement.firstChild);
     } else {
@@ -596,7 +642,7 @@ function spawnMessage(block, location, caveInfo) {
         else if (oreList[block]["spawnMessage"].indexOf(" Has Spawned!") < 0)
             createSpawnMessage = true;
         if (createSpawnMessage || oreInformation.tierGrOrEqTo({"tier1":oreList[block]["oreTier"], "tier2":"Flawless"})) {
-            let spawnText = "<i>" + oreList[block]["spawnMessage"] + "</i><br>";
+            let spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreList[block]["spawnMessage"] + "</span></i><br>";
             if (caveInfo != undefined) {
                 document.getElementById("spawnMessage").innerHTML = spawnText + "1/" + (caveInfo["adjRarity"]).toLocaleString();(currentPickaxe === 5 || gears[0]? "<br>X: " + (location["X"] - 1000000000).toLocaleString() + "<br>Y: " + (-(location["Y"] - sub)).toLocaleString():"");
             } else {
@@ -624,7 +670,8 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     element.style.color = colors["textColor"];
     if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
     else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
-    output += "<span onclick='goToOre(\"" + type + "\", \"" + variant + "\")'>";
+    element.setAttribute("title", oreList[type]["oreName"]);
+    output += `<span onclick='goToOre(\"${type}"\", \"${variant}\")'>`;
     output += variant + " ";
     output += type + " | X: " + (x - 1000000000).toLocaleString() + ", Y: " + (-(y - sub)).toLocaleString();
     if (fromReset) output += " | FROM RESET<br>";

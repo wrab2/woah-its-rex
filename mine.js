@@ -283,11 +283,13 @@ function switchDistance() {
         }
         let layer = layerList[allLayers[Math.floor(y / 2000)]].slice(-1);
         layer = layer[layer.length - 1];   
+        document.getElementById("meterDisplay").setAttribute("title", oreList[layer]["oreName"]);
         if (usingNewEmojis) {
             layer = "<span style=\"font-family:'Noto Color Emoji'\">" + layer + "</span>";
         }
         let sub = currentWorld === 2 ? 2000 : 0;
         document.getElementById("meterDisplay").innerHTML = layer + " " + (y - sub).toLocaleString() + "m";
+        
 }
 
 async function teleport() {

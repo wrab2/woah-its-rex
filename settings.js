@@ -337,7 +337,7 @@ function switchLayerIndex(num, overrideLayer, world) {
     }
     if (layerList[layerToIndex] != undefined) layerMaterial = layerList[layerToIndex].slice(-1);
     if (caveList[layerToIndex] != undefined) layerMaterial = caveList[layerToIndex].slice(-1);
-    document.getElementById("indexSwitchButton").innerText = layerMaterial;
+    document.getElementById("indexSwitchButton").innerHTML = `<span title="${oreList[layerMaterial]["oreName"]}">${layerMaterial}</span>`;
     let oreIndexCards = [];
     let elements = createIndexCards(layerToIndex);
     for (let i = 0; i < elements.length; i++) oreIndexCards.push(elements[i])
@@ -377,7 +377,7 @@ function createIndexCards(layer) {
             parentObject.classList = "oreCard";
             parentWrapper.classList = "indexWrapper";
             
-            let output = "<span class='indexOre'>" + property + "</span>"
+            let output = `<span class='indexOre' title="${oreList[property]["oreName"]}">` + property + "</span>"
             output += "<span class='indexRarity indexTextOutline'>1/"
             if (isCave) {
                 let rarity = oreList[property]["numRarity"];
