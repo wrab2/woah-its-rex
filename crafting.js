@@ -366,7 +366,7 @@ worldOneGears = [
     ],
     //THE REAL CANDILLIUM CANDLE
     [
-        ["🌫️", 1000000],
+        ["🌫️", 7500000],
         ["🧡", 10],
         ["💜", 5],
         ["🎭", 1],
@@ -375,7 +375,7 @@ worldOneGears = [
     ],
     //THE REAL VITRIOL VIGOR
     [
-        ["🌵", 1750000],
+        ["🌵", 12500000],
         ["🖤", 1],
         ["🤍", 7],
         ["🖍️", 2],
@@ -385,7 +385,7 @@ worldOneGears = [
     ],
     //INFINITE ORE COLLECTOR
     [
-        ["🪨", 15000000],
+        ["🪨", 30000000],
         ["💠", 25],
         ["⚜️", 25],
         ["🔋", 10],
@@ -395,14 +395,14 @@ worldOneGears = [
     ],
     //LAYER MATERIALIZER
     [
-        ["🟫", 2500000],
-        ["🧱", 2500000],
-        ["🌫️", 2500000],
-        ["🌊", 2500000],
-        ["🪨", 2500000],
-        ["☢️", 2500000],
-        ["🌵", 2500000],
-        ["📰", 2500000],
+        ["🟫", 10000000],
+        ["🧱", 10000000],
+        ["🌫️", 10000000],
+        ["🌊", 10000000],
+        ["🪨", 10000000],
+        ["☢️", 10000000],
+        ["🌵", 10000000],
+        ["📰", 10000000],
         ["📟", 15],
         ["⌚", 2],
         ["🔥", 1]
@@ -420,7 +420,7 @@ worldOneGears = [
     ],
     //VITRIOL V2 IDK WHAT TO NAME IT
     [
-        ["🌵", 75000000],
+        ["🌵", 150000000],
         ["⚱️", 75],
         ["🗡️", 50],
         ["🎀", 20],
@@ -431,7 +431,7 @@ worldOneGears = [
     ],
     //ENERGY SIPHONER
     [
-        ["🌫️", 3000000],
+        ["🌫️", 17500000],
         ["🎭", 10],
         ["🎴", 5],
         ["🎨", 2],
@@ -439,7 +439,7 @@ worldOneGears = [
     ],
     //SUGAR RUSH
     [
-        ["☢️", 4000000],
+        ["☢️", 20000000],
         ["🧪", 20],
         ["⚗️", 15],
         ["⏹️", 5],
@@ -594,7 +594,8 @@ function displayRecipe(num, element) {
                 if (num !== 25) recipe.lastChild.innerText = "Equipped!";
                 else recipe.lastChild.innerText = "Equipped..?";
             } else if (pickaxes[num + 1][1]) {
-                recipe.lastChild.innerText = "Equip!"
+                if (num !== 25) recipe.lastChild.innerText = "Equip!";
+                else recipe.lastChild.innerText = "Pledge.";
             }
             if (num > worldOnePickaxes.length - 1) {
                 currentRecipe[2] = worldTwoPickaxes[num - worldOnePickaxes.length];
@@ -645,7 +646,9 @@ function displayRecipe(num, element) {
                     if (num !== 25) recipe.lastChild.innerText = "Equipped!";
                     else recipe.lastChild.innerText = "Equipped..?";
                 } else if (pickaxes[num + 1][1]) {
-                    recipe.lastChild.innerText = "Equip!"
+                    if (num !== 25) recipe.lastChild.innerText = "Equip!";
+                    else recipe.lastChild.innerText = "Pledge.";
+                    
                 }
                 if (num > worldOnePickaxes.length - 1) {
                     currentRecipe[2] = worldTwoPickaxes[num - worldOnePickaxes.length];
@@ -866,7 +869,8 @@ function updateActiveRecipe() {
             }
         }
         let button = currentRecipe[0].lastChild;
-        if (button.innerText.includes("Equip")) {
+        let text = button.innerText;
+        if (text.includes("Equip") || text.includes("Owned") || text.includes("SILLIFY") || text.includes("Pledge")) {
             if (!(buttonGradients[button.id]["applied"])) {
                 button.style.backgroundImage = buttonGradients[button.id]["gradient"];
                 buttonGradients[button.id]["applied"] = true;

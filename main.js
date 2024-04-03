@@ -131,7 +131,7 @@ function init() {
         canContinue = true;
         saveAllData();
     }
-        fetch("https://emoji-api.com/emojis?access_key=36b14ad7d39798bc141d9374790856665fe0045c")
+        fetch("emoji.json")
         .then((response) => response.json())
         .then((json) => setEmojiNames(json))
         .catch(error => {
