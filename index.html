@@ -217,7 +217,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <table id="inventory3" class="inventoryHolder" style="display:none;"></table>
                 <table id="inventory4" class="inventoryHolder" style="display:none;"></table>
             </div>
-            <button id="conversionButton" onclick="toggleVariantConversions()">To Variant Conversions</button>
+            <div>
+                <button id="conversionButton" onclick="toggleVariantConversions()">To Variant Conversions</button>
+                <button id="forgeButton" onclick="toggleOreForge()">To The Forge</button>
+            </div>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
                 <img src="media/discord-logo.png" alt="Discord" style="width: 25%; height: 25%;">
                 <p style="font-size: 1.5vw; font-weight: 750;">Join Our Community!<br><span style="font-size: 0.75vw; font-weight: 100;">Updates, Leaks, and Secrets Included!</span></p>
@@ -233,7 +236,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <div id="machineHolder">
         <form id="machineForm">
             <input type="text" id="oreInput" maxlength="99" autocomplete="off" >
-            <input type="text" id="amtInput" maxlength="4" autocomplete="off">
+            <input type="text" id="amtInput" maxlength="7" autocomplete="off">
             <select name="variants" id="variantSelect">
                 <option value="Electrified">Electrified</option>
                 <option value="Radioactive">Radioactive</option>
@@ -244,6 +247,38 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         <button id="leaveConversion" onclick="toggleVariantConversions()">Back To Mine!</button>
     </div>
     <p id="machineError"></p>
+</div>
+<div id="forgeContainer" style="display: none;">
+    <p id="forgeTitle">The Silly Caverns Forge</p>
+    <div id="descriptionContainer">
+        <p class="buttonDescriptor" id="leftForge">Here's where you combine worse ores into a better ore.</p>
+        <p class="buttonDescriptor" id="rightForge">Here's where you break a better ore down into worse ores. (NYI)</p>
+    </div>
+    <div id="forgeSelectionContainer">
+        
+        <button class="forgeTypeSelect">Ore Crafts!</button>
+        <button class="forgeTypeSelect" disabled="true">Ore Fissions!</button>
+        <button class="forgeTypeSelect" onclick="toggleOreForge()">Back To Mine!</button>
+    </div>
+    <hr id="forgeSeparator">
+    <div id="craftingSelections">
+        <button class="forgeCraftingButton" onclick="displayOreRecipe('gearCraft')">Craft <span class="forgeOreDisplay">⚙️</span></button>
+    </div>
+    <hr id="forgeSeparator">
+    <div id="forgeRecipeDisplayContainer">
+        <div id="forgeRecipeDisplay" style="display:none;">
+            
+        </div>
+        <div id="forgeSettings" style="display: none;">
+            <p id="forgeCraftingAmount">1x</p>
+                <button id="setForgeAmount" onclick="multiplyRecipe(document.getElementById('amountInputText').value)">Set Multiplier</button>
+                <br>
+                <form id="amountInput">
+                    <input type="text" placeholder="Amount" id="amountInputText" autocomplete="off" maxlength="3">
+                </form>
+                <button id="craftOreButton" onclick="craftOre(currentOreRecipe)"></button>
+        </div>
+    </div>
 </div>
 <!--
 <div id="celestialContainer" style="display: none;">

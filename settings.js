@@ -613,9 +613,11 @@ function toggleVariantConversions() {
     if (element.style.display === "block") {
         element.style.display = "none";
         document.getElementById("mainContent").style.display = "block";
+        canMine = true;
     } else {
         element.style.display = "block";
         document.getElementById("mainContent").style.display = "none";
+        canMine = false;
     }
 }
 function convertVariants() {

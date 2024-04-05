@@ -1044,3 +1044,125 @@ function switchWorldCraftables() {
         document.getElementById("oblivionFracturer").style.display = "none";
     }
 }
+function toggleOreForge() {
+    let element = document.getElementById("forgeContainer")
+    if (element.style.display === "block") {
+        element.style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        canMine = true;
+    } else {
+        element.style.display = "block";
+        document.getElementById("mainContent").style.display = "none";
+        displayOreRecipe(currentOreRecipe);
+        canMine = false;
+    }
+}
+let currentOreRecipe;
+const oreRecipes = {
+    "gearCraft" : {
+        "cost" : [{"ore":"🤍","amt":1}, {"ore":"🖤","amt":2}, {"ore":"⚫","amt":10000}],
+        "result" : {"ore":"⚙️", "amt":1},
+        "multiplier" : 1
+    }
+}
+function getRecipeById(id) {
+    return oreRecipes[id];
+}
+function displayOreRecipe(id) {
+    if (id === currentOreRecipe) {
+        document.getElementById("forgeSettings").style.display = "none";
+        let parent = document.getElementById("forgeRecipeDisplay");
+        parent.style.display = "none";
+        while (parent.firstChild) parent.removeChild(parent.firstChild);
+        currentOreRecipe = "";
+    } else {
+        let parent = document.getElementById("forgeRecipeDisplay");
+        parent.style.display = "block";
+        document.getElementById("forgeSettings").style.display = "block";
+        currentOreRecipe = id;
+        let recipe = getRecipeById(id);
+        recipe["multiplier"] = 1;
+        document.getElementById("forgeCraftingAmount").innerText = "1x";
+        for (let i = 0; i < recipe["cost"].length; i++) {
+            let ore = recipe["cost"][i]["ore"];
+            let amt = recipe["cost"][i]["amt"];
+            let element = document.createElement("p");
+            let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
+            element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
+            element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${oreList[ore]["normalAmt"]}/${amt}</span>`;
+            element.classList = "recipeOreDisplay";
+            if (oreList[ore]["normalAmt"] >= amt)
+                element.style.color = "#6BC267";
+            else
+                element.style.color = "#FF3D3D";
+            parent.appendChild(element);
+        }
+        let ore = oreRecipes[id]["result"]["ore"]
+        let element = document.createElement("p");
+        let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
+        element.style.borderTop = "1px solid white";
+        element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
+        element.innerText = `${ore} x${oreRecipes[id]["result"]["amt"] * oreRecipes[id]["multiplier"]}`;
+        element.classList = "recipeOreDisplay";
+        parent.appendChild(element);
+    }
+    
+}
+function multiplyRecipe(amt) {
+    amt = Number(amt);
+    if (isNaN(amt)) return;
+    if (amt < 1) amt = 1;
+    amt = Math.floor(amt);
+    document.getElementById("forgeCraftingAmount").innerText = `${amt}x`;
+    document.getElementById('amountInputText').value = "";
+    let recipe = getRecipeById(currentOreRecipe);
+    recipe["multiplier"] = amt;
+    let parent = document.getElementById("forgeRecipeDisplay");
+    while (parent.firstChild) parent.removeChild(parent.firstChild);
+    for (let i = 0; i < recipe["cost"].length; i++) {
+        let ore = recipe["cost"][i]["ore"];
+        let amt = recipe["cost"][i]["amt"] * recipe["multiplier"];
+        let element = document.createElement("p");
+        let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
+        element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
+        element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${oreList[ore]["normalAmt"]}/${amt}</span>`;
+        element.classList = "recipeOreDisplay";
+        if (oreList[ore]["normalAmt"] >= amt)
+            element.style.color = "#6BC267";
+        else
+            element.style.color = "#FF3D3D";
+        parent.appendChild(element);
+    }
+    let ore = oreRecipes[currentOreRecipe]["result"]["ore"]
+    let element = document.createElement("p");
+    let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
+    element.style.borderTop = "1px solid white";
+    element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
+    element.innerText = `${ore} x${oreRecipes[currentOreRecipe]["result"]["amt"] * oreRecipes[currentOreRecipe]["multiplier"]}`;
+    element.classList = "recipeOreDisplay";
+    parent.appendChild(element);
+}
+function craftOre(id) {
+    let recipe = getRecipeById(id);
+    let canCraft = true;
+    for (let i = 0; i < recipe["cost"].length; i++) {
+        let ore = recipe["cost"][i]["ore"];
+        let amt = recipe["cost"][i]["amt"] * recipe["multiplier"];
+        if (oreList[ore]["normalAmt"] < amt) {
+            canCraft = false; 
+            break;
+        }
+    }
+    if (canCraft) {
+        for (let i = 0; i < recipe["cost"].length; i++) {
+            let ore = recipe["cost"][i]["ore"];
+            let amt = recipe["cost"][i]["amt"] * recipe["multiplier"];
+            oreList[ore]["normalAmt"] -= amt;
+            inventoryObj[ore] = 0;
+        }
+        oreList[recipe["result"]["ore"]]["normalAmt"] += (recipe["result"]["amt"] * recipe["multiplier"]);
+        inventoryObj[recipe["result"]["ore"]] = 0;
+        multiplyRecipe(oreRecipes[id]["multiplier"]);
+    }
+        
+}

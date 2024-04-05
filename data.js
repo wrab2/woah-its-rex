@@ -184,7 +184,7 @@ function loadAllData() {
             if (data[3][17] != undefined) {
                 cavesEnabled = data[3][17];
                 if (!cavesEnabled)
-                    document.getElementById("caveToggle").style.backgroundColor = "red";
+                    document.getElementById("caveToggle").style.backgroundColor = "#FF3D3D";
             }
             if (data[3][18] != undefined) {
                 if (data[3][18]) {

@@ -618,7 +618,7 @@ function spawnMessage(block, location, caveInfo) {
     let element = document.createElement("p");
     element.setAttribute("title", oreList[block]["oreName"]);
     element.classList = "latestFind";
-    if (caveInfo != undefined) output += + block + " 1/" + caveInfo["adjRarity"].toLocaleString() + " Adjusted.";
+    if (caveInfo != undefined) output += `<span title="${oreList[block]["oreName"]}">` + block + " 1/" + caveInfo["adjRarity"].toLocaleString() + " Adjusted.";
     else output += `<span title="${oreList[block]["oreName"]}">` + block + "</span> 1/" + oreRarity.toLocaleString();
     if (gears[0] || currentPickaxe === 5) output += " | X: " + (location["X"] - 1000000000).toLocaleString() + ", Y: " + (-(location["Y"] - sub)).toLocaleString();
     let colors = oreInformation.getColors(oreList[block]["oreTier"]);

@@ -154,7 +154,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   font-size: 1.25vw;
   font-weight: 1000;
   border: none;
-  
+  margin: 0;
 }
 #displayRecipe {
   margin:auto;
@@ -1090,17 +1090,167 @@ border-bottom:1px solid #333;
 #conversionButton {
   height: 3vw;
   font-size: 1vw;
-  width: 100%;
+  width: 50%;
   background: none;
   border-left: none;
+  border-top: none;
+  border-color: #2e2e2e;
+  border-width: 0.25em;
+  float: left;
+}
+#conversionButton:hover {
+  background-color: #494949;
+}
+#forgeButton {
+  height: 3vw;
+  font-size: 1vw;
+  width: 50%;
+  background: none;
   border-right: none;
   border-top: none;
   border-color: #2e2e2e;
   border-width: 0.25em;
 }
-#conversionButton:hover {
+#forgeButton:hover {
   background-color: #494949;
 }
+#forgeContainer {
+  background-color: black;
+  width: 100%;
+  height: 100vw;
+  overflow-y: auto;
+}
+#forgeTitle {
+  width: 100%;
+  font-size: 4vw;
+  margin-bottom: 3vw;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+}
+#forgeSelectionContainer {
+  height: 3vw;
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+}
+.forgeTypeSelect {
+  height: 100%;
+  width: 25%;
+  font-size: 2.5vw;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  line-height: 100%;
+  background: none;
+}
+.forgeTypeSelect:hover {
+  background-color: #494949;
+}
+#descriptionContainer {
+  margin-left: 12.5%;
+  width: 75%;
+  display: inline-flex;
+}
+.buttonDescriptor {
+  font-size: 0.75vw;
+  float: left;
+  margin-right: 9.5%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#forgeSeparator {
+  height: 0.25vw;
+  width: 100%;
+  color: #d3d3d3;
+}
+#craftingSelections {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+.forgeCraftingButton {
+  height: 3vw;
+  width: 20%;
+  margin: 0;
+  font-size: 1.5vw;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background: none;
+}
+.forgeCraftingButton:hover {
+  background-color: #494949;
+}
+.forgeOreDisplay {
+  text-shadow: -0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000;
+}
+#forgeRecipeDisplayContainer {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+#forgeRecipeDisplay {
+  width: 50%;
+  height: 100%;
+  border: 1px solid white;
+  justify-self: center;
+  text-align: center;
+}
+#forgeSettings {
+  width: 20%;
+  height: 100%;
+  color: white;
+  border: 1px solid white;
+  text-align: center;
+}
+#forgeCraftingAmount {
+  width: 100%;
+  height: 3vw;
+  font-size: 2vw;
+  margin: 0;
+}
+#forgeAmountContainer {
+  display: inline-flex;
+  width: 100%;
+}
+#amountInput {
+  width: 100%;
+  height: 15%;
+  margin: 0;
+  font-size: 1vw;
+}
+#amountInputText {
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  font-size: 1vw;
+}
+#setForgeAmount {
+  font-size: 1vw;
+  width: 100%;
+  margin: 0;
+  height: 15%;
+  background: none;
+}
+#setForgeAmount:hover {
+  background-color: #494949;
+}
+.forgeRecipeOreDisplay {
+  text-align: center;
+  margin: 0;
+  height: 3vw;
+  line-height: 3vw;
+  font-size: 2vw;
+  width: 100%;
+}
+#craftOreButton {
+  background: orange;
+  background-image:url('media/forge_hammer-1.png'), linear-gradient(to right, black, orange, black);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+  height: 2vw;
+  width: 100%;
+}
+
 #statsTitle {
   font-size: 3vw;
   font-weight: 750;
