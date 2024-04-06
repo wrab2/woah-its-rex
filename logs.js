@@ -14,7 +14,7 @@ class secureLogs {
         this.#verifiedLogs = [];
         this.#logsTimer = null;
     }
-    createLog(r, c, intended, obj, luck, fromCave) {
+    createLog(r, c, intended, obj, fromCave) {
         fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
         let luckModifier1 = 1;
         if (currentWorld === 1 && gears[1])
@@ -24,7 +24,18 @@ class secureLogs {
         let luckModifier2 = 0;
         luckModifier2 +=  (gears[18] ? 2.5 : 0) + (gears[12] ? 0.35 : 0) + (gears[10] ? 0.25 : 0);
         luckModifier1 *= gears[20] ? ((verifiedOres.getLuckBoosts()[currentPickaxe] * 0.1) + 1) : 1;
-        const maxLuck = ((this.#maxLuck[currentPickaxe] + luckModifier2) * luckModifier1) + 1;
+        const maxLuck = ((this.#maxLuck[currentPickaxe] + luckModifier2) * luckModifier1) + 0.25;
+        let luck;
+        if (fromCave[0]) {
+            if (caveLuck > 10000000) {
+                console.log("failed to create, ", obj.stack, caveLuck);
+                return;
+            } else {
+                luck = 1;
+            }
+        } else {
+            luck = oreList[intended]["numRarity"] * oreList[intended]["decimalRarity"];
+        }
         if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
             this.#spawnLogs.push([r, c, intended, luck, fromCave]);
         } else {

@@ -53,6 +53,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div>
                 <button id="resetMine" class="topButtons" onclick="toSurface()">To Surface</button>
                 <button id="settings" class="topButtons" onclick="showSettings()">Settings</button>
+                <p id="lastAutosave" class="topButtons">Please Login to Galaxy for Cloud autosave. <a href="https://galaxy.click/" target="_blank">Login Here.</a></p>
             </div>
             <p id="mineResetProgress"></p>
             <p id="blocksMined">0 Blocks Mined</p>
@@ -476,11 +477,12 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <h2>Data Settings</h2>
     <br>
     <div class="dataDiv">
-    <input type="text" id="dataText">
-    <button class="dataButton" onclick="exportData()">Export Data</button>
-    <button class="dataButton" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
-    
-      
+    <div style="display: inline-flex; justify-content: center; height: 100%;">
+        <input type="text" id="dataText">
+        <button class="dataButton" onclick="exportData()">Export Data</button>
+        <button class="dataButton" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
+        <button class="dataButton" onclick="saveAllData(true)">Force Cloud Save (Galaxy)</button>
+    </div>
         <br>
         <button onclick="verifiedOres.showLogs()" class="dataButton">Generate Ore Logs</button>
         <div id="logHolder"></div>

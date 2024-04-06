@@ -6,7 +6,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 
 //MINE CREATION
-const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'));
+const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:500/'));
 function createMine() {
     for (let r = curY - 101; r < curY + 101; r++) {
         if (r > -1)
@@ -175,7 +175,7 @@ function generateBlock(location) {
         }
         const tier = oreList[blockToGive]["oreTier"];
         if (oreList[blockToGive]["hasLog"]) {
-            verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error(), verifiedOres.getCurrentLuck());
+            verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error());
             verifiedOres.verifyLog(location["Y"], location["X"]);
         }
         playSound(oreList[blockToGive]["oreTier"]);

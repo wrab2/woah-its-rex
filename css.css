@@ -288,12 +288,19 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   width: 100%;
 }
 .topButtons {
-  width: 50%;
+  height: 2vw;
   float: left;
   background: none;
-  border: none;
-  border-bottom:3px solid #333;
+  border:0.2vw solid #333;
+  border-top: none;
   margin-bottom: 2%;
+  margin-top: 0;
+}
+#settings {
+  width: 30%;
+}
+#resetMine {
+  width: 30%;
 }
 #settings:hover {
   background-color: gray;
@@ -329,12 +336,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 #location {
   margin: 0.5vw;
   font-size: 1vw;
-}
-#resetMine {
-  border-right:1px solid #333;
-}
-#settings {
-  border-left:1px solid #333;
 }
 
 .col-5 {
@@ -828,12 +829,17 @@ border-bottom:1px solid #333;
   width: 37.5%!important;
 }
 .dataButton {
-  width: 10%;
+  width: auto;
+  height: 100%;
   background-color: #333;
 }
 .dataDiv {
-  height: 3%;
+  height: 2.5vw;
   vertical-align: middle;
+}
+#lastAutoSave {
+  font-size: 0.5vw;
+  width: 40%;
 }
 #indexSwitchButton {
   width: 50%;

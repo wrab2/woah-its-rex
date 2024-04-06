@@ -666,4 +666,15 @@ function convertVariants() {
         }, 2000);
     }
 }
+function timeSinceLastAutosave() {
+    let milliseconds = (cloudsaving.save_interval - (cloudsaving.next_save_time - Date.now()));
+    let seconds = Math.floor((milliseconds / 1000) % 60);
+    let minutes = Math.floor((milliseconds / 1000 / 60) % 60);
+    let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
+    document.getElementById("lastAutosave").innerHTML = `Time Since Last Galaxy Cloud Save: ${[
+        hours.toString().padStart(2, "0"),
+        minutes.toString().padStart(2, "0"),
+        seconds.toString().padStart(2, "0")
+    ].join(":")}`;
+}
 //convertVariants({"ore":"", "variant":"Explosive", "amt":1})
