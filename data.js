@@ -313,7 +313,7 @@ let cloudsaving = {
 	logged_in: false,
 	dosave: true, //toggles cloud save if every other condition is met
 	save_interval: 900000, //15 minutes, game like this doesn't really need to make backups very often
-	next_save_time: Date.now() + 900000 //same 15 minutes from above
+	next_save_time: Date.now() + 10000 //10s delay
 }
 
 function cloudSave(data,forceCloudSave) {
