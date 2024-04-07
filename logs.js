@@ -36,7 +36,7 @@ class secureLogs {
         } else {
             luck = oreList[intended]["numRarity"] * oreList[intended]["decimalRarity"];
         }
-        if ((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) {
+        if (((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) || debug) {
             this.#spawnLogs.push([r, c, intended, luck, fromCave]);
         } else {
             console.log("failed to create, ", obj.stack, luck, maxLuck);
@@ -93,7 +93,9 @@ class secureLogs {
                     output += this.#verifiedLogs[i][6][0] === true ? ", Cave, " : ", "
                     output += this.#verifiedLogs[i][1][0] + ", ";
                     if (this.#verifiedLogs[i][6][1] > 1) {
-                        let something = oreList[this.#verifiedLogs[i][0]]["numRarity"];
+                        let something;
+                        if (oolProbabilities[this.#verifiedLogs[i][0]] !== undefined && this.#verifiedLogs[i][6][2] !== "type5Ores") something = oolProbabilities[this.#verifiedLogs[i][0]];
+                        else something = oreList[this.#verifiedLogs[i][0]]["numRarity"];
                         something *= this.#verifiedLogs[i][6][1];
                         output += (something * multi).toLocaleString();
                     } else {

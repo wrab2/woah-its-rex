@@ -6,7 +6,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 
 //MINE CREATION
-const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:500/'));
+const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'));
 function createMine() {
     for (let r = curY - 101; r < curY + 101; r++) {
         if (r > -1)
@@ -185,7 +185,8 @@ function generateBlock(location) {
 }
 
 const checkSpecials = function(block) {
-    if (Math.random() < 1/1000)
+    const originalBlock = block;
+    if (Math.random() < 1/10)
     switch(block) {
         case "💙" : 
         if (curDirection === "")
@@ -247,8 +248,8 @@ const checkSpecials = function(block) {
         case "🩸" : 
         block = "💧";
         break;
-            
     }
+    if (originalBlock !== block) oreList[block]["decimalRarity"] = oreList[originalBlock]["decimalRarity"] / 1000;
     return block;
 }
 /*

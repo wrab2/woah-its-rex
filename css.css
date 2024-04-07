@@ -292,7 +292,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   float: left;
   background: none;
   border:0.2vw solid #333;
-  border-top: none;
+  border-top: 1px solid #333;
   margin-bottom: 2%;
   margin-top: 0;
 }

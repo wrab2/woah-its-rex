@@ -671,7 +671,7 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
     else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
     element.setAttribute("title", oreList[type]["oreName"]);
-    output += `<span onclick='goToOre(\"${type}"\", \"${variant}\")'>`;
+    output += `<span onclick='goToOre(\"${type}\", \"${variant}\")'>`;
     output += variant + " ";
     output += type + " | X: " + (x - 1000000000).toLocaleString() + ", Y: " + (-(y - sub)).toLocaleString();
     if (fromReset) output += " | FROM RESET<br>";
