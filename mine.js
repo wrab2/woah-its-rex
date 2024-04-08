@@ -186,7 +186,7 @@ function generateBlock(location) {
 
 const checkSpecials = function(block) {
     const originalBlock = block;
-    if (Math.random() < 1/10)
+    if (Math.random() < 1/1000)
     switch(block) {
         case "💙" : 
         if (curDirection === "")
