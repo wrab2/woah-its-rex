@@ -130,7 +130,6 @@ function importData(data) {
                 if (checkSaveType(data)) {
                     data = oldDataToNew(JSON.parse(data));   
                 }
-                console.log(data);
                 if (!debug && localStorage.getItem("newPlayerData") !== null) localStorage.setItem("newPlayerData", JSON.stringify(data));
                 else localStorage.setItem("newTestingData", JSON.stringify(data));
                 setTimeout(() => {
