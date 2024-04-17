@@ -245,8 +245,8 @@ function powerup5() {
             let tempDirection = curDirection;
             stopMining();
             goDirection(tempDirection);
-            player.powerupVariables.fakeEquipped.removeAt = Date.now() + 30000;
-            player.powerupCooldowns["powerup5"].cooldown = Date.now() + 10800000;
+            player.powerupVariables.fakeEquipped.removeAt = Date.now() + 60000;
+            player.powerupCooldowns["powerup5"].cooldown = Date.now() + 3600000;
         }
     }
 }

@@ -9,7 +9,7 @@ class secureLogs {
     #verifiedLogs;
     #logsTimer;
     #startTime = Date.now();
-    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3.16, 1.25, 4, 5, 11, 30, 175];
+    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3.16, 1.25, 4, 5, 11, 50, 175];
     constructor() {
         this.#spawnLogs = [];
         this.#verifiedLogs = [];
@@ -123,6 +123,7 @@ class secureLogs {
         if (currentWorld === 1)
             luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         luck *= (player.gears["gear20"] ? ((verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1) : 1);
+        luck *= 1.5;
         return luck;
     }
     getStartTime() {

@@ -170,7 +170,7 @@ const powerupList = {
     },
     "powerup5" : {
         title: "Paradoxical Progression",
-        description: "Gives you a random unowned pickaxe or gear for 30 seconds. Has a cooldown of 3 hours.",
+        description: "Gives you a random unowned pickaxe or gear for 1 minute. Has a cooldown of 1 hour.",
         cooldown: 0,
         colors: {
             background: "linear-gradient(to bottom, darkgray, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, darkgray)",

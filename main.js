@@ -310,7 +310,7 @@ function goDirection(direction, speed) {
         if (currentWorld === 1 && player.gears["gear6"])
             miningSpeed = baseSpeed - 15;
         if (currentWorld === 2 || (player.gears["gear11"] && player.gears["gear13"] && player.gears["gear19"]))
-            miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear13"] ? 5 : 0) - (player.gears["gear19"] ? 15 : 0);
+            miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear13"] ? 5 : 0) - (player.gears["gear19"] ? 13 : 0);
         } else {
             miningSpeed = speed;
         }
