@@ -130,8 +130,8 @@ function importData(data) {
                 if (checkSaveType(data)) {
                     data = oldDataToNew(JSON.parse(data));   
                 }
-                if (!debug && localStorage.getItem("newPlayerData") !== null) localStorage.setItem("newPlayerData", JSON.stringify(data));
-                else localStorage.setItem("newTestingData", JSON.stringify(data));
+                if (!debug && localStorage.getItem("newPlayerData") !== null) localStorage.setItem("newPlayerData", data);
+                else localStorage.setItem("newTestingData", data);
                 setTimeout(() => {
                     location.reload();
                 }, 1000);
