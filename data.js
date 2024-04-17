@@ -207,7 +207,7 @@ function cloudSave(data,forceCloudSave) {
 
 	}
 }
-
+/*
 window.addEventListener("message", e => {
 	if (e.origin === cloudsaving.website_name) {
 		//this is the initial message
@@ -254,3 +254,4 @@ window.addEventListener("message", e => {
 		}
 	}
 })
+*/
