@@ -360,7 +360,7 @@ function loadNewData(data) {
             if (player.gears[item] !== undefined) data.gears[item] = false;
             if (player.pickaxes[item] !== undefined) {
                 data.pickaxes[item] = false;
-                player.stats.currentPickaxe = data.powerupVariables.fakeEquipped.originalState;
+                data.stats.currentPickaxe = data.powerupVariables.fakeEquipped.originalState;
             }
         }
         if (data.gears !== undefined && player.gears !== undefined) {
