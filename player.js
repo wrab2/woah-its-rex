@@ -271,7 +271,7 @@ function oldDataToNew(data) {
     if (data[1] !== undefined) {
         let i = 0;
         for (let propertyName in player.pickaxes) {
-            player.pickaxes[propertyName] = data[1][0][0][i][1];
+            if (data[1][0][0][i] !== undefined)player.pickaxes[propertyName] = data[1][0][0][i][1];
             i++;
         }
         player.stats.currentPickaxe = data[1][0][1];
@@ -281,7 +281,7 @@ function oldDataToNew(data) {
     if (data[4] !== undefined) {
         let i = 0;
         for (let propertyName in player.gears) {
-            player.gears[propertyName] = data[4][0][i];
+            if (data[4][0][i] !== undefined) player.gears[propertyName] = data[4][0][i];
             i++;
         }
     }

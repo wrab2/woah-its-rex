@@ -128,7 +128,7 @@ function importData(data) {
             try {
                 data = fromBinary(data);
                 if (checkSaveType(data)) {
-                    data = oldDataToNew(JSON.parse(data));   
+                    data = JSON.stringify(oldDataToNew(JSON.parse(data)));   
                 }
                 if (!debug && localStorage.getItem("newPlayerData") !== null) localStorage.setItem("newPlayerData", data);
                 else localStorage.setItem("newTestingData", data);
