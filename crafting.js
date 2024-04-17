@@ -569,9 +569,6 @@ worldTwoGears = [
         ["🔒", 4200],
         ["🖇️", 1300],
         ["⛓️", 100],
-        ["🔒", 4200],
-        ["🖇️", 1300],
-        ["⛓️", 100],
         ["🚧", 30],
         ["🛎️", 5],
     ],
@@ -587,13 +584,7 @@ worldTwoGears = [
         ["🔎", 150],
         ["📌", 75],
         ["📍", 15],
-        ["🎓", 9]
-        ["✏️", 10000],
-        ["📐", 3000],
-        ["🔎", 150],
-        ["📌", 75],
-        ["📍", 15],
-        ["🎓", 9]
+        ["🎓", 9],
     ],
     [
         ["🦠", 70000000],
@@ -780,7 +771,9 @@ for (let i = 0; i < worlds.length; i++) {
         tempElement.style.display = "none";
         tempElement.classList = "craftingAmountsDisplay"
         let recipeList = list[j - add];
+        
         recipeList.forEach(relation => {
+            
             let ore = relation[0];
             let amtNeeded = relation[1];
             let amtHave = oreList[ore]["normalAmt"];
