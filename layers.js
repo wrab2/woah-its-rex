@@ -574,10 +574,16 @@ function sortLayerRarities(arr) {
 let commons = ["Common","Uncommon","Rare","Legendary","Godly"];
 function applyLuckToLayer(layer, luck) {
     for (let i = 0; i < layer.length; i++) {
-        luck = debug ? cat : luck;
-        let newRarity = (oreList[layer[i]]["numRarity"] / luck);
+        let layerluck = debug ? cat : luck;
+        layerluck *= 1.5;
+        if (player.powerupVariables.currentChosenOre.ore === layer[i])
+            layerluck *= 1.5;
+        let newRarity = (oreList[layer[i]]["numRarity"] / layerluck);
         if (commons.indexOf(oreList[layer[i]]["oreTier"]) < 0)
             oreList[layer[i]]["decimalRarity"] = (1/newRarity);
+        else {
+            if (player.powerupVariables.commonsAffected.state) oreList[layer[i]]["decimalRarity"] = 1/(oreList[layer[i]]["numRarity"] / (layerluck >= 3.5 ? 3.5 : layerluck));
+        }
     }
     if (layer != layerList["dirtLayer2"])
         updateSpecialLayers();
@@ -586,7 +592,7 @@ function applyLuckToLayer(layer, luck) {
 }
 
 function changeLayerOres() {
-    if (currentPickaxe === 13 && currentWorld === 2) {
+    if (player.stats.currentPickaxe === 13 && currentWorld === 2) {
         insertIntoLayers({"ore":"☯️", "layers":undefined, "useLuck":true})
     } else {
         removeFromLayers({"ore":"☯️", "layers":undefined});

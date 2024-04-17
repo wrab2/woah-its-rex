@@ -4,11 +4,6 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-let invToIndex = true;
-let craftingToIndex = true;
-let usePathBlocks = true;
-let useDisguisedChills = false;
-
 function openFrame(frameId) {
     document.querySelectorAll('.frame').forEach(frame => {
       frame.style.display = 'none';
@@ -23,15 +18,17 @@ function openFrame(frameId) {
 }
 
 
-let canDisplay = true;
 function changeCanDisplay(button) {
-    if (canDisplay) {
+    if (player.settings.canDisplay) {
         button.style.backgroundColor = "#FF3D3D";
-        document.getElementById("blockDisplay").innerHTML = "❌";
-        canDisplay = false;
+        document.getElementById("blockDisplay").style.display = "none";
+        document.getElementById("displayDisabled").style.display = "block";
+        player.settings.canDisplay = false;
     } else {
         button.style.backgroundColor = "#6BC267";
-        canDisplay = true;
+        player.settings.canDisplay = true;
+        document.getElementById("blockDisplay").style.display = "block";
+        document.getElementById("displayDisabled").style.display = "none";
         displayArea();
     }
 }
@@ -61,10 +58,11 @@ let allPickaxeNames =
 "Singularity Slammer",
 "Staff of Binding",
 "Stormseer's Superspark Sceptre",
-"Coronary Catastrophe"
+"Coronary Catastrophe",
+"N̴̡̠͍̰̓̀̉́͘͟͜͠͠͝uͧ̆̃͂̔̂͛̆̇ͫ̍̒̍͑̅̎̾͒҉̶̶̧̡̨͘͟͟͡͞͡͏̷̧͈̣̱͚̼̹̤̘̹l̷̷̸̴̨̡̢̜͈̭̰͕̪̯̭͓͓̲̱̹̥̜̝̩̝ͤ̀̕͝͠͠͝͠l̴͋̄̋͐ͪ̒ͦ̄̆̅̂̍͂ͧ͛ͮ̏̒̓ͨ̓͊̓̆ͤ̓̇̽̎͏̷͔̬̟̣͍̗̦̝̮̱̳̼͔̻̭͍̗̦͉̗̥͍͇̭̘͉̕͜͡ ̸̸̶̨̢̳̍̐̓ͪͥ̐͋̃̉͒̓̓̀̌͑̾ͩͯ͋ͦ͗ͮͯͪͥ̅͊ͩͣͨ̆̒̂̂̽̀̀͘͘͘͜͞͠C̵̵̷̸̸̵ͦ͒͆͡͞͡͏̶̵̡͔̙̱͢ḩ̸͙͙̼̖̥̦̻͈̖̫̖̯̣̣͍͎̖̹̜͇̯ͧͥ̎̒ͨ̎̓ͫ͛̅ͨͧͤͤͫ̊̓̈̒͐ͥ̎̓ͤ̃ͧͣ͊̉̄͛͡r̵̸̴̢̢͒ͮ̈́̓ͬ̉͆ͪ̀̓͋̉́͌̾ͬ̾̐ͫ̑ͮ̒̂̈͆͆̆͌̿ͭ́͑̂ͯ͛ͩ̇̚͜͡͏̸̼̫̪̮̲͉͔͇̯̻͇̫͚̰̦̤͈͉̟̙̻̖͇͖̱͕̘̣̫̥̝͍͔͝o̷͐̏̈́ͭ̔̇ͬͣ͑̂̉̑̓̊ͯͪ͏̶̸͏̷̴̴̶̷̷̧́̀̀͘͟͢͞҉̠̩͇͙̥̫̻̮̯̳̖̙͕̹̤͈͓̻͇̘͖͔m͑͐̃́̚͏̷̶̸̴̧̢̧̡̭̰́̕̕͢͡a̷̶̛̓̉͐͋̄̍͊̓ͪ̏̑̍͋ͮ̔͋̒ͧͭ̐̋͛͆̌̚̕͏͏̶͜͢͞͏̵̸̧̢̹̯͎̫̜̪̪̥̫̖̻̝̘͖̼̰̝͈͝͝͡"
 ];
 function changeUseNumbers(button) {
-    if (!useNumbers) {
+    if (!player.settings.useNumbers) {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 0; i < elements.length; i++) {
             elements[i].firstChild.innerText = "Pickaxe " + (i + 1);
@@ -72,7 +70,7 @@ function changeUseNumbers(button) {
         if (button != undefined) {
             button.style.backgroundColor = "#6BC267";
         }
-        useNumbers = true;
+        player.settings.useNumbers = true;
     } else {
         let elements = document.getElementById("pickaxeCrafts").children;
         for (let i = 0; i < elements.length; i++) {
@@ -81,28 +79,25 @@ function changeUseNumbers(button) {
         if (button != undefined) {
             button.style.backgroundColor = "#FF3D3D";
         }
-        useNumbers = false;
+        player.settings.useNumbers = false;
     }
 }
 
-let stopRareNum = 0;
 function changeMinRarity(button) {
-    stopRareNum++;
-    if (stopRareNum > 9) {
-        stopRareNum = 0;
-    }
-    let tier = oreInformation.getTierAt(stopRareNum + 5);
-    button.innerText = tier + "+";
-    const colors = oreInformation.getColors(tier);
+    let nextTier = oreInformation.getNextTier(player.settings.stopOnRare.minimum);
+    if (nextTier === "Common") nextTier = "Antique";
+    player.settings.stopOnRare.minimum = nextTier;
+    button.innerText = nextTier + "+";
+    const colors = oreInformation.getColors(nextTier);
     button.style.color = colors["textColor"]
     button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
 }
 function changeStopOnRare(button) {
-    if (stopOnRare) {
-        stopOnRare = false;
+    if (player.settings.stopOnRare.active) {
+        player.settings.stopOnRare.active = false;
         button.style.backgroundColor = "#FF3D3D";
     } else {
-        stopOnRare = true;
+        player.settings.stopOnRare.active = true;
         button.style.backgroundColor = "#6BC267";
     }   
 }
@@ -235,13 +230,13 @@ let magnificent;
 let zenith;
 let keepRunningAudio;
 */
-function changeSpawnVolume(percent, num) {
+function changeSpawnVolume(percent, name) {
     percent = Number(percent);
     if (!(isNaN(percent))) {
     if (percent > 100)
         percent = 100;
-
-    allAudios[num].volume = (percent / 100);
+    allAudios[name].volume = (percent / 100);
+    player.settings.audioSettings[name].volume = percent;
     }
 }
 
@@ -256,7 +251,7 @@ function changeMinMiningSpeed(element) {
             num = 25;
         if (num < 0)
             num = 0;
-        minMiningSpeed = num;
+        player.settings.minSpeed = num;
         flashGreen(element);
     } else {
         flashRed(element);
@@ -264,12 +259,12 @@ function changeMinMiningSpeed(element) {
 }
 
 function toggleCaves() {
-    if (cavesEnabled) {
-        cavesEnabled = false;
+    if (player.settings.cavesEnabled) {
+        player.settings.cavesEnabled = false;
         document.getElementById("caveToggle").style.backgroundColor = "#FF3D3D";
     }
     else {
-        cavesEnabled = true;
+        player.settings.cavesEnabled = true;
         document.getElementById("caveToggle").style.backgroundColor = "#6BC267";
     }
 }
@@ -279,7 +274,7 @@ function updateCapacity(element) {
     let value = elementValue === "" ? "none" : elementValue;
     value = Number(value);
     if (!(isNaN(value)) && value > 0) {
-        baseMineCapacity = value;
+        player.settings.baseMineCapacity = value;
         mineCapacity = value;
         flashGreen(element);
     } else {
@@ -369,32 +364,34 @@ function createIndexCards(layer) {
         }
         for (let i = 0; i < layer.length; i++) {
         let property = layer[i];
-        if ((ignoreList.indexOf(property) < 0 || indexHasOre(property)) && (oreList[property]["numRarity"] >= minIndexRarity || property === "✴️")) {
+        if ((oreList[property]["numRarity"] >= minIndexRarity || property === "✴️") && oreList[property]["oreTier"] !== "Celestial") {
             if (oreInformation.isCommon(oreList[property]["oreTier"])) affectedByLuck = false;
             if (noLuck.indexOf(property) > -1) affectedByLuck = false;
             let parentObject = document.createElement("div");
             let parentWrapper = document.createElement("div");
             parentObject.classList = "oreCard";
             parentWrapper.classList = "indexWrapper";
-            
-            let output = `<span class='indexOre' title="${oreList[property]["oreName"]}">` + property + "</span>"
-            output += "<span class='indexRarity indexTextOutline'>1/"
+            let blackOut = false;
+            if (ignoreList.indexOf(property) > -1 && !indexHasOre(property)) blackOut = true;
+            let output = `<span class='indexOre ${(blackOut) ? "indexBlackout" : ""}' title="${oreList[property]["oreName"]}">${property}</span>${blackOut ? "</span>" : ""}`;
+            output += `<span class='indexVariants indexTextOutline'>${indexVariants(property)}</span>`
+            output += "<span class='indexRarity indexTextOutline'>1/";
             if (isCave) {
                 let rarity = oreList[property]["numRarity"];
                 if (oolProbabilities[property] != undefined) rarity = Math.round(1/oolProbabilities[property]);
-                output += rarity.toLocaleString();
+                output += (blackOut ? "???" : rarity.toLocaleString());
                 output += " Base Rarity.</span>";
                 rarity *= caveMulti;
-                output += "<span class='indexWithLuck indexTextOutline'>1/" + rarity.toLocaleString() + " Adjusted.</span>";
+                output += `<span class='indexWithLuck indexTextOutline'>1/${(blackOut ? "???" : rarity.toLocaleString())} Adjusted.</span>`;
             } else {
                 let rarity = oreList[property]["numRarity"]
-                output += rarity.toLocaleString();
+                output += (blackOut ? "???" : rarity.toLocaleString());
                 output += " Base Rarity.</span>";
-                if (affectedByLuck) output += "<span class='indexWithLuck indexTextOutline'>1/" + Math.round(rarity / verifiedOres.getCurrentLuck()).toLocaleString() + " With Luck.</span>";
+                if (affectedByLuck) output += "<span class='indexWithLuck indexTextOutline'>1/" + (blackOut ? "???" : Math.round(rarity / verifiedOres.getCurrentLuck()).toLocaleString()) + " With Luck.</span>";
                 else  output += "<span class='indexWithLuck indexTextOutline'>Unaffected By Luck</span>";
             }
             if (oreList[property]["spawnMessage"] !== "") {
-                output += "<span class='indexSpawnMessage indexTextOutline'>" + oreList[property]["spawnMessage"] + "</span>";
+                output += `<span class='indexSpawnMessage indexTextOutline'>${blackOut ? "???" : oreList[property]["spawnMessage"]}</span>`;
             }
             let colors = oreInformation.getColors(oreList[property]["oreTier"]);
             if (oreList[property]["explosiveAmt"]) {
@@ -408,7 +405,7 @@ function createIndexCards(layer) {
             } else {
                 parentWrapper.style.backgroundImage = "linear-gradient(to bottom right, black 5%, " + colors["backgroundColor"] + " 30%, 70%, black 95%), linear-gradient(to top right, #FF3D3D 20%, black, #FF3D3D 80%)"
             }
-            //border-image-source: linear-gradient(to bottom right, #743ad5, #d53a9d);
+            if (blackOut) parentWrapper.style.backgroundImage = "linear-gradient(to bottom right, black 5%, #383838 30%, 70%, black 95%), linear-gradient(to top right, #FF3D3D 20%, black, #FF3D3D 80%)"
             parentWrapper.innerHTML = output;
             parentObject.appendChild(parentWrapper)
             toReturn.push(parentObject);
@@ -419,7 +416,7 @@ function createIndexCards(layer) {
 }
 
 function randomFunction(ore, cause) {
-    if ((cause === "inv" && invToIndex) || (cause === "crafting" && craftingToIndex)) {
+    if ((cause === "inv" && player.settings.inventorySettings.invToIndex) || (cause === "crafting" && player.settings.inventorySettings.craftingToIndex)) {
         let layer = undefined;
         let world = currentWorld;
         if (ore === "❤️‍🔥")
@@ -480,76 +477,77 @@ function randomFunction(ore, cause) {
 function indexHasOre(ore) {
     return (oreList[ore]["normalAmt"] || oreList[ore]["electrifiedAmt"] || oreList[ore]["radioactiveAmt"] || oreList[ore]["explosiveAmt"]);
 }
+function indexVariants(ore) { 
+    return "" + (oreList[ore]["normalAmt"] ? `${ore}` : `<span style='color:transparent; text-shadow:0 0 0 black;'>${ore}</span>`) + (oreList[ore]["electrifiedAmt"] ? "⚡️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>⚡️</span>") + (oreList[ore]["radioactiveAmt"] ? "☢️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>☢️</span>") + (oreList[ore]["explosiveAmt"] ? "💥" : "<span style='color:transparent; text-shadow:0 0 0 black;'>💥</span>")
+}
 function switchToIndex(button, num) {
     if (num === 0) {
-        if (invToIndex) {
-            invToIndex = false;
+        if (player.settings.inventorySettings.invToIndex) {
+            player.settings.inventorySettings.invToIndex = false;
             button.style.backgroundColor = "#FF3D3D";
         } else {
-            invToIndex = true;
+            player.settings.inventorySettings.invToIndex = true;
             button.style.backgroundColor = "#6BC267";
         }
     } else if (num === 1) {
-        if (craftingToIndex) {
-            craftingToIndex = false;
+        if (player.settings.inventorySettings.craftingToIndex) {
+            player.settings.inventorySettings.craftingToIndex = false;
             button.style.backgroundColor = "#FF3D3D";
         } else {
-            craftingToIndex = true;
+            player.settings.inventorySettings.craftingToIndex = true;
             button.style.backgroundColor = "#6BC267";
         }
     }
     
 }
 function togglePathBlocks() {
-    if (usePathBlocks) {
+    if (player.settings.usePathBlocks) {
         document.getElementById("pathBlocks").style.backgroundColor = "#6BC267";
-        usePathBlocks = false;
+        player.settings.usePathBlocks = false;
     } else {
         document.getElementById("pathBlocks").style.backgroundColor = "#FF3D3D";
-        usePathBlocks = true;
+        player.settings.usePathBlocks = true;
     }
     displayArea();
 }
 let testSoundTimeout = null;
-function testSound(num) {
-    let element = document.getElementsByClassName("testButton")[num];
-    let time = (allAudios[num].duration * 1000);
-    if (allAudios[num].currentTime === 0) {
-        allAudios[num].play();
+function testSound(name, element) {
+    let time = (allAudios[name].duration * 1000);
+    if (allAudios[name].currentTime === 0) {
+        allAudios[name].play();
         element.style.backgroundColor = "#6BC267";
         testSoundTimeout = setTimeout(() => {
             element.style.backgroundColor = "#FF3D3D";
-            allAudios[num].pause();
-            allAudios[num].currentTime = 0;
+            allAudios[name].pause();
+            allAudios[name].currentTime = 0;
             clearTimeout(testSoundTimeout);
         }, time);
     } else {
-        allAudios[num].pause();
-        allAudios[num].currentTime = 0;
+        allAudios[name].pause();
+        allAudios[name].currentTime = 0;
         element.style.backgroundColor = "#FF3D3D";
         clearTimeout(testSoundTimeout);
     }
 }
 function enableDisguisedChills() {
-    if (useDisguisedChills) {
-        useDisguisedChills = false;
+    if (player.settings.useDisguisedChills) {
+        player.settings.useDisguisedChills = false;
         document.getElementById("disguisedChills").style.backgroundColor = "#FF3D3D";
     } else {
-        useDisguisedChills = true;
+        player.settings.useDisguisedChills = true;
         document.getElementById("disguisedChills").style.backgroundColor = "#6BC267";
     }
 }
-let usingNewEmojis = false;
 function switchFont() {
-    if (usingNewEmojis) {
-        usingNewEmojis = false;
+    if (player.settings.usingNewEmojis) {
+        player.settings.usingNewEmojis = false;
         document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"")
         document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
         distanceMulti--;
         y -= 2000;
         switchDistance();
     } else {
-        usingNewEmojis = true;
+        player.settings.usingNewEmojis = true;
         document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Noto Color Emoji\",\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"");
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
         distanceMulti--;
@@ -558,11 +556,10 @@ function switchFont() {
     }
 }
 let minTier = "Antique";
-let minRarityNum = 0
 function changeSpawnMessageRarity(button) {
-    minRarityNum++;
-    if (minRarityNum > 9) minRarityNum = 0;
-    minTier = oreInformation.getTierAt(minRarityNum + 5);
+    player.settings.minRarityNum++;
+    if (player.settings.minRarityNum > 9) player.settings.minRarityNum = 0;
+    minTier = oreInformation.getTierAt(player.settings.minRarityNum + 5);
     button.innerText = "Minimum Spawn Message Tier: " + minTier + "+";
     let colors = oreInformation.getColors(minTier);
     button.style.color = colors["textColor"]
@@ -622,6 +619,7 @@ function toggleVariantConversions() {
 }
 function convertVariants() {
     let ore = document.getElementById("oreInput").value;
+    ore = ore.replaceAll(" ", "");
     let variant = document.getElementById("variantSelect").value;
     let amt = document.getElementById("amtInput").value;
     document.getElementById("amtInput").value = "";

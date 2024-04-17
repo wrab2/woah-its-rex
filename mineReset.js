@@ -42,16 +42,17 @@ async function mineReset() {
         a12 = 0;
         caveOreLocations = [];
         resetting = true;
-        mineCapacity = baseMineCapacity;
+        mineCapacity = player.settings.baseMineCapacity;
         const temp = curDirection;
         curDirection = "";
         let temp2;
-        if ((currentWorld === 1 && !gears[3]) || (currentWorld === 1 && !gears[17]))
+        if ((currentWorld === 1 && !player.gears["gear3"]) || (currentWorld === 1 && !player.gears["gear17"]))
             temp2 = await collectOres(temp);
         canMine = await mineResetAid();
         checkAllAround(curX, curY, 1);
         mine[curY][curX] = "⛏️";
         loggedFinds = [];
+        player.oreTracker.existingOres = [];
         displayArea();
         goDirection(temp);
         resetting = false;

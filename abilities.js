@@ -4,18 +4,19 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-let cavesEnabled = true;
+
 async function rollAbilities() {
     let m = 1;
-    if (currentWorld === 1 && gears[8])
+    if (currentWorld === 1 && player.gears["gear8"])
         m = 1.2;
-    if (!resetting && ((currentWorld === 1 && currentPickaxe > 5)||(currentWorld === 2 && gears[14]))) {
-        if (Math.random() < 1/750 && cavesEnabled) {
+    if (!resetting && ((currentWorld === 1 && player.stats.currentPickaxe >= 5)||(currentWorld === 2 && player.gears["gear14"]))) {
+        if (Math.random() < 1/750 && player.settings.cavesEnabled) {
+            player.stats.cavesGenerated++;
             generateCave(curX, curY, 0, 0);
             displayArea();
         }
     }
-    switch (currentPickaxe) {
+    switch (player.stats.currentPickaxe) {
         case 1:
             if (Math.random() < (1/30 * m)) {
                 pickaxeAbility1(curX, curY);
@@ -159,7 +160,7 @@ async function rollAbilities() {
             }
             break;
         case 25:
-            if (Math.random() <= 1/350 * m) {
+            if (Math.random() <= 1/300 * m) {
                 pickaxeAbility25(curX, curY);
                 
             }
@@ -171,20 +172,98 @@ async function rollAbilities() {
     }
 }
 
+//generates a large cube around the player
+function powerup1(x, y) {
+    if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown) {
+        for (let r = y - 50; r < y + 50; r++) {
+            for (let c = x - 50; c < x + 50; c++) {
+                pickaxeAbilityMineBlock(c, r);
+            }
+        }
+        displayArea();
+        player.powerupCooldowns["powerup1"].cooldown = Date.now() + 900000;
+        document.getElementById("powerup1").style.backgroundColor = "#FF3D3D";
+    }
+    
+}
+
+//creates 4 caves around the player
+function powerup2(x, y) {
+    if (Date.now() >= player.powerupCooldowns["powerup2"].cooldown) {
+        generateCave(x + 100, y, 0, 0);
+        generateCave(x - 100, y, 0, 0);
+        generateCave(x, y + 100, 0, 0);
+        generateCave(x, y - 100, 0, 0);
+        displayArea();
+        player.powerupCooldowns["powerup2"].cooldown = Date.now() + 1200000;
+        document.getElementById("powerup2").style.backgroundColor = "#FF3D3D";
+    }
+    
+}
+
+//make a random layer ore more common for a short period
+function powerup3() {
+    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown) {
+        let chosenOre = currentLayer[Math.round(Math.random() * (currentLayer.length - 1))];
+        while (oreInformation.isCommon(oreList[chosenOre]["oreTier"]) && oreList[chosenOre]["oreTier"] !== "Antique") chosenOre = currentLayer[Math.round(Math.random() * (currentLayer.length - 1))];
+        player.powerupVariables.currentChosenOre.ore = chosenOre, 
+        player.powerupVariables.currentChosenOre.removeAt = Date.now() + 600000;
+        applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+        player.powerupCooldowns["powerup3"].cooldown = Date.now() + 3000000;
+        document.getElementById("powerup3").style.backgroundColor = "#FF3D3D";
+    }
+}
+function powerup4() {
+    if (Date.now() >= player.powerupCooldowns["powerup4"].cooldown) {
+        player.powerupVariables.commonsAffected.state = true;
+        player.powerupVariables.commonsAffected.removeAt = Date.now() + 300000;
+        player.powerupCooldowns["powerup4"].cooldown = Date.now() + 2700000;
+        applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+        document.getElementById("powerup4").style.backgroundColor = "#FF3D3D";
+    }
+}
+function powerup5() {
+    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown) {
+        let toChooseFrom = Object.keys(player.pickaxes).concat(Object.keys(player.gears));
+        for (let i = toChooseFrom.length - 1; i >= 0; i--) {
+            if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (currentWorld === 2 && (toChooseFrom[i].includes("pickaxe")) && Number(toChooseFrom[i].substring(7)) < 13)) toChooseFrom.splice(i, 1);
+        }
+        if (toChooseFrom.length > 0) {
+            let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
+            player.powerupVariables.fakeEquipped.item = toGive;
+            if (player.pickaxes[toGive] !== undefined) {
+                player.powerupVariables.fakeEquipped.originalState = player.stats.currentPickaxe;
+                player.stats.currentPickaxe = Number(toGive.substring(7));
+                player.pickaxes[toGive] = true;
+            }
+            if (player.gears[toGive] !== undefined) {
+                player.gears[toGive] = true;
+                if (toGive === "gear0") document.getElementById("trackerLock").style.display = "none";
+                if (toGive === "gear9") document.getElementById("sillyRecipe").style.display = "block";
+            }
+            applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+            let tempDirection = curDirection;
+            stopMining();
+            goDirection(tempDirection);
+            player.powerupVariables.fakeEquipped.removeAt = Date.now() + 30000;
+            player.powerupCooldowns["powerup5"].cooldown = Date.now() + 10800000;
+        }
+    }
+}
+
 let ability1Active = false;
 let ability1Timeout;
-let energySiphonerSpeed;
 let energySiphonerDirection;
 function gearAbility1() {
     if (!ability1Active && !resetting) {
         ability1Active = true;
-        energySiphonerSpeed = miningSpeed;
         energySiphonerDirection = curDirection;
         curDirection = "";
+        baseSpeed -= 3;
         clearInterval(loopTimer);
-        goDirection(energySiphonerDirection, energySiphonerSpeed - 3);
+        goDirection(energySiphonerDirection);
         ability1Timeout = setTimeout(() => {
-            miningSpeed = energySiphonerSpeed;
+            baseSpeed += baseSpeed <= 22 ? 3 : 0;
             clearInterval(loopTimer);
             curDirection = "";
             if (energySiphonerDirection != "") {
@@ -196,7 +275,7 @@ function gearAbility1() {
 }
 
 function gearAbility2() {
-    if (currentWorld === 1 && gears[9]) {
+    if (currentWorld === 1 && player.gears["gear9"]) {
         currentLayer = createLayer([layerList["sillyLayer"]]);
         currentLayerNum = 7777;
     }

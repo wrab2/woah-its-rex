@@ -31,135 +31,20 @@ function toggleMusic() {
     }
 }
 
-let canPlay = [true, true, true, true, true, true, true, true, true, true];
-function changeCanPlay(num, button) {
+function changeCanPlay(name, button) {
     let text = button.innerHTML;
     text = text.substring(text.indexOf(" "));
-    if (canPlay[num]) {
+    if (player.settings.audioSettings[name].canPlay) {
         button.innerHTML = "Unmute" + text;
     } else {
         button.innerHTML = "Mute" + text;
     }
-    canPlay[num] = !(canPlay[num]);
+    player.settings.audioSettings[name].canPlay = !player.settings.audioSettings[name].canPlay;
 }
 
-//SOUND PLAYING
 
 function playSound(type) {
-    type = type.toLowerCase();
-    type = type === "imaginary" ? "ethereal" : type;
-    switch (type) {
-        case "antique":
-            if (canPlay[0]) {
-                chill.currentTime = 0;
-                chill.play();
-            }
-            if (stopOnRare && stopRareNum < 1)
-                stopMining();
-            break;
-        case "mystical":
-            if (canPlay[1]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    ringing.currentTime = 0;
-                    ringing.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 2)
-                stopMining();
-            break;
-        case "divine":
-            if (canPlay[2]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    visionblur.currentTime = 0;
-                    visionblur.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 3)
-                stopMining();
-            break;
-        case "flawless":
-            if (canPlay[3]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    unfath.currentTime = 0;
-                    unfath.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 4)
-                stopMining();
-            break;
-        case "interstellar":
-            if (canPlay[4]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    ow.currentTime = 0;
-                    ow.play(); 
-                }
-            }
-            if (stopOnRare && stopRareNum < 5)
-                stopMining();
-            break;
-        case "sacred":
-            if (canPlay[6]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    zenith.currentTime = 0;
-                    zenith.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 7)
-                stopMining();
-            break;
-        case "metaversal":
-            if (canPlay[5]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    magnificent.currentTime = 0;
-                    magnificent.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 6)
-                stopMining();
-            break;
-        case "ethereal":
-            if (canPlay[7]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    ethereal.currentTime = 0;
-                    ethereal.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 8)
-                stopMining();
-            break;
-        case "celestial":
-            if (canPlay[8]) {
-                if (useDisguisedChills) {
-                    chill.currentTime = 0;
-                    chill.play();
-                } else {
-                    celestial.currentTime = 0;
-                    celestial.play();
-                }
-            }
-            if (stopOnRare && stopRareNum < 9)
-                stopMining();
-            break;
-    }
+    type = type === "Imaginary" ? "Ethereal" : type;
+    if (player.settings.useDisguisedChills) allAudios["Antique"].play();
+    else if (player.settings.audioSettings[type].canPlay) allAudios[type].play();
 }

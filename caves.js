@@ -208,7 +208,7 @@ function generateCaveBlock(y, x, type) {
                 verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
-            if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) mineCaveBlock(x, y, type);
+            if ((currentWorld === 1 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
         }
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
@@ -218,7 +218,7 @@ function generateCaveBlock(y, x, type) {
                 verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage(blockToGive, {"Y" : y, "X" : x});
-            if ((currentWorld === 1 && gears[3]) || currentWorld === 2 && gears[17]) mineCaveBlock(x, y, type);
+            if ((currentWorld === 1 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
         }
     }
     
@@ -284,7 +284,7 @@ let oolProbabilities = {
 }
 function getCaveType() {
     let caveTypeLuck = 1;
-    if (currentPickaxe === 12)
+    if (player.stats.currentPickaxe === 12)
         caveTypeLuck = 2;
     let caveType = undefined;
     let summedProbability = 0;
@@ -297,7 +297,7 @@ function getCaveType() {
             break;
         }
     }
-    if (!gears[21] && caveType === "type5Ores") caveType = "type4Ores";
+    if (!player.gears["gear21"] && caveType === "type5Ores") caveType = "type4Ores";
     return caveType;
 }
 

@@ -19,11 +19,9 @@ if (debug) {
 const adminGivePickaxe = function(num) {
 if (debug) {
     if (num === undefined) {
-        for (let i = 0; i < pickaxes.length; i++) {
-            pickaxes[i][1] = true;
-        }
+        for (let pickaxe in player.pickaxes) player.pickaxes[pickaxe] = true;
     } else {
-        pickaxes[num][1] = true;
+        player.pickaxes[`pickaxe${num}`] = true;
     }
 } else {
     window.alert("INSUFFICIENT PERMISSIONS")
@@ -32,11 +30,9 @@ if (debug) {
 const adminGiveGear = function(num) {
 if (debug) {
     if (num === undefined) {
-        for (let i = 0; i < gears.length; i++) {
-            gears[i] = true;
-        }
+        for (let gear in player.gears) player.gears[gear] = true;
     } else {
-        gears[num] = true;
+        player.gears[`gear${num}`] = true;
     }
 } else {
     window.alert("INSUFFICIENT PERMISSIONS")
@@ -46,10 +42,10 @@ const adminRemovePickaxe = function(num) {
 if (debug) {
     if (num === undefined) {
         for (let i = 0; i < pickaxes.length; i++) {
-            pickaxes[i][1] = false;
+            for (let pickaxe in player.pickaxes) player.pickaxes[pickaxe] = false;
         }
     } else {
-        pickaxes[num][1] = false;
+        player.pickaxes[`pickaxe${num}`] = false;
     }
 } else {
     window.alert("INSUFFICIENT PERMISSIONS")
@@ -58,11 +54,9 @@ if (debug) {
 const adminRemoveGear = function(num) {
 if (debug) {
     if (num === undefined) {
-        for (let i = 0; i < gears.length; i++) {
-            gears[i] = false;
-        }
+        for (let gear in player.gears) player.gears[gear] = false;
     } else {
-        gears[num] = false;
+        player.gears[`gear${num}`] = false;
     }
 } else {
     window.alert("INSUFFICIENT PERMISSIONS")
