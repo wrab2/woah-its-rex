@@ -66,16 +66,8 @@ function init() {
                 document.getElementById("spawnMessage").innerText = "Happy Birthday " + birthdays[propertyName] + "!!!";
             }
         }
-    let playedBefore;
-    if (!debug) playedBefore = localStorage.getItem("playedBefore");
-    else playedBefore = localStorage.getItem("testingPlayedBefore");
-    if (playedBefore) {
         canContinue = loadAllData();
-    }
-    else {
-        canContinue = true;
         saveAllData();
-    }
         fetch("emoji.json")
         .then((response) => response.json())
         .then((json) => setEmojiNames(json))

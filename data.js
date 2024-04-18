@@ -46,6 +46,7 @@ function loadAllData() {
                 data = JSON.parse(localStorage.getItem("testingData"));
             }
         }
+        data ??= {blocks: {}, player: new playerTemplate()};
         if (Array.isArray(data)) {
             try {
                 if (!debug)  localStorage.setItem("dataBackup", localStorage.getItem("playerData"));
