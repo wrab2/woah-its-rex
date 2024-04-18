@@ -1,114 +1,117 @@
-const player = {
-    gears: {
-        "gear0": false, 
-        "gear1": false,
-        "gear2": false,
-        "gear3": false,
-        "gear4": false,
-        "gear5": false,
-        "gear6": false,
-        "gear7": false,
-        "gear8": false,
-        "gear9": false,
-        "gear10": false,
-        "gear11": false,
-        "gear12": false,
-        "gear13": false,
-        "gear14": false,
-        "gear15": false,
-        "gear16": false,
-        "gear17": false,
-        "gear18": false,
-        "gear19": false,
-        "gear20": false,
-        "gear21": false,
-    },
-    pickaxes: {
-        "pickaxe0": true,
-        "pickaxe1": false,
-        "pickaxe2": false,
-        "pickaxe3": false,
-        "pickaxe4": false,
-        "pickaxe5": false,
-        "pickaxe6": false,
-        "pickaxe7": false,
-        "pickaxe8": false,
-        "pickaxe9": false,
-        "pickaxe10": false,
-        "pickaxe11": false,
-        "pickaxe12": false,
-        "pickaxe13": false,
-        "pickaxe14": false,
-        "pickaxe15": false,
-        "pickaxe16": false,
-        "pickaxe17": false,
-        "pickaxe18": false,
-        "pickaxe19": false,
-        "pickaxe20": false,
-        "pickaxe21": false,
-        "pickaxe22": false,
-        "pickaxe23": false,
-        "pickaxe24": false,
-        "pickaxe25": false,
-        "pickaxe26": false,
-    },
-    settings: {
-        audioSettings: {
-            "Antique": {canPlay: true, volume: 100},
-            "Mystical": {canPlay: true, volume: 100},
-            "Divine": {canPlay: true, volume: 100},
-            "Flawless": {canPlay: true, volume: 100},
-            "Interstellar": {canPlay: true, volume: 100},
-            "Metaversal": {canPlay: true, volume: 100},
-            "Sacred": {canPlay: true, volume: 100},
-            "Ethereal": {canPlay: true, volume: 100},
-            "Celestial": {canPlay: true, volume: 100},
-            "Imaginary": {canPlay: true, volume: 100},
+class playerTemplate {
+    constructor() {
+        this.gears = {
+            "gear0": false, 
+            "gear1": false,
+            "gear2": false,
+            "gear3": false,
+            "gear4": false,
+            "gear5": false,
+            "gear6": false,
+            "gear7": false,
+            "gear8": false,
+            "gear9": false,
+            "gear10": false,
+            "gear11": false,
+            "gear12": false,
+            "gear13": false,
+            "gear14": false,
+            "gear15": false,
+            "gear16": false,
+            "gear17": false,
+            "gear18": false,
+            "gear19": false,
+            "gear20": false,
+            "gear21": false,
+        }
+        this.pickaxes = {
+            "pickaxe0": true,
+            "pickaxe1": false,
+            "pickaxe2": false,
+            "pickaxe3": false,
+            "pickaxe4": false,
+            "pickaxe5": false,
+            "pickaxe6": false,
+            "pickaxe7": false,
+            "pickaxe8": false,
+            "pickaxe9": false,
+            "pickaxe10": false,
+            "pickaxe11": false,
+            "pickaxe12": false,
+            "pickaxe13": false,
+            "pickaxe14": false,
+            "pickaxe15": false,
+            "pickaxe16": false,
+            "pickaxe17": false,
+            "pickaxe18": false,
+            "pickaxe19": false,
+            "pickaxe20": false,
+            "pickaxe21": false,
+            "pickaxe22": false,
+            "pickaxe23": false,
+            "pickaxe24": false,
+            "pickaxe25": false,
+            "pickaxe26": false,
+        }
+        this.settings = {
+            audioSettings: {
+                "Antique": {canPlay: true, volume: 100},
+                "Mystical": {canPlay: true, volume: 100},
+                "Divine": {canPlay: true, volume: 100},
+                "Flawless": {canPlay: true, volume: 100},
+                "Interstellar": {canPlay: true, volume: 100},
+                "Metaversal": {canPlay: true, volume: 100},
+                "Sacred": {canPlay: true, volume: 100},
+                "Ethereal": {canPlay: true, volume: 100},
+                "Celestial": {canPlay: true, volume: 100},
+                "Imaginary": {canPlay: true, volume: 100},
+            },
+            musicSettings: {
+                active: true,
+                volume: 100
+            },
+            baseMineCapacity: 250000,
+            minSpeed: 0,
+            stopOnRare: {active: true, minimum: "Antique"},
+            canDisplay: true,
+            useNumbers: false,
+            inventorySettings: {invToIndex: true, craftingToIndex: true},
+            usePathBlocks: true,
+            cavesEnabled: true,
+            useDisguisedChills: false,
+            usingNewEmojis: false,
+            minRarityNum: 0,
+            highRarityLogs: false,
         },
-        musicSettings: {
-            active: true,
-            volume: 100
+        this.stats = {
+            currentPickaxe: 0,
+            blocksMined: 0,
+            timePlayed: 0,
+            cavesGenerated: 0
         },
-        baseMineCapacity: 250000,
-        minSpeed: 0,
-        stopOnRare: {active: true, minimum: "Antique"},
-        canDisplay: true,
-        useNumbers: false,
-        inventorySettings: {invToIndex: true, craftingToIndex: true},
-        usePathBlocks: true,
-        cavesEnabled: true,
-        useDisguisedChills: false,
-        usingNewEmojis: false,
-        minRarityNum: 0,
-    },
-    stats: {
-        currentPickaxe: 0,
-        blocksMined: 0,
-        timePlayed: 0,
-        cavesGenerated: 0
-    },
-    //powerupCooldowns, powerupVariables
-    powerupCooldowns: {
-        "powerup1": {cooldown: Date.now(), unlocked: false},
-        "powerup2": {cooldown: Date.now(), unlocked: false},
-        "powerup3": {cooldown: Date.now(), unlocked: false},
-        "powerup4": {cooldown: Date.now(), unlocked: false},
-        "powerup5": {cooldown: Date.now(), unlocked: false},
-    },
-    powerupVariables : {
-        currentChosenOre : {ore: undefined, removeAt: Date.now},
-        commonsAffected : {state: false, removeAt: Date.now()},
-        currentPowerupDisplayed : "powerup1",
-        fakeEquipped: {originalState: undefined, item: "", removeAt: Date.now()},
-    },
-    oreTracker : {
-        existingOres : [],
-        tracking : false,
-        locationX : 0,
-        locationY : 0
+        //powerupCooldowns, powerupVariables
+        this.powerupCooldowns = {
+            "powerup1": {cooldown: Date.now(), unlocked: false},
+            "powerup2": {cooldown: Date.now(), unlocked: false},
+            "powerup3": {cooldown: Date.now(), unlocked: false},
+            "powerup4": {cooldown: Date.now(), unlocked: false},
+            "powerup5": {cooldown: Date.now(), unlocked: false},
+        },
+        this.powerupVariables = {
+            currentChosenOre : {ore: undefined, removeAt: Date.now},
+            commonsAffected : {state: false, removeAt: Date.now()},
+            currentPowerupDisplayed : "powerup1",
+            fakeEquipped: {originalState: undefined, item: "", removeAt: Date.now()},
+        },
+        this.oreTracker = {
+            existingOres : [],
+            tracking : false,
+            locationX : 0,
+            locationY : 0
+        }
     }
 }
-
+let player = new playerTemplate();
 const powerupOrder = ["powerup1", "powerup2", "powerup3", "powerup4", "powerup5"];
 const powerupList = {
     "powerup1" : {
@@ -260,98 +263,108 @@ function checkPowerupCooldowns() {
 
 function oldDataToNew(data) {
     console.log("transfered old");
+    let newData = {blocks: {}, player: new playerTemplate()};
     for (let i = 0; i < data[0].length; i++) {
-        if (oreList[data[0][i][0]] !== undefined) {
-            oreList[data[0][i][0]]["normalAmt"] = data[0][i][1][0][0];
-            oreList[data[0][i][0]]["electrifiedAmt"] = data[0][i][1][0][1];
-            oreList[data[0][i][0]]["radioactiveAmt"] = data[0][i][1][0][2];
-            oreList[data[0][i][0]]["explosiveAmt"] = data[0][i][1][0][3];
+        newData.blocks[data[0][i][0]] = {
+            n : data[0][i][1][0][0],
+            l : data[0][i][1][0][1],
+            r : data[0][i][1][0][2],
+            e : data[0][i][1][0][3]
         }
     }
     if (data[1] !== undefined) {
         let i = 0;
-        for (let propertyName in player.pickaxes) {
-            if (data[1][0][0][i] !== undefined)player.pickaxes[propertyName] = data[1][0][0][i][1];
+        for (let propertyName in newData.player.pickaxes) {
+            if (data[1][0][0][i] !== undefined) newData.player.pickaxes[propertyName] = data[1][0][0][i][1];
             i++;
         }
-        player.stats.currentPickaxe = data[1][0][1];
+        newData.player.stats.currentPickaxe = data[1][0][1];
     }
     while (Array.isArray(data[2])) data[2] = data[2][0];
-        player.stats.blocksMined = data[2];
+        newData.player.stats.blocksMined = data[2];
     if (data[4] !== undefined) {
         let i = 0;
-        for (let propertyName in player.gears) {
-            if (data[4][0][i] !== undefined) player.gears[propertyName] = data[4][0][i];
+        for (let propertyName in newData.player.gears) {
+            if (data[4][0][i] !== undefined) newData.player.gears[propertyName] = data[4][0][i];
             i++;
         }
     }
     if (data[3] !== undefined) {
         if (data[3][0] != undefined) {
             let i = 0;
-            for (let propertyName in player.settings.audioSettings) {
-                player.settings.audioSettings[propertyName].canPlay = data[3][0][i];
-                player.settings.audioSettings[propertyName].volume = data[3][1][i];
+            for (let propertyName in newData.player.settings.audioSettings) {
+                newData.player.settings.audioSettings[propertyName].canPlay = data[3][0][i];
+                newData.player.settings.audioSettings[propertyName].volume = data[3][1][i];
                 i++;
             }
         }
         if (data[3][2] != undefined) {
-            player.settings.musicSettings.active = !data[3][2];
+            newData.player.settings.musicSettings.active = !data[3][2];
         }
         if (data[3][3] != undefined) {
-            player.settings.musicSettings.volume = data[3][3];
+            newData.player.settings.musicSettings.volume = data[3][3];
         }
         if (data[3][4] != undefined) {
-            player.settings.baseMineCapacity = data[3][4];    
+            newData.player.settings.baseMineCapacity = data[3][4];    
         }
         if (data[3][5] != undefined) {
-            player.settings.minSpeed = data[3][5];
+            newData.player.settings.minSpeed = data[3][5];
         }
         if (data[3][6] != undefined) {
-            player.settings.stopOnRare.active = data[3][6];
+            newData.player.settings.stopOnRare.active = data[3][6];
         }
         if (data[3][7] != undefined) {
-            player.settings.stopOnRare.minimum = oreInformation.getTierAt(data[3][7] + 5);
+            newData.player.settings.stopOnRare.minimum = oreInformation.getTierAt(data[3][7] + 5);
         }
         if (data[3][8] != undefined) {
-            player.settings.canDisplay = data[3][8];
+            newData.player.settings.canDisplay = data[3][8];
         }
         if (data[3][9] != undefined) {
-            player.settings.useNumbers = data[3][9];
+            newData.player.settings.useNumbers = data[3][9];
         }
         if (data[3][10] != undefined) {
-            player.settings.inventorySettings.craftingToIndex = data[3][10];
+            newData.player.settings.inventorySettings.craftingToIndex = data[3][10];
         }
         if (data[3][11] != undefined) {
-            player.settings.inventorySettings.invToIndex = data[3][11];
+            newData.player.settings.inventorySettings.invToIndex = data[3][11];
         }
         if (data[3][16] != undefined) {
-            player.settings.usePathBlocks = data[3][16];
+            newData.player.settings.usePathBlocks = data[3][16];
         }
         if (data[3][17] != undefined) {
-            player.settings.cavesEnabled = data[3][17];
+            newData.player.settings.cavesEnabled = data[3][17];
         }
         if (data[3][18] != undefined) {
-            player.settings.useDisguisedChills = data[3][18]
+            newData.player.settings.useDisguisedChills = data[3][18]
         }
         if (data[3][19] != undefined) {
-            player.settings.usingNewEmojis = data[3][19];
+            newData.player.settings.usingNewEmojis = data[3][19];
         }
         if (data[3][20] != undefined) {
-            player.settings.minRarityNum = data[3][20];
+            newData.player.settings.minRarityNum = data[3][20];
         }
     }
-    return saveNewData(true);
+    return newData;
 }
 
 function loadNewData(data) {
     try {
         for (let propertyName in data.blocks) {
             if (oreList[propertyName] !== undefined) {
-                oreList[propertyName]["normalAmt"] = data.blocks[propertyName].normalAmt;
-                oreList[propertyName]["electrifiedAmt"] = data.blocks[propertyName].electrifiedAmt;
-                oreList[propertyName]["radioactiveAmt"] = data.blocks[propertyName].radioactiveAmt;
-                oreList[propertyName]["explosiveAmt"] = data.blocks[propertyName].explosiveAmt;
+                if (data.blocks[propertyName].normalAmt !== undefined) {
+                    oreList[propertyName]["normalAmt"] = data.blocks[propertyName].normalAmt;
+                    oreList[propertyName]["electrifiedAmt"] = data.blocks[propertyName].electrifiedAmt;
+                    oreList[propertyName]["radioactiveAmt"] = data.blocks[propertyName].radioactiveAmt;
+                    oreList[propertyName]["explosiveAmt"] = data.blocks[propertyName].explosiveAmt;
+                    inventoryObj[propertyName] = 0;
+                } else if (data.blocks[propertyName].n !== undefined) {
+                    oreList[propertyName]["normalAmt"] = data.blocks[propertyName].n;
+                oreList[propertyName]["electrifiedAmt"] = data.blocks[propertyName].l;
+                oreList[propertyName]["radioactiveAmt"] = data.blocks[propertyName].r;
+                oreList[propertyName]["explosiveAmt"] = data.blocks[propertyName].e;
                 inventoryObj[propertyName] = 0;
+                }
+                
             }
         }
         data = data.player;
@@ -413,6 +426,7 @@ function loadNewData(data) {
             player.settings.musicSettings.volume = data.settings.musicSettings.volume;
             if (!player.settings.musicSettings.active) document.getElementById("musicButton").click();
             document.getElementById("musicVolume").value = data.settings.musicSettings.volume;
+            changeMusicVolume(player.settings.musicSettings.volume)
         }
         if (data.settings.stopOnRare !== undefined) {
             player.settings.stopOnRare.minimum = oreInformation.getPreviousTier(data.settings.stopOnRare.minimum);
@@ -444,6 +458,12 @@ function loadNewData(data) {
                 switchFont();
             }
         }
+        if (data.settings.highRarityLogs !== undefined) {
+            if (data.settings.highRarityLogs) {
+                player.settings.highRarityLogs = false;
+                switchHighRarity(document.getElementById("highRarity"));
+            }
+        }
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {
                 if (data.powerupCooldowns[property] !== undefined && player.powerupCooldowns[property] !== undefined) {
@@ -463,20 +483,21 @@ function loadNewData(data) {
     }
 }
 
-function saveNewData(returnData) {
+function saveNewData(obj) {
     try {
         let data = {blocks: {}, player: player};
         for (let propertyName in oreList) {
             data.blocks[propertyName] = {
-                normalAmt: oreList[propertyName]["normalAmt"],
-                electrifiedAmt: oreList[propertyName]["electrifiedAmt"],
-                radioactiveAmt: oreList[propertyName]["radioactiveAmt"],
-                explosiveAmt: oreList[propertyName]["explosiveAmt"]
+                n: oreList[propertyName]["normalAmt"],
+                l: oreList[propertyName]["electrifiedAmt"],
+                r: oreList[propertyName]["radioactiveAmt"],
+                e: oreList[propertyName]["explosiveAmt"]
             };
         }
+        if (obj.override !== undefined) data.player = obj.override;
         if (!debug) localStorage.setItem("newPlayerData", JSON.stringify(data));
         else localStorage.setItem("newTestingData", JSON.stringify(data));
-        if (returnData) return data;
+        if (obj.return) return data;
     } catch (err) {
         console.log(err);
         window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");

@@ -63,6 +63,7 @@ class secureLogs {
                         this.#verifiedLogs[i].mined = true;
                         this.#verifiedLogs[i].variant = variant;
                         this.#verifiedLogs[i].rarity /= multis[names.indexOf(variant)];
+                        if (player.settings.highRarityLogs && this.#verifiedLogs[i].rarity > 1/250000000) this.#verifiedLogs.splice(i, 1)
                         verified = true;
                         break;
                     }

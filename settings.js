@@ -605,6 +605,15 @@ function createStats() {
         tier = oreInformation.getNextTier(tier);
     }
 }
+function switchHighRarity(button) {
+    if (player.settings.highRarityLogs) {
+        player.settings.highRarityLogs = false;
+        button.style.backgroundColor = "#FF3D3D";
+    } else {
+        player.settings.highRarityLogs = true
+        button.style.backgroundColor = "#6BC267";
+    } 
+}
 function toggleVariantConversions() {
     let element = document.getElementById("conversionContainer")
     if (element.style.display === "block") {

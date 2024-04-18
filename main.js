@@ -656,13 +656,16 @@ function removeExistingOre(location) {
                 document.getElementById("trackerOre").innerText = `Ore: N/A`
                 document.getElementById("trackerX").innerText = `X: N/A`
                 document.getElementById("trackerY").innerText = `Y: N/A`
-                player.oreTracker.tracking = false;
-                player.oreTracker.locationX = 0;
-                player.oreTracker.locationY = 0;
+                removeTrackerInformation();
             }
             break;
         }
     }
+}
+function removeTrackerInformation() {
+    player.oreTracker.tracking = false;
+    player.oreTracker.locationX = 0;
+    player.oreTracker.locationY = 0;
 }
 
 function goToOre(block, variantType) {

@@ -53,6 +53,7 @@ async function mineReset() {
         mine[curY][curX] = "⛏️";
         loggedFinds = [];
         player.oreTracker.existingOres = [];
+        removeTrackerInformation();
         displayArea();
         goDirection(temp);
         resetting = false;

@@ -45,6 +45,9 @@ function changeCanPlay(name, button) {
 
 function playSound(type) {
     type = type === "Imaginary" ? "Ethereal" : type;
-    if (player.settings.useDisguisedChills) allAudios["Antique"].play();
-    else if (player.settings.audioSettings[type].canPlay) allAudios[type].play();
+    if (player.settings.audioSettings[type].canPlay) {
+        if (player.settings.useDisguisedChills) allAudios["Antique"].play();
+        else allAudios[type].play();
+    }
+    
 }

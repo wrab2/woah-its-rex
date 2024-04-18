@@ -5,7 +5,7 @@ Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 function saveAllData(forceCloudSave=false) {
-    let data = JSON.stringify(saveNewData(true));
+    let data = JSON.stringify(saveNewData({override: undefined, return: true}));
 	cloudSave(data,forceCloudSave)
     return;
 }
@@ -51,6 +51,7 @@ function loadAllData() {
                 if (!debug)  localStorage.setItem("dataBackup", localStorage.getItem("playerData"));
                 else  localStorage.setItem("dataBackup", localStorage.getItem("testingData"));
                 data = oldDataToNew(data);
+                saveNewData({override: data, return: false});
                 loadNewData(data);
                 localStorage.removeItem("dataBackup");
                 return true;
@@ -206,7 +207,7 @@ function cloudSave(data,forceCloudSave) {
 
 	}
 }
-/*
+
 window.addEventListener("message", e => {
 	if (e.origin === cloudsaving.website_name) {
 		//this is the initial message
@@ -231,7 +232,7 @@ window.addEventListener("message", e => {
 				if (localStorage.getItem("newPlayerData") !== null) {
 					local_data = JSON.parse(localStorage.getItem("newPlayerData"));
 				} else {
-					local_data = (JSON.parse(localStorage.getItem("playerData"))??player);
+					local_data = (JSON.parse(localStorage.getItem("playerData"))??{blocks: {}, player: player});
 					if (checkSaveType(local_data)) local_data = oldDataToNew(local_data);
 				}
 				if (checkSaveType(cloud_data)) cloud_data = oldDataToNew(cloud_data);
@@ -253,4 +254,3 @@ window.addEventListener("message", e => {
 		}
 	}
 })
-*/
