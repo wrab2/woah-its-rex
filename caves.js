@@ -6,7 +6,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 function generateCave(x, y, rate, reps, type) {
     let caveType;
-    if (type === undefined) {
+    if (type === undefined) {  
         type = getCaveType();
         if (type === undefined) {
             type = "currentLayer";
@@ -17,13 +17,14 @@ function generateCave(x, y, rate, reps, type) {
             if (type !== "currentLayer" && caveList[type].length < 2)
                 caveList[type] = createGsCave();
         }
-            
     }
     caveType = type;
         let distX = Math.round(Math.random() * 10) + 3;
         let distY = Math.round(Math.random() * 10) + 3;
         let newOrigins = [];
-            if ((mine[y] != undefined && mine[y + distY] != undefined) && !(mine[y][x] === "⚪" && mine[y + distY][x + distX] === "⚪")) {
+            y > 0 ? mine[y] ??= [] : y = 0, mine[y] ??= [];
+            (y + distY) > 0 ? mine[y + distY] ??= [] : distY = 0, mine[y + distY] ??= [];
+            if (!(mine[y][x] === "⚪" && mine[y + distY][x + distX] === "⚪")) {
             for (let r = y; r < y + distY; r++) {
                 for (let c = x; c < x + distX; c++) {
                     if (Math.random() < (0.1 - rate))

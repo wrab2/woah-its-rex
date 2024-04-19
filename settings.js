@@ -375,6 +375,7 @@ function createIndexCards(layer) {
             if (ignoreList.indexOf(property) > -1 && !indexHasOre(property)) blackOut = true;
             let output = `<span class='indexOre ${(blackOut) ? "indexBlackout" : ""}' title="${oreList[property]["oreName"]}">${property}</span>${blackOut ? "</span>" : ""}`;
             output += `<span class='indexVariants indexTextOutline'>${indexVariants(property)}</span>`
+            output += `<span class='indexTier indexTextOutline'>${blackOut ? "???" : oreList[property]["oreTier"]}</span>`
             output += "<span class='indexRarity indexTextOutline'>1/";
             if (isCave) {
                 let rarity = oreList[property]["numRarity"];

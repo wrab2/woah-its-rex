@@ -411,8 +411,8 @@ function loadNewData(data) {
             if (!data.settings.cavesEnabled) toggleCaves(document.getElementById("caveToggle"));
         }
         if (data.settings.inventorySettings !== undefined) {
-            if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("invIndex"), 0);
-            if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
+            if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
+            if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
         }
         if (data.settings.minRarityNum !== undefined) {
             player.settings.minRarityNum = (data.settings.minRarityNum) - 1;

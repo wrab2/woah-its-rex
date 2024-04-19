@@ -194,6 +194,7 @@ function powerup2(x, y) {
         generateCave(x - 100, y, 0, 0);
         generateCave(x, y + 100, 0, 0);
         generateCave(x, y - 100, 0, 0);
+        player.stats.cavesGenerated += 4;
         displayArea();
         player.powerupCooldowns["powerup2"].cooldown = Date.now() + 1200000;
         document.getElementById("powerup2").style.backgroundColor = "#FF3D3D";
@@ -247,6 +248,7 @@ function powerup5() {
             goDirection(tempDirection);
             player.powerupVariables.fakeEquipped.removeAt = Date.now() + 60000;
             player.powerupCooldowns["powerup5"].cooldown = Date.now() + 3600000;
+            utilitySwitchActions();
         }
     }
 }

@@ -500,6 +500,7 @@ function updateInventory() {
             player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
             player.powerupVariables.fakeEquipped.item = "";
             player.powerupVariables.fakeEquipped.originalState = undefined;
+            utilitySwitchActions();
         }
         let tempDirection = curDirection;
         stopMining();

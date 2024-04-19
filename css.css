@@ -1086,14 +1086,13 @@ border-bottom:1px solid #333;
 }
 #indexSwitchButton {
   width: 50%;
-  height: 3em;
+  height: 3vw;
   border-radius: 0px;
   background-color: #3d3c3c;
   border-style: solid;
   border-width: 2px;
   font-size: 1vw;
   display: inline-flex;
-  position: relative;
   align-content: space-around;   
   flex-wrap: wrap;
   justify-content: center;
@@ -1109,7 +1108,6 @@ border-bottom:1px solid #333;
    border-width: 2px;
    font-size: 1vw;
    background-color: #333;
-   position: relative;
    margin: 0;
    z-index: 99999;
 }
@@ -1117,9 +1115,11 @@ border-bottom:1px solid #333;
   background-color: #2e2e2e;
 }
 #indexButtonHolder {
-  display: inline-block;
+  display: inline-flex;
   width: 30%;
   margin-bottom: 3vw;
+  justify-content: center;
+  align-items: center;
 }
 
 #oreCardHolder {
@@ -1153,9 +1153,18 @@ border-bottom:1px solid #333;
   left: 1vw;
   font-size: 1vw;
 }
+.indexTier {
+  position: absolute;
+  bottom: 1vw;
+  left:8vw;
+  text-align: right;
+  font-size: 1vw;
+  white-space: nowrap;
+}
 .indexBlackout {
   color:transparent; 
   text-shadow:0 0 0 black;
+  user-select: none;
 }
 .indexRarity {
   text-align: left;

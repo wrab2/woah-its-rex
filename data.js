@@ -111,8 +111,7 @@ function importData(data) {
                     localStorage.removeItem("testingData");
                     localStorage.removeItem("newTestingData");
                     localStorage.removeItem("testingPlayedBefore");
-                }
-                else  {
+                } else {
                     localStorage.removeItem("playerData");
                     localStorage.removeItem("newPlayerData");
                     localStorage.removeItem("playedBefore");

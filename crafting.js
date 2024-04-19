@@ -1051,7 +1051,7 @@ function switchWorldCraftables() {
         }
         for (let i = gearStartNum; i < gearStartNum + worldOneGears.length; i++) {
             if (i - gearStartNum === 9) {
-                if (oreList["🎂"]["normalAmt"] > 0 || gears[9]) 
+                if (oreList["🎂"]["normalAmt"] > 0 || player.gears["gear9"]) 
                     elements[i].style.display = "block";
             } else {
                 elements[i].style.display = "block";
