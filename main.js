@@ -258,10 +258,33 @@ document.addEventListener('keydown', (event) => {
             return;
         case "escape":
             //toggleCelestials(false)
-            if (document.getElementById("settingsContainer").style.display === "block") 
+            if (document.getElementById("settingsContainer").style.display === "block") {
                 hideSettings();
-            else
+            } else if (document.getElementById("conversionContainer").style.display === "block") {
+                toggleVariantConversions();
+            } else  if (document.getElementById("forgeContainer").style.display === "block") {
+                toggleOreForge();
+            } else {
                 showSettings();
+            }
+            break;
+        case "t":
+            checkExistingOres();
+            break;
+        case "1":
+            toggleSpecificPowerup(1);
+            break;
+        case "2":
+            toggleSpecificPowerup(2);
+            break;
+        case "3":
+            toggleSpecificPowerup(3);
+            break;
+        case "4":
+            toggleSpecificPowerup(4);
+            break;
+        case "5":
+            toggleSpecificPowerup(5);
             break;
         default:
             break;

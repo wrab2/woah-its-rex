@@ -305,16 +305,17 @@ function pickaxeAbility1(x, y) {
         y--;
         pickaxeAbilityMineBlock(x, y);
     }
+    displayArea();
 }
 
-function pickaxeAbility2(x, y, size, customLuck) {
+function pickaxeAbility2(x, y, size) {
     const constraints = getParams(size, size);
     for (let r = y - constraints[1]; r <= y + size; r++) {
         for (let c = x - constraints[0]; c <= x + size; c++) {
             pickaxeAbilityMineBlock(c, r);
         }
-        displayArea();
     }
+    displayArea();
 }
 
 function pickaxeAbility3(x, y) {

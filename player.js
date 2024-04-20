@@ -258,7 +258,10 @@ function checkPowerupCooldowns() {
         }
     }
 }
-
+function toggleSpecificPowerup(num) {
+    const current = Number(player.powerupVariables.currentPowerupDisplayed.substring(7));
+    switchPowerupDisplay(num - current)
+}
 
 
 function oldDataToNew(data) {
