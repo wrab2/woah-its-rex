@@ -107,6 +107,7 @@ function importData(data) {
     if (data === "") {
         if (confirm("You are importing nothing, this will perform a hard reset on your save file. Are you sure you want to do this?")) {
             if (confirm("YOUR SAVE FILE WILL BE ERASED. PLEASE BE SURE THIS IS WHAT YOU WANT.")) {
+                clearInterval(dataTimer);
                 if (debug) {
                     localStorage.removeItem("testingData");
                     localStorage.removeItem("newTestingData");
@@ -116,7 +117,10 @@ function importData(data) {
                     localStorage.removeItem("newPlayerData");
                     localStorage.removeItem("playedBefore");
                 }
-                location.reload();
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+                
             }
         }
     } else {

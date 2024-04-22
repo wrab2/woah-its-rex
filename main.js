@@ -76,8 +76,6 @@ function init() {
         });
     if (canContinue) {
         repeatDataSave();
-        if (!debug) localStorage.setItem("playedBefore", true);
-        else localStorage.setItem("testingPlayedBefore", true);
         cat = verifiedOres.getCurrentLuck();
         utilitySwitchActions();
         switchPowerupDisplay(0)
