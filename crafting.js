@@ -1147,7 +1147,7 @@ function displayOreRecipe(id) {
         element.style.borderTop = "1px solid white";
         element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
         element.style.color = colors["textColor"];
-        if (colors["textColor"] === "ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
+        if (colors["textColor"] === "#ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
         else element.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
         element.innerText = `${ore} x${oreRecipes[id]["result"]["amt"] * oreRecipes[id]["multiplier"]}`;
         element.classList = "recipeOreDisplay";
@@ -1185,6 +1185,9 @@ function multiplyRecipe(amt) {
     let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
     element.style.borderTop = "1px solid white";
     element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
+    element.style.color = colors["textColor"];
+    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
+    else element.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
     element.innerText = `${ore} x${oreRecipes[currentOreRecipe]["result"]["amt"] * oreRecipes[currentOreRecipe]["multiplier"]}`;
     element.classList = "recipeOreDisplay";
     parent.appendChild(element);
