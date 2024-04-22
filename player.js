@@ -181,9 +181,9 @@ const powerupList = {
             buttonUp: {background: "darkgray", text: "white"},
             buttonDown: {background: "darkgray", text: "white"},
         },
-        requirement: `(player.powerupCooldowns['powerup1'].unlocked && player.powerupCooldowns['powerup2'].unlocked && player.powerupCooldowns['powerup3'].unlocked && player.powerupCooldowns['powerup4'].unlocked)`,
-        condition1: "(0 + (player.powerupCooldowns['powerup1'].unlocked ? 1 : 0) + (player.powerupCooldowns['powerup2'].unlocked ? 1 : 0) + (player.powerupCooldowns['powerup3'].unlocked ? 1 : 0) + (player.powerupCooldowns['powerup4'].unlocked ? 1 : 0))",
-        condition2: "/4 Powerups Unlocked"
+        requirement: `(countFlawlessOres() >= 400)`,
+        condition1: "(countFlawlessOres())",
+        condition2: "/400 Flawless Ores Owned."
     },
 }
 function switchPowerupDisplay(num) {
@@ -262,7 +262,12 @@ function toggleSpecificPowerup(num) {
     const current = Number(player.powerupVariables.currentPowerupDisplayed.substring(7));
     switchPowerupDisplay(num - current)
 }
-
+function countFlawlessOres() {
+    const ores = oreInformation.getOresByTier("Flawless");
+    let count = 0;
+    for (let i = 0; i < ores.length; i++) count += oreList[ores[i]]["normalAmt"];
+    return count;
+}
 
 function oldDataToNew(data) {
     console.log("transfered old");

@@ -33,7 +33,6 @@ class secureLogs {
         }
         if (((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) || debug) {
             this.#spawnLogs.push({x: c, y: r, block: intended, luck: luck, caveInfo: fromCave})
-            //this.#spawnLogs.push([r, c, intended, luck, fromCave]);
         } else {
             console.log("failed to create, ", obj.stack, luck, maxLuck);
         }
@@ -62,6 +61,13 @@ class secureLogs {
                     if (this.#verifiedLogs[i].mined != true) {
                         this.#verifiedLogs[i].mined = true;
                         this.#verifiedLogs[i].variant = variant;
+                        if (this.#verifiedLogs[i].caveInfo[1] > 1) {
+                            let something;
+                            if (oolProbabilities[this.#verifiedLogs[i].block] !== undefined && this.#verifiedLogs[i].caveInfo[2] !== "type5Ores") something = oolProbabilities[this.#verifiedLogs[i].block];
+                            else something = 1/oreList[this.#verifiedLogs[i].block]["numRarity"];
+                            something /= this.#verifiedLogs[i].caveInfo[1];
+                            this.#verifiedLogs[i].rarity = something;
+                        }
                         this.#verifiedLogs[i].rarity /= multis[names.indexOf(variant)];
                         if (player.settings.highRarityLogs && this.#verifiedLogs[i].rarity > 1/250000000) this.#verifiedLogs.splice(i, 1)
                         verified = true;
@@ -92,17 +98,8 @@ class secureLogs {
                     else times = this.#verifiedLogs[i].time;
                     output += `${this.#verifiedLogs[i].block}, ${this.#verifiedLogs[i].time}, ${times}, ${this.#verifiedLogs[i].mined}, ${this.#verifiedLogs[i].variant}, `;
                     output += `${this.#verifiedLogs[i].caveInfo[0] === true ? "Cave, " : ""} ${this.#verifiedLogs[i].y}, `
-                    if (this.#verifiedLogs[i].caveInfo[1] > 1) {
-                        let something;
-                        if (oolProbabilities[this.#verifiedLogs[i].block] !== undefined && this.#verifiedLogs[i].caveInfo[2] !== "type5Ores") something = 1/(oolProbabilities[this.#verifiedLogs[i].block]);
-                        else something = oreList[this.#verifiedLogs[i].block]["numRarity"];
-                        something *= this.#verifiedLogs[i].caveInfo[1];
-                        output += `${(something * multis[names.indexOf(this.#verifiedLogs[i].variant)]).toLocaleString()}, `;
-                    } else {
-                        output += `${Math.round(1/(this.#verifiedLogs[i].rarity)).toLocaleString()}, `;
-                    }
+                    output += `${Math.round(1/(this.#verifiedLogs[i].rarity)).toLocaleString()}, `;
                     output += (Math.log10(this.#verifiedLogs[i].luck * (this.#verifiedLogs[i].y + 1))) * 2 + "<br>";
-                    
                 }
                 this.#logsTimer = setInterval(this.#reloadLogs, 500, output!==""?output:"none");
         } else {
