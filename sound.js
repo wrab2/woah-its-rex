@@ -56,18 +56,19 @@ function playSound(type) {
             allAudios[type].currentTime = 0;;
             allAudios[type].play();
         } 
-    }
-    if (player.settings.doSpawnEffects) {
-        let timeoutAmt = 0;
-        if (document.getElementById("blockContainer").style.animation !== "") {
-            document.getElementById("blockContainer").style.animation = "";
-            timeoutAmt = 10;
+        if (player.settings.doSpawnEffects && oreInformation.tierGrOrEqTo({"tier1":type, "tier2": "Interstellar"})) {
+            let timeoutAmt = 0;
+            if (document.getElementById("blockContainer").style.animation !== "") {
+                document.getElementById("blockContainer").style.animation = "";
+                timeoutAmt = 10;
+            }
+            type = oldType;
+            setTimeout(() => {
+                document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type);  
+            }, timeoutAmt);
         }
-        type = oldType;
-        setTimeout(() => {
-            document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type);  
-        }, timeoutAmt);
     }
+    
 }
 addEventListener("animationend", (event) => {
     if (event.target.id === "blockContainer") document.getElementById("blockContainer").style.animation = "";
