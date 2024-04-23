@@ -799,6 +799,15 @@ class ores {
             if (propertyName === tiers["tier2"]) return true;
         }
     }
+    getEffectByTier(tier) {
+        if (tier === "Interstellar") return "blur 4s linear 1";
+        if (tier === "Metaversal") return "sepia 4s linear 1";
+        if (tier === "Sacred") return "saturate 4s linear 1";
+        if (tier === "Celestial") return "invert 4s ease-in-out 1";
+        if (tier === "Ethereal") return "darken 4s ease-in-out 1";
+        if (tier === "Imaginary") return "rotate 4s linear 1";
+        return "";
+    }
 }
 const oreInformation = new ores();
 /*

@@ -82,6 +82,7 @@ class playerTemplate {
             usingNewEmojis: false,
             minRarityNum: 0,
             highRarityLogs: false,
+            doSpawnEffects: true,
         },
         this.stats = {
             currentPickaxe: 0,
@@ -432,9 +433,12 @@ function loadNewData(data) {
         if (data.settings.musicSettings !== undefined) {
             player.settings.musicSettings.active = data.settings.musicSettings.active;
             player.settings.musicSettings.volume = data.settings.musicSettings.volume;
-            if (!player.settings.musicSettings.active) document.getElementById("musicButton").click();
             document.getElementById("musicVolume").value = data.settings.musicSettings.volume;
-            changeMusicVolume(player.settings.musicSettings.volume)
+            changeMusicVolume(player.settings.musicSettings.volume);
+            if (!player.settings.musicSettings.active) {
+                player.settings.musicSettings.active = true;
+                document.getElementById("musicButton").click();
+            }
         }
         if (data.settings.stopOnRare !== undefined) {
             player.settings.stopOnRare.minimum = oreInformation.getPreviousTier(data.settings.stopOnRare.minimum);
@@ -470,6 +474,11 @@ function loadNewData(data) {
             if (data.settings.highRarityLogs) {
                 player.settings.highRarityLogs = false;
                 switchHighRarity(document.getElementById("highRarity"));
+            }
+        }
+        if (data.settings.doSpawnEffects !== undefined) {
+            if (!data.settings.doSpawnEffects) {
+                toggleSpawnEffects(document.getElementById("spawnEffects"));
             }
         }
         if (data.powerupCooldowns !== undefined) {
