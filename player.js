@@ -109,7 +109,8 @@ class playerTemplate {
             tracking : false,
             locationX : 0,
             locationY : 0
-        }
+        },
+        this.currentEffect = ""
     }
 }
 let player = new playerTemplate();

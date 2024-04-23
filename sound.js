@@ -56,7 +56,7 @@ function playSound(type) {
             allAudios[type].currentTime = 0;;
             allAudios[type].play();
         } 
-        if (player.settings.doSpawnEffects && oreInformation.tierGrOrEqTo({"tier1":type, "tier2": "Interstellar"})) {
+        if (player.settings.doSpawnEffects && oreInformation.tierGrOrEqTo({"tier1":type, "tier2": "Interstellar"}) && ( player.currentEffect === "" ? true : oreInformation.tierGrOrEqTo({"tier1":type, "tier2": (player.currentEffect)}))) {
             let timeoutAmt = 0;
             if (document.getElementById("blockContainer").style.animation !== "") {
                 document.getElementById("blockContainer").style.animation = "";
@@ -65,6 +65,7 @@ function playSound(type) {
             type = oldType;
             setTimeout(() => {
                 document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type);  
+                player.currentEffect = type;
             }, timeoutAmt);
         }
     }
@@ -72,4 +73,5 @@ function playSound(type) {
 }
 addEventListener("animationend", (event) => {
     if (event.target.id === "blockContainer") document.getElementById("blockContainer").style.animation = "";
+    player.currentEffect = "";
 });
