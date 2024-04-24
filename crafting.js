@@ -1000,7 +1000,7 @@ function showPickaxes() {
     disappear(document.getElementById("gearCrafts"));
     m87 = 0;
     m88++;
-    if (m88 === 6 && currentWorld === 2) {
+    if (m88 === 6) {
         let show = true;
         for (let gear in player.gears) if (!player.gears[gear]) show = false;
         for (let pickaxe in player.pickaxes) if (pickaxe !== "pickaxe26" && !player.pickaxes[pickaxe]) show = false;
@@ -1019,11 +1019,9 @@ function showGears() {
     m87++;
     m88 = 0;
     if (m87 === 3 && currentWorld === 2) document.getElementById("oblivionFracturer").style.display = "block";
-    if (currentWorld === 2) {
         let children = document.getElementById("pickaxeCrafts").children;
-        for (let i = worldOnePickaxes.length - 1; i < worldOnePickaxes.length + worldTwoPickaxes.length; i++) children[i].style.display = "block";
+        for (let i = (currentWorld === 2 ? worldOnePickaxes.length - 1 : 0); i < (currentWorld === 2 ? worldOnePickaxes.length + worldTwoPickaxes.length : worldOnePickaxes.length); i++) children[i].style.display = "block";
         document.getElementById("nullChroma").style.display = "none";
-    }
 }
 function switchWorldCraftables() {
     let elements = document.getElementsByClassName("craftingButton");
