@@ -64,14 +64,15 @@ function mineBlock(x, y, cause) {
     player.stats.blocksMined++;
     cause !== "ability" ? rollAbilities() : undefined;
     if (oreList[ore]["isBreakable"]) {
-        mine[y][x] = "⚪";
         if (oreList[ore]["numRarity"] >= 750000) {
             if (checkFromCave({"X":x, "Y":y})["fromCave"]) {
                 giveBlock(ore, x, y, false, true, checkFromCave({"X":x, "Y":y})["multi"]);
+                mine[y][x] = "⚪";
                 return;
             }
         }
         giveBlock(ore, x, y, (cause === "reset"));
+        mine[y][x] = "⚪";
     }
 }
 
