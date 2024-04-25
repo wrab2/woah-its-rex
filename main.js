@@ -510,13 +510,13 @@ function updateInventory() {
         applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
     }
     if (player.powerupVariables.fakeEquipped.item !== "" && Date.now() >= player.powerupVariables.fakeEquipped.removeAt) {
-        if (player.gears[player.powerupVariables.fakeEquipped.item] != undefined) {
+        if (player.gears[player.powerupVariables.fakeEquipped.item] !== undefined) {
             if (player.powerupVariables.fakeEquipped.item === "gear0") document.getElementById("trackerLock").style.display = "inline-flex";
             if (player.powerupVariables.fakeEquipped.item === "gear9") document.getElementById("sillyRecipe").style.display = "none";
             player.gears[player.powerupVariables.fakeEquipped.item] = false;
             player.powerupVariables.fakeEquipped.item = "";
         }
-        if (player.pickaxes[player.powerupVariables.fakeEquipped.item] != undefined) {
+        if (player.pickaxes[player.powerupVariables.fakeEquipped.item] !== undefined) {
             player.pickaxes[player.powerupVariables.fakeEquipped.item] = false;
             player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
             player.powerupVariables.fakeEquipped.item = "";
