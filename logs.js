@@ -77,7 +77,7 @@ class secureLogs {
                             log.rarity = something;
                         }
                         log.rarity /= multis[names.indexOf(variant)];
-                        //const webhookString = `has found ${this.#verifiedLogs[i].variant} ${this.#verifiedLogs[i].block} with a rarity of 1/${Math.round(1/this.#verifiedLogs[i].rarity).toLocaleString()} ${this.#verifiedLogs[i].caveInfo[0] ? (this.#verifiedLogs[i].caveInfo[1] > 1 ? "(" + caveList[this.#verifiedLogs[i].caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(this.#verifiedLogs[i].x - 1000000000).toLocaleString()}, Y: ${(-1 *this.#verifiedLogs[i].y).toLocaleString()}`
+                        //const webhookString = `has found ${this.#verifiedLogs["All"][i].variant} ${this.#verifiedLogs["All"][i].block} with a rarity of 1/${Math.round(1/this.#verifiedLogs["All"][i].rarity).toLocaleString()} ${this.#verifiedLogs["All"][i].caveInfo[0] ? (this.#verifiedLogs["All"][i].caveInfo[1] > 1 ? "(" + caveList[this.#verifiedLogs["All"][i].caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(this.#verifiedLogs["All"][i].x - 1000000000).toLocaleString()}, Y: ${(-1 *this.#verifiedLogs["All"][i].y).toLocaleString()}`
                         if (player.settings.highRarityLogs && log.rarity > 1/250000000) {
                             this.#verifiedLogs.splice(i, 1);
                         } else {
@@ -100,9 +100,8 @@ class secureLogs {
         }
     }
     showLogs() {
-        if (document.getElementById("frame-logs").style.display === "block") {
-                clearInterval(this.#logsTimer);
-                this.#logsTimer = null;
+        if (document.getElementById("menuSelectionContainer").style.display !== "none") {
+                this.#clearLogs()
                 let element = document.createElement("p");
                 if (document.getElementById("generatedLogs") !== null)
                     document.getElementById("generatedLogs").remove();
@@ -121,14 +120,18 @@ class secureLogs {
                 }
                 this.#logsTimer = setInterval(this.#reloadLogs, 500, output!==""?output:"none");
         } else {
-            clearInterval(this.#logsTimer);
-            this.#logsTimer = null;
-            if (document.getElementById("generatedLogs") !== null)
-                document.getElementById("generatedLogs").remove();
+            this.#clearLogs();
         }
     }
     #reloadLogs(output) {
-        document.getElementById("generatedLogs").innerHTML = output;
+        if (document.getElementById("generatedLogs") !== undefined)
+            document.getElementById("generatedLogs").innerHTML = output;
+    }
+    #clearLogs() {
+        clearInterval(this.#logsTimer);
+        this.#logsTimer = null;
+        if (document.getElementById("generatedLogs") !== null)
+            document.getElementById("generatedLogs").remove();
     }
     getLuckBoosts() {
         return this.#maxLuck;

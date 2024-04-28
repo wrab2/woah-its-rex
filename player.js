@@ -406,7 +406,6 @@ function loadNewData(data) {
                 text = text.substring(text.indexOf(" ") + 1);
                 if (!(player.settings.audioSettings[propertyName].canPlay)) document.getElementById(`mute${propertyName}`).innerText = `Unmute ${text}`;
                 let elements = document.getElementsByClassName("spawnVolume");
-                console.log(elements)
                 for (let i = 0; i < elements.length; i++) {
                     if (String(elements[i].onchange).indexOf(propertyName) > -1) {
                         elements[i].value = player.settings.audioSettings[propertyName].volume;

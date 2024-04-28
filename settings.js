@@ -13,7 +13,8 @@ function closeMenu() {
     for (let i = 0; i < children.length; i++) children[i].style.display = "none";
     document.getElementById("menuSelectionContainer").style.display = "none";
     if (document.getElementById("logHolder").children.length > 0) document.getElementById("logHolder").removeChild(document.getElementById("logHolder").firstChild);
-    clearInterval(timeUpdater)
+    clearInterval(timeUpdater);
+    verifiedOres.showLogs();
 }
 function keepShowingMenu() {
     document.getElementById("menuHolder").style.display = "block";
