@@ -83,6 +83,7 @@ class playerTemplate {
             minRarityNum: 0,
             highRarityLogs: false,
             doSpawnEffects: true,
+            latestLength: 10,
         },
         this.stats = {
             currentPickaxe: 0,
@@ -262,7 +263,7 @@ function checkPowerupCooldowns() {
 }
 function toggleSpecificPowerup(num) {
     const current = Number(player.powerupVariables.currentPowerupDisplayed.substring(7));
-    switchPowerupDisplay(num - current)
+    if (document.getElementById("menuSelectionContainer").style.display === "none") switchPowerupDisplay(num - current)
 }
 function countFlawlessOres() {
     const ores = oreInformation.getOresByTier("Flawless");
@@ -404,10 +405,14 @@ function loadNewData(data) {
                 let text = document.getElementById(`mute${propertyName}`).innerText;
                 text = text.substring(text.indexOf(" ") + 1);
                 if (!(player.settings.audioSettings[propertyName].canPlay)) document.getElementById(`mute${propertyName}`).innerText = `Unmute ${text}`;
-                let element = document.getElementById(`mute${propertyName}`).parentElement.children[1].children[0];
-                element.value = player.settings.audioSettings[propertyName].volume;
-                changeSpawnVolume(element.value, propertyName);
-
+                let elements = document.getElementsByClassName("spawnVolume");
+                console.log(elements)
+                for (let i = 0; i < elements.length; i++) {
+                    if (String(elements[i].onchange).indexOf(propertyName) > -1) {
+                        elements[i].value = player.settings.audioSettings[propertyName].volume;
+                        changeSpawnVolume(elements[i].value, propertyName);
+                    }
+                }
             }
         }
         if (data.settings.baseMineCapacity !== undefined) {
@@ -481,6 +486,9 @@ function loadNewData(data) {
             if (!data.settings.doSpawnEffects) {
                 toggleSpawnEffects(document.getElementById("spawnEffects"));
             }
+        }
+        if (data.settings.latestLength !== undefined) {
+            player.settings.latestLength = data.settings.latestLength;
         }
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {

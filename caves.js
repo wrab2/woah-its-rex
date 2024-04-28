@@ -48,11 +48,11 @@ function generateCave(x, y, rate, reps, type) {
 
 function mineCaveBlock(c, r, type) {
     let block = mine[r][c];
-    if (currentWorld === 2 && block === "✖️") {
-        return;
-    }
-    let caveMulti = getCaveMulti(type);
     if (block != undefined) {
+        if (currentWorld === 2 && block === "✖️") {
+            return;
+        }
+        let caveMulti = getCaveMulti(type);
         if (oreList[block]["isBreakable"]) {
             if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock(block, c, r, false, true, caveMulti);
             else giveBlock(block, c, r);
@@ -60,7 +60,6 @@ function mineCaveBlock(c, r, type) {
         }
     }
     //CHECK BELOW THE BLOCK
-    let generated;
     if (mine[r + 1] === undefined) {
         mine[r + 1] = [];
     }

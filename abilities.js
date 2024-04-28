@@ -748,15 +748,15 @@ function pickaxeAbility19(x, y, reps) {
             pickaxeAbilityMineBlock(c, r);
             pickaxeAbilityMineBlock(c, r2);
             if (r2 < y) {
-                if (c < x && Math.random() < 1/30)
+                if (c < x && Math.random() < 1/60)
                     newOrigins[0] = [y - 8, x - 8];
-                if (c > x && Math.random() < 1/30)
+                if (c > x && Math.random() < 1/60)
                     newOrigins[1] = [y - 8, x + 8];
             }
             if (r > y) {
-                if (c < x && Math.random() < 1/30)
+                if (c < x && Math.random() < 1/60)
                     newOrigins[2] = [y + 8, x - 8];
-                if (c > x && Math.random() < 1/30)
+                if (c > x && Math.random() < 1/60)
                     newOrigins[3] = [y + 8, x + 8];
             }
         }

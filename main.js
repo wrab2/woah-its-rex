@@ -256,14 +256,8 @@ document.addEventListener('keydown', (event) => {
             return;
         case "escape":
             //toggleCelestials(false)
-            if (document.getElementById("settingsContainer").style.display === "block") {
-                hideSettings();
-            } else if (document.getElementById("conversionContainer").style.display === "block") {
-                toggleVariantConversions();
-            } else  if (document.getElementById("forgeContainer").style.display === "block") {
-                toggleOreForge();
-            } else {
-                showSettings();
+            if (document.getElementById("menuSelectionContainer").style.display !== "none") {
+                closeMenu()
             }
             break;
         case "t":
@@ -572,7 +566,7 @@ function spawnMessage(block, location, caveInfo) {
         spawnElement.innerText = "";
         spawnElement.appendChild(element)
     }
-    if (spawnElement.children.length > 10) spawnElement.removeChild(spawnElement.lastChild);
+    if (spawnElement.children.length > player.settings.latestLength) spawnElement.removeChild(spawnElement.lastChild);
         let createSpawnMessage = false;
         if (spawnOre === null) 
             createSpawnMessage = true;
@@ -624,7 +618,8 @@ function logFind(type, x, y, variant, atMined, fromReset) {
         spawnElement.innerText = "";
         spawnElement.appendChild(element)
     }
-    if (spawnElement.children.length > 10) spawnElement.removeChild(spawnElement.lastChild);
+    if (spawnElement.children.length > player.settings.latestLength) spawnElement.removeChild(spawnElement.lastChild);
+    if (spawnElement.children.length > document.getElementById("latestSpawns").children.length) console.log("something seems off")
 }
 
 function getAngleBetweenPoints(obj) {

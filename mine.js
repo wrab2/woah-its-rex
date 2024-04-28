@@ -62,7 +62,6 @@ function mineBlock(x, y, cause) {
     if (ore === "⚪") return;
     checkAllAround(x, y);
     player.stats.blocksMined++;
-    cause !== "ability" ? rollAbilities() : undefined;
     if (oreList[ore]["isBreakable"]) {
         if (oreList[ore]["numRarity"] >= 750000) {
             if (checkFromCave({"X":x, "Y":y})["fromCave"]) {
@@ -73,6 +72,7 @@ function mineBlock(x, y, cause) {
         }
         giveBlock(ore, x, y, (cause === "reset"));
         mine[y][x] = "⚪";
+        cause !== "ability" ? rollAbilities() : undefined;
     }
 }
 
@@ -115,17 +115,16 @@ function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
                 verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
             }
         } else {
-                oreRarity *= caveMulti;
-                if (oreRarity >= 750000) { 
-                    if (currentWorld === 1 && player.gears["gear7"])
-                        gearAbility1();
-                    if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
-                        logFind(type, x, y, namesemojis[inv - 1], player.stats.blocksMined, fromReset);     
+            oreRarity *= caveMulti;
+            if (oreRarity >= 750000) { 
+                if (currentWorld === 1 && player.gears["gear7"])
+                    gearAbility1();
+                if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
+                    logFind(type, x, y, namesemojis[inv - 1], player.stats.blocksMined, fromReset);     
                 }
                 if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
                     verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
-                }
-                
+            }
         }
         oreList[type][variantInvNames[inv - 1]]++;
         inventoryObj[type] = 0;

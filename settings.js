@@ -4,6 +4,32 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
+function toggleMenu() {
+    const element = document.getElementById("menuHolder");
+    element.style.display = element.style.display === "block" ? "none" : "block";
+}
+function closeMenu() {
+    const children = document.getElementsByClassName("menuCategory");
+    for (let i = 0; i < children.length; i++) children[i].style.display = "none";
+    document.getElementById("menuSelectionContainer").style.display = "none";
+    if (document.getElementById("logHolder").children.length > 0) document.getElementById("logHolder").removeChild(document.getElementById("logHolder").firstChild);
+    clearInterval(timeUpdater)
+}
+function keepShowingMenu() {
+    document.getElementById("menuHolder").style.display = "block";
+}
+function showMenuScreen(type) {
+    document.getElementById("menuSelectionContainer").style.display = "block";
+    document.getElementById(`frame-${type}`).style.display = "block";
+    if (type === 'settings') switchSettings('game');
+    if (type === 'statistics') createStats();
+    if (type === 'locations') showOreForge(true);
+}
+const settingsTabs = ["game", "audio"]
+function switchSettings(type) {
+    for (let i = 0; i < settingsTabs.length; i++) document.getElementById(`${settingsTabs[i]}Settings`).style.display = "none";
+    document.getElementById(`${type}Settings`).style.display = "block";
+}
 function openFrame(frameId) {
     document.querySelectorAll('.frame').forEach(frame => {
       frame.style.display = 'none';
@@ -91,6 +117,15 @@ function changeMinRarity(button) {
     const colors = oreInformation.getColors(nextTier);
     button.style.color = colors["textColor"]
     button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
+}
+function changeLatestMax(button) {
+    amt = Number(button.value);
+    if (!isNaN(amt) && amt > 0 && amt < 1000) {
+        player.settings.latestLength = amt;
+        flashGreen(button);
+    } else {
+        flashRed(button)
+    }
 }
 function changeStopOnRare(button) {
     if (player.settings.stopOnRare.active) {
@@ -467,8 +502,7 @@ function randomFunction(ore, cause) {
             }
             
             if (layer != undefined) {
-                showSettings();
-                openFrame('index');
+                showMenuScreen('index');
                 switchLayerIndex(0, layer, world);
             }
         }
@@ -566,45 +600,76 @@ function changeSpawnMessageRarity(button) {
     button.style.color = colors["textColor"]
     button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
 }
+let timeUpdater;
 function createStats() {
-    let elements = document.getElementsByClassName("oreStats")
-    let tier = "Flawless";
-    let i = 0;
-    while (tier !== "Common") {
-        let ores = oreInformation.getOresByTier(tier);
-        let isOwned = new Array(ores.length - 1)
-        let output = "";
-        let currentTotal = 0;
-        for (let j = 0; j < ores.length; j++) {
-            currentTotal += oreList[ores[j]]["normalAmt"];
-            if (oreList[ores[j]]["normalAmt"] > 0) isOwned[j] = true;
-        }
-        output += "You have " + currentTotal.toLocaleString() + " normal " + tier + " ores, ";
-        currentTotal = 0;
-        for (let j = 0; j < ores.length; j++) {
-            currentTotal += oreList[ores[j]]["electrifiedAmt"];
-            if (oreList[ores[j]]["electrifiedAmt"] > 0) isOwned[j] = true;
-        }
-        output += currentTotal.toLocaleString() + " electrified " + tier + " ores, ";
-        currentTotal = 0;
-        for (let j = 0; j < ores.length; j++) {
-            currentTotal += oreList[ores[j]]["radioactiveAmt"];
-            if (oreList[ores[j]]["radioactiveAmt"] > 0) isOwned[j] = true;
-        }
-        output += currentTotal.toLocaleString() + " radioactive " + tier + " ores, and ";
-        currentTotal = 0;
-        for (let j = 0; j < ores.length; j++) {
-            currentTotal += oreList[ores[j]]["explosiveAmt"];
-            if (oreList[ores[j]]["explosiveAmt"] > 0) isOwned[j] = true;
-        }
-        let totalExisting = 0;
-        for (let j = 0; j < isOwned.length; j++) if (isOwned[j]) totalExisting++;
-        output += currentTotal.toLocaleString() + " explosive " + tier + " ores.";
-        elements[i].innerText = output;
-        elements[i + 1].innerText = "You have " + totalExisting + "/" + ores.length + " of the ores in this tier."
-        i+= 2;
-        tier = oreInformation.getNextTier(tier);
+    clearInterval(timeUpdater);
+    const elements2 = document.getElementsByClassName("deleteClass")
+    for (let i = elements2.length - 1; i >= 0; i--) elements2[i].remove()
+    let currentTier = "Flawless";
+    const table = document.createElement("table");
+    while (!oreInformation.tierGrOrEqTo({"tier1": "Common", "tier2": currentTier})) {
+    const tableRow = document.createElement('tr');
+    tableRow.classList = "deleteClass";
+    const ores = oreInformation.getOresByTier(currentTier);
+    let totals = {
+        "normalAmt": 0,
+        "electrifiedAmt": 0,
+        "radioactiveAmt": 0,
+        "explosiveAmt": 0,
     }
+    let completionAmt = 0;
+    for (let i = 0; i < ores.length; i++) {
+        let amts = 0;
+        for (let j = 0; j < variantInvNames.length; j++) {
+            totals[variantInvNames[j]] += oreList[ores[i]][variantInvNames[j]];
+            amts += oreList[ores[i]][variantInvNames[j]];
+        }
+        completionAmt += amts > 0 ? 1 : 0;
+    }
+    let tableRowInfo = document.createElement("td");
+    tableRowInfo.classList = "statsRow";
+    tableRowInfo.innerText = currentTier;
+    tableRow.appendChild(tableRowInfo);
+    tableRowInfo = document.createElement("td");
+    tableRowInfo.classList = "statsRow";
+    tableRowInfo.innerText = (totals["normalAmt"] + totals["electrifiedAmt"] + totals["radioactiveAmt"] + totals["explosiveAmt"]).toLocaleString();
+    tableRow.appendChild(tableRowInfo);
+    for (let property in totals) {
+        tableRowInfo = document.createElement("td");
+        tableRowInfo.classList = "statsRow";
+        tableRowInfo.innerText = totals[property].toLocaleString();
+        tableRow.appendChild(tableRowInfo);
+    }
+    tableRowInfo = document.createElement("td");
+    tableRowInfo.classList = "statsRow";
+    tableRowInfo.innerText = `${Math.round(completionAmt / ores.length * 100)}%`;
+    tableRow.appendChild(tableRowInfo);
+    currentTier = oreInformation.getNextTier(currentTier);
+    document.getElementById("statsTable").appendChild(tableRow);
+    }
+   updateTimes();
+   timeUpdater = setInterval(() => {
+    updateTimes();
+   }, 250);
+   
+}
+function updateTimes() {
+    document.getElementById("statsTotalTime").innerText = `${longTime(player.stats.timePlayed)} Time Played.`;
+    document.getElementById("statsSessionTime").innerText = `${longTime(Date.now() - verifiedOres.getStartTime())} Session Time.`;
+    document.getElementById("statsCavesGenerated").innerText = `${player.stats.cavesGenerated.toLocaleString()} Caves Generated.`;
+    document.getElementById("statsBlocksMined").innerText = `${player.stats.blocksMined.toLocaleString()} Blocks Mined.`;
+}
+function longTime(milliseconds) {
+    let seconds = Math.floor((milliseconds / 1000) % 60);
+    let minutes = Math.floor((milliseconds / 1000 / 60) % 60);
+    let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
+    let days = Math.floor((milliseconds / 1000 / 60 / 60 / 24) % 365);
+    return [
+        days.toString().padStart(3, "0"),
+        hours.toString().padStart(2, "0"),
+        minutes.toString().padStart(2, "0"),
+        seconds.toString().padStart(2, "0")
+    ].join(":");
 }
 function switchHighRarity(button) {
     if (player.settings.highRarityLogs) {
@@ -615,22 +680,34 @@ function switchHighRarity(button) {
         button.style.backgroundColor = "#6BC267";
     } 
 }
-function toggleVariantConversions() {
-    let element = document.getElementById("conversionContainer")
-    if (element.style.display === "block") {
-        element.style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        canMine = true;
-    } else {
-        element.style.display = "block";
-        document.getElementById("mainContent").style.display = "none";
-        canMine = false;
-    }
+function toggleVariantList(state) {
+    const elements = document.getElementsByClassName("potentialVariant");
+    for (let i = 0; i < elements.length; i++) elements[i].style.display = state ? "flex" : "none";
+}
+function switchCurrentSelectedVariant(type) {
+    document.getElementById("currentSelectedVariant").innerText = type;
+    toggleVariantList(false)
+}
+function showVariantConversion(state) {
+    if (state) showOreForge(false);
+    document.getElementById("conversionContainer").style.display = state ? "block" : "none";
+}
+function showOreForge(state) {
+    if (state) showVariantConversion(false)
+    document.getElementById("forgeContainer").style.display = state ? "block" : "none";
+}
+function showOreCrafts(state) {
+    if (state) showOreFissions(false);
+    document.getElementById("forgeCraft").style.display = state ? "inline-flex" : "none";
+}
+function showOreFissions(state) {
+    if (state) showOreCrafts(false);
+    document.getElementById("forgeFission").style.display = state ? "inline-flex" : "none";
 }
 function convertVariants() {
     let ore = document.getElementById("oreInput").value;
     ore = ore.replaceAll(" ", "");
-    let variant = document.getElementById("variantSelect").value;
+    let variant = document.getElementById("currentSelectedVariant").innerText;
     let amt = document.getElementById("amtInput").value;
     document.getElementById("amtInput").value = "";
     document.getElementById("oreInput").value = "";
