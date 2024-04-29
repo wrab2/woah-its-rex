@@ -62,9 +62,12 @@ function playSound(type) {
                 document.getElementById("blockContainer").style.animation = "";
                 timeoutAmt = 10;
             }
+            if (document.getElementById("blockDisplay").style.animation !== "")
+                document.getElementById("blockDisplay").style.animation = "";
             type = oldType;
             setTimeout(() => {
                 document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type);  
+                document.getElementById("blockDisplay").style.animation = "shake 0.5s linear 4";
                 player.currentEffect = type;
             }, timeoutAmt);
         }
@@ -73,5 +76,6 @@ function playSound(type) {
 }
 addEventListener("animationend", (event) => {
     if (event.target.id === "blockContainer") document.getElementById("blockContainer").style.animation = "";
+    if (event.target.id === "blockDisplay") document.getElementById("blockDisplay").style.animation = "";
     player.currentEffect = "";
 });

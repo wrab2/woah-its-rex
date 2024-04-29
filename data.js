@@ -106,7 +106,7 @@ function exportData() {
 function importData(data) {
     if (data === "") {
         if (confirm("You are importing nothing, this will perform a hard reset on your save file. Are you sure you want to do this?")) {
-            if (confirm("YOUR SAVE FILE WILL BE ERASED. PLEASE BE SURE THIS IS WHAT YOU WANT.")) {
+            if (confirm("YOUR SAVE FILE WILL BE ERASED. PLEASE BE SURE THIS IS WHAT YOU WANT. IF YOU ARE ON GALAXY, THIS WILL ALSO WIPE YOUR AUTOSAVE.")) {
                 clearInterval(dataTimer);
                 if (debug) {
                     localStorage.removeItem("testingData");
@@ -117,6 +117,11 @@ function importData(data) {
                     localStorage.removeItem("newPlayerData");
                     localStorage.removeItem("playedBefore");
                 }
+                window.top.postMessage({
+                    action: "delete",
+                    slot: 0,
+                  }, cloudsaving.website_name)
+                cloudsaving.dosave = false;
                 setTimeout(() => {
                     location.reload();
                 }, 1000);
