@@ -71,7 +71,7 @@ class secureLogs {
                         log.variant = variant;
                         if (log.caveInfo[1] > 1) {
                             let something;
-                            if (oolProbabilities[log.block] !== undefined && log.caveInfo[2] !== "type5Ores") something = oolProbabilities[this.#verifiedLogs[i].block];
+                            if (oolProbabilities[log.block] !== undefined && log.caveInfo[2] !== "type5Ores") something = oolProbabilities[log.block];
                             else something = 1/oreList[log.block]["numRarity"];
                             something /= log.caveInfo[1];
                             log.rarity = something;
