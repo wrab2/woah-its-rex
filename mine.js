@@ -445,14 +445,12 @@ function switchWorld() {
     canMine = true;
 }
 function stopMining() {
+    ability1Active = false;
+    clearTimeout(ability1Timeout);
+    baseSpeed += baseSpeed <= 22 ? 3 : 0;
     curDirection = "";
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
-    if (ability1Active) {
-        clearTimeout(ability1Timeout);
-        ability1Active = false;
-        baseSpeed += baseSpeed <= 22 ? 3 : 0;
-    }
 }
 
 
