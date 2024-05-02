@@ -263,7 +263,7 @@ function checkPowerupCooldowns() {
 }
 function toggleSpecificPowerup(num) {
     const current = Number(player.powerupVariables.currentPowerupDisplayed.substring(7));
-    if (document.getElementById("menuSelectionContainer").style.display === "none") switchPowerupDisplay(num - current)
+    if (document.getElementById("menuSelectionContainer").style.display !== "block") switchPowerupDisplay(num - current)
 }
 function countFlawlessOres() {
     const ores = oreInformation.getOresByTier("Flawless");
