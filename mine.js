@@ -511,6 +511,7 @@ function sr1Helper(state) {
     updateTolLuck();
     if (player.pickaxes[player.powerupVariables.fakeEquipped.item] !== undefined) {
         player.pickaxes[player.powerupVariables.fakeEquipped.item] = false;
+        player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
         player.powerupVariables.fakeEquipped.item = "";
         player.powerupVariables.fakeEquipped.originalState = undefined;
         player.powerupVariables.fakeEquipped.removeAt = Date.now();
