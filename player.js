@@ -488,16 +488,14 @@ function loadNewData(data) {
         //use new music
         data.settings.useNewMusic ??= true;
         if (!data.settings.useNewMusic) switchMusicType();
-        data.settings.musicSettings ??= {active: true, volume: 100};
         //music settings
-        if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
         player.settings.musicSettings.volume = data.settings.musicSettings.volume;
         document.getElementById("musicVolume").value = data.settings.musicSettings.volume;
-
         if (player.settings.useNewMusic) {changeNewMusicVolume(player.settings.musicSettings.volume); selectSong();}
         else {changeMusicVolume(player.settings.musicSettings.volume); keepRunning();}
-
-        data.settings.stopOnRare ??= {active: true, minimum: "Antique"}
+        data.settings.musicSettings ??= {active: true, volume: 100};
+        if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
+        data.settings.stopOnRare ??= {active: true, minimum: "Antique"};
         player.settings.stopOnRare.minimum = oreInformation.getPreviousTier(data.settings.stopOnRare.minimum);
         player.settings.stopOnRare.active = data.settings.stopOnRare.active;
         if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";

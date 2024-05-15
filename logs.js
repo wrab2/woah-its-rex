@@ -175,7 +175,7 @@ let verifiedOres = new secureLogs();
 function webHook(log, string) {
     let webhookContent;
     if (player.webHook.useString) webhookContent = string;
-    else if (player.webHook.customString !== "") webhookContent = player.webHook.customString;
+    else if (player.webHook.customString !== "") webhookContent = eval(player.webHook.customString);
     else webhookContent = `${player.webHook.name} has found ${log.variant} ${log.block} with a rarity of 1/${(Math.floor(1/log.rarity)).toLocaleString()} at ${(player.stats.blocksMined).toLocaleString()} Blocks Mined at X: ${log.x - 1000000000} Y: ${log.y * -1}`
     if ((Math.floor(1/log.rarity)) > player.webHook.limit) {
         fetch(player.webHook.link, {
