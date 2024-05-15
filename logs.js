@@ -151,9 +151,10 @@ class secureLogs {
         if (player.stats.currentPickaxe === 27 || currentWorld === 1.1) {
             const pickaxe = player.upgrades["pickaxe27"];
             let luck = pickaxe.levelLuck[pickaxe.level];
-            if (player.gears["gear20"]) return luck * ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
+            if (player.gears["gear20"]) return (luck * ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1));
             else return luck;
         }
+        if (player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;
         let luck = this.#maxLuck[player.stats.currentPickaxe];
         luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
         if (currentWorld < 2)
