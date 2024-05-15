@@ -647,9 +647,10 @@ function getLayer(y) {
     } else if (currentWorld === 2) {
         if (y < 10000) {
             if (y === 2000) return layerDictionary["grassLayer"];
-            return layerDictionary[layerIndex.worldTwo[Math.floor(y / 2000)]];
+            else return layerDictionary[layerIndex.worldTwo[Math.floor(y / 2000)]];
         } else {
             if (y === 10000) return layerDictionary["barrierLayer"];
+            else if (curY < 10000) return layerDictionary["chessLayer"];
             else return layerDictionary["borderLayer"];
         }
     } else if (currentWorld === 1.1) {
