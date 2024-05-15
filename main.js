@@ -584,6 +584,7 @@ function spawnMessage(obj) {
     let location = obj.location;
     let caveInfo = obj.caveInfo;
     let variant = namesemojis[obj.variant - 1];
+    let variantMulti = multis[obj.variant - 1];
     //ADD TO MINE CAPACITY IF NEAR RESET
     player.oreTracker.existingOres.push({block: block, posX : location["X"], posY : location["Y"]});
     if ((currentWorld < 2 && !player.gears["gear3"]) && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < player.settings.baseMineCapacity + 50000)
@@ -596,8 +597,8 @@ function spawnMessage(obj) {
     let element = document.createElement("p");
     element.setAttribute("title", oreList[block]["oreName"]);
     element.classList = "latestFind";
-    if (caveInfo != undefined) output += `<span title="${oreList[block]["oreName"]}">${variant} ${block}` + "</span> 1/" + caveInfo["adjRarity"].toLocaleString() + " Adjusted.";
-    else output += `<span title="${oreList[block]["oreName"]}">${variant} ${block}` + "</span> 1/" + oreRarity.toLocaleString();
+    if (caveInfo != undefined) output += `<span title="${oreList[block]["oreName"]}">${variant} ${block}` + "</span> 1/" + (caveInfo["adjRarity"] * variantMulti).toLocaleString() + " Adjusted.";
+    else output += `<span title="${oreList[block]["oreName"]}">${variant} ${block}` + "</span> 1/" + (oreRarity * variantMulti).toLocaleString();
     let colors = oreInformation.getColors(oreList[block]["oreTier"]);
     element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
@@ -615,20 +616,27 @@ function spawnMessage(obj) {
     let curTier = oreList[block]["oreTier"];
     if (oreInformation.tierGrOrEqTo({"tier1": curTier, "tier2":currentSpawnTier}) || spawnOre === null || currentSpawnTier === "") createSpawnMessage = true;
     if (createSpawnMessage) {
+        if (obj.variant === 4) document.getElementById("spawnMessage").classList = "explosiveSpawnMessage";
+        else if (obj.variant === 3) document.getElementById("spawnMessage").classList = "radioactiveSpawnMessage";
+        else if (obj.variant === 2) document.getElementById("spawnMessage").classList = "electrifiedSpawnMessage";
+        else if (obj.variant === 1) document.getElementById("spawnMessage").classList = "";
         currentSpawnTier = curTier;
+        let spawnText;
         if (currentWorld === 1.1) {
-            document.getElementById("spawnMessage").innerHTML = oreInformation.getTierMessage(curTier);
+            spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreInformation.getTierMessage(curTier) + "</span></i><br>";
+            typeWriter(spawnText);
         } else {
-            let spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreList[block]["spawnMessage"] + "</span></i><br>";
+            spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreList[block]["spawnMessage"] + "</span></i><br>";
             if (caveInfo != undefined) {
-                spawnText += "1/" + (caveInfo["adjRarity"]).toLocaleString();
+                spawnText += "1/" + (caveInfo["adjRarity"] * variantMulti).toLocaleString();
             } else {
-                spawnText += "1/" + oreRarity.toLocaleString();
+                spawnText += "1/" + (oreRarity * variantMulti).toLocaleString();
             }
             typeWriter(spawnText)
         }
         clearTimeout(spawnOre);
         spawnOre = setTimeout(() => {
+            document.getElementById("spawnMessage").classList = ""; 
             document.getElementById("spawnMessage").innerHTML = "Spawn Messages Appear Here!";
             spawnOre = null;
             currentSpawnTier = "";
