@@ -185,7 +185,7 @@ function webHook(log) {
     const webhookName = webhookInfo.name;
     let webhookContent = webhookInfo.customString;
     const webhookString = `${webhookName} has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rarity).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}`            
-    webhookContent = webhookContent === "normal" ? webhookString : webhookContent;
+    webhookContent = webhookContent === "`normal`" ? webhookString : webhookContent;
     fetch(player.webHook.link, {
     body: JSON.stringify({
     content: webhookContent,
