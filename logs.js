@@ -151,7 +151,8 @@ class secureLogs {
         if (player.stats.currentPickaxe === 27 || currentWorld === 1.1) {
             const pickaxe = player.upgrades["pickaxe27"];
             let luck = pickaxe.levelLuck[pickaxe.level];
-            if (player.gears["gear20"]) return (luck * ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1));
+            if (player.gears["gear20"]) luck *= ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
+            if (isNaN(luck)) return 1;
             else return luck;
         }
         if (player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;
@@ -160,7 +161,8 @@ class secureLogs {
         if (currentWorld < 2)
             luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         luck *= (player.gears["gear20"] ? ((verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1) : 1);
-        return luck;
+        if (isNaN(luck)) return 1;
+        else return luck;
     }
     getStartTime() {
         return this.#startTime;
