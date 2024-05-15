@@ -22,7 +22,7 @@ function toSurface() {
     curDirection = "";
     mine[curY][curX] = "⚪";
     curX = 1000000000;
-    if (currentWorld === 1) {
+    if (currentWorld < 2) {
         curY = 0;
     } else {
         curY = 2001;
@@ -46,7 +46,7 @@ async function mineReset() {
         const temp = curDirection;
         curDirection = "";
         let temp2;
-        if ((currentWorld === 1 && !player.gears["gear3"]) || (currentWorld === 1 && !player.gears["gear17"]))
+        if ((currentWorld < 2 && !player.gears["gear3"]) || (currentWorld === 1 && !player.gears["gear17"]))
             temp2 = await collectOres(temp);
         canMine = await mineResetAid();
         checkAllAround(curX, curY, 1);

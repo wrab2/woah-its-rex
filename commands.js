@@ -117,7 +117,7 @@ const adminGetHelp = function() {
 const adminChangeLuck = function(value) {
     if (debug) {
         cat = value;
-        currentLayer = applyLuckToLayer(currentLayer, cat);
+        updateAllLayers()
     } else {
         window.alert("INSUFFICIENT PERMISSIONS")
     }
@@ -135,7 +135,7 @@ const displayLarge = function() {
             mine[y] ??= [];
             for (let x = curX - 150; x < curX + 150; x++) {
                 if (mine[y][x]) {
-                    output += mine[y][x];
+                    output += mine[y][x].ore === undefined ? mine[y][x] : mine[y][x].ore;
                 } else {
                     output += "⬛";
                 }

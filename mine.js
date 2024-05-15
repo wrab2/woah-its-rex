@@ -58,19 +58,31 @@ function checkAllAround(x, y) {
 //MINING
 
 function mineBlock(x, y, cause) {
-    let ore = mine[y][x];
+    let ore;
+    let variant;
+    if (mine[y][x].ore !== undefined) {
+        ore = mine[y][x].ore;
+        variant = mine[y][x].variant
+    } else {
+        ore = mine[y][x];
+        variant = undefined;
+    }
     if (ore === "⚪") return;
-    checkAllAround(x, y);
-    player.stats.blocksMined++;
+    
     if (oreList[ore]["isBreakable"]) {
+        checkAllAround(x, y);
         if (oreList[ore]["numRarity"] >= 750000) {
             if (checkFromCave({"X":x, "Y":y})["fromCave"]) {
-                giveBlock(ore, x, y, false, true, checkFromCave({"X":x, "Y":y})["multi"]);
+                giveBlock({type: ore, x:x, y:y, fromReset:false, fromCave:true, caveMulti:checkFromCave({"X":x, "Y":y})["multi"], variant:variant});
                 mine[y][x] = "⚪";
+                checkAllAround(x, y);
+                player.stats.blocksMined++;
                 return;
             }
+            if (cause === "ability" && player.settings.automineProtection && oreInformation.tierGrOrEqTo({"tier1": oreList[ore]["oreTier"], "tier2": minTier})) return;
         }
-        giveBlock(ore, x, y, (cause === "reset"));
+        player.stats.blocksMined++;
+        giveBlock({type: ore, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:variant});
         mine[y][x] = "⚪";
         cause !== "ability" ? rollAbilities() : undefined;
     }
@@ -79,85 +91,91 @@ function mineBlock(x, y, cause) {
 //ORE GENERATION AND OBTAINING
 
 let multis = [1, 50, 250, 500];
-let inv;
-function giveBlock(type, x, y, fromReset, fromCave, caveMulti) {
-        if (type === "⚪") return;
-        //CREATE VARIABLES
-        let oreRarity = oreList[type]["numRarity"];
-        let inv = 1;
-        //SELECT VARIANT
-        if (Math.floor(Math.random() * 50) === 25)
-            inv = 2;
-        else if (Math.floor(Math.random() * 250) === 125)
-            inv = 3;
-        else if (Math.floor(Math.random() * 500) === 250)
-            inv = 4;
-        if (!fromCave) {
-            if (oreRarity >= 750000) {
-                if (currentWorld === 1 && player.gears["gear7"])
-                    gearAbility1();
-                if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
-                    logFind(type, x, y, namesemojis[inv - 1], player.stats.blocksMined, fromReset);     
-            }
-            if (currentWorld === 1 && player.gears["gear4"]) {
-                oreList[currentLayer.slice(-1)]["normalAmt"]++;
-            }
-            if (player.gears["gear15"]) {
-                 if (oreRarity === 1 && (Math.random() < 0.5))
-                    oreList[type]["normalAmt"] += 2;
-            }
-            if (player.gears["gear13"]) {
-                if (oreRarity < 750000 && oreRarity > 1)
-                    if (Math.random < 0.75)
-                        oreList[type]["normalAmt"]++;
-            }
-            if (oreList[type]["hasLog"]) {
-                verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
-            }
-        } else {
-            oreRarity *= caveMulti;
-            if (oreRarity >= 750000) { 
-                if (currentWorld === 1 && player.gears["gear7"])
-                    gearAbility1();
-                if (oreInformation.tierGrOrEqTo({"tier1" : oreList[type]["oreTier"], "tier2" : minTier}))
-                    logFind(type, x, y, namesemojis[inv - 1], player.stats.blocksMined, fromReset);     
-                }
-                if (oreList[type]["hasLog"] || oreRarity >= 160000000) {
-                    verifiedOres.verifyFind(mine[y][x], y, x, names[inv - 1]);
+//{type: x, x:x, y:y, fromReset:x, fromCave:x, caveMulti:x, variant:x}
+function giveBlock(obj) {
+    if (obj.type === "⚪") return;
+    //CREATE VARIABLES
+    let oreRarity = oreList[obj.type]["numRarity"];
+    //SELECT VARIANT
+    let inv;
+    if (obj.variant === undefined) {
+        inv = rollVariant();
+        if (player.gears["gear26"] && inv === 1) inv = rollVariant();
+       
+    } else {
+        inv = obj.variant;
+    }
+    //PROC & LOGS
+    let gear4Proc = currentWorld < 2 && player.gears["gear4"];
+    let gear13Proc = player.gears["gear13"] && oreRarity < 750000 && oreRarity > 1 && Math.random < 0.75;
+    
+    
+    const layerMaterial = layerDictionary[currentLayer].layer.slice(-1);
+    if (gear4Proc) {
+        oreList[layerMaterial]["normalAmt"]++;
+    }
+    if (gear13Proc) {
+        oreList[obj.type]["normalAmt"]++;
+    }
+    if (obj.fromCave) {oreRarity *= obj.caveMulti;}
+    if (oreRarity >= 750000) {
+        let gear22Proc = player.gears["gear22"] && Math.random() < 1/10;
+        if (gear22Proc) oreList[obj.type]["normalAmt"]++;
+        if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
+        let rareTier = oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier});
+        if (rareTier) {
+            logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset); 
+        }
+        if (oreList[obj.type]["oreTier"] === "Flawless") {
+            if (!player.sr1Unlocked) {
+                player.sr1Unlocked = true;
+                document.getElementById("sr1Lock").style.display = "none";
+                document.getElementById("sr1Teleporter").style.display = "block";
             }
         }
-        oreList[type][variantInvNames[inv - 1]]++;
-        inventoryObj[type] = 0;
+    } else {
+        if (oreRarity === 1) {
+            let gear15Proc = player.gears["gear15"] && Math.random() < 0.5;
+            let gear27Proc = player.gears["gear27"] && Math.random() < 1/20;
+            if (gear15Proc) oreList[obj.type]["normalAmt"] += 2;
+            if (gear27Proc) oreList[layerMaterial]["normalAmt"] += 30;
+        }
+    }
+    
+    if (oreList[obj.type]["hasLog"] || oreRarity >= 160000000) {
+        verifiedOres.verifyFind(mine[obj.y][obj.x], obj.y, obj.x, names[inv - 1]);
+    }
+
+    oreList[obj.type][variantInvNames[inv - 1]]++;
+    inventoryObj[obj.type] = 0;
 }
-let minRarity = 750000;
+function rollVariant() {
+    let rng = Math.round(Math.random() * 499 + 1);
+    if (rng === 1) {return 4;} // 1:500
+    else if (rng <= 3) {return 3;} // 1:250
+    else if (rng <= 10) {return 2;} // 1:50
+    return 1;
+}
 let cat = 1;
-let probabilityTable;
 const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸";
 function generateBlock(location) {
     blocksRevealedThisReset++;
-    probabilityTable = currentLayer;
-    if (location["Y"] === 1 && currentWorld === 1) {
-        probabilityTable = layerList[specialLayers[2]];
-    }
-    if (currentWorld === 2) {
-        if (location["Y"] === 10000 && currentWorld === 2)
-            probabilityTable = layerList[specialLayers[3]];
-    }
-    if ((location["Y"] === 0 && currentWorld === 1) || (location["Y"] === 2000 && currentWorld === 2)) {
-        probabilityTable = layerList[specialLayers[5]]
-    }
-        
-
+    let probabilityTable = getLayer(location["Y"]);
+    let generationProbabilities = probabilityTable.probabilities;
+    let arr = probabilityTable.layer;
     let blockToGive = "";
     let chosenValue = Math.random();
-    let summedProbability = 0;
-    for (let i = 0; i < probabilityTable.length; i++) {
-        summedProbability += oreList[probabilityTable[i]]["decimalRarity"];
-        if (chosenValue < summedProbability) {
-            blockToGive = probabilityTable[i];
-            break;
+    let low = 0;
+    let high = arr.length;
+    while (low < high) {
+        const mid = (low + high) >> 1; // Use bitwise shift for integer division
+        if (chosenValue >= generationProbabilities[mid]) {
+            low = mid + 1;
+        } else {
+            high = mid;
         }
     }
+    blockToGive = arr[low];
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
@@ -165,16 +183,19 @@ function generateBlock(location) {
             blockToGive = checkSpecials(blockToGive);
             mine[location["Y"]][location["X"]] = blockToGive;
         }
+        let variant = rollVariant();
+        if (player.gears["gear26"] && variant === 1) variant = rollVariant();
+        mine[location["Y"]][location["X"]] = {ore: blockToGive, variant: variant};
         const tier = oreList[blockToGive]["oreTier"];
-        if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum}))
-            stopMining();
         if (oreList[blockToGive]["hasLog"]) {
-            verifiedOres.createLog(location["Y"],location["X"],blockToGive, new Error());
+            verifiedOres.createLog(location["Y"],location["X"],{ore: blockToGive, variant: variant}, new Error());
             verifiedOres.verifyLog(location["Y"], location["X"]);
         }
         playSound(oreList[blockToGive]["oreTier"]);
-        if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage(blockToGive, location);
-        if (((currentWorld === 1 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) && tier !== "Celestial") mineBlock(location["X"], location["Y"], "ability");
+        if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage({block: blockToGive, location: location, caveInfo: undefined, variant: variant});
+        if ((((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) && tier !== "Celestial") || player.gears["gear28"]) mineBlock(location["X"], location["Y"], "ability");
+        if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum}))
+            stopMining();
     }
 }
 
@@ -256,34 +277,70 @@ for (let i = 0; i < 100000; i++) {
 }
 */
 //TELEPORTING
+const specialLayerLocations = {
 
+}
+let specialLayerDistance;
 let distanceMulti = 1;
-let y = 1000;
+let layerDistanceY = 1000;
+function distanceHelper(layer) {
+    if (specialLayerDistance !== undefined) {
+        if (layer === "fluteLayer") return false;
+        if (layer === "sillyLayer" && specialLayerDistance === "fluteLayer") return true;
+        else if (layer === "unknownLayer" && specialLayerDistance !== "unknownLayer") return true;
+        else if (layer === "lastLayer" && specialLayerDistance !== "lastLayer") return true;
+        else return false;
+    } else {
+        return true;
+    }
+}
 function switchDistance() {
-        if (y < (allLayers.length - 1) * 2000) {
-            y = 2000 * distanceMulti + 1000;
+        if (layerDistanceY < (allLayers.length - 1) * 2000) {
+            layerDistanceY = 2000 * distanceMulti + 1000;
             distanceMulti++;
-        } else if (y > (allLayers.length - 1) * 2000) {
-            if (currentWorld === 1) {
-                y = 1000;
-                distanceMulti = 1;
+        } else if (layerDistanceY > (allLayers.length - 1) * 2000) {
+            if (currentWorld < 2) {
+                if (currentWorld === 1) {
+                    if (specialLayerLocations["fluteLayer"] !== undefined && distanceHelper("fluteLayer")) {specialLayerDistance = "fluteLayer"; layerDistanceY = specialLayerLocations["fluteLayer"] + 5000}
+                    else if (specialLayerLocations["sillyLayer"] !== undefined && distanceHelper("sillyLayer")) {specialLayerDistance = "sillyLayer"; layerDistanceY = specialLayerLocations["sillyLayer"] + 5000}
+                    else if (specialLayerLocations["unknownLayer"] !== undefined && distanceHelper("unknownLayer")) {specialLayerDistance = "unknownLayer"; layerDistanceY = specialLayerLocations["unknownLayer"] + 5000}
+                    else if (specialLayerLocations["lastLayer"] !== undefined && distanceHelper("lastLayer")) {specialLayerDistance = "lastLayer"; layerDistanceY = specialLayerLocations["lastLayer"].y + 5000}
+                    else {
+                        layerDistanceY = 1000;
+                        distanceMulti = 1;
+                        specialLayerDistance = undefined;
+                    }
+                } else {
+                    layerDistanceY = 1000;
+                    distanceMulti = 1;
+                }
             } else {
-                y = 3000;
+                layerDistanceY = 3000;
                 distanceMulti = 2;
             }
-           
         } else {
-            y = 1000;
+            layerDistanceY = 1000;
             distanceMulti = 1;
         }
-        let layer = layerList[allLayers[Math.floor(y / 2000)]].slice(-1);
+        let layer;
+        if (currentWorld === 1 && layerDistanceY > 16000) {
+            for (let property in specialLayerLocations) if (specialLayerLocations[property] + 5000 === layerDistanceY || specialLayerLocations[property].y + 5000 === layerDistanceY) {
+                if (specialLayerDistance === "lastLayer") {
+                    layer = layerDictionary[layerIndex.worldOne[repeatingLayers[specialLayerLocations["lastLayer"].num].layer]].layer.slice(-1);
+                } else if (property !== "lastLayer") {
+                    layer = layerDictionary[property].layer.slice(-1);
+                }
+            }
+        } else {
+            layer = layerList[allLayers[Math.floor(layerDistanceY / 2000)]].slice(-1);
+        }
         layer = layer[layer.length - 1];   
         document.getElementById("meterDisplay").setAttribute("title", oreList[layer]["oreName"]);
-        if (player.settings.usingNewEmojis) {
+        if (player.settings.usingNewEmojis || currentWorld === 1.1) {
             layer = "<span style=\"font-family:'Noto Color Emoji'\">" + layer + "</span>";
         }
         let sub = currentWorld === 2 ? 2000 : 0;
-        document.getElementById("meterDisplay").innerHTML = layer + " " + (y - sub).toLocaleString() + "m";
+        document.getElementById("meterDisplay").innerHTML = layer + " " + (layerDistanceY - sub).toLocaleString() + "m";
         
 }
 
@@ -303,15 +360,20 @@ async function teleport() {
 
 function toLocation() {
     return new Promise((resolve) => {
+    pa1 = [];
+    pa2 = [];
+    pa3 = [];
+    pa4 = [];
+    pickaxeAbility23Num = 0;
     let x = curX;
-    for (let r = y - 101; r < y + 101; r++) {
+    for (let r = layerDistanceY - 101; r < layerDistanceY + 101; r++) {
         if(mine[r] === undefined)
             mine[r] = [];
     }
-    setLayer(y - 50);
+    setLayer(layerDistanceY);
     mine[curY][curX] = "⚪";
     curX = x;
-    curY = y;
+    curY = layerDistanceY;
     checkAllAround(curX, curY, 1);
     mine[curY][curX] = "⛏️";
     setTimeout(() => {
@@ -331,7 +393,7 @@ function getParams(distanceX, distanceY, x, y) {
         displayLeft = distanceX;
     else
         displayLeft = x;
-    if (currentWorld === 1) { 
+    if (currentWorld < 2) { 
     if (y > distanceY)
         displayUp = distanceY;
     else
@@ -365,32 +427,27 @@ function getParams(distanceX, distanceY, x, y) {
     }
     return [displayLeft, displayUp];
 }
-function attemptSwitchWorld() {
-    if (player.pickaxes["pickaxe13"]) {
-        switchWorld();
-    }
+function attemptSwitchWorld(to) {
+    if (to === 2 && player.pickaxes["pickaxe13"] || to === 2 && currentWorld === 2) {switchWorld(currentWorld === 1 ? 2 : 1); return;}
+    if (to === 1.1) {switchWorld(currentWorld === 1.1 ? 1 : 1.1); return;}
 }
-function switchWorld() {
+function switchWorld(to) {
     canMine = false;
     stopMining();
     mine = [];
     player.oreTracker.existingOres = [];
-    document.getElementById("trackerOre").innerText = `Ore: N/A`
-    document.getElementById("trackerX").innerText = `X: N/A`
-    document.getElementById("trackerY").innerText = `Y: N/A`
     removeTrackerInformation();
     m87 = 0;
     m88 = 0;
-    if (currentWorld === 1) {
-        currentWorld = 2;
+    currentLayerNum = -1;
+    currentWorld = to;
+    if (currentWorld === 2) {
+        distanceMulti = 1;
+        y = 1000;
         allLayers = worldTwoLayers;
         curX = 1000000000;
         curY = 2001; 
-        currentLayerNum = -1;
-        setLayer(curY);
         createMine();
-        distanceMulti = 1;
-        y = 1000;
         if (player.stats.currentPickaxe === 25) {
             if (Math.random() < 1/10000) {
                 mine[curY + 1][curX] = "🩷";
@@ -399,43 +456,40 @@ function switchWorld() {
             } else {
                 mine[curY + 1][curX] = "📺";
             }
-
         } else {
             mine[curY + 1][curX] = "📺";
         }
-        if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
         layerNum = 1;
-        switchLayerIndex(0, "tvLayer", 2)
-    } else {
-        let children = document.getElementById("pickaxeCrafts").children;
-        for (let i = worldOnePickaxes.length - 1; i < worldOnePickaxes.length + worldTwoPickaxes.length; i++) children[i].style.display = "block";
+        switchLayerIndex(0, "tvLayer", 2);
+    } else if (currentWorld < 2) {
         distanceMulti = 0;
         y = 1000;
-        currentWorld = 1;
-        allLayers = worldOneLayers;
-        currentLayer = allLayers[0];
+        if (currentWorld === 1) allLayers = worldOneLayers;
+        else if (currentWorld === 1.1) allLayers = subRealmOneLayers;
         curX = 1000000000;
         curY = 0; 
-        currentLayerNum = -1;
-        setLayer(curY);
         createMine();
-        if (player.stats.currentPickaxe === 1) {
-            if (Math.random() < 1/10000) {
-                mine[curY + 1][curX] = "🩶";
-                playSound(oreList["🩶"]["oreTier"]);
-                document.getElementById("spawnMessage").innerHTML = "🩶 Has Spawned!";
-            } else {
-                mine[curY + 1][curX] = "🟫";
+        if (currentWorld === 1) {
+            if (player.stats.currentPickaxe === 1) {
+                if (Math.random() < 1/10000) {
+                    mine[curY + 1][curX] = "🩶";
+                    playSound(oreList["🩶"]["oreTier"]);
+                    document.getElementById("spawnMessage").innerHTML = "🩶 Has Spawned!";
+                } else {
+                    mine[curY + 1][curX] = "🟫";
+                }
             }
         }
-        if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
         layerNum = 0;
-        switchLayerIndex(0, "dirtLayer", 1);
+        if (currentWorld === 1) switchLayerIndex(0, "dirtLayer", 1);
+        else if (currentWorld === 1.1) switchLayerIndex(0, "scLayer", 1);
+        if (currentWorld === 1.1) sr1Helper(true);
+        else sr1Helper(false);
     }
     switchDistance();
     displayArea();
     switchWorldCraftables();
-    document.getElementById("nullChroma").style.display = "none";
+    if (currentRecipe !== undefined) displayRecipe(currentRecipe);
     utilitySwitchActions();
     removeFromLayers({"ore":"🐢","layers":["paperLayer"]})
     removeFromLayers({"ore":"🐰","layers":["paperLayer"]});
@@ -443,15 +497,42 @@ function switchWorld() {
     a13 = false;
     document.getElementById("teleportButton").disabled = false;
     canMine = true;
+    if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
 }
 function stopMining() {
+    ability1Active = false;
+    clearTimeout(ability1Timeout);
+    baseSpeed += baseSpeed <= 22 ? 3 : 0;
     curDirection = "";
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
-    if (ability1Active) {
-        clearTimeout(ability1Timeout);
-        ability1Active = false;
-        baseSpeed += baseSpeed <= 22 ? 3 : 0;
+}
+function sr1Helper(state) {
+    updateTolLuck();
+    if (player.pickaxes[player.powerupVariables.fakeEquipped.item] !== undefined) {
+        player.pickaxes[player.powerupVariables.fakeEquipped.item] = false;
+        player.powerupVariables.fakeEquipped.item = "";
+        player.powerupVariables.fakeEquipped.originalState = undefined;
+        player.powerupVariables.fakeEquipped.removeAt = Date.now();
+    }
+    if (state) {
+        if (!player.settings.usingNewEmojis) {
+            document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Noto Color Emoji\",\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"");
+            document.getElementById("switchFont").disabled = true;
+        }
+        player.wasUsing = player.stats.currentPickaxe;
+        player.stats.currentPickaxe = 27;
+        document.getElementById("theWorkshop").style.display = "block";
+        document.getElementById("sr1Teleporter").innerText = "Return Home...";
+    } else {
+        if (!player.settings.usingNewEmojis) {
+            document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"")
+            document.getElementById("switchFont").disabled = false;
+        }
+        if (player.wasUsing !== undefined) player.stats.currentPickaxe = player.wasUsing;
+        player.wasUsing = undefined;
+        document.getElementById("theWorkshop").style.display = "none";
+        document.getElementById("sr1Teleporter").innerText = "Travel to New Lands...";
     }
 }
 

@@ -23,6 +23,13 @@ class playerTemplate {
             "gear19": false,
             "gear20": false,
             "gear21": false,
+            "gear22": false,
+            "gear23": false,
+            //"gear24": false,
+            //"gear25": false,
+            //"gear26": false,
+            //"gear27": false,
+            //"gear28": false,
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -55,20 +62,20 @@ class playerTemplate {
         }
         this.settings = {
             audioSettings: {
-                "Antique": {canPlay: true, volume: 100},
-                "Mystical": {canPlay: true, volume: 100},
-                "Divine": {canPlay: true, volume: 100},
-                "Flawless": {canPlay: true, volume: 100},
-                "Interstellar": {canPlay: true, volume: 100},
-                "Metaversal": {canPlay: true, volume: 100},
-                "Sacred": {canPlay: true, volume: 100},
-                "Ethereal": {canPlay: true, volume: 100},
-                "Celestial": {canPlay: true, volume: 100},
-                "Imaginary": {canPlay: true, volume: 100},
+                "Antique": {canPlay: true, volume: 50},
+                "Mystical": {canPlay: true, volume: 50},
+                "Divine": {canPlay: true, volume: 50},
+                "Flawless": {canPlay: true, volume: 50},
+                "Interstellar": {canPlay: true, volume: 50},
+                "Metaversal": {canPlay: true, volume: 50},
+                "Sacred": {canPlay: true, volume: 50},
+                "Ethereal": {canPlay: true, volume: 15},
+                "Celestial": {canPlay: true, volume: 50},
+                "Imaginary": {canPlay: true, volume: 50},
             },
             musicSettings: {
                 active: true,
-                volume: 100
+                volume: 50
             },
             baseMineCapacity: 250000,
             minSpeed: 0,
@@ -84,6 +91,9 @@ class playerTemplate {
             highRarityLogs: false,
             doSpawnEffects: true,
             latestLength: 10,
+            useNewMusic: true,
+            automineProtection: false,
+            useNyerd: false
         },
         this.stats = {
             currentPickaxe: 0,
@@ -91,7 +101,6 @@ class playerTemplate {
             timePlayed: 0,
             cavesGenerated: 0
         },
-        //powerupCooldowns, powerupVariables
         this.powerupCooldowns = {
             "powerup1": {cooldown: Date.now(), unlocked: false},
             "powerup2": {cooldown: Date.now(), unlocked: false},
@@ -104,6 +113,8 @@ class playerTemplate {
             commonsAffected : {state: false, removeAt: Date.now()},
             currentPowerupDisplayed : "powerup1",
             fakeEquipped: {originalState: undefined, item: "", removeAt: Date.now()},
+            nextAuto: Date.now(),
+            autoNum: 1,
         },
         this.oreTracker = {
             existingOres : [],
@@ -111,7 +122,17 @@ class playerTemplate {
             locationX : 0,
             locationY : 0
         },
-        this.currentEffect = ""
+        this.currentEffect = "";
+        this.upgrades = {
+            "pickaxe27" : {
+                level: 0,
+                maxLevel: 1,
+                bought: 0,
+                levelLuck: [1, 3]
+            }
+        },
+        this.wasUsing = undefined;
+        this.sr1Unlocked = false;
     }
 }
 let player = new playerTemplate();
@@ -134,8 +155,8 @@ const powerupList = {
     },
     "powerup2" : {
         title: "The Spelunker",
-        description: "Generates a few caves around the player. Has a cooldown of 20 minutes.",
-        cooldown: 1200000,
+        description: "Generates a few caves around the player. Has a cooldown of 5 minutes.",
+        cooldown: 300000,
         colors: {
             background: "linear-gradient(to bottom, #F5533D, #6B331D, #696969, #0A0DC7)",
             text: "white",
@@ -158,12 +179,13 @@ const powerupList = {
         },
         requirement: "(player.stats.timePlayed >= 10800000)",
         condition1: "msToTime(player.stats.timePlayed)",
-        condition2: "/3 Hours Played."
+        condition2: "/3 Hours Played.",
+        oreAffected: "",
     },
     "powerup4" : {
         title: "Re-repurposed Replicator",
-        description: "Makes commons affected by up to 3.5x luck for a short duration. Has a cooldown of 45 minutes.",
-        cooldown: 2700000,
+        description: "Makes commons affected by up to 3.5x luck for a short duration. Has a cooldown of 20 minutes.",
+        cooldown: 1200000,
         colors: {
             background: "linear-gradient(to bottom, #FF0B0B, #FFEB00, #7AFF1F)",
             text: "black",
@@ -207,13 +229,15 @@ function switchPowerupDisplay(num) {
     document.getElementById("powerupScrollUp").style.color = powerup.colors.buttonUp.text;
     document.getElementById("powerupScrollDown").style.backgroundColor = powerup.colors.buttonDown.background;
     document.getElementById("powerupScrollDown").style.color = powerup.colors.buttonDown.text;
+    document.getElementById("powerupExtraInfo").style.color = powerup.colors.text;
     let parent = document.getElementById("powerupContainer");
     parent.style.backgroundImage = powerup.colors.background;
     let children = parent.children;
-    if (children.length > 4) document.getElementById("powerupContainer").removeChild(children[children.length - 1]);
+    if (children.length > 5) document.getElementById("powerupContainer").removeChild(children[children.length - 1]);
     let child = document.getElementById(`${player.powerupVariables.currentPowerupDisplayed}`).cloneNode(true);
     child.style.display = "flex";
     document.getElementById("powerupContainer").appendChild(child);
+    document.getElementById("powerupExtraInfo").innerText = "";
     updatePowerupCooldowns();
     checkPowerupCooldowns();
     if (player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].unlocked || eval(powerup.requirement)) {
@@ -251,6 +275,11 @@ function updatePowerupCooldowns() {
             document.getElementById("powerupRequirement").innerText = `${eval(powerupList[player.powerupVariables.currentPowerupDisplayed].condition1).toLocaleString()}${powerupList[player.powerupVariables.currentPowerupDisplayed].condition2}`
         }
     }
+    if (player.powerupVariables.currentPowerupDisplayed === "powerup3") {
+        const element = document.getElementById("powerupExtraInfo");
+        if (player.powerupVariables.currentChosenOre.ore !== undefined) {element.innerText = `1.5x to ${player.powerupVariables.currentChosenOre.ore}`; element.style.display = "block";}
+        else {element.style.display = "none"; element.innerText = ""}
+    }
 }
 function checkPowerupCooldowns() {
     for (let propertyName in player.powerupCooldowns) {
@@ -263,12 +292,22 @@ function checkPowerupCooldowns() {
 }
 function toggleSpecificPowerup(num) {
     const current = Number(player.powerupVariables.currentPowerupDisplayed.substring(7));
-    if (document.getElementById("menuSelectionContainer").style.display === "none") switchPowerupDisplay(num - current)
+    if (document.getElementById("menuSelectionContainer").style.display !== "block") switchPowerupDisplay(num - current)
+}
+function autoPowerups() {
+    if (Date.now() >= player.powerupVariables.nextAuto) {
+        toggleSpecificPowerup(player.powerupVariables.autoNum);
+        if (player.powerupCooldowns[`powerup${player.powerupVariables.autoNum}`].unlocked)
+            document.getElementById(`${player.powerupVariables.currentPowerupDisplayed}`).click();
+        player.powerupVariables.autoNum++;
+        if (player.powerupCooldowns[`powerup${player.powerupVariables.autoNum}`] === undefined) player.powerupVariables.autoNum = 1;
+        player.powerupVariables.nextAuto = Date.now() + 20000;
+    }
 }
 function countFlawlessOres() {
     const ores = oreInformation.getOresByTier("Flawless");
     let count = 0;
-    for (let i = 0; i < ores.length; i++) count += oreList[ores[i]]["normalAmt"];
+    for (let i = 0; i < ores.length; i++) count += oreList[ores[i]]["normalAmt"], count += oreList[ores[i]]["electrifiedAmt"], count += oreList[ores[i]]["radioactiveAmt"], count += oreList[ores[i]]["explosiveAmt"];
     return count;
 }
 
@@ -379,12 +418,15 @@ function loadNewData(data) {
             }
         }
         data = data.player;
+        if (data.wasUsing !== undefined) {
+            data.stats.currentPickaxe = data.wasUsing;
+        }
         if (data.powerupVariables !== undefined && data.powerupVariables.fakeEquipped !== undefined && data.powerupVariables.fakeEquipped.item !== "") {
             let item = data.powerupVariables.fakeEquipped.item;
             if (player.gears[item] !== undefined) data.gears[item] = false;
             if (player.pickaxes[item] !== undefined) {
                 data.pickaxes[item] = false;
-                data.stats.currentPickaxe = data.powerupVariables.fakeEquipped.originalState;
+                if (data.wasUsing === undefined) data.stats.currentPickaxe = data.powerupVariables.fakeEquipped.originalState;
             }
         }
         if (data.gears !== undefined && player.gears !== undefined) {
@@ -394,6 +436,7 @@ function loadNewData(data) {
             for (let propertyName in data.pickaxes) if (player.pickaxes[propertyName] !== undefined) player.pickaxes[propertyName] = data.pickaxes[propertyName];
         }
         if (data.stats.currentPickaxe !== undefined) player.stats.currentPickaxe = data.stats.currentPickaxe;
+        if (player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;
         if (data.stats.blocksMined !== undefined) player.stats.blocksMined = data.stats.blocksMined;
         if (data.stats.cavesGenerated !== undefined) player.stats.cavesGenerated = data.stats.cavesGenerated;
         if (data.stats.timePlayed !== undefined) player.stats.timePlayed = data.stats.timePlayed;
@@ -414,81 +457,61 @@ function loadNewData(data) {
                 }
             }
         }
-        if (data.settings.baseMineCapacity !== undefined) {
-            player.settings.baseMineCapacity = data.settings.baseMineCapacity;
-            document.getElementById("mineResetProgress").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
-        }
-        if (data.settings.canDisplay !== undefined) {
-            if (!data.settings.canDisplay) changeCanDisplay(document.getElementById("blockUpdates"));
-        }
-        if (data.settings.cavesEnabled !== undefined) {
-            if (!data.settings.cavesEnabled) toggleCaves(document.getElementById("caveToggle"));
-        }
-        if (data.settings.inventorySettings !== undefined) {
-            if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
-            if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
-        }
-        if (data.settings.minRarityNum !== undefined) {
-            player.settings.minRarityNum = (data.settings.minRarityNum) - 1;
-            changeSpawnMessageRarity(document.getElementById("changeSMrarityDisplay"));
-        }
-        if (data.settings.minSpeed !== undefined) {
-            player.settings.minSpeed = data.settings.minSpeed;
-        }
-        if (data.settings.musicSettings !== undefined) {
-            player.settings.musicSettings.active = data.settings.musicSettings.active;
-            player.settings.musicSettings.volume = data.settings.musicSettings.volume;
-            document.getElementById("musicVolume").value = data.settings.musicSettings.volume;
-            changeMusicVolume(player.settings.musicSettings.volume);
-            if (!player.settings.musicSettings.active) {
-                player.settings.musicSettings.active = true;
-                document.getElementById("musicButton").click();
-            }
-        }
-        if (data.settings.stopOnRare !== undefined) {
-            player.settings.stopOnRare.minimum = oreInformation.getPreviousTier(data.settings.stopOnRare.minimum);
-            player.settings.stopOnRare.active = data.settings.stopOnRare.active;
-            if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";
-            changeMinRarity(document.getElementById("stopOnRareDisplay"));
-        }
-        if (data.settings.useDisguisedChills !== undefined) {
-            if (data.settings.useDisguisedChills) {
-                player.settings.useDisguisedChills = false;
-                enableDisguisedChills();
-            }
-        }
-        if (data.settings.useNumbers !== undefined) {
-            if (data.settings.useNumbers) {
-                player.settings.useNumbers = false;
-                changeUseNumbers(document.getElementById("useNumbers"));
-            }
-        }
-        if (data.settings.usePathBlocks !== undefined) {
-            if (!data.settings.usePathBlocks) {
-                player.settings.usePathBlocks = true;
-                togglePathBlocks();
-            }
-        }
-        if (data.settings.usingNewEmojis !== undefined) {
-            if (data.settings.usingNewEmojis) {
-                player.settings.usingNewEmojis = false;
-                switchFont();
-            }
-        }
-        if (data.settings.highRarityLogs !== undefined) {
-            if (data.settings.highRarityLogs) {
-                player.settings.highRarityLogs = false;
-                switchHighRarity(document.getElementById("highRarity"));
-            }
-        }
-        if (data.settings.doSpawnEffects !== undefined) {
-            if (!data.settings.doSpawnEffects) {
-                toggleSpawnEffects(document.getElementById("spawnEffects"));
-            }
-        }
-        if (data.settings.latestLength !== undefined) {
-            player.settings.latestLength = data.settings.latestLength;
-        }
+        //base mine capacity
+        data.settings.baseMineCapacity ??= 250000;
+        player.settings.baseMineCapacity = data.settings.baseMineCapacity;
+        document.getElementById("mineResetProgress").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
+        //block updates
+        data.settings.canDisplay ??= true;
+        if (!data.settings.canDisplay) changeCanDisplay(document.getElementById("blockUpdates"));
+        //cave toggle
+        data.settings.cavesEnabled ??= true;
+        if (!data.settings.cavesEnabled) toggleCaves(document.getElementById("caveToggle"));
+        data.settings.inventorySettings ??= {invToIndex: true, craftingToIndex: true};
+        if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
+        if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
+        //minimum rarity for spawn messages
+        data.settings.minRarityNum ??= 0;
+        player.settings.minRarityNum = (data.settings.minRarityNum) - 1;
+        changeSpawnMessageRarity(document.getElementById("changeSMrarityDisplay"));
+        //minimum mining speed
+        data.settings.minSpeed ??= 0;
+        player.settings.minSpeed = data.settings.minSpeed;
+        //use new music
+        data.settings.useNewMusic ??= true;
+        if (!data.settings.useNewMusic) switchMusicType();
+        data.settings.musicSettings ??= {active: true, volume: 100};
+        //music settings
+        if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
+        player.settings.musicSettings.volume = data.settings.musicSettings.volume;
+        document.getElementById("musicVolume").value = data.settings.musicSettings.volume;
+
+        if (player.settings.useNewMusic) {changeNewMusicVolume(player.settings.musicSettings.volume); selectSong();}
+        else {changeMusicVolume(player.settings.musicSettings.volume); keepRunning();}
+
+        data.settings.stopOnRare ??= {active: true, minimum: "Antique"}
+        player.settings.stopOnRare.minimum = oreInformation.getPreviousTier(data.settings.stopOnRare.minimum);
+        player.settings.stopOnRare.active = data.settings.stopOnRare.active;
+        if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";
+        changeMinRarity(document.getElementById("stopOnRareDisplay"));
+        data.settings.useDisguisedChills ??= false;
+        if (data.settings.useDisguisedChills) enableDisguisedChills();
+        data.settings.useNumbers ??= false;
+        if (data.settings.useNumbers) changeUseNumbers(document.getElementById("useNumbers"));
+        data.settings.usePathBlocks ??= true;
+        if (!data.settings.usePathBlocks) togglePathBlocks();
+        data.settings.usingNewEmojis ??= false;
+        if (data.settings.usingNewEmojis) switchFont();
+        data.settings.highRarityLogs ??= false;
+        if (data.settings.highRarityLogs) switchHighRarity(document.getElementById("highRarity"));
+        data.settings.doSpawnEffects ??= true;
+        if (!data.settings.doSpawnEffects) toggleSpawnEffects(document.getElementById("spawnEffects"));
+        data.settings.latestLength ??= 10;
+        player.settings.latestLength = data.settings.latestLength;
+        data.settings.automineProtection ??= false;
+        data.settings.useNyerd ??= false;
+        if (data.settings.useNyerd) toggleNyerd(document.getElementById("toggleNyerd"));
+        if (data.settings.automineProtection) toggleAutomineProtection(document.getElementById("automineProtection"));
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {
                 if (data.powerupCooldowns[property] !== undefined && player.powerupCooldowns[property] !== undefined) {
@@ -499,6 +522,13 @@ function loadNewData(data) {
                 }
             }
         }
+        if (data.upgrades !== undefined) {
+            if (data.upgrades["pickaxe27"] !== undefined) {player.upgrades["pickaxe27"].level = data.upgrades["pickaxe27"].level; player.upgrades["pickaxe27"].bought = data.upgrades["pickaxe27"].bought}
+            
+        }
+        data.sr1Unlocked ??= false;
+        player.sr1Unlocked = data.sr1Unlocked;
+        if (player.sr1Unlocked) {document.getElementById("sr1Lock").style.display = "none"; document.getElementById("sr1Teleporter").style.display = "block";}
         //unlock locked features
         if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";

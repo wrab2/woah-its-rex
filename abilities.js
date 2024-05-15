@@ -7,12 +7,12 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
 async function rollAbilities() {
     let m = 1;
-    if (currentWorld === 1 && player.gears["gear8"])
-        m = 1.2;
-    if (!resetting && ((currentWorld === 1 && player.stats.currentPickaxe >= 5)||(currentWorld === 2 && player.gears["gear14"]))) {
-        if (Math.random() < 1/750 && player.settings.cavesEnabled) {
+    if (currentWorld < 2 && player.gears["gear8"]) m = 1.2;
+    if (player.gears["gear23"]) m += 0.15;
+    if (!resetting && ((currentWorld < 2 && player.stats.currentPickaxe >= 5)||(currentWorld === 2 && player.gears["gear14"]))) {
+        if (Math.random() < 1/500 && player.settings.cavesEnabled) {
             player.stats.cavesGenerated++;
-            generateCave(curX, curY, 0, 0);
+            generateCave();
             displayArea();
         }
     }
@@ -169,6 +169,12 @@ async function rollAbilities() {
             if (Math.random() < 1/150 * m) {
                 pickaxeAbility26(curX, curY);
             }
+            break;
+        case 27:
+        if (Math.random() < 1/500 * m) {
+            pickaxeAbility27(curX, curY);
+        }
+        break;
     }
 }
 
@@ -190,26 +196,30 @@ function powerup1(x, y) {
 //creates 4 caves around the player
 function powerup2(x, y) {
     if (Date.now() >= player.powerupCooldowns["powerup2"].cooldown) {
-        generateCave(x + 100, y, 0, 0);
-        generateCave(x - 100, y, 0, 0);
-        generateCave(x, y + 100, 0, 0);
-        generateCave(x, y - 100, 0, 0);
-        player.stats.cavesGenerated += 4;
+        generateCave(x + 100, y);
+        generateCave(x - 100, y);
+        generateCave(x, y + 100);
+        generateCave(x, y - 100);
+        generateCave(x + 100, y + 100);
+        generateCave(x - 100, y + 100);
+        generateCave(x - 100, y - 100);
+        generateCave(x + 100, y - 100);
+        player.stats.cavesGenerated += 8;
         displayArea();
-        player.powerupCooldowns["powerup2"].cooldown = Date.now() + 1200000;
+        player.powerupCooldowns["powerup2"].cooldown = Date.now() + 300000;
         document.getElementById("powerup2").style.backgroundColor = "#FF3D3D";
     }
-    
 }
 
 //make a random layer ore more common for a short period
 function powerup3() {
-    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown) {
-        let chosenOre = currentLayer[Math.round(Math.random() * (currentLayer.length - 1))];
-        while (oreInformation.isCommon(oreList[chosenOre]["oreTier"]) && oreList[chosenOre]["oreTier"] !== "Antique") chosenOre = currentLayer[Math.round(Math.random() * (currentLayer.length - 1))];
+    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown ) {
+        const layer = layerDictionary[currentLayer].layer;
+        let chosenOre = layer[Math.round(Math.random() * (layer.length - 1))];
+        while (oreInformation.isCommon(oreList[chosenOre]["oreTier"]) || oreList[chosenOre]["oreTier"] === "Antique") chosenOre = layer[Math.round(Math.random() * (layer.length - 1))];
         player.powerupVariables.currentChosenOre.ore = chosenOre, 
         player.powerupVariables.currentChosenOre.removeAt = Date.now() + 600000;
-        applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+        updateAllLayers();
         player.powerupCooldowns["powerup3"].cooldown = Date.now() + 3000000;
         document.getElementById("powerup3").style.backgroundColor = "#FF3D3D";
     }
@@ -218,13 +228,13 @@ function powerup4() {
     if (Date.now() >= player.powerupCooldowns["powerup4"].cooldown) {
         player.powerupVariables.commonsAffected.state = true;
         player.powerupVariables.commonsAffected.removeAt = Date.now() + 300000;
-        player.powerupCooldowns["powerup4"].cooldown = Date.now() + 2700000;
-        applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+        player.powerupCooldowns["powerup4"].cooldown = Date.now() + 1200000;
+        updateAllLayers()
         document.getElementById("powerup4").style.backgroundColor = "#FF3D3D";
     }
 }
 function powerup5() {
-    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown) {
+    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && currentWorld !== 1.1) {
         let toChooseFrom = Object.keys(player.pickaxes).concat(Object.keys(player.gears));
         for (let i = toChooseFrom.length - 1; i >= 0; i--) {
             if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (currentWorld === 2 && (toChooseFrom[i].includes("pickaxe")) && Number(toChooseFrom[i].substring(7)) < 13)) toChooseFrom.splice(i, 1);
@@ -242,7 +252,7 @@ function powerup5() {
                 if (toGive === "gear0") document.getElementById("trackerLock").style.display = "none";
                 if (toGive === "gear9") document.getElementById("sillyRecipe").style.display = "block";
             }
-            applyLuckToLayer(currentLayer, verifiedOres.getCurrentLuck());
+            updateAllLayers();
             let tempDirection = curDirection;
             stopMining();
             goDirection(tempDirection);
@@ -267,8 +277,8 @@ function gearAbility1() {
         ability1Timeout = setTimeout(() => {
             baseSpeed += baseSpeed <= 22 ? 3 : 0;
             clearInterval(loopTimer);
-            curDirection = "";
-            if (energySiphonerDirection != "") {
+            if (energySiphonerDirection !== "" && curDirection !== "") {
+                curDirection = "";
                 goDirection(energySiphonerDirection);
             }
             ability1Active = false;
@@ -278,8 +288,14 @@ function gearAbility1() {
 
 function gearAbility2() {
     if (currentWorld === 1 && player.gears["gear9"]) {
-        currentLayer = createLayer([layerList["sillyLayer"]]);
-        currentLayerNum = 7777;
+        let reps = -1;
+        let chosenDistance;
+        while (chosenDistance === undefined) {
+            reps++;
+            if (repeatingLayers[reps] === undefined && Math.random() < 1/77) chosenDistance = reps;
+        }
+        repeatingLayers[reps] = {layer: 7777, force: false};
+        specialLayerLocations["sillyLayer"] ??= 16000 + (10000 * reps);
     }
 }
 
@@ -1176,7 +1192,27 @@ function pickaxeAbility26(x, y) {
         }
     }
 }
-
+const treeLevels = {
+    0: [],
+    1: []
+}
+function pickaxeAbility27(x, y) {
+    x -= 37;
+    const level = player.upgrades["pickaxe27"].level;
+    switch (level) {
+        case 0:
+            y -= 65;
+            break;
+        case 1:
+            y -= 100;
+            break;
+    }
+    const arrToIndex = treeLevels[player.upgrades["pickaxe27"].level];
+    for (let i = 0; i < arrToIndex.length; i++) {
+        pickaxeAbilityMineBlock(arrToIndex[i]["x"] + x, arrToIndex[i]["y"] + y)
+    }
+    displayArea();
+}
 
 function pickaxeAbilityMineBlock(x, y) {
     if (y > 0) {

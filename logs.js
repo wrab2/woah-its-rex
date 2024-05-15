@@ -23,23 +23,25 @@ class secureLogs {
         this.#logsTimer = null;
     }
     createLog(r, c, intended, obj, fromCave) {
+        const ore = intended.ore === undefined ? intended : intended.ore;
+        const variant = intended.variant === undefined ? undefined : intended.variant;
         fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
         let luckModifier = (this.#maxLuck[player.stats.currentPickaxe] + (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0)) * ((player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1)) * (player.gears["gear20"] ? ((verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1) : 1) * 10;
         luckModifier *= 1.5;
         const maxLuck = luckModifier;
         let luck;
-        if (fromCave[0]) {
-            if (caveLuck > 2) {
+        if (fromCave[1] > 1) {
+            if (caveLuck > 5) {
                 console.log("failed to create, ", obj.stack, caveLuck);
                 return;
             } else {
                 luck = 1;
             }
         } else {
-            luck = oreList[intended]["numRarity"] * oreList[intended]["decimalRarity"];
+            luck = oreList[ore]["numRarity"] * oreList[ore]["decimalRarity"];
         }
         if (((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) || debug) {
-            this.#spawnLogs.push({x: c, y: r, block: intended, luck: luck, caveInfo: fromCave})
+            this.#spawnLogs.push({x: c, y: r, block: ore, luck: luck, caveInfo: fromCave, variant: variant})
         } else {
             console.log("failed to create, ", obj.stack, luck, maxLuck);
         }
@@ -47,11 +49,15 @@ class secureLogs {
     verifyLog(r, c) {
         for (let i = 0; i < this.#spawnLogs.length; i++) {
             if (this.#spawnLogs[i].y === r && this.#spawnLogs[i].x === c) {
-                if (mine[r][c] === this.#spawnLogs[i].block) {
+                const block = mine[r][c].ore === undefined ? mine[r][c] : mine[r][c].ore;
+                if (block === this.#spawnLogs[i].block) {
                     let rng;
-                    if (this.#spawnLogs[i].caveInfo[0]) rng = 1/oreList[this.#spawnLogs[i].block]["numRarity"];
+                    if (this.#spawnLogs[i].caveInfo[1] > 1) rng = 1/oreList[this.#spawnLogs[i].block]["numRarity"];
                     else rng = oreList[this.#spawnLogs[i].block]["decimalRarity"];
-                    this.#verifiedLogs["All"].push({block: this.#spawnLogs[i].block, y: r, x: c, time: Date.now() - this.#startTime, mined: false, variant: "Normal", luck: this.#spawnLogs[i].luck, caveInfo: this.#spawnLogs[i].caveInfo, rarity: rng})
+                    let variant = this.#spawnLogs[i].variant === undefined ? "Normal" : this.#spawnLogs[i].variant;
+                    rng /= multis[variant - 1];
+                    variant = names[variant - 1];
+                    this.#verifiedLogs["All"].push({block: this.#spawnLogs[i].block, y: r, x: c, time: Date.now() - this.#startTime, mined: false, variant: variant, luck: this.#spawnLogs[i].luck, caveInfo: this.#spawnLogs[i].caveInfo, rarity: rng})
                     this.#spawnLogs.splice(i, 1);
                     break;
                 } else {
@@ -61,6 +67,7 @@ class secureLogs {
         }
     }
     verifyFind(block, r, c, variant) {
+        block = block.ore === undefined ? block : block.ore;
         let verified = false;
         for (let i = this.#verifiedLogs["All"].length - 1; i >= 0; i--) {
             if (this.#verifiedLogs["All"][i].y === r && this.#verifiedLogs["All"][i].x === c) {
@@ -68,16 +75,17 @@ class secureLogs {
                     const log = this.#verifiedLogs["All"][i];
                     if (log.mined != true) {
                         log.mined = true;
-                        log.variant = variant;
+                        if (log.variant === undefined) log.variant = variant;
                         if (log.caveInfo[1] > 1) {
                             let something;
-                            if (oolProbabilities[log.block] !== undefined && log.caveInfo[2] !== "type5Ores") something = oolProbabilities[this.#verifiedLogs[i].block];
+                            if (oolProbabilities[log.block] !== undefined && log.caveInfo[2] !== "type5Ores") something = oolProbabilities[log.block];
+                            else if (log.caveInfo[2] === "type5Ores") something = gsProbabilities[caveList["type5Ores"].indexOf(log.block)]
                             else something = 1/oreList[log.block]["numRarity"];
                             something /= log.caveInfo[1];
                             log.rarity = something;
                         }
-                        log.rarity /= multis[names.indexOf(variant)];
-                        //const webhookString = `has found ${this.#verifiedLogs["All"][i].variant} ${this.#verifiedLogs["All"][i].block} with a rarity of 1/${Math.round(1/this.#verifiedLogs["All"][i].rarity).toLocaleString()} ${this.#verifiedLogs["All"][i].caveInfo[0] ? (this.#verifiedLogs["All"][i].caveInfo[1] > 1 ? "(" + caveList[this.#verifiedLogs["All"][i].caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(this.#verifiedLogs["All"][i].x - 1000000000).toLocaleString()}, Y: ${(-1 *this.#verifiedLogs["All"][i].y).toLocaleString()}`
+                        const webhookString = `Cat has found ${this.#verifiedLogs["All"][i].variant} ${this.#verifiedLogs["All"][i].block} with a rarity of 1/${Math.round(1/this.#verifiedLogs["All"][i].rarity).toLocaleString()} ${this.#verifiedLogs["All"][i].caveInfo[0] ? (this.#verifiedLogs["All"][i].caveInfo[1] > 1 ? "(" + caveList[this.#verifiedLogs["All"][i].caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(this.#verifiedLogs["All"][i].x - 1000000000).toLocaleString()}, Y: ${(-1 *this.#verifiedLogs["All"][i].y).toLocaleString()}`
+                        log.output = webhookString;
                         if (player.settings.highRarityLogs && log.rarity > 1/250000000) {
                             this.#verifiedLogs["All"].splice(i, 1);
                         } else {
@@ -91,7 +99,7 @@ class secureLogs {
                         break;
                     }
                 } else {
-                    console.log("failed to verify find", block, this.#verifiedLogs[i][0]);
+                    console.log("failed to verify find", block, this.#verifiedLogs["All"][i].luck);
                 }
             }
         }
@@ -110,12 +118,15 @@ class secureLogs {
                 let output = "";
                 const list = this.#verifiedLogs[document.getElementById("logSort").value];
                 for (let i = 0; i < list.length; i++) {
+                    if (list[i].output === undefined) {
+                        output += `Cat has NOT found ${list[i].variant} ${list[i].block} (Voided). Verification: `
+                    } else {
+                        output += `${list[i].output}. Verification: `;
+                    }
                     let times;
-                    if (list[i - 1] !== undefined) times =list[i].time - list[i - 1].time;
+                    if (list[i - 1] !== undefined) times = list[i].time - list[i - 1].time;
                     else times = list[i].time;
-                    output += `${list[i].block}, ${list[i].time}, ${times}, ${list[i].mined}, ${list[i].variant}, `;
-                    output += `${list[i].caveInfo[0] === true ? "Cave, " : ""} ${list[i].y}, `
-                    output += `${Math.round(1/(list[i].rarity)).toLocaleString()}, `;
+                    output += `${list[i].time}, ${times}, `;
                     output += (Math.log10(list[i].luck * (list[i].y + 1))) * 2 + "<br>";
                 }
                 this.#logsTimer = setInterval(this.#reloadLogs, 500, output!==""?output:"none");
@@ -137,12 +148,17 @@ class secureLogs {
         return this.#maxLuck;
     }
     getCurrentLuck() {
+        if (player.stats.currentPickaxe === 27 || currentWorld === 1.1) {
+            const pickaxe = player.upgrades["pickaxe27"];
+            let luck = pickaxe.levelLuck[pickaxe.level];
+            if (player.gears["gear20"]) return luck * ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
+            else return luck;
+        }
         let luck = this.#maxLuck[player.stats.currentPickaxe];
         luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
-        if (currentWorld === 1)
+        if (currentWorld < 2)
             luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         luck *= (player.gears["gear20"] ? ((verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1) : 1);
-        luck *= 1.5;
         return luck;
     }
     getStartTime() {

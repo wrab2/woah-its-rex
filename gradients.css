@@ -247,6 +247,21 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#replicatorPrototype span{
+    background: linear-gradient(to right,#FF0B0B, #FFEB00, #7AFF1F);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#treeOfLife span {
+    background: linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#hyperdriveAccelerator span {
+    background: linear-gradient(to right, #00dfff, #3a00f9, #15fd00, #3a00f9, #00dfff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

@@ -62,8 +62,10 @@ function loadAllData() {
                 window.alert("DATA CORRUPTION DETECTED, EXPORT YOUR SAVE FILE AND CONTACT A MODERATOR IN THE DISCORD");
                 return false;
             }
-        }  
-        if (data === null) return true;
+        }
+        data ??= {blocks: {}, player: player};
+        loadNewData(data);
+        return true;
 }
 
 

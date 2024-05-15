@@ -4,8 +4,24 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-function generateCave(x, y, rate, reps, type) {
+function checkValidLocation(x, y) {
+    let reps = 0;
+    while (reps < 100) {
+        const lX = x + Math.round(Math.random() * 100) - 50;
+        const lY = y + Math.round(Math.random() * 75) - 45;
+        mine[lY - 1] ??= [];
+        mine[lY + 1] ??= [];
+        mine[lY] ??= [];
+        if (lY > 1) {
+            if (mine[lY][lX] === undefined && mine[lY + 1][lX] === undefined && mine[lY - 1][lX] === undefined && mine[lY][lX - 1] === undefined && mine[lY][lX + 1] === undefined) return {x: lX, y: lY};
+        }
+        reps++;
+    }
+    return {x: undefined, y: undefined}
+}
+function generateCave(x, y, type) {
     let caveType;
+    let rate = 1;
     if (type === undefined) {  
         type = getCaveType();
         if (type === undefined) {
@@ -18,44 +34,59 @@ function generateCave(x, y, rate, reps, type) {
                 caveList[type] = createGsCave();
         }
     }
+    if (x === undefined || y === undefined) {
+        const newPoints = checkValidLocation(curX, curY);
+        if (newPoints.x === undefined) return;
+        else {
+            x = newPoints.x;
+            y = newPoints.y;
+        }
+    } else {
+        const newPoints = checkValidLocation(x, y);
+        if (newPoints.x === undefined) return;
+        else {
+            x = newPoints.x;
+            y = newPoints.y;
+        }
+    }
     caveType = type;
-        let distX = Math.round(Math.random() * 10) + 3;
-        let distY = Math.round(Math.random() * 10) + 3;
-        let newOrigins = [];
-            y > 0 ? mine[y] ??= [] : y = 0, mine[y] ??= [];
-            (y + distY) > 0 ? mine[y + distY] ??= [] : distY = 0, mine[y + distY] ??= [];
-            if (!(mine[y][x] === "⚪" && mine[y + distY][x + distX] === "⚪")) {
-            for (let r = y; r < y + distY; r++) {
-                for (let c = x; c < x + distX; c++) {
-                    if (Math.random() < (0.1 - rate))
-                        newOrigins.push([c + (Math.round(Math.random() * 4)) - (5 + reps), r + (Math.round(Math.random() * 4)) - (5 + reps)]);
-                        if (r > 0) {
-                            if (mine[r][c] === undefined) {
-                                generateCaveBlock(r, c, caveType);
-                            }  
-                        }
-                        mineCaveBlock(c, r, caveType);
-                }
+    let points = [{x: x, y: y}];
+    while (points.length > 0) {
+        for (let i = points.length - 1; i >= 0; i--) {
+            let pointX = points[i].x;
+            let pointY = points[i].y;
+            mineCaveBlock(pointX, pointY, type);
+            points.splice(i, 1);
+            let block = mine[pointY][pointX + 1];
+            if (block !== "⚪" && Math.random() < rate) points.push({x: pointX + 1, y: pointY});
+            block = mine[pointY][pointX - 1];
+            if (block !== "⚪" && Math.random() < rate) points.push({x: pointX - 1, y: pointY});
+            if (pointY - 1 > 0) {
+                mine[pointY - 1] ??= [];
+                block = mine[pointY - 1][pointX];
+                if (block !== "⚪" && Math.random() < rate) points.push({x: pointX, y: pointY - 1});
             }
-            let newRate = Math.round(Math.random() * 12) / 375;
-            rate += newRate;
-            reps++;
+            mine[pointY + 1] ??= [];
+            block = mine[pointY + 1][pointX];
+            if (block !== "⚪" && Math.random() < rate) points.push({x: pointX, y: pointY + 1});
         }
-        for (let i = 0; i < newOrigins.length; i++) {
-            generateCave(newOrigins[i][0], newOrigins[i][1], rate, reps, caveType);
-        }
+        rate -= 0.04;
+    }
 }
 
 function mineCaveBlock(c, r, type) {
     let block = mine[r][c];
-    if (block != undefined) {
+    if (block !== undefined) {
+        let variant = block.variant;
+        block = block.ore === undefined ? block : block.ore;
         if (currentWorld === 2 && block === "✖️") {
             return;
         }
         let caveMulti = getCaveMulti(type);
         if (oreList[block]["isBreakable"]) {
-            if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock(block, c, r, false, true, caveMulti);
-            else giveBlock(block, c, r);
+            //{type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant}
+            if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock({type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant});
+            else giveBlock({type: block, x:c, y:r});
             mine[r][c] = "⚪";
         }
     }
@@ -164,32 +195,40 @@ function generateCaveBlock(y, x, type) {
     }
     let chosenValue = Math.random();
     if (debug) chosenValue /= caveLuck;
-    let arr = type === "currentLayer" ? currentLayer : caveList[type];
+    let probabilityTable;
+    let arr;
+    if (type === "currentLayer") {
+        probabilityTable = getLayer(y);
+        arr = probabilityTable.layer;
+        probabilityTable = probabilityTable.probabilities;
+    } else {
+        arr = caveList[type];
+    }
     let blockToGive = "";
-        let low = 0;
-        let high = arr.length;
-        if (type !== "type5Ores") {
-            while (low < high) {
-                const mid = (low + high) >> 1; // Use bitwise shift for integer division
-                if (chosenValue >= 1/(oreList[arr[mid]]["numRarity"])) {
-                    low = mid + 1;
-                } else {
-                    high = mid;
-                }
+    let low = 0;
+    let high = arr.length;
+    if (type !== "type5Ores") {
+        while (low < high) {
+            const mid = (low + high) >> 1; // Use bitwise shift for integer division
+            const value = type === "currentLayer" ? probabilityTable[mid] : 1/(oreList[arr[mid]]["numRarity"]);
+            if (chosenValue >= value) {
+                low = mid + 1;
+            } else {
+                high = mid;
             }
-            blockToGive = arr[low];
-        } else {
-            while (low < high) {
-                const mid = (low + high) >> 1; // Use bitwise shift for integer division
-                if (chosenValue >= gsProbabilities[mid]) {
-                    low = mid + 1;
-                } else {
-                    high = mid;
-                }
-            }
-            blockToGive = arr[low];
         }
-        
+        blockToGive = arr[low];
+    } else {
+        while (low < high) {
+            const mid = (low + high) >> 1; // Use bitwise shift for integer division
+            if (chosenValue >= gsProbabilities[mid]) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        blockToGive = arr[low];
+    }
     //GETS THE CAVE RARITY TO MULTIPLY ORE RARITY BY FOR ADJUSTED RARITY
     let multi = getCaveMulti(type);
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
@@ -200,25 +239,31 @@ function generateCaveBlock(y, x, type) {
     }
     if (multi > 1) {
         if (adjRarity >= 25000000) {
+            let variant = rollVariant();
+            if (player.gears["gear26"] && variant === 1) variant = rollVariant();
+            mine[y][x] = {ore: blockToGive, variant: variant};
             if (oolProbabilities[blockToGive] != undefined && type !== "type5Ores")
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 playSound(oreList[blockToGive]["oreTier"]);
-                verifiedOres.createLog(y,x,blockToGive, new Error(), [true, getCaveMulti(type), type]);
+                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type]);
                 verifiedOres.verifyLog(y, x);
             }
-            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage(blockToGive, {"Y" : y, "X" : x}, {"adjRarity" : adjRarity, "caveType" : type});
-            if ((currentWorld === 1 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
+            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: {"adjRarity" : adjRarity, "caveType" : type}, variant: variant});
+            if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
         }
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
+            let variant = rollVariant();
+            if (player.gears["gear26"] && variant === 1) variant = rollVariant();
+            mine[y][x] = {ore: blockToGive, variant: variant};
             playSound(oreList[blockToGive]["oreTier"]);
             if (oreList[blockToGive]["hasLog"]) {
-                verifiedOres.createLog(y, x, blockToGive, new Error(), [true, 1]);
+                verifiedOres.createLog(y, x, {ore: blockToGive, variant: variant}, new Error(), [true, 1]);
                 verifiedOres.verifyLog(y, x);
             }
-            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage(blockToGive, {"Y" : y, "X" : x});
-            if ((currentWorld === 1 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
+            if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: undefined, variant: variant});
+            if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
         }
     }
     
@@ -290,6 +335,7 @@ function getCaveType() {
     let summedProbability = 0;
     let chosenValue = Math.random();
     chosenValue /= caveTypeLuck;
+    if (player.gears["gear25"]) chosenValue /= 1.75;
     for (let propertyName in caveTypes) {
         summedProbability += caveTypes[propertyName];
         if (chosenValue < summedProbability) {

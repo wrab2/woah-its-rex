@@ -21,6 +21,8 @@ function keepShowingMenu() {
 }
 function showMenuScreen(type) {
     document.getElementById("menuSelectionContainer").style.display = "block";
+    const allFrames = document.getElementById("menuSelectionContainer").children;
+    for (let i = 0; i < allFrames.length; i++) allFrames[i].style.display = "none";
     document.getElementById(`frame-${type}`).style.display = "block";
     if (type === 'settings') switchSettings('game');
     if (type === 'statistics') createStats();
@@ -320,6 +322,7 @@ function updateCapacity(element) {
 const indexOrder = {
     "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"],
     "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"],
+    "subrealmOne" : ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"]
 }
 let layerNum = 0;
 function switchLayerIndex(num, overrideLayer, world) {
@@ -329,9 +332,9 @@ function switchLayerIndex(num, overrideLayer, world) {
     let layerToIndex;
     let worldLayer;
     if (world === undefined) {
-        worldLayer = currentWorld === 1 ? indexOrder["worldOne"] : indexOrder["worldTwo"];
+        worldLayer = currentWorld === 1 ? indexOrder["worldOne"] : (world === 2 ? indexOrder["worldTwo"] : indexOrder["subrealmOne"]);
     } else {
-        worldLayer = world === 1 ? indexOrder["worldOne"] : indexOrder["worldTwo"];
+        worldLayer = world === 1 ? indexOrder["worldOne"] : (world === 2 ? indexOrder["worldTwo"] : indexOrder["subrealmOne"]);
     }
     if (overrideLayer === undefined) {
         layerNum += num;
@@ -366,6 +369,7 @@ function switchLayerIndex(num, overrideLayer, world) {
             return;
         }
     }
+    let layerMaterial;
     if (layerList[layerToIndex] != undefined) layerMaterial = layerList[layerToIndex].slice(-1);
     if (caveList[layerToIndex] != undefined) layerMaterial = caveList[layerToIndex].slice(-1);
     document.getElementById("indexSwitchButton").innerHTML = `<span title="${oreList[layerMaterial]["oreName"]}">${layerMaterial}</span>`;
@@ -377,9 +381,10 @@ function switchLayerIndex(num, overrideLayer, world) {
     }
     return 0;
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡🌱🩸♨️🚫🔈⛔💢🔇🛑⭕🔕🎉🧌♾️💅😁🪢";
+let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡🌱🩸♨️🚫🔈⛔💢🔇🛑⭕🔕🎉🧌♾️💅😁🪢🫶🇧🇷🇨🇴🇦🇷🇵🇪🇻🇪🇨🇱🇪🇨🇧🇴🇵🇾🇺🇾🇦🇺🇵🇬🇳🇿🇫🇯🇸🇧🇫🇲🇻🇺🇵🇫🇳🇨🇼🇸🏳️‍⚧️";
 let noLuck = "✴️🌹";
 function createIndexCards(layer) {
+        const oldLayer = layer; 
         let toReturn = [];
         let isCave = false;
         let caveMulti;
@@ -400,7 +405,7 @@ function createIndexCards(layer) {
         }
         for (let i = 0; i < layer.length; i++) {
         let property = layer[i];
-        if ((oreList[property]["numRarity"] >= minIndexRarity || property === "✴️") && oreList[property]["oreTier"] !== "Celestial") {
+        if ((oreList[property]["numRarity"] >= minIndexRarity || property === "✴️" || (oreList[property]["numRarity"] > 1 && subRealmOneLayers.includes(oldLayer))) && oreList[property]["oreTier"] !== "Celestial") {
             if (oreInformation.isCommon(oreList[property]["oreTier"])) affectedByLuck = false;
             if (noLuck.indexOf(property) > -1) affectedByLuck = false;
             let parentObject = document.createElement("div");
@@ -473,6 +478,15 @@ function randomFunction(ore, cause) {
                     if (layerList[worldTwoLayers[i]].includes(ore)) {
                         layer = worldTwoLayers[i];
                         world = 2;
+                        break;
+                    }
+                }
+            }
+            if (layer === undefined) {
+                for (let i = 0; i < subRealmOneLayers.length; i++) {
+                    if (layerList[subRealmOneLayers[i]].includes(ore)) {
+                        layer = subRealmOneLayers[i];
+                        world = 1.1;
                         break;
                     }
                 }
@@ -552,13 +566,15 @@ function testSound(name, element) {
     if (allAudios[name].currentTime === 0) {
         allAudios[name].play();
         element.style.backgroundColor = "#6BC267";
-        testSoundTimeout = setTimeout(() => {
+        allAudios[name].onended = (event) => {
+            allAudios[name].onended = "";
             element.style.backgroundColor = "#FF3D3D";
             allAudios[name].pause();
             allAudios[name].currentTime = 0;
             clearTimeout(testSoundTimeout);
-        }, time);
+        };
     } else {
+        allAudios[name].onended = "";
         allAudios[name].pause();
         allAudios[name].currentTime = 0;
         element.style.backgroundColor = "#FF3D3D";
@@ -705,6 +721,12 @@ function showOreFissions(state) {
     if (state) showOreCrafts(false);
     document.getElementById("forgeFission").style.display = state ? "inline-flex" : "none";
 }
+function showWorkshop(state) {
+    if (state) {showVariantConversion(false); showOreForge(false);}
+    document.getElementById("workshopContainer").style.display = state ? "block" : "none";
+    currentDisplayedUpgrade = undefined;
+    updateDisplayedUpgrade();
+}
 function convertVariants() {
     let ore = document.getElementById("oreInput").value;
     ore = ore.replaceAll(" ", "");
@@ -770,6 +792,34 @@ function toggleSpawnEffects(button) {
     } else {
         button.style.backgroundColor = "#6BC267";
         player.settings.doSpawnEffects = true;
+    }
+}
+function toggleAutomineProtection(button) {
+    if (player.settings.automineProtection) {
+        button.style.backgroundColor = "#FF3D3D";
+        player.settings.automineProtection = false;
+    } else {
+        button.style.backgroundColor = "#6BC267";
+        player.settings.automineProtection = true;
+    }
+}
+function toggleNyerd(button) {
+    if (player.settings.useNyerd) {
+        button.style.backgroundColor = "#FF3D3D";
+        player.settings.useNyerd = false;
+        document.getElementById("nyerd").style.display = "none";
+        document.getElementById("trackerArrow").style.display = "block";
+        if (player.oreTracker.tracking) {
+            getAngleBetweenPoints({x : player.oreTracker.locationX, y: player.oreTracker.locationY});
+        }
+    } else {
+        button.style.backgroundColor = "#6BC267";
+        player.settings.useNyerd = true;
+        document.getElementById("trackerArrow").style.display = "none";
+        document.getElementById("nyerd").style.display = "block";
+        if (player.oreTracker.tracking) {
+            getAngleBetweenPoints({x : player.oreTracker.locationX, y: player.oreTracker.locationY});
+        }
     }
 }
 //convertVariants({"ore":"", "variant":"Explosive", "amt":1})

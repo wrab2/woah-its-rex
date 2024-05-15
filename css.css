@@ -121,6 +121,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   top: 0px;
   left: 0px;
   overflow-y: auto;
+  z-index: 100000;
 }
 .menuCategoryTitle {
   font-size: 2vw;
@@ -132,9 +133,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   background: none;
   border: none;
   color: white;
-  font-size: 1vw;
+  font-size: 1.35vw;
   font-weight: 750;
-  width: 15vw;
+  width: 17.5vw;
+  white-space: nowrap;
 }
 #settingsSelector {
   display: inline-flex;
@@ -143,10 +145,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   display: inline-flex;
 }
 #generatedLogs {
-  width: 100%;
+  width: 80%;
   height: 5vw;
   font-size: 1vw;
-  text-align: center;
+  text-align: left;
+  float: right;
 }
 #logHolder {
   width: 100%;
@@ -544,6 +547,7 @@ img.roundcat {
   height: 100%;
   text-wrap: nowrap;
   vertical-align: middle;
+  text-align: center;
 }
 #blockContainer {
   margin-top: 1%;
@@ -551,10 +555,9 @@ img.roundcat {
   width: 100%;
   height: 27vw;
   line-height: 1.4vw;
-  font-size: 1.4vw;
+  font-size: 1.5vw;
   user-select: none;
-  text-wrap: nowrap;
-  text-align: center;
+  white-space: nowrap;
   letter-spacing: -0.4vw;
   position: relative;
   display: inline-flex;
@@ -668,16 +671,23 @@ img.roundcat {
   line-height: 0.75vw;
   font-weight: bolder;
 }
+#powerupExtraInfo {
+  position: inherit;
+  top:9.8vw;
+  font-size: 0.8vw;
+  line-height: 1vw;
+  font-weight: bolder;
+}
 #powerupCooldown {
   position: inherit;
-  top:10vw;
+  top:11vw;
   font-size: 1vw;
   line-height: 1vw;
   font-weight: bolder;
 }
 #powerupActive {
   position: inherit;
-  top:12.5vw;
+  top:13.25vw;
   font-size: 1vw;
   line-height: 1vw;
   font-weight: bolder;
@@ -746,6 +756,12 @@ img.roundcat {
   height: 1vw;
   filter: drop-shadow(0 0 1px white);
 }
+#nyerd {
+  position: relative;
+  width: 4.5vw;
+  height: 4.5vw;
+  filter: drop-shadow(0 0 3px white);
+}
 #trackerOre {
   position: inherit;
   width: 100%;
@@ -771,7 +787,7 @@ img.roundcat {
 #trackerY {
   position: inherit;
   width: 100%;
-  height: 6vw;
+  height: 2vw;
   font-size: 1vw;
   top:6vw;
   text-align: left;
@@ -791,7 +807,9 @@ img.roundcat {
   border-radius: 50%;
   background:none;
   box-shadow: 0px 0px 5px white;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #trackerLock {
   position: absolute;
@@ -1757,6 +1775,167 @@ button {
   font-weight: bold;
   margin-top: 0.05vw;
   margin-bottom: 0.05vw;
+}
+.electrifiedBlock {
+  position: relative;
+  z-index: 99999;
+  color:rgba(247, 243, 104, 0.35);
+  text-shadow: 0px 0px 0px #e365fc, 0px 0px 3vw #e365fc, 0px 0px 3vw #e365fc, 0px 0px 3vw #e365fc;
+}
+.radioactiveBlock {
+  position: relative;
+  z-index: 99999;
+  color:rgba(201,252,58, 0.35);
+  text-shadow: 0px 0px 0px #c9fc3a, 0px 0px 3vw #c9fc3a, 0px 0px 3vw #c9fc3a, 0px 0px 3vw #c9fc3a;
+}
+.explosiveBlock {
+  position: relative;
+  z-index: 99999;
+  color:rgba(252, 73, 45, 0.35);
+  text-shadow:0px 0px 0px #ff4b33, 0px 0px 3vw #ff4b33, 0px 0px 3vw #ff4b33, 0px 0px 3vw #fc492d;
+}
+#workshopContainer {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+#workshopTitle {
+  font-size: 4vw;
+  font-weight: 750;
+  width: 100%;
+  text-align: center;
+}
+#workshopImageHolder {
+  display: inline-flex;
+  align-items: center;
+  height: 10vw;
+  width: 100%;
+}
+.workshopImage {
+  width: 10vw;
+  margin: auto;
+  height: 90%;
+  color: white;
+}
+#treeOfLifeThumbnail {
+  width: 100%;
+  height: 100%;
+}
+#workshopInformationHolder {
+  width: 100%;
+  height: 10vw;
+  display: inline-flex;
+}
+.workshopInformation {
+  display: block;
+  width: 17.5vw;
+  height: 12.1vw;
+  margin: auto;
+  border: 0.2vw solid #1a1a1a;
+  background-color: #333;
+}
+.workshopInformationName {
+  font-size: 1.5vw;
+  white-space: nowrap;
+  font-weight: 1000;
+  margin-bottom: 0;
+  height: 2.5vw;
+}
+.workshopInformationLevelDescriptor {
+  font-size: 1vw;
+  line-height: 1vw;
+  font-weight: 750;
+  margin-bottom: 0;
+  height: 5vw;
+}
+.workshopInformationLevel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1vw;
+  font-weight: 750;
+  margin-bottom: 0;
+  height: 2vw;
+}
+.workshopDisplayUpgrade {
+  width: 100%;
+  height: 2.5vw;
+  background: none;
+  border: none;
+  margin: 0;
+  border-top:0.2vw solid #1a1a1a;
+  border-radius: 0px;
+}
+.workshopDisplayUpgrade:hover {
+  background-color: rgba(211,211,211, 0.3);
+}
+#upgradeRecipeHolder {
+  display: none;
+  position: absolute;
+  width: 17.5vw;
+  border: 0.2vw solid #1a1a1a;
+  border-top: none;
+}
+.upgradeRecipeElement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2vw;
+  margin: 0;
+  font-weight: 1000;
+}
+.upgradeRecipeProgress {
+  background-color: #333;
+  border: none;
+  border-top:0.1vw solid #1a1a1a;
+  height: 2vw;
+  font-size: 1.3vw;
+  color: white;
+  font-weight: 1000;
+  text-shadow: -0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 0;
+}
+.upgradeMaxLevel {
+  background-color: #333;
+  border:0.1vw solid #1a1a1a;
+  width: 100%;
+  height: 2vw;
+  font-weight: 750;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#sr1Holder {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 8.5vw;
+  height: 2vw;
+}
+.sr1Button {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+#sr1Lock {
+  z-index: 9999;
+  font-size: 0.5vw;
+  color: white;
+  letter-spacing: 0.05em;
+  background: none;
+  border: 0.2vw solid #333;
+}
+#sr1Teleporter {
+  display: none;
+  background: none;
+  border: 0.2vw solid #333;
+  width: 100%;
+  font-size: 0.75vw;
 }
 @keyframes flashGreen {
   0% {background-color:white;}
