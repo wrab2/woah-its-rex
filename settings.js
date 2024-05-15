@@ -706,11 +706,11 @@ function switchCurrentSelectedVariant(type) {
     toggleVariantList(false)
 }
 function showVariantConversion(state) {
-    if (state) showOreForge(false);
+    if (state) {showWorkshop(false); showOreForge(false);}
     document.getElementById("conversionContainer").style.display = state ? "block" : "none";
 }
 function showOreForge(state) {
-    if (state) showVariantConversion(false)
+    if (state) {showVariantConversion(false); showWorkshop(false);}
     document.getElementById("forgeContainer").style.display = state ? "block" : "none";
 }
 function showOreCrafts(state) {

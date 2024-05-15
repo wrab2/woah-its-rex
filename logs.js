@@ -92,10 +92,8 @@ class secureLogs {
                             something /= log.caveInfo[1];
                             log.rarity = something;
                         }
-                        let logName = "Cat";
-                        if (player.webHook.active) logName = player.webHook.name;
-                        const webhookString = `${logName} has found ${this.#verifiedLogs["All"][i].variant} ${this.#verifiedLogs["All"][i].block} with a rarity of 1/${Math.round(1/this.#verifiedLogs["All"][i].rarity).toLocaleString()} ${this.#verifiedLogs["All"][i].caveInfo[0] ? (this.#verifiedLogs["All"][i].caveInfo[1] > 1 ? "(" + caveList[this.#verifiedLogs["All"][i].caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(this.#verifiedLogs["All"][i].x - 1000000000).toLocaleString()}, Y: ${(-1 *this.#verifiedLogs["All"][i].y).toLocaleString()}`
-                        if (player.webHook.active) webHook(log, webhookString);
+                        if (player.webHook.active) webHook(log);
+                        const webhookString = `Cat has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rarity).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}`            
                         log.output = webhookString;
                         if (player.settings.highRarityLogs && log.rarity > 1/250000000) {
                             this.#verifiedLogs["All"].splice(i, 1);
@@ -180,26 +178,36 @@ class secureLogs {
     }
 }
 let verifiedOres = new secureLogs();
-function webHook(log, string) {
-    let webhookContent;
-    if (player.webHook.useString) webhookContent = string;
-    else if (player.webHook.customString !== "") webhookContent = eval(player.webHook.customString);
-    else webhookContent = `${player.webHook.name} has found ${log.variant} ${log.block} with a rarity of 1/${(Math.floor(1/log.rarity)).toLocaleString()} at ${(player.stats.blocksMined).toLocaleString()} Blocks Mined at X: ${log.x - 1000000000} Y: ${log.y * -1}`
-    if ((Math.floor(1/log.rarity)) > player.webHook.limit) {
-        fetch(player.webHook.link, {
-        body: JSON.stringify({
-        content: webhookContent,
-             }),
-             headers: {
-                 "Content-Type": "application/json",
-             },
-             method: "POST",
-         })
-             .then(function (res) {
+function webHook(log) {
+    const currentWebhook = getCurrentWebhookId(Math.floor(1/log.rarity));
+    if (!currentWebhook.valid) return;
+    const webhookInfo = player.webHook.ids[currentWebhook.id];
+    const webhookName = webhookInfo.name;
+    let webhookContent = webhookInfo.customString;
+    const webhookString = `${webhookName} has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rarity).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}`            
+    webhookContent = webhookContent === "normal" ? webhookString : webhookContent;
+    fetch(player.webHook.link, {
+    body: JSON.stringify({
+    content: webhookContent,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+        })
+            .then(function (res) {
                  
-             })
-             .catch(function (res) {
+            })
+            .catch(function (res) {
                  console.log(res);
-             });
-     }
+            });
+}
+function getCurrentWebhookId(num) {
+    const list = player.webHook.ids;
+    let currentValue = 0;
+    let returnValue = {valid: false, id: ""};
+    for (let id in list) {
+        if (num >= list[id].rarity && list[id].rarity > currentValue) {returnValue.valid = true; returnValue.id = id;}
+    }
+    return returnValue;
 }

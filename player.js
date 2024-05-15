@@ -135,11 +135,10 @@ class playerTemplate {
         this.sr1Unlocked = false;
         this.webHook = {
             active: false,
-            limit: 0,
+            ids : {
+
+            },
             link: "",
-            name: "",
-            useString: false,
-            customString: ""
         }
     }
 }
@@ -530,7 +529,6 @@ function loadNewData(data) {
         }
         if (data.upgrades !== undefined) {
             if (data.upgrades["pickaxe27"] !== undefined) {player.upgrades["pickaxe27"].level = data.upgrades["pickaxe27"].level; player.upgrades["pickaxe27"].bought = data.upgrades["pickaxe27"].bought}
-            
         }
         data.sr1Unlocked ??= false;
         player.sr1Unlocked = data.sr1Unlocked;
@@ -541,11 +539,12 @@ function loadNewData(data) {
         if (data.webHook !== undefined) {
             if (data.webHook.active === true) {
                 player.webHook.active = data.webHook.active;
-                player.webHook.limit = data.webHook.limit;
                 player.webHook.link = data.webHook.link;
-                player.webHook.name = data.webHook.name;
-                player.webHook.useString = data.webHook.useString;
-                player.webHook.customString = data.webHook.customString;
+                if (data.webHook.ids !== undefined) {
+                    for (let id in data.webHook.ids) {
+                        player.webHook.ids[id] = data.webHook.ids[id];
+                    }
+                }
             }
         }
     } catch (err) {
