@@ -548,6 +548,7 @@ function switchWorldCraftables() {
     document.getElementById("nullChroma").style.display = "none";
     document.getElementById("oblivionFracturer").style.display = "none";
     if (indexHasOre("🎂")) document.getElementById("sillyRecipe").style.display = "block";
+    else document.getElementById("sillyRecipe").style.display = "none";
 }
 function toggleOreForge() {
     let element = document.getElementById("forgeContainer")

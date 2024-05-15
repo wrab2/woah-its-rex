@@ -543,7 +543,7 @@ function loadNewData(data) {
         if (data.webHook !== undefined) {
             if (data.webHook.active === true) {
                 player.webHook.active = data.webHook.active;
-                player.webHook.limit = data.webHook.limi;t
+                player.webHook.limit = data.webHook.limit;
                 player.webHook.link = data.webHook.link;
                 player.webHook.name = data.webHook.name;
                 player.webHook.useString = data.webHook.useString;
