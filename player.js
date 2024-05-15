@@ -133,6 +133,14 @@ class playerTemplate {
         },
         this.wasUsing = undefined;
         this.sr1Unlocked = false;
+        this.webHook = {
+            active: false,
+            limit: 0,
+            link: "",
+            name: "",
+            useString: false,
+            customString: ""
+        }
     }
 }
 let player = new playerTemplate();
@@ -532,6 +540,16 @@ function loadNewData(data) {
         //unlock locked features
         if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";
+        if (data.webHook !== undefined) {
+            if (data.webHook.active === true) {
+                player.webHook.active = data.webHook.active;
+                player.webHook.limit = data.webHook.limi;t
+                player.webHook.link = data.webHook.link;
+                player.webHook.name = data.webHook.name;
+                player.webHook.useString = data.webHook.useString;
+                player.webHook.customString = data.webHook.customString;
+            }
+        }
     } catch (err) {
         console.log(err);
         window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");

@@ -512,7 +512,6 @@ function showPickaxes() {
             for (let i = 0; i < children.length; i++) children[i].style.display = "none";
             document.getElementById("nullChroma").style.display = "block";
         } else m88 = 0;
-        
     }
     document.getElementById("oblivionFracturer").style.display = "none";
 }
@@ -548,7 +547,7 @@ function switchWorldCraftables() {
     for (let i = 0; i < pickaxeList.length; i++) getButtonByName(pickaxeList[i]).style.display = "block";
     document.getElementById("nullChroma").style.display = "none";
     document.getElementById("oblivionFracturer").style.display = "none";
-    if (indexHasOre("🎂")) document.getElementById("sillyRecipe").style.display = "none";
+    if (indexHasOre("🎂")) document.getElementById("sillyRecipe").style.display = "block";
 }
 function toggleOreForge() {
     let element = document.getElementById("forgeContainer")
