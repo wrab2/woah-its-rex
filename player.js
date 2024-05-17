@@ -25,7 +25,7 @@ class playerTemplate {
             "gear21": false,
             "gear22": false,
             "gear23": false,
-            //"gear24": false,
+            "gear24": false,
             //"gear25": false,
             //"gear26": false,
             //"gear27": false,
@@ -126,9 +126,9 @@ class playerTemplate {
         this.upgrades = {
             "pickaxe27" : {
                 level: 0,
-                maxLevel: 1,
+                maxLevel: 2,
                 bought: 0,
-                levelLuck: [1, 3]
+                levelLuck: [1, 3, 10]
             }
         },
         this.wasUsing = undefined;
@@ -206,7 +206,7 @@ const powerupList = {
     "powerup5" : {
         title: "Paradoxical Progression",
         description: "Gives you a random unowned pickaxe or gear for 1 minute. Has a cooldown of 1 hour.",
-        cooldown: 0,
+        cooldown: 3600000,
         colors: {
             background: "linear-gradient(to bottom, darkgray, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, darkgray)",
             text: "white",

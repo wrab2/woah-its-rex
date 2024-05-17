@@ -9,11 +9,9 @@ function checkValidLocation(x, y) {
     while (reps < 100) {
         const lX = x + Math.round(Math.random() * 100) - 50;
         const lY = y + Math.round(Math.random() * 75) - 45;
-        mine[lY - 1] ??= [];
-        mine[lY + 1] ??= [];
         mine[lY] ??= [];
         if (lY > 1) {
-            if (mine[lY][lX] === undefined && mine[lY + 1][lX] === undefined && mine[lY - 1][lX] === undefined && mine[lY][lX - 1] === undefined && mine[lY][lX + 1] === undefined) return {x: lX, y: lY};
+            if (mine[lY][lX] === undefined) return {x: lX, y: lY};
         }
         reps++;
     }
@@ -34,46 +32,125 @@ function generateCave(x, y, type) {
                 caveList[type] = createGsCave();
         }
     }
-    if (x === undefined || y === undefined) {
-        const newPoints = checkValidLocation(curX, curY);
-        if (newPoints.x === undefined) return;
-        else {
-            x = newPoints.x;
-            y = newPoints.y;
-        }
-    } else {
-        const newPoints = checkValidLocation(x, y);
-        if (newPoints.x === undefined) return;
-        else {
-            x = newPoints.x;
-            y = newPoints.y;
-        }
+    x ??= curX;
+    y ??= curY;
+    const newPoints = checkValidLocation(x, y);
+    if (newPoints.x === undefined) return;
+    else {
+        x = newPoints.x;
+        y = newPoints.y;
     }
     caveType = type;
-    let points = [{x: x, y: y}];
+    let points = [{x: x, y: y, ignore: undefined}];
+    let selectedPoints = [];
+    let add;
+    let addRandom;
+    let point;
     while (points.length > 0) {
         for (let i = points.length - 1; i >= 0; i--) {
             let pointX = points[i].x;
             let pointY = points[i].y;
-            mineCaveBlock(pointX, pointY, type);
             points.splice(i, 1);
-            let block = mine[pointY][pointX + 1];
-            if (block !== "⚪" && Math.random() < rate) points.push({x: pointX + 1, y: pointY});
-            block = mine[pointY][pointX - 1];
-            if (block !== "⚪" && Math.random() < rate) points.push({x: pointX - 1, y: pointY});
-            if (pointY - 1 > 0) {
-                mine[pointY - 1] ??= [];
-                block = mine[pointY - 1][pointX];
-                if (block !== "⚪" && Math.random() < rate) points.push({x: pointX, y: pointY - 1});
+            mine[pointY] ??= [];
+            mineCaveShape(pointX, pointY, type);
+            if (Math.random() < rate) {
+                addRandom = Math.random();
+                if (addRandom < 0.7) add = 3;
+                else add = 4;
+                if (mine[pointY][pointX + (add + 1)] !== "⚪") {
+                    point = {x: pointX + add, y: pointY}
+                    points.push(point);
+                    selectedPoints.push(point);
+                }
             }
-            mine[pointY + 1] ??= [];
-            block = mine[pointY + 1][pointX];
-            if (block !== "⚪" && Math.random() < rate) points.push({x: pointX, y: pointY + 1});
+            if (Math.random() < rate) {
+                addRandom = Math.random();
+                if (addRandom < 0.7) add = 3;
+                else add = 4;
+                if (mine[pointY][pointX - (add + 1)] !== "⚪") {
+                    point = {x: pointX - add, y: pointY}
+                    points.push(point);
+                    selectedPoints.push(point);  
+                }
+            }
+            if (Math.random() < rate) {
+                addRandom = Math.random();
+                if (addRandom < 0.7) add = 3;
+                else add = 4;
+                mine[pointY + (add + 1)] ??= [];
+                if (mine[pointY + (add + 1)][pointX] !== "⚪") {
+                    point = {x: pointX, y: pointY + add} 
+                    points.push(point);
+                    selectedPoints.push(point);
+                }
+            }
+            if (Math.random() < rate) {
+                addRandom = Math.random();
+                if (addRandom < 0.7) add = 3;
+                else add = 4;
+                mine[pointY - (add + 1)] ??= [];
+                if (mine[pointY - (add + 1)][pointX] !== "⚪") {
+                    point = {x: pointX, y: pointY - add}
+                    points.push(point);
+                    selectedPoints.push(point);
+                } 
+            }
         }
-        rate -= 0.04;
+        rate -= ((Math.random() * 12) + 3)/100;
     }
 }
-
+const caveShape = [
+    {x: 0, y: 0},
+    {x: 1, y: 0},
+    {x: 2, y: 0},
+    {x: 3, y: 0},
+    {x: -1, y: 0},
+    {x: -2, y: 0},
+    {x: -3, y: 0},
+    {x: 0, y: 1},
+    {x: 1, y: 1},
+    {x: 2, y: 1},
+    {x: 3, y: 1},
+    {x: -1, y: 1},
+    {x: -2, y: 1},
+    {x: -3, y: 1},
+    {x: 0, y: -1},
+    {x: 1, y: -1},
+    {x: 2, y: -1},
+    {x: 3, y: -1},
+    {x: -1, y: -1},
+    {x: -2, y: -1},
+    {x: -3, y: -1},
+    {x: 0, y: 2},
+    {x: 1, y: 2},
+    {x: 2, y: 2},
+    {x: -1, y: 2},
+    {x: -2, y: 2},
+    {x: 0, y: -2},
+    {x: 1, y: -2},
+    {x: 2, y: -2},
+    {x: -1, y: -2},
+    {x: -2, y: -2},
+    {x: 0, y: 3},
+    {x: 1, y: 3},
+    {x: -1, y: 3},
+    {x: 0, y: -3},
+    {x: 1, y: -3},
+    {x: -1, y: -3},
+]
+function mineCaveShape(x, y, type) {
+    let px;
+    let py;
+    for (let i = 0; i < caveShape.length; i++) {
+        px = x + caveShape[i].x;
+        py = y + caveShape[i].y;
+        if (py > 0) {
+        mine[py] ??= [];
+            if (mine[py][px] === undefined) generateCaveBlock(py, px, type);
+            if (mine[py][px] !== undefined) mineCaveBlock(px, py, type);
+        }
+    }
+}
 function mineCaveBlock(c, r, type) {
     let block = mine[r][c];
     if (block !== undefined) {
@@ -234,11 +311,11 @@ function generateCaveBlock(y, x, type) {
     let adjRarity = oreList[blockToGive]["numRarity"] * multi;
     //PLAYS SOUNDS AND CREATES LOGS BASED ON CAVE RARITY
     mine[y][x] = blockToGive;
-    if (oreList[blockToGive]["numRarity"] >= 750000) {
-        caveOreLocations.push({"X":x, "Y":y, "type":type, "caveMulti":multi});
-    }
     if (multi > 1) {
         if (adjRarity >= 25000000) {
+            if (oreList[blockToGive]["numRarity"] >= 750000) {
+                caveOreLocations.push({"X":x, "Y":y, "type":type, "caveMulti":multi});
+            }
             let variant = rollVariant();
             if (player.gears["gear26"] && variant === 1) variant = rollVariant();
             mine[y][x] = {ore: blockToGive, variant: variant};
@@ -246,11 +323,12 @@ function generateCaveBlock(y, x, type) {
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000) {
                 playSound(oreList[blockToGive]["oreTier"]);
-                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type]);
+                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, caveLuck]);
                 verifiedOres.verifyLog(y, x);
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: {"adjRarity" : adjRarity, "caveType" : type}, variant: variant});
             if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
+            if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": oreList[blockToGive]["oreTier"], "tier2": player.settings.stopOnRare.minimum})) stopMining();
         }
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
@@ -264,10 +342,9 @@ function generateCaveBlock(y, x, type) {
             }
             if (oreInformation.tierGrOrEqTo({"tier1" : oreList[blockToGive]["oreTier"], "tier2" : minTier})) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: undefined, variant: variant});
             if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
+            if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": oreList[blockToGive]["oreTier"], "tier2": player.settings.stopOnRare.minimum})) stopMining();
         }
     }
-    
-    
 }
 
 

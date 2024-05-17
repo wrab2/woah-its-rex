@@ -39,7 +39,7 @@ class secureLogs {
         const maxLuck = luckModifier;
         let luck;
         if (fromCave[1] > 1) {
-            if (caveLuck > 5) {
+            if (caveLuck > 50000000) {
                 console.log("failed to create, ", obj.stack, caveLuck);
                 return;
             } else {
@@ -60,8 +60,19 @@ class secureLogs {
                 const block = mine[r][c].ore === undefined ? mine[r][c] : mine[r][c].ore;
                 if (block === this.#spawnLogs[i].block) {
                     let rng;
-                    if (this.#spawnLogs[i].caveInfo[1] > 1) rng = 1/oreList[this.#spawnLogs[i].block]["numRarity"];
-                    else rng = oreList[this.#spawnLogs[i].block]["decimalRarity"];
+                    if (this.#spawnLogs[i].caveInfo[1] > 1) {
+                        if (oolProbabilities[block] !== undefined && this.#spawnLogs[i].caveInfo[2] !== "type5Ores") {
+                            rng = oolProbabilities[block];
+                        } else if (this.#spawnLogs[i].caveInfo[2] === "type5Ores") {
+                            rng = gsProbabilities[caveList["type5Ores"].indexOf(log.block)];
+                        } else {
+                            rng = 1/oreList[this.#spawnLogs[i].block]["numRarity"];
+                        }
+                        rng /= this.#spawnLogs[i].caveInfo[1];
+                        rng *= this.#spawnLogs[i].caveInfo[3];
+                    } else {
+                        rng = oreList[this.#spawnLogs[i].block]["decimalRarity"];
+                    }
                     let variant = this.#spawnLogs[i].variant === undefined ? "Normal" : this.#spawnLogs[i].variant;
                     rng /= multis[variant - 1];
                     variant = names[variant - 1];
@@ -84,14 +95,6 @@ class secureLogs {
                     if (log.mined != true) {
                         log.mined = true;
                         if (log.variant === undefined) log.variant = variant;
-                        if (log.caveInfo[1] > 1) {
-                            let something;
-                            if (oolProbabilities[log.block] !== undefined && log.caveInfo[2] !== "type5Ores") something = oolProbabilities[log.block];
-                            else if (log.caveInfo[2] === "type5Ores") something = gsProbabilities[caveList["type5Ores"].indexOf(log.block)]
-                            else something = 1/oreList[log.block]["numRarity"];
-                            something /= log.caveInfo[1];
-                            log.rarity = something;
-                        }
                         if (player.webHook.active) webHook(log);
                         const webhookString = `Cat has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rarity).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}`            
                         log.output = webhookString;
@@ -113,7 +116,7 @@ class secureLogs {
             }
         }
         if (!verified) {
-            console.log("log not found, failed to verify if found, block mined")
+            console.log("log not found, failed to verify if found, block mined", block, r, c)
         }
     }
     showLogs() {
@@ -207,7 +210,11 @@ function getCurrentWebhookId(num) {
     let currentValue = 0;
     let returnValue = {valid: false, id: ""};
     for (let id in list) {
-        if (num >= list[id].rarity && list[id].rarity > currentValue) {returnValue.valid = true; returnValue.id = id;}
+        if (num >= list[id].rarity && list[id].rarity > currentValue) {
+            returnValue.valid = true; 
+            returnValue.id = id;
+            currentValue = list[id].rarity;
+        }
     }
     return returnValue;
 }

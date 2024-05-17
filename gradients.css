@@ -262,6 +262,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#superenergeticAutomaton span{
+    background: linear-gradient(to right, #FFFF99, #b4dcf0, #dcf0f0, #b4dcf0, #FFFF99);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

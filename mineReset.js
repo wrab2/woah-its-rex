@@ -125,6 +125,7 @@ function collectOres(temp) {
 function mineResetAid() {
     return new Promise((resolve) => {
     setTimeout(() => {
+        mine = null;
         mine = [[]];
         curX = 1000000000;
         let y = curY;

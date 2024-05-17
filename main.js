@@ -96,6 +96,7 @@ function assignPickaxeNums(json) {
     pickaxe25Nums = json.pickaxeNums25;
     treeLevels[0] = json.pickaxeNums27A;
     treeLevels[1] = json.pickaxeNums27B;
+    treeLevels.cherryBranch = json.cherryBranch;
 }
 function failedFetch() {
     for (let ore in oreList) oreList[ore]["oreName"] = "FAILED TO FETCH NAMES";
@@ -243,8 +244,8 @@ function movePlayer(dir, reps) {
                 }
             }
         }
-        displayArea();
-        }
+    }
+    displayArea();
 }
 let keyCooldown = Date.now();
 document.addEventListener('keydown', (event) => {
@@ -825,14 +826,15 @@ let pickaxe25Nums = [];
 let testNums = [];
 /*
 const az = new Image();
-az.src = "media/Untitled-1Artboard 3.jpg"
+az.src = "media/cherryBranch.png"
         az.onload = () => {
             const c = new OffscreenCanvas(az.width,az.height)
             const cc = c.getContext("2d")
             cc.drawImage(az,0,0)
             const data = cc.getImageData(0,0,c.width,c.height).data
+            console.log(data)
             for (let i = 0; i < data.length; i+=4) {
-                data[i]>125?null:testNums.push({"x":(i / 4) % c.width,"y":Math.floor((i / 4) / c.width)})
+                data[i + 2]===51?null:testNums.push({"x":(i / 4) % c.width,"y":Math.floor((i / 4) / c.width)})
             }
 }
 */

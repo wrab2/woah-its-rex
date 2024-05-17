@@ -56,33 +56,31 @@ function checkAllAround(x, y) {
     }
 }
 //MINING
-
 function mineBlock(x, y, cause) {
-    let ore;
-    let variant;
+    let mineBlockOre;
+    let mineBlockVariant;
     if (mine[y][x].ore !== undefined) {
-        ore = mine[y][x].ore;
-        variant = mine[y][x].variant
+        mineBlockOre = mine[y][x].ore;
+        mineBlockVariant = mine[y][x].variant
     } else {
-        ore = mine[y][x];
-        variant = undefined;
+        mineBlockOre = mine[y][x];
+        mineBlockVariant = undefined;
     }
-    if (ore === "⚪") return;
-    
-    if (oreList[ore]["isBreakable"]) {
+    if (mineBlockOre === "⚪") return;
+    if (oreList[mineBlockOre]["isBreakable"]) {
         checkAllAround(x, y);
-        if (oreList[ore]["numRarity"] >= 750000) {
+        if (oreList[mineBlockOre]["numRarity"] >= 750000) {
             if (checkFromCave({"X":x, "Y":y})["fromCave"]) {
-                giveBlock({type: ore, x:x, y:y, fromReset:false, fromCave:true, caveMulti:checkFromCave({"X":x, "Y":y})["multi"], variant:variant});
+                giveBlock({type: mineBlockOre, x:x, y:y, fromReset:false, fromCave:true, caveMulti:checkFromCave({"X":x, "Y":y})["multi"], variant:mineBlockVariant});
                 mine[y][x] = "⚪";
                 checkAllAround(x, y);
                 player.stats.blocksMined++;
                 return;
             }
-            if (cause === "ability" && player.settings.automineProtection && oreInformation.tierGrOrEqTo({"tier1": oreList[ore]["oreTier"], "tier2": minTier})) return;
+            if (cause === "ability" && player.settings.automineProtection && oreInformation.tierGrOrEqTo({"tier1": oreList[mineBlockOre]["oreTier"], "tier2": minTier})) return;
         }
         player.stats.blocksMined++;
-        giveBlock({type: ore, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:variant});
+        giveBlock({type: mineBlockOre, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:mineBlockVariant});
         mine[y][x] = "⚪";
         cause !== "ability" ? rollAbilities() : undefined;
     }
@@ -101,29 +99,22 @@ function giveBlock(obj) {
     if (obj.variant === undefined) {
         inv = rollVariant();
         if (player.gears["gear26"] && inv === 1) inv = rollVariant();
-       
     } else {
         inv = obj.variant;
     }
     //PROC & LOGS
-    let gear4Proc = currentWorld < 2 && player.gears["gear4"];
-    let gear13Proc = player.gears["gear13"] && oreRarity < 750000 && oreRarity > 1 && Math.random < 0.75;
-    
-    
     const layerMaterial = layerDictionary[currentLayer].layer.slice(-1);
-    if (gear4Proc) {
+    if (currentWorld < 2 && player.gears["gear4"]) {
         oreList[layerMaterial]["normalAmt"]++;
     }
-    if (gear13Proc) {
+    if (player.gears["gear13"] && oreRarity < 750000 && oreRarity > 1 && Math.random < 0.75) {
         oreList[obj.type]["normalAmt"]++;
     }
-    if (obj.fromCave) {oreRarity *= obj.caveMulti;}
     if (oreRarity >= 750000) {
-        let gear22Proc = player.gears["gear22"] && Math.random() < 1/10;
-        if (gear22Proc) oreList[obj.type][variantInvNames[inv - 1]]++;
+        if (obj.fromCave) {oreRarity *= obj.caveMulti;}
+        if (player.gears["gear22"] && Math.random() < 1/10) oreList[obj.type][variantInvNames[inv - 1]]++;
         if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
-        let rareTier = oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier});
-        if (rareTier) {
+        if (oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier})) {
             logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset); 
         }
         if (oreList[obj.type]["oreTier"] === "Flawless") {
@@ -133,19 +124,19 @@ function giveBlock(obj) {
                 document.getElementById("sr1Teleporter").style.display = "block";
             }
         }
+        if (oreList[obj.type]["hasLog"] || oreRarity >= 160000000) {
+            verifiedOres.verifyFind(mine[obj.y][obj.x], obj.y, obj.x, names[inv - 1]);
+        }
+        if (Math.random() < 1/100000) {
+            oreList["bitcoin"]["normalAmt"]++;
+            inventoryObj["bitcoin"] = 0;
+        }
     } else {
         if (oreRarity === 1) {
-            let gear15Proc = player.gears["gear15"] && Math.random() < 0.5;
-            let gear27Proc = player.gears["gear27"] && Math.random() < 1/20;
-            if (gear15Proc) oreList[obj.type]["normalAmt"] += 2;
-            if (gear27Proc) oreList[layerMaterial]["normalAmt"] += 30;
+            if (player.gears["gear15"] && Math.random() < 0.5) oreList[obj.type]["normalAmt"] += 2;
+            if (player.gears["gear27"] && Math.random() < 1/20) oreList[layerMaterial]["normalAmt"] += 30;
         }
     }
-    
-    if (oreList[obj.type]["hasLog"] || oreRarity >= 160000000) {
-        verifiedOres.verifyFind(mine[obj.y][obj.x], obj.y, obj.x, names[inv - 1]);
-    }
-
     oreList[obj.type][variantInvNames[inv - 1]]++;
     inventoryObj[obj.type] = 0;
 }
@@ -157,25 +148,26 @@ function rollVariant() {
     return 1;
 }
 let cat = 1;
+let mainProbabilityTable;
+let mainGenerationTable;
 const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸";
 function generateBlock(location) {
     blocksRevealedThisReset++;
-    let probabilityTable = getLayer(location["Y"]);
-    let generationProbabilities = probabilityTable.probabilities;
-    let arr = probabilityTable.layer;
-    let blockToGive = "";
+    mainProbabilityTable = getLayer(location["Y"]);
+    mainGenerationTable = mainProbabilityTable.probabilities;
+    let arr = mainProbabilityTable.layer;
     let chosenValue = Math.random();
     let low = 0;
     let high = arr.length;
     while (low < high) {
         const mid = (low + high) >> 1; // Use bitwise shift for integer division
-        if (chosenValue >= generationProbabilities[mid]) {
+        if (chosenValue >= mainGenerationTable[mid]) {
             low = mid + 1;
         } else {
             high = mid;
         }
     }
-    blockToGive = arr[low];
+    let blockToGive = arr[low];
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
@@ -193,9 +185,8 @@ function generateBlock(location) {
         }
         playSound(oreList[blockToGive]["oreTier"]);
         if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage({block: blockToGive, location: location, caveInfo: undefined, variant: variant});
-        if ((((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) && tier !== "Celestial") || player.gears["gear28"]) mineBlock(location["X"], location["Y"], "ability");
-        if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum}))
-            stopMining();
+        if (((currentWorld < 2 && (player.gears["gear3"] || player.gears["gear28"])) || player.gears["gear17"] && tier !== "Celestial")) mineBlock(location["X"], location["Y"], "ability");
+        if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum})) stopMining();
     }
 }
 

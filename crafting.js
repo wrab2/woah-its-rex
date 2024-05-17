@@ -255,12 +255,17 @@ const recipes = {
     },
     "gear22" : {
         name : "",
-        recipe : [{ore:"🇿🇦", amt:250}, {ore:"🇹🇿", amt:200}, {ore:"🇨🇩", amt:175}],
+        recipe : [{ore:"🇿🇦", amt:225}, {ore:"🇹🇿", amt:200}, {ore:"🇨🇩", amt:150}],
         upgrades: {}
     },
     "gear23" : {
         name : "",
         recipe : [{ore:"🇯🇵", amt:75}, {ore:"🇧🇩", amt:75}, {ore:"🇵🇰", amt:50}],
+        upgrades: {}
+    },
+    "gear24" : {
+        name : "",
+        recipe : [{ore:"🇨🇺", amt:40}, {ore:"🇭🇹", amt:35}, {ore:"🇬🇹", amt:30}],
         upgrades: {}
     }
 }
@@ -446,7 +451,8 @@ const buttonGradients = {
     "gear21Craft" : {"gradient" : "linear-gradient(to right, #44533D, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, #236B4B)","applied" : false},
     "gear22Craft" : {"gradient" : "linear-gradient(to right,#FF0B0B, #FFEB00, #7AFF1F)","applied" : false},
     "gear23Craft" : {"gradient" : "linear-gradient(to right, #00dfff, #3a00f9, #15fd00, #3a00f9, #00dfff)","applied" : false},
-    //
+    "gear24Craft" : {"gradient" : "linear-gradient(to right, #FFFF99, #b4dcf0, #dcf0f0, #b4dcf0, #FFFF99)","applied" : false},
+    
 }
 function craftPickaxe(item) {
     const recipe = recipes[item].recipe;
@@ -496,7 +502,7 @@ const showOrders = {
     worldOneGears : ["gear0", "gear1", "gear2", "gear7", "gear8", "gear3", "gear4", "gear5", "gear6", "gear9"],
     worldTwoGears : ["gear10", "gear11", "gear12", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "gear21"],
     srOnePickaxes : ["pickaxe27"],
-    srOneGears : ["gear22", "gear23"],
+    srOneGears : ["gear22", "gear23", "gear24"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -547,7 +553,7 @@ function switchWorldCraftables() {
     for (let i = 0; i < pickaxeList.length; i++) getButtonByName(pickaxeList[i]).style.display = "block";
     document.getElementById("nullChroma").style.display = "none";
     document.getElementById("oblivionFracturer").style.display = "none";
-    if (indexHasOre("🎂")) document.getElementById("sillyRecipe").style.display = "block";
+    if (indexHasOre("🎂") && currentWorld === 1) document.getElementById("sillyRecipe").style.display = "block";
     else document.getElementById("sillyRecipe").style.display = "none";
 }
 function toggleOreForge() {
@@ -765,6 +771,22 @@ const upgradeRecipes = {
                 "Ability Size:<br>5,396 -> 19,930"
             ]
         },
+        "upgrade1" : 
+        {
+            recipe : [
+                {ore: "🇪🇬", amt: 200},
+                {ore: "🇪🇹", amt: 180},
+                {ore: "🇳🇬", amt: 160},
+                {ore: "🇹🇷", amt: 140},
+                {ore: "🇮🇷", amt: 120},
+                {ore: "🇻🇳", amt: 100},
+                {ore: "🇵🇭", amt: 80},
+            ],
+            descriptions : [
+                "Luck:<br>3 -> 10",
+                "Ability Size:<br>19,930 -> 30,396"
+            ]
+        },
     }
 }
 let currentDisplayedUpgrade;
@@ -873,11 +895,12 @@ function updateUpgradeDisplay() {
     let toEdit = document.getElementsByClassName("workshopInformationLevel");
     toEdit[0].innerText = `Level ${player.upgrades["pickaxe27"].level}/${player.upgrades["pickaxe27"].maxLevel}`;
     toEdit = document.getElementsByClassName("workshopInformationLevelDescriptor");
-    let descriptions = upgradeRecipes["pickaxe27"]["upgrade0"].descriptions;
+    
     let output = "";
     if (player.upgrades["pickaxe27"].level >= player.upgrades["pickaxe27"].maxLevel) {
         output = ""
     } else {
+        let descriptions = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].descriptions;
         for (let i = 0; i < descriptions.length; i++) {
             output += `${descriptions[i]}<br>`;
         }
