@@ -571,16 +571,6 @@ function setLayer(y) {
                 let force = false;
                 if (Math.random() < 1/1337) {
                     currentLayerNum = 1337;
-                    let tier = "Uncommon";
-                    let arr = [];
-                    while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {
-                        let tierOres = oreInformation.getOresByTier(tier);
-                        for (let i = 0; i < tierOres.length; i++)
-                            arr.push(tierOres[i]);
-                        tier = oreInformation.getNextTier(tier);
-                    }
-                    arr.splice(tier.indexOf("✴️"), 1);
-                    layerDictionary["unknownLayer"] ??= {layer : createLayer([arr, ["🥇", "🟩"]])};
                     updateAllLayers();
                     currentLayer = "unknownLayer";
                     specialLayerLocations["unknownLayer"] ??= tempNum;
@@ -751,6 +741,17 @@ function createAllLayers() {
     for (let i = 0; i < subRealmOneLayers.length; i++) layerDictionary[subRealmOneLayers[i]] = {layer: createLayer([layerList[subRealmOneLayers[i]]]), probabilities: []};
     for (let i = 0; i < specialLayers.length; i++) layerDictionary[specialLayers[i]] = {layer: layerList[specialLayers[i]], probabilities: []};
     layerDictionary["dirtLayer2"] = {layer: createLayer([layerList["dirtLayer2"], layerList["worldOneCommons"]]), probabilities: []};
+    let tier = "Uncommon";
+    let arr = [];
+    while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {
+        let tierOres = oreInformation.getOresByTier(tier);
+        for (let i = 0; i < tierOres.length; i++)
+            arr.push(tierOres[i]);
+            tier = oreInformation.getNextTier(tier);
+    }
+    arr.splice(tier.indexOf("✴️"), 1);
+    const unknownLayer = createLayer([arr, ["🥇", "🟩"]]);
+    layerDictionary["unknownLayer"] = {layer: unknownLayer, probabilities: []}
     createGenerationProbabilities();
     //for (let i = 0; i < worldOneLayers.length; i++) layerDictionary[worldOneLayers[i]] = createLayer([layerList[worldOneLayers[i]], layerList["worldOneCommons"]]);
 }

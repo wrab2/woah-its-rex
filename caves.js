@@ -163,7 +163,7 @@ function mineCaveBlock(c, r, type) {
         if (oreList[block]["isBreakable"]) {
             //{type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant}
             if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock({type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant});
-            else giveBlock({type: block, x:c, y:r});
+            else giveBlock({type: block, x:c, y:r, variant: variant});
             mine[r][c] = "⚪";
         }
     }

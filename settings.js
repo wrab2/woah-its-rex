@@ -753,9 +753,9 @@ function convertVariants() {
     }
     const obj = {"ore":ore, "variant":variant, "amt":amt};
     let amtToGive = 0;
-    if (obj["variant"] === "Explosive") amtToGive = 8;
-    else if (obj["variant"] === "Radioactive") amtToGive = 6;
-    else if (obj["variant"] === "Electrified") amtToGive = 4;
+    if (obj["variant"] === "Explosive") amtToGive = 30;
+    else if (obj["variant"] === "Radioactive") amtToGive = 10;
+    else if (obj["variant"] === "Electrified") amtToGive = 5;
     let name = variantInvNames[names.indexOf(obj["variant"])];
     if (oreList[obj["ore"]][name] >= obj["amt"]) {
         oreList[obj["ore"]][name] -= obj["amt"];

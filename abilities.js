@@ -213,7 +213,7 @@ function powerup2(x, y) {
 
 //make a random layer ore more common for a short period
 function powerup3() {
-    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown ) {
+    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown) {
         const layer = layerDictionary[currentLayer].layer;
         let chosenOre = layer[Math.round(Math.random() * (layer.length - 1))];
         while (oreInformation.isCommon(oreList[chosenOre]["oreTier"]) || oreList[chosenOre]["oreTier"] === "Antique") chosenOre = layer[Math.round(Math.random() * (layer.length - 1))];

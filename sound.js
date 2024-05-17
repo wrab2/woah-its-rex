@@ -155,12 +155,8 @@ function selectSong() {
     musicPlayer.currentSong = selectedSong;
     const song = musicPlayer.songs[selectedSong].src;
     song.currentTime = 0;
-    song.play()
+    song.play();
     song.onended = (event) => {
-        song.currentTime = 0;
-        song.pause();
-        song.ondended = "";
         selectSong();
     };
-    
 }
