@@ -237,7 +237,7 @@ function movePlayer(dir, reps) {
                             let variant = rollVariant();
                             if (player.gears["gear26"] && variant === 1) variant = rollVariant();
                             spawnMessage({block: "⛏️", location: {"X" : curX, "Y" : curY}, caveInfo: undefined, variant: variant})
-                            giveBlock("⛏️", curX, curY, false);
+                            giveBlock({type: "⛏️", x:x, y:y, fromReset: cause === "mining", variant: variant});
                             checkAllAround(curX, curY);
                         }
                     }
@@ -341,8 +341,8 @@ function goDirection(direction, speed) {
             miningSpeed = baseSpeed - 10;
         if (currentWorld < 2 && player.gears["gear6"])
             miningSpeed = baseSpeed - 15;
-        if (currentWorld === 2 || (player.gears["gear11"] && player.gears["gear13"] && player.gears["gear19"]))
-            miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear13"] ? 5 : 0) - (player.gears["gear19"] ? 13 : 0);
+        if (currentWorld === 2 || (player.gears["gear11"] && player.gears["gear16"] && player.gears["gear19"]))
+            miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear16"] ? 5 : 0) - (player.gears["gear19"] ? 13 : 0);
         } else {
             miningSpeed = speed;
         }
@@ -477,7 +477,11 @@ function createInventory() {
                 let oreNum = oreList[propertyName][variantInvNames[i - 1]];
                 let tempElement = document.createElement('tr');
                 tempElement.classList = "oreDisplay";
-                tempElement.setAttribute("onclick", "randomFunction(\"" + propertyName + "\", 'inv')");
+                if (i === 1) {
+                    tempElement.setAttribute("onclick", "randomFunction(\"" + propertyName + "\", 'inv')");
+                } else {
+                    tempElement.setAttribute("onclick", `goToConvert("${propertyName}", ${i})`);
+                }
                 let colors = oreInformation.getColors(oreList[propertyName]["oreTier"]);
                 tempElement.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 90%, black)"
                 tempElement.style.color = colors["textColor"];

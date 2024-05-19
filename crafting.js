@@ -260,7 +260,7 @@ const recipes = {
     },
     "gear23" : {
         name : "",
-        recipe : [{ore:"🇯🇵", amt:75}, {ore:"🇧🇩", amt:75}, {ore:"🇵🇰", amt:50}],
+        recipe : [{ore:"🇯🇵", amt:50}, {ore:"🇧🇩", amt:50}, {ore:"🇵🇰", amt:30}],
         upgrades: {}
     },
     "gear24" : {
@@ -571,7 +571,21 @@ function toggleOreForge() {
 }
 let currentOreRecipe;
 const oreRecipes = {
-    //
+    "frisbeeCraft" : {
+        "cost" : [{"ore":"💠","amt":1}, {"ore":"💙","amt":10}],
+        "result" : [{"ore":"🥏", "amt":1}],
+        "multiplier" : 1
+    },
+    "diamondCraft" : {
+        "cost" : [{"ore":"💙","amt":25}, {"ore":"🔵","amt":250000}],
+        "result" : [{"ore":"💠", "amt":1}],
+        "multiplier" : 1
+    },
+    "bowCraft" : {
+        "cost" : [{"ore":"📟","amt":2},{"ore":"🖍️","amt":3},{"ore":"❤️","amt":25}],
+        "result" : [{"ore":"🎀", "amt":1}],
+        "multiplier" : 1
+    },
     "greenCraft" : {
         "cost" : [{"ore":"🟢","amt":35000}],
         "result" : [{"ore":"💚", "amt":1}],
@@ -615,6 +629,51 @@ const oreRecipes = {
     "whiteCraft" : {
         "cost" : [{"ore":"🔵","amt":30000}, {"ore":"🟢","amt":30000}, {"ore":"🔴","amt":30000}],
         "result" : [{"ore":"🤍", "amt":1}],
+        "multiplier" : 1
+    },
+    "greenFission" : {
+        "cost" : [{"ore":"💚", "amt":1}],
+        "result" : [{"ore":"🟢","amt":25000}],
+        "multiplier" : 1
+    },
+    "blueFission" : {
+        "cost" : [{"ore":"💙", "amt":1}],
+        "result" : [{"ore":"🔵","amt":25000}],
+        "multiplier" : 1
+    },
+    "yellowFission" : {
+        "cost" : [{"ore":"💛", "amt":1}],
+        "result" : [{"ore":"🟡","amt":15000}],
+        "multiplier" : 1
+    },
+    "orangeFission" : {
+        "cost" : [{"ore":"🧡", "amt":1}],
+        "result" : [{"ore":"🟠","amt":20000}],
+        "multiplier" : 1
+    },
+    "redFission" : {
+        "cost" : [{"ore":"❤️", "amt":1}],
+        "result" : [{"ore":"🔴","amt":15000}],
+        "multiplier" : 1
+    },
+    "purpleFission" : {
+        "cost" : [{"ore":"💜", "amt":1}],
+        "result" : [{"ore":"🟣","amt":15000}],
+        "multiplier" : 1
+    },
+    "brownFission" : {
+        "cost" : [{"ore":"🤎", "amt":1}],
+        "result" : [{"ore":"🟤","amt":15000}],
+        "multiplier" : 1
+    },
+    "blackFission" : {
+        "cost" : [{"ore":"🖤", "amt":1}],
+        "result" : [{"ore":"🔵","amt":20000}, {"ore":"🟡","amt":20000}, {"ore":"🔴","amt":20000}],
+        "multiplier" : 1
+    },
+    "whiteFission" : {
+        "cost" : [{"ore":"🤍", "amt":1}],
+        "result" : [{"ore":"🔵","amt":20000}, {"ore":"🟢","amt":20000}, {"ore":"🔴","amt":20000}],
         "multiplier" : 1
     },
     "gearCraft" : {

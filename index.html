@@ -562,7 +562,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <br><br>
                 <div id="conversionContainer">
                     <p id="conversionTitle">Variant Conversion Machine!</p>
-                    <p id="conversionDescription">How to use: Insert emoji into the left container, insert amount to convert next to it, select variant you wish to convert an ore from, and then press convert!<br>
+                    <p id="conversionDescription">How to use: Click on an ore in a variant inventory, or manually input the information!<br>
                     Current Rates: One Explosive Ore -> 30 Normal Ores | One Radioactive Ore -> 10 Normal Ores | One Electrified Ore -> 5 Normal Ores.</p>
                     <div id="machineHolder">
                         <form id="machineForm">
@@ -591,6 +591,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     </div>
                     <hr id="forgeSeparator">
                     <div class="craftingSelections" id="forgeCraft">
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bowCraft')">Craft <span class="forgeOreDisplay">🎀</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('frisbeeCraft')">Craft <span class="forgeOreDisplay">🥏</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('diamondCraft')">Craft <span class="forgeOreDisplay">💠</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('gearCraft')">Craft <span class="forgeOreDisplay">⚙️</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('batteryCraft')">Craft <span class="forgeOreDisplay">🔋</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('bambooCraft')">Craft <span class="forgeOreDisplay">🎍</span></button>
@@ -607,6 +610,15 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <div class="craftingSelections" id="forgeFission" style="display: none;">
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">Fission <span class="forgeOreDisplay">💎</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">Fission <span class="forgeOreDisplay">🧵</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">Fission <span class="forgeOreDisplay">💚</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">Fission <span class="forgeOreDisplay">💙</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowFission')">Fission <span class="forgeOreDisplay">💛</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeFission')">Fission <span class="forgeOreDisplay">🧡</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redFission')">Fission <span class="forgeOreDisplay">❤️</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleFission')">Fission <span class="forgeOreDisplay">💜</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownFission')">Fission <span class="forgeOreDisplay">🤎</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackFission')">Fission <span class="forgeOreDisplay">🖤</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteFission')">Fission <span class="forgeOreDisplay">🤍</span></button>
                     </div>
                     <hr id="forgeSeparator">
                     <div id="forgeRecipeDisplayContainer">

@@ -320,9 +320,9 @@ function updateCapacity(element) {
     }        
 }
 const indexOrder = {
-    "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"],
-    "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"],
-    "subrealmOne" : ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer", "type4Ores", "type3Ores", "type2Ores", "type1Ores"]
+    "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],
+    "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],
+    "subrealmOne" : ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer", "ccCave", "moCave", "foCave", "axCave", "ioCave", "ggCave"]
 }
 let layerNum = 0;
 function switchLayerIndex(num, overrideLayer, world) {
@@ -332,7 +332,7 @@ function switchLayerIndex(num, overrideLayer, world) {
     let layerToIndex;
     let worldLayer;
     if (world === undefined) {
-        worldLayer = currentWorld === 1 ? indexOrder["worldOne"] : (world === 2 ? indexOrder["worldTwo"] : indexOrder["subrealmOne"]);
+        worldLayer = currentWorld === 1 ? indexOrder["worldOne"] : (currentWorld === 2 ? indexOrder["worldTwo"] : indexOrder["subrealmOne"]);
     } else {
         worldLayer = world === 1 ? indexOrder["worldOne"] : (world === 2 ? indexOrder["worldTwo"] : indexOrder["subrealmOne"]);
     }
@@ -492,9 +492,9 @@ function randomFunction(ore, cause) {
                 }
             }
             if (layer === undefined) {
-                for (let i = allCaves.length - 1; i >= 0; i--) {
-                    if (caveList[allCaves[i]].includes(ore)) {
-                        layer = allCaves[i];
+                for (let cave in caveTypes) {
+                    if (caveList[cave].includes(ore)) {
+                        layer = cave;
                         break;
                     }
                 }
@@ -821,5 +821,13 @@ function toggleNyerd(button) {
             getAngleBetweenPoints({x : player.oreTracker.locationX, y: player.oreTracker.locationY});
         }
     }
+}
+function goToConvert(ore, variant) {
+    showMenuScreen("locations");
+    showVariantConversion(true);
+    document.getElementById("oreInput").value = ore;
+    document.getElementById("amtInput").value = oreList[ore][variantInvNames[variant - 1]];
+    document.getElementsByClassName("potentialVariant")[variant - 2].click();
+    console.log(ore);
 }
 //convertVariants({"ore":"", "variant":"Explosive", "amt":1})
