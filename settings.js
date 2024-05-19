@@ -467,7 +467,7 @@ function randomFunction(ore, cause) {
             return;
         if (ore === "🕳️")
             return;
-        if (ignoreList.indexOf(ore) === -1 || indexHasOre(ore)) {
+        if (!shouldIgnore(ore) || indexHasOre(ore)) {
             for (let i = 0; i < worldOneLayers.length; i++) {
                 if (layerList[worldOneLayers[i]].includes(ore)) {
                     layer = worldOneLayers[i];
