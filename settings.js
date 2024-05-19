@@ -381,7 +381,9 @@ function switchLayerIndex(num, overrideLayer, world) {
     }
     return 0;
 }
-let ignoreList = "🌳🏰🚿🐋🏔️⚠️💗🐪💵☘️🪽🔫🗝️💰⚖️🌙🍀🍃🚽🎓👾🪝🪡🍓🏯🦚⚓🪤🤖🦴🎩💘💞🐰🐢🌹🦋🔈☯️🦾🐞🥈🚬🪸🪦🚨🍖📜🐸⛔⚡🌱🩸♨️🚫🔈⛔💢🔇🛑⭕🔕🎉🧌♾️💅😁🪢🫶🇧🇷🇨🇴🇦🇷🇵🇪🇻🇪🇨🇱🇪🇨🇧🇴🇵🇾🇺🇾🇦🇺🇵🇬🇳🇿🇫🇯🇸🇧🇫🇲🇻🇺🇵🇫🇳🇨🇼🇸🏳️‍⚧️";
+function shouldIgnore(ore) {
+    return oreInformation.tierGrOrEqTo({"tier1": oreList[ore]["oreTier"], "tier2": "Sacred"});
+}
 let noLuck = "✴️🌹";
 function createIndexCards(layer) {
         const oldLayer = layer; 
@@ -413,7 +415,7 @@ function createIndexCards(layer) {
             parentObject.classList = "oreCard";
             parentWrapper.classList = "indexWrapper";
             let blackOut = false;
-            if (ignoreList.indexOf(property) > -1 && !indexHasOre(property)) blackOut = true;
+            if (shouldIgnore(property) && !indexHasOre(property)) blackOut = true;
             let output = `<span class='indexOre ${(blackOut) ? "indexBlackout" : ""}' title="${oreList[property]["oreName"]}">${property}</span>${blackOut ? "</span>" : ""}`;
             output += `<span class='indexVariants indexTextOutline'>${indexVariants(property)}</span>`
             output += `<span class='indexTier indexTextOutline'>${blackOut ? "???" : oreList[property]["oreTier"]}</span>`
