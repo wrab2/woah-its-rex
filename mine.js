@@ -113,7 +113,7 @@ function giveBlock(obj) {
     if (oreRarity >= 750000) {
         if (obj.fromCave) {oreRarity *= obj.caveMulti;}
         if (player.gears["gear22"] && Math.random() < 1/10) oreList[obj.type][variantInvNames[inv - 1]]++;
-        if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
+        //if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
         if (oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier})) {
             logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset); 
         }
