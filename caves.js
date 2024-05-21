@@ -238,7 +238,7 @@ function createGsCave() {
         while (outputArr.indexOf(toRemove[i]) > -1)
             outputArr.splice(outputArr.indexOf(toRemove[i]), 1);
     }
-    outputArr.push("🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "📘", "📙", "📕", "📗");
+    outputArr.push("🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "📘", "📙", "📕", "📗", "✡️", "🕳️");
     for (let i = 0; i < outputArr.length; i++) {
         for (let j = 0; j < outputArr.length - i - 1; j++) {
             if (oreList[outputArr[j]]["numRarity"] < oreList[outputArr[j + 1]]["numRarity"]) {

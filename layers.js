@@ -596,7 +596,7 @@ const layerIndex = {
         6 : "catcatLayer"
     }
 }
-let lastRepeatedLayer;
+let lastRepeatedLayer = -1;
 let currentLayer;
 function setLayer(y) {
     if (currentWorld === 1) {
@@ -607,6 +607,7 @@ function setLayer(y) {
                 a88();
                 currentLayerNum = tempNum;
                 currentLayer = allLayers[tempNum];
+                lastRepeatedLayer = -1;
             }
         } else {
             const repeatingLayerNum = Math.floor((y - 16000) / 10000);
@@ -641,7 +642,7 @@ function setLayer(y) {
                     lastRepeatedLayer = repeatingLayerNum;
                     a88();
                     currentLayerNum = repeatingLayers[repeatingLayerNum].layer;
-                    currentLayer = layerIndex.worldOne[currentLayerNum]
+                    currentLayer = layerIndex.worldOne[currentLayerNum];
                     if (repeatingLayers[repeatingLayerNum].force) a87(currentLayerNum, true)
                 }
             }
@@ -797,6 +798,7 @@ function createAllLayers() {
     const unknownLayer = createLayer([arr, ["🥇", "🟩"]]);
     layerDictionary["unknownLayer"] = {layer: unknownLayer, probabilities: []}
     createGenerationProbabilities();
+    caveList["abysstoneCave"] = createGsCave();
     //for (let i = 0; i < worldOneLayers.length; i++) layerDictionary[worldOneLayers[i]] = createLayer([layerList[worldOneLayers[i]], layerList["worldOneCommons"]]);
 }
 function updateAllLayers() {

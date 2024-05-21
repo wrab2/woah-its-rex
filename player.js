@@ -467,6 +467,7 @@ function loadNewData(data) {
         //base mine capacity
         data.settings.baseMineCapacity ??= 250000;
         player.settings.baseMineCapacity = data.settings.baseMineCapacity;
+        mineCapacity = player.settings.baseMineCapacity;
         document.getElementById("mineResetProgress").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
         //block updates
         data.settings.canDisplay ??= true;

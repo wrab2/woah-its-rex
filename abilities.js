@@ -263,29 +263,36 @@ function powerup5() {
     }
 }
 
-let ability1Active = false;
-let ability1Timeout;
-let energySiphonerDirection;
+let ability1RemoveTime = 0;
+let ability1Stacks = 0;
+let energySiphonerCooldown = 0;
+let energySiphonerActive = false;
 function gearAbility1() {
-    if (!ability1Active && !resetting) {
-        ability1Active = true;
-        energySiphonerDirection = curDirection;
-        curDirection = "";
-        baseSpeed -= 3;
-        clearInterval(loopTimer);
-        goDirection(energySiphonerDirection);
-        ability1Timeout = setTimeout(() => {
-            baseSpeed += baseSpeed <= 22 ? 3 : 0;
-            clearInterval(loopTimer);
-            if (energySiphonerDirection !== "" && curDirection !== "") {
-                curDirection = "";
-                goDirection(energySiphonerDirection);
-            }
-            ability1Active = false;
-        }, 5000);
-    }
+        const time = Date.now();
+        if (ability1Stacks === 0 && time >= energySiphonerCooldown) {
+            energySiphonerActive = true;
+            ability1RemoveTime = time + 1000;
+            ability1Stacks++;
+            activateSiphoner();
+            return;
+        }
+        if (ability1Stacks > 0 && ability1Stacks < 6) {
+            ability1RemoveTime += 5000;
+            ability1Stacks++;
+        }
 }
-
+function activateSiphoner() {
+    const temp = curDirection;
+    curDirection = "";
+    baseSpeed -= 3;
+    goDirection(temp);
+}
+function removeSiphoner() {
+    ability1Stacks = 0;
+    energySiphonerCooldown = Date.now() + 5000;
+    baseSpeed += 3;
+    energySiphonerActive = false;
+}
 function gearAbility2() {
     if (currentWorld === 1 && player.gears["gear9"]) {
         let reps = -1;
