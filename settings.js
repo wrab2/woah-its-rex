@@ -318,6 +318,7 @@ function updateCapacity(element) {
     } else {
         flashRed(element);
     }        
+    document.getElementById("mineResetProgress").innerText = `${blocksRevealedThisReset}/${mineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
 }
 const indexOrder = {
     "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],

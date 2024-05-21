@@ -245,6 +245,10 @@ function movePlayer(dir, reps) {
             }
         }
     }
+    if (blocksRevealedThisReset >= mineCapacity) {
+        blocksRevealedThisReset = 0;
+        mineReset();
+    }
     displayArea();
 }
 let keyCooldown = Date.now();
@@ -327,10 +331,6 @@ function goDirection(direction, speed) {
         clearInterval(loopTimer);
         insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
         curDirection = "";
-        if (ability1Active) {
-            clearTimeout(ability1Timeout);
-            ability1Active = false;
-        }
     } else {
         let reps = 1;
         let miningSpeed;
@@ -571,6 +571,7 @@ function updateInventory() {
     if (player.gears["gear24"]) autoPowerups();
     player.stats.timePlayed += Date.now() - lastTime;
     lastTime = Date.now();
+    if (Date.now() >= ability1RemoveTime && energySiphonerActive) removeSiphoner();
 }
 
 function appear(element){
@@ -592,10 +593,6 @@ function spawnMessage(obj) {
     let variantMulti = multis[obj.variant - 1];
     //ADD TO MINE CAPACITY IF NEAR RESET
     player.oreTracker.existingOres.push({block: block, posX : location["X"], posY : location["Y"]});
-    if ((currentWorld < 2 && !player.gears["gear3"]) && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < player.settings.baseMineCapacity + 50000)
-        mineCapacity += 10000;
-    else if (!player.gears["gear17"] && (blocksRevealedThisReset > mineCapacity - 10000) && mineCapacity < player.settings.baseMineCapacity + 50000)
-        mineCapacity += 10000;
     let oreRarity = oreList[block]["numRarity"];
     let spawnElement = document.getElementById("latestSpawns");
     let output = "";
@@ -701,7 +698,7 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     output += `<span onclick='goToOre(\"${type}\", \"${variant}\")'>`;
     output += variant + " ";
     output += type + " | X: " + (x - 1000000000).toLocaleString() + ", Y: " + (-(y - sub)).toLocaleString();
-    if (fromReset) output += " | FROM RESET<br>";
+    if (fromReset) output += " | Void Prevention.<br>";
     else output += " | At " + atMined.toLocaleString() +  " Mined.<br>";
     output += "</span>";
     element.innerHTML = output;

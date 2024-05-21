@@ -41,19 +41,6 @@ function checkAllAround(x, y) {
         }
         
     }
-    if (blocksRevealedThisReset >= mineCapacity) {
-        canMine = false;
-        clearInterval(loopTimer);
-        blocksRevealedThisReset = 0;
-        setTimeout(() => {
-            if (ability1Active) {
-                clearTimeout(ability1Timeout);
-                ability1Active = false;
-                baseSpeed += baseSpeed <= 22 ? 3 : 0;
-            }
-            mineReset();
-        }, 250);
-    }
 }
 //MINING
 function mineBlock(x, y, cause) {
@@ -113,7 +100,7 @@ function giveBlock(obj) {
     if (oreRarity >= 750000) {
         if (obj.fromCave) {oreRarity *= obj.caveMulti;}
         if (player.gears["gear22"] && Math.random() < 1/10) oreList[obj.type][variantInvNames[inv - 1]]++;
-        //if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
+        if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
         if (oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier})) {
             logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset); 
         }
@@ -186,6 +173,7 @@ function generateBlock(location) {
         playSound(oreList[blockToGive]["oreTier"]);
         if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage({block: blockToGive, location: location, caveInfo: undefined, variant: variant});
         if (((currentWorld < 2 && (player.gears["gear3"] || player.gears["gear28"])) || player.gears["gear17"] && tier !== "Celestial")) mineBlock(location["X"], location["Y"], "ability");
+        if (blocksRevealedThisReset / mineCapacity >= 0.9) mineBlock(location["X"], location["Y"], "reset");
         if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum})) stopMining();
     }
 }
@@ -336,7 +324,6 @@ function switchDistance() {
 }
 
 async function teleport() {
-    canMine = false;
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
     curDirection = "";
@@ -345,12 +332,11 @@ async function teleport() {
     pa3 = [];
     pa4 = [];
     pickaxeAbility23Num = 0;
-    canMine = await toLocation();
+    toLocation();
     displayArea();
 }
 
 function toLocation() {
-    return new Promise((resolve) => {
     pa1 = [];
     pa2 = [];
     pa3 = [];
@@ -367,10 +353,6 @@ function toLocation() {
     curY = layerDistanceY;
     checkAllAround(curX, curY, 1);
     mine[curY][curX] = "⛏️";
-    setTimeout(() => {
-        resolve(true);
-    }, 5);
-    });
 }
 
 function getParams(distanceX, distanceY, x, y) {
@@ -491,9 +473,6 @@ function switchWorld(to) {
     if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
 }
 function stopMining() {
-    ability1Active = false;
-    clearTimeout(ability1Timeout);
-    baseSpeed += baseSpeed <= 22 ? 3 : 0;
     curDirection = "";
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);

@@ -27,9 +27,6 @@ function toSurface() {
     } else {
         curY = 2001;
     }
-    for (let i = curY - 101; i < curY + 101; i++)
-        if (i > -1 && mine[i] === undefined) 
-            mine[i] = [];
     setLayer(curY);
     mine[curY][curX] = "⛏️";
     checkAllAround(curX, curY, 1);
@@ -37,107 +34,18 @@ function toSurface() {
     document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
 }
 let resetting = false;
-async function mineReset() {
-    if (!resetting) {
+function mineReset() {
         a12 = 0;
         caveOreLocations = [];
-        resetting = true;
         mineCapacity = player.settings.baseMineCapacity;
-        const temp = curDirection;
-        curDirection = "";
-        let temp2;
-        if ((currentWorld < 2 && !player.gears["gear3"]) || (currentWorld === 1 && !player.gears["gear17"]))
-            temp2 = await collectOres(temp);
-        canMine = await mineResetAid();
-        checkAllAround(curX, curY, 1);
-        mine[curY][curX] = "⛏️";
-        loggedFinds = [];
         player.oreTracker.existingOres = [];
         removeTrackerInformation();
         displayArea();
-        goDirection(temp);
-        resetting = false;
-    }
-}
-
-function collectOres(temp) {
-    return new Promise((resolve) => {
-        let direction = "";
-        if (temp !== "")
-            direction = temp;
-        else if (lastDirection !== "")
-            direction = lastDirection;
-        if (direction === "s") {
-            let constraints = getParams(30, 500);
-            for (let r = curY - constraints[1]; r < curY + 30; r++) {
-                for (let c = curX - constraints[0]; c < curX + 30; c++) {
-                    if (mine[r] !== undefined) {
-                        if (oreList[mine[r][c]] !== undefined) {
-                            if (oreList[mine[r][c]]["numRarity"] >= 750000)
-                                mineBlock(c, r, "reset", 1);
-                        }
-                    }
-                }
-            }
-        } else if (direction === "w") {
-            let constraints = getParams(30, 30);
-            for (let r = curY - constraints[1]; r < curY + 500; r++) {
-                for (let c = curX - constraints[0]; c < curX + 30; c++) {
-                    if (mine[r] !== undefined) {
-                        if (oreList[mine[r][c]] !== undefined) {
-                            if (oreList[mine[r][c]]["numRarity"] >= 750000)
-                                mineBlock(c, r, "reset");
-                        }
-                    }
-                }
-            }
-        } else if (direction === "a") {
-            let constraints = getParams(30, 30);
-            for (let r = curY - constraints[1]; r < curY + 30; r++) {
-                for (let c = curX - constraints[0]; c < curX + 500; c++) {
-                    if (mine[r] !== undefined) {
-                        if (oreList[mine[r][c]] !== undefined) {
-                            if (oreList[mine[r][c]]["numRarity"] >= 750000)
-                                mineBlock(c, r, "reset", 1);
-                        }
-                    }
-                }
-            }
-        } else if (direction === "d") {
-            let constraints = getParams(500, 30);
-            for (let r = curY - constraints[1]; r < curY + 30; r++) {
-                for (let c = curX - constraints[0]; c < curX + 30; c++) {
-                    if (mine[r] !== undefined) {
-                        if (oreList[mine[r][c]] !== undefined) {
-                            if (oreList[mine[r][c]]["numRarity"] >= 750000)
-                                mineBlock(c, r, "reset");
-                        }
-                    }
-                }
-            }
-        }
-    setTimeout(() => {
-        resolve(true);
-    }, 250);
-    });
-}
-
-function mineResetAid() {
-    return new Promise((resolve) => {
-    setTimeout(() => {
+        canMine = false;
         mine = null;
         mine = [[]];
         curX = 1000000000;
-        let y = curY;
-        for (let r = y - 101; r < y + 101; r++) {
-            if(r > -1 && mine[r] === undefined) {
-                mine[r] = [];
-            }
-        }
         checkAllAround(curX, curY, 1);
-    }, 5);
-    setTimeout(() => {
-        resolve(true);
-    }, 10);
-    });
+        mine[curY][curX] = "⛏️";
+        canMine = true;
 }

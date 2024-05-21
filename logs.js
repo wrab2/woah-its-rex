@@ -64,7 +64,7 @@ class secureLogs {
                         if (oolProbabilities[block] !== undefined && this.#spawnLogs[i].caveInfo[2] !== "abysstoneCave") {
                             rng = oolProbabilities[block];
                         } else if (this.#spawnLogs[i].caveInfo[2] === "abysstoneCave") {
-                            rng = gsProbabilities[caveList["abysstoneCave"].indexOf(log.block)];
+                            rng = gsProbabilities[caveList["abysstoneCave"].indexOf(this.#spawnLogs[i].block)];
                         } else {
                             rng = 1/oreList[this.#spawnLogs[i].block]["numRarity"];
                         }
