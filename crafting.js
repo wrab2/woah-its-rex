@@ -586,6 +586,11 @@ const oreRecipes = {
         "result" : [{"ore":"🎀", "amt":1}],
         "multiplier" : 1
     },
+    "fishCraft" : {
+        "cost" : [{"ore":"🫧","amt":2},{"ore":"🤿","amt":2},{"ore":"🎣","amt":2},{"ore":"⛵","amt":2}],
+        "result" : [{"ore":"🐟", "amt":1}],
+        "multiplier" : 1
+    },
     "greenCraft" : {
         "cost" : [{"ore":"🟢","amt":35000}],
         "result" : [{"ore":"💚", "amt":1}],
