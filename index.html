@@ -64,6 +64,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <button class="menuButton"onclick="showMenuScreen('statistics')">Statistics</button>
                 <button class="menuButton"onclick="showMenuScreen('index')">Ore Index</button>
                 <button class="menuButton"onclick="showMenuScreen('locations')">Locations</button>
+                <button class="menuButton"onclick="showMenuScreen('faq')">FAQ</button>
             </div>
             <p id="mineResetProgress"></p>
             <p id="blocksMined">0 Blocks Mined</p>
@@ -96,7 +97,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe14`)" id ="extremeEcholocator" style="display: none;"><span>Extreme Echolocator</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe15`)" id="corundumCaver" style="display: none;"><span>Corundum Caver</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe16`)" id="starborneSlasher" style="display: none;"><span>Starborne Slasher</span></button>
-                    <button class="craftingButton" onclick="displayRecipe(`pickaxe17`)" id="nyabomb" style="display: none;" id="cat"><span>Nyabomb</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(`pickaxe17`)" id="nyabomb" style="display: none;"><span id="cat">Nyabomb</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe18`)" id="lunarLightsabre" style="display: none;"><span>Lunar Lightsabre</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe19`)" id="gemstoneEngraver" style="display: none;"><span>Gemstone Engraver</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe20`)" id="gamblersFallacy" style="display: none;"><span>Gambler's Fallacy</span></button>
@@ -134,6 +135,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe('gear22')" style="display: none;" id="replicatorPrototype"><span>Replicator Prototype</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear23')" style="display: none;" id="hyperdriveAccelerator"><span>Hyperdrive Accelerator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear24')" style="display: none;" id="superenergeticAutomaton"><span>Superenergetic Automaton</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear25')" style="display: none;" id="alterationReiterator"><span>Alteration Reiterator</span></button>
                 </div>
             </div>
             <p id = "craftingRecipeTitle" class="middleTitle" style="display: none;">Recipe</p>
@@ -166,7 +168,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe24Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/175.<br>Has 11x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
                 <p class="itemDescription" id="pickaxe25Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/300.<br>Has 50x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
                 <p class="itemDescription" id="pickaxe26Description" style="display: none;">Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br>Has an ability proc rate of 1/150.<br>Has 175x luck.</p>
-                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at 10ms. The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.</p>
+                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade. The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span></p>
                
                 <!--
                     Pickaxes above
@@ -197,11 +199,14 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear22Description" style="display: none;">Has a 10% chance to duplicate any rare ore mined. (1/750k+)</p>
                 <p class="itemDescription" id="gear23Description" style="display: none;">+15% ability activation rate.</p>
                 <p class="itemDescription" id="gear24Description" style="display: none;">Automatically cycles through powerups and activates them if they are ready. -25% cooldown time, +50% activation time.</p>
+                <p class="itemDescription" id="gear25Description" style="display: none;">Will roll 1 extra time for a variant if an ore is normal.</p>
+           
             </div>
         </div>
         </div>
         </div>
         <div class="col-7">
+            <div id="mainSticky">
             <div class="mobile">
                     <button onclick="goDirection('a')" class="movementButton horizontalArrow" id="leftAutoMine"></button>
                     <button onclick="goDirection('s')" class="movementButton verticalArrow" id="downAutoMine"></button>
@@ -233,9 +238,27 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <button style="display: none;" class="powerupActivateButton" id="powerup3" onclick="powerup3()">Activate!</button>
                 <button style="display: none;" class="powerupActivateButton" id="powerup4" onclick="powerup4()">Activate!</button>
                 <button style="display: none;" class="powerupActivateButton" id="powerup5" onclick="powerup5()">Activate!</button>
-                <p id="blockDisplay">
-                    
-                </p>
+                <div id="blockDisplay">
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                </div>
                 <p id="displayDisabled">Display is Disabled.</p>
                 <div id="trackerLock">
                     <img src="media/featureLock.png" id="lockImage">
@@ -261,8 +284,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 
                 <!--<button id="secretButton" onclick="toggleCelestials(true)"></button>-->
             </div>
-            <div id="latestSpawns" class="latestDisplay">Latest Spawns Will Appear Here</div>
+        </div>
+        <div id="latestDisplayBottom"></div>
+                <div id="latestSpawns" class="latestDisplay">Latest Spawns Will Appear Here</div>
                 <div id="latestFinds" class="latestDisplay">Latest Finds Will Appear Here</div>
+            
         </div>
         
         <div class="col-3"> 
@@ -655,17 +681,209 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     </div>
                 </div>
             </div>
+            <div class="menuCategory" id="frame-faq">
+                <p class="menuCategoryTitle">FAQ</p>
+                <div id="faqTopButtons">
+                    <button class="faqButton" onclick="showFaqPage(0)">How do I play?</button>
+                    <button class="faqButton" onclick="showFaqPage(1)">The Menu</button>
+                    <button class="faqButton" onclick="showFaqPage(2)">Settings</button>
+                    <button class="faqButton" onclick="showFaqPage(3)">Ore Tiers</button>
+                    <button class="faqButton" onclick="showFaqPage(4)">Caves</button>
+                    <button class="faqButton" onclick="showFaqPage(5)">Powerups</button>
+                    <button class="faqButton" onclick="showFaqPage(6)">Other Questions</button>
+                    <button class="faqButton" onclick="closeMenu()">Back to Game</button>
+                </div>
+                <br><br>
+                <div id="faqContentHolder">
+                    <!--
+                        <span class="faqTitle"></span>
+                        <span class="faqSection"></span>
+                        <span class="faqText"></span>
+                    -->
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">How do I play?</span><br>
+                            <span class="faqSection">Movement:</span>
+                            <span class="faqText">You can either hold W, A, S, D to manually move in that direction, press the buttons with 1 arrow to move 1 block in that direction, press any of the arrow keys to automine in that direction, or press the buttons with 3 arrows to automine in that direction.</span><br>
+                            
+                            <span class="faqSection">Rare Spawns</span>
+                            <span class="faqText">One thing you have to pay attention to is spawn sounds. Rare ores all have a noise to indicate they have been spawned in the mine, and it is generally recommended to always collect these ores.</span><br>
+
+                            <span class="faqSection">Crafting</span>
+                            <span class="faqText">Crafting is the most important part of the game. It allows you to create better pickaxes and make gears that will help you progress. New pickaxes will either let you mine more blocks through abilities or gain more luck. Gears are just like upgrades in other games and can increase luck, speed, and other silly things that will help with progression.</span>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">The Menu</span>
+                            <span class="faqText">The menu contains a lot of important tabs that you should make note of!</span><br>
+
+                            <span class="faqSection">Settings</span>
+                            <span class="faqText">The settings tab allows you to change many things about the game (explained in the settings section). It is also where you can control spawn sound volume, and determine what spawn sounds get played.</span><br>
+
+                            <span class="faqSection">Data</span>
+                            <span class="faqText">The data tab has everything with your data. Pressing export will paste your save file into the text box, and asks if you want to download it as a file. It is recommended to make backups of your data regularly in case browser data is lost. Paste data into the text box and press import to import that data. This will overwrite your current data, so make sure it is what you want. Importing nothing performs a hard reset on your game.</span><br>
+
+                            <span class="faqSection">Logs</span>
+                            <span class="faqText">The logs tab is where you can generate ore logs for your current session. This only logs Flawless tier and above ores, along with any rare cave ores. These are also how you can provide proof of ores in the Discord. </span><br>
+
+                            <span class="faqSection">Statistics</span>
+                            <span class="faqText">The statistics tab shows you some things about yourself, such as total ores owned in the rare tiers, total time played, session time, blocks mined, and caves generated (more statistics will come eventually).</span><br>
+
+                            <span class="faqSection">Ore Index</span>
+                            <span class="faqText">The ore index tab gives you information on the ores in each layer in the world you are currently in. Higher tiers will be blacked out until the ore is found. Each index card will also tell you the rarity of the ore, how rare it is with your current luck, and what variants of the ore you own. </span><br>
+
+                            <span class="faqSection">Locations</span>
+                            <span class="faqText">The locations tab provides some very helpful areas. The first one is the forge, which allows you to craft certain ores you might need, or fission rare ores you have into a bunch of more common ores. The second is variant conversion, which can be more easily accessed by clicking on an ore in your inventory that is a variant. It will allow you to convert these variants into their normal selves, gaining more the rarer the variant. The third location is the workshop, which is currently only visible in Subrealm 1. The workshop will allow you to upgrade certain items, making them work better than usual.</span><br>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Settings</span><br>
+
+                            <span class="faqSection">Minimum Speed</span>
+                            <span class="faqText">This setting allows you to set a cap on your speed in case the game runs slowly. It will slow you down if you exceed this speed.</span><br>
+
+                            <span class="faqSection">Capacity</span>
+                            <span class="faqText">This setting allows you to change your mine capacity. It is recommended to keep it under 5,000,000 as there can be performance issues with high mine capacities.</span><br>
+
+                            <span class="faqSection">Latest Ores Max Length</span>
+                            <span class="faqText">This setting allows you to change the amount of ores that will show up in latest spawns and latest finds. </span><br>
+
+                            <span class="faqSection">Stop On Rare</span>
+                            <span class="faqText">This setting is one of the more important ones, and will stop you mining if you spawn an ore of the specified tier. Click on the tier name to change what tier it will stop on. A list of all tiers can be found in the ore information section.</span><br>
+
+                            <span class="faqSection">Minimum Spawn Message</span>
+                            <span class="faqText">This setting sets the minimum tier an ore has to be for it to generate a spawn message and appear in latest spawns and latest finds.</span><br>
+
+                            <span class="faqSection">Travel To Index On Click</span>
+                            <span class="faqText">These settings allow you to specify if clicking an ore in a crafting recipe or in the normal inventory will open the index page for it.</span><br>
+
+                            <span class="faqSection">Toggle Block Updates</span>
+                            <span class="faqText">This settings either enables or disables the blocks on the screen, and can increase performance.</span><br>
+
+                            <span class="faqSection">Use Numbers For Pickaxe Names</span>
+                            <span class="faqText">This setting switches pickaxe names to become numbers, like "Pickaxe 1" instead of the pickaxes actual name.</span><br>
+
+                            <span class="faqSection">Use Different Emojis</span>
+                            <span class="faqText">This setting attempts to switch the emoji font to one that has correct emoji sizes if the current emoji font breaks the display. (doesn't work on all devices)</span><br>
+
+                            <span class="faqSection">Invisible Path Blocks</span>
+                            <span class="faqText">This setting switches the white circles to nothing, can negatively impact performance but looks better.</span><br>
+
+                            <span class="faqSection">Toggle Caves</span>
+                            <span class="faqText">This setting allows you to switch caves on or off. Caves spawn after Geode Staff and can provide a lot more resources.</span><br>
+
+                            <span class="faqSection">1/250m+ RNG Logs</span>
+                            <span class="faqText">This setting changes logs to only include ores that have an RNG of over 1/250,000,000. RNG is how rare an ore is including player luck instead of how rare the ore normally is.</span><br>
+
+                            <span class="faqSection">Spawn Effects</span>
+                            <span class="faqText">This setting allows you to turn spawn effects on or off (the shake and color changes). </span><br>
+
+                            <span class="faqSection">Automine Protection</span>
+                            <span class="faqText">This setting makes abilities and Infinity Collector unable to mine ores, and you have to manually mine them.</span><br>
+                        
+                            <span class="faqSection">Nyerd</span>
+                            <span class="faqText">This setting changes the ore tracker arrow to the :nyerd: emoji.</span>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Ore Tiers</span><br><br>
+
+                            <span class="faqSection">Antique : </span><span class="faqText">1/750,000+ (750k)</span>
+                            <span class="faqSection">Mystical : </span><span class="faqText">1/5,000,000+ (5m)</span>
+                            <span class="faqSection">Divine : </span><span class="faqText">1/25,000,000+ (25m)</span>
+                            <span class="faqSection">Flawless : </span><span class="faqText">1/160,000,000+ (160m) and the first tier to log normally.</span>
+                            <span class="faqSection">Interstellar : </span><span class="faqText">1/750,000,000+ (750m) and the first tier to have spawn effects</span>
+                            <span class="faqSection">Metaversal : </span><span class="faqText">1/1,500,000,000+ (1.5b)</span>
+                            <span class="faqSection">Sacred : </span><span class="faqText">1/5,000,000,000+ (5b)</span>
+                            <span class="faqSection">Ethereal : </span><span class="faqText">1/100,000,000,000+ (100b)</span>
+                            <span class="faqSection">Imaginary : </span><span class="faqText">1/1,000,000,000,000+ (1t)</span>
+                            <span class="faqSection">Celestial : </span><span class="faqText">Secret ores with special spawn conditions, ranges from 1/10,000 (10k) to 1/13,000,000,000,000,000 (13qd)</span>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Caves</span>
+                            <span class="faqText">Caves generate in the mine at a rate of 1/500 after crafting Geode Staff. They will mine a little over 1,500 blocks and will give you whatever was mined. They don't increase blocks mined.</span><br>
+
+                            <span class="faqSection">Cave Types</span>
+                            <span class="faqText">Cave types have a chance of generating when a cave is generated. These have special blocks instead of the normal layer, and have their own loot tables. These loot tables contain cave exclusives, which can only be generated in that specific cave type and are not affected by any luck as of now. Any cave exclusive will log, no matter the rarity.</span><br>
+
+                            <span class="faqSection">Abysstone Caves</span>
+                            <span class="faqText">Abysstone caves are unlocked with a special, secret gear in World 2. They are the rarest cave type and generate any ore from World 1 and World 2, excluding celestials and any cave exclusives. It has its own exclusive ore, which is celestial tier.</span><br>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Powerups And Other Things Like Them</span><br>
+
+                            <span class="faqSection">Terrestrial Terror</span>
+                            <span class="faqText">Mines ~10,000 (10k) blocks around the player using the players current luck. </span><br>
+                            
+                            <span class="faqSection">The Spelunker</span>
+                            <span class="faqText">Generates 8 caves around the player.</span><br>
+                            
+                            <span class="faqSection">Illogical Randomiser</span>
+                            <span class="faqText">Makes a random ore from the layer you are in 1.5x more common. Will display which ore is chosen.</span><br>
+                            
+                            <span class="faqSection">Re-Repurposed Replicator</span>
+                            <span class="faqText">Makes any common ore that wouldn't usually be affected by luck have up to 3.5x luck applied to it.</span><br>
+                            
+                            <span class="faqSection">Paradoxical Progression</span>
+                            <span class="faqText">Gives you any unowned pickaxe or gear for at least 1 minute. Will not give World 1 pickaxes in World 2, and is disabled in Subworld 1. The given item is wiped on refresh.</span><br>
+                            
+                            <span class="faqSection">Ore Tracker</span>
+                            <span class="faqText">Unlocked by crafting the ore tracker gear. Points you in the direction of the nearest rare ore that had a spawn message and gives you its coordinates upon clicking "Track Ores!". Will also display the variant of the ore if it has one.</span><br>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Other Questions</span>
+                            <span class="faqSection">What are variants?</span>
+                            <span class="faqText">Variants are versions of ores that have a much lower chance to spawn. They have no functional use, but can be converted to normal, giving more ores the rarer the variant. They look special on the display, glowing their respective color.</span>
+
+                            <span class="faqSection">What happens when I dig down?</span>
+                            <span class="faqText">In World 2 and Subrealm 1, the last layer of the world will keep generating infinitely as you go down. In World 1, there's a special mechanic that keeps generating layers the further down you go.</span>
+                            <span class="faqText">These layers are usually repeated versions of the main layers, with a small chance to have something added to them. There are also a few secret layers that have a very low chance of generating. These special layers, along with the lowest point you've been, will be added to the teleport list on generation. An index page for the secret layers will also be created once you have mined a certain amount in those layers.</span><br>
+
+                            <span class="faqSection">What is "Void Prevention"?</span>
+                            <span class="faqText">Void prevention is when the game automatically mines a rare ore you spawned because it was near the end of the mine lifespan. It is there to prevent ore loss from the mine resetting.</span><br>
+
+                            <span class="faqTitle">How do i find [layer]? (and other secrets)</span>
+                            <span class="faqText">This section will be spoilered in case people do not want to reveal how to find certain layers or want to figure things out for themselves. Click on the section to reveal the text.</span>
+                            <details class="faqText">
+                                <summary class="faqSection">Cloud Layer</summary>
+                                Found by digging above the surface in World 2
+                            </details>
+                            <details class="faqText">
+                                <summary class="faqSection">❌ Layer</summary>
+                                Found by digging down to the barrier in World 2 and mining along it until a hole spawns. The hole is a different ore that isn't barrier and spawns at a rate of 1/5,000 (5k).
+                            </details>
+                            <details class="faqText">
+                                <summary class="faqSection">Abysstone Gear</summary>
+                                Viewing: Click the gears tab a few times in World 2 and it will appear.
+                            </details>
+                            <details class="faqText">
+                                <summary class="faqSection">The Final Pickaxe</summary>
+                                Viewing: Craft every pickaxe and gear, and click the pickaxes tab 6 times to view the recipe.<br>
+                                The celestials required to craft it:<br>
+                                Pickaxe: Mine down into the barrier to have a chance to obtain it<br>
+                                Yin-Yang: Mine in World 2 with the Key equipped.<br>
+                            </details>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="newPlayer">
+            <p class="newPlayerText">You appear to be new to this game, would you like to see how to play? The information can be viewed at any time by selecting 'FAQ' in the menu.</p>
+            <button class="newPlayerButton" style="background-color:#6BC267;" onclick="doTutorial()">Yes</button>
+            <button class="newPlayerButton" style="background-color:#FF3D3D;" onclick="toggleNewPlayer(false)">No</button>
         </div>
     </div>
 </div>
 </div>
-<!--
-<div id="celestialContainer" style="display: none;">
-    <div id="celestialSwitch">
-        <button id ="celestialLeft">Left</button>
-        <p id="celestialText">Info</p>
-        <button id ="celestialLeft">Right</button>
-    </div>
-</div>
--->
+<p class="latestFind htmlTemplate" style="display: none;"></p>
 </body>

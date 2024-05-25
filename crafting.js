@@ -265,7 +265,12 @@ const recipes = {
     },
     "gear24" : {
         name : "",
-        recipe : [{ore:"🇨🇺", amt:40}, {ore:"🇭🇹", amt:35}, {ore:"🇬🇹", amt:30}],
+        recipe : [{ore:"🇨🇺", amt:30}, {ore:"🇭🇹", amt:25}, {ore:"🇬🇹", amt:20}],
+        upgrades: {}
+    },
+    "gear25" : {  
+        name : "",
+        recipe : [{ore:"🇪🇸", amt:30}, {ore:"🇮🇹", amt:25}, {ore:"🇫🇷", amt:20}],
         upgrades: {}
     }
 }
@@ -452,6 +457,7 @@ const buttonGradients = {
     "gear22Craft" : {"gradient" : "linear-gradient(to right,#FF0B0B, #FFEB00, #7AFF1F)","applied" : false},
     "gear23Craft" : {"gradient" : "linear-gradient(to right, #00dfff, #3a00f9, #15fd00, #3a00f9, #00dfff)","applied" : false},
     "gear24Craft" : {"gradient" : "linear-gradient(to right, #FFFF99, #b4dcf0, #dcf0f0, #b4dcf0, #FFFF99)","applied" : false},
+    "gear25Craft" : {"gradient" : "linear-gradient(to right, #e365fc, #c9fc3a, #ff4b33)","applied" : false},
     
 }
 function craftPickaxe(item) {
@@ -502,7 +508,7 @@ const showOrders = {
     worldOneGears : ["gear0", "gear1", "gear2", "gear7", "gear8", "gear3", "gear4", "gear5", "gear6", "gear9"],
     worldTwoGears : ["gear10", "gear11", "gear12", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "gear21"],
     srOnePickaxes : ["pickaxe27"],
-    srOneGears : ["gear22", "gear23", "gear24"],
+    srOneGears : ["gear22", "gear23", "gear24", "gear25"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -851,6 +857,22 @@ const upgradeRecipes = {
                 "Ability Size:<br>19,930 -> 30,396"
             ]
         },
+        "upgrade2" : 
+        { 
+            recipe : [   
+                {ore: "🇨🇦", amt: 50},
+                {ore: "🇲🇽", amt: 40},
+                {ore: "🇺🇸", amt: 30},
+                {ore: "🇳🇱", amt: 15},
+                {ore: "🇷🇴", amt: 12},
+                {ore: "🇺🇦", amt: 10},
+                {ore: "🇵🇱", amt: 8},
+            ],
+            descriptions : [
+                "Luck:<br>10 -> 20",
+                "Ability Size:<br>30,396 -> 37,491"
+            ]
+        },
     }
 }
 let currentDisplayedUpgrade;
@@ -972,5 +994,6 @@ function updateUpgradeDisplay() {
     toEdit[0].innerHTML = output;
 }
 function updateTolLuck() {
-    document.getElementById("treeOfLifeLuck").innerText = `Has ${player.upgrades["pickaxe27"].levelLuck[player.upgrades["pickaxe27"].level]}x Luck.`
+    document.getElementById("treeOfLifeLuck").innerText = `Has ${player.upgrades["pickaxe27"].levelLuck[player.upgrades["pickaxe27"].level]}x Luck.`;
+    document.getElementById("treeOfLifeSpeed").innerText = `${10 - player.upgrades["pickaxe27"].level}ms`;
 }

@@ -446,112 +446,121 @@ function pickaxeAbility7(x, y) {
     }
     displayArea();
 }
-
-function pickaxeAbility8(x, y, reps) {
-    if (reps < 4) {
-        let procs = [
-            [],
-            [],
-            [],
-            []
-        ];
-        const constraints  = getParams(8, 8, x, y);
-        const origin = [y, x];
-        for (let i = 0; i < 8; i++) {
-            x++;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75)
-            procs[0] = [x, y, true];
-        x = origin[1];
-        for (let i = 0; i < constraints[0]; i++) {
-            x--;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75)
-            procs[1] = [x, y, true];
-        x = origin[1];
-        for (let i = 0; i < 8; i++) {
-            y++;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75) {
-            procs[2] = [x, y, true]
-        }
-        y = origin[0];
-        for (let i = 0; i < constraints[1]; i++) {
-            y--;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75)
-            procs[3] = [x, y, true];
-        reps++;
-        for (let i = 0; i < procs.length; i++) {
-            if (procs[i][1])
-                pickaxeAbility8(procs[i][0], procs[i][1], reps);
-        }
-    } else {
-        displayArea();
+function mineLines(loc) {
+    let x = loc.x;
+    let y = loc.y;
+    let from = loc.from;
+    for (let i = 0; i < 8; i++) {
+        from !== 2 ? pickaxeAbilityMineBlock(x + i, y) : null;
+        from !== 3 ? pickaxeAbilityMineBlock(x - i, y) : null;
+        from !== 0 ? pickaxeAbilityMineBlock(x, y + i) : null;
+        from !== 1 ? pickaxeAbilityMineBlock(x, y - i) : null;
     }
 }
-
-function pickaxeAbility9(x, y, reps) {
-    if (reps < 4) {
-        let procs = [
-            [],
-            [],
-            [],
-            []
-        ];
-        const constraints  = getParams(6, 6, x, y);
-        const origin = [y, x];
-        for (let i = 0; i < constraints[0]; i++) {
-            x--;
-            pickaxeAbilityMineBlock(x, y);
-            y++;
-            pickaxeAbilityMineBlock(x, y);
+function pickaxeAbility8(x, y) {
+    const points = [{x: x, y:y, from: -1}];
+    let reps = 1;
+    while (reps < 5) {
+        let pointX;
+        let pointY;
+        let pointFrom;
+        for (let i = points.length - 1; i >= 0; i--) {
+            pointX = points[i].x;
+            pointY = points[i].y;
+            pointFrom = points[i].from;
+            mineLines({x: pointX, y:pointY, from:pointFrom});
+            points.splice(i, 1);
+            let npy;
+            let npx;
+            if (Math.random() <= 0.75) {
+                //point above center, value of 0
+                npy = pointY - 8;
+                npx = pointX; 
+                mine[npy] ??= [];
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:0});
+            }
+            if (Math.random() <= 0.75) {
+                //point below center, value of 1
+                npy = pointY + 8;
+                npx = pointX; 
+                mine[npy] ??= [];
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:1});
+            }
+            if (Math.random() <= 0.75) {
+                //point left of center, value of 2
+                npy = pointY;
+                npx = pointX - 8; 
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:2});
+            }
+            if (Math.random() <= 0.75) {
+                //point right of center, value of 3
+                npy = pointY;
+                npx = pointX + 8; 
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:3});
+            }
         }
-        if (Math.random() <= 0.75)
-            procs[0] = [x, y, true];
-        x = origin[1];
-        y = origin[0];
-        for (let i = 0; i < constraints[0]; i++) {
-            x++;
-            pickaxeAbilityMineBlock(x, y);
-            y++;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75)
-            procs[1] = [x, y, true];
-        x = origin[1];
-        y = origin[0];
-        for (let i = 0; i < constraints[1]; i++) {
-            x++;
-            pickaxeAbilityMineBlock(x, y);
-            y--;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75)
-            procs[2] = [x, y, true];
-        x = origin[1];
-        y = origin[0];
-        if (constraints[1] < constraints[0])
-            constraints[0] = constraints[1];
-        for (let i = 0; i < constraints[0]; i++) {
-            x--;
-            pickaxeAbilityMineBlock(x, y);
-            y--;
-            pickaxeAbilityMineBlock(x, y);
-        }
-        if (Math.random() <= 0.75)
-            procs[3] = [x, y, true];
         reps++;
-        for (let i = 0; i < procs.length; i++) {
-            if (procs[i][1])
-                pickaxeAbility9(procs[i][0], procs[i][1], reps);
+    }
+}
+function mineX(loc) {
+    let x = loc.x;
+    let y = loc.y;
+    let from = loc.from;
+    pickaxeAbilityMineBlock(x, y)
+    for (let i = 1; i < 7; i++) {
+        //bottom right
+        from !== 2 ? (pickaxeAbilityMineBlock(x + i, y + i), pickaxeAbilityMineBlock(x + i, y + (i - 1))) : null;
+        //top right
+        from !== 3 ? (pickaxeAbilityMineBlock(x + i, y - i), pickaxeAbilityMineBlock(x + i, y - (i - 1))) : null;
+        //bottom left
+        from !== 0 ? (pickaxeAbilityMineBlock(x - i, y + i), pickaxeAbilityMineBlock(x - i, y + (i - 1))) : null;
+        //top left
+        from !== 1 ? (pickaxeAbilityMineBlock(x - i, y - i), pickaxeAbilityMineBlock(x - i, y - (i - 1))) : null;
+    }
+}
+function pickaxeAbility9(x, y) {
+    const points = [{x: x, y:y, from: -1}];
+    let reps = 1;
+    while (reps < 5) {
+        let pointX;
+        let pointY;
+        let pointFrom;
+        for (let i = points.length - 1; i >= 0; i--) {
+            pointX = points[i].x;
+            pointY = points[i].y;
+            pointFrom = points[i].from;
+            mineX({x: pointX, y:pointY, from:pointFrom});
+            points.splice(i, 1);
+            let npy;
+            let npx;
+            if (Math.random() <= 0.75) {
+                //point top right, value of 0
+                npy = pointY - 6;
+                npx = pointX + 7; 
+                mine[npy] ??= [];
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:0});
+            }
+            if (Math.random() <= 0.75) {
+                //point bottom right, value of 1
+                npy = pointY + 6;
+                npx = pointX + 7; 
+                mine[npy] ??= [];
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:1});
+            }
+            if (Math.random() <= 0.75) {
+                //point top left, value of 2
+                npy = pointY - 6;
+                npx = pointX - 7; 
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:2});
+            }
+            if (Math.random() <= 0.75) {
+                //point bottom left, value of 3
+                npy = pointY + 6;
+                npx = pointX - 7; 
+                if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:3});
+            }
         }
-    } else {
-        displayArea();
+        reps++;
     }
 }
 
@@ -1203,6 +1212,7 @@ const treeLevels = {
     0: [],
     1: [],
     cherryBranch: [],
+    autumnBranch: []
 }
 function pickaxeAbility27(x, y) {
     let eX = x;
@@ -1219,6 +1229,12 @@ function pickaxeAbility27(x, y) {
         arrToIndex = treeLevels.cherryBranch;
         eX = x - 345;
         eY = y + 50;
+        pickaxeArrayLoop(arrToIndex, eX, eY)
+    }
+    if (level > 2) {
+        arrToIndex = treeLevels.autumnBranch;
+        eX = x - 260;
+        eY = y - 150;
         pickaxeArrayLoop(arrToIndex, eX, eY)
     }
     displayArea();

@@ -126,13 +126,14 @@ class playerTemplate {
         this.upgrades = {
             "pickaxe27" : {
                 level: 0,
-                maxLevel: 2,
+                maxLevel: 3,
                 bought: 0,
-                levelLuck: [1, 3, 10]
+                levelLuck: [1, 3, 10, 20]
             }
         },
         this.wasUsing = undefined;
         this.sr1Unlocked = false;
+        this.faqOffered = false;
         this.webHook = {
             active: false,
             ids : {
@@ -284,7 +285,17 @@ function updatePowerupCooldowns() {
     }
     if (player.powerupVariables.currentPowerupDisplayed === "powerup3") {
         const element = document.getElementById("powerupExtraInfo");
-        if (player.powerupVariables.currentChosenOre.ore !== undefined) {element.innerText = `1.5x to ${player.powerupVariables.currentChosenOre.ore}`; element.style.display = "block";}
+        if (player.powerupVariables.currentChosenOre.ore !== undefined) {
+            const ore = player.powerupVariables.currentChosenOre.ore;
+            let blockOutput;
+            if (oreList[ore]["hasImage"]) {
+                blockOutput = `<span class="trackerImage"><img src="${oreList[ore]["src"]}"></img></span>`
+            } else {
+                blockOutput = ore;
+            }
+            element.innerHTML = `1.5x to ${blockOutput}`; 
+            element.style.display = "block";
+        }
         else {element.style.display = "none"; element.innerText = ""}
     }
 }
@@ -548,6 +559,8 @@ function loadNewData(data) {
                 }
             }
         }
+        if (!data.faqOffered) toggleNewPlayer(true);
+        else player.faqOffered = true;
     } catch (err) {
         console.log(err);
         window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");

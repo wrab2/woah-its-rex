@@ -28,6 +28,23 @@ function showMenuScreen(type) {
     if (type === 'statistics') createStats();
     if (type === 'locations') showOreForge(true);
 }
+function showFaqPage(num) {
+    const elements = document.getElementsByClassName("faqPage");
+    for (let i = 0; i < elements.length; i++) {
+        if (i === num) elements[i].style.display = "block";
+        else elements[i].style.display = "none";
+    }
+}
+function toggleNewPlayer(state) {
+    if (state) document.getElementById("newPlayer").style.display = "block";
+    else {document.getElementById("newPlayer").style.display = "none"; player.faqOffered = true;}
+}
+function doTutorial() {
+    showMenuScreen("faq");
+    showFaqPage(0);
+    toggleNewPlayer(false);
+    player.faqOffered = true;
+}
 const settingsTabs = ["game", "audio"]
 function switchSettings(type) {
     for (let i = 0; i < settingsTabs.length; i++) document.getElementById(`${settingsTabs[i]}Settings`).style.display = "none";
@@ -88,7 +105,8 @@ let allPickaxeNames =
 "Staff of Binding",
 "Stormseer's Superspark Sceptre",
 "Coronary Catastrophe",
-"N̴̡̠͍̰̓̀̉́͘͟͜͠͠͝uͧ̆̃͂̔̂͛̆̇ͫ̍̒̍͑̅̎̾͒҉̶̶̧̡̨͘͟͟͡͞͡͏̷̧͈̣̱͚̼̹̤̘̹l̷̷̸̴̨̡̢̜͈̭̰͕̪̯̭͓͓̲̱̹̥̜̝̩̝ͤ̀̕͝͠͠͝͠l̴͋̄̋͐ͪ̒ͦ̄̆̅̂̍͂ͧ͛ͮ̏̒̓ͨ̓͊̓̆ͤ̓̇̽̎͏̷͔̬̟̣͍̗̦̝̮̱̳̼͔̻̭͍̗̦͉̗̥͍͇̭̘͉̕͜͡ ̸̸̶̨̢̳̍̐̓ͪͥ̐͋̃̉͒̓̓̀̌͑̾ͩͯ͋ͦ͗ͮͯͪͥ̅͊ͩͣͨ̆̒̂̂̽̀̀͘͘͘͜͞͠C̵̵̷̸̸̵ͦ͒͆͡͞͡͏̶̵̡͔̙̱͢ḩ̸͙͙̼̖̥̦̻͈̖̫̖̯̣̣͍͎̖̹̜͇̯ͧͥ̎̒ͨ̎̓ͫ͛̅ͨͧͤͤͫ̊̓̈̒͐ͥ̎̓ͤ̃ͧͣ͊̉̄͛͡r̵̸̴̢̢͒ͮ̈́̓ͬ̉͆ͪ̀̓͋̉́͌̾ͬ̾̐ͫ̑ͮ̒̂̈͆͆̆͌̿ͭ́͑̂ͯ͛ͩ̇̚͜͡͏̸̼̫̪̮̲͉͔͇̯̻͇̫͚̰̦̤͈͉̟̙̻̖͇͖̱͕̘̣̫̥̝͍͔͝o̷͐̏̈́ͭ̔̇ͬͣ͑̂̉̑̓̊ͯͪ͏̶̸͏̷̴̴̶̷̷̧́̀̀͘͟͢͞҉̠̩͇͙̥̫̻̮̯̳̖̙͕̹̤͈͓̻͇̘͖͔m͑͐̃́̚͏̷̶̸̴̧̢̧̡̭̰́̕̕͢͡a̷̶̛̓̉͐͋̄̍͊̓ͪ̏̑̍͋ͮ̔͋̒ͧͭ̐̋͛͆̌̚̕͏͏̶͜͢͞͏̵̸̧̢̹̯͎̫̜̪̪̥̫̖̻̝̘͖̼̰̝͈͝͝͡"
+"N̴̡̠͍̰̓̀̉́͘͟͜͠͠͝uͧ̆̃͂̔̂͛̆̇ͫ̍̒̍͑̅̎̾͒҉̶̶̧̡̨͘͟͟͡͞͡͏̷̧͈̣̱͚̼̹̤̘̹l̷̷̸̴̨̡̢̜͈̭̰͕̪̯̭͓͓̲̱̹̥̜̝̩̝ͤ̀̕͝͠͠͝͠l̴͋̄̋͐ͪ̒ͦ̄̆̅̂̍͂ͧ͛ͮ̏̒̓ͨ̓͊̓̆ͤ̓̇̽̎͏̷͔̬̟̣͍̗̦̝̮̱̳̼͔̻̭͍̗̦͉̗̥͍͇̭̘͉̕͜͡ ̸̸̶̨̢̳̍̐̓ͪͥ̐͋̃̉͒̓̓̀̌͑̾ͩͯ͋ͦ͗ͮͯͪͥ̅͊ͩͣͨ̆̒̂̂̽̀̀͘͘͘͜͞͠C̵̵̷̸̸̵ͦ͒͆͡͞͡͏̶̵̡͔̙̱͢ḩ̸͙͙̼̖̥̦̻͈̖̫̖̯̣̣͍͎̖̹̜͇̯ͧͥ̎̒ͨ̎̓ͫ͛̅ͨͧͤͤͫ̊̓̈̒͐ͥ̎̓ͤ̃ͧͣ͊̉̄͛͡r̵̸̴̢̢͒ͮ̈́̓ͬ̉͆ͪ̀̓͋̉́͌̾ͬ̾̐ͫ̑ͮ̒̂̈͆͆̆͌̿ͭ́͑̂ͯ͛ͩ̇̚͜͡͏̸̼̫̪̮̲͉͔͇̯̻͇̫͚̰̦̤͈͉̟̙̻̖͇͖̱͕̘̣̫̥̝͍͔͝o̷͐̏̈́ͭ̔̇ͬͣ͑̂̉̑̓̊ͯͪ͏̶̸͏̷̴̴̶̷̷̧́̀̀͘͟͢͞҉̠̩͇͙̥̫̻̮̯̳̖̙͕̹̤͈͓̻͇̘͖͔m͑͐̃́̚͏̷̶̸̴̧̢̧̡̭̰́̕̕͢͡a̷̶̛̓̉͐͋̄̍͊̓ͪ̏̑̍͋ͮ̔͋̒ͧͭ̐̋͛͆̌̚̕͏͏̶͜͢͞͏̵̸̧̢̹̯͎̫̜̪̪̥̫̖̻̝̘͖̼̰̝͈͝͝͡",
+"The Tree of Life"
 ];
 function changeUseNumbers(button) {
     if (!player.settings.useNumbers) {
@@ -417,7 +435,11 @@ function createIndexCards(layer) {
             parentWrapper.classList = "indexWrapper";
             let blackOut = false;
             if (shouldIgnore(property) && !indexHasOre(property)) blackOut = true;
-            let output = `<span class='indexOre ${(blackOut) ? "indexBlackout" : ""}' title="${oreList[property]["oreName"]}">${property}</span>${blackOut ? "</span>" : ""}`;
+            let propertyToAdd;
+            if (oreList[property]["hasImage"]) {
+                propertyToAdd = `<img src="${oreList[property]["src"]}" class="indexImage"></img>`
+            } else propertyToAdd = property;
+            let output = `<span class='indexOre ${(blackOut) ? (oreList[property]["hasImage"] ? "indexBlackout blackoutImage" : "indexBlackout") : ""}' title="${oreList[property]["oreName"]}">${propertyToAdd}</span>${blackOut ? "</span>" : ""}`;
             output += `<span class='indexVariants indexTextOutline'>${indexVariants(property)}</span>`
             output += `<span class='indexTier indexTextOutline'>${blackOut ? "???" : oreList[property]["oreTier"]}</span>`
             output += "<span class='indexRarity indexTextOutline'>1/";
@@ -531,7 +553,13 @@ function indexHasOre(ore) {
     return (oreList[ore]["normalAmt"] || oreList[ore]["electrifiedAmt"] || oreList[ore]["radioactiveAmt"] || oreList[ore]["explosiveAmt"]);
 }
 function indexVariants(ore) { 
-    return "" + (oreList[ore]["normalAmt"] ? `${ore}` : `<span style='color:transparent; text-shadow:0 0 0 black;'>${ore}</span>`) + (oreList[ore]["electrifiedAmt"] ? "⚡️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>⚡️</span>") + (oreList[ore]["radioactiveAmt"] ? "☢️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>☢️</span>") + (oreList[ore]["explosiveAmt"] ? "💥" : "<span style='color:transparent; text-shadow:0 0 0 black;'>💥</span>")
+    let imageOutput = "";
+    let isImage = false;
+    if (oreList[ore]["hasImage"]) {
+        imageOutput = `<span class="${oreList[ore]["normalAmt"] ? "" : "blackoutImage"}"><img src="${oreList[ore]["src"]}" class="indexImageVariant"></img></span>`
+        isImage = true;
+    }
+    return "" + (isImage ? imageOutput : (oreList[ore]["normalAmt"] ? `${oreList[ore]["hasImage"] ? "<span class='indexImageVariant'" : ""}` : `<span style='color:transparent; text-shadow:0 0 0 black;'>${ore}</span>`)) + (oreList[ore]["electrifiedAmt"] ? "⚡️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>⚡️</span>") + (oreList[ore]["radioactiveAmt"] ? "☢️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>☢️</span>") + (oreList[ore]["explosiveAmt"] ? "💥" : "<span style='color:transparent; text-shadow:0 0 0 black;'>💥</span>")
 }
 function switchToIndex(button, num) {
     if (num === 0) {

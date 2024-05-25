@@ -267,6 +267,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#alterationReiterator span{
+    background: linear-gradient(to right, #e365fc, #c9fc3a, #ff4b33);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;
