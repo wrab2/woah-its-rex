@@ -1585,7 +1585,7 @@ top:0px;
 #oreInput {
   float: left;
   height: 6vw;
-  width: 6vw;
+  width: 10vw;
   font-size: 2vw;
   align-self: center;
   background: none;
@@ -2067,10 +2067,13 @@ button {
   position: absolute;
   top:1vw;
   left: 1vw;
-  
+	-webkit-user-drag: none;
+	-moz-user-select: none;
 }
 .blackoutImage {
-  filter: brightness(0%)
+  filter: brightness(0%);
+  -webkit-user-drag: none;
+	-moz-user-select: none;
 }
 
 .indexImageVariant {

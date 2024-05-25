@@ -73,7 +73,7 @@ function changeCanDisplay(button) {
     } else {
         button.style.backgroundColor = "#6BC267";
         player.settings.canDisplay = true;
-        document.getElementById("blockDisplay").style.display = "block";
+        document.getElementById("blockDisplay").style.display = "inline-flex";
         document.getElementById("displayDisabled").style.display = "none";
         displayArea();
     }
@@ -477,7 +477,6 @@ function createIndexCards(layer) {
             parentObject.appendChild(parentWrapper)
             toReturn.push(parentObject);
         }
-        
     }
         return toReturn;
 }
