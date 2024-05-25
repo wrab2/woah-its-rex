@@ -229,7 +229,7 @@ function movePlayer(dir, reps) {
                     lastDirection = dir.key;
                 } else {
                     if (mine[curY + dir.y][curX + dir.x] === "✖️") {
-                        if (Math.random() < 1/20) {
+                        if (Math.random() < 1/10000000) {
                             mine[curY][curX] = "⚪";
                             curY += dir.y;
                             curX += dir.x;
