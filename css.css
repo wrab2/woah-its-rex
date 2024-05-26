@@ -2079,6 +2079,8 @@ button {
 .indexImageVariant {
   width: 1vw;
   height: 1vw;
+  -webkit-user-drag: none;
+	-moz-user-select: none;
 }
 @keyframes flashGreen {
   0% {background-color:white;}

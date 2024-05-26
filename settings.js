@@ -558,7 +558,7 @@ function indexVariants(ore) {
         imageOutput = `<span class="${oreList[ore]["normalAmt"] ? "" : "blackoutImage"}"><img src="${oreList[ore]["src"]}" class="indexImageVariant"></img></span>`
         isImage = true;
     }
-    return "" + (isImage ? imageOutput : (oreList[ore]["normalAmt"] ? `${oreList[ore]["hasImage"] ? "<span class='indexImageVariant'" : ""}` : `<span style='color:transparent; text-shadow:0 0 0 black;'>${ore}</span>`)) + (oreList[ore]["electrifiedAmt"] ? "⚡️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>⚡️</span>") + (oreList[ore]["radioactiveAmt"] ? "☢️" : "<span style='color:transparent; text-shadow:0 0 0 black;'>☢️</span>") + (oreList[ore]["explosiveAmt"] ? "💥" : "<span style='color:transparent; text-shadow:0 0 0 black;'>💥</span>")
+    return "" + (isImage ? imageOutput : (oreList[ore]["normalAmt"] ? ore : (`<span class='indexBlackout'>${ore}</span>`))) + (oreList[ore]["electrifiedAmt"] ? "⚡️" : "<span class='indexBlackout'>⚡️</span>") + (oreList[ore]["radioactiveAmt"] ? "☢️" : "<span class='indexBlackout'>☢️</span>") + (oreList[ore]["explosiveAmt"] ? "💥" : "<span class='indexBlackout'>💥</span>")
 }
 function switchToIndex(button, num) {
     if (num === 0) {

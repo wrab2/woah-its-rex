@@ -7,6 +7,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 let a12 = 0;
 let a13 = false;
 function toSurface() {
+    pa1 = [];
+    pa2 = [];
+    pa3 = [];
+    pa4 = [];
+    pickaxeAbility23Num = 0;
     if (currentWorld === 1) a12++;
     if (currentWorld === 1 && a12 === 10) {
         insertIntoLayers({"ore":"🐢","layers":["paperLayer"], "useLuck":true});
