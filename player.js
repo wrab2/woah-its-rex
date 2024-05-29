@@ -26,7 +26,7 @@ class playerTemplate {
             "gear22": false,
             "gear23": false,
             "gear24": false,
-            //"gear25": false,
+            "gear25": false,
             //"gear26": false,
             //"gear27": false,
             //"gear28": false,
