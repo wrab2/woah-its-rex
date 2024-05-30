@@ -1057,6 +1057,27 @@ const events = {
                 return;
             }
         }
+    },
+    "event10" : {
+        rate: 1/1000000,
+        duration: 9000000,
+        boost: 1,
+        ore: "✈️",
+        message: `<i><span class="rainbowBackground">Lyle! Lyle, wake up! You gotta wake up, please!...</span></i>`,
+        world: 1,
+        specialEffect: function(state) {
+            if (state) {
+                insertIntoLayers({"ore":"✈️", "layers":["sillyLayer"], "useLuck":true});
+                specialOreValues["✈️"] = {
+                    newBaseRarity: 1000000000000,
+                    layerToChange: "sillyLayer"
+                }
+            }
+            else {
+                removeFromLayers({"ore":"✈️", "layers":["sillyLayer"]});
+                delete specialOreValues["✈️"];
+            }
+        }
     }
 }
 function activateEvent(name) {
