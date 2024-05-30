@@ -270,7 +270,7 @@ function distanceHelper(layer) {
     if (specialLayerDistance !== undefined) {
         if (layer === "fluteLayer") return false;
         if (layer === "sillyLayer" && specialLayerDistance === "fluteLayer") return true;
-        else if (layer === "unknownLayer" && specialLayerDistance !== "unknownLayer") return true;
+        else if (layer === "unknownLayer" && specialLayerDistance !== "unknownLayer" && specialLayerDistance !== "lastLayer") return true;
         else if (layer === "lastLayer" && specialLayerDistance !== "lastLayer") return true;
         else return false;
     } else {
