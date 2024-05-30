@@ -132,7 +132,7 @@ function changeUseNumbers(button) {
 
 function changeMinRarity(button) {
     let nextTier = oreInformation.getNextTier(player.settings.stopOnRare.minimum);
-    if (nextTier === "Common") nextTier = "Antique";
+    if (nextTier === "Layer") nextTier = "Antique";
     player.settings.stopOnRare.minimum = nextTier;
     button.innerText = nextTier + "+";
     const colors = oreInformation.getColors(nextTier);
@@ -641,7 +641,7 @@ let minTier = "Antique";
 function changeSpawnMessageRarity(button) {
     player.settings.minRarityNum++;
     if (player.settings.minRarityNum > 9) player.settings.minRarityNum = 0;
-    minTier = oreInformation.getTierAt(player.settings.minRarityNum + 5);
+    minTier = oreInformation.getTierAt(player.settings.minRarityNum + 6);
     button.innerText = "Minimum Spawn Message Tier: " + minTier + "+";
     let colors = oreInformation.getColors(minTier);
     button.style.color = colors["textColor"]
