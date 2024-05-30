@@ -36,6 +36,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <link rel="stylesheet" href="gradients.css">
 </head>
 <body>
+    <p class="latestFind htmlTemplate" style="display: none;"></p>
     <noscript>
         <div id="noscript">
             <p>Enable javascript to mrrp meow like a cat!!</p>
@@ -218,6 +219,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button onclick="moveOne('w', this)" class="movementButton verticalArrow"id="upOne"></button>
                     <button onclick="moveOne('d', this)" class="movementButton horizontalArrow"id="rightOne"></button>
                     <button onclick="switchDistance()" class="movementButton"id="meterDisplay">🟫 1,000m</button>
+            </div>
+            <div id="eventMessages">
+                Event Messages Appear Here!
             </div>
             <div id="blockContainer">
                 <button id="powerupScrollUp" onclick="switchPowerupDisplay(1)"><span><</span></button>
@@ -499,6 +503,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                       <div class="inputAndButton">
                         <button class="toggleDisplay fullyRounded" onclick="toggleNyerd(this);" id="toggleNyerd" style="background-color: #FF3D3D;">Nyerd</button>
                       </div>
+                      <div class="inputAndButton">
+                        <button class="toggleDisplay fullyRounded" onclick="AFKmode();" id="afkMode" style="background-color: #FF3D3D;">AFK Mode</button>
+                      </div>
                 </div>
             </div>
             <div class="menuCategory" id="frame-data">
@@ -637,6 +644,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <div class="craftingSelections" id="forgeFission" style="display: none;">
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">Fission <span class="forgeOreDisplay">💎</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">Fission <span class="forgeOreDisplay">🧵</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('circleFission')">Fission <span class="forgeOreDisplay">⭕</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">Fission <span class="forgeOreDisplay">💚</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">Fission <span class="forgeOreDisplay">💙</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowFission')">Fission <span class="forgeOreDisplay">💛</span></button>
@@ -885,5 +893,4 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     </div>
 </div>
 </div>
-<p class="latestFind htmlTemplate" style="display: none;"></p>
 </body>

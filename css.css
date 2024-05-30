@@ -615,14 +615,14 @@ img.roundcat {
   flex-wrap: nowrap;
 }
 .blockDisplayRow {
-  width: 1.1em;
+  width: 1.15em;
   height: 100%;
   line-height: 1.4vw;
   text-wrap: wrap;
   overflow-wrap: break-word;
 }
 #blockContainer {
-  margin-top: 1%;
+  margin-top: 0;
   padding: 0;
   width: 100%;
   height: 27vw;
@@ -634,6 +634,17 @@ img.roundcat {
   display: inline-flex;
   flex-wrap: nowrap;
   justify-content: center;
+}
+#eventMessages {
+height: 3vw;
+width: 100%;
+color:white;
+text-align: center;
+line-height: 1vw;
+font-size: 1vw;
+padding: 0.2vw;
+border-bottom: 0.2vw solid #333;
+font-weight: 1000;
 }
 @keyframes blur {
   1% {filter:blur(0.2px);}
@@ -1001,7 +1012,7 @@ button, .col-3 > div > button {
 }
 #mainSticky {
   position: sticky;
-  height: 33vw;
+  height: 36vw;
   width: 100%;
   top:0px;
   z-index: 99999;
@@ -2081,6 +2092,13 @@ button {
   height: 1vw;
   -webkit-user-drag: none;
 	-moz-user-select: none;
+}
+.eventGradient {
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
 }
 @keyframes flashGreen {
   0% {background-color:white;}

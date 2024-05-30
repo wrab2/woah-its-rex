@@ -135,7 +135,7 @@ const recipes = {
     },
     "pickaxe26" : {
         name : "",
-        recipe : [{ore:"❌", amt:44444444444},{ore:"🕳️", amt:260000},{ore:"✴️", amt:260},{ore:"⚙️", amt:1750000},{ore:"💠", amt:1460000},{ore:"🫧", amt:1000000},{ore:"💍", amt:584000},{ore:"🎍", amt:240000},{ore:"👑", amt:14000},{ore:"💎", amt:51500},{ore:"🌟", amt:34000},{ore:"💥", amt:23360},{ore:"🌀", amt:14175},{ore:"🪐", amt:12350},{ore:"🥗", amt:10950},{ore:"🪩", amt:8750},{ore:"📌", amt:275},{ore:"🚧", amt:320},{ore:"💫", amt:4350},{ore:"⛏️", amt:1},{ore:"☯️", amt:1},{ore:"🌳", amt:30},{ore:"🏰", amt:30},{ore:"🚿", amt:30},{ore:"🏔️", amt:30},{ore:"⚠️", amt:30},{ore:"🐪", amt:30},{ore:"🐋", amt:1095},{ore:"💵", amt:30},{ore:"🍃", amt:25},{ore:"👾", amt:15},{ore:"🪡", amt:15},{ore:"🚽", amt:15},{ore:"🎓", amt:15},{ore:"⚡", amt:15},{ore:"💘", amt:30},{ore:"💢", amt:50},{ore:"🪽", amt:2},{ore:"🗝️", amt:2},{ore:"🚫", amt:2},{ore:"♨️", amt:1},]        ,
+        recipe : [{ore:"❌", amt:44444444444},{ore:"🕳️", amt:2600000},{ore:"✴️", amt:260},{ore:"⚙️", amt:1750000},{ore:"💠", amt:1460000},{ore:"🫧", amt:1000000},{ore:"💍", amt:584000},{ore:"🎍", amt:240000},{ore:"👑", amt:14000},{ore:"💎", amt:51500},{ore:"🌟", amt:34000},{ore:"💥", amt:23360},{ore:"🌀", amt:14175},{ore:"🪐", amt:12350},{ore:"🥗", amt:10950},{ore:"🪩", amt:8750},{ore:"📌", amt:275},{ore:"🚧", amt:320},{ore:"💫", amt:4350},{ore:"⛏️", amt:1},{ore:"☯️", amt:1},{ore:"🌳", amt:30},{ore:"🏰", amt:30},{ore:"🚿", amt:30},{ore:"🏔️", amt:30},{ore:"⚠️", amt:30},{ore:"🐪", amt:30},{ore:"🐋", amt:1095},{ore:"💵", amt:30},{ore:"🍃", amt:25},{ore:"👾", amt:15},{ore:"🪡", amt:15},{ore:"🚽", amt:15},{ore:"🎓", amt:15},{ore:"⚡", amt:15},{ore:"💘", amt:30},{ore:"💢", amt:50},{ore:"🪽", amt:2},{ore:"🗝️", amt:2},{ore:"🚫", amt:2},{ore:"♨️", amt:1},]        ,
         upgrades : {}
     },
     "pickaxe27" : {
@@ -710,6 +710,11 @@ const oreRecipes = {
     "cylinderFission" : {
         "cost" : [{"ore":"🧵","amt":1}],
         "result" : [{"ore":"🕯️", "amt":2}, {"ore":"🎨", "amt":1}, {"ore":"🥽", "amt":5}, {"ore":"🪄", "amt":10}, {"ore":"🌫️", "amt":750000}],
+        "multiplier" : 1
+    },
+    "circleFission" : {
+        "cost" : [{"ore":"⭕","amt":1}],
+        "result" : [{"ore":"🔕", "amt":2}],
         "multiplier" : 1
     }
 }

@@ -85,7 +85,7 @@ function giveBlock(obj) {
     let inv;
     if (obj.variant === undefined) {
         inv = rollVariant();
-        if (player.gears["gear26"] && inv === 1) inv = rollVariant();
+        if (player.gears["gear25"] && inv === 1) inv = rollVariant();
     } else {
         inv = obj.variant;
     }
@@ -98,11 +98,12 @@ function giveBlock(obj) {
         oreList[obj.type]["normalAmt"]++;
     }
     if (oreRarity >= 750000) {
+        let duped = false;
         if (obj.fromCave) {oreRarity *= obj.caveMulti;}
-        if (player.gears["gear22"] && Math.random() < 1/10) oreList[obj.type][variantInvNames[inv - 1]]++;
+        if (player.gears["gear22"] && Math.random() < 1/10) {oreList[obj.type][variantInvNames[inv - 1]]++; duped = true;}
         if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
         if (oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier})) {
-            logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset); 
+            logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset, duped); 
         }
         if (oreList[obj.type]["oreTier"] === "Flawless") {
             if (!player.sr1Unlocked) {
@@ -163,7 +164,7 @@ function generateBlock(location) {
             mine[location["Y"]][location["X"]] = blockToGive;
         }
         let variant = rollVariant();
-        if (player.gears["gear26"] && variant === 1) variant = rollVariant();
+        if (player.gears["gear25"] && variant === 1) variant = rollVariant();
         mine[location["Y"]][location["X"]] = {ore: blockToGive, variant: variant};
         const tier = oreList[blockToGive]["oreTier"];
         if (oreList[blockToGive]["hasLog"]) {
@@ -175,6 +176,9 @@ function generateBlock(location) {
         if (((currentWorld < 2 && (player.gears["gear3"] || player.gears["gear28"])) || player.gears["gear17"] && tier !== "Celestial")) mineBlock(location["X"], location["Y"], "ability");
         if (blocksRevealedThisReset / mineCapacity >= 0.9) mineBlock(location["X"], location["Y"], "reset");
         if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum})) stopMining();
+        if (currentActiveEvent !== undefined) {
+            if (getCurrentEventOre() === blockToGive) endEvent();
+        } 
     }
 }
 
@@ -406,6 +410,7 @@ function attemptSwitchWorld(to) {
 }
 function switchWorld(to) {
     canMine = false;
+    endEvent();
     stopMining();
     mine = [];
     player.oreTracker.existingOres = [];

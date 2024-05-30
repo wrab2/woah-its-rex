@@ -860,4 +860,27 @@ function goToConvert(ore, variant) {
     document.getElementsByClassName("potentialVariant")[variant - 2].click();
     console.log(ore);
 }
+let inafk = false
+function AFKmode(){
+    if(!inafk){
+        let element = document.createElement("div")
+        element.id = 'afkModeScreen'
+        element.style = 'width:100vw;height:100vh;z-index:2'
+        element.innerHTML = "<h1>AFK</h1></br><p id='blocksMinedafk'></p><br><button onclick='AFKmode()'>bnack</button>"
+        document.body.prepend(element)
+        document.getElementById("inventory1").textContent = ""
+        document.getElementById("inventory2").textContent = ""
+        document.getElementById("inventory3").textContent = ""
+        document.getElementById("inventory4").textContent = ""
+        minedElement = document.getElementById("blocksMinedafk")
+        document.getElementById("mainContent").style.display="none"
+    } else {
+        document.getElementById("afkModeScreen").remove()
+        minedElement = document.getElementById("blocksMined");
+        document.getElementById("mainContent").style.display="block"
+        inventoryObj = {...oreList}
+        createInventory();
+    }
+    inafk = !inafk
+}
 //convertVariants({"ore":"", "variant":"Explosive", "amt":1})

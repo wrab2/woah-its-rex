@@ -40,12 +40,16 @@ let revealedElement;
 let locationElement;
 let blockElement;
 let emojiNames;
+let messageElement;
+let eventElement;
 function init() {
     minedElement = document.getElementById("blocksMined");
     revealedElement = document.getElementById("mineResetProgress");
     locationElement = document.getElementById("location");
     blockElement = document.getElementById("blockDisplay");
     displayRows = document.getElementsByClassName("blockDisplayRow");
+    messageElement = document.getElementById("spawnMessage");
+    eventElement = document.getElementById("eventMessages")
     document.getElementById("menuSelectionContainer").addEventListener('click', (event) => {
         if (event.target.parentElement.classList.contains("menuCategory")) closeMenu();
     }, false);
@@ -327,7 +331,7 @@ document.addEventListener('keydown', (event) => {
 }, false);
 let loopTimer = null;
 let curDirection = "";
-let baseSpeed = 25;;
+let baseSpeed = 25;
 function goDirection(direction, speed) {
     if (curDirection === direction) {
         clearInterval(loopTimer);
@@ -602,6 +606,11 @@ function updateInventory() {
         document.getElementById("mainSticky").style.position = "sticky";
         document.getElementById("mainTop").style.position = "sticky";
     }
+    if (currentActiveEvent !== undefined) {
+        if (Date.now() >= currentActiveEvent.removeAt) endEvent();
+    } else {
+        activateEvent(rollEvent());
+    }
 }
 
 function appear(element){
@@ -661,7 +670,7 @@ function spawnMessage(obj) {
         let spawnText;
         if (currentWorld === 1.1) {
             spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreInformation.getTierMessage(curTier) + "</span></i><br>";
-            typeWriter(spawnText);
+            typeWriter(spawnText, messageElement);
         } else {
             spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreList[block]["spawnMessage"] + "</span></i><br>";
             if (caveInfo != undefined) {
@@ -669,7 +678,7 @@ function spawnMessage(obj) {
             } else {
                 spawnText += "1/" + (oreRarity * variantMulti).toLocaleString();
             }
-            typeWriter(spawnText)
+            typeWriter(spawnText, messageElement)
         }
         clearTimeout(spawnOre);
         spawnOre = setTimeout(() => {
@@ -682,7 +691,7 @@ function spawnMessage(obj) {
         
 }
 let typeCallNum = 0;
-function typeWriter(string) {
+function typeWriter(string, loc) {
     let char;
     let hex;
     let emoji
@@ -690,9 +699,9 @@ function typeWriter(string) {
     let ignoreUntil = 0;
     typeCallNum++;
     const thisTypeNum = typeCallNum;
-    const element = document.getElementById('spawnMessage');
+    const elements = [];
+    const emojiRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
     for (let i = 0; i < string.length; i++) {
-    setTimeout(() => {
         char = string.substring(i, i + 1);
         hex = char.codePointAt(0).toString(16);
         emoji = String.fromCodePoint("0x"+hex);
@@ -704,23 +713,38 @@ function typeWriter(string) {
                 if (htmlChar === ">") break;
             }
             ignoreUntil = i + htmlOutput.length;
-            output += htmlOutput;
+            elements.push({t: htmlOutput, h: true})
         } else {
             if (!(ignoreUntil > i)) {
-                output += emoji;
+                elements.push({t: emoji, h: false, e: emojiRegex.test(emoji)})
             }
         }
-        if (thisTypeNum === typeCallNum) element.innerHTML = output;
-    }, 10 * i);
     }
+    let i = 0;
+    while (i < elements.length - 1) {
+        const text = `${elements[i].t}${elements[i + 1].t}`
+        if (emojiRegex.test(text)) {
+            elements[i].t = `${elements[i].t}${elements[i + 1].t}`;
+            elements.splice(i + 1, 1);
+        }
+        i++;
+    }
+    let multi;
+    for (let i = 0; i < elements.length; i++) {
+        multi = i;
+        if (elements[i].h) multi = i - 1;
+        setTimeout(() => {
+            output += elements[i].t
+            if (thisTypeNum === typeCallNum) loc.innerHTML = output;
+        }, 10 * multi);
+    }
+    
 }
 
 let loggedFinds = [];
-function logFind(type, x, y, variant, atMined, fromReset) {
+function logFind(type, x, y, variant, atMined, fromReset, duped) {
     let output = "";
-    //latestFinds.push([type, x, y, variant, atMined, fromReset]);
     removeExistingOre({x: x, y:y})
-    let sub = currentWorld < 2 ? 0 : 2000;
     let spawnElement = document.getElementById("latestFinds");
     const element = document.getElementsByClassName("htmlTemplate")[0].cloneNode(true);
     element.setAttribute("title", oreList[type]["oreName"]);
@@ -732,16 +756,17 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
     element.setAttribute("title", oreList[type]["oreName"]);
     output += `<span onclick='goToOre(\"${type}\", \"${variant}\")'>`;
-    output += variant + " ";
+    output += `${variant} `;
     let blockOutput;
     if (oreList[type]["hasImage"]) {
         blockOutput = `<span class="latestImage"><img src="${oreList[type]["src"]}"></img></span>`
     } else {
         blockOutput = type;
     }
-    output += blockOutput + " | X: " + (x - 1000000000).toLocaleString() + ", Y: " + (-(y - sub)).toLocaleString();
-    if (fromReset) output += " | Void Prevention.<br>";
-    else output += " | At " + atMined.toLocaleString() +  " Mined.<br>";
+    output += blockOutput + ` ${duped ? "(x2)" : ""}`;
+    if (fromReset) output += " From Void Prevention.";
+    else output += " At " + formatNumber(atMined) +  " Mined.";
+    output += ` 1/${(Math.floor(1/oreList[type]["decimalRarity"]) * multis[namesemojis.indexOf(variant)]).toLocaleString()}`;
     output += "</span>";
     element.innerHTML = output;
     if (spawnElement.children.length > 0) {
@@ -752,7 +777,14 @@ function logFind(type, x, y, variant, atMined, fromReset) {
     }
     if (spawnElement.children.length > player.settings.latestLength) spawnElement.removeChild(spawnElement.lastChild);
 }
-
+const suffixes = ["", "k", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", "QnV", "SeV", "SPG", "OVG", "NVG", "TGN", "UTG", "DTG", "tsTG", "qtTG", "QnTG", "ssTG", "SpTG", "OcTg", "NoTG", "QdDR", "uQDR", "dQDR", "tQDR", "qdQDR", "QnQDR", "sxQDR", "SpQDR", "OQDDr", "NQDDr", "qQGNT", "uQGNT", "dQGNT", "tQGNT", "qdQGNT", "QnQGNT", "sxQGNT", "SpQGNT", "OQQGNT", "NQQGNT", "SXGNTL", "USXGNTL", "DSXGNTL", "TSXGNTL", "QTSXGNTL", "QNSXGNTL", "SXSXGNTL", "SPSXGNTL", "OSXGNTL", "NVSXGNTL", "SPTGNTL", "USPTGNTL", "DSPTGNTL", "TSPTGNTL", "QTSPTGNTL", "QNSPTGNTL", "SXSPTGNTL", "SPSPTGNTL", "OSPTGNTL", "NVSPTGNTL", "OTGNTL", "UOTGNTL", "DOTGNTL", "TOTGNTL", "QTOTGNTL", "QNOTGNTL", "SXOTGNTL", "SPOTGNTL", "OTOTGNTL", "NVOTGNTL", "NONGNTL", "UNONGNTL", "DNONGNTL", "TNONGNTL", "QTNONGNTL", "QNNONGNTL", "SXNONGNTL", "SPNONGNTL", "OTNONGNTL", "NONONGNTL", "CENT"];
+function formatNumber(num) {
+    if (num < 1000) {
+        return num;
+    }
+    let tenMulti = Math.floor(Math.log10(num) / 3);
+    return Math.floor(num / Math.pow(1000, (tenMulti)) * 10) / 10 + suffixes[tenMulti];
+}
 function getAngleBetweenPoints(obj) {
     let x = obj.x - curX;
     let y = obj.y - curY;
@@ -853,6 +885,216 @@ function goToOre(block, variantType) {
             }
         }
     }
+}
+let currentActiveEvent;
+specialOreValues = {
+
+}
+const events = {
+    "event1" : {
+        rate: 1/5000,
+        duration: 750000,
+        boost: 1.5,
+        ore: "🌀",
+        message: `<i><span style="background-image:linear-gradient(to right, #0007ff, #008eff, #14f0f2, #49c7cd, #70a9b3);" class="eventGradient">The tides in the 🌊 drop out into the ocean, lowering a path into the depth...</span></i>`,
+        world: 1,
+        //makes commons twice as rare, puts cheese into water layer, makes cheese rarer
+        specialEffect: function(state) {
+            if (state) {
+                insertIntoLayers({"ore":"🧀", "layers":["waterLayer"], "useLuck":true});
+                oreInformation.commonMultiplier = 2;
+                specialOreValues["🧀"] = {
+                    newBaseRarity: 927000000,
+                    layerToChange: "waterLayer"
+                }
+            }
+            else {
+                removeFromLayers({"ore":"🧀", "layers":["waterLayer"]});
+                oreInformation.commonMultiplier = 1;
+                delete specialOreValues["🧀"];
+            }
+        },
+    },
+    "event2" : {
+        rate: 1/2500,
+        duration: 500000,
+        boost: 2,
+        ore: "⚙️",
+        message: `<i>Mechanical whirring draws your attention deeper into the mines...</i>`,
+        world: 1,
+        specialEffect: function(state) {
+            if (state) return;
+            else return;
+        }
+    },
+    "event3" : {
+        rate: 1/4000,
+        duration: 900000,
+        boost: 1.375,
+        ore: "🌈",
+        message: `<i>Every pigment of color swirls up from below, surrounding you in an eternal rainbow...</i>`,
+        world: 1,
+        specialEffect: function(state) {
+            if (state) return;
+            else return;
+        }
+    },
+    "event4" : {
+        rate: 1/1250,
+        duration: 1200000,
+        boost: 1.25,
+        ore: "🛎️",
+        message: `<i>You hear a bell start dinging in the 🚪 layer...</i>`,
+        world: 2,
+        //makes no bell rarer
+        specialEffect: function(state) {
+            if (state) {
+                specialOreValues["🔕"] = {
+                    newBaseRarity: 500000000,
+                    layerToChange: "borderLayer"
+                }
+            }
+            else {
+                delete specialOreValues["🔕"];
+            }
+        }
+    },
+    "event5" : {
+        rate: 1/3000,
+        duration: 1800000,
+        boost: 2,
+        ore: "🔋",
+        message: `<i>An electrical container in the rock layer energizes the air around you...</i>`,
+        world: 1,
+        //battery event adds +10% ability proc rate
+        specialEffect: function(state) {
+            if (state) {
+                batteryEvent = true;
+            }
+            else {
+                batteryEvent = false;
+            }
+        }
+    },
+    "event6" : {
+        rate: 1/10000,
+        duration: 300000,
+        boost: 1.15,
+        ore: "⌛",
+        message: `<i><span style="background-image:linear-gradient(to right, #c2842d, #edae26, #d45419, #8a1b0c);" class="eventGradient">The passage of time seems to speed up as it's source is unearthed...</span></i>`,
+        world: 1,
+        //decreases base mining speed by 1
+        specialEffect: function(state) {
+            if (state) {
+                baseSpeed--;
+                let temp = curDirection;
+                curDirection = "";
+                if (temp !== "") goDirection(temp);
+            }
+            else {
+                baseSpeed++;
+                let temp = curDirection;
+                curDirection = "";
+                if (temp !== "") goDirection(temp);
+            }
+        }
+    },
+    "event7" : {
+        rate: 1/15000,
+        duration: 600000,
+        boost: 1.3,
+        ore: "🎓",
+        message: `<i><span style="background-image:linear-gradient(to right, #ede6e6, #383434, #7a7878, #ede6e6);" class="eventGradient">All the knowledge of this realm courses through you as a new intelligence forms...</span></i>`,
+        world: 2,
+        //makes some of the knowledge ores in chess layer 2x more common
+        specialEffect: function(state) {
+            if (state) {
+                specialOreValues["✏️"] = {newBaseRarity: 8200000/2,layerToChange: "chessLayer"}
+                specialOreValues["🧠"] = {newBaseRarity: 15500000/2,layerToChange: "chessLayer"}
+                specialOreValues["📖"] = {newBaseRarity: 16000000/2,layerToChange: "chessLayer"}
+                specialOreValues["📐"] = {newBaseRarity: 34000000/2,layerToChange: "chessLayer"}
+                specialOreValues["📚"] = {newBaseRarity: 48100000/2,layerToChange: "chessLayer"}
+                specialOreValues["🖊️"] = {newBaseRarity: 165000000/2,layerToChange: "chessLayer"}
+            }
+            else {
+                delete specialOreValues["✏️"];
+                delete specialOreValues["🧠"];
+                delete specialOreValues["📖"];
+                delete specialOreValues["📐"];
+                delete specialOreValues["📚"];
+                delete specialOreValues["🖊️"];
+            }
+        }
+    },
+    "event8" : {
+        rate: 1/3500,
+        duration: 300000,
+        boost: 1.75,
+        ore: "🥗 ",
+        message: `<i><span style="background-image:linear-gradient(to right, #6a9c44, #78db2c, #27d111, #083802, #2f7327);" class="eventGradient">Leafy greens cloud your vision...</span></i>`,
+        world: 1,
+        specialEffect: function(state) {
+            if (state) {
+                return;
+            }
+            else {
+                return;
+            }
+        }
+    },
+    "event9" : {
+        rate: 1/5000,
+        duration: 900000,
+        boost: 1.25,
+        ore: "📽️",
+        message: `<i>A highlight reel of your journey in the mines is faintly visible in the corner of your eyes...</i>`,
+        world: 2,
+        specialEffect: function(state) {
+            if (state) {
+                return;
+            }
+            else {
+                return;
+            }
+        }
+    }
+}
+function activateEvent(name) {
+    if (name === undefined) return;
+    currentActiveEvent = {name: name, removeAt: Date.now() + events[name].duration}
+    events[name].specialEffect(true);
+    const text = events[name].message;
+    typeWriter(text, eventElement);
+    updateAllLayers();
+}
+function endEvent() {
+    if (currentActiveEvent === undefined) return;
+    events[currentActiveEvent.name].specialEffect(false);
+    currentActiveEvent = undefined;
+    eventElement.textContent = "Event Messages Appear Here!";
+    updateAllLayers();
+}
+function getCurrentEventOre() {
+    if (currentActiveEvent === undefined) return;
+    return events[currentActiveEvent.name].ore;
+}
+function rollEvent() {
+    const arr = Object.keys(events);
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (events[arr[j]].rate > events[arr[j + 1]].rate) {
+                let lesser = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = lesser;
+            }
+        }
+    }
+    for (let i = arr.length - 1; i >= 0; i--) if (currentWorld !== events[arr[i]].world) arr.splice(i, 1);
+    const chosenValue = Math.random();
+    for (let i = 0; i < arr.length; i++) {
+        if (chosenValue < events[arr[i]].rate) return arr[i]
+    }
+    return undefined;
 }
 /*
 function toggleCelestials(state) {

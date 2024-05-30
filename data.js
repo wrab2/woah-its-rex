@@ -21,7 +21,7 @@ function loadAllData() {
                 } catch (error) {
                     console.log(error);
                     localStorage.setItem("newPlayerData", localStorage.getItem("dataBackup"));
-                    window.alert("DATA CORRUPTION DETECTED, EXPORT YOUR SAVE FILE AND CONTACT A MODERATOR IN THE DISCORD");
+                    window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${error}`);
                     localStorage.removeItem("dataBackup");
                     return false;
                 }
@@ -38,7 +38,7 @@ function loadAllData() {
                 } catch (error) {
                     console.log(error);
                     localStorage.setItem("newTestingData", localStorage.getItem("dataBackup"));
-                    window.alert("DATA CORRUPTION DETECTED, EXPORT YOUR SAVE FILE AND CONTACT A MODERATOR IN THE DISCORD");
+                    window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${error}`);
                     localStorage.removeItem("dataBackup");
                     return false;
                 }
@@ -59,7 +59,7 @@ function loadAllData() {
                 console.log(error);
                 if (!debug) localStorage.setItem("playerData", localStorage.getItem("dataBackup"));
                 else localStorage.setItem("testingData", localStorage.getItem("dataBackup"));
-                window.alert("DATA CORRUPTION DETECTED, EXPORT YOUR SAVE FILE AND CONTACT A MODERATOR IN THE DISCORD");
+                window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${error}`);
                 return false;
             }
         }
@@ -156,7 +156,7 @@ function importData(data) {
                     if (!debug) localStorage.setItem("newPlayerData", localStorage.getItem("dataBackup"));
                     else localStorage.setItem("newTestingData", localStorage.getItem("dataBackup"));
                 }
-                window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");
+                window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}`);
             }
         }
     }

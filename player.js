@@ -26,7 +26,7 @@ class playerTemplate {
             "gear22": false,
             "gear23": false,
             "gear24": false,
-            //"gear25": false,
+            "gear25": false,
             //"gear26": false,
             //"gear27": false,
             //"gear28": false,
@@ -559,11 +559,11 @@ function loadNewData(data) {
                 }
             }
         }
+        data.faqOffered ??= false;
         if (!data.faqOffered) toggleNewPlayer(true);
         else player.faqOffered = true;
     } catch (err) {
-        console.log(err);
-        window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");
+        window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}`);
     }
 }
 
@@ -584,6 +584,6 @@ function saveNewData(obj) {
         if (obj.return) return data;
     } catch (err) {
         console.log(err);
-        window.alert("DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD");
+        window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}`);
     }
 }
