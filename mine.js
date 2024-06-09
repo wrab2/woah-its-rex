@@ -159,7 +159,7 @@ function generateBlock(location) {
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
-        if (blockToGive === "sillyMiner") {mine[location["Y"]][location["X"]] = layerDictionary[currentLayer].layer.slice(-1); console.log("silly"); return;}
+        if (blockToGive === "sillyMiner") {mine[location["Y"]][location["X"]] = layerDictionary[currentLayer].layer[layerDictionary[currentLayer].layer.indexOf("sillyMiner") + 1]; return;}
         if (specialCases.indexOf(blockToGive) > -1) {
             blockToGive = checkSpecials(blockToGive);
             mine[location["Y"]][location["X"]] = blockToGive;
