@@ -1109,7 +1109,7 @@ const pickaxeStats = {
         rate: 500,
         src : "⛏️",
     },
-    28 : {mined: 67, revealed: 111, luck: 2.1, rate: 20},
+    28 : {mined: 67, revealed: 111, luck: 2.1, rate: 20, src: "⛏️"},
 }
  
  
