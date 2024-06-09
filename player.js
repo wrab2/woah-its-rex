@@ -94,7 +94,8 @@ class playerTemplate {
             latestLength: 10,
             useNewMusic: true,
             automineProtection: false,
-            useNyerd: false
+            useNyerd: false,
+            automineUpdate: 25
         },
         this.stats = {
             currentPickaxe: 0,
@@ -495,6 +496,9 @@ function loadNewData(data) {
         data.settings.minRarityNum ??= 0;
         player.settings.minRarityNum = (data.settings.minRarityNum) - 1;
         changeSpawnMessageRarity(document.getElementById("changeSMrarityDisplay"));
+        //automine update time
+        data.settings.automineUpdate ??= 25;
+        player.settings.automineUpdate = data.settings.automineUpdate;
         //minimum mining speed
         data.settings.minSpeed ??= 0;
         player.settings.minSpeed = data.settings.minSpeed;

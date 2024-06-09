@@ -461,7 +461,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     
                 </div>
                 <div id="gameSettings" style="display: none;">
-                    <div class="inputAndButton">
+                      <div class="inputAndButton">
                         <input autocomplete ="off" type="text" class="textInput roundedLeft" id="minSpeedInput" placeholder="Default: 0">
                         <button class="inputButton roundedRight" onclick="changeMinMiningSpeed(document.getElementById('minSpeedInput'))">Set Min Speed</button>
                       </div>
@@ -472,6 +472,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                       <div class="inputAndButton">
                         <input autocomplete ="off" type="text" class="textInput roundedLeft" id="latestSetter" placeholder="1-999">
                         <button class="inputButton roundedRight" onclick="changeLatestMax(document.getElementById('latestSetter'))">Change Latest Ores Max Length</button>
+                      </div>
+                      <div class="inputAndButton">
+                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="automineUpdate" placeholder="Default: 25, > 0">
+                        <button class="inputButton roundedRight" onclick="updateAutomineUpdateSpeed(document.getElementById('automineUpdate'))">Change Block Update Speed</button>
                       </div>
                       <div class="inputAndButton">
                         <button class="stopOnRareButton roundedLeft" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
@@ -773,6 +777,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
                             <span class="faqSection">Latest Ores Max Length</span>
                             <span class="faqText">This setting allows you to change the amount of ores that will show up in latest spawns and latest finds. </span><br>
+                            
+                            <span class="faqSection">Block Update Speed</span>
+                            <span class="faqText">This setting allows you to change the speed at which the display will update when automining. (uses ms)</span><br>
 
                             <span class="faqSection">Stop On Rare</span>
                             <span class="faqText">This setting is one of the more important ones, and will stop you mining if you spawn an ore of the specified tier. Click on the tier name to change what tier it will stop on. A list of all tiers can be found in the ore information section.</span><br>

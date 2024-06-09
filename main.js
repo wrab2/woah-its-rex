@@ -652,7 +652,7 @@ function updateDisplayTimer(state) {
     if (state) {
         displayTimer = setInterval(() => {
         displayArea();
-    }, 25);
+    }, player.settings.automineUpdate);
 }
     else {
         clearInterval(displayTimer); 

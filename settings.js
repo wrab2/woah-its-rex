@@ -338,6 +338,16 @@ function updateCapacity(element) {
     }        
     document.getElementById("mineResetProgress").innerText = `${blocksRevealedThisReset}/${mineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
 }
+function updateAutomineUpdateSpeed(element) {
+    let speed = element.value;
+    speed ??= "na";
+    if (!isNaN(speed) && speed > 0) {
+        player.settings.automineUpdate = speed;
+        flashGreen(element);
+    } else {
+        flashRed(element);
+    }
+}
 const indexOrder = {
     "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],
     "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],
