@@ -500,7 +500,7 @@ function sr1Helper(state) {
     removeParadoxical();
     if (state) {
         if (!player.settings.usingNewEmojis) {
-            document.body.style.fontFamily = `Verdana, Geneva, Tahoma, Noto Color Emoji`;
+            document.body.style.fontFamily = `system-ui, Noto Color Emoji`;
             document.getElementById("switchFont").disabled = true;
         }
         player.wasUsing = player.stats.currentPickaxe;
@@ -509,7 +509,7 @@ function sr1Helper(state) {
         document.getElementById("sr1Teleporter").innerText = "Return Home...";
     } else {
         if (!player.settings.usingNewEmojis) {
-            document.body.style.fontFamily = "Verdana, Geneva, Tahoma, sans-serif";
+            document.body.style.fontFamily = "";
             document.getElementById("switchFont").disabled = false;
         }
         if (player.wasUsing !== undefined) player.stats.currentPickaxe = player.wasUsing;
