@@ -365,7 +365,6 @@ function goDirection(direction, speed) {
         movements.x = (direction === "a" ? -1 : (direction === "d" ? 1 : 0));
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
         miningSpeed ??= 25;
-        if (currentWorld === 1.1) {miningSpeed = 10 - player.upgrades["pickaxe27"].level; reps = 1;}
         loopTimer = setInterval(movePlayer, miningSpeed, movements, reps);
         curDirection = direction;
         energySiphonerDirection = direction;
@@ -409,10 +408,10 @@ function calcSpeed() {
     reps += player.gears["gear19"] ? 10 : 0;
     if (currentWorld === 1.1) {
         const sr1Level = player.upgrades["pickaxe27"].level;
+        console.log(sr1Level)
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1}
         else return {speed: 7, reps: (-2 + sr1Level)}
     }
-    if (currentWorld === 1.1) return {speed: 10 -player.upgrades["pickaxe27"].level, reps: 1}
     return {speed: miningSpeed, reps: reps}
 }
 //DISPLAY

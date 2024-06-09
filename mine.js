@@ -185,79 +185,79 @@ function generateBlock(location) {
 
 const checkSpecials = function(block) {
     const originalBlock = block;
-    if (Math.random() < 1/1000)
-    switch(block) {
-        case "💙" : 
-        if (curDirection === "")
-            block = "🩵";
-        break;
-        case "⌛" : 
-        block = "⏳";
-        break;
-        case "🍃" : 
-        block = "🍂";
-        break;
-        case "🦾" : 
-        if (curDirection === "")
-            block = "🦿";
-        break;
-        case "👀" : 
-        block = "👁‍🗨";
-        break;
-        case "🔋" : 
-        if (curDirection === "")
-            block = "🪫";
-        break;
-        case "⛔" : 
-        block = "📛";
-        break;
-        case "🌻" : 
-        if (curDirection === "")
-            block = "🌼";
-        break;
-        case "🌈" : 
-        block = "🏳️‍🌈";
-        break;
-        case "🎉" : 
-        block = "🎊";
-        break;
-        case "🔒" : 
-        if (curDirection === "")
-            block = "🔓";
-        break;
-        case "📽️" : 
-        block = "🎥";
-        break;
-        case "🧂" : 
-        block = "🌶️";
-        break;
-        case "🏯" : 
-        block = "⛩️";
-        break;
-        case "🖊️" : 
-        block = "🖋️";
-        break;
-        case "🏔️" : 
-        block = "🌋";
-        break;
-        case "💔" : 
-        if (curDirection === "")
-            block = "❤️‍🩹";
-        break;
-        case "🩸" : 
-        block = "💧";
-        break;
-        case "🔮" :
-        if (Math.random() < 1/10 && curDirection === "") {
-            block = "jellyfish";
+    if (Math.random() < 1/1000) {
+        switch(block) {
+            case "💙" : 
+            if (curDirection === "")
+                block = "🩵";
+            break;
+            case "⌛" : 
+            block = "⏳";
+            break;
+            case "🍃" : 
+            block = "🍂";
+            break;
+            case "🦾" : 
+            if (curDirection === "")
+                block = "🦿";
+            break;
+            case "👀" : 
+            block = "👁‍🗨";
+            break;
+            case "🔋" : 
+            if (curDirection === "")
+                block = "🪫";
+            break;
+            case "⛔" : 
+            block = "📛";
+            break;
+            case "🌻" : 
+            if (curDirection === "")
+                block = "🌼";
+            break;
+            case "🌈" : 
+            block = "🏳️‍🌈";
+            break;
+            case "🎉" : 
+            block = "🎊";
+            break;
+            case "🔒" : 
+            if (curDirection === "")
+                block = "🔓";
+            break;
+            case "📽️" : 
+            block = "🎥";
+            break;
+            case "🧂" : 
+            block = "🌶️";
+            break;
+            case "🏯" : 
+            block = "⛩️";
+            break;
+            case "🖊️" : 
+            block = "🖋️";
+            break;
+            case "🏔️" : 
+            block = "🌋";
+            break;
+            case "💔" : 
+            if (curDirection === "")
+                block = "❤️‍🩹";
+            break;
+            case "🩸" : 
+            block = "💧";
+            break;
+            case "🔮" :
+            if (Math.random() < 1/10 && curDirection === "") {
+                block = "jellyfish";
+                break;
+            }
+            case "💎" :
+            block = "watermelonDiamond";
             break;
         }
-        case "💎" :
-        block = "watermelonDiamond";
-        break;
-
     }
-    if (originalBlock !== block) oreList[block]["decimalRarity"] = oreList[originalBlock]["decimalRarity"] / 1000;
+    if (originalBlock !== block) oreList[block]["decimalRarity"] = (oreList[originalBlock]["decimalRarity"] / 1000);
     if (block === "jellyfish") oreList[block]["decimalRarity"] /= 10;
     return block;
 }
