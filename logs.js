@@ -9,7 +9,7 @@ class secureLogs {
     #verifiedLogs;
     #logsTimer;
     #startTime = Date.now();
-    #maxLuck = [1, 1.2, 1.5, 2.15, 3, 5, 10, 4, 5.5, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3, 1.5, 4, 8.25, 12.5, 50, 175];
+    #maxLuck = [1, 1.2, 1.5, 2.15, 3, 5, 10, 4, 5.5, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3, 1.5, 4, 8.25, 12.5, 50, 175, 1, 2.1];
     #isRightPickaxe;
     constructor() {
         this.#spawnLogs = [];
