@@ -272,6 +272,21 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#crystallineExcavator span{
+    background: linear-gradient(to right, #c370e1, #8282e6, #ffffcd);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#biomeEnchanter span{
+    background: linear-gradient(to right,#a3a09d, #585f2a, #978773, #8a8038, #5b590a);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#stratumNonillonator span{
+    background: linear-gradient(to right,#DAE34A, #C69908, #EF5522, #C69908, #DAE34A);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

@@ -130,7 +130,7 @@ function playSound(type) {
  }
 addEventListener("animationend", (event) => {
     if (event.target.id === "blockContainer") document.getElementById("blockContainer").style.animation = "";
-    if (event.target.id === "blockDisplay") document.getElementById("blockDisplay").style.animation = "";
+    if (event.target.id === "blockDisplay") {document.getElementById("blockDisplay").style.animation = ""; document.getElementById("blockDisplay").style.rotate = `0deg`}
     player.currentEffect = "";
 });
 

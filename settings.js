@@ -329,7 +329,7 @@ function updateCapacity(element) {
     elementValue = element.value;
     let value = elementValue === "" ? "none" : elementValue;
     value = Number(value);
-    if (!(isNaN(value)) && value > 0) {
+    if (!(isNaN(value)) && value >= 250) {
         player.settings.baseMineCapacity = value;
         mineCapacity = value;
         flashGreen(element);
@@ -623,14 +623,14 @@ function enableDisguisedChills() {
 function switchFont() {
     if (player.settings.usingNewEmojis) {
         player.settings.usingNewEmojis = false;
-        document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"")
+        document.body.style.fontFamily = `'Fredoka One', 'Verdana', 'Geneva', 'Tahoma', sans-serif`
         document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
         distanceMulti--;
         layerDistanceY -= 2000;
         switchDistance();
     } else {
         player.settings.usingNewEmojis = true;
-        document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Noto Color Emoji\",\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"");
+        document.body.style.fontFamily = `"Fredoka One", "Noto Color Emoji"`;
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
         distanceMulti--;
         layerDistanceY -= 2000;
@@ -701,22 +701,45 @@ function createStats() {
    
 }
 function updateTimes() {
-    document.getElementById("statsTotalTime").innerText = `${longTime(player.stats.timePlayed)} Time Played.`;
-    document.getElementById("statsSessionTime").innerText = `${longTime(Date.now() - verifiedOres.getStartTime())} Session Time.`;
-    document.getElementById("statsCavesGenerated").innerText = `${player.stats.cavesGenerated.toLocaleString()} Caves Generated.`;
-    document.getElementById("statsBlocksMined").innerText = `${player.stats.blocksMined.toLocaleString()} Blocks Mined.`;
+    document.getElementById("statsTotalTime").textContent = `${longTime(player.stats.timePlayed)} Time Played.`;
+    document.getElementById("statsSessionTime").textContent = `${longTime(Date.now() - verifiedOres.getStartTime())} Session Time.`;
+    document.getElementById("statsCavesGenerated").textContent = `${player.stats.cavesGenerated.toLocaleString()} Caves Generated.`;
+    document.getElementById("statsBlocksMined").textContent = `${player.stats.blocksMined.toLocaleString()} Blocks Mined.`;
+    lastX += resetAddX;
+    if (movementsX > lastX) {
+        const timeUsing = Date.now();
+        const totalMoves = 1000 * ((movementsX - lastX) / (timeUsing - lastXCheck));
+        lastXCheck = timeUsing;
+        lastX = movementsX;
+        lastXValues.push(totalMoves);
+        if (lastXValues.length > 10) lastXValues.splice(0, 1);
+        let total = 0;
+        for (let i = 0; i < lastXValues.length; i++) total += lastXValues[i];
+        total /= lastXValues.length;
+        const speeds = calcSpeed();
+        resetAddX = 0;
+        const output = `${Math.floor(total)} Average Speed/${Math.floor(1000/speeds.speed * speeds.reps)} Estimated Speed`
+        document.getElementById("statsSpeed").textContent = output;
+    }
+    
 }
 function longTime(milliseconds) {
     let seconds = Math.floor((milliseconds / 1000) % 60);
     let minutes = Math.floor((milliseconds / 1000 / 60) % 60);
     let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
     let days = Math.floor((milliseconds / 1000 / 60 / 60 / 24) % 365);
-    return [
+    let years = Math.floor((milliseconds / 1000 / 60 / 60 / 24 / 365));
+    const finalTime = [
+        years.toString().padStart(20, "0"),
         days.toString().padStart(3, "0"),
         hours.toString().padStart(2, "0"),
         minutes.toString().padStart(2, "0"),
         seconds.toString().padStart(2, "0")
     ].join(":");
+    for (let i = 0; i < finalTime.indexOf(":") + 1; i++) if (finalTime[i] !== "0") {
+        return (finalTime[i] === ":" ? finalTime.substring(i + 1) : finalTime.substring(i));
+    }
+    return finalTime;
 }
 function switchHighRarity(button) {
     if (player.settings.highRarityLogs) {
@@ -757,6 +780,7 @@ function showWorkshop(state) {
     currentDisplayedUpgrade = undefined;
     updateDisplayedUpgrade();
 }
+const conversionRates = [5, 10, 30]
 function convertVariants() {
     let ore = document.getElementById("oreInput").value;
     ore = ore.replaceAll(" ", "");
@@ -783,9 +807,9 @@ function convertVariants() {
     }
     const obj = {"ore":ore, "variant":variant, "amt":amt};
     let amtToGive = 0;
-    if (obj["variant"] === "Explosive") amtToGive = 30;
-    else if (obj["variant"] === "Radioactive") amtToGive = 10;
-    else if (obj["variant"] === "Electrified") amtToGive = 5;
+    if (obj["variant"] === "Explosive") amtToGive = conversionRates[2];
+    else if (obj["variant"] === "Radioactive") amtToGive = conversionRates[1];
+    else if (obj["variant"] === "Electrified") amtToGive = conversionRates[0];
     let name = variantInvNames[names.indexOf(obj["variant"])];
     if (oreList[obj["ore"]][name] >= obj["amt"]) {
         oreList[obj["ore"]][name] -= obj["amt"];
@@ -882,5 +906,26 @@ function AFKmode(){
         createInventory();
     }
     inafk = !inafk
+}
+function convertAllButOne() {
+    let ore = document.getElementById("oreInput").value;
+    ore = ore.replaceAll(" ", "");
+    if (oreList[ore] !== undefined) {
+        const elecAmt = oreList[ore]["electrifiedAmt"] - 1;
+        const radiAmt = oreList[ore]["radioactiveAmt"] - 1;
+        const explAmt = oreList[ore]["explosiveAmt"] - 1;
+        const uses = [false, false, false];
+        const amts = [elecAmt, radiAmt, explAmt]
+        if (elecAmt > 0) uses[0] = true;
+        if (radiAmt > 0) uses[1] = true;
+        if (explAmt > 0) uses[2] = true;
+        for (let i = 1; i < 4; i++) {
+            if (uses[i - 1]) {
+                oreList[ore][variantInvNames[i]] -= amts[i - 1];
+                oreList[ore]["normalAmt"] += (amts[i - 1] * conversionRates[i - 1])
+            }
+        }
+        inventoryObj[ore] = 0;
+    } else return;
 }
 //convertVariants({"ore":"", "variant":"Explosive", "amt":1})

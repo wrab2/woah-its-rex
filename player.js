@@ -27,8 +27,8 @@ class playerTemplate {
             "gear23": false,
             "gear24": false,
             "gear25": false,
-            //"gear26": false,
-            //"gear27": false,
+            "gear26": false,
+            "gear27": false,
             //"gear28": false,
         }
         this.pickaxes = {
@@ -59,6 +59,7 @@ class playerTemplate {
             "pickaxe24": false,
             "pickaxe25": false,
             "pickaxe26": false,
+            "pickaxe28" : false,
         }
         this.settings = {
             audioSettings: {
@@ -126,9 +127,9 @@ class playerTemplate {
         this.upgrades = {
             "pickaxe27" : {
                 level: 0,
-                maxLevel: 3,
+                maxLevel: 5,
                 bought: 0,
-                levelLuck: [1, 3, 10, 20]
+                levelLuck: [1, 3, 10, 20, 40, 100]
             }
         },
         this.wasUsing = undefined;
@@ -477,8 +478,9 @@ function loadNewData(data) {
         }
         //base mine capacity
         data.settings.baseMineCapacity ??= 250000;
-        player.settings.baseMineCapacity = data.settings.baseMineCapacity;
+        player.settings.baseMineCapacity = (data.settings.baseMineCapacity < 250 ? 250 : data.settings.baseMineCapacity);
         mineCapacity = player.settings.baseMineCapacity;
+        mineCapacity = mineCapacity < 250 ? 250 : mineCapacity;
         document.getElementById("mineResetProgress").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
         //block updates
         data.settings.canDisplay ??= true;

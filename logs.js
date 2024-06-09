@@ -9,7 +9,8 @@ class secureLogs {
     #verifiedLogs;
     #logsTimer;
     #startTime = Date.now();
-    #maxLuck = [1, 1.2, 1.35, 1.8, 2, 5, 10, 3, 4, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3.16, 1.25, 4, 5, 11, 50, 175];
+    #maxLuck = [1, 1.2, 1.5, 2.15, 3, 5, 10, 4, 5.5, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3, 1.5, 4, 8.25, 12.5, 50, 175];
+    #isRightPickaxe;
     constructor() {
         this.#spawnLogs = [];
         this.#verifiedLogs = {
@@ -21,6 +22,7 @@ class secureLogs {
             "Explosive" : [],
         };
         this.#logsTimer = null;
+        this.#isRightPickaxe = true;
     }
     createLog(r, c, intended, obj, fromCave) {
         const ore = intended.ore === undefined ? intended : intended.ore;
@@ -178,6 +180,15 @@ class secureLogs {
     }
     getStartTime() {
         return this.#startTime;
+    }
+    isRightPickaxe() {
+        return this.#isRightPickaxe;
+    }
+    checkPickaxe() {
+        if (currentWorld === 1) this.#isRightPickaxe = true;
+        else if (currentWorld === 1.1 && player.stats.currentPickaxe === 27) this.#isRightPickaxe = true;
+        else if (currentWorld === 2 && player.stats.currentPickaxe > 12 && player.stats.currentPickaxe < 27) this.#isRightPickaxe = true;
+        else this.#isRightPickaxe = false;
     }
 }
 let verifiedOres = new secureLogs();

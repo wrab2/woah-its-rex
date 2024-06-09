@@ -34,6 +34,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <script src="commands.js"></script>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="gradients.css">
+    <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 </head>
 <body>
     <p class="latestFind htmlTemplate" style="display: none;"></p>
@@ -85,6 +86,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe1`)" id="mulchMallet"><span>Mulch Mallet</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe2`)" id="mudSickle"><span>Mud Sickle</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe3`)" id="dirtRavager"><span>Dirt Ravager</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(`pickaxe28`)" id="crystallineExcavator"><span>Crystalline Excavator</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe4`)" id="voidCrusher"><span>Void Crusher</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe5`)" id="geodeStaff"><span>Geode Staff</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe6`)" id="earthSoiler"><span>Earth Soiler</span></button>
@@ -137,39 +139,45 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe('gear23')" style="display: none;" id="hyperdriveAccelerator"><span>Hyperdrive Accelerator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear24')" style="display: none;" id="superenergeticAutomaton"><span>Superenergetic Automaton</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear25')" style="display: none;" id="alterationReiterator"><span>Alteration Reiterator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear26')" style="display: none;" id="stratumNonillonator"><span>Stratum Nonillonator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear27')" style="display: none;" id="biomeEnchanter"><span>Biome Enchanter</span></button>
+                    
+                
                 </div>
             </div>
             <p id = "craftingRecipeTitle" class="middleTitle" style="display: none;">Recipe</p>
             <div id="displayRecipe"></div>
+            <p id="craftingTimeDisplay" style="display: none;">Est. Time: 000:00:00:00</p>
             <p id = "descriptionTitle" class="middleTitle" style="display: none;">Description</p>
             <div id="craftableDescriptions">
-                <p class="itemDescription" id="pickaxe1Description" style="display: none;">Mines a few blocks in every direction.<br>Has an ability proc rate of 1/30.<br>Has 1.2x luck.</p>
-                <p class="itemDescription" id="pickaxe2Description" style="display: none;">Mines a small square around the player.<br>Has an ability proc rate of 1/35.<br>Has 1.35x luck.</p>
-                <p class="itemDescription" id="pickaxe3Description" style="display: none;">Mines blocks in an X shape around the player.<br>Has an ability proc rate of 1/30.<br>Has 1.8x luck.</p>
-                <p class="itemDescription" id="pickaxe4Description" style="display: none;">Mines a square randomly around the player.<br>Has an ability proc rate of 1/25.<br>Has 2x luck.</p>
-                <p class="itemDescription" id="pickaxe5Description" style="display: none;">Mines a circle randomly around the player.<br>Enables cave spawns in World 1, along with every pickaxe above it.<br>Has an ability proc rate of 1/17.<br>Has 5x luck.</p>
-                <p class="itemDescription" id="pickaxe6Description" style="display: none;">Has 2 abilities.<br>Ability 1 mines a triangle around the player.<br>Ability 2 mines a heart around the player.<br>Ability 1 has a 1/60 proc rate.<br>Ability 2 has a 1/40 proc rate.<br>Both abilities have 10x luck.</p>
-                <p class="itemDescription" id="pickaxe7Description" style="display: none;">Mines a few blocks in every direction. However, each line has a chance to re-activate the ability from the end of said line with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 3x luck.</p>
-                <p class="itemDescription" id="pickaxe8Description" style="display: none;">Mines blocks in an X shape around the player, with each end having a chance to re-activate the ability at that position with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 4x luck.</p>
-                <p class="itemDescription" id="pickaxe9Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/30.<br>Has 20x luck.<br><i>The pickaxe resonates with a distant entity.. a signal sent from far beyond these lands. Further traces of it are found within the blueprint for a particular craft of a key, one designed to open the lock to a completely new world..</i></p>
-                <p class="itemDescription" id="pickaxe10Description" style="display: none;">Has a 50% chance to mine a 7x7 square in a 49x49 area around the player, with an average of 24 7x7 squares being mined each activation.<br>Has an ability proc rate of 1/50.<br>Has 17.5x luck.</p>
-                <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines an extremely large spiral around the player.<br>Has an ability proc rate of 1/100.<br>Has 30x luck.</p>
-                <p class="itemDescription" id="pickaxe12Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
-                <p class="itemDescription" id="pickaxe13Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Pressing "Teleport!" on this pickaxe will switch the current world.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>All World 2 gears will work in World 1 (The speed gears require all to be owned).</p>
-                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.</p>
-                <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.</p>
-                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.</p>
-                <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a cat around the player :3c.<br>Has an ability proc rate of 1/150.<br>Has 1x luck.</p>
-                <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a crescent moon around the player.<br>Has an ability proc rate of 1/150<br>Has 1.5x luck.</p>
-                <p class="itemDescription" id="pickaxe19Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.<br>Has an ability proc rate of 1/50.<br>Has 2x luck.</p>
-                <p class="itemDescription" id="pickaxe20Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.<br>Has an ability proc rate of 1/75.<br>Has 3x luck.</p>
-                <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines swirls around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.25x luck.</p>
-                <p class="itemDescription" id="pickaxe22Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/120.<br>Has 4x luck.</p>
-                <p class="itemDescription" id="pickaxe23Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 5x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i></p>
-                <p class="itemDescription" id="pickaxe24Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/175.<br>Has 11x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
-                <p class="itemDescription" id="pickaxe25Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/300.<br>Has 50x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span></p>
-                <p class="itemDescription" id="pickaxe26Description" style="display: none;">Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br>Has an ability proc rate of 1/150.<br>Has 175x luck.</p>
-                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade. The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span></p>
+                <p class="itemDescription" id="pickaxe1Description" style="display: none;">Mines a few blocks in every direction.<br>Has an ability proc rate of 1/30.<br>Has 1.2x luck.<br><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
+                <p class="itemDescription" id="pickaxe2Description" style="display: none;">Mines a small square around the player.<br>Has an ability proc rate of 1/25.<br>Has 1.5x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
+                <p class="itemDescription" id="pickaxe3Description" style="display: none;">Mines blocks in an X shape around the player.<br>Has an ability proc rate of 1/25.<br>Has 2.15x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
+                <p class="itemDescription" id="pickaxe28Description" style="display: none;">Mines a pickaxe shape around the player.<br>Has an ability proc rate of 1/20.<br>Has 2.1x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
+                <p class="itemDescription" id="pickaxe4Description" style="display: none;">Mines a square randomly around the player.<br>Has an ability proc rate of 1/19.<br>Has 3x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
+                <p class="itemDescription" id="pickaxe5Description" style="display: none;">Mines a circle randomly around the player.<br>Enables cave spawns in World 1, along with every pickaxe above it.<br>Has an ability proc rate of 1/17.<br>Has 5x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe6Description" style="display: none;">Has 2 abilities.<br>Ability 1 mines a triangle around the player.<br>Ability 2 mines a heart around the player.<br>Ability 1 has a 1/60 proc rate.<br>Ability 2 has a 1/40 proc rate.<br>Both abilities have 10x luck.<br><span style="font-size: 50%;">Icon made by @wrab</span></p>
+                <p class="itemDescription" id="pickaxe7Description" style="display: none;">Mines a few blocks in every direction. However, each line has a chance to re-activate the ability from the end of said line with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 4x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe8Description" style="display: none;">Mines blocks in an X shape around the player, with each end having a chance to re-activate the ability at that position with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/40.<br>Has 5.5x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe9Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/22.<br>Has 20x luck.<br><i>The pickaxe resonates with a distant entity.. a signal sent from far beyond these lands. Further traces of it are found within the blueprint for a particular craft of a key, one designed to open the lock to a completely new world..</i><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe10Description" style="display: none;">Has a 50% chance to mine a 7x7 square in a 49x49 area around the player, with an average of 24 7x7 squares being mined each activation.<br>Has an ability proc rate of 1/50.<br>Has 17.5x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines an extremely large spiral around the player.<br>Has an ability proc rate of 1/100.<br>Has 30x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe12Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
+                <p class="itemDescription" id="pickaxe13Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Pressing "Teleport!" on this pickaxe will switch the current world.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>All World 2 gears will work in World 1 (The speed gears require all to be owned).<br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
+                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a cat around the player :3c.<br>Has an ability proc rate of 1/150.<br>Has 1x luck.<br><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
+                <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a crescent moon around the player.<br>Has an ability proc rate of 1/150<br>Has 1.5x luck.<br><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
+                <p class="itemDescription" id="pickaxe19Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.<br>Has an ability proc rate of 1/60.<br>Has 2x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe20Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.<br>Has an ability proc rate of 1/75.<br>Has 3x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines swirls around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.5x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe22Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/120.<br>Has 4x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe23Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 8.25x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe24Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/175.<br>Has 12.5x luck.<br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe25Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/300.<br>Has 50x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe26Description" style="display: none;">Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br>Has an ability proc rate of 1/150.<br>Has 175x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade. The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                
                 <!--
                     Pickaxes above
@@ -194,14 +202,16 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear16Description" style="display: none;">-5ms Mining Speed.<br>Stacks with all other speed buffs.</p>
                 <p class="itemDescription" id="gear17Description" style="display: none;">Wait... what do you mean its the same as the first? Why is it called the 2nd if its the exact same thing???</p>
                 <p class="itemDescription" id="gear18Description" style="display: none;">+2.5x Luck.<br>Stacks with all other luck additions.</p>
-                <p class="itemDescription" id="gear19Description" style="display: none;">-10ms Mining Speed and each movement with automine gains +2 blocks moved.<br>Stacks with all other speed buffs.</p>
+                <p class="itemDescription" id="gear19Description" style="display: none;">-8ms Mining Speed and each movement with automine gains +10 blocks moved.<br>Stacks with all other speed buffs.</p>
                 <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 5% of your current pickaxe's luck +1. (Cannot lower luck)</p>
                 <p class="itemDescription" id="gear21Description" style="display: none;">Enables the spawn of Abysstone Caves.<br>These caves can spawn any layer Antique+, excluding Celestial tier ores, from any world, with a 1/1000 cave spawn chance.<br>Some ores might not be able to be found in this cave due to having the exact same rarity as another ore, I do not care, have fun :3</p>
                 <p class="itemDescription" id="gear22Description" style="display: none;">Has a 10% chance to duplicate any rare ore mined. (1/750k+)</p>
                 <p class="itemDescription" id="gear23Description" style="display: none;">+15% ability activation rate.</p>
                 <p class="itemDescription" id="gear24Description" style="display: none;">Automatically cycles through powerups and activates them if they are ready. -25% cooldown time, +50% activation time.</p>
                 <p class="itemDescription" id="gear25Description" style="display: none;">Will roll 1 extra time for a variant if an ore is normal.</p>
-           
+                <p class="itemDescription" id="gear26Description" style="display: none;">5% chance to give 30x more layer blocks on mining a layer block.</p>
+                <p class="itemDescription" id="gear27Description" style="display: none;">1.75x cave type boost.</p>
+                
             </div>
         </div>
         </div>
@@ -275,7 +285,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <p id="trackerY">Y: N/A</p>
                     <div id="arrowHolder">
                         <img src="media/trackerArrow.png" id="trackerArrow" style="display: block;">
-                        <img src="media/NYERD.webp" id="nyerd" style="display: none;">
+                        <img src="media/ores/NYERD.webp" id="nyerd" style="display: none;">
                     </div>
                 </div>
                 <div id="sr1Holder">
@@ -456,7 +466,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                         <button class="inputButton roundedRight" onclick="changeMinMiningSpeed(document.getElementById('minSpeedInput'))">Set Min Speed</button>
                       </div>
                       <div class="inputAndButton">
-                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="mineCapacitySetter" placeholder="Default: 250000">
+                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="mineCapacitySetter" placeholder="Default: 250000, >= 250">
                         <button class="inputButton roundedRight" onclick="updateCapacity(document.getElementById('mineCapacitySetter'))">Update Capacity</button>
                       </div>
                       <div class="inputAndButton">
@@ -563,6 +573,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                         <p class="playerStat" id="statsSessionTime">Session Time</p>
                         <p class="playerStat" id="statsCavesGenerated">Caves Generated</p>
                         <p class="playerStat"id="statsBlocksMined">Blocks Mined</p>
+                        <p class="playerStat" id="statsSpeed">Speed</p>
                     </div>
                 </div>
                 
@@ -609,6 +620,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             </div>
                         </form>
                         <button id="variantConvert" onclick="convertVariants()">Convert!</button>
+                    </div>
+                    <div id="underMachine">
+                        <button id="convertAll" onclick="convertAllButOne()">Convert All Variants But One</button>
                     </div>
                     <p id="machineError"></p>
                 </div>
@@ -692,6 +706,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div class="menuCategory" id="frame-faq">
                 <p class="menuCategoryTitle">FAQ</p>
                 <div id="faqTopButtons">
+                    <button class="faqButton" onclick="closeMenu()">Back to Game</button>
                     <button class="faqButton" onclick="showFaqPage(0)">How do I play?</button>
                     <button class="faqButton" onclick="showFaqPage(1)">The Menu</button>
                     <button class="faqButton" onclick="showFaqPage(2)">Settings</button>
@@ -699,7 +714,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="faqButton" onclick="showFaqPage(4)">Caves</button>
                     <button class="faqButton" onclick="showFaqPage(5)">Powerups</button>
                     <button class="faqButton" onclick="showFaqPage(6)">Other Questions</button>
-                    <button class="faqButton" onclick="closeMenu()">Back to Game</button>
+                    <button class="faqButton" onclick="showFaqPage(7)">Pickaxes</button>
+                    <button class="faqButton" onclick="showFaqPage(8)">Events</button>
                 </div>
                 <br><br>
                 <div id="faqContentHolder">
@@ -792,7 +808,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             <span class="faqText">This setting makes abilities and Infinity Collector unable to mine ores, and you have to manually mine them.</span><br>
                         
                             <span class="faqSection">Nyerd</span>
-                            <span class="faqText">This setting changes the ore tracker arrow to the :nyerd: emoji.</span>
+                            <span class="faqText">This setting changes the ore tracker arrow to the :nyerd: emoji.</span><br>
+
+                            <span class="faqSection">AFK Mode</span>
+                            <span class="faqText">Removes most elements on the screen to highly increase performance.</span>
                         </p>
                     </div>
                     <div class="faqPage">
@@ -882,6 +901,130 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             </details>
                         </p>
                     </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Pickaxes</span>
+                            <span class="faqSection">What is pickaxe consistency (cons)?</span>
+                            <span class="faqText">Pickaxe consistency is the average amount of blocks you would be mining per block mined. It is calculated with the formula: (revealed * luck / proc)</span><br>
+                            <span class="faqText">Mulch Mallet: 24 mined, 68 revealed, 1.2x luck, 1/30 proc rate (2.72 cons)</span>
+                            <span class="faqText">Mud Sickle: 47 Mined, 69 revealed, 1.5x luck, 1/25 proc rate (4.14 cons)</span>
+                            <span class="faqText">Dirt Ravager: 46 mined, 94 revealed, 2.15x luck, 1/25 proc rate (8.08)</span>
+                            <span class="faqText">Crystalline Excavator: 67 mined, 111 revealed, 2.1x luck, 1/20 proc rate (11.93 cons)</span>
+                            <span class="faqText">Void Crusher: 81 mined, 113 revealed, 3x luck, 1/19 proc rate (17.84 cons)</span>
+                            <span class="faqText">Geode Staff: 45 mined, 69 revealed, 5x luck, 1/13 proc rate (26 cons)</span>
+                            <span class="faqText">Earth Soiler: 90+40 mined, 135+60 revealed, 10x luck, 1/(60+40) proc rate (37.5 cons)</span>
+                            <span class="faqText">Crypt Smasher: 275 mined, 740 revealed, 4x luck, 1/50 proc rate (59.2 cons)</span>
+                            <span class="faqText">Labyrinthian Tide: 461 mined, 811 revealed, 5.5x luck, 1/40 proc rate (111.51 cons)</span>
+                            <span class="faqText">77 Leaf Destroyer: 188 mined, 252 revealed, 20x luck, 1/22 proc rate (229 cons)</span>
+                            <span class="faqText">Planet Buster: 973 mined, 1195 revealed, 17.5x luck, 1/50 proc rate (418.25 cons)</span>
+                            <span class="faqText">Whirlpool of Fate: 1018 mined, 2993 revealed, 30x luck, 1/100 proc rate  (897 cons)</span>
+                            <span class="faqText">Wings of Glory: 1541 mined, 1861 revealed, 75x luck, 1/150 proc rate, 2 blocks/move (930x2 cons)</span><br>
+                            <span class="faqText">Extreme Echolocator: 40 mined, 51 revealed, 1.05x luck, 1/45 proc rate (1.19 cons)</span>
+                            <span class="faqText">Corundum Caver: 112 mined, 140 revealed, 1.075x luck, 1/75 proc rate (2.021 cons)</span>
+                            <span class="faqText">Starborne Slasher: 218 mined, 292 revealed, 1.3x luck, 1/100 proc rate (3.796 cons)</span>
+                            <span class="faqText">Nyabomb: 826 mined, 936 revealed, 1x luck, 1/150 proc rate (6.24 cons)</span>
+                            <span class="faqText">Lunar Lightsabre: 1005 mined, 1160 revealed, 1.5x luck, 1/150 proc rate (11.6 cons)</span>
+                            <span class="faqText">Gemstone Engraver: 656 mined, 754 revealed, 2x luck, 1/60 proc rate (25.13 cons)</span>
+                            <span class="faqText">Gambler's Fallacy: 1082 mined, 1343 revealed, 3x luck, 1/75 proc rate (53.72 cons)</span>
+                            <span class="faqText">Exponential Centrifuge: 1946 mined, 4489 revealed, 1.5x luck, 1/75 proc rate (89.78 cons)</span>
+                            <span class="faqText">Singularity Slammer: 2498 mined, 5632 revealed, 4x luck, 1/120 proc rate (187 cons)</span>
+                            <span class="faqText">Staff of Binding: 4518 mined, 6325 revealed, 8.25x luck, 1/150 proc rate (347.87 cons)</span>
+                            <span class="faqText">Stormseer's Superspark Sceptre: 7964 mined, 9800 revealed, 12.5x luck, 1/175 proc rate (700 cons)</span>
+                            <span class="faqText">Coronary Catastrophe: 15131 mined, 18594 revealed, 50x luck, 1/300 proc rate (3099 cons)</span><br>
+                            <span class="faqSection">Tree of Life Levels:</span>
+                            <span class="faqText">0: 4383 mined, 4576 revealed, 1x luck (9.1 cons)</span>
+                            <span class="faqText">1: 19928 mined, 20978 revealed, 3x luck, (125.86 cons)</span>
+                            <span class="faqText">2: 30397 mined, 33246 revealed, 10x luck, (664.92 cons)</span>
+                            <span class="faqText">3: 37468 mined, 41654 revealed, 20x luck, (1666.16 cons)</span>
+                            <span class="faqText">4: 46650 mined, 54781 revealed, 40x luck, 2 reps (4382.48 cons * 2)</span>
+                            <span class="faqText">5: 54298 mined, 63893 revealed, 100x luck, 3 reps (12778.6 cons * 3)</span>
+                        </p>
+                    </div>
+                    <div class="faqPage">
+                        <p>
+                            <span class="faqTitle">Events:</span><br>
+                        
+                            <span class="faqSection">Event 1:</span>
+                            <span class="faqText">"The tides in the 🌊 drop out into the ocean, lowering a path into the depth..."</span>
+                            <span class="faqText">Rate: 1/5000</span>
+                            <span class="faqText">Duration: 25 minutes</span>
+                            <span class="faqText">Main effect(s): 1.5x boost on 🌀</span>
+                            <span class="faqText">Side effect(s): makes commons twice as rare, puts 🧀 into water layer, makes 🧀 rarer (1/927,000,000 base rarity)</span>
+                            <span class="faqText">World(s): 1</span><br>
+                            
+                            <span class="faqSection">Event 2:</span>
+                            <span class="faqText">"Mechanical whirring draws your attention deeper into the mines..."</span>
+                            <span class="faqText">Rate: 1/2500</span>
+                            <span class="faqText">Duration: 50 minutes</span>
+                            <span class="faqText">Main effect(s): 2x boost on ⚙️</span>
+                            <span class="faqText">Side effect(s): N/A</span>
+                            <span class="faqText">World(s): 1</span><br>
+                            
+                            <span class="faqSection">Event 3:</span>
+                            <span class="faqText">"Every pigment of color swirls up from below, surrounding you in an eternal rainbow..."</span>
+                            <span class="faqText">Rate: 1/4000</span>
+                            <span class="faqText">Duration: 30 minutes</span>
+                            <span class="faqText">Main effect(s): 1.375x boost on 🌈</span>
+                            <span class="faqText">Side effect(s): N/A</span>
+                            <span class="faqText">World(s): 1</span><br>
+                            
+                            <span class="faqSection">Event 4:</span>
+                            <span class="faqText">"You hear a bell start dinging in the 🚪 layer..."</span>
+                            <span class="faqText">Rate: 1/1250</span>
+                            <span class="faqText">Duration: 30 minutes</span>
+                            <span class="faqText">Main effect(s): 1.25x boost on 🛎️</span>
+                            <span class="faqText">Side effect(s): makes 🔕 rarer (1/500,000,000 base rarity)</span>
+                            <span class="faqText">World(s): 2</span><br>
+                            
+                            <span class="faqSection">Event 5:</span>
+                            <span class="faqText">"An electrical container in the rock layer energizes in the air around you..."</span>
+                            <span class="faqText">Rate: 1/3000</span>
+                            <span class="faqText">Duration: 30 minutes</span>
+                            <span class="faqText">Main effect(s): 2x boost on 🔋</span>
+                            <span class="faqText">Side effect(s): adds +10% ability proc rate</span>
+                            <span class="faqText">World(s): 1</span><br>
+                            
+                            <span class="faqSection">Event 6:</span>
+                            <span class="faqText">"The passage of time seems to speed up as it's source is unearthed..."</span>
+                            <span class="faqText">Rate: 1/10000</span>
+                            <span class="faqText">Duration: 15 minutes</span>
+                            <span class="faqText">Main effect(s): 1.15x boost on ⌛</span>
+                            <span class="faqText">Side effect(s): decreases base mining speed by 1</span>
+                            <span class="faqText">World(s): 1</span><br>
+                            
+                            <span class="faqSection">Event 7:</span>
+                            <span class="faqText">"All the knowledge of this realm courses through you as a new intelligence forms..."</span>
+                            <span class="faqText">Rate: 1/15000</span>
+                            <span class="faqText">Duration: 20 minutes</span>
+                            <span class="faqText">Main effect(s): 1.3x boost on 🎓</span>
+                            <span class="faqText">Side effect(s): makes ✏️,  🧠,  📖, 📐, 📚, and 🖊️ 2x more common</span>
+                            <span class="faqText">World(s): 2</span><br>
+                            
+                            <span class="faqSection">Event 8:</span>
+                            <span class="faqText">"Leafy greens cloud your vision..."</span>
+                            <span class="faqText">Rate: 1/3500</span>
+                            <span class="faqText">Duration: 50 minutes</span>
+                            <span class="faqText">Main effect(s): 1.75x boost on 🥗</span>
+                            <span class="faqText">Side effect(s): N/A</span>
+                            <span class="faqText">World(s): 1</span><br>
+                            
+                            <span class="faqSection">Event 9:</span>
+                            <span class="faqText">"A highlight reel of your journey in the mines if faintly visible in the corner of your eyes..."</span>
+                            <span class="faqText">Rate: 1/5000</span>
+                            <span class="faqText">Duration: 45 minutes</span>
+                            <span class="faqText">Main effect(s): 1.25x boost on 📽️</span>
+                            <span class="faqText">Side effect(s): N/A</span>
+                            <span class="faqText">World(s): 2</span><br>
+
+                            <span class="faqSection">Event 11:</span>
+                            <span class="faqText">"The skies begin to glow as a cosmic body enchants the mine..."</span>
+                            <span class="faqText">Rate: 1/4000</span>
+                            <span class="faqText">Duration: 45 minutes</span>
+                            <span class="faqText">Main effect(s): 3/4x boost on 💫</span>
+                            <span class="faqText">Side effect(s): N/A</span>
+                            <span class="faqText">World(s): 1</span><br>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -893,4 +1036,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     </div>
 </div>
 </div>
+<!--Pickaxe Icons-->
+<img src="media/wingsOfGloryIcon.png" class="mineImage" id="wingsOfGloryIcon"></img>
 </body>

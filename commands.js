@@ -41,9 +41,7 @@ if (debug) {
 const adminRemovePickaxe = function(num) {
 if (debug) {
     if (num === undefined) {
-        for (let i = 0; i < pickaxes.length; i++) {
-            for (let pickaxe in player.pickaxes) player.pickaxes[pickaxe] = false;
-        }
+        for (let pickaxe in player.pickaxes) player.pickaxes[pickaxe] = false;
     } else {
         player.pickaxes[`pickaxe${num}`] = false;
     }

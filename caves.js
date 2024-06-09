@@ -314,7 +314,7 @@ function generateCaveBlock(y, x, type) {
                 caveOreLocations.push({"X":x, "Y":y, "type":type, "caveMulti":multi});
             }
             let variant = rollVariant();
-            if (player.gears["gear26"] && variant === 1) variant = rollVariant();
+            if (player.gears["gear25"] && variant === 1) variant = rollVariant();
             mine[y][x] = {ore: blockToGive, variant: variant};
             if (oolProbabilities[blockToGive] != undefined && type !== "abysstoneCave")
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
@@ -330,7 +330,7 @@ function generateCaveBlock(y, x, type) {
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
             let variant = rollVariant();
-            if (player.gears["gear26"] && variant === 1) variant = rollVariant();
+            if (player.gears["gear25"] && variant === 1) variant = rollVariant();
             mine[y][x] = {ore: blockToGive, variant: variant};
             playSound(oreList[blockToGive]["oreTier"]);
             if (oreList[blockToGive]["hasLog"]) {
@@ -401,7 +401,7 @@ function getCaveType() {
     let summedProbability = 0;
     let chosenValue = Math.random();
     chosenValue /= caveTypeLuck;
-    if (player.gears["gear25"]) chosenValue /= 1.75;
+    if (player.gears["gear27"]) chosenValue /= 1.75;
     const arr = currentWorld === 1.1 ? caveProbabilities2 : caveProbabilities1;
     for (let i = 0; i < arr.length; i++) {
         summedProbability += caveTypes[arr[i]].rarity;

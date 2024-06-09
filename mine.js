@@ -103,7 +103,7 @@ function giveBlock(obj) {
         if (player.gears["gear22"] && Math.random() < 1/10) {oreList[obj.type][variantInvNames[inv - 1]]++; duped = true;}
         if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
         if (oreInformation.tierGrOrEqTo({"tier1" : oreList[obj.type]["oreTier"], "tier2" : minTier})) {
-            logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset, duped); 
+            logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset, duped, {cave: obj.fromCave, multi: obj.caveMulti}); 
         }
         if (oreList[obj.type]["oreTier"] === "Flawless") {
             if (!player.sr1Unlocked) {
@@ -122,7 +122,7 @@ function giveBlock(obj) {
     } else {
         if (oreRarity === 1) {
             if (player.gears["gear15"] && Math.random() < 0.5) oreList[obj.type]["normalAmt"] += 2;
-            if (player.gears["gear27"] && Math.random() < 1/20) oreList[layerMaterial]["normalAmt"] += 30;
+            if (player.gears["gear26"] && Math.random() < 1/20) oreList[layerMaterial]["normalAmt"] += 30;
         }
     }
     oreList[obj.type][variantInvNames[inv - 1]]++;
@@ -138,7 +138,7 @@ function rollVariant() {
 let cat = 1;
 let mainProbabilityTable;
 let mainGenerationTable;
-const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸";
+const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮";
 function generateBlock(location) {
     blocksRevealedThisReset++;
     mainProbabilityTable = getLayer(location["Y"]);
@@ -159,6 +159,7 @@ function generateBlock(location) {
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
+        if (blockToGive === "sillyMiner") {mine[location["Y"]][location["X"]] = layerDictionary[currentLayer].layer.slice(-1); console.log("silly"); return;}
         if (specialCases.indexOf(blockToGive) > -1) {
             blockToGive = checkSpecials(blockToGive);
             mine[location["Y"]][location["X"]] = blockToGive;
@@ -246,8 +247,18 @@ const checkSpecials = function(block) {
         case "🩸" : 
         block = "💧";
         break;
+        case "🔮" :
+        if (Math.random() < 1/10 && curDirection === "") {
+            block = "jellyfish";
+            break;
+        }
+        case "💎" :
+        block = "watermelonDiamond";
+        break;
+
     }
     if (originalBlock !== block) oreList[block]["decimalRarity"] = oreList[originalBlock]["decimalRarity"] / 1000;
+    if (block === "jellyfish") oreList[block]["decimalRarity"] /= 10;
     return block;
 }
 /*
@@ -493,7 +504,7 @@ function sr1Helper(state) {
     }
     if (state) {
         if (!player.settings.usingNewEmojis) {
-            document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Noto Color Emoji\",\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"");
+            document.body.style.fontFamily = `"Fredoka One", "Noto Color Emoji"`;
             document.getElementById("switchFont").disabled = true;
         }
         player.wasUsing = player.stats.currentPickaxe;
@@ -502,7 +513,7 @@ function sr1Helper(state) {
         document.getElementById("sr1Teleporter").innerText = "Return Home...";
     } else {
         if (!player.settings.usingNewEmojis) {
-            document.querySelector(":root").style.setProperty("--bs-font-sans-serif", "system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",\"Liberation Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"")
+            document.body.style.fontFamily = `'Fredoka One', 'Verdana', 'Geneva', 'Tahoma', sans-serif`
             document.getElementById("switchFont").disabled = false;
         }
         if (player.wasUsing !== undefined) player.stats.currentPickaxe = player.wasUsing;

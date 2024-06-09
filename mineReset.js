@@ -33,6 +33,7 @@ function toSurface() {
         curY = 2001;
     }
     setLayer(curY);
+    mine[curY] ??= [];
     mine[curY][curX] = "⛏️";
     checkAllAround(curX, curY, 1);
     displayArea();
@@ -40,17 +41,19 @@ function toSurface() {
 }
 let resetting = false;
 function mineReset() {
-        a12 = 0;
-        caveOreLocations = [];
-        mineCapacity = player.settings.baseMineCapacity;
-        player.oreTracker.existingOres = [];
-        removeTrackerInformation();
-        displayArea();
-        canMine = false;
-        mine = null;
-        mine = [[]];
-        curX = 1000000000;
-        checkAllAround(curX, curY, 1);
-        mine[curY][curX] = "⛏️";
-        canMine = true;
+    resetAddX = lastX;
+    lastX = 0;
+    a12 = 0;
+    caveOreLocations = [];
+    mineCapacity = player.settings.baseMineCapacity;
+    player.oreTracker.existingOres = [];
+    removeTrackerInformation();
+    displayArea();
+    canMine = false;
+    mine = null;
+    mine = [[]];
+    curX = 1000000000;
+    checkAllAround(curX, curY, 1);
+    mine[curY][curX] = "⛏️";
+    canMine = true;
 }
