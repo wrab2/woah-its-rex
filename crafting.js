@@ -298,14 +298,16 @@ function displayRecipe(recipe) {
     if (currentRecipe === undefined || currentRecipe !== recipe) {
         if (recipe !== "pickaxe27") {
             document.getElementById("craftingRecipeTitle").style.display = "block";
-            let time = get("craftingTimeDisplay").cloneNode(true);
-            time.style.display = "block";
-            parentElement.appendChild(time);
         }
         recipeElements[recipe].style.display = "block";
         parentElement.appendChild(recipeElements[recipe]);
         const description = document.getElementById(`${recipe}Description`).cloneNode(true);
         description.style.display = "block";
+        if (recipe !== "pickaxe27") {
+            let time = get("craftingTimeDisplay").cloneNode(true);
+            time.style.display = "block";
+            parentElement.appendChild(time);
+        }
         let title = document.getElementById("descriptionTitle").cloneNode(true);
         title.style.display = "block";
         parentElement.appendChild(title);
