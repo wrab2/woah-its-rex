@@ -83,6 +83,7 @@ let allPickaxeNames =
 ["Mulch Mallet", 
 "Mud Sickle", 
 "Dirt Ravager", 
+"Crystalline Excavator",
 "Void Crusher", 
 "Geode Staff", 
 "Earth Soiler", 
@@ -633,14 +634,14 @@ function enableDisguisedChills() {
 function switchFont() {
     if (player.settings.usingNewEmojis) {
         player.settings.usingNewEmojis = false;
-        document.body.style.fontFamily = `'Fredoka One', 'Verdana', 'Geneva', 'Tahoma', sans-serif`
+        document.body.style.fontFamily = "Verdana, Geneva, Tahoma, sans-serif";
         document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
         distanceMulti--;
         layerDistanceY -= 2000;
         switchDistance();
     } else {
         player.settings.usingNewEmojis = true;
-        document.body.style.fontFamily = `"Fredoka One", "Noto Color Emoji"`;
+        document.body.style.fontFamily = `Verdana, Geneva, Tahoma, Noto Color Emoji`;
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
         distanceMulti--;
         layerDistanceY -= 2000;

@@ -96,6 +96,7 @@ function init() {
         insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
         console.log("meow");
     }
+    window.addEventListener("beforeunload", removeParadoxical());
 }
 function assignImageNames() {
     for (let ore in oreList) {
@@ -408,7 +409,6 @@ function calcSpeed() {
     reps += player.gears["gear19"] ? 10 : 0;
     if (currentWorld === 1.1) {
         const sr1Level = player.upgrades["pickaxe27"].level;
-        console.log(sr1Level)
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1}
         else return {speed: 7, reps: (-2 + sr1Level)}
     }
@@ -606,22 +606,7 @@ function updateInventory() {
         updateAllLayers();
     }
     if (player.powerupVariables.fakeEquipped.item !== "" && Date.now() >= player.powerupVariables.fakeEquipped.removeAt) {
-        if (player.gears[player.powerupVariables.fakeEquipped.item] !== undefined) {
-            if (player.powerupVariables.fakeEquipped.item === "gear0") document.getElementById("trackerLock").style.display = "inline-flex";
-            if (player.powerupVariables.fakeEquipped.item === "gear9") document.getElementById("sillyRecipe").style.display = "none";
-            player.gears[player.powerupVariables.fakeEquipped.item] = false;
-            player.powerupVariables.fakeEquipped.item = "";
-        }
-        if (player.pickaxes[player.powerupVariables.fakeEquipped.item] !== undefined) {
-            player.pickaxes[player.powerupVariables.fakeEquipped.item] = false;
-            player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
-            player.powerupVariables.fakeEquipped.item = "";
-            player.powerupVariables.fakeEquipped.originalState = undefined;
-            utilitySwitchActions();
-        }
-        let tempDirection = curDirection;
-        stopMining();
-        goDirection(tempDirection);
+        removeParadoxical();
     }
     if (currentWorld === 1.1 && player.stats.currentPickaxe !== 27) player.stats.currentPickaxe = 27;
     else if (currentWorld !== 1.1 && player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;

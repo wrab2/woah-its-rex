@@ -1163,7 +1163,7 @@ function ct() {
     let procsNeeded;
     for (let layer in recipeLayers) rarityNeeded += recipeLayers[layer].highestRarity;
     procsNeeded = rarityNeeded / abilityRevealed;
-    const timeForProcs = (procsNeeded * abilityRate) / speed;
+    let timeForProcs = (procsNeeded * abilityRate) / speed;
     if (player.stats.currentPickaxe === 12) timeForProcs /= 2;
     return longTime(timeForProcs * 1000);
 }

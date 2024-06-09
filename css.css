@@ -551,7 +551,7 @@ body {
   height: 100vh;
   justify-content: flex-end;
   overflow-x: hidden;
-  font-family:'Fredoka One', Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 img.roundcat {
   position: absolute;

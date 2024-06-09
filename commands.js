@@ -152,3 +152,10 @@ const displayLarge = function() {
         document.body.appendChild(element);
     }
 }
+const removeCooldowns = function() {
+    if (debug) {
+        for (let cooldown in player.powerupCooldowns) player.powerupCooldowns[cooldown].cooldown = 0;
+    } else {
+        window.alert("INSUFFICIENT PERMISSIONS")
+    }
+}

@@ -497,16 +497,10 @@ function stopMining() {
 }
 function sr1Helper(state) {
     updateTolLuck();
-    if (player.pickaxes[player.powerupVariables.fakeEquipped.item] !== undefined) {
-        player.pickaxes[player.powerupVariables.fakeEquipped.item] = false;
-        player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
-        player.powerupVariables.fakeEquipped.item = "";
-        player.powerupVariables.fakeEquipped.originalState = undefined;
-        player.powerupVariables.fakeEquipped.removeAt = Date.now();
-    }
+    removeParadoxical();
     if (state) {
         if (!player.settings.usingNewEmojis) {
-            document.body.style.fontFamily = `"Fredoka One", "Noto Color Emoji"`;
+            document.body.style.fontFamily = `Verdana, Geneva, Tahoma, Noto Color Emoji`;
             document.getElementById("switchFont").disabled = true;
         }
         player.wasUsing = player.stats.currentPickaxe;
@@ -515,14 +509,32 @@ function sr1Helper(state) {
         document.getElementById("sr1Teleporter").innerText = "Return Home...";
     } else {
         if (!player.settings.usingNewEmojis) {
-            document.body.style.fontFamily = `'Fredoka One', 'Verdana', 'Geneva', 'Tahoma', sans-serif`
+            document.body.style.fontFamily = "Verdana, Geneva, Tahoma, sans-serif";
             document.getElementById("switchFont").disabled = false;
         }
         if (player.wasUsing !== undefined) player.stats.currentPickaxe = player.wasUsing;
         player.wasUsing = undefined;
         document.getElementById("theWorkshop").style.display = "none";
-        document.getElementById("sr1Teleporter").innerText = "Travel to New Lands...";
+        document.getElementById("sr1Teleporter").innerText = "Travel to New Lands";
     }
 }
-
+function removeParadoxical() {
+        if (player.gears[player.powerupVariables.fakeEquipped.item] !== undefined) {
+            if (player.powerupVariables.fakeEquipped.item === "gear0") document.getElementById("trackerLock").style.display = "inline-flex";
+            if (player.powerupVariables.fakeEquipped.item === "gear9") document.getElementById("sillyRecipe").style.display = "none";
+            player.gears[player.powerupVariables.fakeEquipped.item] = false;
+            player.powerupVariables.fakeEquipped.item = "";
+        }
+        if (player.pickaxes[player.powerupVariables.fakeEquipped.item] !== undefined) {
+            player.pickaxes[player.powerupVariables.fakeEquipped.item] = false;
+            player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
+            player.powerupVariables.fakeEquipped.item = "";
+            player.powerupVariables.fakeEquipped.originalState = undefined;
+            utilitySwitchActions();
+        }
+        let tempDirection = curDirection;
+        stopMining();
+        goDirection(tempDirection);
+        saveNewData({override: undefined, return: false});
+}
 
