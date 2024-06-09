@@ -649,6 +649,7 @@ function updateInventory() {
 }
 function updateDisplayTimer(state) {
     if (state) {
+        displayTimer = null;
         displayTimer = setInterval(() => {
         displayArea();
     }, player.settings.automineUpdate);

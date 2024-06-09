@@ -492,6 +492,8 @@ function stopMining() {
     curDirection = "";
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
+    clearInterval(displayTimer);
+    displayTimer = null;
 }
 function sr1Helper(state) {
     updateTolLuck();
