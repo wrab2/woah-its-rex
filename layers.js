@@ -853,7 +853,7 @@ function applyLuckToLayer(layer, luck) {
         if (specialOreValues[layer[i]] !== undefined) {
             baseValue = specialOreValues[layer[i]].newBaseRarity;
         }
-        let newRarity = oreList[layer[i]]["noLuck"] ? oreList[layer[i]]["numRarity"] : (baseValue / layerluck);
+        let newRarity = (oreList[layer[i]]["noLuck"] || oreList[layer[i]]["oreTier"] === "Layer") ? oreList[layer[i]]["numRarity"] : (baseValue / layerluck);
         if (commons.indexOf(oreList[layer[i]]["oreTier"]) < 0)
             oreList[layer[i]]["decimalRarity"] = (1/newRarity);
         else {

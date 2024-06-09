@@ -434,7 +434,7 @@ function displayArea() {
                         if (player.settings.usePathBlocks)
                             output += mine[r][c].ore !== undefined ? checkDisplayVariant(mine[r][c]) : (mine[r][c] === "⛏️" ? addPickaxeIcon() : mine[r][c]);
                         else
-                            output += mine[r][c] === "⚪" ? invisibleBlock : (mine[r][c].ore !== undefined ? checkDisplayVariant(mine[r][c]) : (mine[r][c] === "⛏️" ? addPickaxeIcon() : mine[r][c]));   
+                            output += mine[r][c] === "⚪" ? "⠀" : (mine[r][c].ore !== undefined ? checkDisplayVariant(mine[r][c]) : (mine[r][c] === "⛏️" ? addPickaxeIcon() : mine[r][c]));   
                     } else {
                         output += r === grass ? "🟩" : "⬛";
                     }
@@ -649,6 +649,7 @@ function updateInventory() {
 }
 function updateDisplayTimer(state) {
     if (state) {
+        clearInterval(displayTimer);
         displayTimer = null;
         displayTimer = setInterval(() => {
         displayArea();

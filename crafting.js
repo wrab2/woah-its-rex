@@ -1138,7 +1138,7 @@ function ct() {
         const ore = recipe[i].ore;
         if (!oreList[ore]["caveExclusive"] && oreList[ore]["oreTier"] !== "Celestial") {
             let currentOreLayer;
-            if (oreInformation.isCommon(oreList[ore]["oreTier"]) && oreList[ore]["oreTier"]) {
+            if (oreInformation.isCommon(oreList[ore]["oreTier"]) && oreList[ore]["oreTier"] !== "Layer") {
                 recipeLayers.commons ??= {highestRarity : 0}
                 currentOreLayer = "commons";
             } else {
@@ -1150,30 +1150,19 @@ function ct() {
                     }
                 }
             }
-            const needed = recipe[i].amt;
+            let needed = recipe[i].amt;
             let have = oreList[ore]["normalAmt"];
             have = have >= needed ? needed : have;
+            needed -= have;
             const rarity = 1/oreList[ore]["decimalRarity"];
-            const totalOreRarity = ((rarity * needed) - (rarity * have));
+            const totalOreRarity = (rarity * needed);
             if (totalOreRarity > recipeLayers[currentOreLayer].highestRarity) recipeLayers[currentOreLayer].highestRarity = totalOreRarity;
         }
     }
-    //console.log(abilityMined, abilityRevealed, recipe, recipeLayers, abilityRate, speed)
     let rarityNeeded = 0;
-    let usingCommons = false;
-    if (recipeLayers.commons !== undefined) {
-        for (let layer in recipeLayers) if (recipeLayers.commons.highestRarity >= recipeLayers[layer].highestRarity) usingCommons = true;
-        if (Object.keys(recipeLayers).length === 1) usingCommons = true;
-    }
     let procsNeeded;
-    if (usingCommons) {
-        for (let layer in recipeLayers) recipeLayers[layer].highestRarity = recipeLayers.commons.highestRarity;
-        rarityNeeded = recipeLayers.commons.highestRarity * Object.keys(recipeLayers).length;
-        procsNeeded = rarityNeeded / abilityMined;
-    } else {
-        for (let layer in recipeLayers) if (layer !== "commons") rarityNeeded += recipeLayers[layer].highestRarity;
-        procsNeeded = rarityNeeded / abilityRevealed;
-    }
+    for (let layer in recipeLayers) rarityNeeded += recipeLayers[layer].highestRarity;
+    procsNeeded = rarityNeeded / abilityRevealed;
     const timeForProcs = (procsNeeded * abilityRate) / speed;
     if (player.stats.currentPickaxe === 12) timeForProcs /= 2;
     return longTime(timeForProcs * 1000);
