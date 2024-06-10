@@ -574,6 +574,7 @@ function loadNewData(data) {
             layer: Math.round(Math.random() * 100000),
             lastAddedOn: new Date().getDate()
         }
+        
         if (new Date().getDate() !== data.luna.lastAddedOn) {
             player.luna.layer = Math.round(Math.random() * 100000);
             player.luna.lastAddedOn = new Date().getDate();
@@ -581,11 +582,10 @@ function loadNewData(data) {
             player.luna.layer = data.luna.layer;
             player.luna.lastAddedOn = data.luna.lastAddedOn;
         }
-        
         if (!data.faqOffered) toggleNewPlayer(true);
         else player.faqOffered = true;
     } catch (err) {
-        window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}`);
+        window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}, ${console.log(err)}`);
     }
 }
 

@@ -981,9 +981,11 @@ function checkLimitedOres() {
         else
             removeFromLayers({"ore":propertyName,"layers":limitedOres[propertyName]["layers"]});
     }
-    if (new Date().getDate() !== player.luna.lastAddedOn) {
-        player.luna.layer = Math.round(Math.random() * 100000);
-        player.luna.lastAddedOn = Date.now().getDate();
+    if (player.luna !== undefined) {
+        if (new Date().getDate() !== player.luna.lastAddedOn) {
+            player.luna.layer = Math.round(Math.random() * 100000);
+            player.luna.lastAddedOn = Date.now().getDate();
+        }
     }
 }
 

@@ -638,14 +638,12 @@ function switchFont() {
         document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
         distanceMulti--;
         layerDistanceY -= 2000;
-        switchDistance();
     } else {
         player.settings.usingNewEmojis = true;
         document.body.style.fontFamily = `system-ui, Noto Color Emoji`;
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
         distanceMulti--;
         layerDistanceY -= 2000;
-        switchDistance();
     }
 }
 let minTier = "Antique";

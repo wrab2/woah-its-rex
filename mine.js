@@ -331,7 +331,7 @@ function switchDistance(num) {
         layerDistanceY = 1000 + (2000 * distanceMulti);
     }
     const teleportLayer = getLayer(layerDistanceY).layer.slice(-1)
-    get("meterDisplay").textContent = `${teleportLayer} ${layerDistanceY.toLocaleString()}m`
+    get("meterDisplay").textContent = `${teleportLayer} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`
 }
 
 async function teleport() {
