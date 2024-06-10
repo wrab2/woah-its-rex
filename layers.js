@@ -38,8 +38,10 @@ let oreList = {
     '🎥': { 'decimalRarity': 1 / 3780000000000, 'numRarity': 3780000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎥 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🔓': { 'decimalRarity': 1 / 9900000000, 'numRarity': 9900000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🔓 Has Spawned..?', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🎖️': { 'decimalRarity': 1 / 7000000000, 'numRarity': 7000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "Dedication may only get you so far, yet you've proven you're willing to complete the mission..", 'oreTier': 'Sacred', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
-
-    
+    '🤫' : { 'decimalRarity': 1 / 13370000000, 'numRarity': 13370000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "TOP TEN TUTORIAL HOW TO MOG THANK FOR WATCHING...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🖐' : { 'decimalRarity': 1 / 555555555555, 'numRarity': 555555555555, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "high five! no..? ok...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    'korosan' : { 'decimalRarity': 1 / 563563563, 'numRarity': 563563563, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "Extreme pain tears through your body as your fingers are ripped off one by one...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, "hasImage":true, "src" : "media/ores/korosan.png"},
+    'luna' : { 'decimalRarity': 1 / 50000000000, 'numRarity': 50000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "You hear a soft meow behind you, followed by the soft crunching of kibble...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, "hasImage":true, "src" : "media/ores/luna.png"},
 
     '🐞': { 'decimalRarity': 1 / 241200000000, 'numRarity': 241200000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "In this alternate earth, the keeper of time dons new wings, and sacrifices beauty for survivability...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🍓': { 'decimalRarity': 1 / 560000000000, 'numRarity': 560000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "A sweet aroma guides you to one of nature's finest delicacies...", 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -532,7 +534,8 @@ let variantInvNames = ["normalAmt", "electrifiedAmt", "radioactiveAmt", "explosi
 //ALL LAYERS
 const layerList = {
 "dirtLayer" : ["mutatedGrowth", "sillyMiner", "🍓", "🌳", "💐", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
-"dirtLayer2" : ["sillyMiner", "🍓", "🌳", "💐", "🥬", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
+"dirtLayer2" : ["mutatedGrowth", "sillyMiner", "🍓", "🌳", "💐", "🥬", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
+"dirtLayer3" : ["mutatedGrowth", "sillyMiner", "🍓", "🌳", "💐", "🤫", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
 "brickLayer" : ["sillyMiner", "🏯", "🏰", "🌇", "🥉", "🪞", "🔩", "🧲", "🪬", "🧨", "🔗", "🪙", "🗿", "🪚", "🪜", "🧱"],
 "foggyLayer" : ["sillyMiner", "🦚", "🚿", "👁️", "💸", "⌛", "🧵", "🕯️", "🕋", "🎨", "🎴", "🥽", "🪄", "🎭", "🌫️"],
 "waterLayer" : ["sillyMiner", "⚓", "🐋", "💫", "🪩", "👿", "🌀", "🔱", "👑", "🐟", "🫧", "🤿", "🎣", "⛵", "🌊"],
@@ -544,6 +547,7 @@ const layerList = {
 "sillyLayer" : ["sillyMiner", "qrCode", "kaleidoscope", "🎉", "🧌", "Nyerd", "Fox", "♾️", "💅", "😁", "🪢", "🎂"],
 "fluteLayer" : ["sillyMiner", "mushroomCats", "🫶", "🪈"],
 "cloudLayer" : ["starglint", "sillyMiner",  "🪽", "⚡", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
+"cloudLayer2" : ["🖐", "starglint", "sillyMiner",  "🪽", "⚡", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
 "tvLayer" : ["sillyMiner", "🔫", "👾", "🏹", "💣", "🔨", "🪓", "🪃", "🛡️", "📺"],
 "doorLayer" : ["sillyMiner", "🗝️", "🪝", "🪡", "🛎️", "🚧", "⛓️", "🔏", "🖇️", "🔑", "🔒", "🚪"],
 "globeLayer" : ["sillyMiner", "💰", "💞", "💘", "🚽", "📽️", "🧂", "🔪", "💔", "🍆", "🖱️", "⌨️", "💻", "🌐"],
@@ -566,7 +570,7 @@ const createdLayers = {
 let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
 let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"];
-let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "barrierLayer", "borderLayer"]
+let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer"]
 let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
 
 //SETTING LAYERS
@@ -650,13 +654,14 @@ function setLayer(y) {
                 repeatingLayers[repeatingLayerNum] ??= {layer: currentLayerNum, force: force};
                 lastRepeatedLayer = repeatingLayerNum;
                 specialLayerLocations["lastLayer"] = {y: tempNum, num: repeatingLayerNum};
+                rebuildSpecialLayerObject();
             } else {
                 if (lastRepeatedLayer !== repeatingLayerNum) {
                     lastRepeatedLayer = repeatingLayerNum;
                     a88();
                     currentLayerNum = repeatingLayers[repeatingLayerNum].layer;
                     currentLayer = layerIndex.worldOne[currentLayerNum];
-                    if (repeatingLayers[repeatingLayerNum].force) a87(currentLayerNum, true)
+                    if (repeatingLayers[repeatingLayerNum].force) a87(currentLayerNum, repeatingLayers[repeatingLayerNum].force)
                 }
             }
         }
@@ -686,6 +691,7 @@ function getLayer(y) {
         if (y < 16000) {
             if (y === 0) return layerDictionary["grassLayer"];
             if (y === 1) return layerDictionary["dirtLayer2"];
+            if (y === 1337 && hasConverted) return layerDictionary["dirtLayer3"]
             return layerDictionary[layerIndex.worldOne[Math.floor(y / 2000)]];
         } else {
             const num = Math.floor((y - 16000) / 10000);
@@ -694,6 +700,7 @@ function getLayer(y) {
         }
     } else if (currentWorld === 2) {
         if (y < 10000) {
+            if (y === 0) return layerDictionary["cloudLayer2"];
             if (y === 2000) return layerDictionary["grassLayer"];
             else return layerDictionary[layerIndex.worldTwo[Math.floor(y / 2000)]];
         } else {
@@ -714,6 +721,7 @@ function getLayer(y) {
 function a87(num, force) {
     force ??= false;
     let added = false;
+    let korone = false;
     switch (num) {
         case 0:
             if (Math.random() < 1/29 || force) {
@@ -764,18 +772,25 @@ function a87(num, force) {
             }
             break;
         case 7777:
-            if (Math.random() < 1/13 || force) {
+            const sillyRandom = Math.random();
+            if (sillyRandom < 1/563 || force === "KORONE") {
+                insertIntoLayers({"ore":"korosan", "layers":["sillyLayer"], "useLuck":true});
+                added = true;
+                korone = true;
+            }
+            else if (sillyRandom < 1/13 || force) {
                 insertIntoLayers({"ore":"🐸", "layers":["sillyLayer"], "useLuck":true});
                 added = true;
             }
             break;
     }
     if (added) {
-        document.getElementById("spawnMessage").innerText = "In the endless depths of the world, repetitions of earlier environments make up the lower earth, and yet.. a strange sense of unfamiliarity consumes you..."
+        if (korone) typeWriter("<i>An unusual presence lurks within the silly layer, making your body feel numb...</i>", get("spawnMessage"), true);
+        else typeWriter("<i>In the endless depths of the world, repetitions of earlier environments make up the lower earth, and yet.. a strange sense of unfamiliarity consumes you...</i>", get("spawnMessage"), true);
         eventSpawn.currentTime = 0;
         eventSpawn.play();
     }
-    return added;
+    return (korone ? "KORONE" : added);
 }
 function a88() {
     const toRemove = ["🐞","🥈","🚬","🪸","🪦","🚨","🍖","📜","🐸"]
@@ -783,6 +798,7 @@ function a88() {
         removeFromLayers({"ore":toRemove[i], "layers":[worldOneLayers[i]]})
     }
     removeFromLayers({"ore":toRemove[8], "layers":["sillyLayer"]})
+    removeFromLayers({"ore":"korosan", "layers":["sillyLayer"]})
 }
 
 function createLayer(layers) {
@@ -799,6 +815,8 @@ function createAllLayers() {
     for (let i = 0; i < subRealmOneLayers.length; i++) layerDictionary[subRealmOneLayers[i]] = {layer: createLayer([layerList[subRealmOneLayers[i]]]), probabilities: []};
     for (let i = 0; i < specialLayers.length; i++) layerDictionary[specialLayers[i]] = {layer: layerList[specialLayers[i]], probabilities: []};
     layerDictionary["dirtLayer2"] = {layer: createLayer([layerList["dirtLayer2"], layerList["worldOneCommons"]]), probabilities: []};
+    layerDictionary["dirtLayer3"] = {layer: createLayer([layerList["dirtLayer3"], layerList["worldOneCommons"]]), probabilities: []};
+    layerDictionary["cloudLayer2"] = {layer: createLayer([layerList["cloudLayer2"], layerList["worldTwoCommons"]]), probabilities: []};
     let tier = "Uncommon";
     let arr = [];
     while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {
@@ -815,7 +833,8 @@ function createAllLayers() {
     //for (let i = 0; i < worldOneLayers.length; i++) layerDictionary[worldOneLayers[i]] = createLayer([layerList[worldOneLayers[i]], layerList["worldOneCommons"]]);
 }
 function updateAllLayers() {
-    for (let layer in layerDictionary) layerDictionary[layer].layer = applyLuckToLayer(layerDictionary[layer].layer, verifiedOres.getCurrentLuck())
+    for (let layer in layerDictionary) layerDictionary[layer].layer = applyLuckToLayer(layerDictionary[layer].layer, verifiedOres.getCurrentLuck());
+    oreList["luna"]["decimalRarity"] = 1/(oreList["luna"]["numRarity"] / verifiedOres.getCurrentLuck());
     createGenerationProbabilities();
 }
 function createGenerationProbabilities() {
@@ -961,6 +980,10 @@ function checkLimitedOres() {
             insertIntoLayers({"ore":propertyName,"layers":limitedOres[propertyName]["layers"], "useLuck":true});
         else
             removeFromLayers({"ore":propertyName,"layers":limitedOres[propertyName]["layers"]});
+    }
+    if (new Date().getDate() !== player.luna.lastAddedOn) {
+        player.luna.layer = Math.round(Math.random() * 100000);
+        player.luna.lastAddedOn = Date.now().getDate();
     }
 }
 

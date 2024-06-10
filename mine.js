@@ -138,12 +138,14 @@ function rollVariant() {
 let cat = 1;
 let mainProbabilityTable;
 let mainGenerationTable;
+let lunaY = 1;
 const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮";
 function generateBlock(location) {
     blocksRevealedThisReset++;
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;
+    if (location["Y"] === player.luna.layer && currentWorld === 1) {let lunaLayer = addLuna([...arr], [...mainGenerationTable]); arr = lunaLayer[0]; mainGenerationTable = lunaLayer[1];}
     let chosenValue = Math.random();
     let low = 0;
     let high = arr.length;
@@ -174,7 +176,7 @@ function generateBlock(location) {
         }
         playSound(oreList[blockToGive]["oreTier"]);
         if (oreInformation.tierGrOrEqTo({"tier1" : tier, "tier2" : minTier})) spawnMessage({block: blockToGive, location: location, caveInfo: undefined, variant: variant});
-        if (((currentWorld < 2 && (player.gears["gear3"] || player.gears["gear28"])) || player.gears["gear17"] && tier !== "Celestial")) mineBlock(location["X"], location["Y"], "ability");
+        if (((currentWorld < 2 && (player.gears["gear3"] || player.gears["gear28"])) || player.gears["gear17"]) && tier !== "Celestial") mineBlock(location["X"], location["Y"], "ability");
         if (blocksRevealedThisReset / mineCapacity >= 0.9) mineBlock(location["X"], location["Y"], "reset");
         if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": tier, "tier2": player.settings.stopOnRare.minimum})) stopMining();
         if (currentActiveEvent !== undefined) {
@@ -182,7 +184,22 @@ function generateBlock(location) {
         } 
     }
 }
-
+function addLuna(layer, probs) {
+    let fromHere = 0;
+    let summedProb = oreList["luna"]["decimalRarity"];
+    for (let i = 0; i < probs.length; i++) {
+        if (summedProb < probs[i]) {
+            layer.splice(i, 0, "luna");
+            probs.splice(i, 0, summedProb);
+            fromHere = i + 1;
+            break;
+        }
+        summedProb += oreList[layer[i]]["decimalRarity"];
+    }
+    const add = oreList["luna"]["decimalRarity"];
+    for (let i = fromHere; i < probs.length; i++) probs[i] += add;
+    return [layer, probs];
+}
 const checkSpecials = function(block) {
     const originalBlock = block;
     if (Math.random() < 1/1000) {
@@ -271,71 +288,50 @@ for (let i = 0; i < 100000; i++) {
 }
 */
 //TELEPORTING
-const specialLayerLocations = {
+let specialLayerLocations = {
 
 }
-let specialLayerDistance;
-let distanceMulti = 1;
+let distanceMulti = 0;
 let layerDistanceY = 1000;
-function distanceHelper(layer) {
-    if (specialLayerDistance !== undefined) {
-        if (layer === "fluteLayer") return false;
-        if (layer === "sillyLayer" && specialLayerDistance === "fluteLayer") return true;
-        else if (layer === "unknownLayer" && specialLayerDistance !== "unknownLayer" && specialLayerDistance !== "lastLayer") return true;
-        else if (layer === "lastLayer" && specialLayerDistance !== "lastLayer") return true;
-        else return false;
-    } else {
-        return true;
+const specialOrder = ["sillyLayer", "fluteLayer", "unknownLayer", "lastLayer"];
+function rebuildSpecialLayerObject() {
+    const newArray = [];
+    for (let layer in specialLayerLocations) newArray[specialOrder.indexOf(layer)] = layer;
+    for (let i = newArray.length - 1; i >= 0; i--) if (newArray[i] === undefined) newArray.splice(i, 1);
+    const newLayerObj = {
+
+    };
+    for (let i = 0; i < newArray.length; i++) newLayerObj[newArray[i]] = specialLayerLocations[newArray[i]];
+    if (newLayerObj["lastLayer"] !== undefined) {
+        const lastY = newLayerObj["lastLayer"].y;
+        for (let layer in newLayerObj) if (layer !== "lastLayer" && newLayerObj[layer] === lastY) delete newLayerObj["lastLayer"];
     }
+    specialLayerLocations = newLayerObj;
 }
-function switchDistance() {
-        if (layerDistanceY < (allLayers.length - 1) * 2000) {
-            layerDistanceY = 2000 * distanceMulti + 1000;
-            distanceMulti++;
-        } else if (layerDistanceY > (allLayers.length - 1) * 2000) {
-            if (currentWorld < 2) {
-                if (currentWorld === 1) {
-                    if (specialLayerLocations["fluteLayer"] !== undefined && distanceHelper("fluteLayer")) {specialLayerDistance = "fluteLayer"; layerDistanceY = specialLayerLocations["fluteLayer"] + 5000}
-                    else if (specialLayerLocations["sillyLayer"] !== undefined && distanceHelper("sillyLayer")) {specialLayerDistance = "sillyLayer"; layerDistanceY = specialLayerLocations["sillyLayer"] + 5000}
-                    else if (specialLayerLocations["unknownLayer"] !== undefined && distanceHelper("unknownLayer")) {specialLayerDistance = "unknownLayer"; layerDistanceY = specialLayerLocations["unknownLayer"] + 5000}
-                    else if (specialLayerLocations["lastLayer"] !== undefined && distanceHelper("lastLayer")) {specialLayerDistance = "lastLayer"; layerDistanceY = specialLayerLocations["lastLayer"].y + 5000}
-                    else {
-                        layerDistanceY = 1000;
-                        distanceMulti = 1;
-                        specialLayerDistance = undefined;
-                    }
-                } else {
-                    layerDistanceY = 1000;
-                    distanceMulti = 1;
-                }
-            } else {
-                layerDistanceY = 3000;
-                distanceMulti = 2;
-            }
-        } else {
-            layerDistanceY = 1000;
-            distanceMulti = 1;
-        }
-        let layer;
-        if (currentWorld === 1 && layerDistanceY > 16000) {
-            for (let property in specialLayerLocations) if (specialLayerLocations[property] + 5000 === layerDistanceY || specialLayerLocations[property].y + 5000 === layerDistanceY) {
-                if (specialLayerDistance === "lastLayer") {
-                    layer = layerDictionary[layerIndex.worldOne[repeatingLayers[specialLayerLocations["lastLayer"].num].layer]].layer.slice(-1);
-                } else if (property !== "lastLayer") {
-                    layer = layerDictionary[property].layer.slice(-1);
-                }
-            }
-        } else {
-            layer = layerList[allLayers[Math.floor(layerDistanceY / 2000)]].slice(-1);
-        }
-        layer = layer[layer.length - 1];   
-        document.getElementById("meterDisplay").setAttribute("title", oreList[layer]["oreName"]);
-        if (player.settings.usingNewEmojis || currentWorld === 1.1) {
-            layer = "<span style=\"font-family:'Noto Color Emoji'\">" + layer + "</span>";
-        }
-        let sub = currentWorld === 2 ? 2000 : 0;
-        document.getElementById("meterDisplay").innerHTML = layer + " " + (layerDistanceY - sub).toLocaleString() + "m";
-        
+function switchDistance(num) {
+    const lastLayerInfo = [distanceMulti, layerDistanceY];
+    distanceMulti += num;
+    const layerNums = allLayers.length - 1;
+    const specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
+    if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
+    if (distanceMulti < 0) {
+        distanceMulti = layerNums + specialLayerNums;
+    }
+    if (distanceMulti > layerNums + specialLayerNums) {
+        distanceMulti = currentWorld === 2 ? 1 : 0;
+        layerDistanceY = 1000 + (2000 * distanceMulti);
+    } else if (distanceMulti > layerNums && currentWorld === 1) {
+        const layersToIndex = Object.keys(specialLayerLocations);
+        const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
+        const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
+        if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
+        else layerDistanceY = specialTeleportLayer + 5000;
+        if (layerDistanceY === lastLayerInfo[1]) switchDistance(num)
+    } else {
+        layerDistanceY = 1000 + (2000 * distanceMulti);
+    }
+    const teleportLayer = getLayer(layerDistanceY).layer.slice(-1)
+    get("meterDisplay").textContent = `${teleportLayer} ${layerDistanceY.toLocaleString()}m`
 }
 
 async function teleport() {
@@ -475,7 +471,7 @@ function switchWorld(to) {
         if (currentWorld === 1.1) sr1Helper(true);
         else sr1Helper(false);
     }
-    switchDistance();
+    switchDistance(0);
     displayArea();
     switchWorldCraftables();
     if (currentRecipe !== undefined) displayRecipe(currentRecipe);

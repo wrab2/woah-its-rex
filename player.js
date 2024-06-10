@@ -143,6 +143,10 @@ class playerTemplate {
             },
             link: "",
         }
+        this.luna = {
+            layer: Math.round(Math.random() * 100000),
+            lastAddedOn: new Date().getDate()
+        }
     }
 }
 let player = new playerTemplate();
@@ -566,6 +570,18 @@ function loadNewData(data) {
             }
         }
         data.faqOffered ??= false;
+        data.luna ??= {
+            layer: Math.round(Math.random() * 100000),
+            lastAddedOn: new Date().getDate()
+        }
+        if (new Date().getDate() !== data.luna.lastAddedOn) {
+            player.luna.layer = Math.round(Math.random() * 100000);
+            player.luna.lastAddedOn = new Date().getDate();
+        } else {
+            player.luna.layer = data.luna.layer;
+            player.luna.lastAddedOn = data.luna.lastAddedOn;
+        }
+        
         if (!data.faqOffered) toggleNewPlayer(true);
         else player.faqOffered = true;
     } catch (err) {

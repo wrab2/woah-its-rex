@@ -17,7 +17,7 @@ function toSurface() {
         insertIntoLayers({"ore":"🐢","layers":["paperLayer"], "useLuck":true});
         insertIntoLayers({"ore":"🐰","layers":["paperLayer"], "useLuck":true});
         a13 = true;
-        document.getElementById("spawnMessage").innerText = "The air becomes hard to breathe as particle flow slows to a halt...";
+        typeWriter("<i>The air becomes hard to breathe as particle flow slows to a halt...</i>", get("spawnMessage"), true)
         document.getElementById("teleportButton").disabled = true;
         eventSpawn.currentTime = 0;
         eventSpawn.play();

@@ -791,7 +791,8 @@ function showWorkshop(state) {
     currentDisplayedUpgrade = undefined;
     updateDisplayedUpgrade();
 }
-const conversionRates = [5, 10, 30]
+const conversionRates = [5, 10, 30];
+let hasConverted = false;
 function convertVariants() {
     let ore = document.getElementById("oreInput").value;
     ore = ore.replaceAll(" ", "");
@@ -822,6 +823,12 @@ function convertVariants() {
     else if (obj["variant"] === "Radioactive") amtToGive = conversionRates[1];
     else if (obj["variant"] === "Electrified") amtToGive = conversionRates[0];
     let name = variantInvNames[names.indexOf(obj["variant"])];
+    if (obj["ore"] === "🧱" && obj["variant"] === "Electrified" && obj["amt"] === 1337) {
+        typeWriter("<i>The ground shakes beneath you as something makes its presence known...</i>", get("spawnMessage"), true);
+        eventSpawn.currentTime = 0;
+        eventSpawn.play();
+        hasConverted = true;
+    }
     if (oreList[obj["ore"]][name] >= obj["amt"]) {
         oreList[obj["ore"]][name] -= obj["amt"];
         oreList[obj["ore"]]["normalAmt"] += (obj["amt"] * amtToGive);
@@ -893,7 +900,6 @@ function goToConvert(ore, variant) {
     document.getElementById("oreInput").value = ore;
     document.getElementById("amtInput").value = oreList[ore][variantInvNames[variant - 1]];
     document.getElementsByClassName("potentialVariant")[variant - 2].click();
-    console.log(ore);
 }
 let inafk = false
 function AFKmode(){

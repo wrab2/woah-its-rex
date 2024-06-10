@@ -228,7 +228,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button onclick="moveOne('s', this)" class="movementButton verticalArrow"id="downOne"></button>
                     <button onclick="moveOne('w', this)" class="movementButton verticalArrow"id="upOne"></button>
                     <button onclick="moveOne('d', this)" class="movementButton horizontalArrow"id="rightOne"></button>
-                    <button onclick="switchDistance()" class="movementButton"id="meterDisplay">🟫 1,000m</button>
+                    <button onclick="switchDistance(1)" class="movementButton"id="meterDisplay" oncontextmenu="{switchDistance(-1); return false;}">🟫 1,000m</button>
             </div>
             <div id="eventMessages">
                 Event Messages Appear Here!
