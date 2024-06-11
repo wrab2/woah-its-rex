@@ -636,14 +636,10 @@ function switchFont() {
         player.settings.usingNewEmojis = false;
         document.body.style.fontFamily = "";
         document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
-        distanceMulti--;
-        layerDistanceY -= 2000;
     } else {
         player.settings.usingNewEmojis = true;
         document.body.style.fontFamily = `system-ui, Tahoma, Verdana, sans-serif, Noto Color Emoji`;
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
-        distanceMulti--;
-        layerDistanceY -= 2000;
     }
 }
 let minTier = "Antique";

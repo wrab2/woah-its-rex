@@ -59,7 +59,6 @@ function init() {
     switchPowerupDisplay(0);
     assignImageNames();
     cat = verifiedOres.getCurrentLuck();
-    switchPowerupDisplay(0);
     createAllLayers();
     createMine();
     utilitySwitchActions();
