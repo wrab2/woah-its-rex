@@ -615,7 +615,7 @@ function updateInventory() {
     lastTime = Date.now();
     if (Date.now() >= ability1RemoveTime && energySiphonerActive) removeSiphoner();
     const bodyCheck = document.body.getBoundingClientRect();
-    if (bodyCheck.height < 500) {
+    if (bodyCheck.height < 550) {
         document.getElementById("mainSticky").style.position = "relative";
         document.getElementById("mainTop").style.position = "relative";
     } 
