@@ -496,7 +496,7 @@ function sr1Helper(state) {
     removeParadoxical();
     if (state) {
         if (!player.settings.usingNewEmojis) {
-            document.body.style.fontFamily = `system-ui, Noto Color Emoji`;
+            document.body.style.fontFamily = `system-ui, Tahoma, Verdana, sans-serif, Noto Color Emoji`;
             document.getElementById("switchFont").disabled = true;
         }
         player.wasUsing = player.stats.currentPickaxe;

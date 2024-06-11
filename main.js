@@ -53,47 +53,44 @@ function init() {
     document.getElementById("menuSelectionContainer").addEventListener('click', (event) => {
         if (event.target.parentElement.classList.contains("menuCategory")) closeMenu();
     }, false);
-    let canContinue = true;
     createInventory();
     createGearRecipes();
     createPickaxeRecipes();
     switchPowerupDisplay(0);
     assignImageNames();
-        document.getElementById('dataText').value = "";
-        if (Math.random() < 1/1000)
-            document.getElementById("cat").innerText = "CatAxe";
-        limitedTimer = setInterval(checkLimitedOres, 1000);
-        inventoryTimer = setInterval(updateInventory, 500);
-        if (date.getMonth() === 3 && date.getDate() === 1) {
-            document.title = "The Sily Caverns";
+    cat = verifiedOres.getCurrentLuck();
+    switchPowerupDisplay(0);
+    createAllLayers();
+    createMine();
+    utilitySwitchActions();
+    insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
+    document.getElementById('dataText').value = "";
+    if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
+    limitedTimer = setInterval(checkLimitedOres, 1000);
+    inventoryTimer = setInterval(updateInventory, 500);
+    if (date.getMonth() === 3 && date.getDate() === 1) {
+        document.title = "The Sily Caverns";
+    }
+    for (let propertyName in birthdays) {
+        if ((date.getMonth() + 1 === Number(propertyName.substring(0, propertyName.indexOf("/")))) && (date.getDate() === Number(propertyName.substring(propertyName.indexOf("/") + 1)))) {
+            document.getElementById("spawnMessage").innerText = "Happy Birthday " + birthdays[propertyName] + "!!!";
         }
-        for (let propertyName in birthdays) {
-            if ((date.getMonth() + 1 === Number(propertyName.substring(0, propertyName.indexOf("/")))) && (date.getDate() === Number(propertyName.substring(propertyName.indexOf("/") + 1)))) {
-                document.getElementById("spawnMessage").innerText = "Happy Birthday " + birthdays[propertyName] + "!!!";
-            }
-        }
-        canContinue = loadAllData();
-        saveAllData();
-        fetch("emoji.json")
-        .then((response) => response.json())
-        .then((json) => setEmojiNames(json))
-        .catch(error => {
-            failedFetch();
-        });
-        fetch("abilityNums.json")
-        .then((response) => response.json())
-        .then((json) => assignPickaxeNums(json))
-        .catch(error => {
-            failedFetch();
-        });
+    }
+    fetch("emoji.json")
+    .then((response) => response.json())
+    .then((json) => setEmojiNames(json))
+    .catch(error => {
+        failedFetch();
+    });
+    fetch("abilityNums.json")
+    .then((response) => response.json())
+    .then((json) => assignPickaxeNums(json))
+    .catch(error => {
+        failedFetch();
+    });
+    let canContinue = loadAllData();
     if (canContinue) {
         repeatDataSave();
-        cat = verifiedOres.getCurrentLuck();
-        switchPowerupDisplay(0);
-        createAllLayers();
-        createMine();
-        utilitySwitchActions();
-        insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
         console.log("meow");
     }
     window.addEventListener("beforeunload", removeParadoxical());

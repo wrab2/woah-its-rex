@@ -11,18 +11,19 @@ let batteryEvent = false;
 //console.log(player.stats.blocksMined - preMined, blocksRevealedThisReset - preRevealed);
 const abilityTestNums = []
 let abilityTestAmt = 0;
-async function rollAbilities() {
+async function rollAbilities(force) {
     let m = 1;
     if (currentWorld < 2 && player.gears["gear8"]) m += 0.2;
     if (player.gears["gear23"]) m += 0.15;
     if (batteryEvent) m += 0.1;
-    if (Math.random() < 1/500 && !resetting && ((currentWorld < 2 && player.stats.currentPickaxe >= 5)||(currentWorld === 2 && player.gears["gear14"]))) {
+    if (Math.random() < 1/500 && verifiedOres.canGenerateCaves()) {
         if (player.settings.cavesEnabled) {
             player.stats.cavesGenerated++;
             generateCave();
             displayArea();
         }
     }
+    if (debug && force) m = 10000000;
     switch (player.stats.currentPickaxe) {
         case 1:
             if (Math.random() < (1/30 * m)) {

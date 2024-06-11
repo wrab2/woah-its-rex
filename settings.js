@@ -640,7 +640,7 @@ function switchFont() {
         layerDistanceY -= 2000;
     } else {
         player.settings.usingNewEmojis = true;
-        document.body.style.fontFamily = `system-ui, Noto Color Emoji`;
+        document.body.style.fontFamily = `system-ui, Tahoma, Verdana, sans-serif, Noto Color Emoji`;
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
         distanceMulti--;
         layerDistanceY -= 2000;

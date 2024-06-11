@@ -11,6 +11,7 @@ class secureLogs {
     #startTime = Date.now();
     #maxLuck = [1, 1.2, 1.5, 2.15, 3, 5, 10, 4, 5.5, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3, 1.5, 4, 8.25, 12.5, 50, 175, 1, 2.1];
     #isRightPickaxe;
+    #canGenCaves;
     constructor() {
         this.#spawnLogs = [];
         this.#verifiedLogs = {
@@ -23,6 +24,7 @@ class secureLogs {
         };
         this.#logsTimer = null;
         this.#isRightPickaxe = true;
+        this.#canGenCaves = false;
     }
     createLog(r, c, intended, obj, fromCave) {
         const ore = intended.ore === undefined ? intended : intended.ore;
@@ -189,6 +191,15 @@ class secureLogs {
         else if (currentWorld === 1.1 && player.stats.currentPickaxe === 27) this.#isRightPickaxe = true;
         else if (currentWorld === 2 && player.stats.currentPickaxe > 12 && player.stats.currentPickaxe < 27) this.#isRightPickaxe = true;
         else this.#isRightPickaxe = false;
+    }
+    checkCaves() {
+        if (currentWorld === 1 && player.stats.currentPickaxe > 4 && player.stats.currentPickaxe !== 28) this.#canGenCaves = true;
+        else if (currentWorld === 2 && player.gears["gear14"]) this.#canGenCaves = true;
+        else if (currentWorld === 1.1) this.#canGenCaves = true;
+        else this.#canGenCaves = false;
+    }
+    canGenerateCaves() {
+        return this.#canGenCaves;
     }
 }
 let verifiedOres = new secureLogs();

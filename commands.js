@@ -142,8 +142,8 @@ const displayLarge = function() {
         }
         element.id = "largeDisplay";
         element.style.maxWidth = "10000vw";
-        element.style.fontSize = "0.1vw"
-        element.style.lineHeight = "0.1vw";
+        element.style.fontSize = "0.2vw"
+        element.style.lineHeight = "0.2vw";
         element.style.border = "none";
         text.innerHTML = output;
         clearInterval(dataTimer);

@@ -292,6 +292,7 @@ const recipes = {
 recipeElements = {};
 let currentRecipe = undefined;
 function displayRecipe(recipe) {
+    removePolygon();
     const parentElement = document.getElementById("displayRecipe");
     document.getElementById("craftingRecipeTitle").style.display = "none";
     while (parentElement.firstChild) parentElement.removeChild(parentElement.firstChild);
@@ -529,6 +530,7 @@ function utilitySwitchActions() {
     switchLayerIndex(0);
     if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     verifiedOres.checkPickaxe();
+    verifiedOres.checkCaves();
     displayArea();
 }
 let m87 = 0;
@@ -1075,31 +1077,31 @@ function updateTolLuck() {
 }
 const pickaxeStats = {
     0 : {mined: 1, revealed: 1, luck: 1, rate: 1, src: "⛏️"},
-    1 : {mined: 24, revealed: 68, luck: 1.2, rate: 30, src: `<img class="mineImage" src="media/mulchMalletIcon.png"></img>`},
-    2 : {mined: 47, revealed: 69, luck: 1.5, rate: 25, src: "⛏️"},
-    3 : {mined: 46, revealed: 94, luck: 2.15, rate: 25, src: "⛏️"},
-    4 : {mined: 81, revealed: 113, luck: 3, rate: 19, src: "⛏️"},
-    5 : {mined: 45, revealed: 69, luck: 5, rate: 17, src: "⛏️"},
-    6 : {mined: 57, revealed: 85, luck: 10, rate: 24, src: `<img class="mineImage" src="media/earthSoilerIcon.png"></img>`},
-    7 : {mined: 275, revealed: 740, luck: 4, rate: 50, src: "⛏️"},
-    8 : {mined: 461, revealed: 811, luck: 5.5, rate: 40, src: "⛏️"},
-    9 : {mined: 188, revealed: 252, luck: 20, rate: 22, src: "⛏️"},
-    10 : {mined: 973, revealed: 1195, luck: 17.5, rate: 50, src: "⛏️"},
-    11 : {mined: 1018, revealed: 2993, luck: 30, rate: 100, src: "⛏️"},
-    12 : {mined: 1541, revealed: 1861, luck: 75, rate: 150, src: `<img class="mineImage" src="media/wingsOfGloryIcon.png"></img>`},
+    1 : {mined: 24, revealed: 68, luck: 1.2, rate: 30, src: `<img class="mineImage" src="media/mulchMalletIcon.png"></img>`, ability:"media/abilityImages/mulchMalletAbility.png"},
+    2 : {mined: 47, revealed: 69, luck: 1.5, rate: 25, src: "⛏️", ability:"media/abilityImages/mudSickleAbility.png"},
+    3 : {mined: 46, revealed: 94, luck: 2.15, rate: 25, src: "⛏️", ability:"media/abilityImages/dirtRavagerAbility.png"},
+    4 : {mined: 81, revealed: 113, luck: 3, rate: 19, src: "⛏️", ability:"media/abilityImages/voidCrusherAbility.png"},
+    5 : {mined: 45, revealed: 69, luck: 5, rate: 17, src: "⛏️", ability:"media/abilityImages/geodeStaffAbility.png"},
+    6 : {mined: 57, revealed: 85, luck: 10, rate: 24, src: `<img class="mineImage" src="media/earthSoilerIcon.png"></img>`, ability:"media/abilityImages/earthSoilerAbility.png"},
+    7 : {mined: 275, revealed: 740, luck: 4, rate: 50, src: "⛏️", ability:"media/abilityImages/cryptSmasherAbility.png"},
+    8 : {mined: 461, revealed: 811, luck: 5.5, rate: 40, src: "⛏️", ability:"media/abilityImages/labyrinthianTideAbility.png"},
+    9 : {mined: 188, revealed: 252, luck: 20, rate: 22, src: "⛏️", ability:"media/abilityImages/77LeafDestroyerAbility.png"},
+    10 : {mined: 973, revealed: 1195, luck: 17.5, rate: 50, src: "⛏️", ability:"media/abilityImages/planetBusterAbility.png"},
+    11 : {mined: 1018, revealed: 2993, luck: 30, rate: 100, src: "⛏️", ability:"media/abilityImages/whirlpoolOfFateAbility.png"},
+    12 : {mined: 1541, revealed: 1861, luck: 75, rate: 150, src: `<img class="mineImage" src="media/wingsOfGloryIcon.png"></img>`, ability:"media/abilityImages/wingsOfGloryAbility.png"},
     13 : {mined: 1, revealed: 1, luck: 1, rate: 1, src: `<img class="mineImage" src="media/theKeyIcon.png"></img>`},
-    14 : {mined: 40, revealed: 51, luck: 1.05, rate: 45, src: "⛏️"},
-    15 : {mined: 112, revealed: 140, luck: 1.075, rate: 75, src: "⛏️"},
-    16 : {mined: 218, revealed: 292, luck: 1.3, rate: 100, src: "⛏️"},
-    17 : {mined: 826, revealed: 936, luck: 1, rate: 150, src: `<img class="mineImage" src="media/nyabombIcon.png"></img>`},
-    18 : {mined: 1005, revealed: 1160, luck: 1.5, rate: 150, src:  `<img class="mineImage" src="media/lunarLightsabreIcon.png"></img>`},
-    19 : {mined: 656, revealed: 754, luck: 2, rate: 60, src: "⛏️"},
-    20 : {mined: 1082, revealed: 1343, luck: 3, rate: 75, src: "⛏️"},
-    21 : {mined: 1946, revealed: 4489, luck: 1.5, rate: 75, src: "⛏️"},
-    22 : {mined: 2498, revealed: 5632, luck: 4, rate: 120, src: "⛏️"},
-    23 : {mined: 4518, revealed: 6325, luck: 8.25, rate: 150, src: "⛏️"},
-    24 : {mined: 7964, revealed: 9800, luck: 12.5, rate: 175, src: "⛏️"},
-    25 : {mined: 15131, revealed: 18594, luck: 50, rate: 300, src: "⛏️"},
+    14 : {mined: 40, revealed: 51, luck: 1.05, rate: 45, src: "⛏️", ability:"media/abilityImages/extremeEcholocatorAbility.png"},
+    15 : {mined: 112, revealed: 140, luck: 1.075, rate: 75, src: "⛏️", ability:"media/abilityImages/corundumCaverAbility.png"},
+    16 : {mined: 218, revealed: 292, luck: 1.3, rate: 100, src: "⛏️", ability:"media/abilityImages/starborneSlasherAbility.png"},
+    17 : {mined: 826, revealed: 936, luck: 1, rate: 150, src: `<img class="mineImage" src="media/nyabombIcon.png"></img>`, ability:"media/abilityImages/nyabombAbility.png"},
+    18 : {mined: 1005, revealed: 1160, luck: 1.5, rate: 150, src:  `<img class="mineImage" src="media/lunarLightsabreIcon.png"></img>`, ability:"media/abilityImages/lunarLightsabreAbility.png"},
+    19 : {mined: 656, revealed: 754, luck: 2, rate: 60, src: "⛏️", ability:"media/abilityImages/gemstoneEngraverAbility.png"},
+    20 : {mined: 1082, revealed: 1343, luck: 3, rate: 75, src: "⛏️", ability:"media/abilityImages/gamblersFallacyAbility.png"},
+    21 : {mined: 1946, revealed: 4489, luck: 1.5, rate: 75, src: "⛏️", ability:"media/abilityImages/exponentialCentrifugeAbility.png"},
+    22 : {mined: 2498, revealed: 5632, luck: 4, rate: 120, src: "⛏️", ability:"media/abilityImages/singularitySlammerAbility.png"},
+    23 : {mined: 4518, revealed: 6325, luck: 8.25, rate: 150, src: "⛏️", ability:"media/abilityImages/staffOfBindingAbility.png"},
+    24 : {mined: 7964, revealed: 9800, luck: 12.5, rate: 175, src: "⛏️", ability:"media/abilityImages/sssAbility.png"},
+    25 : {mined: 15131, revealed: 18594, luck: 50, rate: 300, src: "⛏️", ability:"media/abilityImages/coronaryCatastropheAbility.png"},
     26 : {mined: 15131, revealed: 18594, luck: 50, rate: 300, src: "⛏️"},
     27 : {
         0 : {mined: 4383, revealed: 4576, luck: 1},
@@ -1111,7 +1113,7 @@ const pickaxeStats = {
         rate: 500,
         src : "⛏️",
     },
-    28 : {mined: 67, revealed: 111, luck: 2.1, rate: 20, src: "⛏️"},
+    28 : {mined: 67, revealed: 111, luck: 2.1, rate: 20, src: "⛏️", ability:"media/abilityImages/crystallineExcavatorAbility.png"},
 }
  
  
@@ -1166,4 +1168,50 @@ function ct() {
     let timeForProcs = (procsNeeded * abilityRate) / speed;
     if (player.stats.currentPickaxe === 12) timeForProcs /= 2;
     return longTime(timeForProcs * 1000);
+}
+let lastUsedId = undefined;
+let justCreated = false;
+function createPolygon(element) {
+    if (justCreated) {
+        removePolygon(element);
+        return;
+    }
+    justCreated = true;
+    removePolygon(0, true);
+    const canvas = document.createElement('div');
+    canvas.id = "hologramTriangle"
+    canvas.style.height = "15vw";
+    canvas.style.width = "10%";
+    canvas.style.backgroundColor = "rgba(77, 255, 77, 0.25)";
+    canvas.style.clipPath = "polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%)";
+    const image = document.createElement('img');
+    image.width = "10%";
+    image.height = "auto";
+    image.id = "abilityImage";
+    image.style.display = "none";
+    element.children[0].textContent = "Hide Ability";
+    get(element.id).appendChild(image);
+    get(element.id).appendChild(canvas);
+    lastUsedId = element.id;
+    canvas.style.animation = "extendHologramUp 0.1s linear 1";
+    setTimeout(() => {
+        canvas.style.animation = "";
+        canvas.style.animation = "extendHologramSide 0.15s linear 1";
+        setTimeout(() => {
+            canvas.style.width = "100%";
+            image.style.display = "block";
+            image.src = pickaxeStats[Number(element.id.substring(element.id.indexOf("e") + 1, element.id.indexOf("H")))].ability;
+            image.style.animation = "extendImageAbility 0.05s linear 1";
+            
+        }, 150);
+    }, 100);
+}
+function removePolygon(element) {
+    if (lastUsedId !== undefined) {
+        get(lastUsedId).removeChild(get("hologramTriangle"));
+        get(lastUsedId).removeChild(get("abilityImage"));
+        lastUsedId = undefined; 
+        justCreated = false;
+        if (element !== undefined) element.children[0].textContent = "View Ability";
+    }
 }

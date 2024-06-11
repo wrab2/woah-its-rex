@@ -984,7 +984,7 @@ function checkLimitedOres() {
     if (player.luna !== undefined) {
         if (new Date().getDate() !== player.luna.lastAddedOn) {
             player.luna.layer = Math.round(Math.random() * 100000);
-            player.luna.lastAddedOn = Date.now().getDate();
+            player.luna.lastAddedOn = new Date().getDate();
         }
     }
 }
