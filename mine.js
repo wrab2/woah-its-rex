@@ -90,7 +90,7 @@ function giveBlock(obj) {
         inv = obj.variant;
     }
     //PROC & LOGS
-    const layerMaterial = layerDictionary[currentLayer].layer.slice(-1);
+    const layerMaterial = getLayer(obj.y).layer.slice(-1);
     if (currentWorld < 2 && player.gears["gear4"]) {
         oreList[layerMaterial]["normalAmt"]++;
     }
