@@ -226,8 +226,10 @@ function powerup2(x, y) {
 function powerup3() {
     if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown) {
         const layer = layerDictionary[currentLayer].layer;
-        let chosenOre = layer[Math.round(Math.random() * (layer.length - 1))];
-        while (oreInformation.isCommon(oreList[chosenOre]["oreTier"]) || oreList[chosenOre]["oreTier"] === "Antique") chosenOre = layer[Math.round(Math.random() * (layer.length - 1))];
+        const acceptableOres = [];
+        for (let i = 0; i < layer.length; i++) if (!oreInformation.isCommon(oreList[layer[i]]["oreTier"]) && oreList[layer[i]]["oreTier"] !== "Celestial" && oreList[layer[i]]["oreTier"] !== "Antique" && player.powerupVariables.currentChosenOre.lastOre !== layer[i]) acceptableOres.push(layer[i])
+        let chosenOre = acceptableOres[Math.round(Math.random() * (acceptableOres.length - 1))];
+        player.powerupVariables.currentChosenOre.lastOre = chosenOre;
         player.powerupVariables.currentChosenOre.ore = chosenOre, 
         player.powerupVariables.currentChosenOre.removeAt = Date.now() + (player.gears["gear24"] ? 600000 * 1.5 : 600000);;
         updateAllLayers();
@@ -313,7 +315,7 @@ function gearAbility2() {
             reps++;
             if (repeatingLayers[reps] === undefined && Math.random() < 1/77) chosenDistance = reps;
         }
-        const forceKorone = Math.random() < 1/563 ? "KORONE" : false;
+        const forceKorone = Math.random() < 1/1 ? "KORONE" : false;
         repeatingLayers[reps] = {layer: 7777, force: forceKorone};
         specialLayerLocations["sillyLayer"] ??= 16000 + (10000 * reps);
     }

@@ -7,6 +7,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 let a12 = 0;
 let a13 = false;
 function toSurface() {
+    lastX = 0;
+    movementsX = 0;
+    lastXValues = [];
     pa1 = [];
     pa2 = [];
     pa3 = [];
@@ -41,7 +44,6 @@ function toSurface() {
 }
 let resetting = false;
 function mineReset() {
-    resetAddX = lastX;
     lastX = 0;
     a12 = 0;
     caveOreLocations = [];

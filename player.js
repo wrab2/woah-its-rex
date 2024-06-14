@@ -80,7 +80,7 @@ class playerTemplate {
             },
             baseMineCapacity: 250000,
             minSpeed: 0,
-            stopOnRare: {active: true, minimum: "Antique"},
+            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"]},
             canDisplay: true,
             useNumbers: false,
             inventorySettings: {invToIndex: true, craftingToIndex: true},
@@ -95,7 +95,8 @@ class playerTemplate {
             useNewMusic: true,
             automineProtection: false,
             useNyerd: false,
-            automineUpdate: 25
+            automineUpdate: 25,
+            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"]
         },
         this.stats = {
             currentPickaxe: 0,
@@ -111,7 +112,7 @@ class playerTemplate {
             "powerup5": {cooldown: Date.now(), unlocked: false},
         },
         this.powerupVariables = {
-            currentChosenOre : {ore: undefined, removeAt: Date.now},
+            currentChosenOre : {ore: undefined, removeAt: Date.now, lastOre: undefined},
             commonsAffected : {state: false, removeAt: Date.now()},
             currentPowerupDisplayed : "powerup1",
             fakeEquipped: {originalState: undefined, item: "", removeAt: Date.now()},
@@ -299,7 +300,7 @@ function updatePowerupCooldowns() {
             } else {
                 blockOutput = ore;
             }
-            element.innerHTML = `1.5x to ${blockOutput}`; 
+            element.innerHTML = `<span onclick="randomFunction('${ore}', 'inv')">1.5x to ${blockOutput}</span>`; 
             element.style.display = "block";
         }
         else {element.style.display = "none"; element.innerText = ""}
@@ -481,46 +482,39 @@ function loadNewData(data) {
                 }
             }
         }
-        //base mine capacity
         data.settings.baseMineCapacity ??= 250000;
         player.settings.baseMineCapacity = (data.settings.baseMineCapacity < 250 ? 250 : data.settings.baseMineCapacity);
         mineCapacity = player.settings.baseMineCapacity;
         mineCapacity = mineCapacity < 250 ? 250 : mineCapacity;
         document.getElementById("mineResetProgress").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
-        //block updates
         data.settings.canDisplay ??= true;
         if (!data.settings.canDisplay) changeCanDisplay(document.getElementById("blockUpdates"));
-        //cave toggle
         data.settings.cavesEnabled ??= true;
         if (!data.settings.cavesEnabled) toggleCaves(document.getElementById("caveToggle"));
         data.settings.inventorySettings ??= {invToIndex: true, craftingToIndex: true};
         if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
         if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
-        //minimum rarity for spawn messages
-        data.settings.minRarityNum ??= 0;
-        player.settings.minRarityNum = (data.settings.minRarityNum) - 1;
-        changeSpawnMessageRarity(document.getElementById("changeSMrarityDisplay"));
-        //automine update time
+        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"];
+        player.settings.spawnMessageTiers = data.settings.spawnMessageTiers;
+        applySpawnMessageData();
         data.settings.automineUpdate ??= 25;
         player.settings.automineUpdate = data.settings.automineUpdate;
-        //minimum mining speed
         data.settings.minSpeed ??= 0;
         player.settings.minSpeed = data.settings.minSpeed;
-        //use new music
         data.settings.useNewMusic ??= true;
         if (!data.settings.useNewMusic) switchMusicType();
-        //music settings
         player.settings.musicSettings.volume = data.settings.musicSettings.volume;
         document.getElementById("musicVolume").value = data.settings.musicSettings.volume;
         if (player.settings.useNewMusic) {changeNewMusicVolume(player.settings.musicSettings.volume); selectSong();}
         else {changeMusicVolume(player.settings.musicSettings.volume); keepRunning();}
         data.settings.musicSettings ??= {active: true, volume: 100};
         if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
-        data.settings.stopOnRare ??= {active: true, minimum: "Antique"};
-        player.settings.stopOnRare.minimum = oreInformation.getPreviousTier(data.settings.stopOnRare.minimum);
+        data.settings.stopOnRare ??= {active: true, allowList: []};
+        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"];
+        player.settings.stopOnRare.allowList = data.settings.stopOnRare.allowList;
         player.settings.stopOnRare.active = data.settings.stopOnRare.active;
         if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";
-        changeMinRarity(document.getElementById("stopOnRareDisplay"));
+        applyStopOnRareData();
         data.settings.useDisguisedChills ??= false;
         if (data.settings.useDisguisedChills) enableDisguisedChills();
         data.settings.useNumbers ??= false;
@@ -588,7 +582,34 @@ function loadNewData(data) {
         window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}, ${console.log(err)}`);
     }
 }
-
+function applyStopOnRareData() {
+    const elementList = document.getElementsByClassName("stopOnRareTier");
+    for (let i = 0; i < elementList.length; i++) {
+        const tier = elementList[i].textContent;
+        elementList[i].style.backgroundColor = oreInformation.getColors(tier)["backgroundColor"];
+        if (stopIncluded(tier)) elementList[i].style.color = "#6BC267";
+        else elementList[i].style.color = "#FF3D3D";
+    }
+}
+function stopIncluded(tier) {
+    const list = player.settings.stopOnRare.allowList;
+    for (let i = 0; i < list.length; i++) if (tier === list[i]) return true;
+    return false;
+}
+function applySpawnMessageData() {
+    const elementList = document.getElementsByClassName("spawnMessageTier");
+    for (let i = 0; i < elementList.length; i++) {
+        const tier = elementList[i].textContent;
+        elementList[i].style.backgroundColor = oreInformation.getColors(tier)["backgroundColor"];
+        if (messageIncluded(tier)) elementList[i].style.color = "#6BC267";
+        else elementList[i].style.color = "#FF3D3D";
+    }
+}
+function messageIncluded(tier) {
+    const list = player.settings.spawnMessageTiers;
+    for (let i = 0; i < list.length; i++) if (tier === list[i]) return true;
+    return false;
+}
 function saveNewData(obj) {
     try {
         let data = {blocks: {}, player: player};

@@ -15,6 +15,8 @@ function closeMenu() {
     if (document.getElementById("logHolder").children.length > 0) document.getElementById("logHolder").removeChild(document.getElementById("logHolder").firstChild);
     clearInterval(timeUpdater);
     verifiedOres.showLogs();
+    if (get("stopOnRareList").style.display !== "none") toggleStopRareList();
+    if (get("spawnTierList").style.display !== "none") toggleSpawnMessageList();
 }
 function keepShowingMenu() {
     document.getElementById("menuHolder").style.display = "block";
@@ -131,15 +133,6 @@ function changeUseNumbers(button) {
     }
 }
 
-function changeMinRarity(button) {
-    let nextTier = oreInformation.getNextTier(player.settings.stopOnRare.minimum);
-    if (nextTier === "Layer") nextTier = "Antique";
-    player.settings.stopOnRare.minimum = nextTier;
-    button.innerText = nextTier + "+";
-    const colors = oreInformation.getColors(nextTier);
-    button.style.color = colors["textColor"]
-    button.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 70%, black)";
-}
 function changeLatestMax(button) {
     amt = Number(button.value);
     if (!isNaN(amt) && amt > 0 && amt < 1000) {
@@ -426,8 +419,8 @@ function createIndexCards(layer) {
         if (layer === "worldOneCommons" || layer === "worldTwoCommons") {
             layer = layerList[layer];
             spawnMessage = false;
-        } else if (layerList[layer] != undefined) {
-            layer = layerList[layer];
+        } else if (layerDictionary[layer] !== undefined) {
+            layer = layerDictionary[layer].layer;
             minIndexRarity = 5000000;
         }
         else if (caveList[layer] != undefined) {
@@ -710,19 +703,17 @@ function updateTimes() {
     document.getElementById("statsSessionTime").textContent = `${longTime(Date.now() - verifiedOres.getStartTime())} Session Time.`;
     document.getElementById("statsCavesGenerated").textContent = `${player.stats.cavesGenerated.toLocaleString()} Caves Generated.`;
     document.getElementById("statsBlocksMined").textContent = `${player.stats.blocksMined.toLocaleString()} Blocks Mined.`;
-    lastX += resetAddX;
-    if (movementsX > lastX) {
+    if (movementsX > 0) {
         const timeUsing = Date.now();
-        const totalMoves = 1000 * ((movementsX - lastX) / (timeUsing - lastXCheck));
+        const totalMoves = 1000 * (movementsX / (timeUsing - lastXCheck));
+        movementsX = 0;
         lastXCheck = timeUsing;
-        lastX = movementsX;
         lastXValues.push(totalMoves);
         if (lastXValues.length > 10) lastXValues.splice(0, 1);
         let total = 0;
         for (let i = 0; i < lastXValues.length; i++) total += lastXValues[i];
         total /= lastXValues.length;
         const speeds = calcSpeed();
-        resetAddX = 0;
         const output = `${Math.floor(total)} Average Speed/${Math.floor(1000/speeds.speed * speeds.reps)} Estimated Speed`
         document.getElementById("statsSpeed").textContent = output;
     }
@@ -938,5 +929,53 @@ function convertAllButOne() {
         }
         inventoryObj[ore] = 0;
     } else return;
+}
+function toggleStopRareList() {
+const element = get("stopOnRareList");
+const editingButton = get("stopOnRareDisplay")
+if (element.style.display === "none") {
+    element.style.display = "inline-flex"; 
+    editingButton.textContent = "Hide Tiers"; 
+    editingButton.style.borderTopRightRadius = '0px'
+    editingButton.style.borderBottomRightRadius = '0px'
+}
+  else {
+    element.style.display = "none"; 
+    editingButton.textContent = "Show Tiers"; 
+        editingButton.style.borderTopRightRadius = '20px'
+    editingButton.style.borderBottomRightRadius = '20px'
+  }
+}
+function allowList(tier) {
+    const currentList = player.settings.stopOnRare.allowList;
+    let removing = false;
+    for (let i = 0; i < currentList.length; i++) if (currentList[i] === tier) {removing = true; break;}
+    if (removing) player.settings.stopOnRare.allowList.splice(currentList.indexOf(tier), 1);
+    else (player.settings.stopOnRare.allowList.push(tier));
+    const elementsToSearch = document.getElementsByClassName("stopOnRareTier");
+    for (let i = 0; i < elementsToSearch.length; i++) if (elementsToSearch[i].textContent === tier) elementsToSearch[i].style.color = (removing ? "#FF3D3D" : "#6BC267");
+}
+function toggleSpawnMessageList() {
+    const element = get("spawnTierList");
+    const editingButton = get("changeSMrarityDisplay")
+    if (element.style.display === "none") {
+        element.style.display = "inline-flex"; 
+        editingButton.textContent = "Hide Spawn Message Tiers"; 
+    }
+      else {
+        element.style.display = "none"; 
+        editingButton.textContent = "Show Spawn Message Tiers"; 
+            editingButton.style.borderTopRightRadius = '20px'
+        editingButton.style.borderBottomRightRadius = '20px'
+      }
+    }
+function allowMessage(tier) {
+    const currentList = player.settings.spawnMessageTiers;
+    let removing = false;
+    for (let i = 0; i < currentList.length; i++) if (currentList[i] === tier) {removing = true; break;}
+    if (removing) player.settings.spawnMessageTiers.splice(currentList.indexOf(tier), 1);
+    else (player.settings.spawnMessageTiers.push(tier));
+    const elementsToSearch = document.getElementsByClassName("spawnMessageTier");
+    for (let i = 0; i < elementsToSearch.length; i++) if (elementsToSearch[i].textContent === tier) elementsToSearch[i].style.color = (removing ? "#FF3D3D" : "#6BC267");
 }
 //convertVariants({"ore":"", "variant":"Explosive", "amt":1})

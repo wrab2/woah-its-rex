@@ -58,7 +58,6 @@ function init() {
     createPickaxeRecipes();
     switchPowerupDisplay(0);
     assignImageNames();
-    cat = verifiedOres.getCurrentLuck();
     createAllLayers();
     createMine();
     utilitySwitchActions();
@@ -90,6 +89,8 @@ function init() {
     let canContinue = loadAllData();
     if (canContinue) {
         repeatDataSave();
+        cat = verifiedOres.getCurrentLuck();
+        updateAllLayers();
         console.log("meow");
     }
     window.addEventListener("beforeunload", removeParadoxical());
@@ -675,7 +676,6 @@ function spawnMessage(obj) {
     }
     let rng;
     if (caveInfo !== undefined) {
-        console.log(caveInfo["caveType"], "abysstoneCave")
         if (caveInfo["caveType"] === "abysstoneCave") rng = Math.floor(1/gsProbabilities[caveList["abysstoneCave"].indexOf(block)]) * getCaveMulti(caveInfo["caveType"]);
         else if (oolProbabilities[block] !== undefined) rng = Math.floor(1/oolProbabilities[block]) * getCaveMulti(caveInfo["caveType"]);
         else rng = oreRarity * getCaveMulti(caveInfo["caveType"]);
@@ -1176,6 +1176,58 @@ function rollEvent() {
 }
 function get(id) {
     return document.getElementById(`${id}`)
+}
+function editMode() {
+    window.onclick = getElementAt;
+    clearInterval(limitedTimer);
+    clearInterval(inventoryTimer);
+    limitedTimer = null;
+    inventoryTimer = null;
+}
+const ignoreClasses = [""];
+const ignoreIds = [""];
+let currentlyEditingElement = "";
+let edits = 0;
+let editsMade = {};
+function getElementAt(event) {
+    const toEdit = document.elementFromPoint(event.pageX, event.pageY);
+    let includesIgnoreClass = false;
+    for (let i = 0; i < toEdit.classList; i++) if (ignoreClasses.includes(toEdit.classList[i])) {includesIgnoreClass = true; break;}
+    if (toEdit.children.length === 0 && !toEdit.classList.contains("indexBlackout")) {
+        if (toEdit.id.includes("editedManually")) {
+            const searchingIn = toEdit.parentElement.children;
+            let idToFind = toEdit.id;
+            for (let i = 0; i < searchingIn.length; i++) {
+                if (searchingIn[i].id === idToFind) {
+                    currentlyEditingElement = searchingIn[i];
+                    createCustomColorInput();
+                    break;
+                }
+            }
+        } else {
+            currentlyEditingElement = toEdit;
+            createCustomColorInput();
+            edits++;
+        }
+    }
+}
+function setTextColor(color) {
+    if (currentlyEditingElement !== undefined) {
+        const textContent = currentlyEditingElement.innerText;
+        let thisId = currentlyEditingElement.id;
+        if (thisId.indexOf("editedManually") > -1) {
+        } else {
+            thisId = `editedManually${edits}`;
+        }
+        if (editsMade[thisId] === undefined) editsMade[thisId] = {color: color, element: currentlyEditingElement}
+        else editsMade[thisId].color = color;
+        currentlyEditingElement.innerHTML = `<span id='${thisId}' style='color:${color}'>${textContent}</span>`;
+        
+    }
+}
+function createCustomColorInput() {
+    const text = window.prompt("Enter Color");
+    setTextColor(text);
 }
 /*
 function toggleCelestials(state) {

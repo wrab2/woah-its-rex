@@ -599,8 +599,73 @@ img.roundcat {
   bottom: 17.7vw;
   opacity: 100%;
   z-index: 9;
-  border: 0.1vw solid white;
+  border-top: 0.1vw solid white;
+  border-bottom: 0.1vw solid white;
   box-shadow: 0 0 10px white;
+}
+#stopOnRareList {
+  height: 18vw;
+  width: 30%;
+  position: absolute;
+  right:0px;
+  background-color: white;
+  z-index: 14;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.stopOnRareTier {
+  width: 100%;
+  height: 1.5vw;
+  font-size: 0.9vw;
+  border: 0.1vw solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 1000;
+  color:#6BC267;
+  text-shadow:0.1em -0.1em 0 #000, -0.1em -0.1em 0 #000, -0.1em 0.1em 0 #000, 0.1em 0.1em 0 #000;
+  user-select: none;
+}
+.stopOnRareTierDivider {
+  width: 100%;
+  height: 3vw;
+  border: 0.1vw solid white;
+  border-right-width:0.1vw;
+}
+#spawnTierList {
+  width: 50%;
+  height: 18vw;
+  position: absolute;
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 12;
+}
+#spawnMessageHolder {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 15;
+}
+.spawnMessageTier {
+  width: 100%;
+  height: 1.5vw;
+  font-size: 0.9vw;
+  border: 0.1vw solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 1000;
+  color:#6BC267;
+  text-shadow:0.1em -0.1em 0 #000, -0.1em -0.1em 0 #000, -0.1em 0.1em 0 #000, 0.1em 0.1em 0 #000;
+  user-select: none;
+  margin: 0px;
+}
+.spawnMessageTierDivider {
+  width: 100%;
+  height: 3vw;
+  background:none;
+  z-index: 0;
 }
 @keyframes extendHologramUp {
   0% {height: 0vw;}
@@ -1346,6 +1411,9 @@ z-index: 10;
    margin-left: 0;
    margin-right: 0;
    float: left;
+   position: relative;
+   display: flex;
+   align-items: center;
 }
 .inputAndButton2 {
   border-style: solid;
@@ -1364,14 +1432,15 @@ z-index: 10;
   border-style: solid;
 }
 .stopOnRareButton {
-  width: 50%;
+  width: 70%;
   border-style: solid;
   background-color: #FF3D3D;
 }
 .stopOnRareSelector {
-  width:50%;
+  width:30%;
   background-color: #333;
   padding: 1px;
+  z-index: 15;
 }
 #stopOnRareDisplay {
   font-size: 1vw;
@@ -1612,6 +1681,9 @@ z-index: 10;
   width: 100%;
   font-size:1vw;
   font-weight: 750;
+  position: relative;
+  z-index: 13;
+  background-color: #333;
 }
 #secretButton {
   background: none;

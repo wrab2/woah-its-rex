@@ -478,11 +478,37 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                       </div>
                       <div class="inputAndButton">
                         <button class="stopOnRareButton roundedLeft" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
-                        <button class="stopOnRareSelector roundedRight" onclick="changeMinRarity(this)" id="stopOnRareDisplay">Antique+</button>
+                        <button class="stopOnRareSelector roundedRight" onclick="toggleStopRareList()" id="stopOnRareDisplay">Show Tiers</button>
+                        <div id="stopOnRareList" style="display: none;">
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Antique</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Mystical</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Divine</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Flawless</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Interstellar</span>
+                            <span class="stopOnRareTierDivider"></span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Metaversal</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Sacred</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Ethereal</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Imaginary</span>
+                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Celestial</span>
+                        </div>
                       </div>
-                      <div class="inputAndButton">
-                        <button class="fullyRounded" onclick="changeSpawnMessageRarity(this)" id="changeSMrarityDisplay" style="background-image: linear-gradient(to right, #5A865A 70%, black); color: white;">Minimum Spawn Message Tier: Antique+</button>
-                      </div>
+                      <div class="inputAndButton" id="spawnMessageHolder">
+                        <button class="fullyRounded" onclick="toggleSpawnMessageList()" id="changeSMrarityDisplay">Show Spawn Message Tiers</button>
+                        <div id="spawnTierList" style="display: none;">
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Antique</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Mystical</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Divine</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Flawless</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Interstellar</span>
+                            <span class="spawnMessageTierDivider"></span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Metaversal</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Sacred</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Ethereal</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Imaginary</span>
+                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Celestial</span>
+                        </div>
+                    </div>
                       <div class="inputAndButton">
                           <button class="invSettingButton fullyRounded" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
                         </div>
