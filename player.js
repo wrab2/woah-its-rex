@@ -610,6 +610,9 @@ function messageIncluded(tier) {
     for (let i = 0; i < list.length; i++) if (tier === list[i]) return true;
     return false;
 }
+function addMessageToQueue(messageId) {
+    
+}
 function saveNewData(obj) {
     try {
         let data = {blocks: {}, player: player};

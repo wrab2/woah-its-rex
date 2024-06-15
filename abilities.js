@@ -315,7 +315,7 @@ function gearAbility2() {
             reps++;
             if (repeatingLayers[reps] === undefined && Math.random() < 1/77) chosenDistance = reps;
         }
-        const forceKorone = Math.random() < 1/1 ? "KORONE" : false;
+        const forceKorone = Math.random() < 1/56 ? "KORONE" : false;
         repeatingLayers[reps] = {layer: 7777, force: forceKorone};
         specialLayerLocations["sillyLayer"] ??= 16000 + (10000 * reps);
     }

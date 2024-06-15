@@ -27,9 +27,11 @@ let currentWorld = 1;
 let currentLayerNum = 0;
 const birthdays = {
     "3/28" : "Draedon",
-    "5/21" : "Jade",
     "12/16" : "ThatBotCook",
-    "12/23" : "Amber"
+    "12/23" : "Amber",
+    "8/8" : "Korone",
+    "4/8" : "REEKY",
+    "4/27" : "B4SH (if you changed your name i am Not changing it here)"
 }
 //IMPORTANT
 const date = new Date();
