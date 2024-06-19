@@ -46,7 +46,7 @@ let messageElement;
 let eventElement;
 function init() {
     minedElement = document.getElementById("blocksMined");
-    revealedElement = document.getElementById("mineResetProgress");
+    revealedElement = document.getElementById("resetNumber");
     locationElement = document.getElementById("location");
     blockElement = document.getElementById("blockDisplay");
     displayRows = document.getElementsByClassName("blockDisplayRow");
@@ -64,6 +64,7 @@ function init() {
     createMine();
     utilitySwitchActions();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
+    formatEventText();
     document.getElementById('dataText').value = "";
     if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
     limitedTimer = setInterval(checkLimitedOres, 1000);
@@ -95,7 +96,6 @@ function init() {
         updateAllLayers();
         console.log("meow");
     }
-    window.addEventListener("beforeunload", removeParadoxical());
 }
 function assignImageNames() {
     for (let ore in oreList) {
@@ -442,7 +442,13 @@ function displayArea() {
                 i++;
             } 
         }
-        revealedElement.textContent = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
+        const percent = Math.floor(blocksRevealedThisReset/mineCapacity * 10000)/100;
+        const percentElement = get("resetPercent");
+        if (percent >= 90) percentElement.style.color = "red";
+        else if (percent >= 60) percentElement.style.color = "orange";
+        else percentElement.style.color = "green";
+        percentElement.textContent = `${percent}%`
+        revealedElement.textContent = `${blocksRevealedThisReset.toLocaleString()}/${mineCapacity.toLocaleString()} Blocks Revealed This Reset. `;
         let sub = currentWorld === 2 ? 2000 : 0;
         locationElement.textContent = "X: " + (curX - 1000000000).toLocaleString() + " | Y: " + (-(curY - sub)).toLocaleString();
         if (player.oreTracker.tracking) {
@@ -604,7 +610,7 @@ function updateInventory() {
         player.powerupVariables.commonsAffected.state = false;
         updateAllLayers();
     }
-    if (player.powerupVariables.fakeEquipped.item !== "" && Date.now() >= player.powerupVariables.fakeEquipped.removeAt) {
+    if (player.powerupVariables.fakeEquipped.item !== undefined && Date.now() >= player.powerupVariables.fakeEquipped.removeAt) {
         removeParadoxical();
     }
     if (currentWorld === 1.1 && player.stats.currentPickaxe !== 27) player.stats.currentPickaxe = 27;
@@ -630,6 +636,8 @@ function updateInventory() {
     } else {
         activateEvent(rollEvent());
     }
+    let speed = calcAverageSpeed();
+    if (speed !== undefined) player.avgSpeed = speed;
 }
 function updateDisplayTimer(state) {
     if (state) {
@@ -687,8 +695,8 @@ function spawnMessage(obj) {
     let colors = oreInformation.getColors(oreList[block]["oreTier"]);
     element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
-    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
-    else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
+    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
+    else element.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
     element.innerHTML = output;
     if (spawnElement.children.length > 0) {
         spawnElement.insertBefore(element, spawnElement.firstChild);
@@ -791,8 +799,8 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     let colors = oreInformation.getColors(oreList[type]["oreTier"]);
     element.style.backgroundImage = "linear-gradient(to right, black," + colors["backgroundColor"] + " 20%, 80%, black)";
     element.style.color = colors["textColor"];
-    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000";
-    else element.style.textShadow = "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff";
+    if (colors["textColor"] === "#ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
+    else element.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
     element.setAttribute("title", oreList[type]["oreName"]);
     output += `<span onclick='goToOre(\"${type}\", \"${variant}\")'>`;
     output += `${variant} `;
@@ -945,6 +953,7 @@ const events = {
         ore: "🌀",
         message: `<i><span style="background-image:linear-gradient(to right, #0007ff, #008eff, #14f0f2, #49c7cd, #70a9b3);" class="eventGradient">The tides in the 🌊 drop out into the ocean, lowering a path into the depth...</span></i>`,
         world: 1,
+        specialText: "Makes commons twice as rare, puts 🧀 into water layer, makes 🧀 rarer (1/927,000,000 base rarity)",
         //makes commons twice as rare, puts cheese into water layer, makes cheese rarer
         specialEffect: function(state) {
             if (state) {
@@ -969,6 +978,7 @@ const events = {
         ore: "⚙️",
         message: `<i>Mechanical whirring draws your attention deeper into the mines...</i>`,
         world: 1,
+        specialText: "N/A",
         specialEffect: function(state) {
             if (state) return;
             else return;
@@ -981,6 +991,7 @@ const events = {
         ore: "🌈",
         message: `<i>Every pigment of color swirls up from below, surrounding you in an eternal rainbow...</i>`,
         world: 1,
+        specialText: "N/A",
         specialEffect: function(state) {
             if (state) return;
             else return;
@@ -993,7 +1004,7 @@ const events = {
         ore: "🛎️",
         message: `<i>You hear a bell start dinging in the 🚪 layer...</i>`,
         world: 2,
-        //makes no bell rarer
+        specialText: "Makes 🔕 rarer (1/500,000,000 base rarity)",
         specialEffect: function(state) {
             if (state) {
                 specialOreValues["🔕"] = {
@@ -1013,7 +1024,7 @@ const events = {
         ore: "🔋",
         message: `<i>An electrical container in the rock layer energizes the air around you...</i>`,
         world: 1,
-        //battery event adds +10% ability proc rate
+        specialText: "Adds +10% ability proc rate",
         specialEffect: function(state) {
             if (state) {
                 batteryEvent = true;
@@ -1030,7 +1041,7 @@ const events = {
         ore: "⌛",
         message: `<i><span style="background-image:linear-gradient(to right, #c2842d, #edae26, #d45419, #8a1b0c);" class="eventGradient">The passage of time seems to speed up as it's source is unearthed...</span></i>`,
         world: 1,
-        //decreases base mining speed by 1
+        specialText: "Decreases base mining speed by 1",
         specialEffect: function(state) {
             if (state) {
                 baseSpeed--;
@@ -1053,7 +1064,7 @@ const events = {
         ore: "🎓",
         message: `<i><span style="background-image:linear-gradient(to right, #ede6e6, #383434, #7a7878, #ede6e6);" class="eventGradient">All the knowledge of this realm courses through you as a new intelligence forms...</span></i>`,
         world: 2,
-        //makes some of the knowledge ores in chess layer 2x more common
+        specialText: "Makes ✏️,  🧠,  📖, 📐, 📚, and 🖊️ 2x more common",
         specialEffect: function(state) {
             if (state) {
                 specialOreValues["✏️"] = {newBaseRarity: 8200000/2,layerToChange: "chessLayer"}
@@ -1080,6 +1091,7 @@ const events = {
         ore: "🥗 ",
         message: `<i><span style="background-image:linear-gradient(to right, #6a9c44, #78db2c, #27d111, #083802, #2f7327);" class="eventGradient">Leafy greens cloud your vision...</span></i>`,
         world: 1,
+        specialText: "N/A",
         specialEffect: function(state) {
             if (state) {
                 return;
@@ -1096,6 +1108,7 @@ const events = {
         ore: "📽️",
         message: `<i>A highlight reel of your journey in the mines is faintly visible in the corner of your eyes...</i>`,
         world: 2,
+        specialText: "N/A",
         specialEffect: function(state) {
             if (state) {
                 return;
@@ -1112,11 +1125,12 @@ const events = {
         ore: "✈️",
         message: `<i><span class="rainbowBackground">Lyle! Lyle, wake up! You gotta wake up, please!...</span></i>`,
         world: 1,
+        specialText: "Makes ✈️ obtainable",
         specialEffect: function(state) {
             if (state) {
                 insertIntoLayers({"ore":"✈️", "layers":["sillyLayer"], "useLuck":true});
                 specialOreValues["✈️"] = {
-                    newBaseRarity: 1000000000000,
+                    newBaseRarity: 911911911911,
                     layerToChange: "sillyLayer"
                 }
             }
@@ -1129,15 +1143,107 @@ const events = {
     "event11" : {
         rate: 1/4000,
         duration: 2700000,
-        boost: 3/4,
+        boost: 1.25,
         ore: "💫",
         message: `<i>The skies begin to glow as a cosmic body enchants the mine...</i>`,
         world: 1,
+        specialText: "N/A",
         specialEffect: function(state) {
             if (state) return;
             else return;
         }
-    }
+    },
+    "event12" : {
+        rate: 1/15000,
+        duration: 180000,
+        boost: 5,
+        ore: "⌨️",
+        message: `<i>Intense typing can be heard not too deep underground...</i>`,
+        world: 2,
+        specialText: "Makes 🖱️ rarer (1/10,010,000 base rarity)",
+        specialEffect: function(state) {
+            if (state) {
+                specialOreValues["🖱️"] = {
+                    newBaseRarity: 10010000,
+                    layerToChange: "globeLayer"
+                }
+            }
+            else delete specialOreValues["🖱️"];
+        }
+    },
+    "event13" : {
+        rate: 1/22000,
+        duration: 1200000,
+        boost: 1.13,
+        ore: "⚡",
+        message: `<i>A thundercloud begins brewing above the mines...</i>`,
+        world: 2,
+        specialText: "Makes 🪶 rarer (1/4,120,000,000 base rarity)",
+        specialEffect: function(state) {
+            if (state) {
+                specialOreValues["🪶"] = {
+                    newBaseRarity: 4120000000,
+                    layerToChange: "cloudLayer"
+                }
+            }
+            else delete specialOreValues["🪶"];
+        }
+    },
+    "event14" : {
+        rate: 1/12500,
+        duration: 900000,
+        boost: 1.4,
+        ore: "💣",
+        message: `<i>BOMBS AWAY!!!...</i>`,
+        world: 2,
+        specialText: "Makes 🏹 rarer (1/5,000,000,000 base rarity)",
+        specialEffect: function(state) {
+            if (state) {
+                specialOreValues["🏹"] = {
+                    newBaseRarity: 5000000000,
+                    layerToChange: "tvLayer"
+                }
+            }
+            else delete specialOreValues["🏹"];
+        }
+    },
+    "event15" : {
+        rate: 1/30000,
+        duration: 600000,
+        boost: 1.5,
+        ore: "🇯🇵",
+        message: `<i>Onichan, sempaiiiiii, come visit me ^w^...</i>`,
+        world: 1.1,
+        specialText: "Puts 🍆 into 🇧🇳 layer, makes 🍆 rarer (1/696,969,696 base rarity)",
+        specialEffect: function(state) {
+            if (state) {
+                insertIntoLayers({"ore":"🍆", "layers":["bnLayer"], "useLuck":true});
+                specialOreValues["🍆"] = {
+                    newBaseRarity: 696969696,
+                    layerToChange: "bnLayer"
+                }
+            }
+            else {
+                removeFromLayers({"ore":"🍆", "layers":["bnLayer"]});
+                delete specialOreValues["🍆"];
+            }
+        }
+    },
+    "event16" : {
+        rate: 1/50000,
+        duration: 2700000,
+        boost: 1.17,
+        ore: "🇵🇫",
+        message: `<i>Is this from where the french national team comes from?...</i>`,
+        world: 1.1,
+        specialText: "Reduces game brightness to 50%",
+        specialEffect: function(state) {
+            if (state) {
+                document.body.style.filter = "brightness(0.5)";
+            }
+            else document.body.style.filter = "";
+        }
+    },
 }
 function activateEvent(name) {
     if (name === undefined) return;
@@ -1175,6 +1281,22 @@ function rollEvent() {
         if (chosenValue < events[arr[i]].rate) return arr[i]
     }
     return undefined;
+}
+function formatEventText() {
+    const element = document.getElementsByClassName("faqPage")[8];
+    let output = `<span class="faqTitle">Events:</span><br>`;
+    for (let event in events) {
+        const newEventName = `Event ${event.substring(5)}:`
+        output += `<span class="faqSection">${newEventName}</span>`;
+        output += `<span class="faqText">${events[event].message}</span>`;
+        output += `<span class="faqText">Rate: 1/${Math.round(1/events[event].rate)} every 250ms</span>`;
+        output += `<span class="faqText">Duration: ${msToTime(events[event].duration)}</span>`;
+        output += `<span class="faqText">Main Effect(s): ${events[event].boost}x boost on ${events[event].ore}</span>`;
+        output += `<span class="faqText">Side Effect(s): ${events[event].specialText}</span>`;
+        output += `<span class="faqText">World(s): ${events[event].world}</span>`;
+        output += `<br>`;
+    }
+    element.innerHTML = output;
 }
 function get(id) {
     return document.getElementById(`${id}`)
@@ -1231,21 +1353,6 @@ function createCustomColorInput() {
     const text = window.prompt("Enter Color");
     setTextColor(text);
 }
-/*
-function toggleCelestials(state) {
-    let element = document.getElementById("celestialContainer");
-    if (!state) {
-        document.getElementById("mainContent").style.display = "block";
-        element.style.display = "none";
-        canMine = true
-    } 
-    else {
-        element.style.display = "block";
-        document.getElementById("mainContent").style.display = "none";
-        canMine = false;
-    }
-}
-*/
 //TY @marbelynrye FOR MAKING THESE IMAGE DATA GATHERERS UR SO COOL FOR THAT
 //IT WORKS SO WELL!!!!
 let pickaxe24Nums = [];

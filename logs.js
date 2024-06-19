@@ -4,205 +4,7 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-class secureLogs {
-    #spawnLogs;
-    #verifiedLogs;
-    #logsTimer;
-    #startTime = Date.now();
-    #maxLuck = [1, 1.2, 1.5, 2.15, 3, 5, 10, 4, 5.5, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3, 1.5, 4, 8.25, 12.5, 50, 175, 1, 2.1];
-    #isRightPickaxe;
-    #canGenCaves;
-    constructor() {
-        this.#spawnLogs = [];
-        this.#verifiedLogs = {
-            "All" : [],
-            "Cave" : [],
-            "Normal" : [],
-            "Electrified" : [],
-            "Radioactive" : [],
-            "Explosive" : [],
-        };
-        this.#logsTimer = null;
-        this.#isRightPickaxe = true;
-        this.#canGenCaves = false;
-    }
-    createLog(r, c, intended, obj, fromCave) {
-        const ore = intended.ore === undefined ? intended : intended.ore;
-        const variant = intended.variant === undefined ? undefined : intended.variant;
-        fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
-        let luckModifier;
-        if (player.stats.currentPickaxe === 27 || currentWorld === 1.1) {
-            const pickaxe = player.upgrades["pickaxe27"];
-            luckModifier = pickaxe.levelLuck[pickaxe.level];
-            if (player.gears["gear20"]) luckModifier *= ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
-            if (isNaN(luckModifier)) luckModifier = 1;
-        } else {
-            luckModifier = (this.#maxLuck[player.stats.currentPickaxe] + (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0)) * ((player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1)) * (player.gears["gear20"] ? ((verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1) : 1) * 10;
-        }
-        luckModifier *= 1.5;
-        const maxLuck = luckModifier;
-        let luck;
-        if (fromCave[1] > 1) {
-            if (caveLuck > 50000000) {
-                console.log("failed to create, ", obj.stack, caveLuck);
-                return;
-            } else {
-                luck = 1;
-            }
-        } else {
-            luck = oreList[ore]["numRarity"] * oreList[ore]["decimalRarity"];
-        }
-        if (((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) || debug) {
-            this.#spawnLogs.push({x: c, y: r, block: ore, luck: luck, caveInfo: fromCave, variant: variant})
-        } else {
-            console.log("failed to create, ", obj.stack, luck, maxLuck);
-        }
-    }
-    verifyLog(r, c) {
-        for (let i = 0; i < this.#spawnLogs.length; i++) {
-            if (this.#spawnLogs[i].y === r && this.#spawnLogs[i].x === c) {
-                const block = mine[r][c].ore === undefined ? mine[r][c] : mine[r][c].ore;
-                if (block === this.#spawnLogs[i].block) {
-                    let rng;
-                    if (this.#spawnLogs[i].caveInfo[1] > 1) {
-                        if (oolProbabilities[block] !== undefined && this.#spawnLogs[i].caveInfo[2] !== "abysstoneCave") {
-                            rng = oolProbabilities[block];
-                        } else if (this.#spawnLogs[i].caveInfo[2] === "abysstoneCave") {
-                            rng = gsProbabilities[caveList["abysstoneCave"].indexOf(this.#spawnLogs[i].block)];
-                        } else {
-                            rng = 1/oreList[this.#spawnLogs[i].block]["numRarity"];
-                        }
-                        rng /= this.#spawnLogs[i].caveInfo[1];
-                        rng *= this.#spawnLogs[i].caveInfo[3];
-                    } else {
-                        rng = oreList[this.#spawnLogs[i].block]["decimalRarity"];
-                    }
-                    let variant = this.#spawnLogs[i].variant === undefined ? "Normal" : this.#spawnLogs[i].variant;
-                    rng /= multis[variant - 1];
-                    variant = names[variant - 1];
-                    this.#verifiedLogs["All"].push({block: this.#spawnLogs[i].block, y: r, x: c, time: Date.now() - this.#startTime, mined: false, variant: variant, luck: this.#spawnLogs[i].luck, caveInfo: this.#spawnLogs[i].caveInfo, rarity: rng})
-                    this.#spawnLogs.splice(i, 1);
-                    break;
-                } else {
-                    console.log('failed to verify', r, c);
-                }
-            }
-        }
-    }
-    verifyFind(block, r, c, variant) {
-        block = block.ore === undefined ? block : block.ore;
-        let verified = false;
-        for (let i = this.#verifiedLogs["All"].length - 1; i >= 0; i--) {
-            if (this.#verifiedLogs["All"][i].y === r && this.#verifiedLogs["All"][i].x === c) {
-                if (block === this.#verifiedLogs["All"][i].block) {
-                    const log = this.#verifiedLogs["All"][i];
-                    if (log.mined != true) {
-                        log.mined = true;
-                        if (log.variant === undefined) log.variant = variant;
-                        if (player.webHook.active) webHook(log);
-                        const webhookString = `Cat has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rarity).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}`            
-                        log.output = webhookString;
-                        if (player.settings.highRarityLogs && log.rarity > 1/250000000) {
-                            this.#verifiedLogs["All"].splice(i, 1);
-                        } else {
-                            if (log.caveInfo[0]) this.#verifiedLogs["Cave"].push(log);
-                            if (log.variant === "Normal") this.#verifiedLogs["Normal"].push(log);
-                            else if (log.variant === "Electrified") this.#verifiedLogs["Electrified"].push(log);
-                            else if (log.variant === "Radioactive") this.#verifiedLogs["Radioactive"].push(log);
-                            else if (log.variant === "Explosive") this.#verifiedLogs["Explosive"].push(log);
-                        }
-                        verified = true;
-                        break;
-                    }
-                } else {
-                    console.log("failed to verify find", block, this.#verifiedLogs["All"][i].luck);
-                }
-            }
-        }
-        if (!verified) {
-            console.log("log not found, failed to verify if found, block mined", block, r, c)
-        }
-    }
-    showLogs() {
-        if (document.getElementById("menuSelectionContainer").style.display !== "none") {
-                this.#clearLogs()
-                let element = document.createElement("p");
-                if (document.getElementById("generatedLogs") !== null)
-                    document.getElementById("generatedLogs").remove();
-                element.id = "generatedLogs";
-                document.getElementById("logHolder").appendChild(element);
-                let output = "";
-                const list = this.#verifiedLogs[document.getElementById("logSort").value];
-                for (let i = 0; i < list.length; i++) {
-                    if (list[i].output === undefined) {
-                        output += `Cat has NOT found ${list[i].variant} ${list[i].block} (Voided). Verification: `
-                    } else {
-                        output += `${list[i].output}. Verification: `;
-                    }
-                    let times;
-                    if (list[i - 1] !== undefined) times = list[i].time - list[i - 1].time;
-                    else times = list[i].time;
-                    output += `${list[i].time}, ${times}, `;
-                    output += (Math.log10(list[i].luck * (list[i].y + 1))) * 2 + "<br>";
-                }
-                this.#logsTimer = setInterval(this.#reloadLogs, 500, output!==""?output:"none");
-        } else {
-            this.#clearLogs();
-        }
-    }
-    #reloadLogs(output) {
-        if (document.getElementById("generatedLogs") !== undefined)
-            document.getElementById("generatedLogs").innerHTML = output;
-    }
-    #clearLogs() {
-        clearInterval(this.#logsTimer);
-        this.#logsTimer = null;
-        if (document.getElementById("generatedLogs") !== null)
-            document.getElementById("generatedLogs").remove();
-    }
-    getLuckBoosts() {
-        return this.#maxLuck;
-    }
-    getCurrentLuck() {
-        if (player.stats.currentPickaxe === 27 || currentWorld === 1.1) {
-            const pickaxe = player.upgrades["pickaxe27"];
-            let luck = pickaxe.levelLuck[pickaxe.level];
-            if (player.gears["gear20"]) luck *= ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
-            if (isNaN(luck)) return 1;
-            else return luck;
-        }
-        if (player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;
-        let luck = this.#maxLuck[player.stats.currentPickaxe];
-        luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
-        if (currentWorld < 2)
-            luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
-        luck *= (player.gears["gear20"] ? ((verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1) : 1);
-        if (isNaN(luck)) return 1;
-        else return luck;
-    }
-    getStartTime() {
-        return this.#startTime;
-    }
-    isRightPickaxe() {
-        return this.#isRightPickaxe;
-    }
-    checkPickaxe() {
-        if (currentWorld === 1) this.#isRightPickaxe = true;
-        else if (currentWorld === 1.1 && player.stats.currentPickaxe === 27) this.#isRightPickaxe = true;
-        else if (currentWorld === 2 && player.stats.currentPickaxe > 12 && player.stats.currentPickaxe < 27) this.#isRightPickaxe = true;
-        else this.#isRightPickaxe = false;
-    }
-    checkCaves() {
-        if (currentWorld === 1 && player.stats.currentPickaxe > 4 && player.stats.currentPickaxe !== 28) this.#canGenCaves = true;
-        else if (currentWorld === 2 && player.gears["gear14"]) this.#canGenCaves = true;
-        else if (currentWorld === 1.1) this.#canGenCaves = true;
-        else this.#canGenCaves = false;
-    }
-    canGenerateCaves() {
-        return this.#canGenCaves;
-    }
-}
-let verifiedOres = new secureLogs();
+const _0x4963da=_0x3cc5;(function(_0x3d58ad,_0x164cb9){const _0x4abe19=_0x3cc5,_0x17ece9=_0x3d58ad();while(!![]){try{const _0x14b14f=-parseInt(_0x4abe19(0x178))/0x1*(-parseInt(_0x4abe19(0x19a))/0x2)+parseInt(_0x4abe19(0x184))/0x3*(-parseInt(_0x4abe19(0x134))/0x4)+-parseInt(_0x4abe19(0x159))/0x5*(parseInt(_0x4abe19(0x154))/0x6)+parseInt(_0x4abe19(0x16b))/0x7*(-parseInt(_0x4abe19(0x167))/0x8)+parseInt(_0x4abe19(0x15c))/0x9*(parseInt(_0x4abe19(0x16c))/0xa)+parseInt(_0x4abe19(0x17d))/0xb*(parseInt(_0x4abe19(0x146))/0xc)+parseInt(_0x4abe19(0x14d))/0xd*(-parseInt(_0x4abe19(0x15f))/0xe);if(_0x14b14f===_0x164cb9)break;else _0x17ece9['push'](_0x17ece9['shift']());}catch(_0x17259a){_0x17ece9['push'](_0x17ece9['shift']());}}}(_0x1764,0x9a34a));const logCreated={};function _0x3cc5(_0x4b092a,_0x20873c){const _0x176468=_0x1764();return _0x3cc5=function(_0x3cc5e4,_0x34c120){_0x3cc5e4=_0x3cc5e4-0x127;let _0x2e675e=_0x176468[_0x3cc5e4];return _0x2e675e;},_0x3cc5(_0x4b092a,_0x20873c);}function _0x1764(){const _0x3aa948=['innerWidth','gear18','.\x20Verification:\x20','appendChild','includes','log2','level','created','output','Explosive','showLogs','887083mVhsdc','gear1','ore','Cat\x20has\x20NOT\x20found\x20','checkPickaxe','2124309rHJqcY','gear12','active','GJNT38GREJWEP','mined',',\x20Generated\x20At:\x20','reload','1664079OCmLoV','item',',\x20RNG:\x20','innerHTML','luck','style',',\x20Luck:\x20','\x20mined.\x20X:\x20','mine.js',',\x20Time\x20Since\x20Last\x20Log:\x20','toLocaleString','variant','dimensions','verifyLog','Radioactive','log','createElement','log\x20not\x20found,\x20failed\x20to\x20verify\x20if\x20found,\x20block\x20mined','failed\x20to\x20create,\x20','abysstoneCave','avgSpeed','round','2XKEaiY','indexOf','pow','\x20at\x20','Unlikely','and','stats','paradoxical','remove','log10','toUTCString','value','gear20','Likely','Key:\x20','upgrades','4nCjOsB','length',',\x20Using\x20Console:\x20','failed\x20to\x20verify\x20find','display','substring','none','webHook','push','\x20Cave)','levelLuck','createLog','block','\x20with\x20a\x20rarity\x20of\x201/','gear5','gears','powerupVariables','Cave','12RCYgvP','blocksMined','floor','Electrified','All','stack','getLuckBoosts','3096132sOBBSD','settings','splice','getCurrentLuck','time','decimalRarity','failed\x20to\x20verify','18gFlZms','caves.js','now','numRarity','pickaxe26','89705wfOWqT','checkCaves','Normal','194553FoZVxn','currentPickaxe','innerHeight','28jZJQYw','\x20has\x20found\x20','pickaxe27','generatedLogs','(Layer\x20Cave)','sqrt','rarity','caveInfo','424DuMNrO','getStartTime','slice','getElementById','44443FrOuvx','450EUGRei'];_0x1764=function(){return _0x3aa948;};return _0x1764();}class secureLogs{#spawnLogs;#verifiedLogs;#logsTimer;#startTime=Date['now']();#maxLuck=[0x1,1.2,1.5,2.15,0x3,0x5,0xa,0x4,5.5,0x14,17.5,0x1e,0x4b,0x1,1.05,1.075,1.3,0x1,1.5,0x2,0x3,1.5,0x4,8.25,12.5,0x32,0xaf,0x1,2.1];#isRightPickaxe;#canGenCaves;#startingX;#startingY;constructor(){const _0x1b8c44=_0x3cc5;if(logCreated[_0x1b8c44(0x174)])location[_0x1b8c44(0x183)]();this.#spawnLogs=[],this.#verifiedLogs={'All':[],'Cave':[],'Normal':[],'Electrified':[],'Radioactive':[],'Explosive':[]},this.#logsTimer=null,this.#isRightPickaxe=!![],this.#canGenCaves=![],this.#startingX=window[_0x1b8c44(0x16d)],this.#startingY=window[_0x1b8c44(0x15e)];}[_0x4963da(0x13f)](_0x1004f3,_0x2dd1f1,_0x1d2630,_0x43b25a,_0x6781b9){const _0x4a359a=_0x4963da,_0x5bcfdd=_0x1d2630[_0x4a359a(0x17a)]===undefined?_0x1d2630:_0x1d2630[_0x4a359a(0x17a)],_0x50cacd=_0x1d2630[_0x4a359a(0x18f)]===undefined?undefined:_0x1d2630[_0x4a359a(0x18f)];_0x6781b9=_0x6781b9===undefined?[![],0x1,_0x4a359a(0x13a)]:_0x6781b9;let _0x2e6cad;if(player['stats'][_0x4a359a(0x15d)]===0x1b||currentWorld===1.1){const _0x3fd3e1=player['upgrades'][_0x4a359a(0x161)];_0x2e6cad=_0x3fd3e1['levelLuck'][_0x3fd3e1['level']];if(player[_0x4a359a(0x143)][_0x4a359a(0x130)])_0x2e6cad*=_0x3fd3e1['levelLuck'][_0x3fd3e1[_0x4a359a(0x173)]]*0.05+0x1;if(isNaN(_0x2e6cad))_0x2e6cad=0x1;}else _0x2e6cad=(this.#maxLuck[player[_0x4a359a(0x12a)]['currentPickaxe']]+(player[_0x4a359a(0x143)][_0x4a359a(0x16e)]?2.5:0x0)+(player[_0x4a359a(0x143)][_0x4a359a(0x17e)]?0.35:0x0)+(player['gears']['gear10']?0.25:0x0))*((player[_0x4a359a(0x143)][_0x4a359a(0x179)]?1.1:0x1)*(player[_0x4a359a(0x143)][_0x4a359a(0x142)]?1.6:0x1))*(player['gears'][_0x4a359a(0x130)]?verifiedOres[_0x4a359a(0x14c)]()[player[_0x4a359a(0x12a)][_0x4a359a(0x15d)]]*0.05+0x1:0x1)*0xa;_0x2e6cad*=1.5;const _0x14e6ba=_0x2e6cad;let _0x3a3f80;if(_0x6781b9[0x1]>0x1){if(caveLuck>0x2faf080){console['log'](_0x4a359a(0x196),_0x43b25a[_0x4a359a(0x14b)],caveLuck);return;}else _0x3a3f80=0x1;}else _0x3a3f80=oreList[_0x5bcfdd][_0x4a359a(0x157)]*oreList[_0x5bcfdd][_0x4a359a(0x152)];(_0x43b25a[_0x4a359a(0x14b)][_0x4a359a(0x171)](_0x4a359a(0x18c))||_0x43b25a[_0x4a359a(0x14b)][_0x4a359a(0x171)](_0x4a359a(0x155)))&&_0x3a3f80<=_0x14e6ba||debug?this.#spawnLogs[_0x4a359a(0x13c)]({'x':_0x2dd1f1,'y':_0x1004f3,'block':_0x5bcfdd,'luck':_0x3a3f80,'caveInfo':_0x6781b9,'variant':_0x50cacd,'avgSpeed':player[_0x4a359a(0x198)],'paradoxical':player[_0x4a359a(0x144)]['fakeEquipped'][_0x4a359a(0x185)],'dimensions':{'x':this.#startingX-window[_0x4a359a(0x16d)],'y':this.#startingY-window[_0x4a359a(0x15e)]}}):console[_0x4a359a(0x193)](_0x4a359a(0x196),_0x43b25a[_0x4a359a(0x14b)],_0x3a3f80,_0x14e6ba);}[_0x4963da(0x191)](_0x14f620,_0x10827d){const _0x3aef2d=_0x4963da;for(let _0x18e095=0x0;_0x18e095<this.#spawnLogs['length'];_0x18e095++){if(this.#spawnLogs[_0x18e095]['y']===_0x14f620&&this.#spawnLogs[_0x18e095]['x']===_0x10827d){const _0x4b2c75=mine[_0x14f620][_0x10827d]['ore']===undefined?mine[_0x14f620][_0x10827d]:mine[_0x14f620][_0x10827d]['ore'];if(_0x4b2c75===this.#spawnLogs[_0x18e095][_0x3aef2d(0x140)]){let _0x4de27e;if(this.#spawnLogs[_0x18e095][_0x3aef2d(0x166)][0x1]>0x1){if(oolProbabilities[_0x4b2c75]!==undefined&&this.#spawnLogs[_0x18e095][_0x3aef2d(0x166)][0x2]!==_0x3aef2d(0x197))_0x4de27e=oolProbabilities[_0x4b2c75];else this.#spawnLogs[_0x18e095][_0x3aef2d(0x166)][0x2]==='abysstoneCave'?_0x4de27e=gsProbabilities[caveList['abysstoneCave']['indexOf'](this.#spawnLogs[_0x18e095]['block'])]:_0x4de27e=0x1/oreList[this.#spawnLogs[_0x18e095][_0x3aef2d(0x140)]][_0x3aef2d(0x157)];_0x4de27e/=this.#spawnLogs[_0x18e095]['caveInfo'][0x1],_0x4de27e*=this.#spawnLogs[_0x18e095][_0x3aef2d(0x166)][0x3];}else _0x4de27e=oreList[this.#spawnLogs[_0x18e095][_0x3aef2d(0x140)]]['decimalRarity'];let _0x3548d8=this.#spawnLogs[_0x18e095][_0x3aef2d(0x18f)]===undefined?_0x3aef2d(0x15b):this.#spawnLogs[_0x18e095][_0x3aef2d(0x18f)];_0x4de27e/=multis[_0x3548d8-0x1],_0x3548d8=names[_0x3548d8-0x1],this.#verifiedLogs['All']['push']({'block':this.#spawnLogs[_0x18e095][_0x3aef2d(0x140)],'y':_0x14f620,'x':_0x10827d,'time':Date[_0x3aef2d(0x156)]()-this.#startTime,'mined':![],'variant':_0x3548d8,'luck':this.#spawnLogs[_0x18e095][_0x3aef2d(0x188)],'caveInfo':this.#spawnLogs[_0x18e095][_0x3aef2d(0x166)],'rarity':_0x4de27e,'avgSpeed':this.#spawnLogs[_0x18e095][_0x3aef2d(0x198)],'paradoxical':this.#spawnLogs[_0x18e095][_0x3aef2d(0x12b)],'dimensions':this.#spawnLogs[_0x18e095]['dimensions']}),this.#spawnLogs[_0x3aef2d(0x14f)](_0x18e095,0x1);break;}else console[_0x3aef2d(0x193)](_0x3aef2d(0x153),_0x14f620,_0x10827d);}}}['verifyFind'](_0x380a4f,_0x10a404,_0x4885d6,_0x283b8a){const _0x929605=_0x4963da;_0x380a4f=_0x380a4f['ore']===undefined?_0x380a4f:_0x380a4f[_0x929605(0x17a)];let _0x372131=![];for(let _0x46193a=this.#verifiedLogs[_0x929605(0x14a)][_0x929605(0x135)]-0x1;_0x46193a>=0x0;_0x46193a--){if(this.#verifiedLogs[_0x929605(0x14a)][_0x46193a]['y']===_0x10a404&&this.#verifiedLogs['All'][_0x46193a]['x']===_0x4885d6){if(_0x380a4f===this.#verifiedLogs[_0x929605(0x14a)][_0x46193a][_0x929605(0x140)]){const _0x56e01d=this.#verifiedLogs[_0x929605(0x14a)][_0x46193a];if(_0x56e01d['mined']!=!![]){_0x56e01d[_0x929605(0x181)]=!![];if(_0x56e01d[_0x929605(0x18f)]===undefined)_0x56e01d[_0x929605(0x18f)]=_0x283b8a;if(player[_0x929605(0x13b)][_0x929605(0x17f)])webHook(_0x56e01d);const _0x5adf63=player['name']+_0x929605(0x160)+_0x56e01d[_0x929605(0x18f)]+'\x20'+_0x56e01d[_0x929605(0x140)]+_0x929605(0x141)+Math[_0x929605(0x199)](0x1/_0x56e01d[_0x929605(0x165)])[_0x929605(0x18e)]()+'\x20'+(_0x56e01d[_0x929605(0x166)][0x0]?_0x56e01d[_0x929605(0x166)][0x1]>0x1?'('+caveList[_0x56e01d[_0x929605(0x166)][0x2]][_0x929605(0x169)](-0x1)+_0x929605(0x13d):_0x929605(0x163):'')+_0x929605(0x127)+player[_0x929605(0x12a)][_0x929605(0x147)][_0x929605(0x18e)]()+_0x929605(0x18b)+(_0x56e01d['x']-0x3b9aca00)[_0x929605(0x18e)]()+',\x20Y:\x20'+(-0x1*_0x56e01d['y'])['toLocaleString']()+'\x20'+(_0x56e01d[_0x929605(0x12b)]===_0x929605(0x158)?'\x20':'');_0x56e01d['output']=_0x5adf63;if(player[_0x929605(0x14e)]['highRarityLogs']&&_0x56e01d['rarity']>0x1/0xee6b280)this.#verifiedLogs[_0x929605(0x14a)][_0x929605(0x14f)](_0x46193a,0x1);else{if(_0x56e01d[_0x929605(0x166)][0x0])this.#verifiedLogs[_0x929605(0x145)][_0x929605(0x13c)](_0x56e01d);if(_0x56e01d[_0x929605(0x18f)]===_0x929605(0x15b))this.#verifiedLogs[_0x929605(0x15b)][_0x929605(0x13c)](_0x56e01d);else{if(_0x56e01d[_0x929605(0x18f)]===_0x929605(0x149))this.#verifiedLogs[_0x929605(0x149)][_0x929605(0x13c)](_0x56e01d);else{if(_0x56e01d[_0x929605(0x18f)]==='Radioactive')this.#verifiedLogs[_0x929605(0x192)][_0x929605(0x13c)](_0x56e01d);else{if(_0x56e01d[_0x929605(0x18f)]===_0x929605(0x176))this.#verifiedLogs[_0x929605(0x176)][_0x929605(0x13c)](_0x56e01d);}}}}_0x372131=!![];break;}}else console['log'](_0x929605(0x137),_0x380a4f,this.#verifiedLogs['All'][_0x46193a][_0x929605(0x188)]);}}!_0x372131&&console[_0x929605(0x193)](_0x929605(0x195),_0x380a4f,_0x10a404,_0x4885d6);}[_0x4963da(0x177)](){const _0xe29585=_0x4963da;if(document['getElementById']('menuSelectionContainer')[_0xe29585(0x189)][_0xe29585(0x138)]!==_0xe29585(0x13a)){this.#clearLogs();let _0x111e5f=document[_0xe29585(0x194)]('p');if(document['getElementById']('generatedLogs')!==null)document['getElementById'](_0xe29585(0x162))[_0xe29585(0x12c)]();_0x111e5f['id']=_0xe29585(0x162),document[_0xe29585(0x16a)]('logHolder')[_0xe29585(0x170)](_0x111e5f);let _0x1f5170='';const _0x2b92f1=this.#verifiedLogs[document[_0xe29585(0x16a)]('logSort')[_0xe29585(0x12f)]];for(let _0x533df3=0x0;_0x533df3<_0x2b92f1[_0xe29585(0x135)];_0x533df3++){_0x2b92f1[_0x533df3][_0xe29585(0x175)]===undefined?_0x1f5170+=_0xe29585(0x17b)+_0x2b92f1[_0x533df3][_0xe29585(0x18f)]+'\x20'+_0x2b92f1[_0x533df3][_0xe29585(0x140)]+'\x20(Voided).\x20Verification:\x20':_0x1f5170+=_0x2b92f1[_0x533df3][_0xe29585(0x175)]+_0xe29585(0x16f);let _0x236225;if(_0x2b92f1[_0x533df3-0x1]!==undefined)_0x236225=_0x2b92f1[_0x533df3][_0xe29585(0x151)]-_0x2b92f1[_0x533df3-0x1][_0xe29585(0x151)];else _0x236225=_0x2b92f1[_0x533df3][_0xe29585(0x151)];_0x1f5170+='<span><span\x20style=\x22font-size:0vw;\x22>'+encryptLogData(_0x2b92f1[_0x533df3],_0x236225)+'</span><span\x20onclick=\x22copyText(this.parentElement.children[0]);\x20copiedLog(this);\x22>Click\x20Me\x20To\x20Copy\x20Verification</span></span><br>';}if(document[_0xe29585(0x16a)](_0xe29585(0x162))!==undefined)document[_0xe29585(0x16a)](_0xe29585(0x162))[_0xe29585(0x187)]=_0x1f5170;}else this.#clearLogs();}#clearLogs(){const _0x5d90fa=_0x4963da;clearInterval(this.#logsTimer),this.#logsTimer=null;if(document[_0x5d90fa(0x16a)](_0x5d90fa(0x162))!==null)document[_0x5d90fa(0x16a)]('generatedLogs')['remove']();}[_0x4963da(0x14c)](){return this.#maxLuck;}[_0x4963da(0x150)](){const _0x4b7677=_0x4963da;if(player[_0x4b7677(0x12a)]['currentPickaxe']===0x1b||currentWorld===1.1){const _0x4c27d5=player[_0x4b7677(0x133)][_0x4b7677(0x161)];let _0x13569c=_0x4c27d5[_0x4b7677(0x13e)][_0x4c27d5[_0x4b7677(0x173)]];if(player['gears'][_0x4b7677(0x130)])_0x13569c*=_0x4c27d5[_0x4b7677(0x13e)][_0x4c27d5[_0x4b7677(0x173)]]*0.05+0x1;if(isNaN(_0x13569c))return 0x1;else return _0x13569c;}if(player[_0x4b7677(0x12a)]['currentPickaxe']===0x1b)player['stats'][_0x4b7677(0x15d)]=0x0;let _0x6e463d=this.#maxLuck[player[_0x4b7677(0x12a)][_0x4b7677(0x15d)]];_0x6e463d+=(player[_0x4b7677(0x143)]['gear18']?2.5:0x0)+(player[_0x4b7677(0x143)][_0x4b7677(0x17e)]?0.35:0x0)+(player[_0x4b7677(0x143)]['gear10']?0.25:0x0);if(currentWorld<0x2)_0x6e463d*=(player[_0x4b7677(0x143)][_0x4b7677(0x179)]?1.1:0x1)*(player[_0x4b7677(0x143)][_0x4b7677(0x142)]?1.6:0x1);_0x6e463d*=player[_0x4b7677(0x143)]['gear20']?verifiedOres[_0x4b7677(0x14c)]()[player['stats']['currentPickaxe']]*0.05+0x1:0x1;if(isNaN(_0x6e463d))return 0x1;else return _0x6e463d;}[_0x4963da(0x168)](){return this.#startTime;}['isRightPickaxe'](){return this.#isRightPickaxe;}[_0x4963da(0x17c)](){const _0x526774=_0x4963da;if(currentWorld===0x1)this.#isRightPickaxe=!![];else{if(currentWorld===1.1&&player[_0x526774(0x12a)]['currentPickaxe']===0x1b)this.#isRightPickaxe=!![];else{if(currentWorld===0x2&&player[_0x526774(0x12a)][_0x526774(0x15d)]>0xc&&player[_0x526774(0x12a)][_0x526774(0x15d)]<0x1b)this.#isRightPickaxe=!![];else this.#isRightPickaxe=![];}}}[_0x4963da(0x15a)](){const _0x3eaf86=_0x4963da;if(currentWorld===0x1&&player[_0x3eaf86(0x12a)][_0x3eaf86(0x15d)]>0x4&&player[_0x3eaf86(0x12a)][_0x3eaf86(0x15d)]!==0x1c)this.#canGenCaves=!![];else{if(currentWorld===0x2&&player[_0x3eaf86(0x143)]['gear14'])this.#canGenCaves=!![];else{if(currentWorld===1.1)this.#canGenCaves=!![];else this.#canGenCaves=![];}}}['canGenerateCaves'](){return this.#canGenCaves;}}function encryptLogData(_0x209948,_0x5a7847){const _0x238e28=_0x4963da,_0x368a90=Math[_0x238e28(0x12d)](_0x209948[_0x238e28(0x151)]);let _0xec8cea=_0x368a90+',\x20';_0xec8cea+=Math[_0x238e28(0x19c)](Math[_0x238e28(0x193)](_0x209948[_0x238e28(0x188)]),_0x368a90),_0xec8cea+=',\x20',_0xec8cea+=Math['pow'](Math[_0x238e28(0x164)](0x1/_0x209948[_0x238e28(0x165)]),1.225),_0xec8cea+=',\x20',_0xec8cea+=Math[_0x238e28(0x19c)](_0x368a90,0x2),_0xec8cea+=',\x20',_0xec8cea+=Math[_0x238e28(0x172)](_0x5a7847),_0xec8cea+=',\x20',_0xec8cea+=Math['floor'](_0x209948[_0x238e28(0x198)]*1.449),_0xec8cea+=',\x20';const _0x27873c=_0x209948[_0x238e28(0x190)];return _0xec8cea+=_0x27873c['x'],_0xec8cea+=_0x238e28(0x129),_0xec8cea+=_0x27873c['y'],_0xec8cea+=',\x20',_0x209948['paradoxical']??=_0x238e28(0x13a),_0xec8cea+=_0x209948[_0x238e28(0x12b)],toBinary(_0xec8cea);}function decryptLogData(_0x404bc5,_0x352bda){const _0x2071ef=_0x4963da;if(_0x352bda===_0x2071ef(0x180)){_0x404bc5=fromBinary(_0x404bc5);let _0x20e435=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5[_0x2071ef(0x19b)](',\x20')));_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5[_0x2071ef(0x19b)](',')+0x2);let _0x2016f7=Number(_0x404bc5['substring'](0x0,_0x404bc5[_0x2071ef(0x19b)](',\x20')));_0x2016f7=Math['round'](Math[_0x2071ef(0x19c)](Math['E'],Math[_0x2071ef(0x19c)](_0x2016f7,0x1/_0x20e435))),_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5[_0x2071ef(0x19b)](',')+0x2);let _0x444a1c=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5[_0x2071ef(0x19b)](',\x20')));_0x444a1c=Math[_0x2071ef(0x19c)](_0x444a1c,0x1/1.225),_0x444a1c=Math[_0x2071ef(0x199)](Math[_0x2071ef(0x19c)](_0x444a1c,0x2)),_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5[_0x2071ef(0x19b)](',')+0x2);let _0x45b319=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5[_0x2071ef(0x19b)](',\x20')));_0x45b319=Math[_0x2071ef(0x164)](_0x45b319),_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5['indexOf'](',')+0x2);let _0x57bd16=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5[_0x2071ef(0x19b)](',\x20')));_0x57bd16=Math[_0x2071ef(0x19c)](0x2,_0x57bd16),_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5['indexOf'](',')+0x2);let _0x33c5cc=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5['indexOf'](',\x20')));_0x33c5cc=Math[_0x2071ef(0x148)](_0x33c5cc/1.449),_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5[_0x2071ef(0x19b)](',')+0x2),console[_0x2071ef(0x193)](_0x404bc5);let _0x26137f=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5['indexOf'](_0x2071ef(0x129))));_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5[_0x2071ef(0x19b)](_0x2071ef(0x129))+0x3),console[_0x2071ef(0x193)](_0x404bc5);let _0x52c332=Number(_0x404bc5[_0x2071ef(0x139)](0x0,_0x404bc5[_0x2071ef(0x19b)](',\x20')));console[_0x2071ef(0x193)](_0x404bc5,_0x26137f,_0x52c332);let _0x346f20=_0x26137f!==0x0&&_0x52c332!==0x0?![]:_0x26137f===0x0&&_0x52c332!==0x0||_0x52c332===0x0&&_0x26137f!==0x0;_0x404bc5=_0x404bc5[_0x2071ef(0x139)](_0x404bc5[_0x2071ef(0x19b)](',')+0x2);let _0x3cdfb9=_0x404bc5['substring'](0x0);return _0x20e435=Math[_0x2071ef(0x19c)](0xa,_0x20e435),_0x2071ef(0x132)+_0x45b319+_0x2071ef(0x18a)+_0x2016f7+_0x2071ef(0x186)+_0x444a1c+',\x20AVG\x20Speed:\x20'+_0x33c5cc+_0x2071ef(0x18d)+Math[_0x2071ef(0x148)](_0x20e435)+_0x2071ef(0x182)+new Date(verifiedOres[_0x2071ef(0x168)]()+_0x57bd16)[_0x2071ef(0x12e)]()+_0x2071ef(0x136)+(_0x346f20?_0x2071ef(0x131):_0x2071ef(0x128))+',\x20Paradoxical\x20Item:\x20'+_0x3cdfb9;}}
 function webHook(log) {
     const currentWebhook = getCurrentWebhookId(Math.floor(1/log.rarity));
     if (!currentWebhook.valid) return;
@@ -240,3 +42,19 @@ function getCurrentWebhookId(num) {
     }
     return returnValue;
 }
+function copyText(element) {
+    navigator.clipboard.writeText(element.textContent);
+}
+function copiedLog(element) {
+    element.style.animation = "";
+    setTimeout(() => {
+        element.style.animation = "textGreen 1s linear 1";
+    }, 25);
+}
+const verifiedOres = new secureLogs();
+Object.preventExtensions(verifiedOres);
+Object.defineProperty(logCreated, "created", {
+    value: true,
+    writable: false,
+});
+Object.preventExtensions(logCreated);

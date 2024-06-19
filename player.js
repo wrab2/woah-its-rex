@@ -96,13 +96,18 @@ class playerTemplate {
             automineProtection: false,
             useNyerd: false,
             automineUpdate: 25,
-            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"]
+            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"],
+            lastWorld: 1
         },
         this.stats = {
             currentPickaxe: 0,
             blocksMined: 0,
             timePlayed: 0,
-            cavesGenerated: 0
+            cavesGenerated: 0,
+            minesReset: 0,
+            furthestPosX: 1000000000,
+            furthestNegX: 1000000000,
+            furthestY: 0
         },
         this.powerupCooldowns = {
             "powerup1": {cooldown: Date.now(), unlocked: false},
@@ -115,7 +120,7 @@ class playerTemplate {
             currentChosenOre : {ore: undefined, removeAt: Date.now, lastOre: undefined},
             commonsAffected : {state: false, removeAt: Date.now()},
             currentPowerupDisplayed : "powerup1",
-            fakeEquipped: {originalState: undefined, item: "", removeAt: Date.now()},
+            fakeEquipped: {originalState: undefined, item: undefined, removeAt: Date.now()},
             nextAuto: Date.now(),
             autoNum: 1,
         },
@@ -148,6 +153,8 @@ class playerTemplate {
             layer: Math.round(Math.random() * 100000),
             lastAddedOn: new Date().getDate()
         }
+        this.viewedMessages = {}
+        this.avgSpeed = 0;
     }
 }
 let player = new playerTemplate();
@@ -264,6 +271,7 @@ function switchPowerupDisplay(num) {
     }
 }
 function msToTime(milliseconds) {
+    if (milliseconds < 0) milliseconds = 0;
     let seconds = Math.floor((milliseconds / 1000) % 60);
     let minutes = Math.floor((milliseconds / 1000 / 60) % 60);
     let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
@@ -279,7 +287,7 @@ function updatePowerupCooldowns() {
     document.getElementById("powerupCooldown").innerText = `Cooldown: ${msToTime(num)}`;
     if (player.powerupVariables.currentPowerupDisplayed === "powerup3" && player.powerupVariables.currentChosenOre.ore !== undefined) document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.currentChosenOre.removeAt - Date.now())}`;
     else if (player.powerupVariables.currentPowerupDisplayed === "powerup4" && player.powerupVariables.commonsAffected.state) document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.commonsAffected.removeAt - Date.now())}`;
-    else if (player.powerupVariables.currentPowerupDisplayed === "powerup5" && player.powerupVariables.fakeEquipped.item !== "") document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.fakeEquipped.removeAt - Date.now())}`;
+    else if (player.powerupVariables.currentPowerupDisplayed === "powerup5" && player.powerupVariables.fakeEquipped.item !== undefined) document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.fakeEquipped.removeAt - Date.now())}`;
     else document.getElementById("powerupActive").innerText = `Active for: 00:00:00`;
     if (!player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].unlocked) {
         if (eval(powerupList[player.powerupVariables.currentPowerupDisplayed].requirement)) {
@@ -446,7 +454,7 @@ function loadNewData(data) {
         if (data.wasUsing !== undefined) {
             data.stats.currentPickaxe = data.wasUsing;
         }
-        if (data.powerupVariables !== undefined && data.powerupVariables.fakeEquipped !== undefined && data.powerupVariables.fakeEquipped.item !== "") {
+        if (data.powerupVariables !== undefined && data.powerupVariables.fakeEquipped !== undefined && data.powerupVariables.fakeEquipped.item !== undefined) {
             let item = data.powerupVariables.fakeEquipped.item;
             if (player.gears[item] !== undefined) data.gears[item] = false;
             if (player.pickaxes[item] !== undefined) {
@@ -465,6 +473,14 @@ function loadNewData(data) {
         if (data.stats.blocksMined !== undefined) player.stats.blocksMined = data.stats.blocksMined;
         if (data.stats.cavesGenerated !== undefined) player.stats.cavesGenerated = data.stats.cavesGenerated;
         if (data.stats.timePlayed !== undefined) player.stats.timePlayed = data.stats.timePlayed;
+        if (data.stats.minesReset !== undefined) player.stats.minesReset = data.stats.minesReset;
+        player.startingResets = player.stats.minesReset;
+        data.stats.furthestNegX ??= 1000000000;
+        data.stats.furthestPosX ??= 1000000000;
+        data.stats.furthestY ??= 0;
+        player.stats.furthestNegX = data.stats.furthestNegX;
+        player.stats.furthestPosX = data.stats.furthestPosX;
+        player.stats.furthestY = data.stats.furthestY;
         document.getElementById("blocksMined").innerText = `${player.stats.blocksMined.toLocaleString()} Blocks Mined.`;
         if (data.settings.audioSettings !== undefined) {
             for (let propertyName in data.settings.audioSettings) {
@@ -486,7 +502,7 @@ function loadNewData(data) {
         player.settings.baseMineCapacity = (data.settings.baseMineCapacity < 250 ? 250 : data.settings.baseMineCapacity);
         mineCapacity = player.settings.baseMineCapacity;
         mineCapacity = mineCapacity < 250 ? 250 : mineCapacity;
-        document.getElementById("mineResetProgress").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
+        document.getElementById("resetNumber").innerText = `0/${player.settings.baseMineCapacity.toLocaleString()} Blocks Revealed This Reset.`;
         data.settings.canDisplay ??= true;
         if (!data.settings.canDisplay) changeCanDisplay(document.getElementById("blockUpdates"));
         data.settings.cavesEnabled ??= true;
@@ -533,6 +549,8 @@ function loadNewData(data) {
         data.settings.useNyerd ??= false;
         if (data.settings.useNyerd) toggleNyerd(document.getElementById("toggleNyerd"));
         if (data.settings.automineProtection) toggleAutomineProtection(document.getElementById("automineProtection"));
+        data.settings.lastWorld ??= 1;
+        player.settings.lastWorld = data.settings.lastWorld;
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {
                 if (data.powerupCooldowns[property] !== undefined && player.powerupCooldowns[property] !== undefined) {
@@ -548,7 +566,6 @@ function loadNewData(data) {
         }
         data.sr1Unlocked ??= false;
         player.sr1Unlocked = data.sr1Unlocked;
-        if (player.sr1Unlocked) {document.getElementById("sr1Lock").style.display = "none"; document.getElementById("sr1Teleporter").style.display = "block";}
         //unlock locked features
         if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";
@@ -576,8 +593,14 @@ function loadNewData(data) {
             player.luna.layer = data.luna.layer;
             player.luna.lastAddedOn = data.luna.lastAddedOn;
         }
-        if (!data.faqOffered) toggleNewPlayer(true);
-        else player.faqOffered = true;
+        switchWorld(player.settings.lastWorld, true)
+        data.name ??= "Cat";
+        player.name = data.name;
+        data.viewedMessages ??= {};
+        player.viewedMessages = data.viewedMessages;
+        if (data.faqOffered) player.faqOffered = true;
+        for (let message in dailyMessages) checkMessages(message);
+        showNextInQueue();
     } catch (err) {
         window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}, ${console.log(err)}`);
     }
@@ -610,8 +633,47 @@ function messageIncluded(tier) {
     for (let i = 0; i < list.length; i++) if (tier === list[i]) return true;
     return false;
 }
+const dailyMessages = {
+    "newPlayer" : {
+        showUntil : "June 15, 9999",
+    },
+    "chooseName" : {
+        showUntil : "June 15, 9999",
+    },
+    "portalUpdate" : {
+        showUntil : "June 25, 2024",
+    },
+    "sr1Unlocked" : {
+        showUntil : "June 25, 0000",
+    }
+}
+function checkMessages(message) {
+    if (message === "newPlayer" && player.faqOffered) return;
+    if (dailyMessages[message] !== undefined) {
+        const dateUsing = new Date();
+        const dateChecking = new Date(dailyMessages[message].showUntil)
+        if (dateUsing < dateChecking && !player.viewedMessages[message]) addMessageToQueue(message);
+    }
+}
+const messageQueue = [];
+let currentDisplayedMessage = {id: undefined, num: undefined};
 function addMessageToQueue(messageId) {
-    
+    if (messageQueue.indexOf(messageId === -1)) messageQueue.push(messageId);
+}
+function showNextInQueue() {
+    if (dailyMessages[currentDisplayedMessage.id] !== undefined) player.viewedMessages[currentDisplayedMessage.id] = true;
+    currentDisplayedMessage.num ??= -1;
+    currentDisplayedMessage.num++;
+    if (currentDisplayedMessage.id !== undefined) get(`${currentDisplayedMessage.id}`).style.display = "none";
+    currentDisplayedMessage.id = messageQueue[currentDisplayedMessage.num];
+    if (currentDisplayedMessage.id === undefined) {get("dailyMessages").style.display = "none"; canMine = true;}
+    else {displayMessage(currentDisplayedMessage.id); canMine = false;}
+}
+function displayMessage(id) {
+    const elementsToRemove = document.getElementsByClassName("dailyMessage");
+    for (let i = 0; i < elementsToRemove.length; i++) elementsToRemove[i].style.display = "none";
+    get("dailyMessages").style.display = "block";
+    get(`${id}`).style.display = "block";
 }
 function saveNewData(obj) {
     try {

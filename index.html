@@ -37,6 +37,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 </head>
 <body>
+    <div id="blackScreen"></div>
     <p class="latestFind htmlTemplate" style="display: none;"></p>
     <noscript>
         <div id="noscript">
@@ -68,7 +69,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <button class="menuButton"onclick="showMenuScreen('locations')">Locations</button>
                 <button class="menuButton"onclick="showMenuScreen('faq')">FAQ</button>
             </div>
-            <p id="mineResetProgress"></p>
+            <div id="mineResetProgress">
+                <span id="resetNumber"></span><span id="resetPercent"></span>
+            </div>
             <p id="blocksMined">0 Blocks Mined</p>
             <p id="location">X: 0 | Y: 0</p>
             <p id="spawnMessage">Spawn Messages Appear Here!</p>
@@ -150,29 +153,29 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <p id = "descriptionTitle" class="middleTitle" style="display: none;">Description</p>
             <div id="craftableDescriptions">
                 <p class="itemDescription" id="pickaxe1Description" style="display: none;">Mines a few blocks in every direction.<br>Has an ability proc rate of 1/30.<br>Has 1.2x luck.<br><span id="pickaxe1Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe1Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
-                <p class="itemDescription" id="pickaxe2Description" style="display: none;">Mines a small square around the player.<br>Has an ability proc rate of 1/25.<br>Has 1.5x luck.<br><span id="pickaxe2Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe2Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
+                <p class="itemDescription" id="pickaxe2Description" style="display: none;">Mines a small square around the player.<br>Has an ability proc rate of 1/25.<br>Has 1.5x luck.<br><span id="pickaxe2Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe2Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_<</span></p>
                 <p class="itemDescription" id="pickaxe3Description" style="display: none;">Mines blocks in an X shape around the player.<br>Has an ability proc rate of 1/25.<br>Has 2.15x luck.<br><span id="pickaxe3Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe3Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
-                <p class="itemDescription" id="pickaxe28Description" style="display: none;">Mines a pickaxe shape around the player.<br>Has an ability proc rate of 1/20.<br>Has 2.1x luck.<br><span id="pickaxe28Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe28Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
+                <p class="itemDescription" id="pickaxe28Description" style="display: none;">Mines a pickaxe shape around the player.<br>Has an ability proc rate of 1/20.<br>Has 2.1x luck.<br><span id="pickaxe28Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe28Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @thecatofalltime<</span></p>
                 <p class="itemDescription" id="pickaxe4Description" style="display: none;">Mines a square randomly around the player.<br>Has an ability proc rate of 1/19.<br>Has 3x luck.<br><span id="pickaxe4Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe4Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!<</span></p>
-                <p class="itemDescription" id="pickaxe5Description" style="display: none;">Mines a circle randomly around the player.<br>Enables cave spawns in World 1, along with every pickaxe above it.<br>Has an ability proc rate of 1/17.<br>Has 5x luck.<br><span id="pickaxe5Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe5Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe5Description" style="display: none;">Mines a circle randomly around the player.<br>Enables cave spawns in World 1, along with every pickaxe above it.<br>Has an ability proc rate of 1/17.<br>Has 5x luck.<br><span id="pickaxe5Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe5Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_</span></p>
                 <p class="itemDescription" id="pickaxe6Description" style="display: none;">Has 2 abilities.<br>Ability 1 mines a triangle around the player.<br>Ability 2 mines a heart around the player.<br>Ability 1 has a 1/60 proc rate.<br>Ability 2 has a 1/40 proc rate.<br>Both abilities have 10x luck.<br><span id="pickaxe6Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe6Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe7Description" style="display: none;">Mines a few blocks in every direction. However, each line has a chance to re-activate the ability from the end of said line with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 4x luck.<br><span id="pickaxe7Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe7Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe7Description" style="display: none;">Mines a few blocks in every direction. However, each line has a chance to re-activate the ability from the end of said line with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/50.<br>Has 4x luck.<br><span id="pickaxe7Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe7Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @thecatofalltime</span></p>
                 <p class="itemDescription" id="pickaxe8Description" style="display: none;">Mines blocks in an X shape around the player, with each end having a chance to re-activate the ability at that position with a 75% chance and up to 4 times.<br>Has an ability proc rate of 1/40.<br>Has 5.5x luck.<br><span id="pickaxe8Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe8Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe9Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/22.<br>Has 20x luck.<br><i>The pickaxe resonates with a distant entity.. a signal sent from far beyond these lands. Further traces of it are found within the blueprint for a particular craft of a key, one designed to open the lock to a completely new world..</i><br><span id="pickaxe9Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe9Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe9Description" style="display: none;">Mines the shape of a clover around the player.<br>Has an ability proc rate of 1/22.<br>Has 20x luck.<br><i>The pickaxe resonates with a distant entity.. a signal sent from far beyond these lands. Further traces of it are found within the blueprint for a particular craft of a key, one designed to open the lock to a completely new world..</i><br><span id="pickaxe9Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe9Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
                 <p class="itemDescription" id="pickaxe10Description" style="display: none;">Has a 50% chance to mine a 7x7 square in a 49x49 area around the player, with an average of 24 7x7 squares being mined each activation.<br>Has an ability proc rate of 1/50.<br>Has 17.5x luck.<br><span id="pickaxe10Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe10Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines an extremely large spiral around the player.<br>Has an ability proc rate of 1/100.<br>Has 30x luck.<br><span id="pickaxe11Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe11Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe12Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.<br><span id="pickaxe12Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe12Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
-                <p class="itemDescription" id="pickaxe13Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Pressing "Teleport!" on this pickaxe will switch the current world.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>All World 2 gears will work in World 1 (The speed gears require all to be owned).<br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
+                <p class="itemDescription" id="pickaxe13Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>All World 2 gears will work in World 1 (The speed gears require all to be owned).<br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
                 <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.<br><span id="pickaxe14Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe14Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.<br><span id="pickaxe15Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe15Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.<br><span id="pickaxe16Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe16Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a cat around the player :3c.<br>Has an ability proc rate of 1/150.<br>Has 1x luck.<br><span id="pickaxe17Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe17Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
                 <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a crescent moon around the player.<br>Has an ability proc rate of 1/150<br>Has 1.5x luck.<br><span id="pickaxe18Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe18Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
                 <p class="itemDescription" id="pickaxe19Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.<br>Has an ability proc rate of 1/60.<br>Has 2x luck.<br><span id="pickaxe19Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe19Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe20Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.<br>Has an ability proc rate of 1/75.<br>Has 3x luck.<br><span id="pickaxe20Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe20Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe20Description" style="display: none;">Plays a game of tic tac toe around the player, mining X's and O's around you and fully excavating any winning lines.<br>Has an ability proc rate of 1/75.<br>Has 3x luck.<br><span id="pickaxe20Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe20Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe21Description" style="display: none;">Mines swirls around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.5x luck.<br><span id="pickaxe21Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe21Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe22Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/120.<br>Has 4x luck.<br><span id="pickaxe22Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe22Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe23Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 8.25x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i><br><span id="pickaxe23Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe23Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe23Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 8.25x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i><br><span id="pickaxe23Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe23Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe24Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/175.<br>Has 12.5x luck.<br><span id="pickaxe24Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe24Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe25Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/300.<br>Has 50x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span id="pickaxe25Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe25Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe26Description" style="display: none;">Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br>Has an ability proc rate of 1/150.<br>Has 175x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
@@ -286,15 +289,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                         <img src="media/trackerArrow.png" id="trackerArrow" style="display: block;">
                         <img src="media/ores/NYERD.webp" id="nyerd" style="display: none;">
                     </div>
-                </div>
-                <div id="sr1Holder">
-                    <div class="sr1Button" id="sr1Lock">Mine 1 flawless to unlock!</div>
-                    <div class="sr1Button">
-                        <button id="sr1Teleporter" onclick="attemptSwitchWorld(1.1)">Travel to New Lands</button>
-                    </div>
-                </div>
-                
-                
+                </div>       
                 <!--<button id="secretButton" onclick="toggleCelestials(true)"></button>-->
             </div>
         </div>
@@ -603,6 +598,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                         <p class="playerStat" id="statsCavesGenerated">Caves Generated</p>
                         <p class="playerStat"id="statsBlocksMined">Blocks Mined</p>
                         <p class="playerStat" id="statsSpeed">Speed</p>
+                        <p class="playerStat" id="statsSessionReset">Session Resets</p>
+                        <p class="playerStat" id="statsReset">Resets</p>
+                        <p class="playerStat" id="furthestPosX">Resets</p>
+                        <p class="playerStat" id="furthestNegX">Resets</p>
+                        <p class="playerStat" id="furthestY">Resets</p>
                     </div>
                 </div>
                 
@@ -628,9 +628,36 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="menuCategoryTitle">Locations</p>
                 <div id="locationSelector">
                     <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
+                    <button class="settingsTopButton" onclick="showPortalRoom(true)">The Portal Room</button>
                     <button class="settingsTopButton" onclick="showOreForge(true)">Silly Caverns Forge</button>
                     <button class="settingsTopButton" onclick="showVariantConversion(true)">Variant Conversions</button>
                     <button class="settingsTopButton" onclick="showWorkshop(true)" id="theWorkshop" style="display: none;">The Workshop</button>
+                </div>
+                <div id="portalRoom">
+                    <div id="portalArrows">
+                        <img class="portalSwitcher" id="leftArrowPortal" src="media/leftArrowIcon.png" onclick="getNextPortalPosition(-1)">
+                        <img class="portalSwitcher" id="rightArrowPortal" src="media/rightArrowIcon.png" onclick="getNextPortalPosition(1)">
+                    </div>
+                    <div id="portalHolder">
+                        <div id="leftPortal">
+                        
+                        </div>
+                        <div id="portal">
+    
+                        </div>
+                        <div id="rightPortal">
+                            
+                        </div>
+                    </div>
+                    <div id="portalLabelHolder">
+                        <p id="leftPortalName">Subrealm One</p>
+                        <p id="portalName">World One</p>
+                        <p id="rightPortalName">World Two</p>
+                    </div>
+                    <div id="portalLockReason">
+                        <p id="portalLockText">Locked! Reason</p>
+                        <img id="portalChain" src="media/portalChain.png">
+                    </div>
                 </div>
                 <br><br>
                 <div id="conversionContainer">
@@ -976,95 +1003,45 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                         <p>
                             <span class="faqTitle">Events:</span><br>
                         
-                            <span class="faqSection">Event 1:</span>
-                            <span class="faqText">"The tides in the 🌊 drop out into the ocean, lowering a path into the depth..."</span>
-                            <span class="faqText">Rate: 1/5000</span>
-                            <span class="faqText">Duration: 25 minutes</span>
-                            <span class="faqText">Main effect(s): 1.5x boost on 🌀</span>
-                            <span class="faqText">Side effect(s): makes commons twice as rare, puts 🧀 into water layer, makes 🧀 rarer (1/927,000,000 base rarity)</span>
-                            <span class="faqText">World(s): 1</span><br>
-                            
-                            <span class="faqSection">Event 2:</span>
-                            <span class="faqText">"Mechanical whirring draws your attention deeper into the mines..."</span>
-                            <span class="faqText">Rate: 1/2500</span>
-                            <span class="faqText">Duration: 50 minutes</span>
-                            <span class="faqText">Main effect(s): 2x boost on ⚙️</span>
-                            <span class="faqText">Side effect(s): N/A</span>
-                            <span class="faqText">World(s): 1</span><br>
-                            
-                            <span class="faqSection">Event 3:</span>
-                            <span class="faqText">"Every pigment of color swirls up from below, surrounding you in an eternal rainbow..."</span>
-                            <span class="faqText">Rate: 1/4000</span>
-                            <span class="faqText">Duration: 30 minutes</span>
-                            <span class="faqText">Main effect(s): 1.375x boost on 🌈</span>
-                            <span class="faqText">Side effect(s): N/A</span>
-                            <span class="faqText">World(s): 1</span><br>
-                            
-                            <span class="faqSection">Event 4:</span>
-                            <span class="faqText">"You hear a bell start dinging in the 🚪 layer..."</span>
-                            <span class="faqText">Rate: 1/1250</span>
-                            <span class="faqText">Duration: 30 minutes</span>
-                            <span class="faqText">Main effect(s): 1.25x boost on 🛎️</span>
-                            <span class="faqText">Side effect(s): makes 🔕 rarer (1/500,000,000 base rarity)</span>
-                            <span class="faqText">World(s): 2</span><br>
-                            
-                            <span class="faqSection">Event 5:</span>
-                            <span class="faqText">"An electrical container in the rock layer energizes in the air around you..."</span>
-                            <span class="faqText">Rate: 1/3000</span>
-                            <span class="faqText">Duration: 30 minutes</span>
-                            <span class="faqText">Main effect(s): 2x boost on 🔋</span>
-                            <span class="faqText">Side effect(s): adds +10% ability proc rate</span>
-                            <span class="faqText">World(s): 1</span><br>
-                            
-                            <span class="faqSection">Event 6:</span>
-                            <span class="faqText">"The passage of time seems to speed up as it's source is unearthed..."</span>
-                            <span class="faqText">Rate: 1/10000</span>
-                            <span class="faqText">Duration: 15 minutes</span>
-                            <span class="faqText">Main effect(s): 1.15x boost on ⌛</span>
-                            <span class="faqText">Side effect(s): decreases base mining speed by 1</span>
-                            <span class="faqText">World(s): 1</span><br>
-                            
-                            <span class="faqSection">Event 7:</span>
-                            <span class="faqText">"All the knowledge of this realm courses through you as a new intelligence forms..."</span>
-                            <span class="faqText">Rate: 1/15000</span>
-                            <span class="faqText">Duration: 20 minutes</span>
-                            <span class="faqText">Main effect(s): 1.3x boost on 🎓</span>
-                            <span class="faqText">Side effect(s): makes ✏️,  🧠,  📖, 📐, 📚, and 🖊️ 2x more common</span>
-                            <span class="faqText">World(s): 2</span><br>
-                            
-                            <span class="faqSection">Event 8:</span>
-                            <span class="faqText">"Leafy greens cloud your vision..."</span>
-                            <span class="faqText">Rate: 1/3500</span>
-                            <span class="faqText">Duration: 50 minutes</span>
-                            <span class="faqText">Main effect(s): 1.75x boost on 🥗</span>
-                            <span class="faqText">Side effect(s): N/A</span>
-                            <span class="faqText">World(s): 1</span><br>
-                            
-                            <span class="faqSection">Event 9:</span>
-                            <span class="faqText">"A highlight reel of your journey in the mines if faintly visible in the corner of your eyes..."</span>
-                            <span class="faqText">Rate: 1/5000</span>
-                            <span class="faqText">Duration: 45 minutes</span>
-                            <span class="faqText">Main effect(s): 1.25x boost on 📽️</span>
-                            <span class="faqText">Side effect(s): N/A</span>
-                            <span class="faqText">World(s): 2</span><br>
-
-                            <span class="faqSection">Event 11:</span>
-                            <span class="faqText">"The skies begin to glow as a cosmic body enchants the mine..."</span>
-                            <span class="faqText">Rate: 1/4000</span>
-                            <span class="faqText">Duration: 45 minutes</span>
-                            <span class="faqText">Main effect(s): 3/4x boost on 💫</span>
-                            <span class="faqText">Side effect(s): N/A</span>
-                            <span class="faqText">World(s): 1</span><br>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="newPlayer">
-            <p class="newPlayerText">You appear to be new to this game, would you like to see how to play? The information can be viewed at any time by selecting 'FAQ' in the menu.</p>
-            <button class="newPlayerButton" style="background-color:#6BC267;" onclick="doTutorial()">Yes</button>
-            <button class="newPlayerButton" style="background-color:#FF3D3D;" onclick="toggleNewPlayer(false)">No</button>
+        <div id="dailyMessages">
+            <div id="newPlayer" class="dailyMessage">
+                <p class="dailyText">You appear to be new to this game, would you like to see how to play? The information can be viewed at any time by selecting 'FAQ' in the menu.</p>
+                <button class="newPlayerButton" style="background-color:#6BC267;" onclick="doTutorial()">Yes</button>
+                <button class="newPlayerButton" style="background-color:#FF3D3D;" onclick="player.faqOffered = true; showNextInQueue()">No</button>
+            </div>
+            <div id="chooseName" class="dailyMessage">
+                <p class="dailyText">It doesn't appear like you have a name yet! Pick one out for yourself!<br>(Make sure your name is appropriate as it will appear when you generate ore logs)</p>
+                <form id="nameHolder">
+                    <input id="enterName" type="text" placeholder="Enter Name" autocomplete="off">
+                </form>
+                <button id="submitName" onclick="(player.name = get('enterName').value); showNextInQueue();">Confirm!</button>
+            </div>
+            <div id="portalUpdate" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <p class="dailyText">
+                    The Portal Update<br>
+                    - Added The Portal Room<br>
+                    - Teleport to the different worlds using this area! Found in the 'Locations' tab!<br>
+                    - Added a message system (this!!) for anything important I need people to know!<br>
+                    - Something important to know, you now can click on a log to copy and paste it so I dont suffer reading numbers!<br>
+                    - Did a lot of bug fixes.<br>
+                    - Report any bugs in the Discord server!
+                </p>
+            </div>
+            <div id="sr1Unlocked" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <p class="dailyText">
+                    Hey! I notice you mined a Flawless tier ore!<br>
+                    I think there's something new for you to check out in the Portal Room, you should head on over there!
+                </p>
+            </div>
         </div>
+
     </div>
 </div>
 </div>

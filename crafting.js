@@ -285,7 +285,7 @@ const recipes = {
     },
     "gear27" : {  
         name : "",
-        recipe : [{ore:"🇻🇺", amt:10}, {ore:"🇫🇲", amt:8}, {ore:"🇸🇧", amt:6}, {ore:"🇰🇾", amt:3}, {ore:"🇨🇰", amt:1}, {ore:"🇫🇰", amt:1}],
+        recipe : [{ore:"🇻🇺", amt:6}, {ore:"🇫🇲", amt:5}, {ore:"🇸🇧", amt:4}, {ore:"🇰🇾", amt:3}, {ore:"🇨🇰", amt:1}, {ore:"🇫🇰", amt:1}],
         upgrades: {}
     }
 }
@@ -408,18 +408,10 @@ function createPickaxeRecipes() {
                 tempElement.appendChild(recipeElement);
             }
             let tempButton = document.createElement('button');
-            if (property === "pickaxe13") {
-                tempButton.innerText = "Teleport!";
-                tempButton.setAttribute("onclick", "attemptSwitchWorld(2)");
-                tempButton.style.width = "50%";
-                tempButton.classList = "craftPickaxeButton";
-                tempElement.appendChild(tempButton);
-                tempButton = document.createElement('button');
-            }
             tempButton.id=`${property}Craft`;
             tempButton.classList = "craftPickaxeButton";
             tempButton.setAttribute("onclick", `craftPickaxe("${property}")`);
-            tempButton.style.width = property === "pickaxe13" ? "50%" : "100%";
+            tempButton.style.width = "100%";
             tempElement.appendChild(tempButton);
             recipeElements[property] = tempElement;
         }
@@ -889,12 +881,12 @@ const upgradeRecipes = {
         "upgrade1" : 
         {
             recipe : [
-                {ore: "🇪🇬", amt: 200},
-                {ore: "🇪🇹", amt: 180},
-                {ore: "🇳🇬", amt: 160},
-                {ore: "🇹🇷", amt: 140},
-                {ore: "🇮🇷", amt: 120},
-                {ore: "🇻🇳", amt: 100},
+                {ore: "🇪🇬", amt: 100},
+                {ore: "🇪🇹", amt: 90},
+                {ore: "🇳🇬", amt: 80},
+                {ore: "🇹🇷", amt: 70},
+                {ore: "🇮🇷", amt: 60},
+                {ore: "🇻🇳", amt: 50},
                 {ore: "🇵🇭", amt: 30},
             ],
             descriptions : [
@@ -1078,14 +1070,14 @@ function updateTolLuck() {
 const pickaxeStats = {
     0 : {mined: 1, revealed: 1, luck: 1, rate: 1, src: "⛏️"},
     1 : {mined: 24, revealed: 68, luck: 1.2, rate: 30, src: `<img class="mineImage" src="media/mulchMalletIcon.png"></img>`, ability:"media/abilityImages/mulchMalletAbility.png"},
-    2 : {mined: 47, revealed: 69, luck: 1.5, rate: 25, src: "⛏️", ability:"media/abilityImages/mudSickleAbility.png"},
-    3 : {mined: 46, revealed: 94, luck: 2.15, rate: 25, src: "⛏️", ability:"media/abilityImages/dirtRavagerAbility.png"},
+    2 : {mined: 47, revealed: 69, luck: 1.5, rate: 25, src: `<img class="mineImage" src="media/mudSickleIcon.png"></img>`, ability:"media/abilityImages/mudSickleAbility.png"},
+    3 : {mined: 46, revealed: 94, luck: 2.15, rate: 25, src: `<img class="mineImage" src="media/dirtRavagerIcon.png"></img>`, ability:"media/abilityImages/dirtRavagerAbility.png"},
     4 : {mined: 81, revealed: 113, luck: 3, rate: 19, src: "⛏️", ability:"media/abilityImages/voidCrusherAbility.png"},
-    5 : {mined: 45, revealed: 69, luck: 5, rate: 17, src: "⛏️", ability:"media/abilityImages/geodeStaffAbility.png"},
+    5 : {mined: 45, revealed: 69, luck: 5, rate: 17, src: `<img class="mineImage" src="media/geodeStaffIcon.png"></img>`, ability:"media/abilityImages/geodeStaffAbility.png"},
     6 : {mined: 57, revealed: 85, luck: 10, rate: 24, src: `<img class="mineImage" src="media/earthSoilerIcon.png"></img>`, ability:"media/abilityImages/earthSoilerAbility.png"},
-    7 : {mined: 275, revealed: 740, luck: 4, rate: 50, src: "⛏️", ability:"media/abilityImages/cryptSmasherAbility.png"},
+    7 : {mined: 275, revealed: 740, luck: 4, rate: 50, src: `<img class="mineImage" src="media/cryptSmasherIcon.png"></img>`, ability:"media/abilityImages/cryptSmasherAbility.png"},
     8 : {mined: 461, revealed: 811, luck: 5.5, rate: 40, src: "⛏️", ability:"media/abilityImages/labyrinthianTideAbility.png"},
-    9 : {mined: 188, revealed: 252, luck: 20, rate: 22, src: "⛏️", ability:"media/abilityImages/77LeafDestroyerAbility.png"},
+    9 : {mined: 188, revealed: 252, luck: 20, rate: 22, src: `<img class="mineImage" src="media/77LeafDestroyerIcon.png"></img>`, ability:"media/abilityImages/77LeafDestroyerAbility.png"},
     10 : {mined: 973, revealed: 1195, luck: 17.5, rate: 50, src: "⛏️", ability:"media/abilityImages/planetBusterAbility.png"},
     11 : {mined: 1018, revealed: 2993, luck: 30, rate: 100, src: "⛏️", ability:"media/abilityImages/whirlpoolOfFateAbility.png"},
     12 : {mined: 1541, revealed: 1861, luck: 75, rate: 150, src: `<img class="mineImage" src="media/wingsOfGloryIcon.png"></img>`, ability:"media/abilityImages/wingsOfGloryAbility.png"},
@@ -1096,13 +1088,13 @@ const pickaxeStats = {
     17 : {mined: 826, revealed: 936, luck: 1, rate: 150, src: `<img class="mineImage" src="media/nyabombIcon.png"></img>`, ability:"media/abilityImages/nyabombAbility.png"},
     18 : {mined: 1005, revealed: 1160, luck: 1.5, rate: 150, src:  `<img class="mineImage" src="media/lunarLightsabreIcon.png"></img>`, ability:"media/abilityImages/lunarLightsabreAbility.png"},
     19 : {mined: 656, revealed: 754, luck: 2, rate: 60, src: "⛏️", ability:"media/abilityImages/gemstoneEngraverAbility.png"},
-    20 : {mined: 1082, revealed: 1343, luck: 3, rate: 75, src: "⛏️", ability:"media/abilityImages/gamblersFallacyAbility.png"},
+    20 : {mined: 1082, revealed: 1343, luck: 3, rate: 75, src: `<img class="mineImage" src="media/gamblersFallacyIcon.png"></img>`, ability:"media/abilityImages/gamblersFallacyAbility.png"},
     21 : {mined: 1946, revealed: 4489, luck: 1.5, rate: 75, src: "⛏️", ability:"media/abilityImages/exponentialCentrifugeAbility.png"},
     22 : {mined: 2498, revealed: 5632, luck: 4, rate: 120, src: "⛏️", ability:"media/abilityImages/singularitySlammerAbility.png"},
-    23 : {mined: 4518, revealed: 6325, luck: 8.25, rate: 150, src: "⛏️", ability:"media/abilityImages/staffOfBindingAbility.png"},
+    23 : {mined: 4518, revealed: 6325, luck: 8.25, rate: 150, src: `<img class="mineImage" src="media/staffOfBindingIcon.png"></img>`, ability:"media/abilityImages/staffOfBindingAbility.png"},
     24 : {mined: 7964, revealed: 9800, luck: 12.5, rate: 175, src: "⛏️", ability:"media/abilityImages/sssAbility.png"},
     25 : {mined: 15131, revealed: 18594, luck: 50, rate: 300, src: "⛏️", ability:"media/abilityImages/coronaryCatastropheAbility.png"},
-    26 : {mined: 15131, revealed: 18594, luck: 50, rate: 300, src: "⛏️"},
+    26 : {mined: 14343, revealed: 17431, luck: 175, rate: 150, src: "⛏️"},
     27 : {
         0 : {mined: 4383, revealed: 4576, luck: 1},
         1 : {mined: 19928, revealed: 20978, luck: 3},
@@ -1113,9 +1105,8 @@ const pickaxeStats = {
         rate: 500,
         src : "⛏️",
     },
-    28 : {mined: 67, revealed: 111, luck: 2.1, rate: 20, src: "⛏️", ability:"media/abilityImages/crystallineExcavatorAbility.png"},
+    28 : {mined: 67, revealed: 111, luck: 2.1, rate: 20, src: `<img class="mineImage" src="media/crystallineExcavatorIcon.png"></img>`, ability:"media/abilityImages/crystallineExcavatorAbility.png"},
 }
- 
  
  
  

@@ -40,12 +40,16 @@ function toSurface() {
     mine[curY][curX] = "⛏️";
     checkAllAround(curX, curY, 1);
     displayArea();
-    document.getElementById("mineResetProgress").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
+    document.getElementById("resetNumber").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
 }
 let resetting = false;
 function mineReset() {
+    player.stats.minesReset++;
     lastX = 0;
     a12 = 0;
+    if (curX > player.stats.furthestPosX) player.stats.furthestPosX = curX;
+    if (curX < player.stats.furthestNegX) player.stats.furthestNegX = curX;
+    if (curY > player.stats.furthestY) player.stats.furthestY = curY;
     caveOreLocations = [];
     mineCapacity = player.settings.baseMineCapacity;
     player.oreTracker.existingOres = [];

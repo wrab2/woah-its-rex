@@ -251,7 +251,7 @@ function powerup5() {
         removeParadoxical();
         let toChooseFrom = Object.keys(player.pickaxes).concat(Object.keys(player.gears));
         for (let i = toChooseFrom.length - 1; i >= 0; i--) {
-            if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (currentWorld === 2 && (toChooseFrom[i].includes("pickaxe")) && Number(toChooseFrom[i].substring(7)) < 13)) toChooseFrom.splice(i, 1);
+            if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (currentWorld === 2 && (toChooseFrom[i].includes("pickaxe")) && Number(toChooseFrom[i].substring(7)) < 13) || toChooseFrom[i] === "pickaxe28") toChooseFrom.splice(i, 1);
         }
         if (toChooseFrom.length > 0) {
             let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
@@ -498,12 +498,14 @@ function pickaxeAbility8(x, y) {
                 //point left of center, value of 2
                 npy = pointY;
                 npx = pointX - 8; 
+                mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:2});
             }
             if (Math.random() <= 0.75) {
                 //point right of center, value of 3
                 npy = pointY;
                 npx = pointX + 8; 
+                mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:3});
             }
         }
@@ -559,12 +561,14 @@ function pickaxeAbility9(x, y) {
                 //point top left, value of 2
                 npy = pointY - 6;
                 npx = pointX - 7; 
+                mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:2});
             }
             if (Math.random() <= 0.75) {
                 //point bottom left, value of 3
                 npy = pointY + 6;
                 npx = pointX - 7; 
+                mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:3});
             }
         }
@@ -1073,34 +1077,19 @@ function pickaxeAbility25(x, y) {
     }
 }
 const abilityTable = {
-    " 22" : 1/78,
-    " 19" : 1/75,
-    " 20" : 1/61,
-    " 18" : 1/58,
-    " 17" : 1/55,
-    " 21" : 1/52,
-    " 13" : 1/49,
-    " 24" : 1/46,
-    " 25" : 1/43,
-    " 16" : 1/40,
-    " 15" : 1/37,
-    " 14" : 1/34,
-    " 7" : 1/31,
-    " 11" : 1/28,
-    " 12" : 1/25,
-    " 23" : 1/22,
-    " 1" : 1/19,
-    " 2" : 1/16,
-    " 3" : 1/13,
-    " 5" : 1/10,
-    " 9" : 1/9,
-    " 8" : 1/7,
-    " 6" : 1/5,
-    " 4" : 1/3,
-    " 10" : 1/1,
+    " 27":1/19,
+    " 25":1/17,
+    " 24":1/15,
+    " 23":1/13,
+    " 22":1/11,
+    " 21":1/9,
+    " 12":1/7,
+    " 20":1/5,
+    " 11":1/3,
+    " 18":1/1
 }
-const abilityTableArray = [" 22", " 19", " 20", " 18", " 17", " 21", " 13", " 24", " 25", " 16", " 15", " 14", " 7", " 11", " 12", " 23", " 1", " 2", " 3", " 5", " 9", " 8", " 6", " 4", " 10"];
 function pickaxeAbility26(x, y) {
+    const abilityTableArray = Object.keys(abilityTable);
     const points = {
         "a" : {"X":x, "Y":y},
         "b" : {"X":x + 300, "Y":y - 300},
@@ -1122,63 +1111,14 @@ function pickaxeAbility26(x, y) {
         }
         let num = Number(abilityTableArray[low].substring(1));
         switch (num) {
-            case 1:
-                pickaxeAbility1(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 2:
-                pickaxeAbility2(points[propertyName]["X"], points[propertyName]["Y"], 3);
-                break;
-            case 3:
-                pickaxeAbility3(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 4:
-                pickaxeAbility4(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 5:
-                pickaxeAbility5(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 6:
-                if (Math.random() < 1/2) {
-                    pickaxeAbility6(points[propertyName]["X"], points[propertyName]["Y"]);
-                } else {
-                    pickaxeAbility7(points[propertyName]["X"], points[propertyName]["Y"]);
-                }
-                break;
-            case 7:
-                pickaxeAbility8(points[propertyName]["X"], points[propertyName]["Y"], 0);
-                break;
-            case 8:
-                pickaxeAbility9(points[propertyName]["X"], points[propertyName]["Y"], 0);
-                break;
-            case 9:
-                pickaxeAbility10(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 10:
-                pickaxeAbility11(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
             case 11:
                 pickaxeAbility12(points[propertyName]["X"], points[propertyName]["Y"]);
                 break;
             case 12:
                 pickaxeAbility13(points[propertyName]["X"], points[propertyName]["Y"]);
                 break;
-            case 14:
-                pickaxeAbility14(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 15:
-                pickaxeAbility15(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 16:
-                pickaxeAbility16(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 17:
-                pickaxeAbility17(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
             case 18:
                 pickaxeAbility18(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 19:
-                pickaxeAbility19(points[propertyName]["X"], points[propertyName]["Y"], 0);
                 break;
             case 20:
                 pickaxeAbility20(points[propertyName]["X"], points[propertyName]["Y"]);
@@ -1198,6 +1138,10 @@ function pickaxeAbility26(x, y) {
             case 25:
                 pickaxeAbility25(points[propertyName]["X"], points[propertyName]["Y"]);
                 break;
+            case 27:
+                const overrideLevel = Math.round(Math.random() * 5);
+                pickaxeAbility27(points[propertyName]["X"], points[propertyName]["Y"], overrideLevel);
+                break;
         }
     }
 }
@@ -1209,11 +1153,12 @@ const treeLevels = {
     winterBranch: [],
     summerBranch: []
 }
-function pickaxeAbility27(x, y) {
+function pickaxeAbility27(x, y, overrideLevel) {
     let eX = x;
     eX -= 37;
     let eY = y;
-    const level = player.upgrades["pickaxe27"].level;
+    overrideLevel ??= player.upgrades["pickaxe27"].level;
+    const level = overrideLevel;
     let arrToIndex;
     if (level === 0) {arrToIndex = treeLevels[0]; eY -= 65;}
     else if (level > 0) {arrToIndex = treeLevels[1]; eY -= 200;}
