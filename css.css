@@ -757,6 +757,7 @@ img.roundcat {
   cursor: pointer;
   border-radius: 5px;
   animation: playButton 1.25s infinite;
+  background: none;
 }
 @keyframes playButton {
   50% {font-size: 4vw;}
