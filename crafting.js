@@ -1092,7 +1092,7 @@ const pickaxeStats = {
     21 : {mined: 1946, revealed: 4489, luck: 1.5, rate: 75, src: "⛏️", ability:"media/abilityImages/exponentialCentrifugeAbility.png"},
     22 : {mined: 2498, revealed: 5632, luck: 4, rate: 120, src: "⛏️", ability:"media/abilityImages/singularitySlammerAbility.png"},
     23 : {mined: 4518, revealed: 6325, luck: 8.25, rate: 150, src: `<img class="mineImage" src="media/staffOfBindingIcon.png"></img>`, ability:"media/abilityImages/staffOfBindingAbility.png"},
-    24 : {mined: 7964, revealed: 9800, luck: 12.5, rate: 175, src: "⛏️", ability:"media/abilityImages/sssAbility.png"},
+    24 : {mined: 7964, revealed: 9800, luck: 12.5, rate: 175, src: `<img class="mineImage" src="media/sssIcon.png"></img>`, ability:"media/abilityImages/sssAbility.png"},
     25 : {mined: 15131, revealed: 18594, luck: 50, rate: 300, src: "⛏️", ability:"media/abilityImages/coronaryCatastropheAbility.png"},
     26 : {mined: 14343, revealed: 17431, luck: 175, rate: 150, src: "⛏️"},
     27 : {

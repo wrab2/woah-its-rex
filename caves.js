@@ -339,7 +339,7 @@ function generateCaveBlock(y, x, type) {
             }
             if (messageIncluded(oreList[blockToGive]["oreTier"])) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: undefined, variant: variant});
             if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
-            if (player.settings.stopOnRare.active && oreInformation.tierGrOrEqTo({"tier1": oreList[blockToGive]["oreTier"], "tier2": player.settings.stopOnRare.minimum})) stopMining();
+            if (player.settings.stopOnRare.active && stopIncluded(oreList[blockToGive]["oreTier"])) stopMining();
         }
     }
 }
