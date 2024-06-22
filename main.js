@@ -240,7 +240,7 @@ function movePlayer(dir, reps) {
                     mine[curY][curX] = "⚪";
                     curY += dir.y;
                     curX += dir.x;
-                    dir.x !== 0 ? movementsX++ : null;
+                    movementsX += Math.abs(dir.y) + Math.abs(dir.x)
                     if (dir.y !== 0) setLayer(curY);
                     mineBlock(curX, curY, "mining");
                     mine[curY][curX] = "⛏️";
@@ -259,6 +259,7 @@ function movePlayer(dir, reps) {
                             spawnMessage({block: "⛏️", location: {"X" : curX, "Y" : curY}, caveInfo: undefined, variant: variant})
                             giveBlock({type: "⛏️", x:curX, y:curY, fromReset: false, variant: variant});
                             checkAllAround(curX, curY);
+                            playSound("Celestial")
                         }
                     }
                 }
@@ -1090,7 +1091,7 @@ const events = {
         rate: 1/3500,
         duration: 3000000,
         boost: 1.75,
-        ore: "🥗 ",
+        ore: "🥗",
         message: `<i><span style="background-image:linear-gradient(to right, #6a9c44, #78db2c, #27d111, #083802, #2f7327);" class="eventGradient">Leafy greens cloud your vision...</span></i>`,
         world: 1,
         specialText: "N/A",
@@ -1374,5 +1375,4 @@ az.src = "media/Untitled_Artwork2.png"
             }
 }
 */
-
 

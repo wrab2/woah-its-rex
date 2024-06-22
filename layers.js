@@ -1127,6 +1127,23 @@ class ores {
         return "";
     }
 }
+const variantInformation = {
+    "Normal" : {
+        color: ""
+    },
+    "Electrified" : {
+        color: "#e365fc"
+    },
+    "Radioactive" : {
+        color: "#c9fc3a"
+    },
+    "Explosive" : {
+        color: "#ff4b33"
+    },
+    getVariantColor: function(name) {
+        return variantInformation[name].color;
+    }
+}
 const oreInformation = new ores();
 /*
 for (let propertyName in temp) {
