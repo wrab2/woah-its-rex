@@ -4,7 +4,379 @@ Unauthorized copying of this file, via any medium is strictly prohibited
 Proprietary and confidential
 Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
-function _0xef67(_0x527b89,_0x7ac610){const _0x25f848=_0x25f8();return _0xef67=function(_0xef6718,_0x2b3105){_0xef6718=_0xef6718-0x7c;let _0x2e6c2f=_0x25f848[_0xef6718];return _0x2e6c2f;},_0xef67(_0x527b89,_0x7ac610);}const _0x2dd277=_0xef67;(function(_0x262e2c,_0x35f805){const _0x29b86c=_0xef67,_0x46855e=_0x262e2c();while(!![]){try{const _0x379c3c=-parseInt(_0x29b86c(0xff))/0x1+parseInt(_0x29b86c(0xc4))/0x2*(-parseInt(_0x29b86c(0xea))/0x3)+-parseInt(_0x29b86c(0x8d))/0x4*(parseInt(_0x29b86c(0xd7))/0x5)+parseInt(_0x29b86c(0xba))/0x6*(parseInt(_0x29b86c(0xfa))/0x7)+parseInt(_0x29b86c(0xe8))/0x8+parseInt(_0x29b86c(0xe2))/0x9+parseInt(_0x29b86c(0xeb))/0xa*(parseInt(_0x29b86c(0xd8))/0xb);if(_0x379c3c===_0x35f805)break;else _0x46855e['push'](_0x46855e['shift']());}catch(_0x214cfb){_0x46855e['push'](_0x46855e['shift']());}}}(_0x25f8,0xe4797));function _0x25f8(){const _0x3db2e5=['style','numRarity','add','genAt','splice','4hYOPza','http://127.0.0.1:5500/','checkCaves','now','location','avgSpeed','Electrified','gear14','abysstoneCave','log10','currentPickaxe','rarity','generatedLogs','</span><span\x20onclick=\x22copyText(this.parentElement.children[0]);\x20copiedLog(this);\x22>Click\x20Me\x20To\x20Copy\x20Verification</span></span><br>','toUTCString','gear12','decimalRarity','<span><span\x20style=\x22font-size:0vw;\x22>','time','mined','push',',\x20Generated\x20At:\x20','powerupVariables','trophyProgress','console','createLog','href','block',',\x20Console\x20Flags:\x20','getElementById','\x20mined.\x20X:\x20','log','luck','<span\x20\x20style=\x22color:','output','createElement','gear20','failed\x20to\x20verify','(Layer\x20Cave)','\x20high,\x20','testTotals','sqrt','innerHTML','upgrades','floor','6ZYTOTY','gear1','\x20(Voided).</span>\x20Verification:\x20','multiply','Normal','getLuckBoosts','\x20dist\x20to\x20low,\x20','dir','\x20Cave)',',\x20AVG\x20Speed:\x20','4svbCIc','freeze','ore','includes','length','\x20has\x20NOT\x20found\x20','none',';\x22>','width','remove','clear','item',',\x20Paradoxical\x20Item:\x20','\x20has\x20found\x20','value','gear10','toLocaleString','.</span>\x20Verification:\x20','Radioactive','4351610UwXotn','2915igHnAb','gears','secretDebugStats','paradoxical','subrealmOneCompletion','pow',',\x20Y:\x20','object','level','indexOf','1132686zgUFex','stats','constructor','failed\x20to\x20verify\x20find','pickaxe26','(Mobile)','3715712BABwii','color','1735638uRFJeK','78460DmwKZo','substring','gear5','isRightPickaxe','failed\x20to\x20create,\x20','name','getStartTime','created','pickaxe27','round','display','Key:\x20','appendChild','logHolder','variant','6861211lxFSGp','\x20with\x20a\x20rarity\x20of\x201/','caveInfo','x\x20performance,\x20','gear18','686436bItAAi','alert',',\x20Time\x20Since\x20Last\x20Log:\x20','\x20time,\x20','logSort','log\x20not\x20found,\x20failed\x20to\x20verify\x20if\x20found,\x20block\x20mined','\x20at\x20','All','highRarityLogs','checkPickaxe','settings','\x20low,\x20','stack','levelLuck'];_0x25f8=function(){return _0x3db2e5;};return _0x25f8();}const debug=document[_0x2dd277(0x91)][_0x2dd277(0xa7)]['includes']('testing')||document['location'][_0x2dd277(0xa7)][_0x2dd277(0xc7)](_0x2dd277(0x8e)),logCreated={};class secureLogs{#spawnLogs;#verifiedLogs;#logsTimer;#startTime=Date[_0x2dd277(0x90)]();#maxLuck=[0x1,1.2,1.5,2.15,0x3,0x5,0xa,0x4,5.5,0x14,17.5,0x1e,0x4b,0x1,1.05,1.075,1.3,0x1,1.5,0x2,0x3,1.5,0x4,8.25,12.5,0x32,0xaf,0x1,2.1];#isRightPickaxe;#canGenCaves;#consoleDetected=0x0;#consoleCheckTimer;#myNum=0.6;#highestDifference=0x0;#highestPerformance=0x0;[_0x2dd277(0xb5)]=[];constructor(){const _0x3e12d7=_0x2dd277;if(logCreated[_0x3e12d7(0xf2)])location['reload']();this.#spawnLogs=[],this.#verifiedLogs={'All':[],'Cave':[],'Normal':[],'Electrified':[],'Radioactive':[],'Explosive':[]},this.#logsTimer=null,this.#isRightPickaxe=!![],this.#canGenCaves=![],this.#consoleDetected=0x0,this.#onLoad();}[_0x2dd277(0xa6)](_0x4301c0,_0x46f60f,_0x319484,_0x19374d,_0x5cac21){const _0x48cb9e=_0x2dd277,_0xaa5efa=_0x319484[_0x48cb9e(0xc6)]===undefined?_0x319484:_0x319484[_0x48cb9e(0xc6)],_0x1763b4=_0x319484[_0x48cb9e(0xf9)]===undefined?undefined:_0x319484[_0x48cb9e(0xf9)];_0x5cac21=_0x5cac21===undefined?[![],0x1,'none']:_0x5cac21;let _0x35801;if(player[_0x48cb9e(0xe3)][_0x48cb9e(0x97)]===0x1b)_0x35801=player['upgrades'][_0x48cb9e(0xf3)]['levelLuck'][player[_0x48cb9e(0xb8)][_0x48cb9e(0xf3)]['level']];if(currentWorld===1.1){const _0x42a7b4=player['upgrades'][_0x48cb9e(0xf3)];_0x35801+=getRewardTypes('luck',_0x48cb9e(0x8a));if(player[_0x48cb9e(0xd9)][_0x48cb9e(0xb1)])_0x35801*=_0x42a7b4[_0x48cb9e(0x87)][_0x42a7b4[_0x48cb9e(0xe0)]]*0.05+0x1;_0x35801*=getRewardTypes(_0x48cb9e(0xad),'multiply');if(isNaN(_0x35801))_0x35801=0x1;}else _0x35801=this.#maxLuck[player[_0x48cb9e(0xe3)][_0x48cb9e(0x97)]];_0x35801+=(player['gears'][_0x48cb9e(0xfe)]?2.5:0x0)+(player[_0x48cb9e(0xd9)][_0x48cb9e(0x9c)]?0.35:0x0)+(player['gears'][_0x48cb9e(0xd3)]?0.25:0x0)+getRewardTypes('luck','add'),_0x35801*=(player['gears'][_0x48cb9e(0xbb)]?1.1:0x1)*getRewardTypes('luck',_0x48cb9e(0xbd))*(player[_0x48cb9e(0xd9)][_0x48cb9e(0xed)]?1.6:0x1);if(player[_0x48cb9e(0xd9)][_0x48cb9e(0xb1)]){if(player[_0x48cb9e(0xe3)]['currentPickaxe']===0x1b)_0x35801*=player['upgrades'][_0x48cb9e(0xf3)][_0x48cb9e(0x87)][player[_0x48cb9e(0xb8)]['pickaxe27'][_0x48cb9e(0xe0)]]*0.05+0x1;else _0x35801*=verifiedOres[_0x48cb9e(0xbf)]()[player[_0x48cb9e(0xe3)][_0x48cb9e(0x97)]]*0.05+0x1;}_0x35801*=1.5,_0x35801*=1.25,_0x35801*=0xa;const _0x2da4aa=_0x35801;let _0x31f4e9;if(_0x5cac21[0x1]>0x1){if(caveLuck>0x2faf080){console['log'](_0x48cb9e(0xef),_0x19374d[_0x48cb9e(0x86)],caveLuck);return;}else _0x31f4e9=0x1;}else _0x31f4e9=oreList[_0xaa5efa][_0x48cb9e(0x89)]*oreList[_0xaa5efa][_0x48cb9e(0x9d)];(_0x19374d['stack'][_0x48cb9e(0xc7)]('mine.js')||_0x19374d['stack'][_0x48cb9e(0xc7)]('caves.js'))&&_0x31f4e9<=_0x2da4aa||debug?(this.#spawnLogs[_0x48cb9e(0xa1)]({'x':_0x46f60f,'y':_0x4301c0,'block':_0xaa5efa,'luck':_0x31f4e9,'caveInfo':_0x5cac21,'variant':_0x1763b4,'avgSpeed':player['avgSpeed'],'paradoxical':player[_0x48cb9e(0xa3)]['fakeEquipped'][_0x48cb9e(0xcf)],'console':this.#consoleDetected,'genAt':Date['now']()}),Object['freeze'](this.#spawnLogs[this.#spawnLogs[_0x48cb9e(0xc8)]-0x1])):console[_0x48cb9e(0xac)](_0x48cb9e(0xef),_0x19374d[_0x48cb9e(0x86)],_0x31f4e9,_0x2da4aa);}['verifyLog'](_0x5843d7,_0x7c8b88){const _0x2e8e4b=_0x2dd277;for(let _0x40f11e=0x0;_0x40f11e<this.#spawnLogs[_0x2e8e4b(0xc8)];_0x40f11e++){if(this.#spawnLogs[_0x40f11e]['y']===_0x5843d7&&this.#spawnLogs[_0x40f11e]['x']===_0x7c8b88){const _0x269ad4=mine[_0x5843d7][_0x7c8b88][_0x2e8e4b(0xc6)]===undefined?mine[_0x5843d7][_0x7c8b88]:mine[_0x5843d7][_0x7c8b88][_0x2e8e4b(0xc6)];if(_0x269ad4===this.#spawnLogs[_0x40f11e][_0x2e8e4b(0xa8)]){let _0x290850;const _0xe83534=this.#clone(this.#spawnLogs[_0x40f11e]);if(_0xe83534[_0x2e8e4b(0xfc)][0x1]>0x1){if(oolProbabilities[_0x269ad4]!==undefined&&_0xe83534[_0x2e8e4b(0xfc)][0x2]!==_0x2e8e4b(0x95))_0x290850=oolProbabilities[_0x269ad4];else _0xe83534[_0x2e8e4b(0xfc)][0x2]===_0x2e8e4b(0x95)?_0x290850=gsProbabilities[caveList[_0x2e8e4b(0x95)][_0x2e8e4b(0xe1)](_0xe83534[_0x2e8e4b(0xa8)])]:_0x290850=0x1/oreList[_0xe83534[_0x2e8e4b(0xa8)]][_0x2e8e4b(0x89)];_0x290850/=_0xe83534[_0x2e8e4b(0xfc)][0x1],_0x290850*=_0xe83534[_0x2e8e4b(0xfc)][0x3];}else _0x290850=oreList[_0xe83534['block']][_0x2e8e4b(0x9d)];let _0xaacf01=_0xe83534[_0x2e8e4b(0xf9)]===undefined?_0x2e8e4b(0xbe):_0xe83534[_0x2e8e4b(0xf9)];_0x290850/=multis[_0xaacf01-0x1],_0xaacf01=names[_0xaacf01-0x1],this.#verifiedLogs[_0x2e8e4b(0x81)][_0x2e8e4b(0xa1)]({'block':_0xe83534['block'],'y':_0x5843d7,'x':_0x7c8b88,'time':Date['now']()-this.#startTime,'mined':![],'variant':_0xaacf01,'luck':_0xe83534[_0x2e8e4b(0xad)],'caveInfo':_0xe83534[_0x2e8e4b(0xfc)],'rarity':_0x290850,'avgSpeed':_0xe83534[_0x2e8e4b(0x92)],'paradoxical':_0xe83534[_0x2e8e4b(0xdb)],'console':_0xe83534[_0x2e8e4b(0xa5)],'genAt':_0xe83534['genAt']}),Object['freeze'](this.#verifiedLogs[_0x2e8e4b(0x81)][this.#verifiedLogs[_0x2e8e4b(0x81)][_0x2e8e4b(0xc8)]-0x1]),this.#spawnLogs[_0x2e8e4b(0x8c)](_0x40f11e,0x1);break;}else console[_0x2e8e4b(0xac)](_0x2e8e4b(0xb2),_0x5843d7,_0x7c8b88);}}}['verifyFind'](_0x59c2e1,_0x187892,_0x1402e1,_0x2386b6){const _0x3b16b0=_0x2dd277;_0x59c2e1=_0x59c2e1[_0x3b16b0(0xc6)]===undefined?_0x59c2e1:_0x59c2e1[_0x3b16b0(0xc6)];let _0x5869c7=![];for(let _0x233f3a=this.#verifiedLogs[_0x3b16b0(0x81)]['length']-0x1;_0x233f3a>=0x0;_0x233f3a--){if(this.#verifiedLogs['All'][_0x233f3a]['y']===_0x187892&&this.#verifiedLogs[_0x3b16b0(0x81)][_0x233f3a]['x']===_0x1402e1){if(_0x59c2e1===this.#verifiedLogs['All'][_0x233f3a][_0x3b16b0(0xa8)]){const _0x3b18e6=this.#clone(this.#verifiedLogs[_0x3b16b0(0x81)][_0x233f3a]);if(_0x3b18e6[_0x3b16b0(0xa0)]!=!![]){_0x3b18e6[_0x3b16b0(0xa0)]=!![];if(_0x3b18e6[_0x3b16b0(0xf9)]===undefined)_0x3b18e6[_0x3b16b0(0xf9)]=_0x2386b6;if(player['webHook']['active'])webHook(_0x3b18e6);const _0x53101a=player[_0x3b16b0(0xf0)]+_0x3b16b0(0xd1)+_0x3b18e6['variant']+'\x20'+_0x3b18e6[_0x3b16b0(0xa8)]+_0x3b16b0(0xfb)+Math[_0x3b16b0(0xf4)](0x1/_0x3b18e6[_0x3b16b0(0x98)])[_0x3b16b0(0xd4)]()+'\x20'+(_0x3b18e6[_0x3b16b0(0xfc)][0x0]?_0x3b18e6[_0x3b16b0(0xfc)][0x1]>0x1?'('+caveList[_0x3b18e6[_0x3b16b0(0xfc)][0x2]]['slice'](-0x1)+_0x3b16b0(0xc2):_0x3b16b0(0xb3):'')+_0x3b16b0(0x80)+player[_0x3b16b0(0xe3)]['blocksMined'][_0x3b16b0(0xd4)]()+_0x3b16b0(0xab)+(_0x3b18e6['x']-0x3b9aca00)[_0x3b16b0(0xd4)]()+_0x3b16b0(0xde)+(-0x1*_0x3b18e6['y'])['toLocaleString']()+'\x20'+(_0x3b18e6[_0x3b16b0(0xdb)]===_0x3b16b0(0xe6)?'\x20':'');_0x3b18e6['output']=_0x53101a,this.#verifiedLogs[_0x3b16b0(0x81)][_0x233f3a]=_0x3b18e6,Object[_0x3b16b0(0xc5)](_0x3b18e6);if(player[_0x3b16b0(0x84)][_0x3b16b0(0x82)]&&_0x3b18e6[_0x3b16b0(0x98)]>0x1/0xee6b280)this.#verifiedLogs[_0x3b16b0(0x81)]['splice'](_0x233f3a,0x1);else{if(_0x3b18e6[_0x3b16b0(0xfc)][0x0])this.#verifiedLogs['Cave'][_0x3b16b0(0xa1)](_0x3b18e6);if(_0x3b18e6[_0x3b16b0(0xf9)]==='Normal')this.#verifiedLogs['Normal'][_0x3b16b0(0xa1)](_0x3b18e6);else{if(_0x3b18e6[_0x3b16b0(0xf9)]==='Electrified')this.#verifiedLogs[_0x3b16b0(0x93)][_0x3b16b0(0xa1)](_0x3b18e6);else{if(_0x3b18e6[_0x3b16b0(0xf9)]===_0x3b16b0(0xd6))this.#verifiedLogs[_0x3b16b0(0xd6)][_0x3b16b0(0xa1)](_0x3b18e6);else{if(_0x3b18e6['variant']==='Explosive')this.#verifiedLogs['Explosive'][_0x3b16b0(0xa1)](_0x3b18e6);}}}}_0x5869c7=!![];break;}}else console[_0x3b16b0(0xac)](_0x3b16b0(0xe5),_0x59c2e1,this.#verifiedLogs[_0x3b16b0(0x81)][_0x233f3a][_0x3b16b0(0xad)]);}}!_0x5869c7&&console[_0x3b16b0(0xac)](_0x3b16b0(0x7f),_0x59c2e1,_0x187892,_0x1402e1);}['showLogs'](){const _0x5f0411=_0x2dd277;if(document[_0x5f0411(0xaa)]('menuSelectionContainer')[_0x5f0411(0x88)][_0x5f0411(0xf5)]!=='none'){this.#clearLogs();let _0x8aa8eb=document[_0x5f0411(0xb0)]('p');if(document[_0x5f0411(0xaa)](_0x5f0411(0x99))!==null)document[_0x5f0411(0xaa)](_0x5f0411(0x99))[_0x5f0411(0xcd)]();_0x8aa8eb['id']='generatedLogs',document[_0x5f0411(0xaa)](_0x5f0411(0xf8))[_0x5f0411(0xf7)](_0x8aa8eb);let _0x2d2961='';const _0x3a5158=this.#verifiedLogs[document[_0x5f0411(0xaa)](_0x5f0411(0x7e))[_0x5f0411(0xd2)]];for(let _0x95d0c3=0x0;_0x95d0c3<_0x3a5158['length'];_0x95d0c3++){_0x3a5158[_0x95d0c3][_0x5f0411(0xaf)]===undefined?_0x2d2961+=_0x5f0411(0xae)+variantInformation[_0x3a5158[_0x95d0c3][_0x5f0411(0xf9)]][_0x5f0411(0xe9)]+_0x5f0411(0xcb)+player[_0x5f0411(0xf0)]+_0x5f0411(0xc9)+_0x3a5158[_0x95d0c3]['variant']+'\x20'+_0x3a5158[_0x95d0c3]['block']+_0x5f0411(0xbc):_0x2d2961+=_0x5f0411(0xae)+variantInformation[_0x3a5158[_0x95d0c3][_0x5f0411(0xf9)]][_0x5f0411(0xe9)]+';\x22>'+_0x3a5158[_0x95d0c3][_0x5f0411(0xaf)]+_0x5f0411(0xd5);let _0x2bea3e;if(_0x3a5158[_0x95d0c3-0x1]!==undefined)_0x2bea3e=_0x3a5158[_0x95d0c3][_0x5f0411(0x9f)]-_0x3a5158[_0x95d0c3-0x1][_0x5f0411(0x9f)];else _0x2bea3e=_0x3a5158[_0x95d0c3][_0x5f0411(0x9f)];_0x2d2961+=_0x5f0411(0x9e)+encryptLogData(_0x3a5158[_0x95d0c3],_0x2bea3e)+_0x5f0411(0x9a);}if(document['getElementById']('generatedLogs')!==undefined)document[_0x5f0411(0xaa)]('generatedLogs')[_0x5f0411(0xb7)]=_0x2d2961;}else this.#clearLogs();}#clone(_0x3a05f6){const _0x33f6e5=_0x2dd277;if(_0x3a05f6==null||typeof _0x3a05f6!=_0x33f6e5(0xdf))return _0x3a05f6;var _0x16ed4d=_0x3a05f6[_0x33f6e5(0xe4)]();for(var _0x537047 in _0x3a05f6)_0x16ed4d[_0x537047]=this.#clone(_0x3a05f6[_0x537047]);return _0x16ed4d;}#clearLogs(){const _0x782dfb=_0x2dd277;clearInterval(this.#logsTimer),this.#logsTimer=null;if(document['getElementById']('generatedLogs')!==null)document[_0x782dfb(0xaa)](_0x782dfb(0x99))[_0x782dfb(0xcd)]();}['getLuckBoosts'](){return this.#maxLuck;}['getCurrentLuck'](){const _0x42ebf9=_0x2dd277;let _0x479a97;if(player[_0x42ebf9(0xe3)][_0x42ebf9(0x97)]===0x1b)_0x479a97=player['upgrades']['pickaxe27'][_0x42ebf9(0x87)][player[_0x42ebf9(0xb8)][_0x42ebf9(0xf3)][_0x42ebf9(0xe0)]];if(currentWorld===1.1){const _0xc0223f=player['upgrades'][_0x42ebf9(0xf3)];let _0x58a4f7=_0xc0223f[_0x42ebf9(0x87)][_0xc0223f[_0x42ebf9(0xe0)]];_0x58a4f7+=getRewardTypes(_0x42ebf9(0xad),'add');if(player['gears']['gear20'])_0x58a4f7*=_0xc0223f['levelLuck'][_0xc0223f['level']]*0.05+0x1;_0x58a4f7*=1.25,_0x58a4f7*=getRewardTypes(_0x42ebf9(0xad),_0x42ebf9(0xbd));if(isNaN(_0x58a4f7))return 0x1;else return _0x58a4f7;}else{if(player['stats']['currentPickaxe']===0x1b&&!player[_0x42ebf9(0xa4)][_0x42ebf9(0xdc)]['trophyOwned'])player['stats'][_0x42ebf9(0x97)]=0x0,_0x479a97=0x1;else _0x479a97??=this.#maxLuck[player[_0x42ebf9(0xe3)][_0x42ebf9(0x97)]];}_0x479a97+=(player['gears']['gear18']?2.5:0x0)+(player['gears'][_0x42ebf9(0x9c)]?0.35:0x0)+(player['gears'][_0x42ebf9(0xd3)]?0.25:0x0),_0x479a97+=getRewardTypes(_0x42ebf9(0xad),_0x42ebf9(0x8a));if(currentWorld<0x2)_0x479a97*=(player['gears'][_0x42ebf9(0xbb)]?1.1:0x1)*(player['gears'][_0x42ebf9(0xed)]?1.6:0x1);if(player[_0x42ebf9(0xd9)][_0x42ebf9(0xb1)]){if(player[_0x42ebf9(0xe3)][_0x42ebf9(0x97)]===0x1b)_0x479a97*=player[_0x42ebf9(0xb8)][_0x42ebf9(0xf3)][_0x42ebf9(0x87)][player['upgrades'][_0x42ebf9(0xf3)][_0x42ebf9(0xe0)]]*0.05+0x1;else _0x479a97*=verifiedOres[_0x42ebf9(0xbf)]()[player[_0x42ebf9(0xe3)][_0x42ebf9(0x97)]]*0.05+0x1;}_0x479a97*=getRewardTypes('luck',_0x42ebf9(0xbd));if(isNaN(_0x479a97))return 0x1;else return _0x479a97;}[_0x2dd277(0xf1)](){return this.#startTime;}[_0x2dd277(0xee)](){return this.#isRightPickaxe;}[_0x2dd277(0x83)](){const _0x325bad=_0x2dd277;if(currentWorld===0x1)this.#isRightPickaxe=!![];else{if(currentWorld===1.1&&player[_0x325bad(0xe3)][_0x325bad(0x97)]===0x1b)this.#isRightPickaxe=!![];else{if(currentWorld===0x2&&player[_0x325bad(0xe3)]['currentPickaxe']>0xc&&player[_0x325bad(0xe3)][_0x325bad(0x97)]<0x1b)this.#isRightPickaxe=!![];else this.#isRightPickaxe=![];}}}[_0x2dd277(0x8f)](){const _0x5193c1=_0x2dd277;if(currentWorld===0x1&&player['stats']['currentPickaxe']>0x4&&player[_0x5193c1(0xe3)]['currentPickaxe']!==0x1c)this.#canGenCaves=!![];else{if(currentWorld===0x2&&player['gears'][_0x5193c1(0x94)])this.#canGenCaves=!![];else{if(currentWorld===1.1)this.#canGenCaves=!![];else this.#canGenCaves=![];}}}['canGenerateCaves'](){return this.#canGenCaves;}#onLoad(){const _0x287bc8=_0x2dd277,_0x4e875c=screen[_0x287bc8(0xcc)]<0x190;if(debug)window['alert'](screen['width']+',\x20'+screen['height']);!_0x4e875c&&(this.#consoleCheckTimer=setInterval(()=>{this.#checkForConsole();},0x2ee));}#checkForConsole(){const _0x3322d8=_0x2dd277,_0x280876=this.#getBenchmark();let _0x8c05f1=1.2*_0x280876,_0x3a953a=0xa*_0x280876;_0x280876<0.1&&(_0x8c05f1=1.2,_0x3a953a=0xa);const _0x10a136=[];for(let _0x5801c9=0x0;_0x5801c9<0x1f4;_0x5801c9++){const _0x80630e=performance[_0x3322d8(0x90)]();console[_0x3322d8(0xac)](),console[_0x3322d8(0xce)]();const _0x50932f=performance[_0x3322d8(0x90)]()-_0x80630e;_0x10a136[_0x3322d8(0xa1)](_0x50932f);}let _0x6f4527=0x0;for(let _0x3eab53=0x0;_0x3eab53<_0x10a136[_0x3322d8(0xc8)];_0x3eab53++)_0x6f4527+=_0x10a136[_0x3eab53];const _0x22e7dd=_0x8c05f1-_0x6f4527,_0x1597ac=_0x3a953a-_0x6f4527;if(_0x6f4527>_0x3a953a&&_0x6f4527>_0x8c05f1*0xa){this.#consoleDetected++;if(debug){if(this.#consoleDetected<0x2)window[_0x3322d8(0x100)](_0x280876+',\x20'+roundNumberToMillionth(_0x6f4527)+',\x20'+roundNumberToMillionth(_0x8c05f1)+',\x20'+roundNumberToMillionth(_0x3a953a));this['getConsoleStats']();}}if(debug){const _0x1a2a30=roundNumberToMillionth(_0x280876)+_0x3322d8(0xfd)+roundNumberToMillionth(_0x6f4527)+_0x3322d8(0x7d)+roundNumberToMillionth(_0x8c05f1)+_0x3322d8(0x85)+roundNumberToMillionth(_0x22e7dd)+_0x3322d8(0xc0)+roundNumberToMillionth(_0x3a953a)+_0x3322d8(0xb4)+roundNumberToMillionth(_0x1597ac)+'\x20dist\x20to\x20high.';get(_0x3322d8(0xda))['textContent']=_0x1a2a30;}if(_0x6f4527>this.#highestPerformance)this.#highestPerformance=_0x6f4527;}#getBaseNumber(){const _0x5e2014=_0x2dd277,_0x3313ec=[];for(let _0x12970a=0x0;_0x12970a<0x320;_0x12970a++){const _0xf8553b=performance['now']();console[_0x5e2014(0xc1)]();const _0x419132=performance[_0x5e2014(0x90)]()-_0xf8553b;_0x3313ec['push'](_0x419132);}console[_0x5e2014(0xce)]();let _0x3527ca=0x0;for(let _0x1fa90b=0x0;_0x1fa90b<_0x3313ec[_0x5e2014(0xc8)];_0x1fa90b++)_0x3527ca+=_0x3313ec[_0x1fa90b];return _0x3527ca;}#getBenchmark(){const _0x4c6914=_0x2dd277,_0x2ff911=[];for(let _0x16b2be=0x0;_0x16b2be<0x5;_0x16b2be++){const _0x39a26d=performance[_0x4c6914(0x90)]();this.#getBaseNumber();const _0x56358f=performance[_0x4c6914(0x90)]()-_0x39a26d;_0x2ff911[_0x4c6914(0xa1)](_0x56358f);}let _0x227961=0x0;for(let _0x983fc4=0x0;_0x983fc4<_0x2ff911[_0x4c6914(0xc8)];_0x983fc4++)_0x227961+=_0x2ff911[_0x983fc4];_0x227961/=_0x2ff911[_0x4c6914(0xc8)];let _0x140739=_0x227961/this.#myNum;if(_0x140739<0x0)_0x140739=0.1;if(_0x140739>this.#highestDifference)this.#highestDifference=_0x140739;return _0x140739;}['getConsoleStats'](){const _0x2d92b0=_0x2dd277;debug&&(clearInterval(this.#consoleCheckTimer),console[_0x2d92b0(0xac)](this.#consoleDetected,this.#highestPerformance));}['getHighestPerformance'](){const _0x102669=_0x2dd277;window[_0x102669(0x100)](this.#highestPerformance+',\x20'+this.#highestDifference);}}function encryptLogData(_0x324aa3,_0x19a160){const _0x49476e=_0x2dd277,_0xb9d61f=Math[_0x49476e(0x96)](_0x324aa3[_0x49476e(0x9f)]);let _0x1c51be=_0xb9d61f+',\x20';return _0x1c51be+=Math[_0x49476e(0xdd)](Math[_0x49476e(0xac)](_0x324aa3['luck']),_0xb9d61f),_0x1c51be+=',\x20',_0x1c51be+=Math[_0x49476e(0xdd)](Math[_0x49476e(0xb6)](0x1/_0x324aa3[_0x49476e(0x98)]),1.225),_0x1c51be+=',\x20',_0x1c51be+=Math[_0x49476e(0xdd)](_0xb9d61f,0x2),_0x1c51be+=',\x20',_0x1c51be+=Math['log2'](_0x19a160),_0x1c51be+=',\x20',_0x1c51be+=Math[_0x49476e(0xb9)](_0x324aa3[_0x49476e(0x92)]*1.449),_0x1c51be+=',\x20',_0x1c51be+=_0x324aa3[_0x49476e(0xa5)],_0x1c51be+=',\x20',_0x1c51be+=_0x324aa3[_0x49476e(0xdb)]===undefined?_0x49476e(0xca):_0x324aa3[_0x49476e(0xdb)],_0x1c51be+=',\x20',_0x1c51be+=new Date(_0x324aa3[_0x49476e(0x8b)]),toBinary(_0x1c51be);}function decryptLogData(_0x59dcb3,_0x51b91c){const _0x355c02=_0x2dd277;if(_0x51b91c==='GJNT38GREJWEP'){_0x59dcb3=fromBinary(_0x59dcb3);let _0x11a3b8=Number(_0x59dcb3['substring'](0x0,_0x59dcb3[_0x355c02(0xe1)](',\x20')));_0x59dcb3=_0x59dcb3['substring'](_0x59dcb3['indexOf'](',')+0x2);let _0x5584b0=Number(_0x59dcb3['substring'](0x0,_0x59dcb3['indexOf'](',\x20')));_0x5584b0=Math[_0x355c02(0xf4)](Math[_0x355c02(0xdd)](Math['E'],Math[_0x355c02(0xdd)](_0x5584b0,0x1/_0x11a3b8))),_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3[_0x355c02(0xe1)](',')+0x2);let _0x470b44=Number(_0x59dcb3[_0x355c02(0xec)](0x0,_0x59dcb3[_0x355c02(0xe1)](',\x20')));_0x470b44=Math['pow'](_0x470b44,0x1/1.225),_0x470b44=Math['round'](Math['pow'](_0x470b44,0x2)),_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3[_0x355c02(0xe1)](',')+0x2);let _0x3e483b=Number(_0x59dcb3['substring'](0x0,_0x59dcb3['indexOf'](',\x20')));_0x3e483b=Math[_0x355c02(0xb6)](_0x3e483b),_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3['indexOf'](',')+0x2);let _0x3058db=Number(_0x59dcb3[_0x355c02(0xec)](0x0,_0x59dcb3[_0x355c02(0xe1)](',\x20')));_0x3058db=Math[_0x355c02(0xdd)](0x2,_0x3058db),_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3[_0x355c02(0xe1)](',')+0x2);let _0x5b9860=Number(_0x59dcb3[_0x355c02(0xec)](0x0,_0x59dcb3[_0x355c02(0xe1)](',\x20')));_0x5b9860=Math['floor'](_0x5b9860/1.449),_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3[_0x355c02(0xe1)](',')+0x2);let _0x20ef9b=_0x59dcb3[_0x355c02(0xec)](0x0,_0x59dcb3[_0x355c02(0xe1)](',\x20'));_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3[_0x355c02(0xe1)](',')+0x2);let _0x2220ff=_0x59dcb3[_0x355c02(0xec)](0x0,_0x59dcb3['indexOf'](',\x20'));_0x59dcb3=_0x59dcb3[_0x355c02(0xec)](_0x59dcb3[_0x355c02(0xe1)](',')+0x2);let _0xa15255=_0x59dcb3[_0x355c02(0xec)](0x0);_0x11a3b8=Math[_0x355c02(0xdd)](0xa,_0x11a3b8);const _0xfd5ec5=screen[_0x355c02(0xcc)]<0x1f4;return _0x355c02(0xf6)+_0x3e483b+',\x20Luck:\x20'+_0x5584b0+',\x20RNG:\x20'+_0x470b44+_0x355c02(0xc3)+_0x5b9860+_0x355c02(0x7c)+Math[_0x355c02(0xb9)](_0x11a3b8)+_0x355c02(0xa2)+new Date(_0xa15255)[_0x355c02(0x9b)]()+_0x355c02(0xa9)+(_0x20ef9b+'\x20'+(_0xfd5ec5?_0x355c02(0xe7):''))+_0x355c02(0xd0)+_0x2220ff;}}
+const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'));
+const logCreated = {}
+class secureLogs {
+    #spawnLogs;
+    #verifiedLogs;
+    #logsTimer;
+    #startTime = Date.now();
+    #maxLuck = [1, 1.2, 1.5, 2.15, 3, 5, 10, 4, 5.5, 20, 17.5, 30, 75, 1, 1.05, 1.075, 1.3, 1, 1.5, 2, 3, 1.5, 4, 8.25, 12.5, 50, 175, 1, 2.1];
+    #isRightPickaxe;
+    #canGenCaves;
+    #consoleDetected = 0;
+    #consoleCheckTimer;
+    #myNum = 0.6;
+    #highestDifference = 0;
+    #highestPerformance = 0;
+    testTotals = [];
+    //0.64
+    //0.592
+    constructor() {
+        if (logCreated["created"]) location.reload();
+        this.#spawnLogs = [];
+        this.#verifiedLogs = {
+            "All" : [],
+            "Cave" : [],
+            "Normal" : [],
+            "Electrified" : [],
+            "Radioactive" : [],
+            "Explosive" : [],
+        };
+        this.#logsTimer = null;
+        this.#isRightPickaxe = true;
+        this.#canGenCaves = false;
+        this.#consoleDetected = 0;
+        this.#onLoad()
+    }
+    createLog(r, c, intended, obj, fromCave) {
+        const ore = intended.ore === undefined ? intended : intended.ore;
+        const variant = intended.variant === undefined ? undefined : intended.variant;
+        fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
+        let luckModifier;
+        if (player.stats.currentPickaxe === 27) luckModifier = player.upgrades["pickaxe27"].levelLuck[player.upgrades["pickaxe27"].level];
+        if (currentWorld === 1.1) {
+            const pickaxe = player.upgrades["pickaxe27"];
+            luckModifier += getRewardTypes("luck", "add");
+            if (player.gears["gear20"]) luckModifier *= ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
+            luckModifier *= getRewardTypes("luck", "multiply")
+            if (isNaN(luckModifier)) luckModifier = 1;
+        } else {
+            luckModifier = this.#maxLuck[player.stats.currentPickaxe];
+        }
+        luckModifier += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0) + (getRewardTypes("luck", "add"));
+        luckModifier *= (player.gears["gear1"] ? 1.1 : 1) * (getRewardTypes("luck", "multiply")) * (player.gears["gear5"] ? 1.6 : 1);
+        if (player.gears["gear20"]) {
+            if (player.stats.currentPickaxe === 27) luckModifier *= ((player.upgrades["pickaxe27"].levelLuck[player.upgrades["pickaxe27"].level] * 0.05) + 1);
+            else luckModifier *= (verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1;
+        }
+        luckModifier *= 1.5;
+        luckModifier *= 1.25;
+        luckModifier *= 10;
+        const maxLuck = luckModifier;
+        let luck;
+        if (fromCave[1] > 1) {
+            if (caveLuck > 50000000) {
+                console.log("failed to create, ", obj.stack, caveLuck);
+                return;
+            } else {
+                luck = 1;
+            }
+        } else {
+            luck = oreList[ore]["numRarity"] * oreList[ore]["decimalRarity"];
+        }
+        if (((obj.stack.includes("mine.js") || obj.stack.includes("caves.js")) && luck <= maxLuck) || debug) {
+            this.#spawnLogs.push({x: c, y: r, block: ore, luck: luck, caveInfo: fromCave, variant: variant, avgSpeed: player.avgSpeed, paradoxical: player.powerupVariables.fakeEquipped.item, console: this.#consoleDetected, genAt: Date.now()})
+            Object.freeze(this.#spawnLogs[this.#spawnLogs.length - 1])
+        } else {
+            console.log("failed to create, ", obj.stack, luck, maxLuck);
+        }
+    }
+    verifyLog(r, c) {
+        for (let i = 0; i < this.#spawnLogs.length; i++) {
+            if (this.#spawnLogs[i].y === r && this.#spawnLogs[i].x === c) {
+                const block = mine[r][c].ore === undefined ? mine[r][c] : mine[r][c].ore;
+                if (block === this.#spawnLogs[i].block) {
+                    let rng;
+                    const log = this.#clone(this.#spawnLogs[i]);
+                    if (log.caveInfo[1] > 1) {
+                        if (oolProbabilities[block] !== undefined && log.caveInfo[2] !== "abysstoneCave") {
+                            rng = oolProbabilities[block];
+                        } else if (log.caveInfo[2] === "abysstoneCave") {
+                            rng = gsProbabilities[caveList["abysstoneCave"].indexOf(log.block)];
+                        } else {
+                            rng = 1/oreList[log.block]["numRarity"];
+                        }
+                        rng /= log.caveInfo[1];
+                        rng *= log.caveInfo[3];
+                    } else {
+                        rng = oreList[log.block]["decimalRarity"];
+                    }
+                    let variant = log.variant === undefined ? "Normal" : log.variant;
+                    rng /= multis[variant - 1];
+                    variant = names[variant - 1];
+                    this.#verifiedLogs["All"].push({block: log.block, y: r, x: c, time: Date.now() - this.#startTime, mined: false, variant: variant, luck: log.luck, caveInfo: log.caveInfo, rarity: rng, avgSpeed: log.avgSpeed, paradoxical: log.paradoxical, console: log.console, genAt: log.genAt})
+                    Object.freeze(this.#verifiedLogs["All"][this.#verifiedLogs["All"].length - 1])
+                    this.#spawnLogs.splice(i, 1);
+                    break;
+                } else {
+                    console.log('failed to verify', r, c);
+                }
+            }
+        }
+    }
+    verifyFind(block, r, c, variant) {
+        block = block.ore === undefined ? block : block.ore;
+        let verified = false;
+        for (let i = this.#verifiedLogs["All"].length - 1; i >= 0; i--) {
+            if (this.#verifiedLogs["All"][i].y === r && this.#verifiedLogs["All"][i].x === c) {
+                if (block === this.#verifiedLogs["All"][i].block) {
+                    const log = this.#clone(this.#verifiedLogs["All"][i]);
+                    if (log.mined != true) {
+                        log.mined = true;
+                        if (log.variant === undefined) log.variant = variant;
+                        if (player.webHook.active) webHook(log);
+                        const webhookString = `${player.name} has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rarity).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()} ${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
+                        log.output = webhookString;
+                        this.#verifiedLogs["All"][i] = log;
+                        Object.freeze(log);
+                        if (player.settings.highRarityLogs && log.rarity > 1/250000000) {
+                            this.#verifiedLogs["All"].splice(i, 1);
+                        } else {
+                            if (log.caveInfo[0]) this.#verifiedLogs["Cave"].push(log);
+                            if (log.variant === "Normal") this.#verifiedLogs["Normal"].push(log);
+                            else if (log.variant === "Electrified") this.#verifiedLogs["Electrified"].push(log);
+                            else if (log.variant === "Radioactive") this.#verifiedLogs["Radioactive"].push(log);
+                            else if (log.variant === "Explosive") this.#verifiedLogs["Explosive"].push(log);
+                        }
+                        verified = true;
+                        break;
+                    }
+                } else {
+                    console.log("failed to verify find", block, this.#verifiedLogs["All"][i].luck);
+                }
+            }
+        }
+        if (!verified) {
+            console.log("log not found, failed to verify if found, block mined", block, r, c)
+        }
+    }
+    showLogs() {
+        if (document.getElementById("menuSelectionContainer").style.display !== "none") {
+                this.#clearLogs()
+                let element = document.createElement("p");
+                if (document.getElementById("generatedLogs") !== null)
+                    document.getElementById("generatedLogs").remove();
+                element.id = "generatedLogs";
+                document.getElementById("logHolder").appendChild(element);
+                let output = "";
+                const list = this.#verifiedLogs[document.getElementById("logSort").value];
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i].output === undefined) {
+                        output += `<span  style="color:${variantInformation[list[i].variant].color};">${player.name} has NOT found ${list[i].variant} ${list[i].block} (Voided).</span> Verification: `
+                    } else {
+                        output += `<span  style="color:${variantInformation[list[i].variant].color};">${list[i].output}.</span> Verification: `;
+                    }
+                    let times;
+                    if (list[i - 1] !== undefined) times = list[i].time - list[i - 1].time;
+                    else times = list[i].time;
+                    output += `<span><span style="font-size:0vw;">${encryptLogData(list[i], times)}</span><span onclick="copyText(this.parentElement.children[0]); copiedLog(this);">Click Me To Copy Verification</span></span><br>`
+                }
+                if (document.getElementById("generatedLogs") !== undefined) document.getElementById("generatedLogs").innerHTML = output;
+        } else {
+            this.#clearLogs();
+        }
+    }
+    #clone(obj){
+        if(obj == null || typeof(obj) != 'object')
+           return obj;
+     
+        var temp = obj.constructor();
+     
+        for(var key in obj)
+            temp[key] = this.#clone(obj[key]);
+        return temp;
+    }
+    #clearLogs() {
+        clearInterval(this.#logsTimer);
+        this.#logsTimer = null;
+        if (document.getElementById("generatedLogs") !== null)
+            document.getElementById("generatedLogs").remove();
+    }
+    getLuckBoosts() {
+        return this.#maxLuck;
+    }
+    getCurrentLuck() {
+        let luck; 
+        if (player.stats.currentPickaxe === 27) luck = player.upgrades["pickaxe27"].levelLuck[player.upgrades["pickaxe27"].level];
+        if (currentWorld === 1.1) {
+            const pickaxe = player.upgrades["pickaxe27"];
+            let luck = pickaxe.levelLuck[pickaxe.level];
+            luck += getRewardTypes("luck", "add");
+            if (player.gears["gear20"]) luck *= ((pickaxe.levelLuck[pickaxe.level] * 0.05) + 1);
+            luck *= 1.25;
+            luck *= getRewardTypes("luck", "multiply")
+            if (isNaN(luck)) return 1;
+            else return luck;
+        } else {
+            if (player.stats.currentPickaxe === 27 && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) {player.stats.currentPickaxe = 0; luck = 1;}
+            else luck ??= this.#maxLuck[player.stats.currentPickaxe];
+        }
+        luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
+        luck += getRewardTypes("luck", "add");
+        if (currentWorld < 2)
+            luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
+        if (player.gears["gear20"]) {
+            if (player.stats.currentPickaxe === 27) luck *= ((player.upgrades["pickaxe27"].levelLuck[player.upgrades["pickaxe27"].level] * 0.05) + 1);
+            else luck *= (verifiedOres.getLuckBoosts()[player.stats.currentPickaxe] * 0.05) + 1;
+        }
+        luck *= getRewardTypes("luck", "multiply");
+        if (isNaN(luck)) return 1;
+        else return luck;
+    }
+    getStartTime() {
+        return this.#startTime;
+    }
+    isRightPickaxe() {
+        return this.#isRightPickaxe;
+    }
+    checkPickaxe() {
+        if (currentWorld === 1) this.#isRightPickaxe = true;
+        else if (currentWorld === 1.1 && player.stats.currentPickaxe === 27) this.#isRightPickaxe = true;
+        else if (currentWorld === 2 && player.stats.currentPickaxe > 12 && player.stats.currentPickaxe < 27) this.#isRightPickaxe = true;
+        else this.#isRightPickaxe = false;
+    }
+    checkCaves() {
+        if (currentWorld === 1 && player.stats.currentPickaxe > 4 && player.stats.currentPickaxe !== 28) this.#canGenCaves = true;
+        else if (currentWorld === 2 && player.gears["gear14"]) this.#canGenCaves = true;
+        else if (currentWorld === 1.1) this.#canGenCaves = true;
+        else this.#canGenCaves = false;
+    }
+    canGenerateCaves() {
+        return this.#canGenCaves;
+    }
+    #onLoad() {
+        const isMobile = screen.width < 400;
+        if (debug) window.alert(`${screen.width}, ${screen.height}`)
+        if (!isMobile) {
+            this.#consoleCheckTimer = setInterval(() => {
+                this.#checkForConsole();
+            }, 750);
+        }
+    }
+    #checkForConsole() {
+        const thisModifier = this.#getBenchmark();
+        let lowEnd = 1.2 * thisModifier;
+        let highEnd = 10 * thisModifier;
+        if (thisModifier < 0.1) {lowEnd = 1.2; highEnd = 10;}
+        const times = [];
+        for (let i = 0; i < 500; i++) {
+            const timeBefore = performance.now();
+            console.log();
+            console.clear();
+            const timeAfter = performance.now() - timeBefore;
+            times.push(timeAfter);
+        }
+        let total = 0;
+        for (let i = 0; i < times.length; i++) total += times[i];
+        const distToLow = lowEnd - total;
+        const distToHigh = highEnd - total;
+        if ((total > highEnd) && total > lowEnd * 10) {
+            this.#consoleDetected++;
+            if (debug) {
+                if (this.#consoleDetected < 2) window.alert(`${thisModifier}, ${roundNumberToMillionth(total)}, ${roundNumberToMillionth(lowEnd)}, ${roundNumberToMillionth(highEnd)}`);
+                this.getConsoleStats();
+            }
+        }
+        if (debug) {
+            const output = `${roundNumberToMillionth(thisModifier)}x performance, ${roundNumberToMillionth(total)} time, ${roundNumberToMillionth(lowEnd)} low, ${roundNumberToMillionth(distToLow)} dist to low, ${roundNumberToMillionth(highEnd)} high, ${roundNumberToMillionth(distToHigh)} dist to high.`;
+            get("secretDebugStats").textContent = output;
+        }
+        if (total > this.#highestPerformance) this.#highestPerformance = total;
+    }
+    #getBaseNumber() {
+        const times = [];
+        for (let i = 0; i < 800; i++) {
+            const timeBefore = performance.now();
+            console.dir()
+            const timeAfter = performance.now() - timeBefore;
+            times.push(timeAfter);
+        }
+        console.clear();
+        let total = 0;
+        for (let i = 0; i < times.length; i++) total += times[i];
+        return total;
+    }
+    #getBenchmark() {
+        const times = [];
+        for (let i = 0; i < 5; i++) {
+            const timeBefore = performance.now();
+            this.#getBaseNumber();
+            const timeAfter = performance.now() - timeBefore;
+            times.push(timeAfter);
+        }
+        let total = 0;
+        for (let i = 0; i < times.length; i++) total += times[i];
+        total /= times.length;
+        let num = total/this.#myNum;
+        if (num < 0) num = 0.1;
+        if (num > this.#highestDifference) this.#highestDifference = num;
+        return num;
+    }
+    getConsoleStats() {
+        if (debug) {
+            clearInterval(this.#consoleCheckTimer);
+            console.log(this.#consoleDetected, this.#highestPerformance);
+        }
+    }
+    getHighestPerformance() {
+        window.alert(`${this.#highestPerformance}, ${this.#highestDifference}`);
+    }
+}
+function encryptLogData(log, times) {
+    const key = Math.log10(log.time);
+    let output = key + ", ";
+    output += Math.pow(Math.log(log.luck), key);
+    output += ", ";
+    output += Math.pow(Math.sqrt(1 / log.rarity), 1.225);
+    output += ", ";
+    output += Math.pow(key, 2);
+    output += ", ";
+    output += Math.log2(times);
+    output += ", ";
+    output += Math.floor(log.avgSpeed * 1.449);
+    output += ", ";
+    output += log.console;
+    output += ", ";
+    output += (log.paradoxical === undefined ? "none" : log.paradoxical);
+    output += ", ";
+    output += new Date(log.genAt);
+    output += ", ";
+    output += screen.width < 500;
+    return toBinary(output);
+  }
+  function decryptLogData(toDecrypt, key) {
+    if (key === "GJNT38GREJWEP") {
+      toDecrypt = fromBinary(toDecrypt);
+      let paramOne = Number(toDecrypt.substring(0, toDecrypt.indexOf(", ")));
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramTwo = Number(toDecrypt.substring(0, toDecrypt.indexOf(", ")));
+      paramTwo = Math.round(Math.pow(Math.E, Math.pow(paramTwo, 1 / paramOne)));
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramThree = Number(toDecrypt.substring(0, toDecrypt.indexOf(", ")));
+      paramThree = Math.pow(paramThree, 1/1.225);
+      paramThree = Math.round(Math.pow(paramThree, 2));
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramFour = Number(toDecrypt.substring(0, toDecrypt.indexOf(", ")));
+      paramFour = Math.sqrt(paramFour);
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramFive = Number(toDecrypt.substring(0, toDecrypt.indexOf(", ")));
+      paramFive = Math.pow(2, paramFive);
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramSix = Number(toDecrypt.substring(0, toDecrypt.indexOf(", ")));
+      paramSix = Math.floor(paramSix / 1.449);
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramSeven = toDecrypt.substring(0, toDecrypt.indexOf(", "));
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramEight = toDecrypt.substring(0, toDecrypt.indexOf(", "));
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let paramNine = toDecrypt.substring(0, toDecrypt.indexOf(", "));
+      toDecrypt = toDecrypt.substring(toDecrypt.indexOf(',') + 2);
+      let isMobile = toDecrypt.substring(0) === "true";
+      paramOne = Math.pow(10, paramOne);
+      return "Key: " + paramFour + ", Luck: " + paramTwo + ", RNG: " + paramThree + ", AVG Speed: " + paramSix + ", Time Since Last Log: " + Math.floor(paramOne) + ", Generated At: " + new Date(paramNine).toUTCString() + ", Console Flags: " + `${paramSeven} ${isMobile ? "(Mobile)" : ""}` + ", Paradoxical Item: " + paramEight;
+    }
+}
 function roundNumberToMillionth(num) {
     return Math.round(num * 1000000) / 1000000;
 }
