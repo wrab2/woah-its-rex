@@ -606,6 +606,22 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   width: 25vw;
   height: 100%;
 }
+#dataFileUpload {
+  display: none;
+}
+#dataFileLabel {
+  width: 10vw;
+  height: 100%;
+  color: white;
+  border: 0.1vw solid white;
+  background-color: #333;
+  font-size: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
 body {
   background-color: #1a1a1a;
   margin: 0;
@@ -2438,6 +2454,188 @@ background-size: 100%;
   width: 25vw;
   position: absolute;
   z-index: 9;
+}
+#trophyRoom {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  background-color: rgba(26, 26, 26, 0.75);
+}
+#trophyMargin {
+  width: 100%;
+  height: 10vw;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.shelfComponent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  height: 25vw;
+}
+.chainConnector {
+  height: 100%;
+  width: 5%;
+  z-index: 0;
+  background-image: url(media/chainTexture.png);
+  background-size: auto;
+  background-repeat: repeat-y;
+  background-position: center;
+  filter: drop-shadow(0 0 0.1vw white);
+}
+.mainShelfContent {
+  width: 90%;
+  height: 100%;
+  z-index: 1;
+}
+.trophyImages {
+  width: 100%;
+  height: 80%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.trophyDisplayImage {
+  width: 30%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.trophy {
+  width: auto;
+  height: 100%;
+}
+.unownedTrophy {
+  filter: brightness(0%);
+}
+.horizontalPlank {
+  width: 115%;
+  height: 20%;
+  margin-left: -7.5%;
+  z-index: 1;
+  background-image: url(media/plankTexture.jpg);
+  background-size: auto;
+  background-repeat: repeat;
+  border: 0.1vw solid white;
+}
+#secretDebugStats {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  height: 2vw;
+  color: white;
+  font-size: 0.75vw;
+  text-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#shelfStart {
+  width: 100%;
+  height: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+#shelfStartMargin {
+  width: 80%;
+}
+.shelfStartPlank {
+  height: 2vw;
+  width: 10%;
+  background-image: url(media/plankTexture.jpg);
+  z-index: 1;
+}
+#leaveTrophyRoom {
+  height: 25%;
+  width: 25%;
+  font-size: 2vw;
+  background: none;
+  border: none;
+  font-family: Fredoka One;
+  white-space: nowrap;
+  cursor: pointer;
+  margin: 0px;
+}
+#trophyTitle {
+  height: 50%;
+  width: 100%;
+  font-size: 3vw;
+  letter-spacing: 0.2vw;
+  background: none;
+  border: none;
+  font-family: Fredoka One;
+  white-space: nowrap;
+  margin: 0px;
+  text-align: center;
+}
+#requirementTextArea {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  top: 100%;
+  left: 10%;
+}
+#textBottom {
+  height: 100%;
+  width: 100%;
+  background-color: #3d3c3c;
+  border: 0.1vw solid white;
+  border-radius: 1vw;
+  color: white;
+  text-align: center;
+  display: flex;
+  font-size: 1.15vw;
+  font-weight: 750;
+  line-height: 1.1vw;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.trophyRequirements {
+  width: 100%;
+  height: 60%;
+  margin:0px;
+  display: flex;
+  align-items: top;
+  padding-top: 3%;
+  justify-content: center;
+  line-height: 1.3vw;
+  margin-bottom: 5%;
+}
+.trophyReward {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: top;
+  margin-bottom: 5%;
+  justify-content: center;
+}
+.trophyIcon {
+  width: 100%;
+  height: 15%;
+  font-size: 75%;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  margin-bottom: 3%;
+}
+#worldTwoCompletion {
+  width: auto;
+  height: auto;
 }
 @keyframes flashGreen {
   0% {background-color:white;}

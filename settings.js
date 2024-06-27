@@ -1004,7 +1004,7 @@ function allowMessage(tier) {
 const portalLocations = {
     "worldOne" : {position: 0, name: "World One", goesTo: 1, hue: "0deg"},
     "worldTwo" : {position: 1, name: "World Two", goesTo: 2, hue: "-40deg"},
-    "trophyRoom" : {position: 2, name: "Trophy Room (Coming Soon)", goesTo: 0, hue: "150deg"},
+    "trophyRoom" : {position: 2, name: "Trophy Room", goesTo: 0, hue: "150deg"},
     "subrealmOne" : {position: 3, name: "Subrealm One", goesTo: 1.1, hue: "40deg"}
 }
 let currentPortalShown = 0;

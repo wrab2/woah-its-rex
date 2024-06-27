@@ -104,7 +104,14 @@ function exportData() {
         alert("The textbox has been selected for you; make sure to copy your data to your clipboard so you don't lose it!");
     }
 }
-
+function getFileContents(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = (evt) => {
+        importData(evt.target.result)
+    }
+}
 function importData(data) {
     if (data === "") {
         if (confirm("You are importing nothing, this will perform a hard reset on your save file. Are you sure you want to do this?")) {

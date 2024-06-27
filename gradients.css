@@ -287,6 +287,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#celestianReaper span{
+    background: linear-gradient(to right, #5A1700, #8C2806, #AB3C16, #BC4E28, #DB5B2F, #F5541D, #FF4100);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;

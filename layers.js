@@ -424,6 +424,7 @@ let oreList = {
     
     //🏳️‍⚧️ 🇺🇳 
     '🇺🇳' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
+    '🏁': { 'decimalRarity': 1 / 25000000000000, 'numRarity': 25000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🏳️‍⚧️' : { 'decimalRarity': 1 / 500000000000000, 'numRarity': 500000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     
     '🍀': { 'decimalRarity': 1 / 234000000000000, 'numRarity': 234000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'This is it..? The symbol of luck itself, a simple four-leafed clover..?', 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -565,7 +566,7 @@ const layerList = {
 "vaLayer" : ["sillyMiner", '🇷🇺', '🇩🇪', '🇬🇧', '🇫🇷', '🇮🇹', '🇪🇸', '🇵🇱', '🇺🇦', '🇷🇴', '🇳🇱', '🇻🇦'],
 "srLayer" : ["sillyMiner", '🇧🇷', '🇨🇴', '🇦🇷', '🇵🇪', '🇻🇪', '🇨🇱', '🇪🇨', '🇧🇴', '🇵🇾', '🇺🇾', '🇸🇷'],
 "ocLayer" : ["sillyMiner", '🇦🇺', '🇵🇬', '🇳🇿', '🇫🇯', '🇸🇧', '🇫🇲', '🇻🇺', '🇵🇫', '🇳🇨', '🇼🇸', '🇹🇻'],
-"catcatLayer" : [ '🏳️‍⚧️', '🇺🇳']
+"catcatLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳']
 }
 const createdLayers = {
 
@@ -836,8 +837,9 @@ function createAllLayers() {
     //for (let i = 0; i < worldOneLayers.length; i++) layerDictionary[worldOneLayers[i]] = createLayer([layerList[worldOneLayers[i]], layerList["worldOneCommons"]]);
 }
 function updateAllLayers() {
-    for (let layer in layerDictionary) layerDictionary[layer].layer = applyLuckToLayer(layerDictionary[layer].layer, verifiedOres.getCurrentLuck());
-    oreList["luna"]["decimalRarity"] = 1/(oreList["luna"]["numRarity"] / verifiedOres.getCurrentLuck());
+    const luck = verifiedOres.getCurrentLuck();
+    for (let layer in layerDictionary) layerDictionary[layer].layer = applyLuckToLayer(layerDictionary[layer].layer, luck);
+    oreList["luna"]["decimalRarity"] = 1/(oreList["luna"]["numRarity"] / luck);
     createGenerationProbabilities();
 }
 function createGenerationProbabilities() {
@@ -900,9 +902,10 @@ function insertIntoLayers(obj) {
     let layers = obj["layers"];
     let useLuck = obj["useLuck"];
     if (layers === undefined) layers = allLayers;
+    const luck = verifiedOres.getCurrentLuck();
     for (let i = 0; i < layers.length; i++) {
         if (!(layerDictionary[layers[i]].layer.includes(ore))) {
-            if (useLuck) oreList[ore]["decimalRarity"] = 1/(oreList[ore]["numRarity"] / verifiedOres.getCurrentLuck());
+            if (useLuck) oreList[ore]["decimalRarity"] = 1/(oreList[ore]["numRarity"] / luck);
             let layer = layerDictionary[layers[i]].layer;
             for (let j = 0; j < layer.length; j++) {
                 if (oreList[layer[j]]["decimalRarity"] > oreList[ore]["decimalRarity"]) {

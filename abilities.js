@@ -191,7 +191,7 @@ function getTestAvg() {
 }
 //generates a large cube around the player
 function powerup1(x, y) {
-    if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown) {
+    if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
         for (let r = y - 50; r < y + 50; r++) {
             for (let c = x - 50; c < x + 50; c++) {
                 pickaxeAbilityMineBlock(c, r);
@@ -206,7 +206,7 @@ function powerup1(x, y) {
 
 //creates 4 caves around the player
 function powerup2(x, y) {
-    if (Date.now() >= player.powerupCooldowns["powerup2"].cooldown) {
+    if (Date.now() >= player.powerupCooldowns["powerup2"].cooldown && player.powerupCooldowns["powerup2"].unlocked) {
         generateCave(x + 100, y);
         generateCave(x - 100, y);
         generateCave(x, y + 100);
@@ -224,7 +224,7 @@ function powerup2(x, y) {
 
 //make a random layer ore more common for a short period
 function powerup3() {
-    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown) {
+    if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown && player.powerupCooldowns["powerup3"].unlocked) {
         const layer = layerDictionary[currentLayer].layer;
         const acceptableOres = [];
         for (let i = 0; i < layer.length; i++) if (!oreInformation.isCommon(oreList[layer[i]]["oreTier"]) && oreList[layer[i]]["oreTier"] !== "Celestial" && oreList[layer[i]]["oreTier"] !== "Antique" && player.powerupVariables.currentChosenOre.lastOre !== layer[i]) acceptableOres.push(layer[i])
@@ -238,7 +238,7 @@ function powerup3() {
     }
 }
 function powerup4() {
-    if (Date.now() >= player.powerupCooldowns["powerup4"].cooldown) {
+    if (Date.now() >= player.powerupCooldowns["powerup4"].cooldown && player.powerupCooldowns["powerup4"].unlocked) {
         player.powerupVariables.commonsAffected.state = true;
         player.powerupVariables.commonsAffected.removeAt = Date.now() + (player.gears["gear24"] ? 300000 * 1.5 : 300000);;
         player.powerupCooldowns["powerup4"].cooldown = Date.now() + (player.gears["gear24"] ? 1200000 * 0.75 : 1200000);
@@ -247,7 +247,7 @@ function powerup4() {
     }
 }
 function powerup5() {
-    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && currentWorld !== 1.1) {
+    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && currentWorld !== 1.1 && player.powerupCooldowns["powerup5"].unlocked) {
         removeParadoxical();
         let toChooseFrom = Object.keys(player.pickaxes).concat(Object.keys(player.gears));
         for (let i = toChooseFrom.length - 1; i >= 0; i--) {

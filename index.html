@@ -20,6 +20,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--Importing JS Files-->
     <script src="settings.js"></script>
+    <script src="achievements.js"></script>
     <script src="layers.js"></script>
     <script src="logs.js"></script>
     <script src="mine.js"></script>
@@ -38,6 +39,40 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 </head>
 <body>
     <div id="blackScreen"></div>
+    <div id="trophyRoom">
+        <div id="requirementTextArea">
+            <div id="textBottom">
+
+            </div>
+        </div>
+        <div id="trophyMargin">
+            <p id="trophyTitle">Trophy Room</p>
+            <button id="leaveTrophyRoom" onclick="showTrophyRoom(false)">Return Home</button>
+        </div>
+        <div id="shelfStart">
+            <img class="shelfStartPlank">
+            <div id="shelfStartMargin"></div>
+            <img class="shelfStartPlank">
+        </div>
+        <div class="shelfComponent">
+            <div class="chainConnector"></div>
+            <div class="mainShelfContent">
+                <div class="trophyImages">
+                    <div class="trophyDisplayImage">
+                        <img class="trophy unownedTrophy" onclick="displayRequirementAtLocation(this)" id="worldOneCompletion" src="media/worldOneTrophy.PNG">
+                    </div>
+                    <div class="trophyDisplayImage" style="width: 40%;">
+                        <img class="trophy unownedTrophy" onclick="displayRequirementAtLocation(this)" id="worldTwoCompletion" src="media/worldTwoTrophy.webp">
+                    </div>
+                    <div class="trophyDisplayImage">
+                        <img class="trophy unownedTrophy" onclick="displayRequirementAtLocation(this)" id="subrealmOneCompletion" src="media/subrealmOneTrophy.webp">
+                    </div>
+                </div>
+                <div class="horizontalPlank"></div>
+            </div>
+            <div class="chainConnector"></div>
+        </div>
+    </div>
     <p class="latestFind htmlTemplate" style="display: none;"></p>
     <noscript>
         <div id="noscript">
@@ -144,6 +179,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe('gear25')" style="display: none;" id="alterationReiterator"><span>Alteration Reiterator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear26')" style="display: none;" id="stratumNonillonator"><span>Stratum Nonillonator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear27')" style="display: none;" id="biomeEnchanter"><span>Biome Enchanter</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear28')" style="display: none;" id="celestianReaper"><span>Celestian Reaper</span></button>
+                
                 </div>
                 
             </div>
@@ -166,9 +203,9 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe11Description" style="display: none;">Mines an extremely large spiral around the player.<br>Has an ability proc rate of 1/100.<br>Has 30x luck.<br><span id="pickaxe11Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe11Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe12Description" style="display: none;">Mines wings around the player.<br>Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck.<br>Has an ability proc rate of 1/150.<br>Has 75x luck.<br><span id="pickaxe12Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe12Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
                 <p class="itemDescription" id="pickaxe13Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>All World 2 gears will work in World 1 (The speed gears require all to be owned).<br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
-                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.<br><span id="pickaxe14Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe14Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe14Description" style="display: none;">Mines a randomly sized circle around the player.<br>Has an ability proc rate of 1/45.<br>Has 1.05x luck.<br><span id="pickaxe14Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe14Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @hulfe</span></p>
                 <p class="itemDescription" id="pickaxe15Description" style="display: none;">Mines a diamond around the player.<br>Has an ability proc rate of 1/75.<br>Has 1.075x luck.<br><span id="pickaxe15Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe15Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.<br><span id="pickaxe16Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe16Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe16Description" style="display: none;">Mines a star around the player.<br>Has an ability proc rate of 1/100.<br>Has 1.3x luck.<br><span id="pickaxe16Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe16Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe17Description" style="display: none;">Mines a cat around the player :3c.<br>Has an ability proc rate of 1/150.<br>Has 1x luck.<br><span id="pickaxe17Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe17Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
                 <p class="itemDescription" id="pickaxe18Description" style="display: none;">Mines a crescent moon around the player.<br>Has an ability proc rate of 1/150<br>Has 1.5x luck.<br><span id="pickaxe18Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe18Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
                 <p class="itemDescription" id="pickaxe19Description" style="display: none;">Mines a diamond around the player, but is able to keep activating itself.<br>Has an ability proc rate of 1/60.<br>Has 2x luck.<br><span id="pickaxe19Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe19Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
@@ -177,10 +214,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe22Description" style="display: none;">Mines 20 circles around the player, each having it's radius increased 2 blocks more than the last.<br>Has an ability proc rate of 1/120.<br>Has 4x luck.<br><span id="pickaxe22Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe22Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe23Description" style="display: none;">Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 8.25x luck.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i><br><span id="pickaxe23Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe23Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe24Description" style="display: none;">You've mined too much, best to turn back now. Be warned.<br>Has an ability proc rate of 1/175.<br>Has 12.5x luck.<br><span id="pickaxe24Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe24Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe25Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/300.<br>Has 50x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span id="pickaxe25Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe25Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe25Description" style="display: none;">Slashes through your heart.<br>Has an ability proc rate of 1/300.<br>Has 50x luck.<br><i style="font-size: 75%;">..This is where it ends? The most powerful tool in all the worlds..? No.. it can't end here there must be something more...</i><br><i>Warning: High mine capacities with this pickaxe may lead to game crashes.</i><br><span id="pickaxe25Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe25Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe26Description" style="display: none;">Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br>Has an ability proc rate of 1/150.<br>Has 175x luck.<br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade. The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-               
+                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade (only in Subrealm). The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
                 <!--
                     Pickaxes above
                     Gears below
@@ -213,6 +250,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear25Description" style="display: none;">Will roll 1 extra time for a variant if an ore is normal.</p>
                 <p class="itemDescription" id="gear26Description" style="display: none;">5% chance to give 30x more layer blocks on mining a layer block.</p>
                 <p class="itemDescription" id="gear27Description" style="display: none;">1.75x cave type boost.</p>
+                <p class="itemDescription" id="gear28Description" style="display: none;">Allows any Infinity Collector to mine Celestial tier ores.</p>
                 
             </div>
         </div>
@@ -235,6 +273,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div id="eventMessages">
                 Event Messages Appear Here!
             </div>
+            <span id="secretDebugStats"></span>
             <div id="blockContainer">
                 <button id="powerupScrollUp" onclick="switchPowerupDisplay(1)"><span><</span></button>
                 <div id="powerupLock">
@@ -551,6 +590,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                         <button class="dataButton" onclick="exportData()">Export Data</button>
                         <input type="text" id="dataText">
                         <button class="dataButton" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
+                        <label for="dataFileUpload" id="dataFileLabel">
+                            Upload Save File
+                        </label>
+                        <input type="file" id="dataFileUpload" accept=".txt">
                         <button class="dataButton" onclick="saveAllData(true)">Force Cloud Save (Galaxy)</button>
                     </div>
                         
@@ -953,7 +996,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             </details>
                             <details class="faqText">
                                 <summary class="faqSection">The Final Pickaxe</summary>
-                                Viewing: Craft every pickaxe and gear, and click the pickaxes tab 6 times to view the recipe.<br>
+                                Viewing: Obtain every world completion trophy and click the pickaxes tab 6 times.<br>
                                 The celestials required to craft it:<br>
                                 Pickaxe: Mine down into the barrier to have a chance to obtain it<br>
                                 Yin-Yang: Mine in World 2 with the Key equipped.<br>
@@ -1030,6 +1073,19 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     - Added a message system (this!!) for anything important I need people to know!<br>
                     - Something important to know, you now can click on a log to copy and paste it so I dont suffer reading numbers!<br>
                     - Did a lot of bug fixes.<br>
+                    - Report any bugs in the Discord server!
+                </p>
+            </div>
+            <div id="trophyUpdate" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <p class="dailyText">
+                    Trophy Room Update!!<br>
+                    - Added the Trophy Room (found in the Portal Room)<br>
+                    - This is pretty much achievements but I wanted to be extra.<br>
+                    - Only 3 obtainable trophies for World completions, a completion is from a task instead of owning every ore or item.<br>
+                    - More pickaxe icons added!<br>
+                    - Made owned pickaxes from other worlds appear in the World 1 list.<br>
+                    - Silly bug fixes :3<br>
                     - Report any bugs in the Discord server!
                 </p>
             </div>

@@ -29,7 +29,7 @@ class playerTemplate {
             "gear25": false,
             "gear26": false,
             "gear27": false,
-            //"gear28": false,
+            "gear28": false,
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -155,6 +155,24 @@ class playerTemplate {
         }
         this.viewedMessages = {}
         this.avgSpeed = 0;
+        this.trophyProgress = {
+            "worldOneCompletion" : {
+                lastMinedAmt : 0,
+                lastPickaxeUsed : 0,
+                blocksWithWOG : 0,
+                trophyOwned : false
+            },
+            "worldTwoCompletion" : {
+                lastMinedAmt : 0,
+                lastPickaxeUsed : 0,
+                blocksWithCoronary : 0,
+                trophyOwned : false
+            },
+            "subrealmOneCompletion" : {
+                trophyOwned : false
+
+            },
+        }
     }
 }
 let player = new playerTemplate();
@@ -451,6 +469,13 @@ function loadNewData(data) {
             }
         }
         data = data.player;
+        if (data.trophyProgress !== undefined) {
+            for (let trophy in data.trophyProgress) {
+                if (player.trophyProgress[trophy] !== undefined) {
+                    player.trophyProgress[trophy] = data.trophyProgress[trophy];
+                }
+            }
+        }
         if (data.wasUsing !== undefined) {
             data.stats.currentPickaxe = data.wasUsing;
         }
@@ -469,7 +494,7 @@ function loadNewData(data) {
             for (let propertyName in data.pickaxes) if (player.pickaxes[propertyName] !== undefined) player.pickaxes[propertyName] = data.pickaxes[propertyName];
         }
         if (data.stats.currentPickaxe !== undefined) player.stats.currentPickaxe = data.stats.currentPickaxe;
-        if (player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;
+        if (player.stats.currentPickaxe === 27 && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = 0;
         if (data.stats.blocksMined !== undefined) player.stats.blocksMined = data.stats.blocksMined;
         if (data.stats.cavesGenerated !== undefined) player.stats.cavesGenerated = data.stats.cavesGenerated;
         if (data.stats.timePlayed !== undefined) player.stats.timePlayed = data.stats.timePlayed;
@@ -585,7 +610,6 @@ function loadNewData(data) {
             layer: Math.round(Math.random() * 100000),
             lastAddedOn: new Date().getDate()
         }
-        
         if (new Date().getDate() !== data.luna.lastAddedOn) {
             player.luna.layer = Math.round(Math.random() * 100000);
             player.luna.lastAddedOn = new Date().getDate();
@@ -638,10 +662,13 @@ const dailyMessages = {
         showUntil : "June 15, 9999",
     },
     "chooseName" : {
-        showUntil : "June 15, 9999",
+        showUntil : "June 25, 0000",
     },
     "portalUpdate" : {
         showUntil : "June 25, 2024",
+    },
+    "trophyUpdate" : {
+        showUntil : "July 1, 2024",
     },
     "sr1Unlocked" : {
         showUntil : "June 25, 0000",

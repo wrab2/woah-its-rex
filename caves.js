@@ -315,31 +315,39 @@ function generateCaveBlock(y, x, type) {
             }
             let variant = rollVariant();
             if (player.gears["gear25"] && variant === 1) variant = rollVariant();
+            const tier = oreList[blockToGive]["oreTier"];
             mine[y][x] = {ore: blockToGive, variant: variant};
             if (oolProbabilities[blockToGive] != undefined && type !== "abysstoneCave")
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000 || oreList[blockToGive]["hasLog"]) {
-                playSound(oreList[blockToGive]["oreTier"]);
+                playSound(tier);
                 verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, caveLuck]);
                 verifiedOres.verifyLog(y, x);
             }
-            if (messageIncluded(oreList[blockToGive]["oreTier"])) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: {"adjRarity" : adjRarity, "caveType" : type}, variant: variant});
-            if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
-            if (player.settings.stopOnRare.active && stopIncluded(oreList[blockToGive]["oreTier"])) stopMining();
+            if (messageIncluded(tier)) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: {"adjRarity" : adjRarity, "caveType" : type}, variant: variant});
+            let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
+            if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
+            if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
+            if (canCollect) mineCaveBlock(x, y, type);
+            if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
         }
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
             let variant = rollVariant();
             if (player.gears["gear25"] && variant === 1) variant = rollVariant();
+            const tier = oreList[blockToGive]["oreTier"];
             mine[y][x] = {ore: blockToGive, variant: variant};
-            playSound(oreList[blockToGive]["oreTier"]);
+            playSound(tier);
             if (oreList[blockToGive]["hasLog"]) {
                 verifiedOres.createLog(y, x, {ore: blockToGive, variant: variant}, new Error(), [true, 1]);
                 verifiedOres.verifyLog(y, x);
             }
-            if (messageIncluded(oreList[blockToGive]["oreTier"])) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: undefined, variant: variant});
-            if ((currentWorld < 2 && player.gears["gear3"]) || currentWorld === 2 && player.gears["gear17"]) mineCaveBlock(x, y, type);
-            if (player.settings.stopOnRare.active && stopIncluded(oreList[blockToGive]["oreTier"])) stopMining();
+            if (messageIncluded(tier)) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: undefined, variant: variant});
+            let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
+            if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
+            if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
+            if (canCollect) mineCaveBlock(x, y, type);
+            if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
         }
     }
 }

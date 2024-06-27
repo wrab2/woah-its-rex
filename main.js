@@ -37,6 +37,7 @@ const birthdays = {
 const date = new Date();
 let limitedTimer;
 let inventoryTimer;
+let trophyTimer;
 let minedElement;
 let revealedElement;
 let locationElement;
@@ -51,7 +52,8 @@ function init() {
     blockElement = document.getElementById("blockDisplay");
     displayRows = document.getElementsByClassName("blockDisplayRow");
     messageElement = document.getElementById("spawnMessage");
-    eventElement = document.getElementById("eventMessages")
+    eventElement = document.getElementById("eventMessages");
+    document.getElementById('dataFileUpload').addEventListener('change', getFileContents, false);
     document.getElementById("menuSelectionContainer").addEventListener('click', (event) => {
         if (event.target.parentElement.classList.contains("menuCategory")) closeMenu();
     }, false);
@@ -69,6 +71,7 @@ function init() {
     if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
     limitedTimer = setInterval(checkLimitedOres, 1000);
     inventoryTimer = setInterval(updateInventory, 500);
+    trophyTimer = setInterval(checkUnlockConditions, 5000)
     if (date.getMonth() === 3 && date.getDate() === 1) {
         document.title = "The Sily Caverns";
     }
@@ -94,9 +97,10 @@ function init() {
         repeatDataSave();
         cat = verifiedOres.getCurrentLuck();
         updateAllLayers();
+        checkUnlockConditions();
+        switchWorldCraftables();
         console.log("meow");
     }
-    verifiedOres.onLoad();
 }
 function assignImageNames() {
     for (let ore in oreList) {
@@ -616,7 +620,7 @@ function updateInventory() {
         removeParadoxical();
     }
     if (currentWorld === 1.1 && player.stats.currentPickaxe !== 27) player.stats.currentPickaxe = 27;
-    else if (currentWorld !== 1.1 && player.stats.currentPickaxe === 27) player.stats.currentPickaxe = 0;
+    else if (currentWorld !== 1.1 && player.stats.currentPickaxe === 27 && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = 0;
     checkPowerupCooldowns();
     updatePowerupCooldowns();
     updateDisplayedUpgrade();
@@ -640,7 +644,6 @@ function updateInventory() {
     }
     let speed = calcAverageSpeed();
     if (speed !== undefined) player.avgSpeed = speed;
-    verifiedOres.getBenchmark();
 }
 function updateDisplayTimer(state) {
     if (state) {

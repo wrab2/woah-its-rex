@@ -6,7 +6,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 */
 
 //MINE CREATION
-const debug = (document.location.href.includes("testing")) || (document.location.href.includes('http://127.0.0.1:5500/'));
 function createMine() {
     for (let r = curY - 101; r < curY + 101; r++) {
         if (r > -1)
@@ -161,9 +160,12 @@ function generateBlock(location) {
     let oreRarity = oreList[blockToGive]["numRarity"];
     mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
+        let variant = rollVariant();
+        if (player.gears["gear25"] && variant === 1) variant = rollVariant();
         if (blockToGive === "sillyMiner") {
             const nextOre = layerDictionary[currentLayer].layer[layerDictionary[currentLayer].layer.indexOf("sillyMiner") + 1];
-            mine[location["Y"]][location["X"]] = nextOre; 
+            if (oreList[nextOre]["numRarity"] >= 750000) mine[location["Y"]][location["X"]] = {ore: nextOre, variant:variant}; 
+            else mine[location["Y"]][location["X"]] = nextOre;
             if (Math.floor(1/oreList[nextOre]["decimalRarity"] < 750000)) return;
             else blockToGive = nextOre;
         }
@@ -171,8 +173,6 @@ function generateBlock(location) {
             blockToGive = checkSpecials(blockToGive);
             mine[location["Y"]][location["X"]] = blockToGive;
         }
-        let variant = rollVariant();
-        if (player.gears["gear25"] && variant === 1) variant = rollVariant();
         mine[location["Y"]][location["X"]] = {ore: blockToGive, variant: variant};
         const tier = oreList[blockToGive]["oreTier"];
         if (oreList[blockToGive]["hasLog"]) {
@@ -181,7 +181,10 @@ function generateBlock(location) {
         }
         playSound(oreList[blockToGive]["oreTier"]);
         if (messageIncluded(oreList[blockToGive]["oreTier"])) spawnMessage({block: blockToGive, location: location, caveInfo: undefined, variant: variant});
-        if (((currentWorld < 2 && (player.gears["gear3"] || player.gears["gear28"])) || player.gears["gear17"]) && tier !== "Celestial") mineBlock(location["X"], location["Y"], "ability");
+        let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
+        if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
+        if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
+        if (canCollect) mineBlock(location["X"], location["Y"], "ability");
         if (blocksRevealedThisReset / mineCapacity >= 0.9) mineBlock(location["X"], location["Y"], "reset");
         if (player.settings.stopOnRare.active && stopIncluded(oreList[blockToGive]["oreTier"])) stopMining();
         if (currentActiveEvent !== undefined) {
@@ -427,10 +430,11 @@ function attemptSwitchWorld(to) {
     if (to === 2 && player.pickaxes["pickaxe13"] && currentWorld !== 2){switchWorld(2); return;}
     if (to === 1.1 && player.sr1Unlocked && currentWorld !== 1.1) {switchWorld(1.1); return;}
     if (to === 1 && currentWorld !== 1) {switchWorld(1); return;}
+    if (to === 0) {showTrophyRoom(true); return;}
 }
 function switchWorld(to, skipAnim) {
     get("blackScreen").style.display = "block";
-    get("blackScreen").style.animation = "fadeToBlack 2s linear 1";
+    if (!skipAnim) get("blackScreen").style.animation = "fadeToBlack 2s linear 1";
     player.settings.lastWorld = to;
     const timeout = skipAnim ? 0 : 1000;
     setTimeout(() => {
@@ -527,7 +531,7 @@ function sr1Helper(state) {
             document.body.style.fontFamily = `system-ui, Tahoma, Verdana, sans-serif, Noto Color Emoji`;
             document.getElementById("switchFont").disabled = true;
         }
-        player.wasUsing = player.stats.currentPickaxe;
+        if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.wasUsing = player.stats.currentPickaxe;
         player.stats.currentPickaxe = 27;
         document.getElementById("theWorkshop").style.display = "block";
     } else {
