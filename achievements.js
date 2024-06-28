@@ -28,7 +28,7 @@ const achievementList = {
             player.trophyProgress["worldTwoCompletion"].lastPickaxeUsed = player.stats.currentPickaxe;
             player.trophyProgress["worldTwoCompletion"].lastMinedAmt = player.stats.blocksMined;
             if (get) return `${player.trophyProgress["worldTwoCompletion"].blocksWithCoronary.toLocaleString()}/25,000,000,000 blocks mined with Coronary Catastrophe in World 2.<br>Oblivion Fracturer: ${player.gears["gear21"] ? "Obtained." : "Required."}`
-            if (player.trophyProgress["worldTwoCompletion"].blocksWithCoronary > 25000000000 && player.gears["21"]) {
+            if (player.trophyProgress["worldTwoCompletion"].blocksWithCoronary > 25000000000 && player.gears["gear21"]) {
                 return true;
             }
         },

@@ -82,7 +82,14 @@ let allGearNames = [
     "Clover's Undoing",
     "Fantastical Feather",
     "Statistical Analyzer",
-    "Oblivion Fracturer"
+    "Oblivion Fracturer",
+    "Replicator Prototype",
+    "Hyperdrive Accelerator",
+    "Superenergetic Automaton",
+    "Alteration Reiterator",
+    "Stratum Nonillonator",
+    "Biome Enchanter",
+    "Celestian Reaper"
 ]
 const adminListNums = function() {
     if (debug) {

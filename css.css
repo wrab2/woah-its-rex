@@ -2258,6 +2258,7 @@ button {
   height: 2vw;
   font-weight: 750;
   margin: 0;
+  font-size: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -679,6 +679,7 @@ function spawnMessage(obj) {
     //ADD TO MINE CAPACITY IF NEAR RESET
     player.oreTracker.existingOres.push({block: block, posX : location["X"], posY : location["Y"]});
     let oreRarity = oreList[block]["numRarity"];
+    if (block === "✈️") oreRarity = 911911911911;
     let spawnElement = document.getElementById("latestSpawns");
     let output = "";
     const element = document.getElementsByClassName("htmlTemplate")[0].cloneNode(true);
