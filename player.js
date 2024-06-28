@@ -662,7 +662,7 @@ const dailyMessages = {
         showUntil : "June 15, 9999",
     },
     "chooseName" : {
-        showUntil : "June 25, 0000",
+        showUntil : "June 25, 9999",
     },
     "portalUpdate" : {
         showUntil : "June 25, 2024",
