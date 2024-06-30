@@ -307,6 +307,7 @@ function removeSiphoner() {
     baseSpeed += 3;
     energySiphonerActive = false;
     const temp = curDirection;
+    curDirection = "";
     if (temp !== "") goDirection(temp);
 }
 function gearAbility2() {
