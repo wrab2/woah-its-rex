@@ -1112,7 +1112,7 @@ const pickaxeStats = {
     8 : {mined: 461, revealed: 811, luck: 5.5, rate: 40, src: "⛏️", ability:"media/abilityImages/labyrinthianTideAbility.png"},
     9 : {mined: 188, revealed: 252, luck: 20, rate: 22, src: `<img class="mineImage" src="media/77LeafDestroyerIcon.png"></img>`, ability:"media/abilityImages/77LeafDestroyerAbility.png"},
     10 : {mined: 973, revealed: 1195, luck: 17.5, rate: 50, src: "⛏️", ability:"media/abilityImages/planetBusterAbility.png"},
-    11 : {mined: 1018, revealed: 2993, luck: 30, rate: 100, src: "⛏️", ability:"media/abilityImages/whirlpoolOfFateAbility.png"},
+    11 : {mined: 1018, revealed: 2993, luck: 30, rate: 100, src: `<img class="mineImage" src="media/whirlpoolOfFateIcon.png"></img>`, ability:"media/abilityImages/whirlpoolOfFateAbility.png"},
     12 : {mined: 1541, revealed: 1861, luck: 75, rate: 150, src: `<img class="mineImage" src="media/wingsOfGloryIcon.png"></img>`, ability:"media/abilityImages/wingsOfGloryAbility.png"},
     13 : {mined: 1, revealed: 1, luck: 1, rate: 1, src: `<img class="mineImage" src="media/theKeyIcon.png"></img>`},
     14 : {mined: 40, revealed: 51, luck: 1.05, rate: 45, src: `<img class="mineImage" src="media/extremeEcholocatorIcon.png"></img>`, ability:"media/abilityImages/extremeEcholocatorAbility.png"},

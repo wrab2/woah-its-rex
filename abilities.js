@@ -306,6 +306,8 @@ function removeSiphoner() {
     energySiphonerCooldown = Date.now() + 5000;
     baseSpeed += 3;
     energySiphonerActive = false;
+    const temp = curDirection;
+    if (temp !== "") goDirection(temp);
 }
 function gearAbility2() {
     if (currentWorld === 1 && player.gears["gear9"]) {

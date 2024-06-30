@@ -442,7 +442,7 @@ function switchWorld(to, skipAnim) {
         canMine = false;
         endEvent();
         stopMining();
-        mine = [];
+        mine = [[]];
         player.oreTracker.existingOres = [];
         removeTrackerInformation();
         m87 = 0;
@@ -473,6 +473,7 @@ function switchWorld(to, skipAnim) {
             }
             layerNum = 1;
             switchLayerIndex(0, "tvLayer", 2);
+            removeSiphoner();
         } else if (currentWorld < 2) {
             distanceMulti = 0;
             y = 1000;
