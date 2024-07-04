@@ -314,6 +314,8 @@
 }
 #tropicalCarver span{
     background: linear-gradient(to right,#feda84, #976393, #43457f, #ff9b83);
+    -webkit-background-clip: text;
+    color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }

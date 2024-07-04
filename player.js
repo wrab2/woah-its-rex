@@ -237,9 +237,9 @@ const powerupList = {
             buttonUp: {background: "#FF0B0B", text: "black"},
             buttonDown: {background: "#7AFF1F", text: "black"},
         },
-        requirement: "(oreList['⏏️']['normalAmt'] >= 50)",
-        condition1: "oreList['⏏️']['normalAmt'].toLocaleString()",
-        condition2: "/50 ⏏️ Owned"
+        requirement: "(oreList['🔘']['normalAmt'] >= 50)",
+        condition1: "oreList['🔘']['normalAmt'].toLocaleString()",
+        condition2: "/50 🔘 Owned"
     },
     "powerup5" : {
         title: "Paradoxical Progression",
