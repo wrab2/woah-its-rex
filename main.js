@@ -67,6 +67,7 @@ function init() {
     utilitySwitchActions();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
     formatEventText();
+    addPickaxeDescriptions();
     document.getElementById('dataText').value = "";
     if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
     limitedTimer = setInterval(checkLimitedOres, 1000);
@@ -115,6 +116,18 @@ function assignPickaxeNums(json) {
     pickaxe24Nums = json.pickaxeNums24;
     pickaxe25Nums = json.pickaxeNums25;
     pickaxe28Nums = json.pickaxeNums28;
+    pickaxe29Nums = json.pickaxeNums29;
+    pickaxe30Nums = json.pickaxeNums30;
+    pickaxe1Nums = json.pickaxeNums1;
+    pickaxe2Nums = json.pickaxeNums2;
+    pickaxe3Nums = json.pickaxeNums3;
+    pickaxe4Nums = json.pickaxeNums4;
+    pickaxe5Nums = json.pickaxeNums5;
+    pickaxe6Nums = json.pickaxeNums6;
+    pickaxe9Nums = json.pickaxeNums9;
+    pickaxe10Nums = json.pickaxeNums10;
+    pickaxe11Nums = json.pickaxeNums11;
+    pickaxe12Nums = json.pickaxeNums12;
     treeLevels[0] = json.pickaxeNums27A;
     treeLevels[1] = json.pickaxeNums27B;
     treeLevels.cherryBranch = json.cherryBranch;
@@ -122,6 +135,7 @@ function assignPickaxeNums(json) {
     treeLevels.winterBranch = json.winterBranch;
     treeLevels.summerBranch = json.summerBranch;
 }
+//meow
 function failedFetch() {
     for (let ore in oreList) oreList[ore]["oreName"] = "FAILED TO FETCH NAMES";
     switchLayerIndex(0, "dirtLayer", 1);
@@ -249,6 +263,21 @@ function movePlayer(dir, reps) {
                     mineBlock(curX, curY, "mining");
                     mine[curY][curX] = "⛏️";
                     lastDirection = dir.key;
+                    if (player.gears["gear29"] && !isHoldingShift) {
+                        if (dir.y !== 0) {
+                            if (curY > 0 && mine[curY + dir.y][curX] === "⚪") {
+                                mine[curY][curX] = "⚪";
+                                curY += getNextSolidY(dir.y, curY, curX);
+                                mine[curY][curX] = "⛏️";
+                            }
+                        } else if (dir.x !== 0) {
+                            if (mine[curY][curX + dir.x] === "⚪") {
+                                mine[curY][curX] = "⚪";
+                                curX += getNextSolidX(dir.x, curY, curX);
+                                mine[curY][curX] = "⛏️";
+                            }
+                        }
+                    }
                 } else {
                     if (mine[curY + dir.y][curX + dir.x] === "✖️") {
                         if (Math.random() < 1/10000000) {
@@ -276,7 +305,18 @@ function movePlayer(dir, reps) {
     }
     if (curDirection === "") displayArea();
 }
+function getNextSolidY(dir, y, x) {
+    const original = dir;
+    while (y + dir > 0 && mine[y + dir][x] === "⚪" && Math.abs(dir) < 25) dir += original;
+    return dir - original;
+}
+function getNextSolidX(dir, y, x) {
+    const original = dir;
+    while (x + dir > 0 && mine[y][x + dir] === "⚪" && Math.abs(dir) < 25) dir += original;
+    return dir - original;
+}
 let keyCooldown = Date.now();
+let isHoldingShift = false;
 document.addEventListener('keydown', (event) => {
     let name = event.key;
     let validInput = false;
@@ -334,6 +374,9 @@ document.addEventListener('keydown', (event) => {
         case "5":
             toggleSpecificPowerup(5);
             break;
+        case "shift":
+            isHoldingShift = true;
+            break;
         default:
             break;
     }
@@ -346,6 +389,15 @@ document.addEventListener('keydown', (event) => {
         movements.y = (name === "s" ? 1 : (name === "w" ? -1 : 0));
         movePlayer(movements, 1);
         energySiphonerDirection = "";
+    }
+}, false);
+document.addEventListener('keyup', (event) => {
+    let name = event.key;
+    name = name.toLowerCase();
+    switch (name) {
+        case "shift" :
+            isHoldingShift = false;
+            break;
     }
 }, false);
 let loopTimer = null;
@@ -401,6 +453,8 @@ function speedFactorial(num) {
 function calcSpeed() {
     let miningSpeed = baseSpeed;
     let reps = 1;
+    if (currentWorld < 2 && player.gears["gear31"])
+        miningSpeed = baseSpeed - 5;
     if (currentWorld < 2 && player.gears["gear2"])
         miningSpeed = baseSpeed - 10;
     if (currentWorld < 2 && player.gears["gear6"])
@@ -409,7 +463,7 @@ function calcSpeed() {
         miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear16"] ? 5 : 0) - (player.gears["gear19"] ? 8 : 0);
     if (miningSpeed < player.settings.minSpeed)
         miningSpeed = player.settings.minSpeed;
-    if (player.stats.currentPickaxe === 12)
+    if (player.stats.currentPickaxe === "pickaxe12")
         reps++;
     reps += player.gears["gear19"] ? 10 : 0;
     if (currentWorld === 1.1) {
@@ -417,6 +471,7 @@ function calcSpeed() {
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1}
         else return {speed: 7, reps: (-2 + sr1Level)}
     }
+    if (debug) return {speed: 0, reps: 100}
     return {speed: miningSpeed, reps: reps}
 }
 //DISPLAY
@@ -464,14 +519,15 @@ function displayArea() {
     minedElement.textContent = player.stats.blocksMined.toLocaleString() + " Blocks Mined";
 }
 function addPickaxeIcon() {
-    return pickaxeStats[player.stats.currentPickaxe].src;
+    return `<span class="mineSpan">${pickaxeStats[player.stats.currentPickaxe].src}</span>`
 }
 function checkDisplayVariant(location) {
     let oreToAdd;
     let includeSize;
     let specialVariant;
     if (oreList[location.ore]["hasImage"]) {
-        oreToAdd = `<img class="mineImage" src="${oreList[location.ore]["src"]}"></img>`;
+        let isLarge = oreList[location.ore]["oreTier"] === "Imaginary";
+        oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineImage'}" src="${oreList[location.ore]["src"]}"></img>`;
         includeSize = "";
         specialVariant = "Img";
     } else {
@@ -491,7 +547,7 @@ function checkDisplayVariant(location) {
             return `<span class="explosiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
         }
     } else {
-        return `<span class="${includeSize}">${oreToAdd}</span>`
+        return `<span class="${includeSize} mineSpan">${oreToAdd}</span>`
     }
 }
 
@@ -619,8 +675,8 @@ function updateInventory() {
     if (player.powerupVariables.fakeEquipped.item !== undefined && Date.now() >= player.powerupVariables.fakeEquipped.removeAt) {
         removeParadoxical();
     }
-    if (currentWorld === 1.1 && player.stats.currentPickaxe !== 27) player.stats.currentPickaxe = 27;
-    else if (currentWorld !== 1.1 && player.stats.currentPickaxe === 27 && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = 0;
+    if (currentWorld === 1.1 && player.stats.currentPickaxe !== "pickaxe27") player.stats.currentPickaxe = "pickaxe27";
+    else if (currentWorld !== 1.1 && player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = "pickaxe0";
     checkPowerupCooldowns();
     updatePowerupCooldowns();
     updateDisplayedUpgrade();
@@ -744,15 +800,20 @@ function spawnMessage(obj) {
         }
         
 }
-let typeCallNum = 0;
-function typeWriter(string, loc, override) {
+let typeCalls = {
+    spawnMessages:0,
+    eventMessages:0
+};
+function typeWriter(string, loc) {
     let char;
     let hex;
     let emoji
     let output = "";
     let ignoreUntil = 0;
-    typeCallNum++;
-    const thisTypeNum = typeCallNum;
+    const thisId = loc.id;
+    if (thisId === "spawnMessage") typeCalls.spawnMessages++ ;
+    else typeCalls.eventMessages++;
+    const thisTypeNum = thisId === "spawnMessage" ? typeCalls.spawnMessages : typeCalls.eventMessages;
     const elements = [];
     const emojiRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
     for (let i = 0; i < string.length; i++) {
@@ -789,7 +850,8 @@ function typeWriter(string, loc, override) {
         if (elements[i].h) multi = i - 1;
         setTimeout(() => {
             output += elements[i].t
-            if (thisTypeNum === typeCallNum || override) loc.innerHTML = output;
+            if (thisTypeNum === (thisId === "spawnMessage" ? typeCalls.spawnMessages : typeCalls.eventMessages)) loc.innerHTML = output;
+            else return;
         }, 10 * multi);
     }
     
@@ -1257,7 +1319,7 @@ function activateEvent(name) {
     currentActiveEvent = {name: name, removeAt: Date.now() + events[name].duration}
     events[name].specialEffect(true);
     const text = events[name].message;
-    typeWriter(text, eventElement, true);
+    typeWriter(text, eventElement);
     updateAllLayers();
 }
 function endEvent() {
@@ -1367,7 +1429,7 @@ let pickaxe25Nums = [];
 let testNums = [];
 /*
 const az = new Image();
-az.src = "media/Untitled_Artwork2.png"
+az.src = "media/wings_re_3.webp"
         az.onload = () => {
             const c = new OffscreenCanvas(az.width,az.height)
             const cc = c.getContext("2d")

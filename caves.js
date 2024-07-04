@@ -19,6 +19,9 @@ function checkValidLocation(x, y) {
 }
 function generateCave(x, y, type) {
     let rate = 1;
+    let caveRateModifier = 150;
+    if (player.gears["gear14"]) caveRateModifier += 100;
+    if (player.stats.currentPickaxe === "pickaxe12") caveRateModifier += 50;
     if (type === undefined) {  
         type = getCaveType();
         if (type === undefined) {
@@ -51,50 +54,52 @@ function generateCave(x, y, type) {
             points.splice(i, 1);
             mine[pointY] ??= [];
             mineCaveShape(pointX, pointY, type);
-            if (Math.random() < rate) {
-                addRandom = Math.random();
-                if (addRandom < 0.7) add = 3;
-                else add = 4;
-                if (mine[pointY][pointX + (add + 1)] !== "⚪") {
-                    point = {x: pointX + add, y: pointY}
-                    points.push(point);
-                    selectedPoints.push(point);
+            if (pointY > 0) {
+                if (Math.random() < rate) {
+                    addRandom = Math.random();
+                    if (addRandom < 0.7) add = 3;
+                    else add = 4;
+                    if (mine[pointY][pointX + (add + 1)] !== "⚪") {
+                        point = {x: pointX + add, y: pointY}
+                        points.push(point);
+                        selectedPoints.push(point);
+                    }
                 }
-            }
-            if (Math.random() < rate) {
-                addRandom = Math.random();
-                if (addRandom < 0.7) add = 3;
-                else add = 4;
-                if (mine[pointY][pointX - (add + 1)] !== "⚪") {
-                    point = {x: pointX - add, y: pointY}
-                    points.push(point);
-                    selectedPoints.push(point);  
+                if (Math.random() < rate) {
+                    addRandom = Math.random();
+                    if (addRandom < 0.7) add = 3;
+                    else add = 4;
+                    if (mine[pointY][pointX - (add + 1)] !== "⚪") {
+                        point = {x: pointX - add, y: pointY}
+                        points.push(point);
+                        selectedPoints.push(point);  
+                    }
                 }
-            }
-            if (Math.random() < rate) {
-                addRandom = Math.random();
-                if (addRandom < 0.7) add = 3;
-                else add = 4;
-                mine[pointY + (add + 1)] ??= [];
-                if (mine[pointY + (add + 1)][pointX] !== "⚪") {
-                    point = {x: pointX, y: pointY + add} 
-                    points.push(point);
-                    selectedPoints.push(point);
+                if (Math.random() < rate) {
+                    addRandom = Math.random();
+                    if (addRandom < 0.7) add = 3;
+                    else add = 4;
+                    mine[pointY + (add + 1)] ??= [];
+                    if (mine[pointY + (add + 1)][pointX] !== "⚪") {
+                        point = {x: pointX, y: pointY + add} 
+                        points.push(point);
+                        selectedPoints.push(point);
+                    }
                 }
-            }
-            if (Math.random() < rate) {
-                addRandom = Math.random();
-                if (addRandom < 0.7) add = 3;
-                else add = 4;
-                mine[pointY - (add + 1)] ??= [];
-                if (mine[pointY - (add + 1)][pointX] !== "⚪") {
-                    point = {x: pointX, y: pointY - add}
-                    points.push(point);
-                    selectedPoints.push(point);
-                } 
+                if (Math.random() < rate) {
+                    addRandom = Math.random();
+                    if (addRandom < 0.7) add = 3;
+                    else add = 4;
+                    mine[pointY - (add + 1)] ??= [];
+                    if (mine[pointY - (add + 1)][pointX] !== "⚪") {
+                        point = {x: pointX, y: pointY - add}
+                        points.push(point);
+                        selectedPoints.push(point);
+                    } 
+                }
             }
         }
-        rate -= ((Math.random() * 12) + 3)/100;
+        rate -= ((Math.random() * 12) + 3)/caveRateModifier;
     }
 }
 const caveShape = [
@@ -403,7 +408,7 @@ let oolProbabilities = {
 }
 function getCaveType() {
     let caveTypeLuck = 1;
-    if (player.stats.currentPickaxe === 12)
+    if (player.stats.currentPickaxe === "pickaxe12")
         caveTypeLuck = 2;
     let caveType = undefined;
     let summedProbability = 0;

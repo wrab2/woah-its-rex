@@ -3,7 +3,7 @@ const achievementList = {
         name : "World One Completionist",
         requirement: function(get) {
             const blocksMinedNow = player.stats.blocksMined;
-            if (player.trophyProgress["worldOneCompletion"].lastPickaxeUsed === 12 && player.stats.currentPickaxe === 12) {
+            if (player.trophyProgress["worldOneCompletion"].lastPickaxeUsed === "pickaxe12" && player.stats.currentPickaxe === "pickaxe12") {
                 const totalMinedWithWOG = blocksMinedNow - player.trophyProgress["worldOneCompletion"].lastMinedAmt;
                 player.trophyProgress["worldOneCompletion"].blocksWithWOG += totalMinedWithWOG;
             }
@@ -14,25 +14,25 @@ const achievementList = {
                 return true;
             }
         },
-        reward: {type: "luck", do: "add", amt: 2},
+        reward: {type: "luck", do: "multiply", amt: 1.1},
         icon: "<span class='trophyIcon'>Trophy made by @lxzy.</span>"
     },
     "worldTwoCompletion" : {
         name : "World Two Completionist",
         requirement: function(get) {
             const blocksMinedNow = player.stats.blocksMined;
-            if (player.trophyProgress["worldTwoCompletion"].lastPickaxeUsed === 25 && player.stats.currentPickaxe === 25 && currentWorld === 2) {
+            if (player.trophyProgress["worldTwoCompletion"].lastPickaxeUsed === "pickaxe25" && player.stats.currentPickaxe === "pickaxe25" && currentWorld === 2) {
                 const totalMinedWithCoronary = blocksMinedNow - player.trophyProgress["worldTwoCompletion"].lastMinedAmt;
                 player.trophyProgress["worldTwoCompletion"].blocksWithCoronary += totalMinedWithCoronary;
             }
             player.trophyProgress["worldTwoCompletion"].lastPickaxeUsed = player.stats.currentPickaxe;
             player.trophyProgress["worldTwoCompletion"].lastMinedAmt = player.stats.blocksMined;
-            if (get) return `${player.trophyProgress["worldTwoCompletion"].blocksWithCoronary.toLocaleString()}/25,000,000,000 blocks mined with Coronary Catastrophe in World 2.<br>Oblivion Fracturer: ${player.gears["gear21"] ? "Obtained." : "Required."}`
-            if (player.trophyProgress["worldTwoCompletion"].blocksWithCoronary > 25000000000 && player.gears["gear21"]) {
+            if (get) return `${player.trophyProgress["worldTwoCompletion"].blocksWithCoronary.toLocaleString()}/10,000,000,000 blocks mined with Coronary Catastrophe in World 2.<br>Oblivion Fracturer: ${player.gears["gear21"] ? "Obtained." : "Required."}`
+            if (player.trophyProgress["worldTwoCompletion"].blocksWithCoronary > 10000000000 && player.gears["gear21"]) {
                 return true;
             }
         },
-        reward: {type: "luck", do: "add", amt: 5},
+        reward: {type: "luck", do: "multiply", amt: 1.25},
         icon: "<span class='trophyIcon'>Trophy made by @wrab</span>"
     },
     "subrealmOneCompletion" : {
@@ -101,7 +101,7 @@ function formatReward(reward) {
     let output = "";
     if (reward.type === "luck") {
         if (reward.do === "add") output += "Adds " + reward.amt + " to base luck.";
-        else if (reward.do === "multiply") output += "Multiplies luck by " + reward.amt + "x";
+        else if (reward.do === "multiply") output += "Multiplies base luck by " + reward.amt + "x";
     } else if (reward.type === "allow") {
         if (reward.do === "usage") {
             if (reward.amt === "pickaxe27") output += "Allows usage of the Tree of Life in World 1.";

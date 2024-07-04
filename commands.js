@@ -136,9 +136,9 @@ const displayLarge = function() {
         document.body.style.overflow = "scroll"
         let text = document.createElement('p');
         let output = "";
-        for (let y = curY - 400; y < curY + 400; y++) {
+        for (let y = curY - 750; y < curY + 750; y++) {
             mine[y] ??= [];
-            for (let x = curX - 400; x < curX + 400; x++) {
+            for (let x = curX - 750; x < curX + 750; x++) {
                 if (mine[y][x]) {
                     output += mine[y][x].ore === undefined ? mine[y][x] : mine[y][x].ore;
                 } else {
@@ -149,8 +149,8 @@ const displayLarge = function() {
         }
         element.id = "largeDisplay";
         element.style.maxWidth = "10000vw";
-        element.style.fontSize = "0.2vw"
-        element.style.lineHeight = "0.2vw";
+        element.style.fontSize = "0.05vw"
+        element.style.lineHeight = "0.05vw";
         element.style.border = "none";
         text.innerHTML = output;
         clearInterval(dataTimer);

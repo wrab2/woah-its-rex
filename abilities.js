@@ -24,159 +24,13 @@ async function rollAbilities(force) {
         }
     }
     if (debug && force) m = 10000000;
-    switch (player.stats.currentPickaxe) {
-        case 1:
-            if (Math.random() < (1/30 * m)) {
-                pickaxeAbility1(curX, curY);
-                
-            }
-            break;
-        case 2:
-            if (Math.random() <= (1/25 * m)) {
-                pickaxeAbility2(curX, curY, 3);
-                
-            }
-            break;
-        case 3:
-            if (Math.random() <= (1/25 * m)) {
-                pickaxeAbility3(curX, curY);
-                
-            }
-            break;
-        case 4:
-            if (Math.random() <= (1/19 * m)) {
-                pickaxeAbility4(curX, curY);
-                
-            }
-            break;
-        case 5:
-            if (Math.random() <= (1/13 * m)) {
-                pickaxeAbility5(curX, curY);
-                
-            }
-            break;
-        case 6:
-            const doubleAbilityProc = Math.random();
-            if (doubleAbilityProc <= (1/60 * m)) {
-                pickaxeAbility6(curX, curY);
-            } else if (doubleAbilityProc <= (1/40 * m)) {
-                pickaxeAbility7(curX, curY);
-            }
-            break;
-        case 7:
-            if (Math.random() <= (1/50 * m)) {
-                pickaxeAbility8(curX, curY, 0);
-            }
-            break;
-        case 8:
-            if (Math.random() <= (1/40 * m)) {
-                pickaxeAbility9(curX, curY, 0);
-            }
-            break;
-        case 9:
-            if (Math.random() <= (1/22 * m)) {
-                pickaxeAbility10(curX, curY);
-            }
-            break;
-        case 10:
-            if (Math.random() <= (1/50 * m)) {
-                pickaxeAbility11(curX, curY);
-            }
-            break;
-        case 11:
-            if (Math.random() <= (1/100 * m)) {
-                pickaxeAbility12(curX, curY);
-                
-            }
-            break;
-        case 12:
-            if (Math.random() <= (1/150 * m)) {
-                pickaxeAbility13(curX, curY);
-                
-            }
-            break;
-        case 14:
-            if (Math.random() <= 1/45 * m) {
-                pickaxeAbility14(curX, curY);
-            }
-            break;
-        case 15:
-            if (Math.random() <= 1/75 * m) {
-                pickaxeAbility15(curX, curY);
-                
-            }
-            break;
-        case 16:
-            if (Math.random() <= 1/100 * m) {
-                pickaxeAbility16(curX, curY);
-                
-            }
-            break;
-        case 17:
-            if (Math.random() <= 1/150 * m) {
-                pickaxeAbility17(curX, curY);
-                
-            }
-            break;
-        case 18:
-            if (Math.random() <= 1/150 * m) {
-                pickaxeAbility18(curX, curY);
-                
-            }
-            break;
-        case 19:
-            if (Math.random() <= 1/60 * m) {
-                pickaxeAbility19(curX, curY, 0);
-            }
-            break;
-        case 20:
-            if (Math.random() <= 1/75 * m) {
-                pickaxeAbility20(curX, curY);
-            }
-            break;
-        case 21:
-            if (Math.random() <= 1/75 * m) {
-                pickaxeAbility21(curX, curY);
-            }
-            break;
-        case 22:
-            if (Math.random() <= 1/120 * m) {
-                pickaxeAbility22(curX, curY);
-                
-            }
-            break;
-         case 23:
-            if (Math.random() <= 1/75 * m) {
-                pickaxeAbility23(curX, curY);
-            }
-            break;
-        case 24:
-            if (Math.random() <= 1/175 * m) {
-                pickaxeAbility24(curX, curY);
-                
-            }
-            break;
-        case 25:
-            if (Math.random() <= 1/300 * m) {
-                pickaxeAbility25(curX, curY);
-                
-            }
-            break;
-        case 26:
-            if (Math.random() < 1/150 * m) {
-                pickaxeAbility26(curX, curY);
-            }
-            break;
-        case 27:
-            if (Math.random() < 1/500 * m) {
-                pickaxeAbility27(curX, curY);
-            }
-            break;
-        case 28:
-            if (Math.random() < 1/20 * m) {
-                pickaxeAbility28(curX, curY);
-            }
-            break;
+    const pickaxe = pickaxeStats[player.stats.currentPickaxe]
+    if (Math.random() <= (m/pickaxe.rate)) {
+        const preMined = player.stats.blocksMined;
+        const preRevealed = blocksRevealedThisReset;
+        pickaxe.doAbility(curX, curY);
+        abilityTestNums.push({mined: player.stats.blocksMined - preMined, revealed: blocksRevealedThisReset - preRevealed});
+        abilityTestAmt++;
     }
 }
 function getTestAvg() {
@@ -258,7 +112,7 @@ function powerup5() {
             player.powerupVariables.fakeEquipped.item = toGive;
             if (player.pickaxes[toGive] !== undefined) {
                 player.powerupVariables.fakeEquipped.originalState = player.stats.currentPickaxe;
-                player.stats.currentPickaxe = Number(toGive.substring(7));
+                player.stats.currentPickaxe = toGive;
                 player.pickaxes[toGive] = true;
             }
             if (player.gears[toGive] !== undefined) {
@@ -324,138 +178,43 @@ function gearAbility2() {
     }
 }
 
+let pickaxe1Nums = [];
 function pickaxeAbility1(x, y) {
-    const constraints  = getParams(6, 6, x, y);
-    const origin = [y, x];
-    for (let i = 0; i < 6; i++) {
-        x++;
-        pickaxeAbilityMineBlock(x, y);
-    }
-    x = origin[1];
-    for (let i = 0; i < constraints[0]; i++) {
-        x--;
-        pickaxeAbilityMineBlock(x, y);
-    }
-    x = origin[1];
-    for (let i = 0; i < 6; i++) {
-        y++;
-        pickaxeAbilityMineBlock(x, y);
-    }
-    y = origin[0];
-    for (let i = 0; i < constraints[1]; i++) {
-        y--;
-        pickaxeAbilityMineBlock(x, y);
-    }
+    x -= 7;
+    y -= 7;
+    pickaxeArrayLoop(pickaxe1Nums, x, y);
 }
 
-function pickaxeAbility2(x, y, size) {
-    const constraints = getParams(size, size);
-    for (let r = y - constraints[1]; r <= y + size; r++) {
-        for (let c = x - constraints[0]; c <= x + size; c++) {
-            pickaxeAbilityMineBlock(c, r);
-        }
-    }
+let pickaxe2Nums = [];
+function pickaxeAbility2(x, y) {
+    x -= 5;
+    y -= 5;
+    pickaxeArrayLoop(pickaxe2Nums, x, y);
 }
-
+let pickaxe3Nums = [];
 function pickaxeAbility3(x, y) {
-    const constraints  = getParams(6, 6);
-    const origin = [y, x];
-    for (let i = 0; i < constraints[0]; i++) {
-        x--;
-        pickaxeAbilityMineBlock(x, y);
-        y++;
-        pickaxeAbilityMineBlock(x, y);
-    }
-    x = origin[1];
-    y = origin[0];
-    for (let i = 0; i < constraints[0]; i++) {
-        x++;
-        pickaxeAbilityMineBlock(x, y);
-        y++;
-        pickaxeAbilityMineBlock(x, y);
-    }
-    x = origin[1];
-    y = origin[0];
-    for (let i = 0; i < constraints[1]; i++) {
-        x++;
-        pickaxeAbilityMineBlock(x, y);
-        y--;
-        pickaxeAbilityMineBlock(x, y);
-    }
-    x = origin[1];
-    y = origin[0];
-    if (constraints[1] < constraints[0])
-        constraints[0] = constraints[1];
-    for (let i = 0; i < constraints[0]; i++) {
-        x--;
-        pickaxeAbilityMineBlock(x, y);
-        y--;
-        pickaxeAbilityMineBlock(x, y);
-    }
+    x -= 12;
+    y -= 12;
+    pickaxeArrayLoop(pickaxe3Nums, x, y);
 }
-
-
+let pickaxe4Nums = [];
 function pickaxeAbility4(x, y) {
-    const constraints  = getParams(7, 7);
-    const area1 = Math.round((Math.random() * (-(constraints[0]) - 7)) + 7);
-    const area2 = Math.round((Math.random() * (-(constraints[1]) - 7)) + 7);
-    pickaxeAbility2((x + area1), (y + area2), 4, 1);
+    x -= 11;
+    y -= 11;
+    pickaxeArrayLoop(pickaxe4Nums, x, y);
 }
 
+let pickaxe5Nums = [];
 function pickaxeAbility5(x, y) {
-    const area1 = Math.round((Math.random() * 40) - 20);
-    const area2 = Math.round((Math.random() * 40) - 20);
-    let r = y + area2;
-    let c = x + area1;
-    for (let i = c; i < c + 5; i++) {
-        pickaxeAbilityMineBlock(i, r);
-    }
-    r++;
-    for (let i = 0; i < 5; i++) {
-        for (let j = c - 1; j < c + 6; j++) {
-            pickaxeAbilityMineBlock(j, r);
-        }
-        r++;
-    }
-    for (let i = c; i < c + 5; i++) {
-        pickaxeAbilityMineBlock(i, r);
-    }
+    x -= 16;
+    y -= 16;
+    pickaxeArrayLoop(pickaxe5Nums, x, y);
 }
-
+let pickaxe6Nums = [];
 function pickaxeAbility6(x, y) {
-    const constraints  = getParams(9, 9);
-    let dist = 9;
-    for (let r = y + 6; r >= y - constraints[1]; r--) {
-        for (let c = x - dist; c <= x + dist; c++) {
-            if (c >= x - constraints[0]) {
-                pickaxeAbilityMineBlock(c, r);
-            }
-        }
-        dist--;
-    }
-}
-
-function pickaxeAbility7(x, y) {
-    const constraints = getParams(4, 3);
-    let reps = 1;
-    for (let r = y - constraints[1]; r < y; r++) {
-        for (let c = x - constraints[0]; c < x + 5; c++) {
-            if (reps !== 4 && reps !== 6) {
-                pickaxeAbilityMineBlock(c, r);
-            }
-            reps++; 
-        }
-    }
-    reps = 1;
-    let dist = 3;
-    for (let r = y; r < y+4; r++) {
-        for (let c = x - dist; c <= x + dist; c++) {
-            if (c >= x - constraints[0]) {
-                pickaxeAbilityMineBlock(c, r);
-            }
-        }
-        dist--;
-    }
+    x -= 18;
+    y -= 19;
+    pickaxeArrayLoop(pickaxe6Nums, x, y);
 }
 function mineLines(loc) {
     let x = loc.x;
@@ -468,10 +227,10 @@ function mineLines(loc) {
         from !== 1 ? pickaxeAbilityMineBlock(x, y - i) : null;
     }
 }
-function pickaxeAbility8(x, y) {
+function pickaxeAbility7(x, y) {
     const points = [{x: x, y:y, from: -1}];
     let reps = 1;
-    while (reps < 5) {
+    while (reps < 8) {
         let pointX;
         let pointY;
         let pointFrom;
@@ -483,28 +242,28 @@ function pickaxeAbility8(x, y) {
             points.splice(i, 1);
             let npy;
             let npx;
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.85) {
                 //point above center, value of 0
                 npy = pointY - 8;
                 npx = pointX; 
                 mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:0});
             }
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.85) {
                 //point below center, value of 1
                 npy = pointY + 8;
                 npx = pointX; 
                 mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:1});
             }
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.85) {
                 //point left of center, value of 2
                 npy = pointY;
                 npx = pointX - 8; 
                 mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:2});
             }
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.85) {
                 //point right of center, value of 3
                 npy = pointY;
                 npx = pointX + 8; 
@@ -531,10 +290,10 @@ function mineX(loc) {
         from !== 1 ? (pickaxeAbilityMineBlock(x - i, y - i), pickaxeAbilityMineBlock(x - i, y - (i - 1))) : null;
     }
 }
-function pickaxeAbility9(x, y) {
+function pickaxeAbility8(x, y) {
     const points = [{x: x, y:y, from: -1}];
     let reps = 1;
-    while (reps < 5) {
+    while (reps < 8) {
         let pointX;
         let pointY;
         let pointFrom;
@@ -546,28 +305,28 @@ function pickaxeAbility9(x, y) {
             points.splice(i, 1);
             let npy;
             let npx;
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.7) {
                 //point top right, value of 0
                 npy = pointY - 6;
                 npx = pointX + 7; 
                 mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:0});
             }
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.7) {
                 //point bottom right, value of 1
                 npy = pointY + 6;
                 npx = pointX + 7; 
                 mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:1});
             }
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.7) {
                 //point top left, value of 2
                 npy = pointY - 6;
                 npx = pointX - 7; 
                 mine[npy] ??= [];
                 if (mine[npy][npx] !== "⚪") points.push({x:npx, y:npy, from:2});
             }
-            if (Math.random() <= 0.75) {
+            if (Math.random() <= 0.7) {
                 //point bottom left, value of 3
                 npy = pointY + 6;
                 npx = pointX - 7; 
@@ -578,131 +337,29 @@ function pickaxeAbility9(x, y) {
         reps++;
     }
 }
-
+let pickaxe9Nums = [];
+function pickaxeAbility9(x, y) {
+    x -= 25;
+    y -= 20;
+    pickaxeArrayLoop(pickaxe9Nums, x, y);
+}
+let pickaxe10Nums = [];
 function pickaxeAbility10(x, y) {
-    let skips = [
-        [0, 4, 12, 16],
-        [5, 11],
-        [6, 10],
-        [0, 16],
-        [0, 1, 15, 16],
-        [0, 16],
-        [6, 10],
-        [5, 11],
-        [0, 4, 12, 16]
-    ];
-    let i = 0;
-    let reps = 0;
-    for (let c = x - 4; c < x + 5; c++) {
-        for (let r = y - 8; r < y + 9; r++) {
-            if (mine[r] !== undefined) {
-                if (!(skips[reps].includes(i))) {
-                    pickaxeAbilityMineBlock(c, r);
-                }
-            }
-            i++;
-        }
-        i = 0;
-        reps++;
-    }
-    i = 0;
-    reps = 0;
-    for (let r = y - 4; r < y + 5; r++) {
-        for (let c = x - 8; c < x + 9; c++) {
-            if (mine[r] !== undefined) {
-                if (!(skips[reps].includes(i))) {
-                    pickaxeAbilityMineBlock(c, r);
-                }
-            }
-            i++;
-        }
-        i = 0;
-        reps++;
-    }
+    x -= 30;
+    y -= 30;
+    pickaxeArrayLoop(pickaxe10Nums, x, y);
 }
-
+let pickaxe11Nums = [];
 function pickaxeAbility11(x, y) {
-    for (let i = -3; i < 4; i++) {
-        for (let j = -3; j < 4; j++) {
-            if (!(i === 0 && j === 0) && Math.random() <= 0.5) {
-                let startX = x + 7 * j;
-                let startY = y + 7 * i
-                for (let r = startY; r < startY + 7; r++)
-                    for (let c = startX; c < startX + 7; c++)
-                        pickaxeAbilityMineBlock(c, r);
-            }
-        }
-    }
+    x -= 40;
+    y -= 37;
+    pickaxeArrayLoop(pickaxe11Nums, x, y);
 }
-
+let pickaxe12Nums = [];
 function pickaxeAbility12(x, y) {
-    let direction;
-    let dirNum = 0;
-    const nums = [3, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36, 38, 39, 41, 42, 44, 45, 47, 48, 50, 51, 53, 54];
-    const dirs = ["down", "left", "up", "right"];
-    for (let i = 0; i < nums.length; i++) {
-        direction = dirs[dirNum];
-        switch(direction) {
-            case "down":
-                for (let r = y; r <= y + nums[i]; r++) {
-                    pickaxeAbilityMineBlock(x, r);
-            }
-            y += nums[i];
-            break;
-            case "left":
-                for (let c = x; c >= x - nums[i]; c--) {
-                    pickaxeAbilityMineBlock(c, y);
-                }
-                x -= nums[i];
-                break;
-            case "up":
-                for (let r = y; r >= y - nums[i]; r--) {
-                    if (mine[r] != undefined) {
-                        pickaxeAbilityMineBlock(x, r);
-                    }
-                }
-                y -= nums[i];
-                break;
-            case "right":
-                for (let c = x; c <= x + nums[i]; c++) {
-                    pickaxeAbilityMineBlock(c, y);
-                }
-                x += nums[i];
-                break;
-        }
-        dirNum++;
-        if (dirNum > 3)
-            dirNum = 0;
-    }
-    
-}
-
-function pickaxeAbility13(x, y) {
-    let startNums = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 4, 5, 6, 6];
-    let endNums = [37, 36, 35, 34, 29, 31, 30, 29, 28, 27, 26, 24, 29, 28, 32, 31, 25, 24, 23, 16, 24, 23, 22, 24, 26, 28, 19, 31, 30, 24, 13, 20, 21];
-    let numSkips = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [28], [27], [], [], [], [], [19, 20], [21, 22], [], [], [], [], [], [24], [12, 25], [13], [], [15], [16]];
-    let i = 0;
-    for (let r = y - 16; r < y + 17; r++) {
-        if (mine[r] != undefined) {
-            for (let c = x + startNums[i]; c <= x + endNums[i]; c++) {
-                if (!(numSkips[i].includes(c - x))) {
-                    pickaxeAbilityMineBlock(c, r);
-                }
-            }
-        }
-        i++;
-    }
-    i = 0;
-    for (let r = y - 16; r < y + 17; r++) {
-        if (mine[r] != undefined) {
-            for (let c = x - startNums[i]; c >= x - endNums[i]; c--) {
-                if (!(numSkips[i].includes(-(c - x)))) {
-                    pickaxeAbilityMineBlock(c, r);
-                }
-            }
-        }
-        i++;
-    }
+    x -= 103;
+    y -= 56;
+    pickaxeArrayLoop(pickaxe12Nums, x, y);
 }
 function pickaxeAbility14(translatex, translatey) {
     let r = Math.round((Math.random() * 5) + 1)
@@ -1080,26 +737,27 @@ function pickaxeAbility25(x, y) {
     }
 }
 const abilityTable = {
-    " 27":1/19,
-    " 25":1/17,
-    " 24":1/15,
-    " 23":1/13,
-    " 22":1/11,
-    " 21":1/9,
-    " 12":1/7,
-    " 20":1/5,
-    " 11":1/3,
-    " 18":1/1
+    "pickaxe23" : 1/17,
+    "pickaxe25" : 1/15,
+    "pickaxe10" : 1/13,
+    "pickaxe27" : 1/11,
+    "pickaxe21" : 1/9,
+    "pickaxe22" : 1/7,
+    "pickaxe12" : 1/5,
+    "pickaxe24" : 1/3,
+    "pickaxe11" : 1/1,
 }
 function pickaxeAbility26(x, y) {
     const abilityTableArray = Object.keys(abilityTable);
+    const offset = Math.floor(Math.random() * 400) + 250;
     const points = {
         "a" : {"X":x, "Y":y},
-        "b" : {"X":x + 300, "Y":y - 300},
-        "c" : {"X":x - 300, "Y":y - 300},
-        "d" : {"X":x + 300, "Y":y + 300},
-        "e" : {"X":x - 300, "Y":y + 300}
+        "b" : {"X":x + offset, "Y":y - offset},
+        "c" : {"X":x - offset, "Y":y - offset},
+        "d" : {"X":x + offset, "Y":y + offset},
+        "e" : {"X":x - offset, "Y":y + offset}
     }
+    console.log
     for (let propertyName in points) {
         let low = 0;
         let high = abilityTableArray.length;
@@ -1112,40 +770,11 @@ function pickaxeAbility26(x, y) {
                 high = mid;
             }
         }
-        let num = Number(abilityTableArray[low].substring(1));
-        switch (num) {
-            case 11:
-                pickaxeAbility12(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 12:
-                pickaxeAbility13(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 18:
-                pickaxeAbility18(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 20:
-                pickaxeAbility20(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 21:
-                pickaxeAbility21(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 22:
-                pickaxeAbility22(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-             case 23:
-                pickaxeAbility23(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 24:
-                pickaxeAbility24(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 25:
-                pickaxeAbility25(points[propertyName]["X"], points[propertyName]["Y"]);
-                break;
-            case 27:
-                const overrideLevel = Math.round(Math.random() * 5);
-                pickaxeAbility27(points[propertyName]["X"], points[propertyName]["Y"], overrideLevel);
-                break;
-        }
+        if (abilityTableArray[low] === "pickaxe27") {
+            const overrideLevel = Math.round(Math.random() * 3) + 2;
+            pickaxeAbility27(points[propertyName]["X"], points[propertyName]["Y"], overrideLevel);
+            console.log("fuck", overrideLevel)
+        } else pickaxeStats[abilityTableArray[low]].doAbility(points[propertyName]["X"], points[propertyName]["Y"])
     }
 }
 const treeLevels = {
@@ -1193,18 +822,31 @@ function pickaxeAbility27(x, y, overrideLevel) {
         pickaxeArrayLoop(arrToIndex, eX, eY)
     }
 }
+let pickaxe28Nums = [];
+function pickaxeAbility28(x, y) {
+    x -= 22;
+    y -= 22;
+    pickaxeArrayLoop(pickaxe28Nums, x, y);
+}
+let pickaxe29Nums = [];
+function pickaxeAbility29(x, y) {
+    x -= 33;
+    y -= 24;
+    pickaxeArrayLoop(pickaxe29Nums, x, y);
+}
+let pickaxe30Nums = [];
+function pickaxeAbility30(x, y) {
+    x -= 13;
+    y -= 15;
+    pickaxeArrayLoop(pickaxe30Nums, x, y);
+}
 function pickaxeArrayLoop(array, x, y) {
     for (let i = 0; i < array.length; i++) {
         pickaxeAbilityMineBlock(array[i]["x"] + x, array[i]["y"] + y)
     }
 }
 
-let pickaxe28Nums = [];
-function pickaxeAbility28(x, y) {
-    x -= 8;
-    y -= 6;
-    pickaxeArrayLoop(pickaxe28Nums, x, y);
-}
+
 function pickaxeAbilityMineBlock(x, y) {
     if (y > 0) {
         mine[y] ??= [];

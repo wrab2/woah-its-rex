@@ -30,6 +30,9 @@ class playerTemplate {
             "gear26": false,
             "gear27": false,
             "gear28": false,
+            "gear29": false,
+            "gear30": false,
+            "gear31": false,
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -60,6 +63,8 @@ class playerTemplate {
             "pickaxe25": false,
             "pickaxe26": false,
             "pickaxe28" : false,
+            "pickaxe29" : false,
+            "pickaxe30" : false,
         }
         this.settings = {
             audioSettings: {
@@ -100,7 +105,7 @@ class playerTemplate {
             lastWorld: 1
         },
         this.stats = {
-            currentPickaxe: 0,
+            currentPickaxe: "pickaxe0",
             blocksMined: 0,
             timePlayed: 0,
             cavesGenerated: 0,
@@ -379,7 +384,7 @@ function oldDataToNew(data) {
             if (data[1][0][0][i] !== undefined) newData.player.pickaxes[propertyName] = data[1][0][0][i][1];
             i++;
         }
-        newData.player.stats.currentPickaxe = data[1][0][1];
+        newData.player.stats.currentPickaxe = `pickaxe${data[1][0][1]}`;
     }
     while (Array.isArray(data[2])) data[2] = data[2][0];
         newData.player.stats.blocksMined = data[2];
@@ -477,14 +482,14 @@ function loadNewData(data) {
             }
         }
         if (data.wasUsing !== undefined) {
-            data.stats.currentPickaxe = data.wasUsing;
+            data.stats.currentPickaxe = isNaN(data.wasUsing) ? data.wasUsing : `pickaxe${data.wasUsing}`;
         }
         if (data.powerupVariables !== undefined && data.powerupVariables.fakeEquipped !== undefined && data.powerupVariables.fakeEquipped.item !== undefined) {
             let item = data.powerupVariables.fakeEquipped.item;
             if (player.gears[item] !== undefined) data.gears[item] = false;
             if (player.pickaxes[item] !== undefined) {
                 data.pickaxes[item] = false;
-                if (data.wasUsing === undefined) data.stats.currentPickaxe = data.powerupVariables.fakeEquipped.originalState;
+                if (data.wasUsing === undefined) data.stats.currentPickaxe = isNaN(data.powerupVariables.fakeEquipped.originalState) ? data.powerupVariables.fakeEquipped.originalState : `pickaxe${data.powerupVariables.fakeEquipped.originalState}`;
             }
         }
         if (data.gears !== undefined && player.gears !== undefined) {
@@ -493,8 +498,8 @@ function loadNewData(data) {
         if (data.pickaxes !== undefined && player.pickaxes !== undefined) {
             for (let propertyName in data.pickaxes) if (player.pickaxes[propertyName] !== undefined) player.pickaxes[propertyName] = data.pickaxes[propertyName];
         }
-        if (data.stats.currentPickaxe !== undefined) player.stats.currentPickaxe = data.stats.currentPickaxe;
-        if (player.stats.currentPickaxe === 27 && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = 0;
+        if (data.stats.currentPickaxe !== undefined) player.stats.currentPickaxe = isNaN(data.stats.currentPickaxe) ? data.stats.currentPickaxe : `pickaxe${data.stats.currentPickaxe}`;
+        if (player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = "pickaxe0";
         if (data.stats.blocksMined !== undefined) player.stats.blocksMined = data.stats.blocksMined;
         if (data.stats.cavesGenerated !== undefined) player.stats.cavesGenerated = data.stats.cavesGenerated;
         if (data.stats.timePlayed !== undefined) player.stats.timePlayed = data.stats.timePlayed;
@@ -669,6 +674,9 @@ const dailyMessages = {
     },
     "trophyUpdate" : {
         showUntil : "July 1, 2024",
+    },
+    "worldOneRevamp" : {
+        showUntil : "July 20, 2024",
     },
     "sr1Unlocked" : {
         showUntil : "June 25, 0000",

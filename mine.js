@@ -281,7 +281,7 @@ const checkSpecials = function(block) {
             block = "watermelonDiamond";
             break;
             case "💠" :
-            if (player.stats.currentPickaxe === 4) block = "pixel";
+            if (player.stats.currentPickaxe === "pickaxe4") block = "pixel";
             break;
         }
     }
@@ -342,7 +342,8 @@ function switchDistance(num) {
         layerDistanceY = 1000 + (2000 * distanceMulti);
     }
     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
-    const teleportLayer = getLayer(layerDistanceY).layer.slice(-1)
+    let teleportLayer = getLayer(layerDistanceY).layer;
+    for (let i = 0; i < teleportLayer.length; i++) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
     get("meterDisplay").textContent = `${teleportLayer} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`
 }
 
@@ -460,7 +461,7 @@ function switchWorld(to, skipAnim) {
             curX = 1000000000;
             curY = 2001; 
             createMine();
-            if (player.stats.currentPickaxe === 25) {
+            if (player.stats.currentPickaxe === "pickaxe25") {
                 if (Math.random() < 1/10000) {
                     mine[curY + 1][curX] = "🩷";
                     playSound(oreList["🩷"]["oreTier"]);
@@ -483,7 +484,7 @@ function switchWorld(to, skipAnim) {
             curY = 0; 
             createMine();
             if (currentWorld === 1) {
-                if (player.stats.currentPickaxe === 1) {
+                if (player.stats.currentPickaxe === "pickaxe1") {
                     if (Math.random() < 1/10000) {
                         mine[curY + 1][curX] = "🩶";
                         playSound(oreList["🩶"]["oreTier"]);
@@ -533,7 +534,7 @@ function sr1Helper(state) {
             document.getElementById("switchFont").disabled = true;
         }
         if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.wasUsing = player.stats.currentPickaxe;
-        player.stats.currentPickaxe = 27;
+        player.stats.currentPickaxe = "pickaxe27";
         document.getElementById("theWorkshop").style.display = "block";
     } else {
         if (!player.settings.usingNewEmojis) {

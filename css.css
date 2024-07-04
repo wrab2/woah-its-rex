@@ -647,19 +647,22 @@ img.roundcat {
 }
 .hologram {
   height: 2vw;
-  width: 40%;
+  width: 100%;
   display: flex;
   align-items: flex-end;
   margin: auto;
   justify-content: center;
-
+  position: relative;
+  
 }
 .hologram button {
   height: 100%;
-  width: 100%;
+  width: 40%;
   border: none;
-  border-top: 0.1vw solid white;
   background: none;
+  font-size: 1.25vw;
+  font-weight: 750;
+  box-shadow: 0px -0.2vw 6px -1px red;
 }
 #hologramTriangle {
   position: absolute;
@@ -671,9 +674,9 @@ img.roundcat {
   width: 25vw;
   height: auto;
   position: absolute;
-  bottom: 17.7vw;
+  bottom: 16.7vw;
   opacity: 100%;
-  z-index: 9;
+  z-index: 15;
   border-top: 0.1vw solid white;
   border-bottom: 0.1vw solid white;
   box-shadow: 0 0 10px white;
@@ -2089,10 +2092,23 @@ button {
   font-size: 1.8vw;
   margin-left: -0.2vw;
 }
+.largeMineImage {
+  position: absolute;
+  width: 10vw;
+  height: 10vw;
+}
 .mineImage {
-  width: 1.4vw;
-  height: 1.4vw;
-  margin-left: 0.3vw;
+  position: absolute;
+  width: 1.7vw;
+  height: 1.7vw;
+}
+.mineSpan {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5.2631%;
+  width: 100%;
 }
 .electrifiedBlock {
   position: relative;

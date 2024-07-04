@@ -112,7 +112,7 @@ function playSound(type) {
         } 
     }
     
-    if (player.settings.doSpawnEffects && oreInformation.tierGrOrEqTo({"tier1":type, "tier2": "Interstellar"}) && (player.currentEffect === '' ? true : (oreInformation.tierGrOrEqTo({"tier1":type, "tier2":player.currentEffect})))) {
+    if ((player.settings.doSpawnEffects && oreInformation.tierGrOrEqTo({"tier1":type, "tier2": "Interstellar"}) && (player.currentEffect === '' ? true : (oreInformation.tierGrOrEqTo({"tier1":type, "tier2":player.currentEffect})))) && messageIncluded(type)) {
         let timeoutAmt = 0;
         if (document.getElementById("blockContainer").style.animation !== "") {
             document.getElementById("blockContainer").style.animation = "";
