@@ -472,7 +472,7 @@ function calcSpeed() {
         else return {speed: 7, reps: (-2 + sr1Level)}
     }
     if (debug) return {speed: 0, reps: 100}
-    return {speed: miningSpeed, reps: reps}
+    else return {speed: miningSpeed, reps: reps}
 }
 //DISPLAY
 let displayRows;
