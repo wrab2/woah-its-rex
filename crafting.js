@@ -190,7 +190,7 @@ const recipes = {
     },
     "gear6" : {
         name : "",
-        recipe : [{ore:"🌵", amt:450000000},{ore:"⚱️", amt:400},{ore:"🗡️", amt:350},{ore:"🎀", amt:100},{ore:"🔆", amt:50},{ore:"⭐", amt:45},{ore:"💥", amt:10},{ore:"🪐", amt:5},],
+        recipe : [{ore:"🌵", amt:350000000},{ore:"⚱️", amt:300},{ore:"🗡️", amt:270},{ore:"🎀", amt:75},{ore:"🔆", amt:35},{ore:"⭐", amt:35},{ore:"💥", amt:7},{ore:"🪐", amt:3},],
         upgrades : {}
     },
     "gear7" : {
@@ -1339,7 +1339,7 @@ const pickaxeStats = {
         canMineIn:[1],
         extraInformation: "Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck and slightly increased cave size.",
 },
-    //to ~3250
+    
     "pickaxe13": {
         mined: 1,
         revealed: 1,
@@ -1412,7 +1412,7 @@ const pickaxeStats = {
         rate: 60,
         src: "⛏️",
         ability: "media/abilityImages/gemstoneEngraverAbility.png",
-        doAbility: function(x, y) { pickaxeAbility19(x, y) },
+        doAbility: function(x, y) { pickaxeAbility19(x, y, 0)},
         canSpawnCaves:[1, 2],
         canMineIn:[1, 2],
         extraInformation: "High repetition chance, 7 max repititions."

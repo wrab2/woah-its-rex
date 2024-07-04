@@ -243,7 +243,7 @@ function loadContent() {
 }
 
 //MOVEMENT
-function movePlayer(dir, reps) {
+function movePlayer(dir, reps, type) {
     for (let i = 0; i < reps; i++) {
         if (canMine) {
             if (verifiedOres.isRightPickaxe()) {
@@ -263,7 +263,7 @@ function movePlayer(dir, reps) {
                     mineBlock(curX, curY, "mining");
                     mine[curY][curX] = "⛏️";
                     lastDirection = dir.key;
-                    if (player.gears["gear29"] && !isHoldingShift) {
+                    if (player.gears["gear29"] && !isHoldingShift && type !== "single") {
                         if (dir.y !== 0) {
                             if (curY > 0 && mine[curY + dir.y][curX] === "⚪") {
                                 mine[curY][curX] = "⚪";
@@ -423,7 +423,7 @@ function goDirection(direction, speed) {
         movements.x = (direction === "a" ? -1 : (direction === "d" ? 1 : 0));
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
         miningSpeed ??= 25;
-        loopTimer = setInterval(movePlayer, miningSpeed, movements, reps);
+        loopTimer = setInterval(movePlayer, miningSpeed, movements, reps, "auto");
         curDirection = direction;
         energySiphonerDirection = direction;
         updateDisplayTimer(true);
@@ -438,7 +438,7 @@ function moveOne(dir, button) {
     let movements = {x:0, y:0, key:dir};
     movements.x = (dir === "a" ? -1 : (dir === "d" ? 1 : 0));
     movements.y = (dir === "s" ? 1 : (dir === "w" ? -1 : 0));
-    movePlayer(movements, 1);
+    movePlayer(movements, 1, "single");
     curDirection = "";
     setTimeout(() => {
         button.disabled = false;
