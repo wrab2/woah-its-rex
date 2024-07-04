@@ -1490,7 +1490,7 @@ const pickaxeStats = {
         revealed: 26494,
         luck: 175,
         rate: 150,
-        src: "⛏️",
+        src: `<img class="mineImage" src="media/nullChromaIcon.png"></img>`,
         doAbility: function(x, y) { pickaxeAbility26(x, y) },
         canSpawnCaves:[1, 2],
         canMineIn:[1, 2],

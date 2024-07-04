@@ -91,6 +91,8 @@ let allPickaxeNames =
 "Mud Sickle", 
 "Dirt Ravager", 
 "Crystalline Excavator",
+"Ballast Breaker",
+"Tropical Carver",
 "Void Crusher", 
 "Geode Staff", 
 "Earth Soiler", 
@@ -118,18 +120,26 @@ let allPickaxeNames =
 ];
 function changeUseNumbers(button) {
     if (!player.settings.useNumbers) {
-        let elements = document.getElementById("pickaxeCrafts").children;
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].firstChild.innerText = "Pickaxe " + (i + 1);
+        const list = pickaxeStats;
+        let i = 1;
+        for (let name in list) {
+            if (name !== "pickaxe0") {
+                getButtonByName(name).firstChild.textContent = `Pickaxe ${i}`;
+                i++;
+            }
         }
         if (button != undefined) {
             button.style.backgroundColor = "#6BC267";
         }
         player.settings.useNumbers = true;
     } else {
-        let elements = document.getElementById("pickaxeCrafts").children;
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].firstChild.innerText = allPickaxeNames[i];
+        const list = pickaxeStats;
+        let i = 0;
+        for (let name in list) {
+            if (name !== "pickaxe0") {
+                getButtonByName(name).firstChild.textContent = allPickaxeNames[i];
+                i++;
+            }
         }
         if (button != undefined) {
             button.style.backgroundColor = "#FF3D3D";

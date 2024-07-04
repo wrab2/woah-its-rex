@@ -20,7 +20,6 @@ async function rollAbilities(force) {
         if (player.settings.cavesEnabled) {
             player.stats.cavesGenerated++;
             generateCave();
-            displayArea();
         }
     }
     if (debug && force) m = 10000000;
@@ -103,9 +102,17 @@ function powerup4() {
 function powerup5() {
     if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && currentWorld !== 1.1 && player.powerupCooldowns["powerup5"].unlocked) {
         removeParadoxical();
-        let toChooseFrom = Object.keys(player.pickaxes).concat(Object.keys(player.gears));
+        let toChooseFrom = [];
+        for (let pickaxe in pickaxeStats) {
+            if (currentWorld === 1) {
+                if (pickaxe !== "pickaxe27") toChooseFrom.push(pickaxe);
+            } else if (currentWorld === 2) {
+                if (pickaxeStats[pickaxe].canMineIn.includes(2)) toChooseFrom.push(pickaxe)
+            }
+        }
+        toChooseFrom = toChooseFrom.concat(Object.keys(player.gears));
         for (let i = toChooseFrom.length - 1; i >= 0; i--) {
-            if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (currentWorld === 2 && (toChooseFrom[i].includes("pickaxe")) && Number(toChooseFrom[i].substring(7)) < 13) || toChooseFrom[i] === "pickaxe28") toChooseFrom.splice(i, 1);
+            if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]]) toChooseFrom.splice(i, 1);
         }
         if (toChooseFrom.length > 0) {
             let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
@@ -773,7 +780,6 @@ function pickaxeAbility26(x, y) {
         if (abilityTableArray[low] === "pickaxe27") {
             const overrideLevel = Math.round(Math.random() * 3) + 2;
             pickaxeAbility27(points[propertyName]["X"], points[propertyName]["Y"], overrideLevel);
-            console.log("fuck", overrideLevel)
         } else pickaxeStats[abilityTableArray[low]].doAbility(points[propertyName]["X"], points[propertyName]["Y"])
     }
 }
