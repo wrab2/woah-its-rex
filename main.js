@@ -60,7 +60,6 @@ function init() {
     createInventory();
     createGearRecipes();
     createPickaxeRecipes();
-    switchPowerupDisplay(0);
     assignImageNames();
     createAllLayers();
     createMine();
@@ -100,6 +99,7 @@ function init() {
         updateAllLayers();
         checkUnlockConditions();
         switchWorldCraftables();
+        switchPowerupDisplay(0);
         console.log("meow");
     }
 }
@@ -675,9 +675,17 @@ function updateInventory() {
     if (player.powerupVariables.fakeEquipped.item !== undefined && Date.now() >= player.powerupVariables.fakeEquipped.removeAt) {
         removeParadoxical();
     }
+    if (player.powerupVariables.fakeTreeLevel.level !== undefined && Date.now() >= player.powerupVariables.fakeTreeLevel.removeAt) {
+        removeParadoxical();
+    }
+    if (player.powerupVariables.caveBoosts.active && Date.now() >= player.powerupVariables.caveBoosts.removeAt) {
+        player.powerupVariables.caveBoosts.removeAt = 0;
+        player.powerupVariables.caveBoosts.active = false;
+        caveLuck = 1;
+    }
+
     if (currentWorld === 1.1 && player.stats.currentPickaxe !== "pickaxe27") player.stats.currentPickaxe = "pickaxe27";
     else if (currentWorld !== 1.1 && player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = "pickaxe0";
-    checkPowerupCooldowns();
     updatePowerupCooldowns();
     updateDisplayedUpgrade();
     if (player.gears["gear24"]) autoPowerups();
@@ -700,6 +708,18 @@ function updateInventory() {
     }
     let speed = calcAverageSpeed();
     if (speed !== undefined) player.avgSpeed = speed;
+    get("catPlayerStats").textContent = `${player.displayStatistics.luck.toLocaleString()}x Luck. ${getAvgBlockSpeed().toLocaleString()} Average Blocks Per Minute.`;
+}
+const blockAmts = [];
+let lastBlockAmt = 0;
+function getAvgBlockSpeed() {
+    blockAmts.push(player.stats.blocksMined - lastBlockAmt);
+    if (blockAmts.length > 4) blockAmts.splice(0, 1);
+    let totalBlockAmts = 0;
+    for (let i = 0; i < blockAmts.length; i++) totalBlockAmts += blockAmts[i];
+    totalBlockAmts *= 60;
+    lastBlockAmt = player.stats.blocksMined;
+    return totalBlockAmts;
 }
 function updateDisplayTimer(state) {
     if (state) {

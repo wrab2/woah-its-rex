@@ -80,8 +80,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
         </div>
     </noscript>
     <div id="pressPlay">
-        <p class="credits"><b>UI by @catlover/@ZayedLovesCats on Discord! 😼</b><br><b>Game made by @thecatofalltime on Discord! 😺</b></p>
-        <p class="credits">Background music made by the community! (ty<3)<br>Spawn sounds made by @monocrexy on Discord!<br>Thank you to all the spreadsheet editors!</p>
+        <p class="credits"><b>Game made by @thecatofalltime on Discord! 😺</b><br>Thank you to all the spreadsheet editors!</p>
+        <p class="credits">Background music made by the community! (ty<3)<br>Spawn sounds made by @monocrexy on Discord!</p>
         <p class="credits">Some sounds made by @tevv_  & @etherealelysia on Discord!<br>Many ideas by @viridescentluna on Discord!</p>
         <button class="play-button" onclick="loadContent()">Play!</button>
     </div>
@@ -189,7 +189,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 </div>
                 
             </div>
-            <p id = "craftingRecipeTitle" class="middleTitle" style="display: none;">Recipe</p>
             <div id="displayRecipe"></div>
             <p id="craftingTimeDisplay" style="display: none;">Est. Time: 000:00:00:00</p>
             <p id = "descriptionTitle" class="middleTitle" style="display: none;">Description</p>
@@ -223,7 +222,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe24Description" style="display: none;"><span id="pickaxe24Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe24Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe25Description" style="display: none;"><span id="pickaxe25Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe25Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe26Description" style="display: none;">Has an ability proc rate of 1/150.<br>Has 175x luck.<br>Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade (only in Subrealm). The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade (only in Subrealm). The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br>Paradoxical Progression will give access to the next level instead of a random item.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
                 <!--
                     Pickaxes above
@@ -283,26 +282,57 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
             <div id="eventMessages">
                 Event Messages Appear Here!
             </div>
-            <span id="secretDebugStats"></span>
+            <div id="powerupHolder" onmousewheel="scrollPowerups(event)">
+                <button id="powerupTop" class="powerupStyling" onclick="switchPowerupDisplay(1)">
+                    <span id="topPowerupLabel" class="powerupLabel">1</span>
+                    <span id="topPowerupReady" class="powerupLabel powerupStatus"></span>
+                </button>
+                <button id="mainPowerup" class="powerupStyling" onclick="triggerPowerupExtension()">
+                    <span id="mainPowerupLabel" class="powerupLabel">1</span>
+                    <span id="mainPowerupReady" class="powerupLabel powerupStatus"></span>
+                </button> 
+                <button id="powerupBottom" class="powerupStyling" onclick="switchPowerupDisplay(-1)">
+                    <span id="bottomPowerupLabel" class="powerupLabel">1</span>
+                    <span id="bottomPowerupReady" class="powerupLabel powerupStatus"></span>
+                </button>
+
+                <div id="powerupInfoExtension" style="display: none;">
+                    <div id="powerupLock">
+                        <div id="powerupLockChain"></div>
+                        <p id="powerupRequirement">
+                            
+                        </p>
+                    </div>
+                    <button id="allowAutoPowerup" onclick="toggleCanAuto(currentPowerupDisplayed)">
+                        Allow Auto?
+                    </button>
+                    <p id="powerupTitle">
+                        <span>
+                            Re-Repurpused Replicator
+                        </span>
+                    </p>
+                    <p id="powerupDescription">
+                        Makes commons affected by up to 3.5x luck for a short duration. Has a cooldown of 20 minutes.
+                    </p>
+                    <div id="powerupBottomArea">
+                        <div id="powerupTimes">
+                            <button id="powerupCooldown">
+                                Activate!
+                            </button>
+                            <div id="powerupActive">
+                                Not Active!
+                            </div>
+                        </div>
+                        <div id="powerupLabels">
+                            <p id="powerupInformation">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span id="catPlayerStats">Meow!</span>
             <div id="blockContainer">
-                <button id="powerupScrollUp" onclick="switchPowerupDisplay(1)"><span><</span></button>
-                <div id="powerupLock">
-                    <img src="media/featureLock.png" id="lockImage">
-                    <p id="powerupRequirement">0/500,000 Blocks Mined.</p>
-                </div>
-                <div id="powerupContainer">
-                    <p class="powerupText" id="powerupTitle">Name Placeholder</p>
-                    <p class="powerupText" id="powerupDescription">Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text</p>
-                    <p class="powerupText" id="powerupExtraInfo">Info Here!</p>
-                    <p class="powerupText" id="powerupCooldown">Cooldown: 00:00:00</p>
-                    <p class="powerupText" id="powerupActive">Active for: 00:00:00</p>
-                </div>
-                <button id="powerupScrollDown" onclick="switchPowerupDisplay(-1)"><span>></span></button>
-                <button style="display: none;" id="powerup1" class="powerupActivateButton" onclick="powerup1(curX, curY)">Activate!</button>
-                <button style="display: none;" class="powerupActivateButton" id="powerup2" onclick="powerup2(curX, curY)">Activate!</button>
-                <button style="display: none;" class="powerupActivateButton" id="powerup3" onclick="powerup3()">Activate!</button>
-                <button style="display: none;" class="powerupActivateButton" id="powerup4" onclick="powerup4()">Activate!</button>
-                <button style="display: none;" class="powerupActivateButton" id="powerup5" onclick="powerup5()">Activate!</button>
                 <div id="blockDisplay">
                     <div class="blockDisplayRow"></div>
                     <div class="blockDisplayRow"></div>
@@ -1076,31 +1106,6 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 </form>
                 <button id="submitName" onclick="(player.name = get('enterName').value); showNextInQueue();">Confirm!</button>
             </div>
-            <div id="portalUpdate" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    The Portal Update<br>
-                    - Added The Portal Room<br>
-                    - Teleport to the different worlds using this area! Found in the 'Locations' tab!<br>
-                    - Added a message system (this!!) for anything important I need people to know!<br>
-                    - Something important to know, you now can click on a log to copy and paste it so I dont suffer reading numbers!<br>
-                    - Did a lot of bug fixes.<br>
-                    - Report any bugs in the Discord server!
-                </p>
-            </div>
-            <div id="trophyUpdate" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    Trophy Room Update!!<br>
-                    - Added the Trophy Room (found in the Portal Room)<br>
-                    - This is pretty much achievements but I wanted to be extra.<br>
-                    - Only 3 obtainable trophies for World completions, a completion is from a task instead of owning every ore or item.<br>
-                    - More pickaxe icons added!<br>
-                    - Made owned pickaxes from other worlds appear in the World 1 list.<br>
-                    - Silly bug fixes :3<br>
-                    - Report any bugs in the Discord server!
-                </p>
-            </div>
             <div id="worldOneRevamp" class="dailyMessage">
                 <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
                 <p class="dailyText">
@@ -1115,6 +1120,18 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     - WOG and Cavern Capacitator increase cave size!<br>
                     - Bug Fixes!! YIPPEEEE!! :3<br>
                     I'll be checking Galaxy chat, game comments, and my discord server a bunch for suggestions with the new progression as it is a work in progress as of right now.
+                </p>
+            </div>
+            <div id="summerEvent" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <p class="dailyText">
+                    <b>Summer Event + Powerup Revamp!</b><br>
+                    - 9 New event ores found in a few World 1 layers.<br>
+                    - 1 New celestial.<br>
+                    - Overhauled Powerup UI.<br>
+                    - Changed a few powerup effects.<br>
+                    - A few QOL changes with crafting.<br>
+                    - Bug Fixes!!!!!!!!!!!!!!!! YAYYYYYYYYYY!!!!!!<br>
                 </p>
             </div>
             <div id="sr1Unlocked" class="dailyMessage">

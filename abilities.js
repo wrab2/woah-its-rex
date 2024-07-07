@@ -16,8 +16,9 @@ async function rollAbilities(force) {
     if (currentWorld < 2 && player.gears["gear8"]) m += 0.2;
     if (player.gears["gear23"]) m += 0.15;
     if (batteryEvent) m += 0.1;
-    if (Math.random() < 1/500 && verifiedOres.canGenerateCaves()) {
-        if (player.settings.cavesEnabled) {
+    if (verifiedOres.canGenerateCaves()) {
+        const caveRate = player.powerupVariables.caveBoosts.active ? 1/250 : 1/500;
+        if (Math.random() <= caveRate && player.settings.cavesEnabled) {
             player.stats.cavesGenerated++;
             generateCave();
         }
@@ -42,40 +43,30 @@ function getTestAvg() {
     }
     return {m: mined/abilityTestAmt, r: revealed/abilityTestAmt};
 }
-//generates a large cube around the player
 function powerup1(x, y) {
     if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
-        for (let r = y - 50; r < y + 50; r++) {
-            for (let c = x - 50; c < x + 50; c++) {
+        const multiplier = Math.floor(Math.log(player.stats.blocksMined/500000)/Math.log(10)) + 1;
+        for (let r = y - (50 * multiplier); r < y + (50 * multiplier); r++) {
+            for (let c = x - (50 * multiplier); c < x + (50 * multiplier); c++) {
                 pickaxeAbilityMineBlock(c, r);
             }
         }
         displayArea();
         player.powerupCooldowns["powerup1"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
-        document.getElementById("powerup1").style.backgroundColor = "#FF3D3D";
+        applyNearbyData();
     }
     
 }
-
-//creates 4 caves around the player
-function powerup2(x, y) {
+function powerup2() {
     if (Date.now() >= player.powerupCooldowns["powerup2"].cooldown && player.powerupCooldowns["powerup2"].unlocked) {
-        generateCave(x + 100, y);
-        generateCave(x - 100, y);
-        generateCave(x, y + 100);
-        generateCave(x, y - 100);
-        generateCave(x + 100, y + 100);
-        generateCave(x - 100, y + 100);
-        generateCave(x - 100, y - 100);
-        generateCave(x + 100, y - 100);
-        player.stats.cavesGenerated += 8;
-        displayArea();
-        player.powerupCooldowns["powerup2"].cooldown = Date.now() + (player.gears["gear24"] ? 300000 * 0.75 : 300000);
-        document.getElementById("powerup2").style.backgroundColor = "#FF3D3D";
+        player.powerupCooldowns["powerup2"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
+        player.powerupVariables.caveBoosts.removeAt = Date.now() + 150000;
+        player.powerupVariables.caveBoosts.active = true;
+        caveLuck = 2;
+        applyNearbyData();
     }
 }
 
-//make a random layer ore more common for a short period
 function powerup3() {
     if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown && player.powerupCooldowns["powerup3"].unlocked) {
         const layer = layerDictionary[currentLayer].layer;
@@ -87,54 +78,73 @@ function powerup3() {
         player.powerupVariables.currentChosenOre.removeAt = Date.now() + (player.gears["gear24"] ? 600000 * 1.5 : 600000);;
         updateAllLayers();
         player.powerupCooldowns["powerup3"].cooldown = Date.now() + (player.gears["gear24"] ? 3000000 * 0.75 : 3000000);
-        document.getElementById("powerup3").style.backgroundColor = "#FF3D3D";
+        applyNearbyData();
     }
 }
 function powerup4() {
     if (Date.now() >= player.powerupCooldowns["powerup4"].cooldown && player.powerupCooldowns["powerup4"].unlocked) {
         player.powerupVariables.commonsAffected.state = true;
-        player.powerupVariables.commonsAffected.removeAt = Date.now() + (player.gears["gear24"] ? 300000 * 1.5 : 300000);;
+        player.powerupVariables.commonsAffected.removeAt = Date.now() + (player.gears["gear24"] ? 300000 * 1.5 : 300000);
         player.powerupCooldowns["powerup4"].cooldown = Date.now() + (player.gears["gear24"] ? 1200000 * 0.75 : 1200000);
-        updateAllLayers()
-        document.getElementById("powerup4").style.backgroundColor = "#FF3D3D";
+        updateAllLayers();
+        applyNearbyData();
     }
 }
 function powerup5() {
-    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && currentWorld !== 1.1 && player.powerupCooldowns["powerup5"].unlocked) {
-        removeParadoxical();
-        let toChooseFrom = [];
-        for (let pickaxe in pickaxeStats) {
-            if (currentWorld === 1) {
-                if (pickaxe !== "pickaxe27") toChooseFrom.push(pickaxe);
-            } else if (currentWorld === 2) {
-                if (pickaxeStats[pickaxe].canMineIn.includes(2)) toChooseFrom.push(pickaxe)
+    if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && player.powerupCooldowns["powerup5"].unlocked) {
+        if (currentWorld !== 1.1) {
+            removeParadoxical();
+            let toChooseFrom = [];
+            for (let pickaxe in pickaxeStats) {
+                if (currentWorld === 1) {
+                    if (pickaxe !== "pickaxe27") toChooseFrom.push(pickaxe);
+                } else if (currentWorld === 2) {
+                    if (pickaxeStats[pickaxe].canMineIn.includes(2)) toChooseFrom.push(pickaxe)
+                }
+            }
+            toChooseFrom = toChooseFrom.concat(Object.keys(player.gears));
+            for (let i = toChooseFrom.length - 1; i >= 0; i--) {
+                if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]]) toChooseFrom.splice(i, 1);
+            }
+            if (toChooseFrom.length > 0) {
+                let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
+                player.powerupVariables.fakeEquipped.item = toGive;
+                if (player.pickaxes[toGive] !== undefined) {
+                    player.powerupVariables.fakeEquipped.originalState = player.stats.currentPickaxe;
+                    player.stats.currentPickaxe = toGive;
+                    player.pickaxes[toGive] = true;
+                }
+                if (player.gears[toGive] !== undefined) {
+                    player.gears[toGive] = true;
+                    if (toGive === "gear0") document.getElementById("trackerLock").style.display = "none";
+                    if (toGive === "gear9") document.getElementById("sillyRecipe").style.display = "block";
+                }
+                updateAllLayers();
+                let tempDirection = curDirection;
+                stopMining();
+                goDirection(tempDirection);
+                player.powerupVariables.fakeEquipped.removeAt = Date.now() + (player.gears["gear24"] ? 60000 * 1.5 : 60000);
+                player.powerupCooldowns["powerup5"].cooldown = Date.now() + (player.gears["gear24"] ? 3600000 * 0.75 : 3600000);
+                utilitySwitchActions();
+            }
+        } else {
+            removeParadoxical();
+            const curTreeLevel = player.upgrades["pickaxe27"].level;
+            if (curTreeLevel < 5) {
+               const chosenLevel = curTreeLevel + 1;
+                player.powerupVariables.fakeTreeLevel.originalState = player.upgrades["pickaxe27"].level;
+                player.powerupVariables.fakeTreeLevel.level = chosenLevel;
+                player.upgrades["pickaxe27"].level = chosenLevel;
+                updateAllLayers();
+                let tempDirection = curDirection;
+                stopMining();
+                goDirection(tempDirection);
+                player.powerupVariables.fakeTreeLevel.removeAt = Date.now() + (player.gears["gear24"] ? 60000 * 1.5 : 60000);
+                player.powerupCooldowns["powerup5"].cooldown = Date.now() + (player.gears["gear24"] ? 3600000 * 0.75 : 3600000);
+                utilitySwitchActions();
             }
         }
-        toChooseFrom = toChooseFrom.concat(Object.keys(player.gears));
-        for (let i = toChooseFrom.length - 1; i >= 0; i--) {
-            if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]]) toChooseFrom.splice(i, 1);
-        }
-        if (toChooseFrom.length > 0) {
-            let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
-            player.powerupVariables.fakeEquipped.item = toGive;
-            if (player.pickaxes[toGive] !== undefined) {
-                player.powerupVariables.fakeEquipped.originalState = player.stats.currentPickaxe;
-                player.stats.currentPickaxe = toGive;
-                player.pickaxes[toGive] = true;
-            }
-            if (player.gears[toGive] !== undefined) {
-                player.gears[toGive] = true;
-                if (toGive === "gear0") document.getElementById("trackerLock").style.display = "none";
-                if (toGive === "gear9") document.getElementById("sillyRecipe").style.display = "block";
-            }
-            updateAllLayers();
-            let tempDirection = curDirection;
-            stopMining();
-            goDirection(tempDirection);
-            player.powerupVariables.fakeEquipped.removeAt = Date.now() + (player.gears["gear24"] ? 60000 * 1.5 : 60000);;
-            player.powerupCooldowns["powerup5"].cooldown = Date.now() + (player.gears["gear24"] ? 3600000 * 0.75 : 3600000);
-            utilitySwitchActions();
-        }
+        applyNearbyData();
     }
 }
 

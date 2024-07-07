@@ -115,19 +115,20 @@ class playerTemplate {
             furthestY: 0
         },
         this.powerupCooldowns = {
-            "powerup1": {cooldown: Date.now(), unlocked: false},
-            "powerup2": {cooldown: Date.now(), unlocked: false},
-            "powerup3": {cooldown: Date.now(), unlocked: false},
-            "powerup4": {cooldown: Date.now(), unlocked: false},
-            "powerup5": {cooldown: Date.now(), unlocked: false},
+            "powerup1": {cooldown: Date.now(), unlocked: false, canAuto: false},
+            "powerup2": {cooldown: Date.now(), unlocked: false, canAuto: false},
+            "powerup3": {cooldown: Date.now(), unlocked: false, canAuto: false},
+            "powerup4": {cooldown: Date.now(), unlocked: false, canAuto: false},
+            "powerup5": {cooldown: Date.now(), unlocked: false, canAuto: false},
         },
         this.powerupVariables = {
-            currentChosenOre : {ore: undefined, removeAt: Date.now, lastOre: undefined},
-            commonsAffected : {state: false, removeAt: Date.now()},
-            currentPowerupDisplayed : "powerup1",
-            fakeEquipped: {originalState: undefined, item: undefined, removeAt: Date.now()},
+            currentChosenOre : {ore: undefined, removeAt: 0, lastOre: undefined},
+            commonsAffected : {state: false, removeAt: 0},
+            fakeEquipped: {originalState: undefined, item: undefined, removeAt: 0},
+            fakeTreeLevel: {originalState: undefined, level: undefined, removeAt: 0},
             nextAuto: Date.now(),
             autoNum: 1,
+            caveBoosts: {removeAt: 0, active: false}
         },
         this.oreTracker = {
             existingOres : [],
@@ -178,120 +179,271 @@ class playerTemplate {
 
             },
         }
+        this.displayStatistics = {
+            blocksPerMinute: 0,
+            luck: 1
+        }
     }
 }
 let player = new playerTemplate();
 const powerupOrder = ["powerup1", "powerup2", "powerup3", "powerup4", "powerup5"];
+let currentPowerupDisplayed = "powerup1";
+let powerupDisplayed = false;
 const powerupList = {
     "powerup1" : {
         title: "Terrestrial Terror",
-        description: "Mines a large area around the player. Has a cooldown of 15 minutes.",
+        description: "Mines a 101x101 area around the player, the size growing the more blocks mined you have. Has a cooldown of 15 minutes.",
         cooldown: 900000,
-        colors: {
-            background: "linear-gradient(to bottom, #00ffff, #ff00ff, #ffff00)",
-            text: "black",
-            buttonUp: {background: "#00ffff", text: "black"},
-            buttonDown: {background: "#ffff00", text: "black"},
+        gradient: "linear-gradient(to right, #00ffff, #ff00ff, #ffff00)",
+        checkRequirements: function() {
+            if (player.stats.blocksMined >= 500000) return true;
+            else return false;
         },
-        //these store the requirements for each powerup to be unlocked, use eval() on the property and put them into the lock area
-        requirement: "(player.stats.blocksMined >= 500000)",
-        condition1: "player.stats.blocksMined",
-        condition2: "/500,000 Blocks Mined."
+        displayProgress: function() {
+            return `${player.stats.blocksMined.toLocaleString()}/500,000 Blocks Mined.`
+        },
+        getActiveFor: function() {
+            get("powerupInformation").innerHTML = "";
+            return {progress: 0, active: 0};
+        },
+        doAbility: "powerup1(curX, curY); updatePowerupCooldowns();",
     },
     "powerup2" : {
         title: "The Spelunker",
-        description: "Generates a few caves around the player. Has a cooldown of 5 minutes.",
-        cooldown: 300000,
-        colors: {
-            background: "linear-gradient(to bottom, #F5533D, #6B331D, #696969, #0A0DC7)",
-            text: "white",
-            buttonUp: {background: "#F5533D", text: "black"},
-            buttonDown: {background: "#0A0DC7", text: "white"},
+        description: "Increases cave spawn chance, cave size, and cave luck for 2:30 minutes. Has a cooldown of 15 minutes",
+        cooldown: 900000,
+        gradient: "linear-gradient(to right, #F5533D, #6B331D, #696969, #0A0DC7)",
+        checkRequirements: function() {
+            if (player.stats.cavesGenerated >= 2500) return true;
+            else return false;
         },
-        requirement: "(player.stats.cavesGenerated >= 250)",
-        condition1: "player.stats.cavesGenerated",
-        condition2: "/250 Caves Generated."
+        displayProgress: function() {
+            return `${player.stats.cavesGenerated.toLocaleString()}/2,500 Caves Generated.`
+        },
+        getActiveFor: function() {
+            const beginTime = player.powerupCooldowns["powerup2"].cooldown - (player.gears["gear24"] ? 900000 * 0.75 : 900000);
+            const endTime = player.powerupVariables.caveBoosts.removeAt;
+            const progressTime = endTime - Date.now();
+            const abilityTime = endTime - beginTime;
+            return {progress: progressTime, active: abilityTime};
+        },
+        doAbility: "powerup2(); updatePowerupCooldowns();",
     },
     "powerup3" : {
         title: "Illogical Randomiser",
         description: "Makes a random, Mystical+ ore more common for a short duration. Has a cooldown of 50 minutes.",
         cooldown: 3000000,
-        colors: {
-            background: "linear-gradient(to bottom, #f00e1d, #ff8178, #ebebeb, #ff8178, #f00e1d)",
-            text: "black",
-            buttonUp: {background: "#f00e1d", text: "black"},
-            buttonDown: {background: "#f00e1d", text: "black"},
-        },
-        requirement: "(player.stats.timePlayed >= 10800000)",
-        condition1: "msToTime(player.stats.timePlayed)",
-        condition2: "/3 Hours Played.",
         oreAffected: "",
+        gradient: "linear-gradient(to right, #f00e1d, #ff8178, #ebebeb, #ff8178, #f00e1d)",
+        checkRequirements: function() {
+            if (player.stats.timePlayed >= 10800000) return true;
+            else return false;
+        },
+        displayProgress: function() {
+            return `${msToTime(player.stats.timePlayed)}/3:00:00 Time Played.`
+        },
+        getActiveFor: function() {
+            if (player.powerupVariables.currentChosenOre.ore !== undefined) {
+                get("powerupInformation").innerHTML = `Boosted Ore:<br>${player.powerupVariables.currentChosenOre.ore}`;
+            } else  get("powerupInformation").innerHTML = "";
+            const beginTime = player.powerupCooldowns["powerup3"].cooldown - (player.gears["gear24"] ? 3000000 * 0.75 : 3000000);
+            const endTime = player.powerupVariables.currentChosenOre.removeAt;
+            const progressTime = endTime - Date.now();
+            const abilityTime = endTime - beginTime;
+            return {progress: progressTime, active: abilityTime};
+        },
+        doAbility: "powerup3(); updatePowerupCooldowns();",
     },
     "powerup4" : {
         title: "Re-repurposed Replicator",
         description: "Makes commons affected by up to 3.5x luck for a short duration. Has a cooldown of 20 minutes.",
         cooldown: 1200000,
-        colors: {
-            background: "linear-gradient(to bottom, #FF0B0B, #FFEB00, #7AFF1F)",
-            text: "black",
-            buttonUp: {background: "#FF0B0B", text: "black"},
-            buttonDown: {background: "#7AFF1F", text: "black"},
+        gradient: "linear-gradient(to right, #FF0B0B, #FFEB00, #7AFF1F)",
+        checkRequirements: function() {
+            if (oreList['🔘']['normalAmt'] >= 50) return true;
+            else return false;
         },
-        requirement: "(oreList['🔘']['normalAmt'] >= 50)",
-        condition1: "oreList['🔘']['normalAmt'].toLocaleString()",
-        condition2: "/50 🔘 Owned"
+        displayProgress: function() {
+            return `${oreList['🔘']['normalAmt']}/50 🔘 Owned.`
+        },
+        getActiveFor: function() {
+            get("powerupInformation").innerHTML = "";
+            const beginTime = player.powerupCooldowns["powerup4"].cooldown - (player.gears["gear24"] ? 1200000 * 0.75 : 1200000);
+            const endTime = player.powerupVariables.commonsAffected.removeAt;
+            const progressTime = endTime - Date.now();
+            const abilityTime = endTime - beginTime;
+            return {progress: progressTime, active: abilityTime};
+        },
+        doAbility: "powerup4(); updatePowerupCooldowns();",
     },
     "powerup5" : {
         title: "Paradoxical Progression",
         description: "Gives you a random unowned pickaxe or gear for 1 minute. Has a cooldown of 1 hour.",
         cooldown: 3600000,
-        colors: {
-            background: "linear-gradient(to bottom, darkgray, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, darkgray)",
-            text: "white",
-            buttonUp: {background: "darkgray", text: "white"},
-            buttonDown: {background: "darkgray", text: "white"},
+        gradient: "linear-gradient(to right, darkgray, #37085A, #76734E, #116666, #58340B, #04370A, #3B0505, #740A32, #451676, darkgray)",
+        checkRequirements: function() {
+            if (countFlawlessOres() >= 400) return true;
+            else return false;
         },
-        requirement: `(countFlawlessOres() >= 400)`,
-        condition1: "(countFlawlessOres())",
-        condition2: "/400 Flawless Ores Owned."
+        displayProgress: function() {
+            return `${countFlawlessOres()}/400 Flawess Tier Ores Owned.`
+        },
+        getActiveFor: function() {
+            if (player.powerupVariables.fakeEquipped.item !== undefined) {
+                get("powerupInformation").innerHTML = `Fake Equipped:<br>${getItemNameFromParadoxical(player.powerupVariables.fakeEquipped.item)}`;
+            } else if (player.powerupVariables.fakeTreeLevel.level !== undefined) {
+                get("powerupInformation").innerHTML = `Fake Equipped:<br>TOL Level ${player.powerupVariables.fakeTreeLevel.level}`;
+            }
+            else get("powerupInformation").innerHTML = "";
+            const beginTime = player.powerupCooldowns["powerup5"].cooldown - (player.gears["gear24"] ? 3600000 * 0.75 : 3600000);
+            let endTime;
+            if (player.powerupVariables.fakeEquipped.item !== undefined) endTime = player.powerupVariables.fakeEquipped.removeAt;
+            else endTime = player.powerupVariables.fakeTreeLevel.removeAt;
+            const progressTime = endTime - Date.now();
+            const abilityTime = endTime - beginTime;
+            return {progress: progressTime, active: abilityTime};
+        },
+        doAbility: "powerup5(); updatePowerupCooldowns();",
     },
 }
 function switchPowerupDisplay(num) {
-    let currentNum = powerupOrder.indexOf(player.powerupVariables.currentPowerupDisplayed);
-    currentNum += num;
-    if (currentNum < 0) currentNum = (powerupOrder.length - 1)
-    else if (currentNum > powerupOrder.length - 1) currentNum = 0;
-    player.powerupVariables.currentPowerupDisplayed = powerupOrder[currentNum];
-    let powerup = powerupList[player.powerupVariables.currentPowerupDisplayed];
-    document.getElementById("powerupTitle").innerText = powerup.title;
-    document.getElementById("powerupTitle").style.color = powerup.colors.text;
-    document.getElementById("powerupDescription").innerText = powerup.description;
-    document.getElementById("powerupDescription").style.color = powerup.colors.text;
-    document.getElementById("powerupCooldown").innerText = `Cooldown: ${msToTime(powerup.cooldown)}`;
-    document.getElementById("powerupCooldown").style.color = powerup.colors.text;
-    document.getElementById("powerupActive").style.color = powerup.colors.text;
-    document.getElementById("powerupScrollUp").style.backgroundColor = powerup.colors.buttonUp.background;
-    document.getElementById("powerupScrollUp").style.color = powerup.colors.buttonUp.text;
-    document.getElementById("powerupScrollDown").style.backgroundColor = powerup.colors.buttonDown.background;
-    document.getElementById("powerupScrollDown").style.color = powerup.colors.buttonDown.text;
-    document.getElementById("powerupExtraInfo").style.color = powerup.colors.text;
-    let parent = document.getElementById("powerupContainer");
-    parent.style.backgroundImage = powerup.colors.background;
-    let children = parent.children;
-    if (children.length > 5) document.getElementById("powerupContainer").removeChild(children[children.length - 1]);
-    let child = document.getElementById(`${player.powerupVariables.currentPowerupDisplayed}`).cloneNode(true);
-    child.style.display = "flex";
-    document.getElementById("powerupContainer").appendChild(child);
-    document.getElementById("powerupExtraInfo").innerText = "";
+    const currentIndex = powerupOrder.indexOf(currentPowerupDisplayed);
+    let newIndex = currentIndex + num;
+    if (newIndex >= powerupOrder.length) newIndex = 0;
+    else if (newIndex < 0) newIndex = powerupOrder.length - 1;
+    currentPowerupDisplayed = powerupOrder[newIndex];
+    get("powerupLock").style.display = "none";
+    const powerup = powerupList[powerupOrder[newIndex]];
+    get("powerupTitle").children[0].textContent = powerup.title;
+    get("powerupTitle").children[0].style = `background:${powerup.gradient}; -webkit-background-clip: text; color: transparent; background-clip: text; -webkit-text-fill-color: transparent;`;
+    get("powerupDescription").textContent = powerup.description;
+    get("powerupCooldown").setAttribute("onclick", `${powerupList[currentPowerupDisplayed].doAbility}`);
+    if (player.powerupCooldowns[currentPowerupDisplayed].canAuto) get("allowAutoPowerup").style.backgroundColor = "6BC267";
+    else get("allowAutoPowerup").style.backgroundColor = "FF3D3D";
+    applyNearbyData();
     updatePowerupCooldowns();
-    checkPowerupCooldowns();
-    if (player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].unlocked || eval(powerup.requirement)) {
-        document.getElementById("powerupLock").style.display = "none";
-        player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].unlocked = true;
-    } else {
-        document.getElementById("powerupLock").style.display = "inline-flex";
-        document.getElementById("powerupRequirement").innerText = `${eval(powerup.condition1).toLocaleString()}${powerupList[player.powerupVariables.currentPowerupDisplayed].condition2}`
+}
+function updatePowerupCooldowns() {
+    checkPowerupConditions(currentPowerupDisplayed);
+    const cooldown = powerupList[currentPowerupDisplayed].cooldown * (player.gears["gear24"] ? 0.75 : 1);
+    const canUseAt = player.powerupCooldowns[currentPowerupDisplayed].cooldown;
+    let cooldownPercent = Math.round(100000*((canUseAt - Date.now())/cooldown))/1000
+    if (cooldownPercent <= 0) cooldownPercent = 0;
+    get("powerupCooldown").style.background = `linear-gradient(to left, #FF3D3D 0%, ${cooldownPercent}%, #6BC267 ${cooldownPercent}%`;
+    get("powerupCooldown").textContent = cooldownPercent > 0 ? `Can use in ${msToTime(canUseAt - Date.now())}` : "Activate!";
+    const activeNumbers = powerupList[currentPowerupDisplayed].getActiveFor();
+    if (activeNumbers.active <= 0) activeNumbers.active = 1;
+    let activePercent = Math.round(100000*(activeNumbers.progress/activeNumbers.active))/1000;
+    get("powerupActive").style.background = `linear-gradient(to left, #6BC267 0%, ${activePercent}%, #FF3D3D ${activePercent}%`;
+    get("powerupActive").textContent = activePercent > 0 ? `Active for ${msToTime(activeNumbers.progress)}` : "Not Active";
+}
+function checkPowerupConditions(powerup) {
+    if (player.powerupCooldowns[powerup].unlocked) get("powerupLock").style.display = "none";
+    else {
+        if (powerupList[powerup].checkRequirements()) {
+            player.powerupCooldowns[powerup].unlocked = true;
+            switchPowerupDisplay(0);
+        } else {
+            const lock = get("powerupLock")
+            lock.style.display = "block";
+            get("powerupRequirement").textContent = powerupList[powerup].displayProgress();
+        }
     }
+}
+function triggerPowerupExtension() {
+    if (!get("powerupInfoExtension").style.animation === "") return;
+    if (powerupDisplayed) {
+        powerupDisplayed = false;
+        get("mainPowerup").style.backgroundImage = "url('media/rightArrowIcon.png')";
+        get("powerupInfoExtension").style.animation = "retractPowerup 0.25s ease-out 1";
+        setTimeout(() => {
+            get("powerupInfoExtension").style.animation = "";
+            get("powerupInfoExtension").style.display = "none";
+            get("powerupInfoExtension").style.left = "-25vw";
+        }, 240);
+    } else {
+        powerupDisplayed = true;
+        get("mainPowerup").style.backgroundImage = "url('media/leftArrowIcon.png')";
+        get("powerupInfoExtension").style.display = "block";
+        get("powerupInfoExtension").style.animation = "extendPowerup 0.25s ease-out 1";
+        setTimeout(() => {
+            get("powerupInfoExtension").style.left = "4vw";
+            get("powerupInfoExtension").style.animation = "";
+        }, 240);
+    }
+}
+function scrollPowerups(event) {
+    if (event.deltaY > 0) switchPowerupDisplay(-1)
+    else switchPowerupDisplay(1);
+}
+function getNearbyGradients() {
+    const currentIndex = powerupOrder.indexOf(currentPowerupDisplayed);
+    let indexOne;
+    let indexTwo;
+    if (currentIndex + 1 >= powerupOrder.length) indexOne = 0;
+    else indexOne = currentIndex + 1;
+    if (currentIndex - 1 < 0) indexTwo = powerupOrder.length - 1;
+    else indexTwo = currentIndex - 1;
+    return {top: powerupOrder[indexOne], middle: powerupOrder[currentIndex], bottom: powerupOrder[indexTwo]}
+}
+function applyNearbyData() {
+    const powerupLocations = getNearbyGradients();
+    get("mainPowerupLabel").style = `background:${powerupList[powerupLocations.middle].gradient.replace("right", "bottom")}; -webkit-background-clip: text; color: transparent; background-clip: text; -webkit-text-fill-color: transparent;`;
+    get("topPowerupLabel").style = `background:${powerupList[powerupLocations.top].gradient.replace("right", "bottom")}; -webkit-background-clip: text; color: transparent; background-clip: text; -webkit-text-fill-color: transparent;`;
+    get("bottomPowerupLabel").style = `background:${powerupList[powerupLocations.bottom].gradient.replace("right", "bottom")}; -webkit-background-clip: text; color: transparent; background-clip: text; -webkit-text-fill-color: transparent;`;
+    get("mainPowerupLabel").textContent = powerupOrder.indexOf(powerupLocations.middle) + 1;
+    get("topPowerupLabel").textContent = powerupOrder.indexOf(powerupLocations.top) + 1;
+    get("bottomPowerupLabel").textContent = powerupOrder.indexOf(powerupLocations.bottom) + 1;
+    checkPowerupConditions(powerupLocations.top);
+    checkPowerupConditions(powerupLocations.middle);
+    checkPowerupConditions(powerupLocations.bottom);
+    if (player.powerupCooldowns[powerupLocations.top].unlocked) {
+        if (Date.now() >= player.powerupCooldowns[powerupLocations.top].cooldown) get("topPowerupReady").textContent = "🟢";
+        else get("topPowerupReady").textContent = "🔴";
+    } else get("topPowerupReady").textContent = "⚫";
+    if (player.powerupCooldowns[powerupLocations.bottom].unlocked) {
+        if (Date.now() >= player.powerupCooldowns[powerupLocations.bottom].cooldown) get("bottomPowerupReady").textContent = "🟢";
+        else get("bottomPowerupReady").textContent = "🔴";
+    } else get("bottomPowerupReady").textContent = "⚫";
+    if (player.powerupCooldowns[powerupLocations.middle].unlocked) {
+        if (Date.now() >= player.powerupCooldowns[powerupLocations.middle].cooldown) get("mainPowerupReady").textContent = "🟢";
+        else get("mainPowerupReady").textContent = "🔴";
+    } else get("mainPowerupReady").textContent = "⚫";
+}
+function getItemNameFromParadoxical(item) {
+    return recipes[item].name;
+}
+function toggleCanAuto(powerup) {
+    const area = player.powerupCooldowns[powerup];
+    if (area.canAuto) {
+        area.canAuto = false;
+        get("allowAutoPowerup").style.backgroundColor = "FF3D3D";
+    } else {
+        area.canAuto = true;
+        get("allowAutoPowerup").style.backgroundColor = "6BC267";
+    }
+}
+function toggleSpecificPowerup(num) {
+    num--;
+    if (num > -1 && num < powerupOrder.length + 1) {
+        const curIndex = powerupOrder.indexOf(currentPowerupDisplayed);
+        const distToTravel = num - curIndex;
+        switchPowerupDisplay(distToTravel);
+        if (!powerupDisplayed || distToTravel === 0) triggerPowerupExtension();
+    }
+}
+function autoPowerups() {
+    const powerup = powerupList[powerupOrder[player.autoNum]];
+    if (Date.now() >= player.powerupVariables.nextAuto && player.powerupCooldowns[powerupOrder[player.powerupVariables.autoNum]].canAuto) {
+        const powerup = powerupList[powerupOrder[player.powerupVariables.autoNum]];
+        const toExecute = powerup.doAbility.substring(0, powerup.doAbility.indexOf(";") + 1);
+        eval(toExecute);
+        player.powerupVariables.nextAuto += 30000;
+    }
+    player.powerupVariables.autoNum++;
+    if (player.powerupVariables.autoNum >= powerupOrder.length) player.powerupVariables.autoNum = 0;
+    if (player.powerupVariables.autoNum < 0) player.powerupVariables.autoNum = powerupOrder.length - 1;
+
 }
 function msToTime(milliseconds) {
     if (milliseconds < 0) milliseconds = 0;
@@ -304,69 +456,12 @@ function msToTime(milliseconds) {
         seconds.toString().padStart(2, "0")
     ].join(":");
 }
-function updatePowerupCooldowns() {
-    let num = player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].cooldown - Date.now();
-    num = num < 0 ? 0 : num;
-    document.getElementById("powerupCooldown").innerText = `Cooldown: ${msToTime(num)}`;
-    if (player.powerupVariables.currentPowerupDisplayed === "powerup3" && player.powerupVariables.currentChosenOre.ore !== undefined) document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.currentChosenOre.removeAt - Date.now())}`;
-    else if (player.powerupVariables.currentPowerupDisplayed === "powerup4" && player.powerupVariables.commonsAffected.state) document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.commonsAffected.removeAt - Date.now())}`;
-    else if (player.powerupVariables.currentPowerupDisplayed === "powerup5" && player.powerupVariables.fakeEquipped.item !== undefined) document.getElementById("powerupActive").innerText = `Active for: ${msToTime(player.powerupVariables.fakeEquipped.removeAt - Date.now())}`;
-    else document.getElementById("powerupActive").innerText = `Active for: 00:00:00`;
-    if (!player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].unlocked) {
-        if (eval(powerupList[player.powerupVariables.currentPowerupDisplayed].requirement)) {
-            player.powerupCooldowns[player.powerupVariables.currentPowerupDisplayed].unlocked = true;
-            document.getElementById("powerupLock").style.display = "none";
-        } else {
-            document.getElementById("powerupLock").style.display = "inline-flex";
-            document.getElementById("powerupRequirement").innerText = `${eval(powerupList[player.powerupVariables.currentPowerupDisplayed].condition1).toLocaleString()}${powerupList[player.powerupVariables.currentPowerupDisplayed].condition2}`
-        }
-    }
-    if (player.powerupVariables.currentPowerupDisplayed === "powerup3") {
-        const element = document.getElementById("powerupExtraInfo");
-        if (player.powerupVariables.currentChosenOre.ore !== undefined) {
-            const ore = player.powerupVariables.currentChosenOre.ore;
-            let blockOutput;
-            if (oreList[ore]["hasImage"]) {
-                blockOutput = `<span class="trackerImage"><img src="${oreList[ore]["src"]}"></img></span>`
-            } else {
-                blockOutput = ore;
-            }
-            element.innerHTML = `<span onclick="randomFunction('${ore}', 'inv')">1.5x to ${blockOutput}</span>`; 
-            element.style.display = "block";
-        }
-        else {element.style.display = "none"; element.innerText = ""}
-    }
-}
-function checkPowerupCooldowns() {
-    for (let propertyName in player.powerupCooldowns) {
-        if (Date.now() >= player.powerupCooldowns[propertyName].cooldown) {
-            document.getElementById(`${propertyName}`).style.backgroundColor = "#6BC267";
-        } else {
-            document.getElementById(`${propertyName}`).style.backgroundColor = "#FF3D3D";
-        }
-    }
-}
-function toggleSpecificPowerup(num) {
-    const current = Number(player.powerupVariables.currentPowerupDisplayed.substring(7));
-    if (document.getElementById("menuSelectionContainer").style.display !== "block") switchPowerupDisplay(num - current)
-}
-function autoPowerups() {
-    if (Date.now() >= player.powerupVariables.nextAuto) {
-        toggleSpecificPowerup(player.powerupVariables.autoNum);
-        if (player.powerupCooldowns[`powerup${player.powerupVariables.autoNum}`].unlocked)
-            document.getElementById(`${player.powerupVariables.currentPowerupDisplayed}`).click();
-        player.powerupVariables.autoNum++;
-        if (player.powerupCooldowns[`powerup${player.powerupVariables.autoNum}`] === undefined) player.powerupVariables.autoNum = 1;
-        player.powerupVariables.nextAuto = Date.now() + 20000;
-    }
-}
 function countFlawlessOres() {
     const ores = oreInformation.getOresByTier("Flawless");
     let count = 0;
     for (let i = 0; i < ores.length; i++) count += oreList[ores[i]]["normalAmt"], count += oreList[ores[i]]["electrifiedAmt"], count += oreList[ores[i]]["radioactiveAmt"], count += oreList[ores[i]]["explosiveAmt"];
     return count;
 }
-
 function oldDataToNew(data) {
     console.log("transfered old");
     let newData = {blocks: {}, player: new playerTemplate()};
@@ -492,6 +587,10 @@ function loadNewData(data) {
                 if (data.wasUsing === undefined) data.stats.currentPickaxe = isNaN(data.powerupVariables.fakeEquipped.originalState) ? data.powerupVariables.fakeEquipped.originalState : `pickaxe${data.powerupVariables.fakeEquipped.originalState}`;
             }
         }
+        if (data.powerupVariables !== undefined && data.powerupVariables.fakeTreeLevel !== undefined && data.powerupVariables.fakeTreeLevel.level !== undefined) {
+            let level = data.powerupVariables.fakeTreeLevel.originalState;
+            data.upgrades["pickaxe27"].level = level;
+        }
         if (data.gears !== undefined && player.gears !== undefined) {
             for (let propertyName in data.gears) if (player.gears[propertyName] !== undefined) player.gears[propertyName] = data.gears[propertyName];
         }
@@ -588,6 +687,8 @@ function loadNewData(data) {
                         player.powerupCooldowns[property].cooldown = data.powerupCooldowns[property].cooldown;
                     if (data.powerupCooldowns[property].unlocked !== undefined)
                         player.powerupCooldowns[property].unlocked = data.powerupCooldowns[property].unlocked;
+                    if (data.powerupCooldowns[property].canAuto !== undefined) 
+                        player.powerupCooldowns[property].canAuto = data.powerupCooldowns[property].canAuto;
                 }
             }
         }
@@ -622,6 +723,7 @@ function loadNewData(data) {
             player.luna.layer = data.luna.layer;
             player.luna.lastAddedOn = data.luna.lastAddedOn;
         }
+        lastBlockAmt = player.stats.blocksMined;
         switchWorld(player.settings.lastWorld, true)
         data.name ??= "Cat";
         player.name = data.name;
@@ -676,7 +778,10 @@ const dailyMessages = {
         showUntil : "July 1, 2024",
     },
     "worldOneRevamp" : {
-        showUntil : "July 20, 2024",
+        showUntil : "July 10, 2024",
+    },
+    "summerEvent" : {
+        showUntil : "August 30, 2024",
     },
     "sr1Unlocked" : {
         showUntil : "June 25, 0000",

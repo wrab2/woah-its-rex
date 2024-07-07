@@ -45,6 +45,20 @@ let oreList = {
     'pixel' : { 'decimalRarity': 1 / 6000000000, 'numRarity': 6000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "You seriously cannot be this unlucky... just craft it already...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, "hasImage":true, "src" : "media/ores/pixel.webp", "oreName":"Pixel"},
     'matrix' : { 'decimalRarity': 1 / 1011010000, 'numRarity': 1011010000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "Caverns so silly, even the matrix is!...", 'oreTier': 'Interstellar', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, "hasImage":true, "src" : "media/ores/matrix.webp", "oreName":"Matrix"},
     'apatite' : { 'decimalRarity': 1 / 3250000000, 'numRarity': 3250000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "A bright,sparkly, and gleaming crystal illuminates the caverns as it slowly appears...", 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, "hasImage":true, "src" : "media/ores/apatite.webp", "oreName":"Apatite"},
+    'draedon' : { 'decimalRarity': 1 / 480000000000, 'numRarity': 480000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "An unknown factor - a catalyst is what you are...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0,  "hasImage":true, "src" : "media/ores/draedon.webp", "oreName":"Draedon"},
+    
+    //summer event fuck i forgot my bad chat
+    //🏐🌴🐙🐬🍧🏖️🏄‍♂️🎋☀️
+    '🏐' : { 'decimalRarity': 1 / 1475000, 'numRarity': 1475000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "🏐 Has Spawned!", 'oreTier': 'Antique', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🌴' : { 'decimalRarity': 1 / 10400000, 'numRarity': 10400000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "🌴 Has Spawned!", 'oreTier': 'Mystical', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🐙' : { 'decimalRarity': 1 / 87500000, 'numRarity': 87500000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "🐙 Has Spawned!", 'oreTier': 'Divine', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🐬' : { 'decimalRarity': 1 / 345975000, 'numRarity': 345975000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "The sound of clicking draws you nearer to the ocean's edge...", 'oreTier': 'Flawless', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🍧' : { 'decimalRarity': 1 / 900350000, 'numRarity': 900350000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "mmmmm tamsty :3...", 'oreTier': 'Interstellar', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🏖️' : { 'decimalRarity': 1 / 4650000000, 'numRarity': 4650000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "An umbrella descends from the heavens, providing the perfect amount of shade...", 'oreTier': 'Metaversal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🏄‍♂️' : { 'decimalRarity': 1 / 50000000000, 'numRarity': 50000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "A strange board washes ashore...", 'oreTier': 'Sacred', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '🎋' : { 'decimalRarity': 1 / 150000000000, 'numRarity': 150000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "The wishes of billions intertwine, bringing prosperity to all...", 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    '☀️' : { 'decimalRarity': 1 / 2750000000000, 'numRarity': 2750000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "Reality is warped as the birth of a new star brings upon a new age...", 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0},
+    
 
     '🐞': { 'decimalRarity': 1 / 241200000000, 'numRarity': 241200000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "In this alternate earth, the keeper of time dons new wings, and sacrifices beauty for survivability...", 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
     '🍓': { 'decimalRarity': 1 / 560000000000, 'numRarity': 560000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "A sweet aroma guides you to one of nature's finest delicacies...", 'oreTier': 'Ethereal', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -539,7 +553,7 @@ let oreList = {
     'kaleidoscope' : { 'decimalRarity': 1 / 9180274130450, 'numRarity': 9180274130450, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Your vision begins to distort as you hallucinate vibrant colors flying around you...', 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, 'hasImage' : true, "src" : "media/ores/kaleidoscope.png", "oreName" : "Kaleidoscope"},
     'qrCode' : { 'decimalRarity': 1 / 281907640568244, 'numRarity': 281907640568244, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A QR Code has appeared in the mines, I wonder where it leads you?...', 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, 'hasImage' : true, "src" : "media/ores/qrcode.png", "oreName" : "QR Code"},
     'mutatedGrowth' : { 'decimalRarity': 1 / 3666006060600, 'numRarity': 3666006060600, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Thick vines extend throughout the tunnels, covering everything in poison filled thorns...', 'oreTier': 'Imaginary', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, 'hasImage' : true, "src" : "media/ores/silly_mines_flower.png", "oreName" : "Mutated Growth"},
-    'sillyMiner' : {'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': true, 'spawnMessage': 'You found someone else mining. Thou must get rid of competitors...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, 'hasImage' : true, "src" : "media/ores/sillyminer.png", "oreName" : "Silly Miner"},
+    'sillyMiner' : {useLuck: false, 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': true, 'spawnMessage': 'You found someone else mining. Thou must get rid of competitors...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, 'hasImage' : true, "src" : "media/ores/sillyminer.png", "oreName" : "Silly Miner"},
     'starglint' : { 'decimalRarity': 1 / 670000000, 'numRarity': 670000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A vibrant pink and purple diamond shines its hue everywhere in a glorious fashion...', 'oreTier': 'Flawless', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0, 'hasImage' : true, "src" : "media/ores/starglint.png", "oreName" : "Starglint"},
    
     "☯️" : { 'decimalRarity': 1 / 987656789, 'numRarity': 987656789, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Through light and darkness, only one may guide you to the truth...', 'oreTier': 'Celestial', 'normalAmt': 0, 'electrifiedAmt': 0, 'radioactiveAmt': 0, 'explosiveAmt': 0 },
@@ -981,9 +995,58 @@ const limitedOres = {
         "layers" : ["dirtLayer"],
         "timeType" : "hour",
         "timeValues" : [Math.round(Math.random() * 23)]
-    }
+    },
+    "🏐": {
+        "layers" : ["cactusLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🌴": {
+        "layers" : ["dirtLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🐙": {
+        "layers" : ["waterLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🐬": {
+        "layers" : ["waterLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🍧": {
+        "layers" : ["rockLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🏖️": {
+        "layers" : ["cactusLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🏄‍♂️": {
+        "layers" : ["waterLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "🎋": {
+        "layers" : ["dirtLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "☀️": {
+        "layers" : ["cactusLayer"],
+        "timeType" : "month",
+        "timeValues" : [5, 6, 7]
+    },
+    "draedon": {
+        "layers" : ["radioactiveLayer"],
+        "timeType" : "day",
+        "timeValues" : [4]
+    },
 }
-
 function checkLimitedOres() {
     let time = new Date();
     for (let propertyName in limitedOres) {

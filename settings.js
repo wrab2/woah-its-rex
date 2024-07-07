@@ -29,6 +29,7 @@ function showMenuScreen(type) {
     const allFrames = document.getElementById("menuSelectionContainer").children;
     for (let i = 0; i < allFrames.length; i++) allFrames[i].style.display = "none";
     document.getElementById(`frame-${type}`).style.display = "block";
+    if (type === "index") switchLayerIndex(0)
     if (type === 'settings') switchSettings('game');
     if (type === 'statistics') createStats();
     if (type === 'locations') {

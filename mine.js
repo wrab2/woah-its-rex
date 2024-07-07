@@ -474,7 +474,7 @@ function switchWorld(to, skipAnim) {
             }
             layerNum = 1;
             switchLayerIndex(0, "tvLayer", 2);
-            removeSiphoner();
+            if (energySiphonerActive) removeSiphoner();
         } else if (currentWorld < 2) {
             distanceMulti = 0;
             y = 1000;
@@ -547,6 +547,7 @@ function sr1Helper(state) {
     }
 }
 function removeParadoxical() {
+    if (player.powerupVariables.fakeEquipped.item !== undefined) {
         if (player.gears[player.powerupVariables.fakeEquipped.item] !== undefined) {
             if (player.powerupVariables.fakeEquipped.item === "gear0") document.getElementById("trackerLock").style.display = "inline-flex";
             if (player.powerupVariables.fakeEquipped.item === "gear9") document.getElementById("sillyRecipe").style.display = "none";
@@ -561,9 +562,15 @@ function removeParadoxical() {
             utilitySwitchActions();
         }
         player.powerupVariables.fakeEquipped.removeAt = 0;
-        let tempDirection = curDirection;
-        stopMining();
-        goDirection(tempDirection);
-        saveNewData({override: undefined, return: false});
+    } else if (player.powerupVariables.fakeTreeLevel.level !== undefined) {
+        player.upgrades["pickaxe27"].level = player.powerupVariables.fakeTreeLevel.originalState;
+        player.powerupVariables.fakeTreeLevel.level = undefined;
+        player.powerupVariables.fakeTreeLevel.originalState = undefined;
+        player.powerupVariables.fakeTreeLevel.removeAt = 0;
+    }
+    let tempDirection = curDirection;
+    stopMining();
+    goDirection(tempDirection);
+    saveNewData({override: undefined, return: false});
 }
 

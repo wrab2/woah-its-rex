@@ -22,6 +22,7 @@ function generateCave(x, y, type) {
     let caveRateModifier = 150;
     if (player.gears["gear14"]) caveRateModifier += 100;
     if (player.stats.currentPickaxe === "pickaxe12") caveRateModifier += 50;
+    if (player.powerupVariables.caveBoosts.active) caveRateModifier *= 2;
     if (type === undefined) {  
         type = getCaveType();
         if (type === undefined) {
