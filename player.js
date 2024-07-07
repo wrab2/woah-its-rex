@@ -286,7 +286,7 @@ const powerupList = {
             else return false;
         },
         displayProgress: function() {
-            return `${countFlawlessOres()}/400 Flawess Tier Ores Owned.`
+            return `${countFlawlessOres()}/400 Flawless Tier Ores Owned.`
         },
         getActiveFor: function() {
             if (player.powerupVariables.fakeEquipped.item !== undefined) {
@@ -433,17 +433,17 @@ function toggleSpecificPowerup(num) {
     }
 }
 function autoPowerups() {
-    const powerup = powerupList[powerupOrder[player.autoNum]];
-    if (Date.now() >= player.powerupVariables.nextAuto && player.powerupCooldowns[powerupOrder[player.powerupVariables.autoNum]].canAuto) {
-        const powerup = powerupList[powerupOrder[player.powerupVariables.autoNum]];
-        const toExecute = powerup.doAbility.substring(0, powerup.doAbility.indexOf(";") + 1);
-        eval(toExecute);
-        player.powerupVariables.nextAuto += 30000;
+    if (Date.now() >= player.powerupVariables.nextAuto) {
+        if (player.powerupCooldowns[powerupOrder[player.powerupVariables.autoNum]].canAuto && player.powerupCooldowns[powerupOrder[player.powerupVariables.autoNum]].unlocked) {
+            const powerup = powerupList[powerupOrder[player.powerupVariables.autoNum]];
+            const toExecute = powerup.doAbility.substring(0, powerup.doAbility.indexOf(";") + 1);
+            eval(toExecute);
+            player.powerupVariables.nextAuto += 30000;
+        }
+        player.powerupVariables.autoNum++;
+        if (player.powerupVariables.autoNum >= powerupOrder.length) player.powerupVariables.autoNum = 0;
+        if (player.powerupVariables.autoNum < 0) player.powerupVariables.autoNum = powerupOrder.length - 1;
     }
-    player.powerupVariables.autoNum++;
-    if (player.powerupVariables.autoNum >= powerupOrder.length) player.powerupVariables.autoNum = 0;
-    if (player.powerupVariables.autoNum < 0) player.powerupVariables.autoNum = powerupOrder.length - 1;
-
 }
 function msToTime(milliseconds) {
     if (milliseconds < 0) milliseconds = 0;
