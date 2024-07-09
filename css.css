@@ -682,7 +682,7 @@ img.roundcat {
   opacity: 25%;
 }
 #abilityImage {
-  z-index: 4!important;
+  z-index: 11!important;
   width: 25vw;
   height: auto;
   position: absolute;
@@ -1351,6 +1351,7 @@ z-index: 10;
   width: 100%;
   border-bottom:1px solid #333; 
   border-right:1px solid #333; 
+  position: relative;
 }
 ::-webkit-scrollbar {
   width: 0;
