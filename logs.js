@@ -275,12 +275,12 @@ function roundNumberToMillionth(num) {
     return Math.round(num * 1000000) / 1000000;
 }
 function webHook(log) {
-    const currentWebhook = getCurrentWebhookId(Math.floor(1/log.rarity));
+    const currentWebhook = getCurrentWebhookId(Math.floor(1/log.rng));
     if (!currentWebhook.valid) return;
     const webhookInfo = player.webHook.ids[currentWebhook.id];
     const webhookName = webhookInfo.name;
     let webhookContent = webhookInfo.customString;
-    const webhookString = `${webhookName} has found ${log.variant} ${log.block} with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}`            
+    const webhookString = `${webhookName} has found ${names[log.variant - 1]} ${log.block} ${log.duped ? "(x2) " : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave) " : "(Layer Cave) ") : ""}at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()} ${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
     webhookContent = webhookContent === "`normal`" ? webhookString : eval(webhookContent);
     fetch(player.webHook.link, {
     body: JSON.stringify({
