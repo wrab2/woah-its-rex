@@ -42,6 +42,11 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
   height: 1vw;
   width: 1vw;
 }
+.craftingImage img {
+  width: 3.25vw;
+  height: 3.25vw;
+
+}
 .movementButton {
   width:20%;
   height:50%;
@@ -692,7 +697,7 @@ img.roundcat {
   box-shadow: 0 0 10px white;
 }
 #stopOnRareList {
-  height: 18vw;
+  height: 21vw;
   width: 30%;
   position: absolute;
   right:0px;
@@ -722,7 +727,7 @@ img.roundcat {
 }
 #spawnTierList {
   width: 50%;
-  height: 18vw;
+  height: 21vw;
   position: absolute;
   display: none;
   justify-content: center;
@@ -856,6 +861,48 @@ font-size: 1vw;
 padding: 0.2vw;
 border-bottom: 0.2vw solid #333;
 font-weight: 1000;
+position: relative;
+z-index: 20;
+}
+#webhookSettings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@keyframes invisible {
+  0% {filter: opacity(100%);}
+  5% {filter: opacity(80%);}
+  10% {filter: opacity(60%);}
+  15% {filter: opacity(40%);}
+  20% {filter: opacity(10%);}
+  30% {filter: opacity(10%);}
+  35% {filter: opacity(40%);}
+  40% {filter: opacity(60%);}
+  45% {filter: opacity(80%);}
+  50% {filter: opacity(100%);}
+  51% {filter: contrast(100%);}
+  60% {filter: contrast(90%);}
+  65% {filter: contrast(70%);}
+  70% {filter: contrast(50%);}
+  75% {filter: contrast(30%);}
+  80% {filter: contrast(30%);}
+  85% {filter: contrast(50%);}
+  90% {filter: contrast(70%);}
+  95% {filter: contrast(90%);}
+  100% {filter: contrast(100%);}
+}
+@keyframes blackout {
+  0% {filter: brightness(100);}
+  5% {filter: brightness(75);}
+  10% {filter: brightness(50);}
+  15% {filter: brightness(25);}
+  40% {filter: brightness(0);}
+  80% {filter: brightness(0);}
+  85% {filter: brightness(25%);}
+  90% {filter: brightness(50%);}
+  95% {filter: brightness(75%);}
+  100% {filter: brightness(100%);}
 }
 @keyframes blur {
   1% {filter:blur(0.2px);}
@@ -923,7 +970,8 @@ font-weight: 1000;
   height: 27vw;
   position: absolute;
   left: 0px;
-  bottom: 2vw;
+  bottom: 0vw;
+  white-space: wrap!important;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1513,7 +1561,7 @@ z-index: 10;
   background: none;
   color: #fff;
   border: none;
-  font-size: 1.5vw;
+  font-size: 1.25vw;
   white-space: nowrap;
 }
 .spawnVolume {
@@ -1812,6 +1860,26 @@ z-index: 10;
   position: absolute;
   font-size: 1vw;
   top: 9vw;
+  left: 1px;
+  right: 1px;
+  padding-left: 0.75vw;
+  padding-right: 0.75vw;
+}
+.eventLayers {
+  text-align: center;
+  position: absolute;
+  font-size: 0.75vw;
+  top: 6.75vw;
+  left: 1px;
+  right: 1px;
+  padding-left: 0.75vw;
+  padding-right: 0.75vw;
+}
+.eventMonths {
+  text-align: center;
+  position: absolute;
+  font-size: 0.75vw;
+  top: 7.65vw;
   left: 1px;
   right: 1px;
   padding-left: 0.75vw;
@@ -2232,29 +2300,17 @@ button {
 .electrifiedBlockImg {
   position: relative;
   z-index: 99999;
-  background-color: rgba(227,101,252, 0.8);
-  box-shadow: 0px 0px 1vw #e365fc, 0px 0px 2vw #e365fc, 0px 0px 2vw #e365fc, 0px 0px 3vw #e365fc, 0px 0px 3vw #e365fc,0px 0px 3vw #e365fc;
-}
-.electrifiedBlockImg img{
-  opacity: 0.35;
+  filter: drop-shadow(0px 0px 2vw #e365fc);
 }
 .radioactiveBlockImg {
   position: relative;
   z-index: 99999;
-  background-color: rgba(201,252,58, 0.8);
-  box-shadow: 0px 0px 1vw #c9fc3a, 0px 0px 2vw #c9fc3a, 0px 0px 2vw #c9fc3a, 0px 0px 3vw #c9fc3a, 0px 0px 3vw #c9fc3a,0px 0px 3vw #c9fc3a;
-}
-.radioactiveBlockImg img{
-  opacity: 0.35;
+  filter: drop-shadow(0px 0px 2vw #c9fc3a);
 }
 .explosiveBlockImg {
   position: relative;
   z-index: 99999;
-  background-color: rgba(252, 73, 45, 0.8);
-  box-shadow: 0px 0px 1vw #ff4b33, 0px 0px 2vw #ff4b33, 0px 0px 2vw #ff4b33, 0px 0px 3vw #ff4b33, 0px 0px 3vw #ff4b33,0px 0px 3vw #ff4b33;
-}
-.explosiveBlockImg img{
-  opacity: 0.35;
+  filter: drop-shadow(0px 0px 2vw #ff4b33);
 }
 .electrifiedSpawnMessage {
   text-shadow: 0px 0px 1vw #e365fc, 0px 0px 1vw #e365fc;

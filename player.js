@@ -65,6 +65,7 @@ class playerTemplate {
             "pickaxe28" : false,
             "pickaxe29" : false,
             "pickaxe30" : false,
+            "pickaxe31" : false,
         }
         this.settings = {
             audioSettings: {
@@ -78,6 +79,8 @@ class playerTemplate {
                 "Ethereal": {canPlay: true, volume: 15},
                 "Celestial": {canPlay: true, volume: 50},
                 "Imaginary": {canPlay: true, volume: 50},
+                "Hyperdimensional" : {canPlay: true, volume:50},
+                "Infinitesimal" : {canPlay: true, volume:50},
             },
             musicSettings: {
                 active: true,
@@ -85,7 +88,7 @@ class playerTemplate {
             },
             baseMineCapacity: 250000,
             minSpeed: 0,
-            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"]},
+            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Infinitesimal"]},
             canDisplay: true,
             useNumbers: false,
             inventorySettings: {invToIndex: true, craftingToIndex: true},
@@ -94,14 +97,14 @@ class playerTemplate {
             useDisguisedChills: false,
             usingNewEmojis: false,
             minRarityNum: 0,
-            highRarityLogs: false,
+            minLogRarity: 1,
             doSpawnEffects: true,
             latestLength: 10,
             useNewMusic: true,
             automineProtection: false,
             useNyerd: false,
             automineUpdate: 25,
-            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"],
+            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Infinitesimal"],
             lastWorld: 1
         },
         this.stats = {
@@ -110,9 +113,11 @@ class playerTemplate {
             timePlayed: 0,
             cavesGenerated: 0,
             minesReset: 0,
-            furthestPosX: 1000000000,
-            furthestNegX: 1000000000,
-            furthestY: 0
+            furthestPosX: 1000000,
+            furthestNegX: 1000000,
+            furthestY: 0,
+            manualMined: 0,
+            caveGenerated: 0
         },
         this.powerupCooldowns = {
             "powerup1": {cooldown: Date.now(), unlocked: false, canAuto: false},
@@ -127,7 +132,7 @@ class playerTemplate {
             fakeEquipped: {originalState: undefined, item: undefined, removeAt: 0},
             fakeTreeLevel: {originalState: undefined, level: undefined, removeAt: 0},
             nextAuto: Date.now(),
-            autoNum: 1,
+            autoNum: 0,
             caveBoosts: {removeAt: 0, active: false}
         },
         this.oreTracker = {
@@ -182,7 +187,8 @@ class playerTemplate {
         this.displayStatistics = {
             blocksPerMinute: 0,
             luck: 1
-        }
+        },
+        this.serverHook = undefined;
     }
 }
 let player = new playerTemplate();
@@ -221,6 +227,7 @@ const powerupList = {
             return `${player.stats.cavesGenerated.toLocaleString()}/2,500 Caves Generated.`
         },
         getActiveFor: function() {
+            get("powerupInformation").innerHTML = "";
             const beginTime = player.powerupCooldowns["powerup2"].cooldown - (player.gears["gear24"] ? 900000 * 0.75 : 900000);
             const endTime = player.powerupVariables.caveBoosts.removeAt;
             const progressTime = endTime - Date.now();
@@ -604,8 +611,8 @@ function loadNewData(data) {
         if (data.stats.timePlayed !== undefined) player.stats.timePlayed = data.stats.timePlayed;
         if (data.stats.minesReset !== undefined) player.stats.minesReset = data.stats.minesReset;
         player.startingResets = player.stats.minesReset;
-        data.stats.furthestNegX ??= 1000000000;
-        data.stats.furthestPosX ??= 1000000000;
+        data.stats.furthestNegX ??= 1000000;
+        data.stats.furthestPosX ??= 1000000;
         data.stats.furthestY ??= 0;
         player.stats.furthestNegX = data.stats.furthestNegX;
         player.stats.furthestPosX = data.stats.furthestPosX;
@@ -668,8 +675,8 @@ function loadNewData(data) {
         if (!data.settings.usePathBlocks) togglePathBlocks();
         data.settings.usingNewEmojis ??= false;
         if (data.settings.usingNewEmojis) switchFont();
-        data.settings.highRarityLogs ??= false;
-        if (data.settings.highRarityLogs) switchHighRarity(document.getElementById("highRarity"));
+        data.settings.minLogRarity ??= 1;
+        player.settings.minLogRarity = data.settings.minLogRarity;
         data.settings.doSpawnEffects ??= true;
         if (!data.settings.doSpawnEffects) toggleSpawnEffects(document.getElementById("spawnEffects"));
         data.settings.latestLength ??= 10;
@@ -700,6 +707,8 @@ function loadNewData(data) {
         //unlock locked features
         if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";
+        if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
+        else get("allowAutoPowerup").style.display = "none";
         if (data.webHook !== undefined) {
             if (data.webHook.active === true) {
                 player.webHook.active = data.webHook.active;
@@ -711,6 +720,7 @@ function loadNewData(data) {
                 }
             }
         }
+        if (data.serverHook !== undefined) player.serverHook = data.serverHook;
         data.faqOffered ??= false;
         data.luna ??= {
             layer: Math.round(Math.random() * 100000),
@@ -729,6 +739,12 @@ function loadNewData(data) {
         player.name = data.name;
         data.viewedMessages ??= {};
         player.viewedMessages = data.viewedMessages;
+        if (player.viewedMessages["waterWorld"] === undefined) {
+            player.settings.spawnMessageTiers.push("Hyperdimensional", "Infinitesimal");
+            player.settings.stopOnRare.allowList.push("Hyperdimensional", "Infinitesimal");
+            applyStopOnRareData();
+            applySpawnMessageData();
+        }
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
@@ -782,6 +798,9 @@ const dailyMessages = {
     },
     "summerEvent" : {
         showUntil : "August 30, 2024",
+    },
+    "waterWorld" : {
+        showUntil : "July 21, 2024",
     },
     "sr1Unlocked" : {
         showUntil : "June 25, 0000",

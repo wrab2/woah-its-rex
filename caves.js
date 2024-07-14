@@ -273,8 +273,7 @@ function generateCaveBlock(y, x, type) {
             return;
         }
     }
-    let chosenValue = Math.random();
-    if (debug) chosenValue /= caveLuck;
+    let chosenValue = Math.random() / caveLuck;
     let probabilityTable;
     let arr;
     if (type === "currentLayer") {
@@ -334,7 +333,7 @@ function generateCaveBlock(y, x, type) {
             let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
             if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
             if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
-            if (canCollect) mineCaveBlock(x, y, type);
+            if (canCollect) mineCaveBlock(x, y, type, "infinity");
             if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
         }
     } else {
@@ -352,7 +351,7 @@ function generateCaveBlock(y, x, type) {
             let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
             if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
             if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
-            if (canCollect) mineCaveBlock(x, y, type);
+            if (canCollect) mineCaveBlock(x, y, type, "infinity");
             if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
         }
     }
@@ -408,6 +407,7 @@ let oolProbabilities = {
     "🔆" : 1/25000000,
 }
 function getCaveType() {
+    if (currentWorld === 1.2) return undefined;
     let caveTypeLuck = 1;
     if (player.stats.currentPickaxe === "pickaxe12")
         caveTypeLuck = 2;

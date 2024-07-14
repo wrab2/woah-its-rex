@@ -16,7 +16,7 @@ const pixelcoordinate = (x, y, width) => {
   CanvasRenderingContext2D.prototype.getPixelColor = azeiclopiff;
   OffscreenCanvasRenderingContext2D.prototype.getPixelColor = azeiclopiff;
 let mine = [];
-let curX = 1000000000;
+let curX = 1000000;
 let curY = 0;
 let currentDisplay = "";
 let blocksRevealedThisReset = 0;
@@ -63,8 +63,8 @@ function init() {
     assignImageNames();
     createAllLayers();
     createMine();
-    utilitySwitchActions();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
+    removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
     formatEventText();
     addPickaxeDescriptions();
     document.getElementById('dataText').value = "";
@@ -96,10 +96,10 @@ function init() {
     if (canContinue) {
         repeatDataSave();
         cat = verifiedOres.getCurrentLuck();
-        updateAllLayers();
         checkUnlockConditions();
         switchWorldCraftables();
         switchPowerupDisplay(0);
+        utilitySwitchActions();
         console.log("meow");
     }
 }
@@ -118,6 +118,7 @@ function assignPickaxeNums(json) {
     pickaxe28Nums = json.pickaxeNums28;
     pickaxe29Nums = json.pickaxeNums29;
     pickaxe30Nums = json.pickaxeNums30;
+    pickaxe31Nums = json.pickaxeNums31;
     pickaxe1Nums = json.pickaxeNums1;
     pickaxe2Nums = json.pickaxeNums2;
     pickaxe3Nums = json.pickaxeNums3;
@@ -138,7 +139,6 @@ function assignPickaxeNums(json) {
 //meow
 function failedFetch() {
     for (let ore in oreList) oreList[ore]["oreName"] = "FAILED TO FETCH NAMES";
-    switchLayerIndex(0, "dirtLayer", 1);
     for (let ore in oreList) {
         oreList[ore]["Normal"].parentElement.setAttribute("title", oreList[ore]["oreName"]);
         oreList[ore]["Electrified"].parentElement.setAttribute("title", oreList[ore]["oreName"]);
@@ -175,7 +175,6 @@ function setEmojiNames(emojis) {
         }
     }
     document.getElementById("meterDisplay").setAttribute("title", oreList["🟫"]["oreName"]);
-    switchLayerIndex(0, "dirtLayer", 1);
 }
 
 let chill;
@@ -200,7 +199,9 @@ let allAudios = {
     "Sacred" : undefined,
     "Ethereal" : undefined,
     "Celestial" : undefined,
-    "Imaginary" : undefined
+    "Imaginary" : undefined,
+    "Hyperdimensional" : undefined,
+    "Infinitesimal" : undefined
 };
 function loadContent() {
     keepRunningAudio = new Audio("audios/ambiencebyx2corp.mp3")
@@ -217,6 +218,8 @@ function loadContent() {
     ethereal = new Audio("audios/ethereal sound by elysia.mp3");
     celestial = new Audio("audios/celestial.mp3");
     imaginary = new Audio("audios/imaginary.mp3");
+    hyperdimensional = new Audio("audios/hyperdimensional.mp3");
+    infinitesimal = new Audio("audios/infinitesimal.mp3");
     allAudios["Antique"] = chill;
     allAudios["Mystical"] = mystical;
     allAudios["Divine"] = divine;
@@ -227,6 +230,8 @@ function loadContent() {
     allAudios["Ethereal"] = ethereal;
     allAudios["Celestial"] = celestial;
     allAudios["Imaginary"] = imaginary;
+    allAudios["Hyperdimensional"] = hyperdimensional;
+    allAudios["Infinitesimal"] = infinitesimal;
     for (let property in allAudios) allAudios[property].load();
     musicPlayer.songs["song1"].src = new Audio("audios/ely_audio_1.mp3");
     musicPlayer.songs["song2"].src = new Audio("audios/ely_audio_2.mp3");
@@ -485,6 +490,7 @@ function displayArea() {
             let grass = 0;
             if (currentWorld === 2)
                 grass = 2000;
+            if (currentWorld === 1.2) grass = -1
             let i = 0;
             for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) mine[r] ??= [];
             for (let c = curX - constraints[0]; c <= curX + 9 + (9-constraints[0]); c++) {
@@ -511,7 +517,7 @@ function displayArea() {
         percentElement.textContent = `${percent}%`
         revealedElement.textContent = `${blocksRevealedThisReset.toLocaleString()}/${mineCapacity.toLocaleString()} Blocks Revealed This Reset. `;
         let sub = currentWorld === 2 ? 2000 : 0;
-        locationElement.textContent = "X: " + (curX - 1000000000).toLocaleString() + " | Y: " + (-(curY - sub)).toLocaleString();
+        locationElement.textContent = "X: " + (curX - 1000000).toLocaleString() + " | Y: " + (-(curY - sub)).toLocaleString();
         if (player.oreTracker.tracking) {
             getAngleBetweenPoints({x : player.oreTracker.locationX, y: player.oreTracker.locationY});
         }
@@ -526,7 +532,8 @@ function checkDisplayVariant(location) {
     let includeSize;
     let specialVariant;
     if (oreList[location.ore]["hasImage"]) {
-        let isLarge = oreList[location.ore]["oreTier"] === "Imaginary";
+        const tier = oreList[location.ore]["oreTier"]
+        let isLarge =  tier === "Hyperdimensional" || tier === "Infinitesimal";
         oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineImage'}" src="${oreList[location.ore]["src"]}"></img>`;
         includeSize = "";
         specialVariant = "Img";
@@ -536,15 +543,12 @@ function checkDisplayVariant(location) {
         specialVariant = "";
     }
     if (location.variant > 1) {
-        //linear-gradient(to bottom right, #c91800, #ff722b, #383838) explosive
-        //linear-gradient(to bottom right, #062404, #c9fc3a, #062404) radioactive
-        //linear-gradient(to bottom right, #f7f368, #ffc629, #e365fc) electrified
         if (location.variant === 2) {
-            return `<span class="electrifiedBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
+            return `<span class="mineSpan electrifiedBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
         } else if (location.variant === 3) {
-            return `<span class="radioactiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
+            return `<span class="mineSpan radioactiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
         } else if (location.variant === 4) {
-            return `<span class="explosiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
+            return `<span class=" mineSpan explosiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
         }
     } else {
         return `<span class="${includeSize} mineSpan">${oreToAdd}</span>`
@@ -606,7 +610,13 @@ function createInventory() {
                 tempElement.style.display = "none";
                 let oreNameBlock = document.createElement("td");
                 if (oreList[propertyName]["hasImage"]) {
-                    oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}"></img></span>`
+                    const tier = oreList[propertyName]["oreTier"]
+                    if ((tier === "Infinitesimal" || tier === "Hyperdimensional") && oreList[propertyName]["hasImage"]) {
+                        oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
+                    } else {
+                        oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}"></img></span>`;
+                    }
+                    
                 } else {
                     oreNameBlock.innerText = propertyName;
                     oreNameBlock.classList = "inventoryElement1";
@@ -714,10 +724,10 @@ const blockAmts = [];
 let lastBlockAmt = 0;
 function getAvgBlockSpeed() {
     blockAmts.push(player.stats.blocksMined - lastBlockAmt);
-    if (blockAmts.length > 4) blockAmts.splice(0, 1);
+    if (blockAmts.length > 40) blockAmts.splice(0, 1);
     let totalBlockAmts = 0;
     for (let i = 0; i < blockAmts.length; i++) totalBlockAmts += blockAmts[i];
-    totalBlockAmts *= 60;
+    totalBlockAmts *= 6;
     lastBlockAmt = player.stats.blocksMined;
     return totalBlockAmts;
 }
@@ -755,15 +765,21 @@ function spawnMessage(obj) {
     //ADD TO MINE CAPACITY IF NEAR RESET
     player.oreTracker.existingOres.push({block: block, posX : location["X"], posY : location["Y"]});
     let oreRarity = oreList[block]["numRarity"];
-    if (block === "✈️") oreRarity = 911911911911;
+    if (oreList[block]["oreTier"] === "Infinitesimal") oreRarity = Infinity;
     let spawnElement = document.getElementById("latestSpawns");
     let output = "";
     const element = document.getElementsByClassName("htmlTemplate")[0].cloneNode(true);
     element.setAttribute("title", oreList[block]["oreName"]);
     element.style.display = "block";
     let blockOutput;
+    let curTier = oreList[block]["oreTier"];
     if (oreList[block]["hasImage"]) {
-        blockOutput = `<span class="latestImage"><img src="${oreList[block]["src"]}"></img></span>`
+        if (curTier === "Hyperdimensional" || curTier === "Infinitesimal") {
+            blockOutput = `<span class="latestImage"><img src="${oreList[block]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
+            element.style.height = "2.5vw";
+        } else {
+            blockOutput = `<span class="latestImage"><img src="${oreList[block]["src"]}"></img></span>`;
+        }
     } else {
         blockOutput = block;
     }
@@ -789,7 +805,6 @@ function spawnMessage(obj) {
     }
     if (spawnElement.children.length > player.settings.latestLength) spawnElement.removeChild(spawnElement.lastChild);
     let createSpawnMessage = false;
-    let curTier = oreList[block]["oreTier"];
     if (oreInformation.tierGrOrEqTo({"tier1": curTier, "tier2":currentSpawnTier}) || spawnOre === null || currentSpawnTier === "") createSpawnMessage = true;
     if (createSpawnMessage) {
         if (obj.variant === 4) document.getElementById("spawnMessage").classList = "explosiveSpawnMessage";
@@ -894,8 +909,14 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     output += `<span onclick='goToOre(\"${type}\", \"${variant}\")'>`;
     output += `${variant} `;
     let blockOutput;
+    let curTier = oreList[type]["oreTier"]
     if (oreList[type]["hasImage"]) {
-        blockOutput = `<span class="latestImage"><img src="${oreList[type]["src"]}"></img></span>`
+        if (curTier === "Hyperdimensional" || curTier === "Infinitesimal") {
+            blockOutput = `<span class="latestImage"><img src="${oreList[type]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
+            element.style.height = "2.5vw";
+        } else {
+            blockOutput = `<span class="latestImage"><img src="${oreList[type]["src"]}"></img></span>`;
+        }
     } else {
         blockOutput = type;
     }
@@ -910,6 +931,7 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     } else {
         rng = Math.floor(1/oreList[type]["decimalRarity"]);
     }
+    if (oreList[type]["oreTier"] === "Infinitesimal") rng = Infinity;
     output += ` 1/${formatNumber(rng * multis[namesemojis.indexOf(variant)])}`;
     output += "</span>";
     element.innerHTML = output;
@@ -922,12 +944,16 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     if (spawnElement.children.length > player.settings.latestLength) spawnElement.removeChild(spawnElement.lastChild);
 }
 const suffixes = ["", "k", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", "QnV", "SeV", "SPG", "OVG", "NVG", "TGN", "UTG", "DTG", "tsTG", "qtTG", "QnTG", "ssTG", "SpTG", "OcTg", "NoTG", "QdDR", "uQDR", "dQDR", "tQDR", "qdQDR", "QnQDR", "sxQDR", "SpQDR", "OQDDr", "NQDDr", "qQGNT", "uQGNT", "dQGNT", "tQGNT", "qdQGNT", "QnQGNT", "sxQGNT", "SpQGNT", "OQQGNT", "NQQGNT", "SXGNTL", "USXGNTL", "DSXGNTL", "TSXGNTL", "QTSXGNTL", "QNSXGNTL", "SXSXGNTL", "SPSXGNTL", "OSXGNTL", "NVSXGNTL", "SPTGNTL", "USPTGNTL", "DSPTGNTL", "TSPTGNTL", "QTSPTGNTL", "QNSPTGNTL", "SXSPTGNTL", "SPSPTGNTL", "OSPTGNTL", "NVSPTGNTL", "OTGNTL", "UOTGNTL", "DOTGNTL", "TOTGNTL", "QTOTGNTL", "QNOTGNTL", "SXOTGNTL", "SPOTGNTL", "OTOTGNTL", "NVOTGNTL", "NONGNTL", "UNONGNTL", "DNONGNTL", "TNONGNTL", "QTNONGNTL", "QNNONGNTL", "SXNONGNTL", "SPNONGNTL", "OTNONGNTL", "NONONGNTL", "CENT"];
-function formatNumber(num) {
+function formatNumber(num, topoint) {
+    topoint ??= 1;
+    if (topoint < 1) topoint = 1;
+    topoint = Math.pow(10, topoint);
     if (num < 1000) {
         return num;
     }
+    if (num >= Infinity) return Infinity;
     let tenMulti = Math.floor(Math.log10(num) / 3);
-    return Math.floor(num / Math.pow(1000, (tenMulti)) * 10) / 10 + suffixes[tenMulti];
+    return Math.floor(num / Math.pow(1000, (tenMulti)) * topoint) / topoint + suffixes[tenMulti];
 }
 function getAngleBetweenPoints(obj) {
     let x = obj.x - curX;
@@ -971,7 +997,7 @@ function checkExistingOres() {
                 blockOutput = ore;
             }
             document.getElementById("trackerOre").innerHTML = `Ore: ${variantAtIndex}${blockOutput}`
-            document.getElementById("trackerX").innerText = `X: ${(player.oreTracker.locationX - 1000000000).toLocaleString()}`
+            document.getElementById("trackerX").innerText = `X: ${(player.oreTracker.locationX - 1000000).toLocaleString()}`
             document.getElementById("trackerY").innerText = `Y: ${(-1 * (player.oreTracker.locationY - (currentWorld < 2 ? 0 : 2000))).toLocaleString()}`
             getAngleBetweenPoints({x:player.oreTracker.locationX, y:player.oreTracker.locationY});
         }
@@ -1333,6 +1359,21 @@ const events = {
             else document.body.style.filter = "";
         }
     },
+    "event16" : {
+        rate: 1/1250,
+        duration: 1800000,
+        boost: 1,
+        ore: "🪸",
+        message: `<i><span style="background-image:linear-gradient(to right, #037ADE, #03E5B7);" class="eventGradient">watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr,watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr, watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br>watr<br></span></i>`,
+        world: 1.2,
+        specialText: "watr",
+        specialEffect: function(state) {
+            if (state) {
+                insertIntoLayers({"ore":"🪸", "layers":["waterLayer"], "useLuck":true});
+            }
+            else removeFromLayers({"ore":"🪸", "layers":["waterLayer"]});
+        }
+    },
 }
 function activateEvent(name) {
     if (name === undefined) return;
@@ -1449,7 +1490,7 @@ let pickaxe25Nums = [];
 let testNums = [];
 /*
 const az = new Image();
-az.src = "media/wings_re_3.webp"
+az.src = "media/b.png"
         az.onload = () => {
             const c = new OffscreenCanvas(az.width,az.height)
             const cc = c.getContext("2d")
@@ -1461,4 +1502,3 @@ az.src = "media/wings_re_3.webp"
             }
 }
 */
-

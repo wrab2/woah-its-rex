@@ -91,9 +91,13 @@ function fromBinary(encoded) {
 
 function exportData() {
     let data;
-    if (!debug && localStorage.getItem("newPlayerData") !== null) data = toBinary(localStorage.getItem("newPlayerData"));
-    else if (localStorage.getItem("newTestingData") !== null) data = toBinary(localStorage.getItem("newTestingData"));
-    else data = !debug ? (toBinary(localStorage.getItem("playerData"))) : (toBinary(localStorage.getItem("testingData")));
+    if (!debug && localStorage.getItem("newPlayerData") !== null) data = localStorage.getItem("newPlayerData");
+    else if (localStorage.getItem("newTestingData") !== null) data = localStorage.getItem("newTestingData");
+    else data = !debug ? localStorage.getItem("playerData") : localStorage.getItem("testingData");
+    data = JSON.parse(data)
+    if (data.player.serverHook !== undefined) delete data.player.serverHook;
+    data = JSON.stringify(data);
+    data = toBinary(data);
     let textField = document.getElementById("dataText");
     textField.value = data;
     if (confirm("Download save data as file?"))

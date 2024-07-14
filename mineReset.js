@@ -29,7 +29,7 @@ function toSurface() {
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     curDirection = "";
     mine[curY][curX] = "⚪";
-    curX = 1000000000;
+    curX = 1000000;
     if (currentWorld < 2) {
         curY = 0;
     } else {
@@ -58,7 +58,7 @@ function mineReset() {
     canMine = false;
     mine = null;
     mine = [[]];
-    curX = 1000000000;
+    curX = 1000000;
     checkAllAround(curX, curY, 1);
     mine[curY][curX] = "⛏️";
     canMine = true;

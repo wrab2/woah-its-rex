@@ -11,7 +11,7 @@ function createMine() {
         if (r > -1)
             mine[r] = [];
     }
-    mine[curY][1000000000] = "⛏️"; //trusty pickaxe
+    mine[curY][1000000] = "⛏️"; //trusty pickaxe
     currentLayerNum = -1;
     setLayer(curY);
     checkAllAround(curX, curY, 1);
@@ -54,7 +54,8 @@ function mineBlock(x, y, cause) {
     }
     if (mineBlockOre === "⚪") return;
     if (oreList[mineBlockOre]["isBreakable"]) {
-        checkAllAround(x, y);
+        if (cause !== "infinity") checkAllAround(x, y);
+        else placeLayerAround(x, y);
         if (oreList[mineBlockOre]["numRarity"] >= 750000) {
             if (checkFromCave({"X":x, "Y":y})["fromCave"]) {
                 giveBlock({type: mineBlockOre, x:x, y:y, fromReset:false, fromCave:true, caveMulti:checkFromCave({"X":x, "Y":y})["multi"], variant:mineBlockVariant});
@@ -63,15 +64,27 @@ function mineBlock(x, y, cause) {
                 player.stats.blocksMined++;
                 return;
             }
-            if (cause === "ability" && player.settings.automineProtection && messageIncluded(oreList[mineBlockOre]["oreTier"])) return;
+            if ((cause === "ability" || cause === "infinity") && player.settings.automineProtection && messageIncluded(oreList[mineBlockOre]["oreTier"])) return;
         }
         player.stats.blocksMined++;
         giveBlock({type: mineBlockOre, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:mineBlockVariant});
         mine[y][x] = "⚪";
-        cause !== "ability" ? rollAbilities() : undefined;
+        (cause !== "ability" && cause !== "infinity") ? rollAbilities() : undefined;
     }
 }
+function placeLayerAround(x, y) {
+    mine[y + 1] ??= [];
+    mine[y - 1] ??= [];
+    if (mine[y + 1][x] === undefined) {mine[y + 1][x] = getLayerMaterial(getLayer(y + 1)); blocksRevealedThisReset++;}
+    if (mine[y - 1][x] === undefined) {mine[y - 1][x] = getLayerMaterial(getLayer(y - 1)); blocksRevealedThisReset++;}
+    if (mine[y][x + 1] === undefined) {mine[y][x + 1] = getLayerMaterial(getLayer(y)); blocksRevealedThisReset++;}
+    if (mine[y][x - 1] === undefined) {mine[y][x - 1] = getLayerMaterial(getLayer(y)); blocksRevealedThisReset++;}
 
+}
+function getLayerMaterial(layer) {
+    const thisLayer = layer.layer;
+    for (let i = thisLayer.length - 1; i >= 0; i--) if (oreList[thisLayer[i]]["oreTier"] === "Layer") return thisLayer[i];
+}
 //ORE GENERATION AND OBTAINING
 
 let multis = [1, 50, 250, 500];
@@ -112,7 +125,7 @@ function giveBlock(obj) {
             }
         }
         if (oreList[obj.type]["hasLog"] || oreRarity >= 160000000) {
-            verifiedOres.verifyFind(mine[obj.y][obj.x], obj.y, obj.x, names[inv - 1]);
+            verifiedOres.verifyFind(mine[obj.y][obj.x], obj.y, obj.x, names[inv - 1], duped);
         }
         if (Math.random() < 1/100000) {
             oreList["bitcoin"]["normalAmt"]++;
@@ -149,7 +162,7 @@ function generateBlock(location) {
     let low = 0;
     let high = arr.length;
     while (low < high) {
-        const mid = (low + high) >> 1; // Use bitwise shift for integer division
+        const mid = (low + high) >> 1;
         if (chosenValue >= mainGenerationTable[mid]) {
             low = mid + 1;
         } else {
@@ -184,7 +197,7 @@ function generateBlock(location) {
         let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
         if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
         if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
-        if (canCollect) mineBlock(location["X"], location["Y"], "ability");
+        if (canCollect) mineBlock(location["X"], location["Y"], "infinity");
         if (blocksRevealedThisReset / mineCapacity >= 0.9) mineBlock(location["X"], location["Y"], "reset");
         if (player.settings.stopOnRare.active && stopIncluded(oreList[blockToGive]["oreTier"])) stopMining();
         if (currentActiveEvent !== undefined) {
@@ -348,6 +361,7 @@ function switchDistance(num) {
 }
 
 async function teleport() {
+    if (layerDistanceY === 7000 && currentWorld === 1 && currentLayer === "waterLayer") if (Math.random() < 1/500 || debug) {attemptSwitchWorld(1.2); return;}
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
     curDirection = "";
@@ -431,6 +445,7 @@ function attemptSwitchWorld(to) {
     if (to === 2 && player.pickaxes["pickaxe13"] && currentWorld !== 2){switchWorld(2); return;}
     if (to === 1.1 && player.sr1Unlocked && currentWorld !== 1.1) {switchWorld(1.1); return;}
     if (to === 1 && currentWorld !== 1) {switchWorld(1); return;}
+    if (to === 1.2 && currentWorld !== 1.2) {switchWorld(1.2); return;}
     if (to === 0) {showTrophyRoom(true); return;}
 }
 function switchWorld(to, skipAnim) {
@@ -449,6 +464,7 @@ function switchWorld(to, skipAnim) {
         m87 = 0;
         m88 = 0;
         currentLayerNum = -1;
+        if (currentWorld === 1.1) sr1Helper(false);
         currentWorld = to;
         lastX = 0;
         movementsX = 0;
@@ -458,7 +474,7 @@ function switchWorld(to, skipAnim) {
             distanceMulti = 1;
             y = 1000;
             allLayers = worldTwoLayers;
-            curX = 1000000000;
+            curX = 1000000;
             curY = 2001; 
             createMine();
             if (player.stats.currentPickaxe === "pickaxe25") {
@@ -480,7 +496,8 @@ function switchWorld(to, skipAnim) {
             y = 1000;
             if (currentWorld === 1) allLayers = worldOneLayers;
             else if (currentWorld === 1.1) allLayers = subRealmOneLayers;
-            curX = 1000000000;
+            else if (currentWorld === 1.2) allLayers = waterWorldLayers;
+            curX = 1000000;
             curY = 0; 
             createMine();
             if (currentWorld === 1) {
@@ -497,8 +514,7 @@ function switchWorld(to, skipAnim) {
             layerNum = 0;
             if (currentWorld === 1) switchLayerIndex(0, "dirtLayer", 1);
             else if (currentWorld === 1.1) switchLayerIndex(0, "scLayer", 1);
-            if (currentWorld === 1.1) sr1Helper(true);
-            else sr1Helper(false);
+            else if (currentWorld === 1.2) switchLayerIndex(0, "waterLayer", 1);
         }
         switchDistance(0);
         displayArea();
@@ -507,6 +523,8 @@ function switchWorld(to, skipAnim) {
         utilitySwitchActions();
         removeFromLayers({"ore":"🐢","layers":["paperLayer"]})
         removeFromLayers({"ore":"🐰","layers":["paperLayer"]});
+        if (currentWorld === 1.2) insertIntoLayers({"ore":"HD 160529","layers":["waterLayer"], "useLuck":true});
+        else removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
         a12 = 0;
         a13 = false;
         document.getElementById("teleportButton").disabled = false;
@@ -551,6 +569,7 @@ function removeParadoxical() {
         if (player.gears[player.powerupVariables.fakeEquipped.item] !== undefined) {
             if (player.powerupVariables.fakeEquipped.item === "gear0") document.getElementById("trackerLock").style.display = "inline-flex";
             if (player.powerupVariables.fakeEquipped.item === "gear9") document.getElementById("sillyRecipe").style.display = "none";
+            if (player.powerupVariables.fakeEquipped.item === "gear24") get("allowAutoPowerup").style.display = "none";
             player.gears[player.powerupVariables.fakeEquipped.item] = false;
             player.powerupVariables.fakeEquipped.item = undefined;
         }

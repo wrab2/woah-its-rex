@@ -8,6 +8,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
 
  */
 const recipes = {
+    "pickaxe0" : {
+        name: "What do I even name pickaxe 0",
+        recipe: []
+    },
     "pickaxe1" : {
         name : "Mulch Mallet",
         recipe : [{ore:"🟫", amt:5000},{ore:"🟧", amt:160},{ore:"🟡", amt:30},{ore:"🔴", amt:17},{ore:"⚫", amt:7}],
@@ -156,6 +160,11 @@ const recipes = {
     "pickaxe27" : {
         name: "The Tree of Life",
         recipe : [],
+        upgrades : {}
+    },
+    "pickaxe31" : {
+        name: "Undersea Eviscerator",
+        recipe : [{ore:"🌊", amt:500000000000},{ore:"⛵", amt:440000000},{ore:"🎣", amt:425000000},{ore:"🤿", amt:404000000},{ore:"🫧", amt:400000000},{ore:"🐟", amt:134000000},{ore:"👑", amt:53000000},{ore:"🔱", amt:50000000},{ore:"🌀", amt:5600000},{ore:"👿", amt:4650000},{ore:"🪩", amt:3500000},{ore:"💫", amt:1750000},{ore:"🐋", amt:435000},{ore:"⚓", amt:4600},{ore:"🪸", amt:1250},{ore:"HD 160529", amt:1}],
         upgrades : {}
     },
     "gear0" : {
@@ -378,7 +387,11 @@ function updateActiveRecipe() {
                     let needed = recipe[i].amt;
                     let amtOwned = oreList[ore]["normalAmt"];
                     totalRarity += oreList[ore]["numRarity"] * needed;
-                    toChange.innerHTML = `<span style="filter: drop-shadow(0 0 0.2vw white)">${ore}</span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned.toLocaleString()}/${needed.toLocaleString()}</span>`;
+                    if (oreList[ore]["hasImage"]) {
+                        toChange.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned.toLocaleString()}/${needed.toLocaleString()}</span>`
+                    } else {
+                        toChange.innerHTML = `<span style="filter: drop-shadow(0 0 0.2vw white)">${ore}</span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned.toLocaleString()}/${needed.toLocaleString()}</span>`;
+                    }
                     if(amtOwned >= needed) {
                         count++;
                         toChange.style.color = "#6BC267";
@@ -449,7 +462,12 @@ function createPickaxeRecipes() {
                 const recipeElement = document.createElement('p');
                 recipeElement.id = `${property}Display`;
                 recipeElement.classList = `recipeOreDisplay`;
-                recipeElement.innerText = `${ore} ${amtHave.toLocaleString()}/${amtNeeded.toLocaleString()}`
+                const oreTier = oreList[ore]["oreTier"];
+                if (oreList[ore]["hasImage"]) {
+                    recipeElement.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span>${amtHave.toLocaleString()}/${amtNeeded.toLocaleString()}`
+                } else {
+                    recipeElement.innerText = `${ore} ${amtHave.toLocaleString()}/${amtNeeded.toLocaleString()}`;
+                }
                 recipeElement.setAttribute("onclick", `randomFunction("${ore}", "crafting")`);
                 const colors = oreInformation.getColors(oreList[ore]["oreTier"]);
                 recipeElement.style.backgroundImage = `linear-gradient(to right, black, ${colors["backgroundColor"]}, black)`;
@@ -502,6 +520,7 @@ const buttonGradients = {
     "pickaxe28Craft" : {"gradient" : "linear-gradient(to right, #c370e1, #8282e6, #ffffcd)","applied" : false},
     "pickaxe29Craft" : {"gradient" : "linear-gradient(to right, #882608, #6c1805, #360a0a)","applied" : false},
     "pickaxe30Craft" : {"gradient" : "linear-gradient(to right, #feda84, #976393, #43457f, #ff9b83)","applied" : false},
+    "pickaxe31Craft" : {"gradient" : "linear-gradient(to right, #feda84, #976393, #43457f, #ff9b83)","applied" : false},
     
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
@@ -567,6 +586,7 @@ function craftPickaxe(item) {
     if (currentWorld === 1 && item === "gear9")
         gearAbility2();
     if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
+    if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
     updateActiveRecipe();
     utilitySwitchActions();
 }
@@ -586,12 +606,14 @@ function utilitySwitchActions() {
     if (toAdd) toAdd.classList.add("equippedOutline");
     changeLayerOres();
     updateAllLayers();
-    switchLayerIndex(0);
     if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     verifiedOres.checkPickaxe();
     verifiedOres.checkCaves();
     displayArea();
     player.displayStatistics.luck = Math.floor(verifiedOres.getCurrentLuck());
+    const temp = curDirection;
+    curDirection = "";
+    goDirection(temp);
 }
 let m87 = 0;
 let m88 = 0;
@@ -602,6 +624,8 @@ const showOrders = {
     worldTwoGears : ["gear10", "gear11", "gear12", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "gear21"],
     srOnePickaxes : ["pickaxe27"],
     srOneGears : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
+    wwPickaxes: ["pickaxe31"],
+    wwGears: []
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -627,7 +651,7 @@ function showGears() {
     m87++;
     m88 = 0;
     if (m87 === 3 && currentWorld === 2) document.getElementById("oblivionFracturer").style.display = "block";
-        const list = currentWorld === 1 ? showOrders.worldOnePickaxes : (currentWorld === 1.1 ? showOrders.srOnePickaxes : showOrders.worldTwoPickaxes);
+        const list = currentWorld === 1 ? showOrders.worldOnePickaxes : (currentWorld === 1.1 ? showOrders.srOnePickaxes : (currentWorld === 1.2 ? showOrders.wwPickaxes : showOrders.worldTwoPickaxes));
         for (let i = 0; i < list.length; i++) {
             getButtonByName(list[i]).style.display = "block";
         }
@@ -647,7 +671,10 @@ function switchWorldCraftables() {
     } else if (currentWorld === 1.1) {
         gearList = showOrders.srOneGears;
         pickaxeList = showOrders.srOnePickaxes;
-    } else if (currentWorld === 2) {
+    }  else if (currentWorld === 1.2) {
+        gearList = showOrders.wwGears;
+        pickaxeList = showOrders.wwPickaxes;
+    }else if (currentWorld === 2) {
         gearList = showOrders.worldTwoGears;
         pickaxeList = showOrders.worldTwoPickaxes;
     }
@@ -1228,7 +1255,7 @@ const pickaxeStats = {
         revealed: 510,
         luck: 1.3,
         rate: 45,
-        src: "⛏️",
+        src: `<img class="mineImage" src="media/tropicalCarverIcon.webp"></img>`,
         ability: "media/abilityImages/palmTreeAbility.png",
         doAbility: function(x, y) { pickaxeAbility30(x, y) },
         canSpawnCaves:[],
@@ -1500,8 +1527,8 @@ const pickaxeStats = {
         rate: 150,
         src: `<img class="mineImage" src="media/nullChromaIcon.png"></img>`,
         doAbility: function(x, y) { pickaxeAbility26(x, y) },
-        canSpawnCaves:[1, 2],
-        canMineIn:[1, 2],
+        canSpawnCaves:[1, 2, 1.2],
+        canMineIn:[1, 2, 1.2],
 },
     "pickaxe27" : {
         0 : {mined: 4383, revealed: 4576, luck: 1},
@@ -1515,6 +1542,17 @@ const pickaxeStats = {
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
         canSpawnCaves:[1.1],
         canMineIn:[1, 1.1],
+    }, 
+    "pickaxe31" : {
+        mined: 34321,
+        revealed: 35899,
+        luck: 425,
+        rate: 200,
+        src : "⛏️",
+        ability: "media/abilityImages/underseaEvisceratorAbility.png",
+        doAbility: function(x, y) {pickaxeAbility31(x, y)},
+        canSpawnCaves:[1, 1.2, 2],
+        canMineIn:[1, 1.2, 2],
     },
     
 }
@@ -1543,12 +1581,12 @@ function ct() {
         if (!oreList[ore]["caveExclusive"] && oreList[ore]["oreTier"] !== "Celestial") {
             let currentOreLayer;
             if (oreInformation.isCommon(oreList[ore]["oreTier"]) && oreList[ore]["oreTier"] !== "Layer") {
-                recipeLayers.commons ??= {ore: ore, highestRarity : 0}
+                recipeLayers.commons ??= {ore: ore, highestProcs : 0}
                 currentOreLayer = "commons";
             } else {
                 for (let layer in layerDictionary) {
                     if (layerDictionary[layer].layer.includes(ore)) {
-                        recipeLayers[layer] ??= {ore: ore, highestRarity : 0}
+                        recipeLayers[layer] ??= {ore: ore, highestProcs : 0}
                         currentOreLayer = layer;
                         break;
                     }
@@ -1560,32 +1598,38 @@ function ct() {
             needed -= have;
             const rarity = 1/oreList[ore]["decimalRarity"];
             const totalOreRarity = (rarity * needed);
-            if (totalOreRarity > recipeLayers[currentOreLayer].highestRarity) recipeLayers[currentOreLayer] = {ore: ore, highestRarity: totalOreRarity};
+            let totalProcsNeeded;
+            if (currentOreLayer === "commons") {
+                totalProcsNeeded = totalOreRarity/abilityMined;
+                if (totalProcsNeeded > recipeLayers["commons"].highestProcs) {
+                    recipeLayers["commons"].highestProcs = totalProcsNeeded;
+                    recipeLayers["commons"].ore = ore;
+                }
+            } else {
+                totalProcsNeeded = totalOreRarity/abilityRevealed;
+                if (oreList[ore]["oreTier"] === "Layer") totalProcsNeeded = totalOreRarity/abilityMined;
+                if (totalProcsNeeded > recipeLayers[currentOreLayer].highestProcs) {
+                    recipeLayers[currentOreLayer].highestProcs = totalProcsNeeded;
+                    recipeLayers[currentOreLayer].ore = ore;
+                }
+            }
         }
     }
-    let commonProcsNeeded = 0;
-    let procsNeeded = [];
-    if (recipeLayers["commons"] !== undefined) {
-        commonProcsNeeded = recipeLayers["commons"].highestRarity / abilityMined;
-    }
-    for (let layer in recipeLayers) {
-        if (layer !== "commons") {
-            if (oreList[recipeLayers[layer].ore]["oreTier"] === "Layer") procsNeeded.push(recipeLayers[layer].highestRarity / abilityMined);
-            else procsNeeded.push(recipeLayers[layer].highestRarity / abilityRevealed)
-        }
-    }
-    let searchForCommons = false;
-    let commonsAdded = false;
     let totalProcs = 0;
-    if (commonProcsNeeded > 0) searchForCommons = true;
-    if (procsNeeded.length === 0) totalProcs = commonProcsNeeded;
-    for (let i = 0; i < procsNeeded.length; i++) {
-        if (searchForCommons && procsNeeded[i] <= commonProcsNeeded) {
-            procsNeeded[i] = commonProcsNeeded;
-            searchForCommons = false;
-            commonsAdded = true;
+    let commonsAdded = false;
+    const keys = Object.keys(recipeLayers);
+    if (recipeLayers["commons"] !== undefined) {
+        for (let layer in recipeLayers) {
+            if (recipeLayers[layer].highestProcs < recipeLayers["commons"].highestProcs && !commonsAdded) {
+                recipeLayers[layer].highestProcs = recipeLayers["commons"].highestProcs;
+                commonsAdded = true;
+                delete recipeLayers["commons"];
+            }
         }
-        totalProcs += procsNeeded[i];
+    }
+    if (recipeLayers["commons"] !== undefined) delete recipeLayers["commons"];
+    for (let layer in recipeLayers) {
+        totalProcs += recipeLayers[layer].highestProcs;
     }
     let timeForProcs = (Math.floor(totalProcs) * abilityRate) / speed;
     return longTime(timeForProcs * 1000);

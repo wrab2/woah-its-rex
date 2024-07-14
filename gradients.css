@@ -439,6 +439,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#underseaEviscerator span{
+    background: linear-gradient(to right,#00FFFF, #00A36C, #5D3FD3, #CCCCFF, #FFBF00, #CD7F32, #C04000, #FAD5A5, #E4D00A, #FDDA0D);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     background-clip: text;
