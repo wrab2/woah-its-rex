@@ -513,7 +513,7 @@ function switchWorld(to, skipAnim) {
             }
             layerNum = 0;
             if (currentWorld === 1) switchLayerIndex(0, "dirtLayer", 1);
-            else if (currentWorld === 1.1) switchLayerIndex(0, "scLayer", 1);
+            else if (currentWorld === 1.1) {switchLayerIndex(0, "scLayer", 1); sr1Helper(true);}
             else if (currentWorld === 1.2) switchLayerIndex(0, "waterLayer", 1);
         }
         switchDistance(0);
@@ -527,6 +527,8 @@ function switchWorld(to, skipAnim) {
         else removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
         a12 = 0;
         a13 = false;
+        verifiedOres.checkPickaxe();
+        verifiedOres.checkCaves();
         document.getElementById("teleportButton").disabled = false;
         canMine = true;
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
