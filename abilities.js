@@ -90,6 +90,7 @@ function powerup4() {
         applyNearbyData();
     }
 }
+const paradoxicalCantGive = ["pickaxe27", "pickaxe31"]
 function powerup5() {
     if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && player.powerupCooldowns["powerup5"].unlocked) {
         if (currentWorld !== 1.1) {
@@ -97,9 +98,9 @@ function powerup5() {
             let toChooseFrom = [];
             for (let pickaxe in pickaxeStats) {
                 if (currentWorld === 1) {
-                    if (pickaxe !== "pickaxe27" && pickaxe !== "pickaxe31") toChooseFrom.push(pickaxe);
+                    if (paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe);
                 } else if (currentWorld === 2) {
-                    if (pickaxeStats[pickaxe].canMineIn.includes(2)) toChooseFrom.push(pickaxe)
+                    if (pickaxeStats[pickaxe].canMineIn.includes(2) && paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe)
                 }
             }
             toChooseFrom = toChooseFrom.concat(Object.keys(player.gears));
