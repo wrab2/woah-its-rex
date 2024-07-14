@@ -201,7 +201,7 @@ function generateBlock(location) {
         if (blocksRevealedThisReset / mineCapacity >= 0.9) mineBlock(location["X"], location["Y"], "reset");
         if (player.settings.stopOnRare.active && stopIncluded(oreList[blockToGive]["oreTier"])) stopMining();
         if (currentActiveEvent !== undefined) {
-            if (getCurrentEventOre() === blockToGive) endEvent();
+            if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();
         } 
     }
 }

@@ -1623,7 +1623,6 @@ function ct() {
             if (recipeLayers[layer].highestProcs < recipeLayers["commons"].highestProcs && !commonsAdded) {
                 recipeLayers[layer].highestProcs = recipeLayers["commons"].highestProcs;
                 commonsAdded = true;
-                delete recipeLayers["commons"];
             }
         }
     }

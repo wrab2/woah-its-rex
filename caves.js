@@ -353,6 +353,9 @@ function generateCaveBlock(y, x, type) {
             if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
             if (canCollect) mineCaveBlock(x, y, type, "infinity");
             if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
+            if (currentActiveEvent !== undefined) {
+                if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();
+            } 
         }
     }
 }
