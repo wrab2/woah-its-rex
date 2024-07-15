@@ -322,72 +322,82 @@ function getNextSolidX(dir, y, x) {
 }
 let keyCooldown = Date.now();
 let isHoldingShift = false;
+const catstuff = {
+    ":" : false,
+    layer: undefined
+}
 document.addEventListener('keydown', (event) => {
     let name = event.key;
     let validInput = false;
     name = name.toLowerCase();
-    switch(name) {
-        case "w":
-            if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
-            break;
-        case "a":
-            if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
-            break;
-        case "s":
-            if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
-            break;
-        case "d":
-            if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
-            break;
-        case "arrowup":
-            event.preventDefault();
-            goDirection('w')
-            return;
-        case "arrowleft":
-            event.preventDefault();
-            goDirection('a')
-            return;
-        case "arrowdown":
-            event.preventDefault();
-            goDirection('s')
-            return;
-        case "arrowright":
-            event.preventDefault();
-            goDirection('d')
-            return;
-        case "escape":
-            //toggleCelestials(false)
-            if (document.getElementById("menuSelectionContainer").style.display !== "none") {
-                closeMenu()
-            }
-            break;
-        case "t":
-            checkExistingOres();
-            break;
-        case "1":
-            toggleSpecificPowerup(1);
-            break;
-        case "2":
-            toggleSpecificPowerup(2);
-            break;
-        case "3":
-            toggleSpecificPowerup(3);
-            break;
-        case "4":
-            toggleSpecificPowerup(4);
-            break;
-        case "5":
-            toggleSpecificPowerup(5);
-            break;
-        case "shift":
-            isHoldingShift = true;
-            break;
-        default:
-            break;
+    if (get("menuSelectionContainer").style.display !== "block") {
+        switch(name) {
+            case "w":
+                if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
+                break;
+            case "a":
+                if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
+                break;
+            case "s":
+                if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
+                break;
+            case "d":
+                if (!buttonClicked && Date.now() >= keyCooldown) {validInput = true; keyCooldown = Date.now() + 15;}
+                break;
+            case "arrowup":
+                event.preventDefault();
+                goDirection('w')
+                return;
+            case "arrowleft":
+                event.preventDefault();
+                goDirection('a')
+                return;
+            case "arrowdown":
+                event.preventDefault();
+                goDirection('s')
+                return;
+            case "arrowright":
+                event.preventDefault();
+                goDirection('d')
+                return;
+            case "escape":
+                //toggleCelestials(false)
+                if (document.getElementById("menuSelectionContainer").style.display !== "none") {
+                    closeMenu()
+                }
+                break;
+            case "t":
+                checkExistingOres();
+                break;
+            case "1":
+                toggleSpecificPowerup(1);
+                break;
+            case "2":
+                toggleSpecificPowerup(2);
+                break;
+            case "3":
+                if (catstuff[":"]) {showCatText(); catstuff[":"] = false;}
+                else toggleSpecificPowerup(3);
+                break;
+            case "4":
+                toggleSpecificPowerup(4);
+                break;
+            case "5":
+                toggleSpecificPowerup(5);
+                break;
+            case "shift":
+                isHoldingShift = true;
+                break;
+            case ":":
+                catstuff[":"] = true;
+                break;
+            default:
+                break;
+        }
     }
+    if (name !== ":") catstuff[":"] = false;
     if (validInput) {
-        clearInterval(loopTimer);
-        insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
+        stopMining();
         curDirection = "";
         let movements = {x:0, y:0, key:name};
         movements.x = (name === "a" ? -1 : (name === "d" ? 1 : 0));
@@ -406,20 +416,19 @@ document.addEventListener('keyup', (event) => {
     }
 }, false);
 let loopTimer = null;
+let secondaryTimer = null;
 let curDirection = "";
 let baseSpeed = 25;
 function goDirection(direction, speed) {
     if (curDirection === direction) {
-        clearInterval(loopTimer);
-        insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
+        stopMining();
         curDirection = "";
         updateDisplayTimer(false);
     } else {
         const nums = calcSpeed();
         let reps = nums.reps;
         let miningSpeed = nums.speed;
-        clearInterval(loopTimer);
-        removeFromLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"]});
+        stopMining();
         if (a13) {
             reps = 1;
             miningSpeed = 35;
@@ -429,6 +438,7 @@ function goDirection(direction, speed) {
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
         miningSpeed ??= 25;
         loopTimer = setInterval(movePlayer, miningSpeed, movements, reps, "auto");
+        secondaryTimer = setInterval(movePlayer, 25, movements, 1, "auto");
         curDirection = direction;
         energySiphonerDirection = direction;
         updateDisplayTimer(true);
@@ -439,8 +449,9 @@ function moveOne(dir, button) {
     button.disabled = true;
     buttonClicked = true;
     clearInterval(loopTimer);
+    clearInterval(secondaryTimer);
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
-    let movements = {x:0, y:0, key:dir};
+    let movements = {x:0, y:0, key:dir, extra:0};
     movements.x = (dir === "a" ? -1 : (dir === "d" ? 1 : 0));
     movements.y = (dir === "s" ? 1 : (dir === "w" ? -1 : 0));
     movePlayer(movements, 1, "single");
@@ -476,8 +487,14 @@ function calcSpeed() {
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1}
         else return {speed: 7, reps: (-2 + sr1Level)}
     }
-    if (debug) return {speed: 0, reps: 100}
-    else return {speed: miningSpeed, reps: reps}
+    const extraSpeed = 0;
+    //if (debug) return {speed: 0, reps: 100, extra:0}
+    return {speed: miningSpeed, reps: reps, extra: extraSpeed}
+}
+function updateSpeed() {
+    const temp = curDirection;
+    stopMining();
+    if (temp !== "") goDirection(temp);
 }
 //DISPLAY
 let displayRows;
@@ -623,11 +640,13 @@ function createInventory() {
                 }
                 let oreRarityBlock = document.createElement("td");
                 let rarity = oreList[propertyName]["numRarity"];
+                rarity *= multis[i - 1];
+                if (propertyName === "Wavaderg") rarity = ":3";
                 if (oreList[propertyName]["caveExclusive"]) {
                     rarity *= getCaveMultiFromOre(propertyName);
-                    oreRarityBlock.innerText = "1/" + (rarity * multis[i - 1]).toLocaleString() + "*";
+                    oreRarityBlock.innerText = "1/" + (rarity).toLocaleString() + "*";
                 } else {
-                    oreRarityBlock.innerText = "1/" + (rarity * multis[i - 1]).toLocaleString();
+                    oreRarityBlock.innerText = "1/" + (rarity).toLocaleString();
                 }
                 oreRarityBlock.classList = "inventoryElement2";
                 let oreAmountBlock = document.createElement("td");
@@ -1160,15 +1179,11 @@ const events = {
         specialEffect: function(state) {
             if (state) {
                 baseSpeed--;
-                let temp = curDirection;
-                curDirection = "";
-                if (temp !== "") goDirection(temp);
+                updateSpeed();
             }
             else {
                 baseSpeed++;
-                let temp = curDirection;
-                curDirection = "";
-                if (temp !== "") goDirection(temp);
+                updateSpeed();
             }
         }
     },

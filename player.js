@@ -189,6 +189,7 @@ class playerTemplate {
             luck: 1
         },
         this.serverHook = undefined;
+        this.serverHookName = undefined;
     }
 }
 let player = new playerTemplate();
@@ -710,12 +711,13 @@ function loadNewData(data) {
         if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
         else get("allowAutoPowerup").style.display = "none";
         if (data.webHook !== undefined) {
-            if (data.webHook.active === true) {
-                player.webHook.active = data.webHook.active;
-                player.webHook.link = data.webHook.link;
-                if (data.webHook.ids !== undefined) {
-                    for (let id in data.webHook.ids) {
+            if (data.webHook.ids !== undefined) {
+                for (let id in data.webHook.ids) {
+                    if (data.webHook.ids[id].link === undefined) {
+                        delete data.webHook.ids[id];
+                    } else {
                         player.webHook.ids[id] = data.webHook.ids[id];
+                        addToCreated(id)
                     }
                 }
             }

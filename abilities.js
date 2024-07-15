@@ -122,9 +122,7 @@ function powerup5() {
                     if (toGive === "gear24") get("allowAutoPowerup").style.display = "block";
                 }
                 updateAllLayers();
-                let tempDirection = curDirection;
-                stopMining();
-                goDirection(tempDirection);
+                updateSpeed();
                 player.powerupVariables.fakeEquipped.removeAt = Date.now() + (player.gears["gear24"] ? 60000 * 1.5 : 60000);
                 player.powerupCooldowns["powerup5"].cooldown = Date.now() + (player.gears["gear24"] ? 3600000 * 0.75 : 3600000);
                 utilitySwitchActions();
@@ -169,19 +167,15 @@ function gearAbility1() {
         }
 }
 function activateSiphoner() {
-    const temp = curDirection;
-    curDirection = "";
     baseSpeed -= 3;
-    goDirection(temp);
+    updateSpeed();
 }
 function removeSiphoner() {
     ability1Stacks = 0;
     energySiphonerCooldown = Date.now() + 5000;
     baseSpeed += 3;
     energySiphonerActive = false;
-    const temp = curDirection;
-    curDirection = "";
-    if (temp !== "") goDirection(temp);
+    updateSpeed();
 }
 function gearAbility2() {
     if (currentWorld === 1 && player.gears["gear9"]) {

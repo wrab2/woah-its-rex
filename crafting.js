@@ -611,9 +611,7 @@ function utilitySwitchActions() {
     verifiedOres.checkCaves();
     displayArea();
     player.displayStatistics.luck = Math.floor(verifiedOres.getCurrentLuck());
-    const temp = curDirection;
-    curDirection = "";
-    goDirection(temp);
+    updateSpeed();
 }
 let m87 = 0;
 let m88 = 0;
@@ -1548,7 +1546,7 @@ const pickaxeStats = {
         revealed: 35899,
         luck: 425,
         rate: 200,
-        src : "⛏️",
+        src : `<img class="mineImage" src="media/underseaEvisceratorIcon.webp"></img>`,
         ability: "media/abilityImages/underseaEvisceratorAbility.png",
         doAbility: function(x, y) {pickaxeAbility31(x, y)},
         canSpawnCaves:[1, 1.2, 2],
@@ -1563,7 +1561,7 @@ const pickaxeStats = {
 function ct() {
     const nums = calcSpeed();
     nums.speed = nums.speed < 1 ? 0 : nums.speed;
-    const speed = (1000 / nums.speed) * nums.reps;
+    const speed = (1000 / nums.speed) * nums.reps + nums.extra;
     const pickaxeUsing = player.stats.currentPickaxe;
     const abilityMined = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].mined : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
     const abilityRevealed = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].revealed : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].revealed;

@@ -155,7 +155,7 @@ function mineCaveShape(x, y, type) {
         }
     }
 }
-function mineCaveBlock(c, r, type) {
+function mineCaveBlock(c, r, type, cause) {
     let block = mine[r][c];
     if (block !== undefined) {
         let variant = block.variant;
@@ -171,35 +171,57 @@ function mineCaveBlock(c, r, type) {
             mine[r][c] = "⚪";
         }
     }
-    //CHECK BELOW THE BLOCK
-    if (mine[r + 1] === undefined) {
-        mine[r + 1] = [];
-    }
-    if (mine[r + 1][c] === undefined) {
-        generateCaveBlock(r + 1, c, type);
-        blocksRevealedThisReset++;
-    }
-    //CHECK TO THE RIGHT OF THE BLOCK
-    if (mine[r][c + 1] === undefined) {
-        generateCaveBlock(r, c + 1, type);
-        blocksRevealedThisReset++;
-    }
-    //CHECK TO THE LEFT OF THE BLOCK
-    if (mine[r][c - 1] === undefined) {
-        generateCaveBlock(r, c - 1, type);
-        blocksRevealedThisReset++;
-    }
-    //CHECK ABOVE THE BLOCK 
     if (r - 1 > 0 && mine[r - 1] === undefined) {
         mine[r - 1] = [];
     }
-    if (r - 1 > 0 && mine[r - 1][c] === undefined) {
-        generateCaveBlock(r - 1, c, type)
-        blocksRevealedThisReset++;
+    if (mine[r + 1] === undefined) {
+        mine[r + 1] = [];
+    }
+    if (cause === "infinity") {
+        if (mine[r + 1][c] === undefined) {
+            mine[r+1][c] ??= getCaveMaterial(type);
+            blocksRevealedThisReset++;
+        }
+        //CHECK TO THE RIGHT OF THE BLOCK
+        if (mine[r][c + 1] === undefined) {
+            mine[r][c+1] ??= getCaveMaterial(type);
+            blocksRevealedThisReset++;
+        }
+        //CHECK TO THE LEFT OF THE BLOCK
+        if (mine[r][c - 1] === undefined) {
+            mine[r][c-1] ??= getCaveMaterial(type);
+            blocksRevealedThisReset++;
+        }
+        //CHECK ABOVE THE BLOCK 
+        if (r - 1 > 0 && mine[r - 1][c] === undefined) {
+            mine[r-1][c] ??= getCaveMaterial(type);
+            blocksRevealedThisReset++;
+        }
+    } else {
+        if (mine[r + 1][c] === undefined) {
+            generateCaveBlock(r + 1, c, type);
+            blocksRevealedThisReset++;
+        }
+        //CHECK TO THE RIGHT OF THE BLOCK
+        if (mine[r][c + 1] === undefined) {
+            generateCaveBlock(r, c + 1, type);
+            blocksRevealedThisReset++;
+        }
+        //CHECK TO THE LEFT OF THE BLOCK
+        if (mine[r][c - 1] === undefined) {
+            generateCaveBlock(r, c - 1, type);
+            blocksRevealedThisReset++;
+        }
+        //CHECK ABOVE THE BLOCK 
+        if (r - 1 > 0 && mine[r - 1][c] === undefined) {
+            generateCaveBlock(r - 1, c, type)
+            blocksRevealedThisReset++;
+        }
     }
 }
-
-
+function getCaveMaterial(type) {
+    return caveList[type].splice(-1);
+}
 function sortCaveRarities(type) {
     let arr = caveList[type];
     for (let i = 0; i < arr.length; i++) {
@@ -351,7 +373,7 @@ function generateCaveBlock(y, x, type) {
             let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
             if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
             if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
-            if (canCollect) mineCaveBlock(x, y, type, "infinity");
+            if (canCollect) mineBlock(x, y, type, "infinity");
             if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
             if (currentActiveEvent !== undefined) {
                 if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();

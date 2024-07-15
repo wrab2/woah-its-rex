@@ -38,6 +38,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 </head>
 <body>
+    <div id="catStuff">
+        <input type="text" id="catText" autocomplete="off">
+        <button id="catSubmit" onclick="sillyKittyCat(get('catText').value)">Meow!</button>
+    </div>
     <div id="blackScreen"></div>
     <div id="trophyRoom">
         <div id="requirementTextArea">
@@ -199,7 +203,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe2Description" style="display: none;"><span id="pickaxe2Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe2Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_</span></p>
                 <p class="itemDescription" id="pickaxe3Description" style="display: none;"><span id="pickaxe3Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe3Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @lemurkin</span></p>
                 <p class="itemDescription" id="pickaxe29Description" style="display: none;"><span id="pickaxe29Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe29Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe30Description" style="display: none;"><span id="pickaxe30Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe30Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe30Description" style="display: none;"><span id="pickaxe30Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe30Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe28Description" style="display: none;"><span id="pickaxe28Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe28Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @thecatofalltime</span></p>
                 <p class="itemDescription" id="pickaxe4Description" style="display: none;"><span id="pickaxe4Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe4Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mrfloaties</span></p>
                 <p class="itemDescription" id="pickaxe5Description" style="display: none;"><span id="pickaxe5Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe5Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_</span></p>
@@ -225,7 +229,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="pickaxe25Description" style="display: none;"><span id="pickaxe25Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe25Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe26Description" style="display: none;">Has an ability proc rate of 1/150.<br>Has 175x luck.<br>Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade (only in Subrealm). The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br>Paradoxical Progression will give access to the next level instead of a random item.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe31Description" style="display: none;"><span id="pickaxe31Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe31Hologram'))">View Ability</button></span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe31Description" style="display: none;"><span id="pickaxe31Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe31Hologram'))">View Ability</button></span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
                 <!--
                     Pickaxes above
@@ -560,10 +564,52 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     
                 </div>
                 <div id="webhookSettings" style="display: none;">
-                    <div class="inputAndButton">
-                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="webhookLinkSet" placeholder="Leave blank to reset">
-                        <button class="inputButton roundedRight" onclick="setWebhookLink(get('webhookLinkSet'))">Set Webhook Link</button>
-                      </div>
+                    <span class="createdWebhooksLabel" style="font-size: 1vw;">If you have the link to the Silly Caverns tracker, enter the link and your discord username below.<br>
+                        If you want a webhook for another server, create a custom ID below. Name is the name that will appear in the embed, can be a ping. Rarity is the rarity that the ID will check, is a number >1 that represents the RNG you want to webhook (The ID chosen depends on the rarity of the ore, with the embed being sent to the link that the rarity falls under). ID is the ID that the information will fall under. Link is the webhook link you want to use for that ID.</span>
+                    <span class="createdWebhooksLabel">Server Webhook Link</span>
+                    <div id="serverHook">
+                        <div class="inputAndButton">
+                            <input autocomplete ="off" type="text" class="textInput roundedLeft" id="webhookLinkSet" placeholder="Leave blank to reset">
+                            <button class="inputButton roundedRight" onclick="setWebhookLink(get('webhookLinkSet'))">Set Webhook Link</button>
+                        </div>
+                        <div class="inputAndButton">
+                            <input autocomplete ="off" type="text" class="textInput roundedLeft" id="webhookNameSet" placeholder="Enter your Discord username">
+                            <button class="inputButton roundedRight" onclick="setWebhookName(get('webhookNameSet'))">Set Webhook Name</button>
+                        </div>
+                    </div>
+                    <span class="createdWebhooksLabel">Create Custom Webhook</span>
+                    <br>
+                    <button id="createNewWebhook" onclick="addToNew()">New</button>
+                    <div id="customHookContainer">
+                        
+                        <div class="webhookInfoInputSection" id="newHookCopyable">
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Name">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Rarity">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Id">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo"  placeholder="Link">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <button class="webhookInfo createButton" onclick="createWebhookId(this.parentElement.parentElement)">Create!</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="createdWebhooks">
+                        <span class="createdWebhooksLabel">Created Webhoook Ids</span>
+                        <div class="createdHookDisplay" id="createdHookCopyable">
+                            <span class="createdHookInfo">Name</span>
+                            <span class="createdHookInfo">Rarity</span>
+                            <span class="createdHookInfo">Id</span>
+                            <button class="createdHookInfo deleteHookButton" onclick="removeWebhookId(this.parentElement)">Delete</button>
+                        </div>
+                    </div>
+
                 </div>
                 <div id="gameSettings" style="display: none;">
                       <div class="inputAndButton">
@@ -1112,6 +1158,14 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             <span class="faqText">Staff of Binding: 4518 mined, 6325 revealed, 8.25x luck, 1/150 proc rate (347.87 cons)</span>
                             <span class="faqText">Stormseer's Superspark Sceptre: 7964 mined, 9800 revealed, 12.5x luck, 1/175 proc rate (700 cons)</span>
                             <span class="faqText">Coronary Catastrophe: 15131 mined, 18594 revealed, 50x luck, 1/300 proc rate (3099 cons)</span><br>
+                            <details class="faqText">
+                                <summary>?????</summary>
+                                Null Chroma: 21021 mined, 26494 revealed, 175x luck, 1/150 proc rate (30909 cons)
+                            </details>
+                            <details class="faqText">
+                                <summary>???watr???</summary>
+                                Undersea Eviscerator: 34321 mined, 35899 revealed, 425x luck, 1/200 proc rate (76289 cons)
+                            </details>
                             <span class="faqSection">Tree of Life Levels:</span>
                             <span class="faqText">0: 4383 mined, 4576 revealed, 1x luck (9.1 cons)</span>
                             <span class="faqText">1: 19928 mined, 20978 revealed, 3x luck, (125.86 cons)</span>
@@ -1196,17 +1250,16 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
     </div>
 </div>
 </div>
-<div id="normalIndexCard" class="indexWrapper">
-    <span class="indexOre" title=""></span>
-    <span class='indexVariants indexTextOutline'></span>
-    <span class='indexTier indexTextOutline'></span>
-    <span class='indexRarity indexTextOutline'></span>
-    <span class='indexWithLuck indexTextOutline'></span>
-    <span class='indexSpawnMessage indexTextOutline'></span>
-    <span class="eventLayers indexTextOutline"></span>
-    <span class="eventMonths indexTextOutline"></span>
-</div>
-<div id="eventIndexCard">
-
+<div style="display: none;">
+    <div id="normalIndexCard" class="indexWrapper">
+        <span class="indexOre" title=""></span>
+        <span class='indexVariants indexTextOutline'></span>
+        <span class='indexTier indexTextOutline'></span>
+        <span class='indexRarity indexTextOutline'></span>
+        <span class='indexWithLuck indexTextOutline'></span>
+        <span class='indexSpawnMessage indexTextOutline'></span>
+        <span class="eventLayers indexTextOutline"></span>
+        <span class="eventMonths indexTextOutline"></span>
+    </div>
 </div>
 </body>

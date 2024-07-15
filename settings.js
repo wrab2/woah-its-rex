@@ -800,7 +800,7 @@ function updateTimes() {
     get("furthestY").textContent = `-${player.stats.furthestY} Furthest Y.`
     const total = player.avgSpeed;
     const speeds = calcSpeed();
-    const output = `${Math.floor(total)} Average Speed/${Math.floor(1000/speeds.speed * speeds.reps)} Estimated Speed`;
+    const output = `${Math.floor(total)} Average Speed/${Math.floor(1000/speeds.speed * speeds.reps) + speeds.extra} Estimated Speed`;
     document.getElementById("statsSpeed").textContent = output;
 }
 function calcAverageSpeed() {
@@ -852,6 +852,61 @@ function setWebhookLink(element) {
         player.serverHook = undefined;
         flashGreen(element);
     }
+}
+function setWebhookName(element) {
+    if (element.value !== "") {
+        player.serverHookName = element.value;
+        flashGreen(element);
+    } else {
+        flashRed(element);
+    }
+}
+function createWebhookId(parent) {
+    const children = parent.children;
+    const webhookName = children[0].children[0].value;
+    const rarityNum = Number(children[1].children[0].value);
+    const idName = children[2].children[0].value;
+    const webhookLink = children[3].children[0].value;
+    if (isNaN(rarityNum) || webhookLink === undefined || idName === undefined || webhookName === undefined) return;
+    if (player.webHook.ids[idName] !== undefined) {
+        removeWebhookId(undefined, idName);
+    }
+    player.webHook.ids[idName] = {name: webhookName, rarity:rarityNum, link:webhookLink}
+    parent.remove();
+    addToCreated(idName);
+}
+function addToNew() {
+    const element = get("newHookCopyable").cloneNode(true);
+    element.id = "";
+    if (get("customHookContainer").children.length < 2) {
+        get("customHookContainer").appendChild(element);
+    }
+}
+function addToCreated(id) {
+    const element = get("createdHookCopyable").cloneNode(true);
+    element.id = "";
+    const children = element.children;
+    children[0].textContent = player.webHook.ids[id].name;
+    children[1].textContent = player.webHook.ids[id].rarity;
+    children[2].textContent = id;
+    get("createdWebhooks").appendChild(element);
+}
+function removeWebhookId(element, id) {
+    let toRemove;
+    if (id === undefined) {
+        toRemove = element.children[2].textContent;
+    }
+    else toRemove = id;
+    if (player.webHook.ids[toRemove] !== undefined) delete player.webHook.ids[toRemove];
+    if (element === undefined) {
+        const toSearch = get("createdWebhooks").children;
+        for (let i = 0; i < toSearch.length; i++) {
+            if ( i > 0 && toSearch[i].children[2].textContent === toRemove) {toSearch[i].remove(); break;}
+        }
+    } else {
+        element.remove();
+    }
+
 }
 function toggleVariantList(state) {
     const elements = document.getElementsByClassName("potentialVariant");
@@ -1139,4 +1194,42 @@ function getWorldRequirements(world) {
     if (world === 2) return "Craft 'The Key' to Unlock!";
     if (world === 1.1) return "Mine 1 Flawless to Unlock!";
 }
-//convertVariants({"ore":"", "variant":"Explosive", "amt":1})
+//SILLINESS BELOW!!!!!!!
+function showCatText() {
+    console.log("cat")
+    get("catStuff").style.display = "flex";
+}
+let curCatStep = 0;
+function sillyKittyCat(text) {
+    const catFaceOrder = [
+        "ᓚᘏᗢ",
+        "≽^•⩊•^≼",
+        "ദ്ദി（• ˕ •マ.ᐟ",
+        "ᓚ₍ ^. .^₎",
+        "BALLIN CAT 43",
+        "•⩊•",
+        "/ᐠ｡‸｡ᐟ\\",
+        "₊˚⊹♡ ᓚ₍ ^. .^₎",
+        "⎛⎝ ≽  >  ⩊   < ≼ ⎠⎞",
+        "ᨐᵉᵒʷ",
+        "/ᐠ˵- ⩊ -˵マ",
+        "I LOVE CATLAND CENTRAL",
+        "◕⩊◕"
+    ]
+    if (text === catFaceOrder[curCatStep]) {
+        get("catText").value = "";
+        curCatStep++;
+        new Audio("audios/meow-1.mp3").play();
+        if (curCatStep === catFaceOrder.length) {
+            typeWriter("WHY DO YOU KNOW SO MANY CAT EMOTICONS YOU FUCKING FURRY :SOB:", get("spawnMessage"));
+            get("catStuff").style.display = "none";
+            catstuff.layer = currentLayer;
+            insertIntoLayers({ore: "Wavaderg", layers:[currentLayer], "useLuck": true})
+        }
+    } else {
+        new Audio("audios/meow-2.mp3").play();
+        curCatStep = 0;
+        get("catText").value = "";
+        get("catStuff").style.display = "none";
+    }
+}

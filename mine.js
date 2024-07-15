@@ -69,7 +69,7 @@ function mineBlock(x, y, cause) {
         player.stats.blocksMined++;
         giveBlock({type: mineBlockOre, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:mineBlockVariant});
         mine[y][x] = "⚪";
-        (cause !== "ability" && cause !== "infinity") ? rollAbilities() : undefined;
+        (cause === "mining") ? rollAbilities() : undefined;
     }
 }
 function placeLayerAround(x, y) {
@@ -91,9 +91,7 @@ let multis = [1, 50, 250, 500];
 //{type: x, x:x, y:y, fromReset:x, fromCave:x, caveMulti:x, variant:x}
 function giveBlock(obj) {
     if (obj.type === "⚪") return;
-    //CREATE VARIABLES
     let oreRarity = oreList[obj.type]["numRarity"];
-    //SELECT VARIANT
     let inv;
     if (obj.variant === undefined) {
         inv = rollVariant();
@@ -101,13 +99,9 @@ function giveBlock(obj) {
     } else {
         inv = obj.variant;
     }
-    //PROC & LOGS
     const layerMaterial = getLayer(obj.y).layer.slice(-1);
     if (currentWorld < 2 && player.gears["gear4"]) {
         oreList[layerMaterial]["normalAmt"]++;
-    }
-    if (player.gears["gear13"] && oreRarity < 750000 && oreRarity > 1 && Math.random < 0.75) {
-        oreList[obj.type]["normalAmt"]++;
     }
     if (oreRarity >= 750000) {
         let duped = false;
@@ -135,6 +129,10 @@ function giveBlock(obj) {
         if (oreRarity === 1) {
             if (player.gears["gear15"] && Math.random() < 0.5) oreList[obj.type]["normalAmt"] += 2;
             if (player.gears["gear26"] && Math.random() < 1/20) oreList[layerMaterial]["normalAmt"] += 30;
+        } else {
+            if (player.gears["gear13"] && Math.random < 0.75) {
+                oreList[obj.type]["normalAmt"]++;
+            }
         }
     }
     oreList[obj.type][variantInvNames[inv - 1]]++;
@@ -364,6 +362,7 @@ async function teleport() {
     if (layerDistanceY === 7000 && currentWorld === 1 && currentLayer === "waterLayer") if (Math.random() < 1/500 || debug) {attemptSwitchWorld(1.2); return;}
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
+    clearInterval(secondaryTimer);
     curDirection = "";
     pa1 = [];
     pa2 = [];
@@ -542,6 +541,7 @@ function stopMining() {
     curDirection = "";
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true})
     clearInterval(loopTimer);
+    clearInterval(secondaryTimer);
     clearInterval(displayTimer);
     displayTimer = null;
 }
@@ -589,9 +589,7 @@ function removeParadoxical() {
         player.powerupVariables.fakeTreeLevel.originalState = undefined;
         player.powerupVariables.fakeTreeLevel.removeAt = 0;
     }
-    let tempDirection = curDirection;
-    stopMining();
-    goDirection(tempDirection);
+    updateSpeed();
     saveNewData({override: undefined, return: false});
 }
 

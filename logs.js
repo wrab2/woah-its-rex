@@ -117,7 +117,7 @@ class secureLogs {
                     if (log.mined !== true) {
                         log.mined = true;
                         if (log.variant === undefined) log.variant = variant;
-                        if (player.webHook.active) webHook(log);
+                        if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
                         if ((log.rng < 1/1000000000 || oreList[log.block]["oreTier"] === "Infinitesimal") && player.serverHook !== undefined) serverWebhook(log, player.stats.blocksMined);
                         const webhookString = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.duped ? "(x2) " : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()} ${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
                         log.output = webhookString;
@@ -196,7 +196,6 @@ class secureLogs {
         let luck = baseLuck;
         if (currentWorld === 1.1) {
             if (player.gears["gear20"]) luck *= ((baseLuck * 0.05) + 1);
-            luck *= 1.25;
             if (isNaN(luck)) return 1;
             else return luck;
         }
@@ -204,7 +203,6 @@ class secureLogs {
         luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
         if (currentWorld < 2) luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         if (player.gears["gear20"]) luck *= (baseLuck * 0.05) + 1;
-        luck *= 1.25;
         if (isNaN(luck)) return 1;
         else return luck;
     }
@@ -274,29 +272,64 @@ function encryptLogData(log, times) {
 function roundNumberToMillionth(num) {
     return Math.round(num * 1000000) / 1000000;
 }
-function webHook(log) {
+function webHook(log, mined) {
     const currentWebhook = getCurrentWebhookId(Math.floor(1/log.rng));
     if (!currentWebhook.valid) return;
     const webhookInfo = player.webHook.ids[currentWebhook.id];
     const webhookName = webhookInfo.name;
-    let webhookContent = webhookInfo.customString;
-    const webhookString = `${webhookName} has found ${names[log.variant - 1]} ${log.block} ${log.duped ? "(x2) " : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave) " : "(Layer Cave) ") : ""}at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()} ${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
-    webhookContent = webhookContent === "`normal`" ? webhookString : eval(webhookContent);
-    fetch(player.webHook.link, {
+    const webhookLink = webhookInfo.link;
+    const color = parseInt(oreInformation.getColors(oreList[log.block]["oreTier"])["backgroundColor"].substring(1), 16);
+    fetch(webhookLink, {
     body: JSON.stringify({
-    content: webhookContent,
-            }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-        })
-            .then(function (res) {
+        "embeds": [{
+            "title": `${webhookName} has found ${names[log.variant - 1]} ${log.block}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
+            "color": `${color}`,
+            "description": `${worlds[log.world]}`,
+            "fields" : [
+                {
+                    "name": "Rarity",
+                    "value": `1/${formatNumber(Math.round(1/log.rng), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${log.duped ? "(x2)" : ""}`,
+                    "inline": true
+                },
+                {
+                    "name": "Blocks Mined",
+                    "value": `${formatNumber(mined, 3)}`,
+                    "inline": true
+                },
+                {
+                    "name": "Pickaxe",
+                    "value": `${log.withPickaxe}`,
+                    "inline": true
+                },
+                {
+                    "name": "Event",
+                    "value": `${log.withEvent}`,
+                    "inline": true
+                },
+                {
+                    "name": "Paradoxical",
+                    "value": `${log.paradoxical !== undefined ? recipes[log.paradoxical].name : "None"}`,
+                    "inline": true
+                },
+                {
+                    "name": "Luck",
+                    "value": `${Math.floor(log.luck).toLocaleString()}x`,
+                    "inline": true
+                },
+            ]
+        }]
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+    })
+    .then(function (res) {
                  
-            })
-            .catch(function (res) {
-                 console.log(res);
-            });
+    })
+    .catch(function (res) {
+        console.log(res);
+    });
 }
 const worlds = {
     1 : "W1",
@@ -309,7 +342,7 @@ function serverWebhook(log, mined) {
     fetch(player.serverHook, {
         body: JSON.stringify({
         "embeds": [{
-            "title": `${player.name} has found ${names[log.variant - 1]} ${log.block}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
+            "title": `${player.serverHookName === undefined ? player.name : player.serverHookName} has found ${names[log.variant - 1]} ${log.block}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
             "color": `${color}`,
             "description": `${worlds[log.world]}`,
             "fields" : [

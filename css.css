@@ -870,6 +870,110 @@ z-index: 20;
   justify-content: center;
   flex-wrap: wrap;
 }
+#serverHook {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#customHookContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2vw;
+}
+.webhookInfoInputSection {
+  width: 100%;
+  height: 3vw;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.webhookInputSection {
+  width: 100%;
+  height: 5vw;
+}
+.webhookInfoSection {
+  width: 15vw;
+  height: 100%;
+}
+.webhookInfo {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  font-size: 1vw;
+}
+.createButton {
+  border: 0.1vw solid white;
+  background-color: #6BC267;
+}
+.createButton:hover {
+  background-color: #6ad466;
+}
+#createdWebhooks {
+  width: 100%;
+  margin-top: 2vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.createdHookDisplay {
+  width: 100%;
+  height: 3vw;
+  margin-top: 0.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.createdHookInfo {
+  width: 20vw;
+  height: 3vw;
+  background-color: white;
+  border: 0.1vw solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1vw;
+}
+.deleteHookButton {
+  background-color: #FF3D3D;
+  font-size: 1.5vw;
+}
+.deleteHookButton:hover {
+  background-color: #ba0d0d;
+}
+#newHookCopyable {
+  display: none;
+}
+#createdHookCopyable {
+  display: none;
+}
+#createNewWebhook {
+  width: 4vw;
+  height: 4vw;
+  font-size: 1vw;
+  margin-top: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10vw;
+  background-color: #6BC267;
+}
+#createNewWebhook:hover {
+  background-color: #6ad466;
+}
+.createdWebhooksLabel {
+  width: 100%;
+  font-size: 2vw;
+  color: white;
+  font-weight: 1000;
+  margin-top: 1vw;
+}
 @keyframes invisible {
   0% {filter: opacity(100%);}
   5% {filter: opacity(80%);}
@@ -2829,4 +2933,29 @@ background-size: 100%;
 @keyframes rotatePortal {
   0% {transform: rotate(0deg);}
   0% {transform: rotate(360deg);}
+}
+#catStuff {
+  position: absolute;
+  width: 30vw;
+  height: 3vw;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  top: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  background-color: #212121;
+  display: none;
+  z-index: 99999999999;
+}
+#catSubmit {
+  width: 20%;
+  height: 100%;
+}
+#catText {
+  width: 80%;
+  height: 100%;
 }
