@@ -282,10 +282,18 @@ function webHook(log, mined) {
     fetch(webhookLink, {
     body: JSON.stringify({
         "embeds": [{
-            "title": `${webhookName} has found ${names[log.variant - 1]} ${log.block}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
             "color": `${color}`,
-            "description": `${worlds[log.world]}`,
             "fields" : [
+                {
+                    "name": ` `,
+                    "value": `${webhookName} has found ${names[log.variant - 1]} ${log.block}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
+                    "inline": false
+                },
+                {
+                    "name": `${worlds[log.world]}`,
+                    "value": ` `,
+                    "inline": false
+                },
                 {
                     "name": "Rarity",
                     "value": `1/${formatNumber(Math.round(1/log.rng), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${log.duped ? "(x2)" : ""}`,
