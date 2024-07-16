@@ -433,6 +433,7 @@ function goDirection(direction, speed) {
             reps = 1;
             miningSpeed = 35;
         }
+        removeFromLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"]})
         let movements = {x:0, y:0, key:direction};
         movements.x = (direction === "a" ? -1 : (direction === "d" ? 1 : 0));
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
