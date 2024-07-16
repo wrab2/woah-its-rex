@@ -485,7 +485,7 @@ function calcSpeed() {
     if (currentWorld === 1.1) {
         const sr1Level = player.upgrades["pickaxe27"].level;
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1}
-        else return {speed: 7, reps: (-2 + sr1Level)}
+        else return {speed: 7, reps: (-2 + sr1Level), extra:0}
     }
     const extraSpeed = 0;
     //if (debug) return {speed: 0, reps: 100, extra:0}
