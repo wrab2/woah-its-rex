@@ -438,7 +438,6 @@ function goDirection(direction, speed) {
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
         miningSpeed ??= 25;
         loopTimer = setInterval(movePlayer, miningSpeed, movements, reps, "auto");
-        secondaryTimer = setInterval(movePlayer, 25, movements, 1, "auto");
         curDirection = direction;
         energySiphonerDirection = direction;
         updateDisplayTimer(true);
