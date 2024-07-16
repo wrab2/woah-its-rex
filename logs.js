@@ -127,10 +127,10 @@ class secureLogs {
                             this.#verifiedLogs["All"].splice(i, 1);
                         } else {
                             if (log.caveInfo[0]) this.#verifiedLogs["Cave"].push(log);
-                            if (log.variant === "Normal") this.#verifiedLogs["Normal"].push(log);
-                            else if (log.variant === "Electrified") this.#verifiedLogs["Electrified"].push(log);
-                            else if (log.variant === "Radioactive") this.#verifiedLogs["Radioactive"].push(log);
-                            else if (log.variant === "Explosive") this.#verifiedLogs["Explosive"].push(log);
+                            if (log.variant === 1) this.#verifiedLogs["Normal"].push(log);
+                            else if (log.variant === 2) this.#verifiedLogs["Electrified"].push(log);
+                            else if (log.variant === 3) this.#verifiedLogs["Radioactive"].push(log);
+                            else if (log.variant === 4) this.#verifiedLogs["Explosive"].push(log);
                         }
                         verified = true;
                         break;
