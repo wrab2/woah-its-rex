@@ -150,7 +150,7 @@ let mainProbabilityTable;
 let mainGenerationTable;
 let lunaY = 1;
 const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠";
-function generateBlock(location) {
+const generateBlock = function(location) {
     blocksRevealedThisReset++;
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;

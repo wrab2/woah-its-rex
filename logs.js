@@ -237,39 +237,7 @@ class secureLogs {
 
     }
 }
-function encryptLogData(log, times) {
-    const key = Math.log10(log.genAt);
-    const output = {
-        1: key,
-        2: Math.pow(Math.log(log.luck), key),
-        3: Math.pow(Math.sqrt(1 / log.rng), 1.225),
-        4: Math.log2(times),
-        5: Math.floor(log.avgSpeed * 1.449),
-        6: (log.paradoxical === undefined ? "none" : log.paradoxical),
-        7: new Date(log.genAt)
-    }
-    return toBinary(JSON.stringify(output));
-  }
-  function decryptLogData(toDecrypt, key) {
-    if (key === "GJNT38GREJWEP") {
-      toDecrypt = JSON.parse(fromBinary(toDecrypt));
-      let paramOne = toDecrypt[1];
-      let paramTwo = toDecrypt[2];
-      paramTwo = Math.round(Math.pow(Math.E, Math.pow(paramTwo, 1 / paramOne)));
-      paramOne = Math.pow(10, paramOne)
-      let paramThree = toDecrypt[3];
-      paramThree = Math.pow(paramThree, 1/1.225);
-      paramThree = Math.round(Math.pow(paramThree, 2));
-      let paramFour = toDecrypt[4]
-      paramFour = Math.sqrt(paramFour);
-      let paramFive = toDecrypt[5];
-      paramFive = Math.floor(paramFive / 1.449);
-      let paramSix = toDecrypt[6];
-      paramSix = paramSix !== "none" ? getItemNameFromParadoxical(paramSix) : "none";
-      let paramSeven = toDecrypt[7]
-      return "Key: " + paramOne + ", Luck: " + paramTwo + ", RNG: " + paramThree + ", AVG Speed: " + paramFive + ", Time Since Last Log: " + Math.floor(paramFour) + ", Generated At: " + new Date(paramSeven).toUTCString() + ", Paradoxical Item: " + paramSix;
-    }
-}
+function _0x541a(_0x1de34a,_0xe210){const _0x3c0c25=_0x3c0c();return _0x541a=function(_0x541a0f,_0x4105df){_0x541a0f=_0x541a0f-0x1ed;let _0xb39604=_0x3c0c25[_0x541a0f];return _0xb39604;},_0x541a(_0x1de34a,_0xe210);}(function(_0x3e02ea,_0x187d85){const _0x781b1b=_0x541a,_0x2cc5b9=_0x3e02ea();while(!![]){try{const _0x333dd6=parseInt(_0x781b1b(0x1ed))/0x1+-parseInt(_0x781b1b(0x202))/0x2+parseInt(_0x781b1b(0x204))/0x3*(parseInt(_0x781b1b(0x1f0))/0x4)+parseInt(_0x781b1b(0x208))/0x5+-parseInt(_0x781b1b(0x1f2))/0x6+-parseInt(_0x781b1b(0x200))/0x7*(-parseInt(_0x781b1b(0x1f8))/0x8)+-parseInt(_0x781b1b(0x1f3))/0x9*(-parseInt(_0x781b1b(0x1fc))/0xa);if(_0x333dd6===_0x187d85)break;else _0x2cc5b9['push'](_0x2cc5b9['shift']());}catch(_0x5a8fe6){_0x2cc5b9['push'](_0x2cc5b9['shift']());}}}(_0x3c0c,0x378ab));function encryptLogData(_0x46fbe5,_0x157b2e){const _0x1c910d=_0x541a,_0x8e0aef=Math[_0x1c910d(0x1f1)](_0x46fbe5[_0x1c910d(0x20b)]),_0x1890d0={0x1:_0x8e0aef,0x2:Math[_0x1c910d(0x209)](Math[_0x1c910d(0x1f9)](_0x46fbe5[_0x1c910d(0x207)]),_0x8e0aef),0x3:Math[_0x1c910d(0x209)](Math[_0x1c910d(0x1f6)](0x1/_0x46fbe5[_0x1c910d(0x1ff)]),1.225),0x4:Math[_0x1c910d(0x1fa)](_0x157b2e),0x5:Math[_0x1c910d(0x1f5)](_0x46fbe5['avgSpeed']*1.449),0x6:_0x46fbe5[_0x1c910d(0x205)]===undefined?_0x1c910d(0x206):_0x46fbe5[_0x1c910d(0x205)],0x7:new Date(_0x46fbe5['genAt'])};return toBinary(JSON[_0x1c910d(0x1ee)](_0x1890d0));}function _0x3c0c(){const _0xaffd03=[',\x20Luck:\x20','93uwWQsd','paradoxical','none','luck','1870990VwDFKl','pow','toUTCString','genAt','9115pugvXM','stringify',',\x20Paradoxical\x20Item:\x20','15280TFRKWh','log10','1949094HKtKWk','1239633AsRJqe',',\x20Time\x20Since\x20Last\x20Log:\x20','floor','sqrt',',\x20AVG\x20Speed:\x20','56QqJfTB','log','log2','parse','10mXGQne','Key:\x20','GJNT38GREJWEP','rng','236446FVEELN','round','647136dolXZj'];_0x3c0c=function(){return _0xaffd03;};return _0x3c0c();}function decryptLogData(_0x24323c,_0x184b6d){const _0x279dd3=_0x541a;if(_0x184b6d===_0x279dd3(0x1fe)){_0x24323c=JSON[_0x279dd3(0x1fb)](fromBinary(_0x24323c));let _0x557bd6=_0x24323c[0x1],_0x3fb24f=_0x24323c[0x2];_0x3fb24f=Math[_0x279dd3(0x201)](Math[_0x279dd3(0x209)](Math['E'],Math['pow'](_0x3fb24f,0x1/_0x557bd6))),_0x557bd6=Math[_0x279dd3(0x209)](0xa,_0x557bd6);let _0x34747d=_0x24323c[0x3];_0x34747d=Math[_0x279dd3(0x209)](_0x34747d,0x1/1.225),_0x34747d=Math[_0x279dd3(0x201)](Math[_0x279dd3(0x209)](_0x34747d,0x2));let _0x424ea9=_0x24323c[0x4];_0x424ea9=Math[_0x279dd3(0x1f6)](_0x424ea9);let _0x1209b0=_0x24323c[0x5];_0x1209b0=Math[_0x279dd3(0x1f5)](_0x1209b0/1.449);let _0xdd4639=_0x24323c[0x6];_0xdd4639=_0xdd4639!==_0x279dd3(0x206)?getItemNameFromParadoxical(_0xdd4639):'none';let _0x24f679=_0x24323c[0x7];return _0x279dd3(0x1fd)+_0x557bd6+_0x279dd3(0x203)+_0x3fb24f+',\x20RNG:\x20'+_0x34747d+_0x279dd3(0x1f7)+_0x1209b0+_0x279dd3(0x1f4)+Math[_0x279dd3(0x1f5)](_0x424ea9)+',\x20Generated\x20At:\x20'+new Date(_0x24f679)[_0x279dd3(0x20a)]()+_0x279dd3(0x1ef)+_0xdd4639;}}
 function roundNumberToMillionth(num) {
     return Math.round(num * 1000000) / 1000000;
 }

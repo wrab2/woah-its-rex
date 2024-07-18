@@ -466,7 +466,7 @@ function speedFactorial(num) {
     if (num === 0) return 1;
     return num * speedFactorial(num-1);
 }
-function calcSpeed() {
+const calcSpeed = function() {
     let miningSpeed = baseSpeed;
     let reps = 1;
     if (currentWorld < 2 && player.gears["gear31"])
