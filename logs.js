@@ -30,6 +30,7 @@ class secureLogs {
         this.#onLoad()
     }
     createLog(r, c, intended, obj, fromCave) {
+        if (Math.random.toString() !== "function random() { [native code] }") {console.log("random edited"); return;}
         const ore = intended.ore === undefined ? intended : intended.ore;
         const variant = intended.variant === undefined ? undefined : intended.variant;
         fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
