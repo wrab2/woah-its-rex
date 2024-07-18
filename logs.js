@@ -72,7 +72,7 @@ class secureLogs {
             })
             Object.freeze(this.#spawnLogs[this.#spawnLogs.length - 1])
         } else {
-            console.log("failed to create, ", obj.stack, luck, maxLuck);
+            console.log("failed to create, ", obj.stack, luck);
         }
     }
     verifyLog(r, c) {
