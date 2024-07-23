@@ -150,7 +150,7 @@ let cat = 1;
 let mainProbabilityTable;
 let mainGenerationTable;
 let lunaY = 1;
-const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠God of The Mine";
+const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠godOfTheMine";
 const generateBlock = function(location) {
     blocksRevealedThisReset++;
     mainProbabilityTable = getLayer(location["Y"]);
@@ -224,7 +224,7 @@ const checkSpecials = function(block) {
     const originalBlock = block;
     let rand = 1000;
     if (block === "🔮") rand = 10000;
-    if (block === "God of The Mine") rand = 25;
+    if (block === "godOfTheMine") rand = 25;
     console.log(block, rand)
     if (Math.random() < 1/rand) {
         switch(block) {
@@ -299,7 +299,7 @@ const checkSpecials = function(block) {
             case "💠" :
             if (player.stats.currentPickaxe === "pickaxe4") block = "pixel";
             break;
-            case "God of The Mine" :
+            case "godOfTheMine" :
                 if (player.stats.currentPickaxe === "pickaxe31") block = "Omnipotent God of The Mine";
                 break;
         }
