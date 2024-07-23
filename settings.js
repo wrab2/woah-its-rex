@@ -386,25 +386,25 @@ function switchLayerIndex(num, overrideLayer, world) {
         layerToIndex = overrideLayer;
     }
     
-    if (layerToIndex === "sillyLayer") if (oreList["🎂"]["normalAmt"] < 1000000) {
+    if (layerToIndex === "sillyLayer") if (playerInventory["🎂"]["normalAmt"] < 1000000) {
         if (num === undefined) return; else {
             switchLayerIndex(num);
             return;
         }
     }
-    if (layerToIndex === "borderLayer") if (oreList["❌"]["normalAmt"] < 1000000) {
+    if (layerToIndex === "borderLayer") if (playerInventory["❌"]["normalAmt"] < 1000000) {
         if (num === undefined) return; else {
             switchLayerIndex(num);
             return;
         }
     }
-    if (layerToIndex === "fluteLayer") if (oreList["🪈"]["normalAmt"] < 1000000) {
+    if (layerToIndex === "fluteLayer") if (playerInventory["🪈"]["normalAmt"] < 1000000) {
         if (num === undefined) return; else {
             switchLayerIndex(num);
             return;
         }
     }
-    if (layerToIndex === "grassLayer") if (oreList["🟩"]["normalAmt"] < 1000000) {
+    if (layerToIndex === "grassLayer") if (playerInventory["🟩"]["normalAmt"] < 1000000) {
         if (num === undefined) return; else {
             switchLayerIndex(num);
             return;
@@ -559,13 +559,13 @@ function formatEventMonths(arr) {
 }
 function addIndexColors(element, blackOut, property) {
     let colors = oreInformation.getColors(oreList[property]["oreTier"]);
-    if (oreList[property]["explosiveAmt"]) {
+    if (playerInventory[property]["explosiveAmt"]) {
         element.style.backgroundImage = "linear-gradient(to bottom right, black 5%, " + colors["backgroundColor"] + " 30%, 70%, black 95%), linear-gradient(to bottom right, #c91800, #ff722b, #383838)"
-    } else if (oreList[property]["radioactiveAmt"]) {
+    } else if (playerInventory[property]["radioactiveAmt"]) {
         element.style.backgroundImage = "linear-gradient(to bottom right, black 5%, " + colors["backgroundColor"] + " 30%, 70%, black 95%), linear-gradient(to bottom right, #062404, #c9fc3a, #062404)"
-    } else if (oreList[property]["electrifiedAmt"]) {
+    } else if (playerInventory[property]["electrifiedAmt"]) {
         element.style.backgroundImage = "linear-gradient(to bottom right, black 5%, " + colors["backgroundColor"] + " 30%, 70%, black 95%), linear-gradient(to bottom right, #f7f368, #ffc629, #e365fc)"
-    } else if (oreList[property]["normalAmt"]) {
+    } else if (playerInventory[property]["normalAmt"]) {
         element.style.backgroundImage = "linear-gradient(to bottom right, black 5%, " + colors["backgroundColor"] + " 30%, 70%, black 95%), linear-gradient(to top right, #6BC267 20%, black, #6BC267 80%)"
     } else {
         element.style.backgroundImage = "linear-gradient(to bottom right, black 5%, " + colors["backgroundColor"] + " 30%, 70%, black 95%), linear-gradient(to top right, #FF3D3D 20%, black, #FF3D3D 80%)"
@@ -643,16 +643,16 @@ function randomFunction(ore, cause) {
 }
 
 function indexHasOre(ore) {
-    return (oreList[ore]["normalAmt"] || oreList[ore]["electrifiedAmt"] || oreList[ore]["radioactiveAmt"] || oreList[ore]["explosiveAmt"]);
+    return (playerInventory[ore]["normalAmt"] || playerInventory[ore]["electrifiedAmt"] || playerInventory[ore]["radioactiveAmt"] || playerInventory[ore]["explosiveAmt"]);
 }
 function indexVariants(ore) { 
     let imageOutput = "";
     let isImage = false;
     if (oreList[ore]["hasImage"]) {
-        imageOutput = `<span class="${oreList[ore]["normalAmt"] ? "" : "blackoutImage"}"><img src="${oreList[ore]["src"]}" class="indexImageVariant"></img></span>`
+        imageOutput = `<span class="${playerInventory[ore]["normalAmt"] ? "" : "blackoutImage"}"><img src="${oreList[ore]["src"]}" class="indexImageVariant"></img></span>`
         isImage = true;
     }
-    return "" + (isImage ? imageOutput : (oreList[ore]["normalAmt"] ? ore : (`<span class='indexBlackout'>${ore}</span>`))) + (oreList[ore]["electrifiedAmt"] ? "⚡️" : "<span class='indexBlackout'>⚡️</span>") + (oreList[ore]["radioactiveAmt"] ? "☢️" : "<span class='indexBlackout'>☢️</span>") + (oreList[ore]["explosiveAmt"] ? "💥" : "<span class='indexBlackout'>💥</span>")
+    return "" + (isImage ? imageOutput : (playerInventory[ore]["normalAmt"] ? ore : (`<span class='indexBlackout'>${ore}</span>`))) + (playerInventory[ore]["electrifiedAmt"] ? "⚡️" : "<span class='indexBlackout'>⚡️</span>") + (playerInventory[ore]["radioactiveAmt"] ? "☢️" : "<span class='indexBlackout'>☢️</span>") + (playerInventory[ore]["explosiveAmt"] ? "💥" : "<span class='indexBlackout'>💥</span>")
 }
 function switchToIndex(button, num) {
     if (num === 0) {
@@ -756,8 +756,8 @@ function createStats() {
     for (let i = 0; i < ores.length; i++) {
         let amts = 0;
         for (let j = 0; j < variantInvNames.length; j++) {
-            totals[variantInvNames[j]] += oreList[ores[i]][variantInvNames[j]];
-            amts += oreList[ores[i]][variantInvNames[j]];
+            totals[variantInvNames[j]] += playerInventory[ores[i]][variantInvNames[j]];
+            amts += playerInventory[ores[i]][variantInvNames[j]];
         }
         completionAmt += amts > 0 ? 1 : 0;
     }
@@ -986,9 +986,9 @@ function convertVariants() {
         eventSpawn.play();
         hasConverted = true;
     }
-    if (oreList[obj["ore"]][name] >= obj["amt"]) {
-        oreList[obj["ore"]][name] -= obj["amt"];
-        oreList[obj["ore"]]["normalAmt"] += (obj["amt"] * amtToGive);
+    if (playerInventory[obj["ore"]][name] >= obj["amt"]) {
+        playerInventory[obj["ore"]][name] -= obj["amt"];
+        playerInventory[obj["ore"]]["normalAmt"] += (obj["amt"] * amtToGive);
         inventoryObj[obj["ore"]] = 0;
         document.getElementById("machineError").innerText = "Success!";
         document.getElementById("machineError").style.color = "green";
@@ -1055,7 +1055,7 @@ function goToConvert(ore, variant) {
     showMenuScreen("locations");
     showVariantConversion(true);
     document.getElementById("oreInput").value = ore;
-    document.getElementById("amtInput").value = oreList[ore][variantInvNames[variant - 1]];
+    document.getElementById("amtInput").value = playerInventory[ore][variantInvNames[variant - 1]];
     document.getElementsByClassName("potentialVariant")[variant - 2].click();
 }
 let inafk = false
@@ -1085,9 +1085,9 @@ function convertAllButOne() {
     let ore = document.getElementById("oreInput").value;
     ore = ore.replaceAll(" ", "");
     if (oreList[ore] !== undefined) {
-        const elecAmt = oreList[ore]["electrifiedAmt"] - 1;
-        const radiAmt = oreList[ore]["radioactiveAmt"] - 1;
-        const explAmt = oreList[ore]["explosiveAmt"] - 1;
+        const elecAmt = playerInventory[ore]["electrifiedAmt"] - 1;
+        const radiAmt = playerInventory[ore]["radioactiveAmt"] - 1;
+        const explAmt = playerInventory[ore]["explosiveAmt"] - 1;
         const uses = [false, false, false];
         const amts = [elecAmt, radiAmt, explAmt]
         if (elecAmt > 0) uses[0] = true;
@@ -1095,8 +1095,8 @@ function convertAllButOne() {
         if (explAmt > 0) uses[2] = true;
         for (let i = 1; i < 4; i++) {
             if (uses[i - 1]) {
-                oreList[ore][variantInvNames[i]] -= amts[i - 1];
-                oreList[ore]["normalAmt"] += (amts[i - 1] * conversionRates[i - 1])
+                playerInventory[ore][variantInvNames[i]] -= amts[i - 1];
+                playerInventory[ore]["normalAmt"] += (amts[i - 1] * conversionRates[i - 1])
             }
         }
         inventoryObj[ore] = 0;

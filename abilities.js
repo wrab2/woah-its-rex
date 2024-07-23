@@ -862,8 +862,6 @@ function pickaxeArrayLoop(array, x, y) {
         pickaxeAbilityMineBlock(array[i]["x"] + x, array[i]["y"] + y)
     }
 }
-
-
 function pickaxeAbilityMineBlock(x, y) {
     if (y > 0) {
         mine[y] ??= [];
@@ -872,4 +870,13 @@ function pickaxeAbilityMineBlock(x, y) {
         mineBlock(x, y, "ability"); 
     }
 }
-//GET THIS HELL SPAWN AWAY FROM ME PLEASE
+function increaseAbilitySize(array) {
+    const xOrigin = array[0].x;
+    const yOrigin = array[0].y
+    const finalList = [];
+    for (let i = 0; i < array.length; i++) finalList.push({x:array[i].x + incDistTo(xOrigin, array[i].x), y:array[i].y + incDistTo(yOrigin, array[i].y)},{x:array[i].x + incDistTo(xOrigin, array[i].x) + 1, y:array[i].y + incDistTo(yOrigin, array[i].y)},{x:array[i].x + incDistTo(xOrigin, array[i].x), y:array[i].y + incDistTo(yOrigin, array[i].y) + 1},{x:array[i].x + incDistTo(xOrigin, array[i].x) + 1, y:array[i].y + incDistTo(yOrigin, array[i].y) + 1})
+    return finalList;
+}
+function incDistTo(x, y) {
+    return y - x;
+}

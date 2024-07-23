@@ -99,57 +99,57 @@ const recipes = {
     },
     "pickaxe15" : {
         name : "Corundum Caver",
-        recipe : [{ore:"🚪", amt:400000},{ore:"🔁", amt:1800},{ore:"⬇️", amt:150},{ore:"⏫", amt:18},{ore:"▶️", amt:2},],
+        recipe : [{ore:"🚪", amt:400000},{ore:"🔁", amt:1800},{ore:"⬇️", amt:150},{ore:"⏫", amt:18},{ore:"▶️", amt:1},],
         upgrades : {}
     },
     "pickaxe16" : {
         name : "Starborne Slasher",
-        recipe : [{ore:"🌐", amt:1000000},{ore:"⤵️", amt:1900},{ore:"↪️", amt:960},{ore:"🔽", amt:100},{ore:"⏮️", amt:20},{ore:"📕", amt:1},],
+        recipe : [{ore:"🌐", amt:1000000},{ore:"⤵️", amt:1900},{ore:"↪️", amt:960},{ore:"🔽", amt:95},{ore:"⏮️", amt:15},{ore:"📕", amt:1},],
         upgrades : {}
     },
     "pickaxe17" : {
         name : "Nyabomb",
-        recipe : [{ore:"♟️", amt:3000000},{ore:"🔂", amt:28000},{ore:"⏺️", amt:75},{ore:"⏏️", amt:25},{ore:"📗", amt:5},{ore:"📘", amt:3},{ore:"✏️", amt:1},],
+        recipe : [{ore:"♟️", amt:3000000},{ore:"🔂", amt:16000},{ore:"⏺️", amt:40},{ore:"⏏️", amt:10},{ore:"📗", amt:5},{ore:"📘", amt:3},{ore:"✏️", amt:1},],
         upgrades : {}
     },
     "pickaxe18" : {
         name : "Lunar Lightsabre",
-        recipe : [{ore:"☁️", amt:7500000},{ore:"⬅️", amt:12800},{ore:"↖️", amt:2500},{ore:"➡️", amt:2250},{ore:"📙", amt:6},{ore:"🌧️", amt:2},{ore:"🌤️", amt:1},],
+        recipe : [{ore:"☁️", amt:7500000},{ore:"⬅️", amt:6000},{ore:"↖️", amt:1300},{ore:"➡️", amt:1150},{ore:"📙", amt:6},{ore:"🌧️", amt:2},{ore:"🌤️", amt:1},],
         upgrades : {}
     },
     "pickaxe19" : {
         name : "Gemstone Engraver",
-        recipe : [{ore:"♟️", amt:12500000},{ore:"⬆️", amt:19000},{ore:"◀️", amt:2400},{ore:"⏯️", amt:275},{ore:"⏸️", amt:240},{ore:"📗", amt:15},{ore:"🧠", amt:2},{ore:"📐", amt:1},],
+        recipe : [{ore:"♟️", amt:12500000},{ore:"⬆️", amt:9750},{ore:"◀️", amt:1200},{ore:"⏯️", amt:275},{ore:"⏸️", amt:130},{ore:"📗", amt:15},{ore:"🧠", amt:2},{ore:"📐", amt:1},],
         upgrades : {}
     },
     "pickaxe20" : {
         name : "Gambler's Fallacy",
-        recipe : [{ore:"❌", amt:2000000},{ore:"📺", amt:35000000},{ore:"🔼", amt:6700},{ore:"⏪", amt:1950},{ore:"✴️", amt:3},{ore:"📙", amt:20},{ore:"🛡️", amt:20},{ore:"🪃", amt:10},{ore:"🪓", amt:3},],
+        recipe : [{ore:"❌", amt:2000000},{ore:"📺", amt:35000000},{ore:"🔼", amt:4850},{ore:"⏪", amt:1400},{ore:"✴️", amt:3},{ore:"📙", amt:20},{ore:"🛡️", amt:20},{ore:"🪃", amt:10},{ore:"🪓", amt:3},],
         upgrades : {}
     },
     "pickaxe21" : {
         name : "Exponential Centrifuge",
-        recipe : [{ore:"☁️", amt:37500000},{ore:"🚪", amt:37500000},{ore:"🔃", amt:2670000},{ore:"⏏️", amt:850},{ore:"📘", amt:50},{ore:"🔑", amt:20},{ore:"🌨️", amt:10},{ore:"🖇️", amt:10},{ore:"⛈️", amt:3},],
+        recipe : [{ore:"☁️", amt:37500000},{ore:"🚪", amt:37500000},{ore:"🔃", amt:2160000},{ore:"⏏️", amt:70},{ore:"📘", amt:50},{ore:"🔑", amt:20},{ore:"🌨️", amt:10},{ore:"🖇️", amt:10},{ore:"⛈️", amt:3},],
         upgrades : {}
     },
     "pickaxe22" : {
         name : "Singularity Slammer",
-        recipe : [{ore:"❌", amt:75000000},{ore:"📺", amt:100000000},{ore:"🔄", amt:2675000},{ore:"↪️", amt:310000},{ore:"⏬", amt:9000},{ore:"⏯️", amt:2400},{ore:"📗", amt:35},{ore:"📕", amt:30},{ore:"📙", amt:25},{ore:"📘", amt:20},{ore:"🛡️", amt:30},{ore:"🪃", amt:25},{ore:"🪓", amt:5},{ore:"🔕", amt:1},],
+        recipe : [{ore:"❌", amt:75000000},{ore:"📺", amt:100000000},{ore:"🔄", amt:2230000},{ore:"↪️", amt:260000},{ore:"⏬", amt:7800},{ore:"⏯️", amt:2100},{ore:"📗", amt:35},{ore:"📕", amt:30},{ore:"📙", amt:25},{ore:"📘", amt:20},{ore:"🛡️", amt:30},{ore:"🪃", amt:25},{ore:"🪓", amt:5},{ore:"🔕", amt:2},{ore:"🔨", amt:1}],
         upgrades : {}
     },
     "pickaxe23" : {
         name : "Staff of Binding",
-        recipe : [{ore:"🚪", amt:200000000},{ore:"↘️", amt:175000},{ore:"➡️", amt:85000},{ore:"🔽", amt:57000},{ore:"🔒", amt:125},{ore:"🔑", amt:100},{ore:"🖇️", amt:35},{ore:"🔏", amt:5},{ore:"⛓️", amt:4},],
+        recipe : [{ore:"🚪", amt:200000000},{ore:"↘️", amt:148000},{ore:"➡️", amt:73000},{ore:"🔽", amt:49000},{ore:"🔒", amt:125},{ore:"🔑", amt:100},{ore:"🖇️", amt:35},{ore:"🔏", amt:5},{ore:"⛓️", amt:4},],
         upgrades : {}
     },
     "pickaxe24" : {
         name : "SSS",
-        recipe : [{ore:"☁️", amt:625000000},{ore:"🔃", amt:18500000},{ore:"⤵️", amt:2800000},{ore:"⏬", amt:33000},{ore:"⏺️", amt:21000},{ore:"📙", amt:7500},{ore:"📘", amt:6000},{ore:"🌨️", amt:300},{ore:"🪁", amt:200},{ore:"⛈️", amt:120},{ore:"🌩️", amt:45},{ore:"🪶", amt:4},],
+        recipe : [{ore:"☁️", amt:625000000},{ore:"🔃", amt:16175000},{ore:"⤵️", amt:2440000},{ore:"⏬", amt:28900},{ore:"⏺️", amt:18300},{ore:"📙", amt:7500},{ore:"📘", amt:6000},{ore:"🌨️", amt:300},{ore:"🪁", amt:200},{ore:"⛈️", amt:120},{ore:"🌩️", amt:45},{ore:"🪶", amt:4},],
         upgrades : {}
     },
     "pickaxe25" : {
         name : "Coronary Catastrophe",
-        recipe : [{ore:"🌐", amt:1500000000},{ore:"🔂", amt:30000000},{ore:"⬇️", amt:1700000},{ore:"◀️", amt:250000},{ore:"⏫", amt:200000},{ore:"🖱️", amt:2300},{ore:"💔", amt:200},{ore:"🔪", amt:50},{ore:"🧂", amt:20},{ore:"📽️", amt:10},{ore:"💘", amt:1},],
+        recipe : [{ore:"🌐", amt:1500000000},{ore:"🔂", amt:17825000},{ore:"⬇️", amt:1480000},{ore:"◀️", amt:220000},{ore:"⏫", amt:178000},{ore:"🖱️", amt:2300},{ore:"💔", amt:200},{ore:"🔪", amt:50},{ore:"🧂", amt:20},{ore:"📽️", amt:10},{ore:"💘", amt:1},],
         upgrades : {}
     },
     "pickaxe26" : {
@@ -219,57 +219,57 @@ const recipes = {
     },
     "gear10" : {
         name : "Logical Randomiser",
-        recipe : [{ore:"🌐", amt:2500000},{ore:"🔄", amt:28000},{ore:"🔀", amt:10000},{ore:"💻", amt:1},],
+        recipe : [{ore:"🌐", amt:2500000},{ore:"🔄", amt:18500},{ore:"🔀", amt:6500},{ore:"➡️", amt:325},{ore:"⏫", amt:130},{ore:"⏏️", amt:10},{ore:"📕", amt:10},{ore:"📙", amt:10},{ore:"💻", amt:1},],
         upgrades : {}
     },
     "gear11" : {
         name : "Storm Sneakers",
-        recipe : [{ore:"☁️", amt:7500000},{ore:"📗", amt:15},{ore:"📘", amt:10},{ore:"🌧️", amt:4},{ore:"🌨️", amt:1},],
+        recipe : [{ore:"☁️", amt:5500000},{ore:"🔁", amt:25000},{ore:"↘️", amt:1750},{ore:"⏪", amt:140},{ore:"⏯️", amt:50},{ore:"📗", amt:30},{ore:"📘", amt:20},{ore:"🌧️", amt:3},{ore:"🌥️", amt:1},],
         upgrades : {}
     },
     "gear12" : {
         name : "Artifice Annihilator",
-        recipe : [{ore:"🚪", amt:8750000},{ore:"⏪", amt:625},{ore:"⏏️", amt:125},{ore:"🔒", amt:8},{ore:"🔑", amt:5},{ore:"🖇️", amt:2},],
+        recipe : [{ore:"🚪", amt:8750000},{ore:"⤴️", amt:17500},{ore:"⬅️", amt:10000},{ore:"⏬", amt:350},{ore:"⏏️", amt:45},{ore:"🔒", amt:4},{ore:"🔑", amt:3},{ore:"🖇️", amt:1},],
         upgrades : {}
     },
     "gear13" : {
         name : "Repurposed Replicator",
-        recipe : [{ore:"🌐", amt:15000000},{ore:"🔃", amt:675000},{ore:"⤴️", amt:67500},{ore:"➡️", amt:6750},{ore:"⏺️", amt:675},{ore:"💻", amt:15},{ore:"🖱️", amt:5},],
+        recipe : [{ore:"🌐", amt:15000000},{ore:"🔃", amt:317500},{ore:"⤴️", amt:15000},{ore:"➡️", amt:2925},{ore:"⏺️", amt:325},{ore:"💻", amt:15},{ore:"🖱️", amt:5},],
         upgrades : {}
     },
     "gear14" : {
         name : "Cavern Capacitator",
-        recipe : [{ore:"♟️", amt:22500000},{ore:"🔂", amt:450000},{ore:"↩️", amt:90000},{ore:"▶️", amt:450},{ore:"✏️", amt:15},{ore:"🧠", amt:6},{ore:"📖", amt:5},{ore:"📐", amt:4},{ore:"📚", amt:2},],
+        recipe : [{ore:"♟️", amt:22500000},{ore:"🔂", amt:280000},{ore:"↩️", amt:57500},{ore:"▶️", amt:450},{ore:"✏️", amt:10},{ore:"🧠", amt:6},{ore:"📖", amt:5},{ore:"📐", amt:2},{ore:"📚", amt:2},],
         upgrades : {}
     },
     "gear15" : {
         name : "High Powered Vacuum",
-        recipe : [{ore:"☁️", amt:20000000},{ore:"📺", amt:60000000},{ore:"🚪", amt:20000000},{ore:"🌐", amt:20000000},{ore:"♟️", amt:20000000},{ore:"◀️", amt:12625},{ore:"⏺️", amt:1400},{ore:"📗", amt:60},{ore:"📕", amt:50},{ore:"📙", amt:40},{ore:"📘", amt:30},{ore:"🛡️", amt:15},],
+        recipe : [{ore:"☁️", amt:6000000},{ore:"📺", amt:6000000},{ore:"🚪", amt:6000000},{ore:"🌐", amt:6000000},{ore:"♟️", amt:6000000},{ore:"🔄", amt:690000},{ore:"⬆️", amt:49750},{ore:"◀️", amt:6200},{ore:"⏺️", amt:1400},{ore:"📗", amt:60},{ore:"📕", amt:50},{ore:"📙", amt:40},{ore:"📘", amt:30},{ore:"🛡️", amt:15},],
         upgrades : {}
     },
     "gear16" : {
         name : "Unlocked Speedcap",
-        recipe : [{ore:"🌐", amt:45000000},{ore:"➡️", amt:27500},{ore:"⏩", amt:5000},{ore:"⏭️", amt:3800},{ore:"▶️", amt:920},{ore:"🖱️", amt:30},{ore:"🍆", amt:3},{ore:"💔", amt:1},],
+        recipe : [{ore:"🌐", amt:60000000},{ore:"➡️", amt:19650},{ore:"⏩", amt:3250},{ore:"⏭️", amt:2500},{ore:"▶️", amt:915},{ore:"🖱️", amt:30},{ore:"🍆", amt:5},{ore:"💔", amt:2},],
         upgrades : {}
     },
     "gear17" : {
         name : "Infinity Collector II",
-        recipe : [{ore:"♟️", amt:87500000},{ore:"🔼", amt:30000},{ore:"✏️", amt:50},{ore:"🧠", amt:35},{ore:"📖", amt:30},{ore:"📐", amt:15},{ore:"📚", amt:10},{ore:"🖊️", amt:3},],
+        recipe : [{ore:"♟️", amt:100000000},{ore:"⤵️", amt:530000},{ore:"🔽", amt:26500},{ore:"🔼", amt:23000},{ore:"⏸️", amt:2000},{ore:"✏️", amt:70},{ore:"🧠", amt:35},{ore:"📖", amt:35},{ore:"📐", amt:15},{ore:"📚", amt:10},{ore:"🖊️", amt:3}],
         upgrades : {}
     },
     "gear18" : {
         name : "Clover's Undoing",
-        recipe : [{ore:"📺", amt:250000000},{ore:"🔀", amt:2000000},{ore:"⬅️", amt:580000},{ore:"⏩", amt:9500},{ore:"⏮️", amt:13500},{ore:"⏸️", amt:5000},{ore:"🛡️", amt:250},{ore:"🪃", amt:200},{ore:"🪓", amt:30},{ore:"🔨", amt:5},{ore:"💣", amt:3},],
+        recipe : [{ore:"📺", amt:250000000},{ore:"🔀", amt:1650000},{ore:"⬅️", amt:470000},{ore:"⏩", amt:8750},{ore:"⏮️", amt:11225},{ore:"⏸️", amt:2200},{ore:"🛡️", amt:275},{ore:"🪃", amt:235},{ore:"🪓", amt:35},{ore:"🔨", amt:5},{ore:"💣", amt:3},],
         upgrades : {}
     },
     "gear19" : {
         name : "Structural Service",
-        recipe : [{ore:"🚪", amt:1500000000},{ore:"⤴️", amt:2700000},{ore:"↪️", amt:1850000},{ore:"⏪", amt:45000},{ore:"⏯️", amt:15000},{ore:"🔒", amt:4200},{ore:"🖇️", amt:1300},{ore:"⛓️", amt:100},{ore:"🚧", amt:30},{ore:"🛎️", amt:5},],
+        recipe : [{ore:"🚪", amt:1500000000},{ore:"⤴️", amt:3400000},{ore:"↪️", amt:2300000},{ore:"⏪", amt:57000},{ore:"⏯️", amt:19500},{ore:"🔒", amt:4200},{ore:"🖇️", amt:1300},{ore:"⛓️", amt:100},{ore:"🚧", amt:30},{ore:"🛎️", amt:5},],
         upgrades : {}
     },
     "gear20" : {
         name : "Statistical Amplifier",
-        recipe : [{ore:"♟️", amt:4500000000},{ore:"↩️", amt:4500000},{ore:"⬆️", amt:2300000},{ore:"↖️", amt:640000},{ore:"⏭️", amt:60000},{ore:"✏️", amt:10000},{ore:"📐", amt:3000},{ore:"🔎", amt:150},{ore:"📌", amt:75},{ore:"📍", amt:15},{ore:"🎓", amt:9},],
+        recipe : [{ore:"♟️", amt:4500000000},{ore:"↩️", amt:9000000},{ore:"⬆️", amt:4450000},{ore:"↖️", amt:1250000},{ore:"⏭️", amt:120000},{ore:"✏️", amt:10000},{ore:"📐", amt:3000},{ore:"🔎", amt:150},{ore:"📌", amt:75},{ore:"📍", amt:15},{ore:"🎓", amt:9}],
         upgrades : {}
     },
     "gear21" : {
@@ -325,6 +325,16 @@ const recipes = {
     "gear31" : {  
         name : "Makeshift Accelerator",
         recipe : [{ore:"☢️", amt:600000},{ore:"🔵", amt:9000},{ore:"🟨", amt:10},{ore:"🔘", amt:3},{ore:"🔸", amt:2},{ore:"💙", amt:5},{ore:"❤️", amt:4}],
+        upgrades: {}
+    },
+    "gear32" : {  
+        name : "Quantum Entangler",
+        recipe : [{ore:"📺", amt:750000},{ore:"🔃", amt:7500},{ore:"🔂", amt:3000},{ore:"⤵️", amt:1000},{ore:"🔽", amt:50},{ore:"📗", amt:25},{ore:"📘", amt:10}],
+        upgrades: {}
+    },
+    "gear33" : {  
+        name : "Subatomic Superpositioner",
+        recipe : [{ore:"🚪", amt:45000000},{ore:"🔁", amt:25000},{ore:"⬅️", amt:4400},{ore:"🔼", amt:440},{ore:"⏺️", amt:75},{ore:"🔒", amt:4},{ore:"🔑", amt:2}],
         upgrades: {}
     },
 }
@@ -385,7 +395,7 @@ function updateActiveRecipe() {
                 if (oreList[ore] !== undefined) {
                     totalCount++;
                     let needed = recipe[i].amt;
-                    let amtOwned = oreList[ore]["normalAmt"];
+                    let amtOwned = playerInventory[ore]["normalAmt"];
                     totalRarity += oreList[ore]["numRarity"] * needed;
                     if (oreList[ore]["hasImage"]) {
                         toChange.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned.toLocaleString()}/${needed.toLocaleString()}</span>`
@@ -458,7 +468,7 @@ function createPickaxeRecipes() {
             for (let i = 0; i < recipe.length; i++) {
                 const ore = recipe[i].ore;
                 const amtNeeded = recipe[i].amt;
-                const amtHave = oreList[ore]["normalAmt"];
+                const amtHave = playerInventory[ore]["normalAmt"];
                 const recipeElement = document.createElement('p');
                 recipeElement.id = `${property}Display`;
                 recipeElement.classList = `recipeOreDisplay`;
@@ -555,6 +565,8 @@ const buttonGradients = {
     "gear29Craft" : {"gradient" : "linear-gradient(to right, #2D3250, #424769, #7077A1, #424769, #2D3250","applied" : false},
     "gear30Craft" : {"gradient" : "linear-gradient(to right, #d20202, #d20202","applied" : false},
     "gear31Craft" : {"gradient" : "linear-gradient(to right, #5F9EA0, #5F9EA0","applied" : false},
+    "gear32Craft" : {"gradient" : "linear-gradient(to right, #854d89, #a9bf70, #8c4c4c","applied" : false},
+    "gear33Craft" : {"gradient" : "linear-gradient(to right, #350264, #303287, #000000, #226e8f, #15116d","applied" : false},
     
 }
 function craftPickaxe(item) {
@@ -570,13 +582,13 @@ function craftPickaxe(item) {
         if (item === "pickaxe13" && !player.pickaxes["pickaxe9"]) return;
         for (let i = 0; i < recipe.length; i++) {
             const amtNeeded = recipe[i].amt;
-            const amtHave = oreList[recipe[i].ore]["normalAmt"];
+            const amtHave = playerInventory[recipe[i].ore]["normalAmt"];
             if (amtHave < amtNeeded) return;
         }
         for (let i = 0; i < recipe.length; i++) {
             const ore = recipe[i].ore;
             const amtNeeded = recipe[i].amt;
-            oreList[ore]["normalAmt"] -= amtNeeded;
+            playerInventory[ore]["normalAmt"] -= amtNeeded;
             inventoryObj[ore] = 0;
         }
         if (type === "pickaxe") player.pickaxes[item] = true;
@@ -619,7 +631,7 @@ const showOrders = {
     worldOnePickaxes : ["pickaxe1", "pickaxe2", "pickaxe3", "pickaxe29", "pickaxe30", "pickaxe28", "pickaxe4", "pickaxe5", "pickaxe6", "pickaxe7", "pickaxe8", "pickaxe9", "pickaxe10", "pickaxe11", "pickaxe12", "pickaxe13"],
     worldTwoPickaxes : ["pickaxe13", "pickaxe14", "pickaxe15", "pickaxe16", "pickaxe17", "pickaxe18", "pickaxe19", "pickaxe20", "pickaxe21", "pickaxe22", "pickaxe23", "pickaxe24", "pickaxe25", "pickaxe26"],
     worldOneGears : ["gear30", "gear31", "gear0", "gear1", "gear2", "gear7", "gear8", "gear3", "gear4", "gear5", "gear6", "gear9", "gear29"],
-    worldTwoGears : ["gear10", "gear11", "gear12", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "gear21"],
+    worldTwoGears : ["gear32", "gear10", "gear11", "gear12", "gear33", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "gear21"],
     srOnePickaxes : ["pickaxe27"],
     srOneGears : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     wwPickaxes: ["pickaxe31"],
@@ -864,9 +876,9 @@ function displayOreRecipe(id) {
             let element = document.createElement("p");
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
-            element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${oreList[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
+            element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${playerInventory[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
             element.classList = "recipeOreDisplay";
-            if (oreList[ore]["normalAmt"] >= amt)
+            if (playerInventory[ore]["normalAmt"] >= amt)
                 element.style.color = "#6BC267";
             else
                 element.style.color = "#FF3D3D";
@@ -904,9 +916,9 @@ function multiplyRecipe(amt) {
         let element = document.createElement("p");
         let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
         element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
-        element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${oreList[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
+        element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${playerInventory[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
         element.classList = "recipeOreDisplay";
-        if (oreList[ore]["normalAmt"] >= amt)
+        if (playerInventory[ore]["normalAmt"] >= amt)
             element.style.color = "#6BC267";
         else
             element.style.color = "#FF3D3D";
@@ -932,7 +944,7 @@ function craftOre(id) {
     for (let i = 0; i < recipe["cost"].length; i++) {
         let ore = recipe["cost"][i]["ore"];
         let amt = recipe["cost"][i]["amt"] * recipe["multiplier"];
-        if (oreList[ore]["normalAmt"] < amt) {
+        if (playerInventory[ore]["normalAmt"] < amt) {
             canCraft = false; 
             break;
         }
@@ -941,11 +953,11 @@ function craftOre(id) {
         for (let i = 0; i < recipe["cost"].length; i++) {
             let ore = recipe["cost"][i]["ore"];
             let amt = recipe["cost"][i]["amt"] * recipe["multiplier"];
-            oreList[ore]["normalAmt"] -= amt;
+            playerInventory[ore]["normalAmt"] -= amt;
             inventoryObj[ore] = 0;
         }
         for (let i = 0; i < recipe["result"].length; i++) {
-            oreList[recipe["result"][i]["ore"]]["normalAmt"] += (recipe["result"][i]["amt"] * recipe["multiplier"]);
+            playerInventory[recipe["result"][i]["ore"]]["normalAmt"] += (recipe["result"][i]["amt"] * recipe["multiplier"]);
             inventoryObj[recipe["result"][i]["ore"]] = 0;
             multiplyRecipe(oreRecipes[id]["multiplier"]);
         }
@@ -1073,7 +1085,7 @@ function displayUpgrade(id, location) {
     currentUpgrade.forEach(recipeElement => {
         ore = recipeElement.ore;
         needed = recipeElement.amt;
-        amt = oreList[ore]["normalAmt"];
+        amt = playerInventory[ore]["normalAmt"];
         totalNeed += oreList[ore]["numRarity"] * needed;
         totalHave += amt >= needed ? (oreList[ore]["numRarity"] * needed) : (oreList[ore]["numRarity"] * amt);
         totalCount++;
@@ -1111,12 +1123,12 @@ function craftUpgrade(id) {
     if (currentUpgrade === undefined) return;
     for (let i = 0; i < currentUpgrade.length; i++) {
         let recipeElement = currentUpgrade[i];
-        if (oreList[recipeElement.ore]["normalAmt"] < recipeElement.amt) return;
+        if (playerInventory[recipeElement.ore]["normalAmt"] < recipeElement.amt) return;
     }
     removeParadoxical();
     for (let i = 0; i < currentUpgrade.length; i++) {
         let recipeElement = currentUpgrade[i];
-        oreList[recipeElement.ore]["normalAmt"] -= recipeElement.amt;
+        playerInventory[recipeElement.ore]["normalAmt"] -= recipeElement.amt;
     }
     player.upgrades[id].level++;
     player.upgrades[id].bought++;
@@ -1464,7 +1476,7 @@ const pickaxeStats = {
     "pickaxe21": {
         mined: 1946,
         revealed: 4489,
-        luck: 1.5,
+        luck: 2,
         rate: 75,
         src: "⛏️",
         ability: "media/abilityImages/exponentialCentrifugeAbility.png",
@@ -1538,7 +1550,7 @@ const pickaxeStats = {
         rate: 500,
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
-        canSpawnCaves:[1.1],
+        canSpawnCaves:[1, 1.1],
         canMineIn:[1, 1.1],
     }, 
     "pickaxe31" : {
@@ -1591,7 +1603,7 @@ function ct() {
                 }
             }
             let needed = recipe[i].amt;
-            let have = oreList[ore]["normalAmt"];
+            let have = playerInventory[ore]["normalAmt"];
             have = have >= needed ? needed : have;
             needed -= have;
             const rarity = 1/oreList[ore]["decimalRarity"];

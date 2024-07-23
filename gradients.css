@@ -441,11 +441,29 @@
 }
 #underseaEviscerator span{
     background: linear-gradient(to right,#00FFFF, #00A36C, #5D3FD3, #CCCCFF, #FFBF00, #CD7F32, #C04000, #FAD5A5, #E4D00A, #FDDA0D);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#quantumEntangler span{
+    background: linear-gradient(to right, #854d89, #a9bf70, #8c4c4c);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#subatomicSuperpositioner span{
+    background: linear-gradient(to right,#350264, #303287, #000000, #226e8f, #15116d);
+    -webkit-background-clip: text;
+    color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 #text span{
     background: linear-gradient(to right,);
+    -webkit-background-clip: text;
+    color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }

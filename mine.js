@@ -101,12 +101,12 @@ function giveBlock(obj) {
     }
     const layerMaterial = getLayer(obj.y).layer.slice(-1);
     if (currentWorld < 2 && player.gears["gear4"]) {
-        oreList[layerMaterial]["normalAmt"]++;
+        playerInventory[layerMaterial]["normalAmt"]++;
     }
     if (oreRarity >= 750000) {
         let duped = false;
         if (obj.fromCave) {oreRarity *= obj.caveMulti;}
-        if (player.gears["gear22"] && Math.random() < 1/10) {oreList[obj.type][variantInvNames[inv - 1]]++; duped = true;}
+        if (player.gears["gear22"] && Math.random() < 1/10) {playerInventory[obj.type][variantInvNames[inv - 1]]++; duped = true;}
         if (currentWorld < 2 && player.gears["gear7"]) {gearAbility1();}
         if (messageIncluded(oreList[obj.type]["oreTier"])) {
             logFind(obj.type, obj.x, obj.y, namesemojis[inv - 1], player.stats.blocksMined, obj.fromReset, duped, {cave: obj.fromCave, multi: obj.caveMulti}); 
@@ -122,20 +122,21 @@ function giveBlock(obj) {
             verifiedOres.verifyFind(mine[obj.y][obj.x], obj.y, obj.x, names[inv - 1], duped);
         }
         if (Math.random() < 1/100000) {
-            oreList["bitcoin"]["normalAmt"]++;
+            playerInventory["bitcoin"]["normalAmt"]++;
             inventoryObj["bitcoin"] = 0;
         }
+        playerInventory[obj.type]["foundAt"] ??= Date.now();
     } else {
         if (oreRarity === 1) {
-            if (player.gears["gear15"] && Math.random() < 0.5) oreList[obj.type]["normalAmt"] += 2;
-            if (player.gears["gear26"] && Math.random() < 1/20) oreList[layerMaterial]["normalAmt"] += 30;
+            if (player.gears["gear15"] && Math.random() < 0.5) playerInventory[obj.type]["normalAmt"] += 2;
+            if (player.gears["gear26"] && Math.random() < 1/20) playerInventory[layerMaterial]["normalAmt"] += 30;
         } else {
             if (player.gears["gear13"] && Math.random < 0.75) {
-                oreList[obj.type]["normalAmt"]++;
+                playerInventory[obj.type]["normalAmt"]++;
             }
         }
     }
-    oreList[obj.type][variantInvNames[inv - 1]]++;
+    playerInventory[obj.type][variantInvNames[inv - 1]]++;
     inventoryObj[obj.type] = 0;
 }
 function rollVariant() {
@@ -149,7 +150,7 @@ let cat = 1;
 let mainProbabilityTable;
 let mainGenerationTable;
 let lunaY = 1;
-const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠";
+const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠God of The Mine";
 const generateBlock = function(location) {
     blocksRevealedThisReset++;
     mainProbabilityTable = getLayer(location["Y"]);
@@ -221,7 +222,11 @@ function addLuna(layer, probs) {
 }
 const checkSpecials = function(block) {
     const originalBlock = block;
-    if (Math.random() < 1/1000) {
+    let rand = 1000;
+    if (block === "🔮") rand = 10000;
+    if (block === "God of The Mine") rand = 25;
+    console.log(block, rand)
+    if (Math.random() < 1/rand) {
         switch(block) {
             case "💙" : 
             if (curDirection === "")
@@ -284,7 +289,7 @@ const checkSpecials = function(block) {
             block = "💧";
             break;
             case "🔮" :
-            if (Math.random() < 1/10 && curDirection === "") {
+            if (curDirection === "") {
                 block = "jellyfish";
             }
             break;
@@ -294,10 +299,12 @@ const checkSpecials = function(block) {
             case "💠" :
             if (player.stats.currentPickaxe === "pickaxe4") block = "pixel";
             break;
+            case "God of The Mine" :
+                if (player.stats.currentPickaxe === "pickaxe31") block = "Omnipotent God of The Mine";
+                break;
         }
     }
-    if (originalBlock !== block) oreList[block]["decimalRarity"] = (oreList[originalBlock]["decimalRarity"] / 1000);
-    if (block === "jellyfish") oreList[block]["decimalRarity"] /= 10;
+    if (originalBlock !== block) oreList[block]["decimalRarity"] = (oreList[originalBlock]["decimalRarity"] / rand);
     return block;
 }
 /*
@@ -364,10 +371,6 @@ async function teleport() {
     clearInterval(loopTimer);
     clearInterval(secondaryTimer);
     curDirection = "";
-    pa1 = [];
-    pa2 = [];
-    pa3 = [];
-    pa4 = [];
     pickaxeAbility23Num = 0;
     lastX = 0;
     movementsX = 0;
@@ -452,23 +455,11 @@ function switchWorld(to, skipAnim) {
     if (!skipAnim) get("blackScreen").style.animation = "fadeToBlack 2s linear 1";
     player.settings.lastWorld = to;
     const timeout = skipAnim ? 0 : 1000;
+    canMine = false;
     setTimeout(() => {
-        closeMenu();
-        canMine = false;
-        endEvent();
-        stopMining();
-        mine = [[]];
-        player.oreTracker.existingOres = [];
-        removeTrackerInformation();
-        m87 = 0;
-        m88 = 0;
-        currentLayerNum = -1;
+        resetForSwitch();
         if (currentWorld === 1.1) sr1Helper(false);
         currentWorld = to;
-        lastX = 0;
-        movementsX = 0;
-        blocksRevealedThisReset = 0;
-        lastXValues = [];
         if (currentWorld === 2) {
             distanceMulti = 1;
             y = 1000;
@@ -524,8 +515,6 @@ function switchWorld(to, skipAnim) {
         removeFromLayers({"ore":"🐰","layers":["paperLayer"]});
         if (currentWorld === 1.2) insertIntoLayers({"ore":"HD 160529","layers":["waterLayer"], "useLuck":true});
         else removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
-        a12 = 0;
-        a13 = false;
         verifiedOres.checkPickaxe();
         verifiedOres.checkCaves();
         document.getElementById("teleportButton").disabled = false;
@@ -536,6 +525,27 @@ function switchWorld(to, skipAnim) {
             get("blackScreen").style.animation = "";
         }, timeout);
     }, timeout);
+}
+function resetForSwitch() {
+    closeMenu();
+    endEvent();
+    stopMining();
+    mine = [[]];
+    player.oreTracker.existingOres = [];
+    removeTrackerInformation();
+    m87 = 0;
+    m88 = 0;
+    currentLayerNum = -1;
+    lastX = 0;
+    movementsX = 0;
+    blocksRevealedThisReset = 0;
+    lastXValues = [];
+    pa1 = [];
+    pa2 = [];
+    pa3 = [];
+    pa4 = [];
+    a12 = 0;
+    a13 = false;
 }
 function stopMining() {
     curDirection = "";
@@ -580,9 +590,9 @@ function removeParadoxical() {
             player.stats.currentPickaxe = player.powerupVariables.fakeEquipped.originalState;
             player.powerupVariables.fakeEquipped.item = undefined;
             player.powerupVariables.fakeEquipped.originalState = undefined;
-            utilitySwitchActions();
         }
         player.powerupVariables.fakeEquipped.removeAt = 0;
+        utilitySwitchActions();
     } else if (player.powerupVariables.fakeTreeLevel.level !== undefined) {
         player.upgrades["pickaxe27"].level = player.powerupVariables.fakeTreeLevel.originalState;
         player.powerupVariables.fakeTreeLevel.level = undefined;

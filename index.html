@@ -172,11 +172,13 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                     <button class="craftingButton" onclick="displayRecipe('gear6')" id="hasteIIBeacon"><span>Haste II Beacon</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear29')" id="abyssalLeaper"><span>Abyssal Leaper</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear9')" id="sillyRecipe" style="display: none;"><span>SILLYYYY</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear32')" style="display: none;" id="quantumEntangler"><span>Quantum Entangler</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear10')" style="display: none;" id="logicalRandomiser"><span>Logical Randomiser</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear11')" style="display: none;" id=stormSneakers><span>Storm Sneakers</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear12')" style="display: none;" id="artificeAnnihilator"><span>Artifice Annihilator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear13')" style="display: none;" id="repurposedReplicator"><span>Repurposed Replicator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear14')" style="display: none;" id="cavernCapacitator"><span>Cavern Capacitator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear33')" style="display: none;" id="subatomicSuperpositioner"><span>Subatomic Superpositioner</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear15')" style="display: none;" id="highPoweredVacuum"><span>High Powered Vacuum</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear16')" style="display: none;" id="unlockedSpeedcap"><span>Unlocked Speedcap</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear17')" style="display: none;" id="infinityCollector"><span>Infinity Collector II</span></button>
@@ -267,6 +269,8 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 <p class="itemDescription" id="gear29Description" style="display: none;">Skips over blank tiles while mining. Can skip up to 25 tiles at once. Will be disabled if holding shift while mining (sorry mobile players).</p>
                 <p class="itemDescription" id="gear30Description" style="display: none;">+0.3x Base Luck.</p>
                 <p class="itemDescription" id="gear31Description" style="display: none;">Sets mining speed delay to 20ms from 25ms.</p>
+                <p class="itemDescription" id="gear32Description" style="display: none;">Adds ~25 blocks per second to your speed.</p>
+                <p class="itemDescription" id="gear33Description" style="display: none;">Adds ~75 blocks per second to your speed.</p>
                 
             </div>
         </div>
@@ -1000,10 +1004,10 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             <span class="faqText">This setting allows you to change the speed at which the display will update when automining. (uses ms)</span><br>
 
                             <span class="faqSection">Stop On Rare</span>
-                            <span class="faqText">This setting is one of the more important ones, and will stop you mining if you spawn an ore of the specified tier. Click on the tier name to change what tier it will stop on. A list of all tiers can be found in the ore information section.</span><br>
+                            <span class="faqText">This setting is one of the more important ones, and will stop you mining if you spawn an ore of the specified tier. Click on tiers and select which tiers you would like to be automatically stopped on.</span><br>
 
                             <span class="faqSection">Minimum Spawn Message</span>
-                            <span class="faqText">This setting sets the minimum tier an ore has to be for it to generate a spawn message and appear in latest spawns and latest finds.</span><br>
+                            <span class="faqText">This setting sets the tiers an ore has to be for it to generate a spawn message and appear in latest spawns and latest finds.</span><br>
 
                             <span class="faqSection">Travel To Index On Click</span>
                             <span class="faqText">These settings allow you to specify if clicking an ore in a crafting recipe or in the normal inventory will open the index page for it.</span><br>
@@ -1135,15 +1139,15 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             <span class="faqText">Mud Sickle: 96 Mined, 156 revealed, 1.1x luck, 1/50 proc rate (3.5 cons)</span>
                             <span class="faqText">Dirt Ravager: 228 mined, 468 revealed, 1.1x luck, 1/100 proc rate (5.1 cons)</span>
                             <span class="faqText">Crystalline Excavator: 248 mined, 354 revealed, 1.275x luck, 1/60 proc rate (7.5 cons)</span>
-                            <span class="faqText">Ballast Breaker: 309 mined, 432 revealed, 1.2x luck, 1/50 proc rate (10.15)</span>
+                            <span class="faqText">Ballast Breaker: 309 mined, 432 revealed, 1.2x luck, 1/50 proc rate (10.15 cons)</span>
                             <span class="faqText">Tropical Carver: 378 mined, 510 revealed, 1.3x luck, 1/45 proc rate (14.7 cons)</span>
                             <span class="faqText">Void Crusher: 437 mined, 597 revealed, 1.25x luck, 1/35 proc rate (21.3 cons)</span>
                             <span class="faqText">Geode Staff: 604 mined, 796 revealed, 1.3x luck, 1/35 proc rate (29.5 cons)</span>
                             <span class="faqText">Earth Soiler: 822 mined, 1207 revealed, 1.3x luck, 1/40 proc rate (44 cons)</span>
                             <span class="faqText">Crypt Smasher: 1036 mined, 2731 revealed, 1.75x luck, 1/65 proc rate (73.5 cons)</span>
                             <span class="faqText">Labyrinthian Tide: 1264 mined, 2095 revealed, 3.75x luck, 1/60 proc rate (130.9 cons)</span>
-                            <span class="faqText">77 Leaf Destroyer: 1445 mined, 1665 revealed, 5x luck, 1/35 proc rate (237.8)</span>
-                            <span class="faqText">Planet Buster: 1989 mined, 2803 revealed, 7.5x luck, 1/50 proc rate (420.4)</span>
+                            <span class="faqText">77 Leaf Destroyer: 1445 mined, 1665 revealed, 5x luck, 1/35 proc rate (237.8 cons)</span>
+                            <span class="faqText">Planet Buster: 1989 mined, 2803 revealed, 7.5x luck, 1/50 proc rate (420.4 cons)</span>
                             <span class="faqText">Whirlpool of Fate: 2564 mined, 3288 revealed, 25x luck, 1/80 proc rate  (1027.5 cons)</span>
                             <span class="faqText">Wings of Glory: 7269 mined, 8025 revealed, 60x luck, 1/250 proc rate, 2 blocks/move (1920x2 cons)</span><br>
                             <span class="faqText">Extreme Echolocator: 40 mined, 51 revealed, 1.05x luck, 1/45 proc rate (1.19 cons)</span>
@@ -1153,7 +1157,7 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                             <span class="faqText">Lunar Lightsabre: 1005 mined, 1160 revealed, 1.5x luck, 1/150 proc rate (11.6 cons)</span>
                             <span class="faqText">Gemstone Engraver: 656 mined, 754 revealed, 2x luck, 1/60 proc rate (25.13 cons)</span>
                             <span class="faqText">Gambler's Fallacy: 1082 mined, 1343 revealed, 3x luck, 1/75 proc rate (53.72 cons)</span>
-                            <span class="faqText">Exponential Centrifuge: 1946 mined, 4489 revealed, 1.5x luck, 1/75 proc rate (89.78 cons)</span>
+                            <span class="faqText">Exponential Centrifuge: 1946 mined, 4489 revealed, 2x luck, 1/75 proc rate (119.7 cons)</span>
                             <span class="faqText">Singularity Slammer: 2498 mined, 5632 revealed, 4x luck, 1/120 proc rate (187 cons)</span>
                             <span class="faqText">Staff of Binding: 4518 mined, 6325 revealed, 8.25x luck, 1/150 proc rate (347.87 cons)</span>
                             <span class="faqText">Stormseer's Superspark Sceptre: 7964 mined, 9800 revealed, 12.5x luck, 1/175 proc rate (700 cons)</span>
@@ -1197,20 +1201,14 @@ Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
                 </form>
                 <button id="submitName" onclick="(player.name = get('enterName').value); showNextInQueue();">Confirm!</button>
             </div>
-            <div id="worldOneRevamp" class="dailyMessage">
+            <div id="worldTwoRevamp" class="dailyMessage">
                 <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
                 <p class="dailyText">
-                    - World One Revamp!!!<br>
-                    - 2 new early game pickaxes!<br>
-                    - 3 new World One gears!<br>
-                    - 15 new Commons in World One!<br>
-                    - Redid EVERY World One pickaxe ability!<br>
-                    - Redid all recipes in World One!<br>
-                    - Tried to fix ETA on recipes.<br>
-                    - Removed most ability descriptions in favor of images.<br>
-                    - WOG and Cavern Capacitator increase cave size!<br>
-                    - Bug Fixes!! YIPPEEEE!! :3<br>
-                    I'll be checking Galaxy chat, game comments, and my discord server a bunch for suggestions with the new progression as it is a work in progress as of right now.
+                    - World Two Revamp!!! (kinda)<br>
+                    - Balanced the commons (and some rares) for all World 2 craftables.<br>
+                    - 2 New World 2 gears.<br>
+                    - Bug Fixes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>
+                    - Let me know if progression needs any more tweaking and I'll try to make it better.
                 </p>
             </div>
             <div id="summerEvent" class="dailyMessage">

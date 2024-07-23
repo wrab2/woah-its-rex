@@ -120,7 +120,7 @@ class secureLogs {
                         log.mined = true;
                         if (log.variant === undefined) log.variant = variant;
                         if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
-                        if ((log.rng < 1/1000000000 || oreList[log.block]["oreTier"] === "Infinitesimal") && player.serverHook !== undefined) serverWebhook(log, player.stats.blocksMined);
+                        if (log.rng < 1/1000000000 && player.serverHook !== undefined) serverWebhook(log, player.stats.blocksMined);
                         const webhookString = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.duped ? "(x2) " : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()} ${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
                         log.output = webhookString;
                         this.#verifiedLogs["All"][i] = log;
@@ -336,7 +336,7 @@ function serverWebhook(log, mined) {
                 },
                 {
                     "name": "Pickaxe",
-                    "value": `${log.withPickaxe}`,
+                    "value": `${log.withPickaxe} ${log.withPickaxe === "The Tree of Life" ? `L${player.upgrades["pickaxe27"].level}` : ""}`,
                     "inline": true
                 },
                 {

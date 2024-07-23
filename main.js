@@ -46,6 +46,9 @@ let emojiNames;
 let messageElement;
 let eventElement;
 function init() {
+    for (let propertyName in oreList) {
+        playerInventory[propertyName] = {"normalAmt":0,"electrifiedAmt":0, "radioactiveAmt":0, "explosiveAmt":0, "foundAt": undefined}
+    }
     minedElement = document.getElementById("blocksMined");
     revealedElement = document.getElementById("resetNumber");
     locationElement = document.getElementById("location");
@@ -439,6 +442,9 @@ function goDirection(direction, speed) {
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
         miningSpeed ??= 25;
         loopTimer = setInterval(movePlayer, miningSpeed, movements, reps, "auto");
+        if (nums.extra > 0) {
+            secondaryTimer = setInterval(movePlayer, (Math.ceil(1000/nums.extra)), movements, 1, "auto");
+        }
         curDirection = direction;
         energySiphonerDirection = direction;
         updateDisplayTimer(true);
@@ -466,6 +472,7 @@ function speedFactorial(num) {
     if (num === 0) return 1;
     return num * speedFactorial(num-1);
 }
+
 const calcSpeed = function() {
     let miningSpeed = baseSpeed;
     let reps = 1;
@@ -482,13 +489,13 @@ const calcSpeed = function() {
     if (player.stats.currentPickaxe === "pickaxe12")
         reps++;
     reps += player.gears["gear19"] ? 10 : 0;
+    const extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
     if (currentWorld === 1.1) {
         const sr1Level = player.upgrades["pickaxe27"].level;
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:0}
         else return {speed: 7, reps: (-2 + sr1Level), extra:0}
     }
-    const extraSpeed = 0;
-    //if (debug) return {speed: 0, reps: 100, extra:0}
+    if (debug) return {speed: 5, reps: 100, extra:0}
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
 }
 function updateSpeed() {
@@ -613,7 +620,7 @@ function createInventory() {
         for (let k = 0; k < arr[j].length; k++) {
             let propertyName = arr[j][k];
             for (let i = 1; i < 5; i++) {
-                let oreNum = oreList[propertyName][variantInvNames[i - 1]];
+                let oreNum = playerInventory[propertyName][variantInvNames[i - 1]];
                 let tempElement = document.createElement('tr');
                 tempElement.classList = "oreDisplay";
                 if (i === 1) {
@@ -628,7 +635,7 @@ function createInventory() {
                 let oreNameBlock = document.createElement("td");
                 if (oreList[propertyName]["hasImage"]) {
                     const tier = oreList[propertyName]["oreTier"]
-                    if ((tier === "Infinitesimal" || tier === "Hyperdimensional") && oreList[propertyName]["hasImage"]) {
+                    if ((tier === "Infinitesimal" || tier === "Hyperdimensional" || oreList[propertyName]["numRarity"] >= 1000000000000000) && oreList[propertyName]["hasImage"]) {
                         oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
                     } else {
                         oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}"></img></span>`;
@@ -686,8 +693,8 @@ let displayTimer = null;
 function updateInventory() {
     for (let propertyName in inventoryObj) {
         for (let i = 1; i < 5; i++) {
-            oreList[propertyName][names[i - 1]].textContent = "x" + oreList[propertyName][variantInvNames[i - 1]].toLocaleString();
-            if (oreList[propertyName][variantInvNames[i - 1]] > 0) (oreList[propertyName][names[i - 1]].parentElement).style.display = "table";
+            oreList[propertyName][names[i - 1]].textContent = "x" + playerInventory[propertyName][variantInvNames[i - 1]].toLocaleString();
+            if (playerInventory[propertyName][variantInvNames[i - 1]] > 0) (oreList[propertyName][names[i - 1]].parentElement).style.display = "table";
             else (oreList[propertyName][names[i - 1]].parentElement).style.display = "none";
         }
     }
@@ -717,6 +724,7 @@ function updateInventory() {
     else if (currentWorld !== 1.1 && player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = "pickaxe0";
     updatePowerupCooldowns();
     updateDisplayedUpgrade();
+    displayNearbyCooldowns();
     if (player.gears["gear24"]) autoPowerups();
     player.stats.timePlayed += Date.now() - lastTime;
     lastTime = Date.now();
@@ -793,7 +801,7 @@ function spawnMessage(obj) {
     let blockOutput;
     let curTier = oreList[block]["oreTier"];
     if (oreList[block]["hasImage"]) {
-        if (curTier === "Hyperdimensional" || curTier === "Infinitesimal") {
+        if (curTier === "Hyperdimensional" || curTier === "Infinitesimal" || oreList[block]["numRarity"] >= 1000000000000000) {
             blockOutput = `<span class="latestImage"><img src="${oreList[block]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
             element.style.height = "2.5vw";
         } else {
@@ -930,7 +938,7 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     let blockOutput;
     let curTier = oreList[type]["oreTier"]
     if (oreList[type]["hasImage"]) {
-        if (curTier === "Hyperdimensional" || curTier === "Infinitesimal") {
+        if (curTier === "Hyperdimensional" || curTier === "Infinitesimal" || oreList[type]["numRarity"] >= 1000000000000000) {
             blockOutput = `<span class="latestImage"><img src="${oreList[type]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
             element.style.height = "2.5vw";
         } else {

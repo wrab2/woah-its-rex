@@ -33,6 +33,8 @@ class playerTemplate {
             "gear29": false,
             "gear30": false,
             "gear31": false,
+            "gear32": false,
+            "gear33": false,
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -252,7 +254,11 @@ const powerupList = {
         },
         getActiveFor: function() {
             if (player.powerupVariables.currentChosenOre.ore !== undefined) {
-                get("powerupInformation").innerHTML = `Boosted Ore:<br>${player.powerupVariables.currentChosenOre.ore}`;
+                let ore = player.powerupVariables.currentChosenOre.ore;
+                if (oreList[ore]["hasImage"]) {
+                    ore = `<span class="boostedOreHolder"><img src="${oreList[ore]["src"]}" class="boostedOreImage"></span>`;
+                }
+                get("powerupInformation").innerHTML = `Boosted Ore:<br>${ore}`;
             } else  get("powerupInformation").innerHTML = "";
             const beginTime = player.powerupCooldowns["powerup3"].cooldown - (player.gears["gear24"] ? 3000000 * 0.75 : 3000000);
             const endTime = player.powerupVariables.currentChosenOre.removeAt;
@@ -268,11 +274,11 @@ const powerupList = {
         cooldown: 1200000,
         gradient: "linear-gradient(to right, #FF0B0B, #FFEB00, #7AFF1F)",
         checkRequirements: function() {
-            if (oreList['🔘']['normalAmt'] >= 50) return true;
+            if (playerInventory['🔘']['normalAmt'] >= 50) return true;
             else return false;
         },
         displayProgress: function() {
-            return `${oreList['🔘']['normalAmt']}/50 🔘 Owned.`
+            return `${playerInventory['🔘']['normalAmt']}/50 🔘 Owned.`
         },
         getActiveFor: function() {
             get("powerupInformation").innerHTML = "";
@@ -346,12 +352,13 @@ function updatePowerupCooldowns() {
     get("powerupActive").textContent = activePercent > 0 ? `Active for ${msToTime(activeNumbers.progress)}` : "Not Active";
 }
 function checkPowerupConditions(powerup) {
-    if (player.powerupCooldowns[powerup].unlocked) get("powerupLock").style.display = "none";
+    const isCurrent = powerup === currentPowerupDisplayed;
+    if (player.powerupCooldowns[powerup].unlocked && isCurrent) get("powerupLock").style.display = "none";
     else {
         if (powerupList[powerup].checkRequirements()) {
             player.powerupCooldowns[powerup].unlocked = true;
-            switchPowerupDisplay(0);
-        } else {
+            if (isCurrent) switchPowerupDisplay(0);
+        } else if (isCurrent) {
             const lock = get("powerupLock")
             lock.style.display = "block";
             get("powerupRequirement").textContent = powerupList[powerup].displayProgress();
@@ -402,6 +409,10 @@ function applyNearbyData() {
     get("mainPowerupLabel").textContent = powerupOrder.indexOf(powerupLocations.middle) + 1;
     get("topPowerupLabel").textContent = powerupOrder.indexOf(powerupLocations.top) + 1;
     get("bottomPowerupLabel").textContent = powerupOrder.indexOf(powerupLocations.bottom) + 1;
+    displayNearbyCooldowns()
+}
+function displayNearbyCooldowns() {
+    const powerupLocations = getNearbyGradients();
     checkPowerupConditions(powerupLocations.top);
     checkPowerupConditions(powerupLocations.middle);
     checkPowerupConditions(powerupLocations.bottom);
@@ -467,7 +478,7 @@ function msToTime(milliseconds) {
 function countFlawlessOres() {
     const ores = oreInformation.getOresByTier("Flawless");
     let count = 0;
-    for (let i = 0; i < ores.length; i++) count += oreList[ores[i]]["normalAmt"], count += oreList[ores[i]]["electrifiedAmt"], count += oreList[ores[i]]["radioactiveAmt"], count += oreList[ores[i]]["explosiveAmt"];
+    for (let i = 0; i < ores.length; i++) count += playerInventory[ores[i]]["normalAmt"], count += playerInventory[ores[i]]["electrifiedAmt"], count += playerInventory[ores[i]]["radioactiveAmt"], count += playerInventory[ores[i]]["explosiveAmt"];
     return count;
 }
 function oldDataToNew(data) {
@@ -561,17 +572,18 @@ function loadNewData(data) {
         for (let propertyName in data.blocks) {
             if (oreList[propertyName] !== undefined) {
                 if (data.blocks[propertyName].normalAmt !== undefined) {
-                    oreList[propertyName]["normalAmt"] = data.blocks[propertyName].normalAmt;
-                    oreList[propertyName]["electrifiedAmt"] = data.blocks[propertyName].electrifiedAmt;
-                    oreList[propertyName]["radioactiveAmt"] = data.blocks[propertyName].radioactiveAmt;
-                    oreList[propertyName]["explosiveAmt"] = data.blocks[propertyName].explosiveAmt;
+                    playerInventory[propertyName]["normalAmt"] = data.blocks[propertyName].normalAmt;
+                    playerInventory[propertyName]["electrifiedAmt"] = data.blocks[propertyName].electrifiedAmt;
+                    playerInventory[propertyName]["radioactiveAmt"] = data.blocks[propertyName].radioactiveAmt;
+                    playerInventory[propertyName]["explosiveAmt"] = data.blocks[propertyName].explosiveAmt;
                     inventoryObj[propertyName] = 0;
                 } else if (data.blocks[propertyName].n !== undefined) {
-                    oreList[propertyName]["normalAmt"] = data.blocks[propertyName].n;
-                oreList[propertyName]["electrifiedAmt"] = data.blocks[propertyName].l;
-                oreList[propertyName]["radioactiveAmt"] = data.blocks[propertyName].r;
-                oreList[propertyName]["explosiveAmt"] = data.blocks[propertyName].e;
-                inventoryObj[propertyName] = 0;
+                    playerInventory[propertyName]["normalAmt"] = data.blocks[propertyName].n;
+                    playerInventory[propertyName]["electrifiedAmt"] = data.blocks[propertyName].l;
+                    playerInventory[propertyName]["radioactiveAmt"] = data.blocks[propertyName].r;
+                    playerInventory[propertyName]["explosiveAmt"] = data.blocks[propertyName].e;
+                    playerInventory[propertyName]["foundAt"] = data.blocks[propertyName].f;
+                    inventoryObj[propertyName] = 0;
                 }
                 
             }
@@ -789,15 +801,6 @@ const dailyMessages = {
     "chooseName" : {
         showUntil : "June 25, 9999",
     },
-    "portalUpdate" : {
-        showUntil : "June 25, 2024",
-    },
-    "trophyUpdate" : {
-        showUntil : "July 1, 2024",
-    },
-    "worldOneRevamp" : {
-        showUntil : "July 10, 2024",
-    },
     "summerEvent" : {
         showUntil : "August 30, 2024",
     },
@@ -806,7 +809,10 @@ const dailyMessages = {
     },
     "sr1Unlocked" : {
         showUntil : "June 25, 0000",
-    }
+    },
+    "worldTwoRevamp" : {
+        showUntil : "August 3, 2024",
+    },
 }
 function checkMessages(message) {
     if (message === "newPlayer" && player.faqOffered) return;
@@ -839,12 +845,13 @@ function displayMessage(id) {
 function saveNewData(obj) {
     try {
         let data = {blocks: {}, player: player};
-        for (let propertyName in oreList) {
-            data.blocks[propertyName] = {
-                n: oreList[propertyName]["normalAmt"],
-                l: oreList[propertyName]["electrifiedAmt"],
-                r: oreList[propertyName]["radioactiveAmt"],
-                e: oreList[propertyName]["explosiveAmt"]
+        for (let propertyName in playerInventory) {
+            if (indexHasOre(propertyName)) data.blocks[propertyName] = {
+                n: playerInventory[propertyName]["normalAmt"],
+                l: playerInventory[propertyName]["electrifiedAmt"],
+                r: playerInventory[propertyName]["radioactiveAmt"],
+                e: playerInventory[propertyName]["explosiveAmt"],
+                f: playerInventory[propertyName]["foundAt"]
             };
         }
         if (obj.override !== undefined) data.player = obj.override;
