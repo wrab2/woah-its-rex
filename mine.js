@@ -225,7 +225,6 @@ const checkSpecials = function(block) {
     let rand = 1000;
     if (block === "🔮") rand = 10000;
     if (block === "godOfTheMine") rand = 25;
-    console.log(block, rand)
     if (Math.random() < 1/rand) {
         switch(block) {
             case "💙" : 
