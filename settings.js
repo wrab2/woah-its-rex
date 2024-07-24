@@ -1,9 +1,3 @@
-/* Copyright (C) Amber Blessing - All Rights Reserved
- 
-Unauthorized copying of this file, via any medium is strictly prohibited
-Proprietary and confidential
-Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
-*/
 function toggleMenu() {
     const element = document.getElementById("menuHolder");
     element.style.display = element.style.display === "block" ? "none" : "block";

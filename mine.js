@@ -1,11 +1,3 @@
-/* Copyright (C) Amber Blessing - All Rights Reserved
- 
-Unauthorized copying of this file, via any medium is strictly prohibited
-Proprietary and confidential
-Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
-*/
-
-//MINE CREATION
 function createMine() {
     for (let r = curY - 101; r < curY + 101; r++) {
         if (r > -1)

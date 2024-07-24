@@ -1,12 +1,3 @@
-/* Copyright (C) Amber Blessing - All Rights Reserved
- 
-Unauthorized copying of this file, via any medium is strictly prohibited
-Proprietary and confidential
-Written by Amber Blessing <ambwuwu@gmail.com>, January 2024
-*/
-/*
-
- */
 const recipes = {
     "pickaxe0" : {
         name: "What do I even name pickaxe 0",
