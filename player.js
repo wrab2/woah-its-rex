@@ -845,8 +845,11 @@ const dailyMessages = {
         showUntil : "June 25, 0000",
     },
     "worldTwoRevamp" : {
-        showUntil : "August 3, 2024",
+        showUntil : "August 1, 2024",
     },
+    "simRng" : {
+        showUntil : "August 16, 2024",
+    }
 }
 function checkMessages(message) {
     if (message === "newPlayer" && player.faqOffered) return;
