@@ -150,6 +150,7 @@
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe26`)" id="nullChroma" style="display: none;"><span>N̴̡̠͍̰̓̀̉́͘͟͜͠͠͝uͧ̆̃͂̔̂͛̆̇ͫ̍̒̍͑̅̎̾͒҉̶̶̧̡̨͘͟͟͡͞͡͏̷̧͈̣̱͚̼̹̤̘̹l̷̷̸̴̨̡̢̜͈̭̰͕̪̯̭͓͓̲̱̹̥̜̝̩̝ͤ̀̕͝͠͠͝͠l̴͋̄̋͐ͪ̒ͦ̄̆̅̂̍͂ͧ͛ͮ̏̒̓ͨ̓͊̓̆ͤ̓̇̽̎͏̷͔̬̟̣͍̗̦̝̮̱̳̼͔̻̭͍̗̦͉̗̥͍͇̭̘͉̕͜͡ ̸̸̶̨̢̳̍̐̓ͪͥ̐͋̃̉͒̓̓̀̌͑̾ͩͯ͋ͦ͗ͮͯͪͥ̅͊ͩͣͨ̆̒̂̂̽̀̀͘͘͘͜͞͠C̵̵̷̸̸̵ͦ͒͆͡͞͡͏̶̵̡͔̙̱͢ḩ̸͙͙̼̖̥̦̻͈̖̫̖̯̣̣͍͎̖̹̜͇̯ͧͥ̎̒ͨ̎̓ͫ͛̅ͨͧͤͤͫ̊̓̈̒͐ͥ̎̓ͤ̃ͧͣ͊̉̄͛͡r̵̸̴̢̢͒ͮ̈́̓ͬ̉͆ͪ̀̓͋̉́͌̾ͬ̾̐ͫ̑ͮ̒̂̈͆͆̆͌̿ͭ́͑̂ͯ͛ͩ̇̚͜͡͏̸̼̫̪̮̲͉͔͇̯̻͇̫͚̰̦̤͈͉̟̙̻̖͇͖̱͕̘̣̫̥̝͍͔͝o̷͐̏̈́ͭ̔̇ͬͣ͑̂̉̑̓̊ͯͪ͏̶̸͏̷̴̴̶̷̷̧́̀̀͘͟͢͞҉̠̩͇͙̥̫̻̮̯̳̖̙͕̹̤͈͓̻͇̘͖͔m͑͐̃́̚͏̷̶̸̴̧̢̧̡̭̰́̕̕͢͡a̷̶̛̓̉͐͋̄̍͊̓ͪ̏̑̍͋ͮ̔͋̒ͧͭ̐̋͛͆̌̚̕͏͏̶͜͢͞͏̵̸̧̢̹̯͎̫̜̪̪̥̫̖̻̝̘͖̼̰̝͈͝͝͡</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe27`)" id="treeOfLife" style="display: none;"><span>The Tree of Life</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe31`)" id="underseaEviscerator" style="display: none;"><span>Undersea Eviscerator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(`pickaxe32`)" id="dimensionalSlicer" style="display: none;"><span>Dimensional Slicer</span></button>
                 
                 </div>
                 <div id="gearCrafts" class="hidden">
@@ -187,6 +188,8 @@
                     <button class="craftingButton" onclick="displayRecipe('gear26')" style="display: none;" id="stratumNonillonator"><span>Stratum Nonillonator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear27')" style="display: none;" id="biomeEnchanter"><span>Biome Enchanter</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear28')" style="display: none;" id="celestianReaper"><span>Celestian Reaper</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear34')" style="display: none;" id="potentialityMultiplier"><span>Potentiality Multiplier</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear35')" style="display: none;" id="electrifyingPropagator"><span>Electrifying Propagator</span></button>
                 
                 </div>
                 
@@ -227,6 +230,7 @@
                 <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade (only in Subrealm). The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br>Paradoxical Progression will give access to the next level instead of a random item.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <p class="itemDescription" id="pickaxe31Description" style="display: none;"><span id="pickaxe31Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe31Hologram'))">View Ability</button></span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
+                <p class="itemDescription" id="pickaxe32Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 75,000 blocks.<br></i><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
                 <!--
                     Pickaxes above
                     Gears below
@@ -265,6 +269,8 @@
                 <p class="itemDescription" id="gear31Description" style="display: none;">Sets mining speed delay to 20ms from 25ms.</p>
                 <p class="itemDescription" id="gear32Description" style="display: none;">Adds ~25 blocks per second to your speed.</p>
                 <p class="itemDescription" id="gear33Description" style="display: none;">Adds ~75 blocks per second to your speed.</p>
+                <p class="itemDescription" id="gear34Description" style="display: none;">Has a 25% chance to multiply normal ability size by 4x and simulted ability size by 2x.</p>
+                <p class="itemDescription" id="gear35Description" style="display: none;">+50% ability activation rate.</p>
                 
             </div>
         </div>
@@ -360,11 +366,33 @@
                     <div class="blockDisplayRow"></div>
                 </div>
                 <p id="displayDisabled">Display is Disabled.</p>
-                <div id="trackerLock">
-                    <img src="media/featureLock.png" id="lockImage">
-                    <p id="lockDescription">Craft the Ore Tracker to unlock!</p>
+                <button id="galacticaCrafts" onclick="replaceWithGalactica()"></button>
+                <div id="sideIconHolder">
+                    <button class="sideIcon" style="background-image:url('media/radar.gif');" onclick="toggleTracker()"></button>
+                    <button class="sideIcon" style="background-image:url('media/placer.png');" id="toggleOrePlacer" onclick="togglePlacement()"></button>
+                    <button class="sideIcon" style="background-image:url('media/offlineProgress.png');" id="toggleOfflineProgress" onclick="toggleOffline()"></button>
+                </div>
+                <div id="offlineHolder">
+                    <p id="offlineTitle">Offline Progression</p>
+                    <p id="offlineStats">00:00:00/08:00:00</p>
+                    <p id="offlineLayerTitle">You can get: -></p>
+                    <p id="offlineLayer"></p>
+                    <button id="offlineActivate" onclick="generateOfflineProgress()"></button>
+                    <div id="offlineProgressBar">
+                        <div id="offlineBar">
+                            <div id="offlineInteriorGradient" title="im not fixing the gradient extending outside of the bar for low offline progress times.">
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="oreTrackerHolder">
+                    <div id="trackerLock">
+                        <div id="trackerLockChain"></div>
+                        <p id="trackerRequirement">
+                            Craft the Ore Tracker!
+                        </p>
+                    </div>
                     <button id="oreTrackerButton" onclick="checkExistingOres()">Track Ores!</button>
                     <p id="trackerOre">Ore: N/A</p>
                     <p id="trackerX">X: N/A</p>
@@ -426,7 +454,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Antique', this)" id="muteAntique">Mute Antiques</button>
-                                <button class="testButton" onclick="testSound('Antique', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Antique', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -437,7 +465,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Mystical', this)"id="muteMystical">Mute Mysticals</button>
-                                <button class="testButton" onclick="testSound('Mystical', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Mystical', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -448,7 +476,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Divine', this)"id="muteDivine">Mute Divines</button>
-                                <button class="testButton" onclick="testSound('Divine', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Divine', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -459,7 +487,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Flawless', this)"id="muteFlawless">Mute Flawless</button>
-                                <button class="testButton" onclick="testSound('Flawless', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Flawless', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -470,7 +498,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Interstellar', this)"id="muteInterstellar">Mute Interstellars</button>
-                                <button class="testButton" onclick="testSound('Interstellar', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Interstellar', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -482,7 +510,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Metaversal', this)"id="muteMetaversal">Mute Metaversals</button>
-                                <button class="testButton" onclick="testSound('Metaversal', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Metaversal', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -493,7 +521,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Sacred', this)"id="muteSacred">Mute Sacreds</button>
-                                <button class="testButton" onclick="testSound('Sacred', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Sacred', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -505,7 +533,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Ethereal', this)"id="muteEthereal">Mute Ethereals</button>
-                                <button class="testButton" onclick="testSound('Ethereal', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Ethereal', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -517,7 +545,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Celestial', this)"id="muteCelestial">Mute Celestials</button>
-                                <button class="testButton" onclick="testSound('Celestial', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Celestial', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -528,7 +556,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Imaginary', this)"id="muteImaginary">Mute Imaginaries</button>
-                                <button class="testButton" onclick="testSound('Imaginary', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Imaginary', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -539,7 +567,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Hyperdimensional', this)"id="muteHyperdimensional">Mute Hyperdimensionals</button>
-                                <button class="testButton" onclick="testSound('Hyperdimensional', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Hyperdimensional', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -550,7 +578,7 @@
                         <div class="spawnSoundSettings">
                             <div class="soundMuteButtonHolder">
                                 <button class="muteButton" onclick="changeCanPlay('Infinitesimal', this)"id="muteInfinitesimal">Mute Infinitesimals</button>
-                                <button class="testButton" onclick="testSound('Infinitesimal', this)">Test</button>
+                                <button class="testButton" onclick="testSound('Infinitesimal', this)">Preview</button>
                             </div>
                             <div class="soundSliderHolder">
                                 <label class="spawnSoundContainer">
@@ -668,6 +696,9 @@
                             <button class="inputButton roundedRight" onclick="switchHighRarity(get('logRarityInput'))">Set Minimum Log RNG</button>
                         </div>
                         <div class="inputAndButton">
+                            <button class="toggleDisplay fullyRounded" onclick="toggleSimulatedRng(this)" id="simulatedRng" style="background-color: #FF3D3D;">Toggle Simulated RNG</button>
+                          </div>
+                        <div class="inputAndButton">
                           <button class="invSettingButton fullyRounded" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
                         </div>
                         <div class="inputAndButton">
@@ -676,6 +707,7 @@
                       <div class="inputAndButton">
                         <button class="toggleDisplay fullyRounded" onclick="changeCanDisplay(this)" id="blockUpdates">Toggle Block Updates</button>
                       </div>
+
                       <div class="inputAndButton">
                         <button class="toggleDisplay fullyRounded" style="background-color: #FF3D3D;" onclick="changeUseNumbers(this)" id="useNumbers">Use Numbers for Pickaxe Names</button>
                       </div>
@@ -763,6 +795,7 @@
                         <p class="playerStat"id="statsBlocksMined">Blocks Mined</p>
                         <p class="playerStat" id="statsSpeed">Speed</p>
                         <p class="playerStat" id="statsSessionReset">Session Resets</p>
+                        <p class="playerStat" id="sessionMined">Mined</p>
                         <p class="playerStat" id="statsReset">Resets</p>
                         <p class="playerStat" id="furthestPosX">Resets</p>
                         <p class="playerStat" id="furthestNegX">Resets</p>
@@ -985,6 +1018,9 @@
                         <p>
                             <span class="faqTitle">Settings</span><br>
 
+                            <span class="faqSection">Simulated RNG</span>
+                            <span class="faqText">This setting changes block generation to calculate averages of what you should get in certain amounts of blocks generated opposed to rolling for each ore individually. Heavily increased game performance, slightly lowered RNG accuracy. Any generation above 35,899 blocks will have a different RNG formula applied to it.</span><br>
+
                             <span class="faqSection">Minimum Speed</span>
                             <span class="faqText">This setting allows you to set a cap on your speed in case the game runs slowly. It will slow you down if you exceed this speed.</span><br>
 
@@ -1164,6 +1200,10 @@
                                 <summary>???watr???</summary>
                                 Undersea Eviscerator: 34321 mined, 35899 revealed, 425x luck, 1/200 proc rate (76289 cons)
                             </details>
+                            <details class="faqText">
+                                <summary>Galactica</summary>
+                                Dimensional Slicer: 75000 mined, 1 revealed, 500x luck, 1/200 proc rate (187,500 cons)
+                            </details>
                             <span class="faqSection">Tree of Life Levels:</span>
                             <span class="faqText">0: 4383 mined, 4576 revealed, 1x luck (9.1 cons)</span>
                             <span class="faqText">1: 19928 mined, 20978 revealed, 3x luck, (125.86 cons)</span>
@@ -1228,6 +1268,20 @@
                     - Added Webhook section to the settings, put any webhook link here for an embed webhook in any desired channel.<br>
                     - Added limited event section to the index<br>
                     - Bug Fixes<br>
+                </p>
+            </div>
+            <div id="simRng" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <p class="dailyText">
+                    <b>Dimensional Update</b><br>
+                    - New Simulated RNG setting, view information in the FAQ!<br>
+                    - New World! Mostly used for crafting purposes but has many very rare ores.<br>
+                    - New Pickaxe! Uses the power of alternate dimensions to mine an insane amount of blocks.<br>
+                    - 2 New Gears!<br>
+                    - Added offline progress, stacks up to 8 hours and you get a percentage of what you would normally get in that time.<br>
+                    - Revamped right side of the display, added ore placer and offline progress buttons there along with the ore tracker.<br>
+                    - Added new ores and replaced Wavaderg with Goober for personal reasons.<br>
+                    - Bug Fixes :3c<br>
                 </p>
             </div>
             <div id="sr1Unlocked" class="dailyMessage">

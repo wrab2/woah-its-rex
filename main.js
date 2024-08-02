@@ -62,6 +62,7 @@ function init() {
     createMine();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
     removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
+    if (Math.random() < 1/1000) insertIntoLayers({"ore":"intercept", "layers":["globeLayer"], "useLuck":true})
     formatEventText();
     addPickaxeDescriptions();
     document.getElementById('dataText').value = "";
@@ -171,7 +172,7 @@ function setEmojiNames(emojis) {
             }
         }
     }
-    document.getElementById("meterDisplay").setAttribute("title", oreList["🟫"]["oreName"]);
+    document.getElementById("meterDisplay").setAttribute("title", oreList[getLayer(curY).layerMat]["oreName"]);
 }
 
 let chill;
@@ -291,7 +292,7 @@ function movePlayer(dir, reps, type) {
                             lastDirection = dir.key;
                             let variant = rollVariant();
                             if (player.gears["gear25"] && variant === 1) variant = rollVariant();
-                            spawnMessage({block: "⛏️", location: {"X" : curX, "Y" : curY}, caveInfo: undefined, variant: variant})
+                            spawnMessage({block: "⛏️", location: {"X" : curX, "Y" : curY}, caveInfo: undefined, variant: variant, amt:1})
                             giveBlock({type: "⛏️", x:curX, y:curY, fromReset: false, variant: variant});
                             checkAllAround(curX, curY);
                             playSound("Celestial")
@@ -466,7 +467,7 @@ function speedFactorial(num) {
     if (num === 0) return 1;
     return num * speedFactorial(num-1);
 }
-
+let devReps = 100;
 const calcSpeed = function() {
     let miningSpeed = baseSpeed;
     let reps = 1;
@@ -485,11 +486,12 @@ const calcSpeed = function() {
     reps += player.gears["gear19"] ? 10 : 0;
     const extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
     if (currentWorld === 1.1) {
+        if (debug) return {speed: 5, reps: devReps, extra:0}
         const sr1Level = player.upgrades["pickaxe27"].level;
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:0}
         else return {speed: 7, reps: (-2 + sr1Level), extra:0}
     }
-    if (debug) return {speed: 5, reps: 100, extra:0}
+    if (debug) return {speed: 5, reps: devReps, extra:0}
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
 }
 function updateSpeed() {
@@ -508,7 +510,8 @@ function displayArea() {
             let grass = 0;
             if (currentWorld === 2)
                 grass = 2000;
-            if (currentWorld === 1.2) grass = -1
+            if (currentWorld === 1.2) grass = -1;
+            if (currentWorld === 0.9) grass = -1;
             let i = 0;
             for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) mine[r] ??= [];
             for (let c = curX - constraints[0]; c <= curX + 9 + (9-constraints[0]); c++) {
@@ -540,7 +543,8 @@ function displayArea() {
             getAngleBetweenPoints({x : player.oreTracker.locationX, y: player.oreTracker.locationY});
         }
     }
-    minedElement.textContent = player.stats.blocksMined.toLocaleString() + " Blocks Mined";
+    const blocksMined = player.stats.blocksMined;
+    minedElement.textContent = (blocksMined > 1e12 ? formatNumber(blocksMined, 6) : blocksMined.toLocaleString()) + " Blocks Mined";
 }
 function addPickaxeIcon() {
     return `<span class="mineSpan">${pickaxeStats[player.stats.currentPickaxe].src}</span>`
@@ -549,13 +553,16 @@ function checkDisplayVariant(location) {
     let oreToAdd;
     let includeSize;
     let specialVariant;
+    const tier = oreList[location.ore]["oreTier"];
+    let isRare = (tier !== "Layer" && commons.indexOf(tier) === -1) 
     if (oreList[location.ore]["hasImage"]) {
-        const tier = oreList[location.ore]["oreTier"]
-        let isLarge =  tier === "Hyperdimensional" || tier === "Infinitesimal";
-        oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineImage'}" src="${oreList[location.ore]["src"]}"></img>`;
+        let isLarge = tier === "Hyperdimensional" || tier === "Infinitesimal" || oreList[location.ore]["numRarity"] >= 1000000000000000;
+        if (isRare) oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[location.ore]["src"]}"></img>`;
+        else return location.ore;
         includeSize = "";
         specialVariant = "Img";
     } else {
+        if (!isRare) return location.ore;
         oreToAdd = location.ore;
         includeSize = "normalRare";
         specialVariant = "";
@@ -642,12 +649,13 @@ function createInventory() {
                 let oreRarityBlock = document.createElement("td");
                 let rarity = oreList[propertyName]["numRarity"];
                 rarity *= multis[i - 1];
-                if (propertyName === "Wavaderg") rarity = ":3";
+                if (oreList[propertyName]["oreTier"] === "Infinitesimal") rarity = Infinity;
+                if (propertyName === "Goober") rarity = ":3";
                 if (oreList[propertyName]["caveExclusive"]) {
                     rarity *= getCaveMultiFromOre(propertyName);
-                    oreRarityBlock.innerText = "1/" + (rarity).toLocaleString() + "*";
+                    oreRarityBlock.innerText = "1/" + (rarity >= 1000000000000 ? formatNumber(rarity, 2) : rarity.toLocaleString()) + "*";
                 } else {
-                    oreRarityBlock.innerText = "1/" + (rarity).toLocaleString();
+                    oreRarityBlock.innerText = "1/" + (rarity >= 1000000000000 ? formatNumber(rarity, 2) : rarity.toLocaleString());
                 }
                 oreRarityBlock.classList = "inventoryElement2";
                 let oreAmountBlock = document.createElement("td");
@@ -687,7 +695,9 @@ let displayTimer = null;
 function updateInventory() {
     for (let propertyName in inventoryObj) {
         for (let i = 1; i < 5; i++) {
-            oreList[propertyName][names[i - 1]].textContent = "x" + playerInventory[propertyName][variantInvNames[i - 1]].toLocaleString();
+            let amt = playerInventory[propertyName][variantInvNames[i - 1]];
+            if (amt > 1e308) amt = 1e308;
+            oreList[propertyName][names[i - 1]].textContent = "x" + (amt >= 1000000 ? formatNumber(amt, 2) : amt.toLocaleString());
             if (playerInventory[propertyName][variantInvNames[i - 1]] > 0) (oreList[propertyName][names[i - 1]].parentElement).style.display = "table";
             else (oreList[propertyName][names[i - 1]].parentElement).style.display = "none";
         }
@@ -739,7 +749,10 @@ function updateInventory() {
     }
     let speed = calcAverageSpeed();
     if (speed !== undefined) player.avgSpeed = speed;
-    get("catPlayerStats").textContent = `${player.displayStatistics.luck.toLocaleString()}x Luck. ${getAvgBlockSpeed().toLocaleString()} Average Blocks Per Minute.`;
+    const avgBlocks = getAvgBlockSpeed();
+    get("catPlayerStats").textContent = `${player.displayStatistics.luck.toLocaleString()}x Luck. ${avgBlocks > 1000000000000 ? formatNumber(avgBlocks, 3) : avgBlocks.toLocaleString()} Average Blocks Per Minute.`;
+    player.lastOnline = Date.now();
+    updateOfflineProgress();
 }
 const blockAmts = [];
 let lastBlockAmt = 0;
@@ -914,7 +927,7 @@ function typeWriter(string, loc) {
 }
 
 let loggedFinds = [];
-function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
+function logFind(type, x, y, variant, atMined, fromReset, amt, fromCave, bulkRarity) {
     let output = "";
     removeExistingOre({x: x, y:y})
     let spawnElement = document.getElementById("latestFinds");
@@ -941,7 +954,7 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     } else {
         blockOutput = type;
     }
-    output += blockOutput + ` ${duped ? "(x2)" : ""}`;
+    output += blockOutput + ` ${amt > 1 ? `(x${amt > 1000000 ? formatNumber(amt, 2) : amt.toLocaleString()})` : ""}`;
     if (fromReset) output += " From Void Prevention.";
     else output += " At " + formatNumber(atMined) +  " Mined.";
     let rng;
@@ -953,7 +966,7 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
         rng = Math.floor(1/oreList[type]["decimalRarity"]);
     }
     if (oreList[type]["oreTier"] === "Infinitesimal") rng = Infinity;
-    output += ` 1/${formatNumber(rng * multis[namesemojis.indexOf(variant)])}`;
+    output += ` 1/${bulkRarity === undefined ? formatNumber(rng * multis[namesemojis.indexOf(variant)], 2) : formatNumber(1/bulkRarity, 2)}`;
     output += "</span>";
     element.innerHTML = output;
     if (spawnElement.children.length > 0) {
@@ -964,8 +977,9 @@ function logFind(type, x, y, variant, atMined, fromReset, duped, fromCave) {
     }
     if (spawnElement.children.length > player.settings.latestLength) spawnElement.removeChild(spawnElement.lastChild);
 }
-const suffixes = ["", "k", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", "QnV", "SeV", "SPG", "OVG", "NVG", "TGN", "UTG", "DTG", "tsTG", "qtTG", "QnTG", "ssTG", "SpTG", "OcTg", "NoTG", "QdDR", "uQDR", "dQDR", "tQDR", "qdQDR", "QnQDR", "sxQDR", "SpQDR", "OQDDr", "NQDDr", "qQGNT", "uQGNT", "dQGNT", "tQGNT", "qdQGNT", "QnQGNT", "sxQGNT", "SpQGNT", "OQQGNT", "NQQGNT", "SXGNTL", "USXGNTL", "DSXGNTL", "TSXGNTL", "QTSXGNTL", "QNSXGNTL", "SXSXGNTL", "SPSXGNTL", "OSXGNTL", "NVSXGNTL", "SPTGNTL", "USPTGNTL", "DSPTGNTL", "TSPTGNTL", "QTSPTGNTL", "QNSPTGNTL", "SXSPTGNTL", "SPSPTGNTL", "OSPTGNTL", "NVSPTGNTL", "OTGNTL", "UOTGNTL", "DOTGNTL", "TOTGNTL", "QTOTGNTL", "QNOTGNTL", "SXOTGNTL", "SPOTGNTL", "OTOTGNTL", "NVOTGNTL", "NONGNTL", "UNONGNTL", "DNONGNTL", "TNONGNTL", "QTNONGNTL", "QNNONGNTL", "SXNONGNTL", "SPNONGNTL", "OTNONGNTL", "NONONGNTL", "CENT"];
+const suffixes = ["", "k", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", "QnV", "SeV", "SPG", "OVG", "NVG", "TGN", "UTG", "DTG", "tsTG", "qtTG", "QnTG", "ssTG", "SpTG", "OcTg", "NoTG", "QdDR", "uQDR", "dQDR", "tQDR", "qdQDR", "QnQDR", "sxQDR", "SpQDR", "OQDDr", "NQDDr", "qQGNT", "uQGNT", "dQGNT", "tQGNT", "qdQGNT", "QnQGNT", "sxQGNT", "SpQGNT", "OQQGNT", "NQQGNT", "SXGNTL", "USXGNTL", "DSXGNTL", "TSXGNTL", "QTSXGNTL", "QNSXGNTL", "SXSXGNTL", "SPSXGNTL", "OSXGNTL", "NVSXGNTL", "SPTGNTL", "USPTGNTL", "DSPTGNTL", "TSPTGNTL", "QTSPTGNTL", "QNSPTGNTL", "SXSPTGNTL", "SPSPTGNTL", "OSPTGNTL", "NVSPTGNTL", "OTGNTL", "UOTGNTL", "DOTGNTL", "TOTGNTL", "QTOTGNTL", "QNOTGNTL", "SXOTGNTL", "SPOTGNTL", "OTOTGNTL", "NVOTGNTL", "NONGNTL", "UNONGNTL", "DNONGNTL", "TNONGNTL", "QTNONGNTL", "QNNONGNTL", "SXNONGNTL", "SPNONGNTL", "OTNONGNTL", "NONONGNTL", "CENT", "UCENT"];
 function formatNumber(num, topoint) {
+    num = Math.round(num)
     topoint ??= 1;
     if (topoint < 1) topoint = 1;
     topoint = Math.pow(10, topoint);
@@ -1039,9 +1053,10 @@ function removeExistingOre(location) {
 }
 function removeTrackerInformation() {
     player.oreTracker.tracking = false;
-    document.getElementById("trackerOre").innerText = `Ore: N/A`
-    document.getElementById("trackerX").innerText = `X: N/A`
-    document.getElementById("trackerY").innerText = `Y: N/A`
+    document.getElementById("trackerOre").innerText = `${player.settings.useNyerd ? "Ore: NYAH" : "Ore: N/A"}`;
+    document.getElementById("trackerX").innerText = `${player.settings.useNyerd ? "X: NYAH" : "X: N/A"}`;
+    document.getElementById("trackerY").innerText = `${player.settings.useNyerd ? "Y: NYAH" : "Y: N/A"}`;
+    get("oreTrackerButton").textContent = `${player.settings.useNyerd ? "Track NYERDS!" : "Track Ores!"}`
     player.oreTracker.locationX = 0;
     player.oreTracker.locationY = 0;
 }
@@ -1499,6 +1514,87 @@ function setTextColor(color) {
 function createCustomColorInput() {
     const text = window.prompt("Enter Color");
     setTextColor(text);
+}
+let trackerDisplayed = false;
+function toggleTracker() {
+    const tracker = get("oreTrackerHolder");
+    if (tracker.style.animation !== "") return;
+    if (trackerDisplayed) {
+        tracker.style.animation = "retractTracker 0.5s linear 1";
+        tracker.onanimationend = () => {
+            tracker.style.display = "none";
+            tracker.style.right = "-7vw";
+            tracker.style.animation = "";
+            trackerDisplayed = false;
+            tracker.onanimationend = undefined;
+        };
+    } else {
+        tracker.style.display = "flex";
+        tracker.style.animation = "extendTracker 0.5s linear 1";
+        tracker.onanimationend = () => {
+            tracker.style.right = "2.5vw";
+            tracker.style.animation = "";
+            trackerDisplayed = true;
+            tracker.onanimationend = undefined;
+        };
+    }
+}
+let offlineDisplayed = false;
+function toggleOffline() {
+    if (trackerDisplayed) {
+        const tracker = get("oreTrackerHolder");
+        tracker.style.display = "none";
+        tracker.style.right = "-7vw";
+        trackerDisplayed = false;
+    }
+    const offlineDisplay = get("offlineHolder")
+    if (offlineDisplayed) {
+        offlineDisplay.style.animation = "retractOffline 0.5s linear 1";
+        offlineDisplay.onanimationend = () => {
+            offlineDisplay.style.display = "none";
+            offlineDisplay.style.right = "-7vw";
+            offlineDisplay.style.animation = "";
+            offlineDisplayed = false;
+            offlineDisplay.onanimationend = undefined;
+        };
+    } else {
+        offlineDisplay.style.display = "block";
+        offlineDisplay.style.animation = "extendOffline 0.5s linear 1";
+        offlineDisplayed = true;
+        updateOfflineProgress();
+        offlineDisplay.onanimationend = () => {
+            offlineDisplay.style.right = "2.5vw";
+            offlineDisplay.style.animation = "";
+            offlineDisplay.onanimationend = undefined;
+        };
+    }
+}
+function updateOfflineProgress() {
+    if (offlineDisplayed) {
+        let output = "";
+        const layer = getLayer(curY).layer;
+        let m = 1;
+        for (let i = layer.length-1; i >= 0; i--) if (oreList[layer[i]]["oreTier"] !== "Celestial") output += `${layer[i]}${(i<layer.length-1&& m%5 === 0) ? (m++, "<br>") : (m++," ")}`;
+        get("offlineLayer").innerHTML = `${output}`;
+        if (player.offlineProgress > 28800000) player.offlineProgress = 28800000;
+        get("offlineStats").textContent = `${msToTime(player.offlineProgress)}/08:00:00`;
+        const percent = player.offlineProgress > 0 ? 100/(28800000/(player.offlineProgress)) : 0;
+        get("offlineInteriorGradient").style.width = `${percent}%`;
+        get("offlineInteriorGradient").style.background = "repeating-linear-gradient(45deg, #7f007f, #fff, #7f007f 3vw)";
+        const nums = calcSpeed();
+        const speed = ((1000/nums.speed)*nums.reps)+nums.extra;
+        let pickaxeMined;
+        if (player.stats.currentPickaxe === "pickaxe27") pickaxeMined = pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
+        else pickaxeMined = pickaxeStats[player.stats.currentPickaxe].mined
+        let willGen = player.offlineProgress > 0 ? Math.floor((speed * (player.offlineProgress/1000))*(pickaxeMined/pickaxeStats[player.stats.currentPickaxe].rate)/10) : 0;
+        if (player.powerupVariables.fakeEquipped.item !== undefined || player.powerupVariables.fakeTreeLevel.level !== undefined) {get("offlineActivate").textContent = "Cant Gen: Paradoxical Active!"; willGen = 0;}
+        else get("offlineActivate").textContent = `Gen ${willGen > 1000000000 ? formatNumber(willGen, 2) : willGen.toLocaleString()} Blocks.`;
+        return willGen;
+    }
+}
+function generateOfflineProgress() {
+    const offlineAmt = updateOfflineProgress();
+    if (offlineAmt > 0) {bulkGenerate(curY, offlineAmt); player.offlineProgress = 0; updateOfflineProgress();}
 }
 //TY @marbelynrye FOR MAKING THESE IMAGE DATA GATHERERS UR SO COOL FOR THAT
 //IT WORKS SO WELL!!!!

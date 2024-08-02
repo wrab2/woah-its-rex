@@ -16,11 +16,15 @@ async function rollAbilities(force) {
     if (debug && force) m = 10000000;
     const pickaxe = pickaxeStats[player.stats.currentPickaxe]
     if (Math.random() <= (m/pickaxe.rate)) {
-        const preMined = player.stats.blocksMined;
-        const preRevealed = blocksRevealedThisReset;
-        pickaxe.doAbility(curX, curY);
-        abilityTestNums.push({mined: player.stats.blocksMined - preMined, revealed: blocksRevealedThisReset - preRevealed});
-        abilityTestAmt++;
+        if (player.settings.simulatedRng) {
+            let bulkAmt = 0;
+            if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
+            else bulkAmt = pickaxe.mined;
+            if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
+            bulkGenerate(curY, bulkAmt)
+        } else {
+            pickaxe.doAbility(curX, curY);
+        }
     }
 }
 function getTestAvg() {
@@ -87,15 +91,13 @@ function powerup5() {
             removeParadoxical();
             let toChooseFrom = [];
             for (let pickaxe in pickaxeStats) {
-                if (currentWorld === 1) {
-                    if (paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe);
-                } else if (currentWorld === 2) {
+                if (currentWorld === 2) {
                     if (pickaxeStats[pickaxe].canMineIn.includes(2) && paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe)
-                }
+                } else if (currentWorld !== 2 && paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe)
             }
             toChooseFrom = toChooseFrom.concat(Object.keys(player.gears));
             for (let i = toChooseFrom.length - 1; i >= 0; i--) {
-                if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]]) toChooseFrom.splice(i, 1);
+                if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (pickaxeStats[toChooseFrom[i]] !== undefined && pickaxeStats[toChooseFrom[i]].isDimensional)) toChooseFrom.splice(i, 1);
             }
             if (toChooseFrom.length > 0) {
                 let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
@@ -185,6 +187,7 @@ let pickaxe1Nums = [];
 function pickaxeAbility1(x, y) {
     x -= 7;
     y -= 7;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe1Nums, 1), x, y); return;}
     pickaxeArrayLoop(pickaxe1Nums, x, y);
 }
 
@@ -192,18 +195,21 @@ let pickaxe2Nums = [];
 function pickaxeAbility2(x, y) {
     x -= 5;
     y -= 5;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe2Nums, 2), x, y); return;}
     pickaxeArrayLoop(pickaxe2Nums, x, y);
 }
 let pickaxe3Nums = [];
 function pickaxeAbility3(x, y) {
     x -= 12;
     y -= 12;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe3Nums, 3), x, y); return;}
     pickaxeArrayLoop(pickaxe3Nums, x, y);
 }
 let pickaxe4Nums = [];
 function pickaxeAbility4(x, y) {
     x -= 11;
     y -= 11;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe4Nums, 4), x, y); return;}
     pickaxeArrayLoop(pickaxe4Nums, x, y);
 }
 
@@ -211,12 +217,14 @@ let pickaxe5Nums = [];
 function pickaxeAbility5(x, y) {
     x -= 16;
     y -= 16;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe5Nums, 5), x, y); return;}
     pickaxeArrayLoop(pickaxe5Nums, x, y);
 }
 let pickaxe6Nums = [];
 function pickaxeAbility6(x, y) {
     x -= 18;
     y -= 19;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe6Nums, 6), x, y); return;}
     pickaxeArrayLoop(pickaxe6Nums, x, y);
 }
 function mineLines(loc) {
@@ -344,24 +352,28 @@ let pickaxe9Nums = [];
 function pickaxeAbility9(x, y) {
     x -= 25;
     y -= 20;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe9Nums, 9), x, y); return;}
     pickaxeArrayLoop(pickaxe9Nums, x, y);
 }
 let pickaxe10Nums = [];
 function pickaxeAbility10(x, y) {
     x -= 30;
     y -= 30;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe10Nums, 10), x, y); return;}
     pickaxeArrayLoop(pickaxe10Nums, x, y);
 }
 let pickaxe11Nums = [];
 function pickaxeAbility11(x, y) {
     x -= 40;
     y -= 37;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe11Nums, 11), x, y); return;}
     pickaxeArrayLoop(pickaxe11Nums, x, y);
 }
 let pickaxe12Nums = [];
 function pickaxeAbility12(x, y) {
     x -= 103;
     y -= 56;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe12Nums, 12), x, y); return;}
     pickaxeArrayLoop(pickaxe12Nums, x, y);
 }
 function pickaxeAbility14(translatex, translatey) {
@@ -728,6 +740,7 @@ function pickaxeAbility23(x, y) {
 function pickaxeAbility24(x, y) {
     x = x - 60;
     y = y - 110;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe24Nums, 24), x, y); return;}
     for (let i = 0; i < pickaxe24Nums.length; i++) {
         pickaxeAbilityMineBlock(pickaxe24Nums[i]["x"] + x, pickaxe24Nums[i]["y"] + y)
     }
@@ -735,6 +748,7 @@ function pickaxeAbility24(x, y) {
 function pickaxeAbility25(x, y) {
     x = x - 130;
     y = y - 110;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe25Nums, 25), x, y); return;}
     for (let i = 0; i < pickaxe25Nums.length; i++) {
         pickaxeAbilityMineBlock(pickaxe25Nums[i]["x"] + x, pickaxe25Nums[i]["y"] + y)
     }
@@ -827,25 +841,32 @@ let pickaxe28Nums = [];
 function pickaxeAbility28(x, y) {
     x -= 22;
     y -= 22;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe28Nums, 28), x, y); return;}
     pickaxeArrayLoop(pickaxe28Nums, x, y);
 }
 let pickaxe29Nums = [];
 function pickaxeAbility29(x, y) {
     x -= 33;
     y -= 24;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe29Nums, 29), x, y); return;}
     pickaxeArrayLoop(pickaxe29Nums, x, y);
 }
 let pickaxe30Nums = [];
 function pickaxeAbility30(x, y) {
     x -= 13;
     y -= 15;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe30Nums, 30), x, y); return;}
     pickaxeArrayLoop(pickaxe30Nums, x, y);
 }
 let pickaxe31Nums = [];
 function pickaxeAbility31(x, y) {
     x = x - 300;
     y = y - 200;
+    if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe31Nums, 31), x, y); return;}
     pickaxeArrayLoop(pickaxe31Nums, x, y);
+}
+function pickaxeAbility32(x, y) {
+    bulkGenerate(y, 75000)
 }
 function pickaxeArrayLoop(array, x, y) {
     for (let i = 0; i < array.length; i++) {
@@ -860,12 +881,17 @@ function pickaxeAbilityMineBlock(x, y) {
         mineBlock(x, y, "ability"); 
     }
 }
-function increaseAbilitySize(array) {
+function increaseAbilitySize(array, num) {
+    if (magnifiedAbilites[num] !== undefined) return magnifiedAbilites[num];
     const xOrigin = array[0].x;
     const yOrigin = array[0].y
     const finalList = [];
     for (let i = 0; i < array.length; i++) finalList.push({x:array[i].x + incDistTo(xOrigin, array[i].x), y:array[i].y + incDistTo(yOrigin, array[i].y)},{x:array[i].x + incDistTo(xOrigin, array[i].x) + 1, y:array[i].y + incDistTo(yOrigin, array[i].y)},{x:array[i].x + incDistTo(xOrigin, array[i].x), y:array[i].y + incDistTo(yOrigin, array[i].y) + 1},{x:array[i].x + incDistTo(xOrigin, array[i].x) + 1, y:array[i].y + incDistTo(yOrigin, array[i].y) + 1})
+    magnifiedAbilites[num] = finalList;
     return finalList;
+}
+const magnifiedAbilites = {
+
 }
 function incDistTo(x, y) {
     return y - x;

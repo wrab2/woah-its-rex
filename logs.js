@@ -102,20 +102,20 @@ class secureLogs {
             }
         }
     }
-    verifyFind(block, r, c, variant, duped) {
+    verifyFind(block, r, c, variant, amt) {
         block = block.ore === undefined ? block : block.ore;
         let verified = false;
         for (let i = this.#verifiedLogs["All"].length - 1; i >= 0; i--) {
             if (this.#verifiedLogs["All"][i].y === r && this.#verifiedLogs["All"][i].x === c) {
                 if (block === this.#verifiedLogs["All"][i].block) {
                     const log = this.#clone(this.#verifiedLogs["All"][i]);
-                    log.duped = duped;
+                    log.amt = amt;
                     if (log.mined !== true) {
                         log.mined = true;
                         if (log.variant === undefined) log.variant = variant;
                         if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
-                        if (log.rng < 1/1000000000 && player.serverHook !== undefined) serverWebhook(log, player.stats.blocksMined);
-                        const webhookString = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.duped ? "(x2) " : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()} ${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
+                        if (log.rng < 1/1000000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
+                        const webhookString = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.amt > 1 ? `(x${log.amt}) ` : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
                         log.output = webhookString;
                         this.#verifiedLogs["All"][i] = log;
                         Object.freeze(log);
@@ -139,6 +139,28 @@ class secureLogs {
         if (!verified) {
             console.log("log not found, failed to verify if found, block mined", block, r, c)
         }
+    }
+    createBulkLog(log) {
+        log.x = "Err";
+        log.y = `${-1*curY}?`;
+        log.withEvent ??= "None";
+        if (log.caveInfo !== undefined) {
+            const oldInfo = log.caveInfo;
+            log.caveInfo = [true, getCaveMulti(oldInfo.type), oldInfo.type, caveLuck];
+            log.luck = caveLuck;
+        }
+        log.caveInfo ??= [false, 1, "none", caveLuck];
+        log.output = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.amt > 1 ? `(x${log.amt}) ` : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x)}, Y: ${(log.y).toLocaleString()}`;           
+        log.from = (log.from.stack.indexOf("mine.js") > -1);
+        Object.freeze(log);
+        this.#verifiedLogs["All"].push(log);
+        if (log.caveInfo[0]) this.#verifiedLogs["Cave"].push(log);
+        if (log.variant === 1) this.#verifiedLogs["Normal"].push(log);
+        else if (log.variant === 2) this.#verifiedLogs["Electrified"].push(log);
+        else if (log.variant === 3) this.#verifiedLogs["Radioactive"].push(log);
+        else if (log.variant === 4) this.#verifiedLogs["Explosive"].push(log);
+        if (log.rng <= 1/100000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
+        if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
     }
     showLogs() {
         if (document.getElementById("menuSelectionContainer").style.display !== "none") {
@@ -233,7 +255,17 @@ class secureLogs {
     }
 }
 //i lost the original code for this so gl :3c
-function _0x541a(_0x1de34a,_0xe210){const _0x3c0c25=_0x3c0c();return _0x541a=function(_0x541a0f,_0x4105df){_0x541a0f=_0x541a0f-0x1ed;let _0xb39604=_0x3c0c25[_0x541a0f];return _0xb39604;},_0x541a(_0x1de34a,_0xe210);}(function(_0x3e02ea,_0x187d85){const _0x781b1b=_0x541a,_0x2cc5b9=_0x3e02ea();while(!![]){try{const _0x333dd6=parseInt(_0x781b1b(0x1ed))/0x1+-parseInt(_0x781b1b(0x202))/0x2+parseInt(_0x781b1b(0x204))/0x3*(parseInt(_0x781b1b(0x1f0))/0x4)+parseInt(_0x781b1b(0x208))/0x5+-parseInt(_0x781b1b(0x1f2))/0x6+-parseInt(_0x781b1b(0x200))/0x7*(-parseInt(_0x781b1b(0x1f8))/0x8)+-parseInt(_0x781b1b(0x1f3))/0x9*(-parseInt(_0x781b1b(0x1fc))/0xa);if(_0x333dd6===_0x187d85)break;else _0x2cc5b9['push'](_0x2cc5b9['shift']());}catch(_0x5a8fe6){_0x2cc5b9['push'](_0x2cc5b9['shift']());}}}(_0x3c0c,0x378ab));function encryptLogData(_0x46fbe5,_0x157b2e){const _0x1c910d=_0x541a,_0x8e0aef=Math[_0x1c910d(0x1f1)](_0x46fbe5[_0x1c910d(0x20b)]),_0x1890d0={0x1:_0x8e0aef,0x2:Math[_0x1c910d(0x209)](Math[_0x1c910d(0x1f9)](_0x46fbe5[_0x1c910d(0x207)]),_0x8e0aef),0x3:Math[_0x1c910d(0x209)](Math[_0x1c910d(0x1f6)](0x1/_0x46fbe5[_0x1c910d(0x1ff)]),1.225),0x4:Math[_0x1c910d(0x1fa)](_0x157b2e),0x5:Math[_0x1c910d(0x1f5)](_0x46fbe5['avgSpeed']*1.449),0x6:_0x46fbe5[_0x1c910d(0x205)]===undefined?_0x1c910d(0x206):_0x46fbe5[_0x1c910d(0x205)],0x7:new Date(_0x46fbe5['genAt'])};return toBinary(JSON[_0x1c910d(0x1ee)](_0x1890d0));}function _0x3c0c(){const _0xaffd03=[',\x20Luck:\x20','93uwWQsd','paradoxical','none','luck','1870990VwDFKl','pow','toUTCString','genAt','9115pugvXM','stringify',',\x20Paradoxical\x20Item:\x20','15280TFRKWh','log10','1949094HKtKWk','1239633AsRJqe',',\x20Time\x20Since\x20Last\x20Log:\x20','floor','sqrt',',\x20AVG\x20Speed:\x20','56QqJfTB','log','log2','parse','10mXGQne','Key:\x20','GJNT38GREJWEP','rng','236446FVEELN','round','647136dolXZj'];_0x3c0c=function(){return _0xaffd03;};return _0x3c0c();}function decryptLogData(_0x24323c,_0x184b6d){const _0x279dd3=_0x541a;if(_0x184b6d===_0x279dd3(0x1fe)){_0x24323c=JSON[_0x279dd3(0x1fb)](fromBinary(_0x24323c));let _0x557bd6=_0x24323c[0x1],_0x3fb24f=_0x24323c[0x2];_0x3fb24f=Math[_0x279dd3(0x201)](Math[_0x279dd3(0x209)](Math['E'],Math['pow'](_0x3fb24f,0x1/_0x557bd6))),_0x557bd6=Math[_0x279dd3(0x209)](0xa,_0x557bd6);let _0x34747d=_0x24323c[0x3];_0x34747d=Math[_0x279dd3(0x209)](_0x34747d,0x1/1.225),_0x34747d=Math[_0x279dd3(0x201)](Math[_0x279dd3(0x209)](_0x34747d,0x2));let _0x424ea9=_0x24323c[0x4];_0x424ea9=Math[_0x279dd3(0x1f6)](_0x424ea9);let _0x1209b0=_0x24323c[0x5];_0x1209b0=Math[_0x279dd3(0x1f5)](_0x1209b0/1.449);let _0xdd4639=_0x24323c[0x6];_0xdd4639=_0xdd4639!==_0x279dd3(0x206)?getItemNameFromParadoxical(_0xdd4639):'none';let _0x24f679=_0x24323c[0x7];return _0x279dd3(0x1fd)+_0x557bd6+_0x279dd3(0x203)+_0x3fb24f+',\x20RNG:\x20'+_0x34747d+_0x279dd3(0x1f7)+_0x1209b0+_0x279dd3(0x1f4)+Math[_0x279dd3(0x1f5)](_0x424ea9)+',\x20Generated\x20At:\x20'+new Date(_0x24f679)[_0x279dd3(0x20a)]()+_0x279dd3(0x1ef)+_0xdd4639;}}
+const ignoreProperties = ["output", "x", "y"]
+function encryptLogData(log) {
+    const newObj = {};
+    for (let property in log) {
+        if (property !== "output") newObj[property] = log[property];
+    }
+    return toBinary(JSON.stringify(newObj));
+}
+function decryptLogData(log) {
+    return JSON.parse(fromBinary(log));
+}
 function roundNumberToMillionth(num) {
     return Math.round(num * 1000000) / 1000000;
 }
@@ -309,19 +341,21 @@ const worlds = {
     1.1: "SR1",
     1.2: "WW",
     2: "W2",
+    0.9: "Galactica"
 }
 function serverWebhook(log, mined) {
     const color = parseInt(oreInformation.getColors(oreList[log.block]["oreTier"])["backgroundColor"].substring(1), 16);
+    const wasDuped = log.amt > 1 && log.bulkAmt === undefined;
     fetch(player.serverHook, {
         body: JSON.stringify({
         "embeds": [{
-            "title": `${player.serverHookName === undefined ? player.name : player.serverHookName} has found ${names[log.variant - 1]} ${log.block}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
+            "title": `${player.serverHookName === undefined ? player.name : player.serverHookName} has found ${names[log.variant - 1]} ${oreList[log.block]["eId"] ? oreList[log.block]["eId"] : log.block} ${log.amt > 1 ? `(x${log.amt})` : ""}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
             "color": `${color}`,
             "description": `${worlds[log.world]}`,
             "fields" : [
                 {
                     "name": "Rarity",
-                    "value": `1/${formatNumber(Math.round(1/log.rng), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${log.duped ? "(x2)" : ""}`,
+                    "value": `1/${formatNumber((Math.round(1/log.rng) * (wasDuped ? 10 : 1)), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}`,
                     "inline": true
                 },
                 {

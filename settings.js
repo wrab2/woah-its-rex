@@ -357,7 +357,8 @@ const indexOrder = {
     "worldOne" : ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer",  "paperLayer", "worldOneCommons", "sillyLayer", "fluteLayer", "grassLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave", "eventLayer"],
     "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],
     "subrealmOne" : ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer", "ccCave", "moCave", "foCave", "axCave", "ioCave", "ggCave"],
-    "waterWorld" : ["waterLayer"]
+    "waterWorld" : ["waterLayer", "watrCave"],
+    "galactica" : ["starLayer"]
 }
 let layerNum = 0;
 function switchLayerIndex(num, overrideLayer, world) {
@@ -367,9 +368,17 @@ function switchLayerIndex(num, overrideLayer, world) {
     let layerToIndex;
     let worldLayer;
     if (world === undefined) {
-        worldLayer = currentWorld === 1 ? indexOrder["worldOne"] : (currentWorld === 2 ? indexOrder["worldTwo"] : (currentWorld === 1.2 ? indexOrder["waterWorld"] : indexOrder["subrealmOne"]));
+        if (currentWorld === 1) worldLayer = indexOrder["worldOne"];
+        else if (currentWorld === 1.1) worldLayer = indexOrder["subrealmOne"];
+        else if (currentWorld === 1.2) worldLayer = indexOrder["waterWorld"];
+        else if (currentWorld === 2) worldLayer = indexOrder["worldTwo"];
+        else if (currentWorld === 0.9) worldLayer = indexOrder["galactica"];
     } else {
-        worldLayer = world === 1 ? indexOrder["worldOne"] : (world === 2 ? indexOrder["worldTwo"] : (world === 1.2 ? indexOrder["waterWorld"] : indexOrder["subrealmOne"]));
+        if (world === 1) worldLayer = indexOrder["worldOne"];
+        else if (world === 1.1) worldLayer = indexOrder["subrealmOne"];
+        else if (world === 1.2) worldLayer = indexOrder["waterWorld"];
+        else if (world === 2) worldLayer = indexOrder["worldTwo"];
+        else if (world === 0.9) worldLayer = indexOrder["galactica"];
     }
     if (overrideLayer === undefined) {
         layerNum += num;
@@ -498,16 +507,38 @@ function createIndexCards(layer) {
                 const caveMulti = getCaveMulti(oldLayer);
                 if (oolProbabilities[property] != undefined) rarity = Math.round(1/oolProbabilities[property]);
                 if (blackOut) indexRarity.textContent = "1/??? Base Rarity.";
-                else indexRarity.textContent = `${rarity.toLocaleString()} Base Rarity.`;
+                else indexRarity.textContent = `${rarity > 1000000000000000 ? formatNumber(rarity, 3) : rarity.toLocaleString()} Base Rarity.`;
                 rarity *= caveMulti;
                 if (blackOut) indexRarityLuck.textContent = "1/??? Adjusted.";
-                else indexRarityLuck.textContent = `${rarity.toLocaleString()} Adjusted.`
+                else indexRarityLuck.textContent = `${rarity > 1000000000000000 ? formatNumber(rarity, 3) : rarity.toLocaleString()} Adjusted.`
             } else {
                 let rarity = oreList[property]["numRarity"];
                 if (blackOut) indexRarity.textContent = "1/??? Base Rarity.";
-                else indexRarity.textContent = `${rarity.toLocaleString()} Base Rarity.`;
+                else indexRarity.textContent = `${rarity > 1000000000000000 ? formatNumber(rarity, 3) : rarity.toLocaleString()} Base Rarity.`;
+                rarity = Math.round(rarity / verifiedOres.getCurrentLuck());
+                let simAmt;
+                if (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) {
+                    if (pickaxeStats[player.stats.currentPickaxe].isDimensional) simAmt = pickaxeStats[player.stats.currentPickaxe].mined;
+                    else {
+                        if (player.stats.currentPickaxe === "pickaxe27") simAmt = pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
+                        else simAmt = pickaxeStats[player.stats.currentPickaxe].mined;
+                    }
+                    if (simAmt < 35899) rarity = Math.round(1/oreList[property]["decimalRarity"]);
+                    else {
+                        let rngModifier = simAmt / 35899;
+                        rarity = oreList[property]["decimalRarity"]*simAmt;
+                        if (rarity < 1) {
+                            rarity /= simAmt;
+                            rarity *= rngModifier;
+                            rarity = Math.round(1/rarity);
+                        }
+                        else {
+                            rarity = 1;
+                        }
+                    }
+                }
                 if (affectedByLuck && blackOut) indexRarityLuck.textContent = "1/??? With Luck.";
-                else if (affectedByLuck) indexRarityLuck.textContent = `${Math.round(rarity / verifiedOres.getCurrentLuck()).toLocaleString()} With Luck.`
+                else if (affectedByLuck) indexRarityLuck.textContent = `${rarity > 1000000000000000 ? formatNumber(rarity, 3) : rarity.toLocaleString()} With ${simAmt !== undefined ? "Simulated." : "Luck."}`
                 else indexRarityLuck.textContent = "Unaffected By Luck";
             }
             //Add Spawn Message
@@ -568,8 +599,13 @@ function addIndexColors(element, blackOut, property) {
     if (blackOut) element.style.backgroundImage = "linear-gradient(to bottom right, black 5%, #383838 30%, 70%, black 95%), linear-gradient(to top right, #FF3D3D 20%, black, #FF3D3D 80%)"
     return element
 }
-
+let isPlacing = false;
 function randomFunction(ore, cause) {
+    if (isPlacing) {
+        mine[curY][curX + 1] = {ore: ore, variant:1, isPlaced: true};
+        displayArea();
+        return;
+    }
     if ((cause === "inv" && player.settings.inventorySettings.invToIndex) || (cause === "crafting" && player.settings.inventorySettings.craftingToIndex)) {
         let layer = undefined;
         let world = currentWorld;
@@ -599,6 +635,15 @@ function randomFunction(ore, cause) {
                     if (layerList[subRealmOneLayers[i]].includes(ore)) {
                         layer = subRealmOneLayers[i];
                         world = 1.1;
+                        break;
+                    }
+                }
+            }
+            if (layer === undefined) {
+                for (let i = 0; i < galacticaLayers.length; i++) {
+                    if (layerList[galacticaLayers[i]].includes(ore)) {
+                        layer = galacticaLayers[i];
+                        world = 0.9;
                         break;
                     }
                 }
@@ -680,9 +725,9 @@ function togglePathBlocks() {
 }
 let testSoundTimeout = null;
 function testSound(name, element) {
-    let time = (allAudios[name].duration * 1000);
     if (allAudios[name].currentTime === 0) {
-        allAudios[name].play();
+        closeMenu();
+        playSound(name);
         element.style.backgroundColor = "#6BC267";
         allAudios[name].onended = (event) => {
             allAudios[name].onended = "";
@@ -690,6 +735,8 @@ function testSound(name, element) {
             allAudios[name].pause();
             allAudios[name].currentTime = 0;
             clearTimeout(testSoundTimeout);
+            get("blockContainer").style.animation = "";
+            get("blockDisplay").style.animation = "";
         };
     } else {
         allAudios[name].onended = "";
@@ -697,6 +744,8 @@ function testSound(name, element) {
         allAudios[name].currentTime = 0;
         element.style.backgroundColor = "#FF3D3D";
         clearTimeout(testSoundTimeout);
+        get("blockContainer").style.animation = "";
+        get("blockDisplay").style.animation = "";
     }
 }
 function enableDisguisedChills() {
@@ -761,12 +810,13 @@ function createStats() {
     tableRow.appendChild(tableRowInfo);
     tableRowInfo = document.createElement("td");
     tableRowInfo.classList = "statsRow";
-    tableRowInfo.innerText = (totals["normalAmt"] + totals["electrifiedAmt"] + totals["radioactiveAmt"] + totals["explosiveAmt"]).toLocaleString();
+    const totalAmt = (totals["normalAmt"] + totals["electrifiedAmt"] + totals["radioactiveAmt"] + totals["explosiveAmt"])
+    tableRowInfo.innerText = totalAmt > 1000000000 ? formatNumber(totalAmt, 3) : totalAmt.toLocaleString();
     tableRow.appendChild(tableRowInfo);
     for (let property in totals) {
         tableRowInfo = document.createElement("td");
         tableRowInfo.classList = "statsRow";
-        tableRowInfo.innerText = totals[property].toLocaleString();
+        tableRowInfo.innerText = totals[property] > 1000000000 ? formatNumber(totals[property], 3) : totals[property].toLocaleString();
         tableRow.appendChild(tableRowInfo);
     }
     tableRowInfo = document.createElement("td");
@@ -791,7 +841,8 @@ function updateTimes() {
     get("statsReset").textContent = `${player.stats.minesReset.toLocaleString()} Total Resets.`
     get("furthestPosX").textContent = `${player.stats.furthestPosX - 1000000} Furthest X.`
     get("furthestNegX").textContent = `${player.stats.furthestNegX - 1000000} Furthest -X.`
-    get("furthestY").textContent = `-${player.stats.furthestY} Furthest Y.`
+    get("furthestY").textContent = `-${player.stats.furthestY} Furthest Y.`;
+    get("sessionMined").textContent = `${formatNumber((player.stats.blocksMined-player.startingBlocks), 3)} Session Mined.`
     const total = player.avgSpeed;
     const speeds = calcSpeed();
     const output = `${Math.floor(total)} Average Speed/${Math.floor(1000/speeds.speed * speeds.reps) + speeds.extra} Estimated Speed`;
@@ -1044,8 +1095,35 @@ function toggleNyerd(button) {
             getAngleBetweenPoints({x : player.oreTracker.locationX, y: player.oreTracker.locationY});
         }
     }
+    removeTrackerInformation();
+}
+function toggleSimulatedRng(button) {
+    if (player.settings.simulatedRng) {
+        button.style.backgroundColor = "#FF3D3D";
+        player.settings.simulatedRng = false;
+    } else {
+        button.style.backgroundColor = "#6BC267";
+        player.settings.simulatedRng = true;
+    }
+}
+function togglePlacement() {
+    const placer = get("toggleOrePlacer");
+    if (isPlacing) {
+        placer.style.border = "0.1vw solid red";
+        placer.style.boxShadow = "0px 0px 0.5vw red";
+        isPlacing = false;
+    } else {
+        placer.style.border = "0.1vw solid green";
+        placer.style.boxShadow = "0px 0px 0.5vw green";
+        isPlacing = true;
+    }
 }
 function goToConvert(ore, variant) {
+    if (isPlacing) {
+        mine[curY][curX + 1] = {ore: ore, variant:variant, isPlaced: true};
+        displayArea();
+        return;
+    }
     showMenuScreen("locations");
     showVariantConversion(true);
     document.getElementById("oreInput").value = ore;
@@ -1148,7 +1226,8 @@ const portalLocations = {
     "worldOne" : {position: 0, name: "World One", goesTo: 1, hue: "0deg"},
     "worldTwo" : {position: 1, name: "World Two", goesTo: 2, hue: "-40deg"},
     "trophyRoom" : {position: 2, name: "Trophy Room", goesTo: 0, hue: "150deg"},
-    "subrealmOne" : {position: 3, name: "Subrealm One", goesTo: 1.1, hue: "40deg"}
+    "galactica" : {position: 3, name: "Galactica", goesTo: 0.9, hue: "190deg"},
+    "subrealmOne" : {position: 4, name: "Subrealm One", goesTo: 1.1, hue: "40deg"}
 }
 let currentPortalShown = 0;
 function getNextPortalPosition(num) {
@@ -1182,15 +1261,16 @@ function isUnlocked(portal) {
     if (portal.goesTo === 1.1 && player.sr1Unlocked) return true;
     if (portal.goesTo === 2 && player.pickaxes["pickaxe13"]) return true;
     if (portal.goesTo === 0) return true;
+    if (portal.goesTo === 0.9 && player.galacticaUnlocked) return true;
     return false;
 }
 function getWorldRequirements(world) {
     if (world === 2) return "Craft 'The Key' to Unlock!";
     if (world === 1.1) return "Mine 1 Flawless to Unlock!";
+    if (world === 0.9) return "Find the true God of this world."
 }
 //SILLINESS BELOW!!!!!!!
 function showCatText() {
-    console.log("cat")
     get("catStuff").style.display = "flex";
 }
 let curCatStep = 0;
@@ -1218,7 +1298,7 @@ function sillyKittyCat(text) {
             typeWriter("WHY DO YOU KNOW SO MANY CAT EMOTICONS YOU FUCKING FURRY :SOB:", get("spawnMessage"));
             get("catStuff").style.display = "none";
             catstuff.layer = currentLayer;
-            insertIntoLayers({ore: "Wavaderg", layers:[currentLayer], "useLuck": true})
+            insertIntoLayers({ore: "Goober", layers:[currentLayer], "useLuck": true})
         }
     } else {
         new Audio("audios/meow-2.mp3").play();

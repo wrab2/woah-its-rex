@@ -35,6 +35,8 @@ class playerTemplate {
             "gear31": false,
             "gear32": false,
             "gear33": false,
+            "gear34": false,
+            "gear35": false,
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -68,6 +70,7 @@ class playerTemplate {
             "pickaxe29" : false,
             "pickaxe30" : false,
             "pickaxe31" : false,
+            "pickaxe32" : false,
         }
         this.settings = {
             audioSettings: {
@@ -107,7 +110,8 @@ class playerTemplate {
             useNyerd: false,
             automineUpdate: 25,
             spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Infinitesimal"],
-            lastWorld: 1
+            lastWorld: 1,
+            simulatedRng: false
         },
         this.stats = {
             currentPickaxe: "pickaxe0",
@@ -154,6 +158,7 @@ class playerTemplate {
         },
         this.wasUsing = undefined;
         this.sr1Unlocked = false;
+        this.galacticaUnlocked = false;
         this.faqOffered = false;
         this.webHook = {
             active: false,
@@ -192,6 +197,8 @@ class playerTemplate {
         },
         this.serverHook = undefined;
         this.serverHookName = undefined;
+        this.lastOnline = Date.now();
+        this.offlineProgress = 0;
     }
 }
 let player = new playerTemplate();
@@ -569,6 +576,8 @@ function oldDataToNew(data) {
 
 function loadNewData(data) {
     try {
+        if (data.blocks["Wavaderg"] !== undefined) data.blocks["Ryoui"] = data.blocks["Goober"];
+        delete data.blocks["Wavaderg"];
         for (let propertyName in data.blocks) {
             if (oreList[propertyName] !== undefined) {
                 if (data.blocks[propertyName].normalAmt !== undefined) {
@@ -624,6 +633,7 @@ function loadNewData(data) {
         if (data.stats.timePlayed !== undefined) player.stats.timePlayed = data.stats.timePlayed;
         if (data.stats.minesReset !== undefined) player.stats.minesReset = data.stats.minesReset;
         player.startingResets = player.stats.minesReset;
+        player.startingBlocks = player.stats.blocksMined;
         data.stats.furthestNegX ??= 1000000;
         data.stats.furthestPosX ??= 1000000;
         data.stats.furthestY ??= 0;
@@ -700,6 +710,8 @@ function loadNewData(data) {
         if (data.settings.automineProtection) toggleAutomineProtection(document.getElementById("automineProtection"));
         data.settings.lastWorld ??= 1;
         player.settings.lastWorld = data.settings.lastWorld;
+        data.settings.simulatedRng ??= false;
+        if (data.settings.simulatedRng) toggleSimulatedRng(get("simulatedRng"));
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {
                 if (data.powerupCooldowns[property] !== undefined && player.powerupCooldowns[property] !== undefined) {
@@ -717,6 +729,8 @@ function loadNewData(data) {
         }
         data.sr1Unlocked ??= false;
         player.sr1Unlocked = data.sr1Unlocked;
+        data.galacticaUnlocked ??= false;
+        player.galacticaUnlocked = data.galacticaUnlocked;
         //unlock locked features
         if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";
@@ -734,7 +748,9 @@ function loadNewData(data) {
                 }
             }
         }
+        if (player.galacticaUnlocked && player.lastWorld !== 0.9) galacticaShortcut();
         if (data.serverHook !== undefined) player.serverHook = data.serverHook;
+        if (data.serverHookName !== undefined) player.serverHookName = data.serverHookName;
         data.faqOffered ??= false;
         data.luna ??= {
             layer: Math.round(Math.random() * 100000),
@@ -748,16 +764,34 @@ function loadNewData(data) {
             player.luna.lastAddedOn = data.luna.lastAddedOn;
         }
         lastBlockAmt = player.stats.blocksMined;
-        switchWorld(player.settings.lastWorld, true)
+        if (player.settings.lastWorld !== 1) switchWorld(player.settings.lastWorld, true)
         data.name ??= "Cat";
         player.name = data.name;
         data.viewedMessages ??= {};
         player.viewedMessages = data.viewedMessages;
-        if (player.viewedMessages["waterWorld"] === undefined) {
-            player.settings.spawnMessageTiers.push("Hyperdimensional", "Infinitesimal");
-            player.settings.stopOnRare.allowList.push("Hyperdimensional", "Infinitesimal");
-            applyStopOnRareData();
-            applySpawnMessageData();
+        //sorry i broke stuff so this exists lol mb
+        let sh = false;
+        let si = false;
+        let rh = false;
+        let ri = false;
+        if (player.settings.spawnMessageTiers.indexOf("Hyperdimensional") > -1) sh = true;
+        if (player.settings.spawnMessageTiers.indexOf("Infinitesimal") > -1) si = true;
+        if (player.settings.stopOnRare.allowList.indexOf("Hyperdimensional") > -1) rh = true;
+        if (player.settings.stopOnRare.allowList.indexOf("Infinitesimal") > -1) ri = true;
+        for (let i = player.settings.spawnMessageTiers.length - 1; i >= 0; i--) if (player.settings.spawnMessageTiers[i] === "Hyperdimensional" || player.settings.spawnMessageTiers[i] === "Infinitesimal") player.settings.spawnMessageTiers.splice(i, 1);
+        for (let i = player.settings.stopOnRare.allowList.length - 1; i >= 0; i--) if (player.settings.stopOnRare.allowList[i] === "Hyperdimensional" || player.settings.stopOnRare.allowList[i] === "Infinitesimal") player.settings.stopOnRare.allowList.splice(i, 1);
+        if (sh) player.settings.spawnMessageTiers.push("Hyperdimensional"); 
+        if (si) player.settings.spawnMessageTiers.push("Infinitesimal"); 
+        if (rh) player.settings.stopOnRare.allowList.push("Hyperdimensional"); 
+        if (ri) player.settings.stopOnRare.allowList.push("Infinitesimal"); 
+        applyStopOnRareData();
+        applySpawnMessageData();
+        data.offlineProgress ??= 0;
+        if (data.lastOnline !== undefined) {
+            data.offlineProgress += Date.now() - data.lastOnline;
+            if (data.offlineProgress < 0) data.offlineProgress = 0;
+            if (data.offlineProgress > 28800000) data.offlineProgress = 28800000;
+            player.offlineProgress = data.offlineProgress;
         }
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
@@ -853,6 +887,7 @@ function saveNewData(obj) {
                 e: playerInventory[propertyName]["explosiveAmt"],
                 f: playerInventory[propertyName]["foundAt"]
             };
+            for (let num in data.blocks[propertyName]) if (data.blocks[propertyName][num] > 1e308) data.blocks[propertyName][num] = 1e308;
         }
         if (obj.override !== undefined) data.player = obj.override;
         if (!debug) localStorage.setItem("newPlayerData", JSON.stringify(data));

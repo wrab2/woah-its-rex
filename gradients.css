@@ -460,6 +460,27 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#dimensionalSlicer span{
+    background: linear-gradient(to right,#000000, #FF4191, #E90074, #FFF078, #FFF078, #E90074, #FF4191, #000000);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#potentialityMultiplier span{
+    background: linear-gradient(to right,#FF8F00, #AF47D2, #FFDB00, #26355D, #FFDB00, #AF47D2, #FF8F00);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#electrifyingPropagator span{
+    background: linear-gradient(to right,#850F8D, #E49BFF, #F8F9D7, #180161, #F8F9D7, #E49BFF, #850F8D);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     -webkit-background-clip: text;
