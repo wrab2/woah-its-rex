@@ -159,7 +159,7 @@ class secureLogs {
         else if (log.variant === 2) this.#verifiedLogs["Electrified"].push(log);
         else if (log.variant === 3) this.#verifiedLogs["Radioactive"].push(log);
         else if (log.variant === 4) this.#verifiedLogs["Explosive"].push(log);
-        if (log.rng <= 1/100000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
+        if (log.rng <= 1/1000000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
         if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
     }
     showLogs() {
