@@ -697,8 +697,8 @@ function showPickaxes() {
             for (let i = 0; i < children.length; i++) children[i].style.display = "none";
             document.getElementById("nullChroma").style.display = "block";
         } else m88 = 0;
-    } else m88 = 0;
-    let list = showOrders[`g${currentWorld}`]
+    }
+    let list = showOrders[`g${currentWorld}`];
     if (!galDis) for (let i = 0; i < list.length; i++) {
         getButtonByName(list[i]).style.display = "block";
     }

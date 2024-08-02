@@ -576,7 +576,7 @@ function oldDataToNew(data) {
 
 function loadNewData(data) {
     try {
-        if (data.blocks["Wavaderg"] !== undefined) data.blocks["Ryoui"] = data.blocks["Goober"];
+        if (data.blocks["Wavaderg"] !== undefined) data.blocks["Goober"] = data.blocks["Wavaderg"];
         delete data.blocks["Wavaderg"];
         for (let propertyName in data.blocks) {
             if (oreList[propertyName] !== undefined) {
