@@ -6,340 +6,342 @@ const recipes = {
     "pickaxe1" : {
         name : "Mulch Mallet",
         recipe : [{ore:"🟫", amt:5000},{ore:"🟧", amt:160},{ore:"🟡", amt:30},{ore:"🔴", amt:17},{ore:"⚫", amt:7}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe2" : {
         name : "Mud Sickle",
         recipe : [{ore:"🟫", amt:25000},{ore:"🟥", amt:750},{ore:"🔵", amt:300},{ore:"🟣", amt:60},{ore:"🧧", amt:15}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe3" : {
         name : "Dirt Ravager",
         recipe : [{ore:"🟫", amt:100000},{ore:"🟧", amt:4000},{ore:"🟢", amt:1800},{ore:"🟠", amt:650},{ore:"🟤", amt:240},{ore:"⬜", amt:30},{ore:"🟨", amt:2}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe28" : {
         name: "Crystalline Excavator",
         recipe : [{ore:"🌫️", amt:250000},{ore:"🟪", amt:6900},{ore:"🟡", amt:2500},{ore:"◽", amt:480},{ore:"🔲", amt:3},{ore:"🔘", amt:2},{ore:"🔻", amt:1},{ore:"💚", amt:1}],
-        upgrades : {}
+        active : []
     },
     "pickaxe29" : {
         name: "Ballast Breaker",
         recipe : [{ore:"🌫️", amt:500000},{ore:"🟧", amt:25000},{ore:"🔵", amt:8500},{ore:"⚫", amt:1300},{ore:"⬛", amt:70},{ore:"🟦", amt:25},{ore:"🔺", amt:2},{ore:"🔹", amt:1},{ore:"💙", amt:2},{ore:"🤎", amt:1}],
-        upgrades : {}
+        active : []
     },
     "pickaxe30" : {
         name: "Tropical Carver",
         recipe : [{ore:"🌫️", amt:1250000},{ore:"🟥", amt:52000},{ore:"🟢", amt:28000},{ore:"⬜", amt:500},{ore:"🔲", amt:15},{ore:"🔻", amt:5},{ore:"🔸", amt:2},{ore:"🔷", amt:3},{ore:"💚", amt:3},{ore:"❤️", amt:2},{ore:"🤍", amt:1}],
-        upgrades : {}
+        active : []
     },
     "pickaxe4" : {
         name : "Void Crusher",
         recipe : [{ore:"📰", amt:2000000},{ore:"🟪", amt:68000},{ore:"◽", amt:4750},{ore:"⬛", amt:270},{ore:"🟨", amt:60},{ore:"🔘", amt:15},{ore:"🔹", amt:7},{ore:"🔶", amt:5},{ore:"💙", amt:10},{ore:"❤️", amt:8},{ore:"🤍", amt:4},{ore:"⚙️", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe5" : {
         name : "Geode Staff",
         recipe : [{ore:"🪨", amt:2500000},{ore:"🟠", amt:32500},{ore:"🟣", amt:12000},{ore:"◾", amt:6900},{ore:"⬜", amt:1000},{ore:"🟦", amt:160},{ore:"🔺", amt:5},{ore:"🔹", amt:8},{ore:"💜", amt:8},{ore:"🖤", amt:5},{ore:"💠", amt:1},{ore:"🥏", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe6" : {
         name : "Earth Soiler",
         recipe : [{ore:"🟫", amt:3000000},{ore:"🟧", amt:290000},{ore:"🔵", amt:87500},{ore:"🟤", amt:13500},{ore:"🔻", amt:20},{ore:"🔶", amt:8},{ore:"❤️", amt:20},{ore:"🤍", amt:10},{ore:"🍁", amt:2},{ore:"🎄", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe7" : {
         name : "Crypt Smasher",
         recipe : [{ore:"🌵", amt:4000000},{ore:"🌊", amt:1500000},{ore:"🟢", amt:185000},{ore:"🟤", amt:27750},{ore:"🟨", amt:150},{ore:"🔸", amt:20},{ore:"🔷", amt:20},{ore:"🖍️", amt:2},{ore:"⚱️", amt:2},{ore:"🤿", amt:1},{ore:"🫧", amt:1},{ore:"🎀", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe8" : {
         name : "Labyrinthian Tide",
         recipe : [{ore:"🧱", amt:5000000},{ore:"🌊", amt:5000000},{ore:"☢️", amt:5000000},{ore:"🟪", amt:470000},{ore:"🧧", amt:15000},{ore:"🟨", amt:700},{ore:"🔺", amt:65},{ore:"🔶", amt:30},{ore:"🗿", amt:2},{ore:"🪙", amt:2},{ore:"🔔", amt:2},{ore:"🧩", amt:2},{ore:"⛵", amt:3},{ore:"🎣", amt:3},{ore:"🎇", amt:1},{ore:"🧲", amt:1},{ore:"👑", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe9" : {
         name : "77 Leaf Destroyer",
         recipe : [{ore:"📰", amt:15000000},{ore:"🧱", amt:15000000},{ore:"🟥", amt:1400000},{ore:"🟣", amt:115000},{ore:"⬜", amt:13500},{ore:"🔘", amt:280},{ore:"🔹", amt:100},{ore:"✂️", amt:20},{ore:"🎲", amt:18},{ore:"🪜", amt:17},{ore:"🪚", amt:15},{ore:"🏆", amt:4},{ore:"🧨", amt:5},{ore:"🔗", amt:6},{ore:"📝", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe10" : {
         name : "Planet Buster",
         recipe : [{ore:"🟫", amt:75000000},{ore:"🟧", amt:4150000},{ore:"🟡", amt:920000},{ore:"◾", amt:135000},{ore:"🔲", amt:1200},{ore:"🔸", amt:200},{ore:"🔷", amt:180},{ore:"🍁", amt:50},{ore:"🌻", amt:45},{ore:"🪵", amt:45},{ore:"🎄", amt:35},{ore:"🎍", amt:15},{ore:"🎃", amt:6},{ore:"🌲", amt:6},{ore:"🌏", amt:2},{ore:"🌪️", amt:2},{ore:"🥗", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe11" : {
         name : "Whirlpool of Fate",
         recipe : [{ore:"🌊", amt:225000000},{ore:"🔴", amt:1200000},{ore:"◽", amt:450000},{ore:"🟨", amt:5300},{ore:"🔻", amt:1000},{ore:"🔶", amt:470},{ore:"⛵", amt:325},{ore:"🎣", amt:315},{ore:"🤿", amt:300},{ore:"🫧", amt:300},{ore:"🐟", amt:100},{ore:"👑", amt:40},{ore:"🔱", amt:35},{ore:"🌀", amt:5},{ore:"👿", amt:4},{ore:"🪩", amt:3},{ore:"💫", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe12" : {
         name : "Wings of Glory",
         recipe : [{ore:"🧱", amt:150000000},{ore:"🪨", amt:150000000},{ore:"🌫️", amt:150000000},{ore:"🔵", amt:8000000},{ore:"🟠", amt:4000000},{ore:"⚫", amt:1230000},{ore:"🧧", amt:390000},{ore:"🟦", amt:22900},{ore:"🔺", amt:1900},{ore:"💚", amt:1500},{ore:"🤍", amt:750},{ore:"🧵", amt:70},{ore:"❄️", amt:40},{ore:"🥉", amt:35},{ore:"🧊", amt:25},{ore:"💸", amt:20},{ore:"👁️", amt:7},{ore:"🌈", amt:5},{ore:"🌇", amt:3}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe13" : {
         name : "The Key",
         recipe :  [{ore:"🟫", amt:10000000},{ore:"🧱", amt:10000000},{ore:"🌫️", amt:10000000},{ore:"🌊", amt:10000000},{ore:"🪨", amt:10000000},{ore:"☢️", amt:10000000},{ore:"🌵", amt:10000000},{ore:"📰", amt:10000000},{ore:"🌏", amt:1},{ore:"🔩", amt:1},{ore:"🧵", amt:1},{ore:"🌀", amt:1},{ore:"❄️", amt:1},{ore:"🥀", amt:1},{ore:"🔥", amt:1},{ore:"📝", amt:1}],
-        upgrades : {},
+        active : [],
     },
     "pickaxe14" : {
         name : "Extreme Echolocator",
         recipe : [{ore:"📺", amt:50000},{ore:"🔃", amt:500},{ore:"↘️", amt:10},{ore:"⏬", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe15" : {
         name : "Corundum Caver",
         recipe : [{ore:"🚪", amt:400000},{ore:"🔁", amt:1800},{ore:"⬇️", amt:150},{ore:"⏫", amt:18},{ore:"▶️", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe16" : {
         name : "Starborne Slasher",
         recipe : [{ore:"🌐", amt:1000000},{ore:"⤵️", amt:1900},{ore:"↪️", amt:960},{ore:"🔽", amt:95},{ore:"⏮️", amt:15},{ore:"📕", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe17" : {
         name : "Nyabomb",
         recipe : [{ore:"♟️", amt:3000000},{ore:"🔂", amt:16000},{ore:"⏺️", amt:40},{ore:"⏏️", amt:10},{ore:"📗", amt:5},{ore:"📘", amt:3},{ore:"✏️", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe18" : {
         name : "Lunar Lightsabre",
         recipe : [{ore:"☁️", amt:7500000},{ore:"⬅️", amt:6000},{ore:"↖️", amt:1300},{ore:"➡️", amt:1150},{ore:"📙", amt:6},{ore:"🌧️", amt:2},{ore:"🌤️", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe19" : {
         name : "Gemstone Engraver",
         recipe : [{ore:"♟️", amt:12500000},{ore:"⬆️", amt:9750},{ore:"◀️", amt:1200},{ore:"⏯️", amt:275},{ore:"⏸️", amt:130},{ore:"📗", amt:15},{ore:"🧠", amt:2},{ore:"📐", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe20" : {
         name : "Gambler's Fallacy",
         recipe : [{ore:"❌", amt:2000000},{ore:"📺", amt:35000000},{ore:"🔼", amt:4850},{ore:"⏪", amt:1400},{ore:"✴️", amt:3},{ore:"📙", amt:20},{ore:"🛡️", amt:20},{ore:"🪃", amt:10},{ore:"🪓", amt:3},],
-        upgrades : {}
+        active : []
     },
     "pickaxe21" : {
         name : "Exponential Centrifuge",
         recipe : [{ore:"☁️", amt:37500000},{ore:"🚪", amt:37500000},{ore:"🔃", amt:2160000},{ore:"⏏️", amt:70},{ore:"📘", amt:50},{ore:"🔑", amt:20},{ore:"🌨️", amt:10},{ore:"🖇️", amt:10},{ore:"⛈️", amt:3},],
-        upgrades : {}
+        active : []
     },
     "pickaxe22" : {
         name : "Singularity Slammer",
         recipe : [{ore:"❌", amt:75000000},{ore:"📺", amt:100000000},{ore:"🔄", amt:2230000},{ore:"↪️", amt:260000},{ore:"⏬", amt:7800},{ore:"⏯️", amt:2100},{ore:"📗", amt:35},{ore:"📕", amt:30},{ore:"📙", amt:25},{ore:"📘", amt:20},{ore:"🛡️", amt:30},{ore:"🪃", amt:25},{ore:"🪓", amt:5},{ore:"🔕", amt:2},{ore:"🔨", amt:1}],
-        upgrades : {}
+        active : []
     },
     "pickaxe23" : {
         name : "Staff of Binding",
         recipe : [{ore:"🚪", amt:200000000},{ore:"↘️", amt:148000},{ore:"➡️", amt:73000},{ore:"🔽", amt:49000},{ore:"🔒", amt:125},{ore:"🔑", amt:100},{ore:"🖇️", amt:35},{ore:"🔏", amt:5},{ore:"⛓️", amt:4},],
-        upgrades : {}
+        active : []
     },
     "pickaxe24" : {
         name : "SSS",
         recipe : [{ore:"☁️", amt:625000000},{ore:"🔃", amt:16175000},{ore:"⤵️", amt:2440000},{ore:"⏬", amt:28900},{ore:"⏺️", amt:18300},{ore:"📙", amt:7500},{ore:"📘", amt:6000},{ore:"🌨️", amt:300},{ore:"🪁", amt:200},{ore:"⛈️", amt:120},{ore:"🌩️", amt:45},{ore:"🪶", amt:4},],
-        upgrades : {}
+        active : []
     },
     "pickaxe25" : {
         name : "Coronary Catastrophe",
         recipe : [{ore:"🌐", amt:1500000000},{ore:"🔂", amt:17825000},{ore:"⬇️", amt:1480000},{ore:"◀️", amt:220000},{ore:"⏫", amt:178000},{ore:"🖱️", amt:2300},{ore:"💔", amt:200},{ore:"🔪", amt:50},{ore:"🧂", amt:20},{ore:"📽️", amt:10},{ore:"💘", amt:1},],
-        upgrades : {}
+        active : []
     },
     "pickaxe26" : {
         name : "Null Chroma",
         recipe : [{ore:"❌", amt:44444444444},{ore:"🕳️", amt:2600000},{ore:"✴️", amt:260},{ore:"⚙️", amt:1750000},{ore:"💠", amt:1460000},{ore:"🫧", amt:1000000},{ore:"💍", amt:584000},{ore:"🎍", amt:240000},{ore:"👑", amt:140000},{ore:"💎", amt:51500},{ore:"🌟", amt:34000},{ore:"💥", amt:23360},{ore:"🌀", amt:14175},{ore:"🪐", amt:12350},{ore:"🥗", amt:10950},{ore:"🪩", amt:8750},{ore:"📌", amt:275},{ore:"🚧", amt:320},{ore:"💫", amt:4350},{ore:"⛏️", amt:1},{ore:"☯️", amt:1},{ore:"🌳", amt:30},{ore:"🏰", amt:30},{ore:"🚿", amt:30},{ore:"🏔️", amt:30},{ore:"⚠️", amt:30},{ore:"🐪", amt:30},{ore:"🐋", amt:1095},{ore:"💵", amt:30},{ore:"🍃", amt:25},{ore:"👾", amt:15},{ore:"🪡", amt:15},{ore:"🚽", amt:15},{ore:"🎓", amt:15},{ore:"⚡", amt:15},{ore:"💘", amt:30},{ore:"💢", amt:50},{ore:"🪽", amt:2},{ore:"🗝️", amt:2},{ore:"🚫", amt:2},{ore:"♨️", amt:1},]        ,
-        upgrades : {}
+        active : []
     },
     "pickaxe27" : {
         name: "The Tree of Life",
         recipe : [],
-        upgrades : {}
+        active : []
     },
     "pickaxe31" : {
         name: "Undersea Eviscerator",
         recipe : [{ore:"🌊", amt:500000000000},{ore:"⛵", amt:352000000},{ore:"🎣", amt:340000000},{ore:"🤿", amt:323200000},{ore:"🫧", amt:320000000},{ore:"🐟", amt:107200000},{ore:"👑", amt:42400000},{ore:"🔱", amt:40000000},{ore:"🌀", amt:4480000},{ore:"👿", amt:3720000},{ore:"🪩", amt:2800000},{ore:"💫", amt:1400000},{ore:"🐋", amt:348000},{ore:"⚓", amt:3680},{ore:"🪸", amt:1000},{ore:"HD 160529", amt:1}],
-        upgrades : {}
+        active : []
     },
     "pickaxe32" : {
         name: "Dimensional Slicer",
         recipe : [{ore:"australiumIngot", amt:7500000},{ore: "⚠️", amt:175000},{ore: "🐪", amt:150000},{ore: "🐋", amt:145000},{ore: "🏰", amt:131500},{ore: "💵", amt:131500},{ore: "🌳", amt:125000},{ore: "🦴", amt:6700},{ore: "🦚", amt:4800},{ore: "🎩", amt:3900},{ore: "🏯", amt:2725},{ore: "🍓", amt:2095},{ore: "🤖", amt:1830},{ore: "Bismuth", amt:1140},{ore: "mutatedGrowth", amt:320},{ore: "godOfTheMine", amt:5},{ore: "unstableCore", amt:1}],
-        upgrades : {}
+        active : []
     },
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear1" : {
         name : "Real Candilium",
         recipe : [{ore:"🌫️", amt:5000000},{ore:"🟤", amt:12500},{ore:"⬜", amt:1700},{ore:"🟦", amt:200},{ore:"🔻", amt:20},{ore:"🔷", amt:4},{ore:"🎭", amt:2},{ore:"🪄", amt:1},{ore:"🕯️", amt:1}],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear2" : {
         name : "Real Vitriol",
         recipe : [{ore:"🌵", amt:10000000},{ore:"🔴", amt:55000},{ore:"🔹", amt:35},{ore:"🔸", amt:25},{ore:"🖤", amt:10},{ore:"🤍", amt:20},{ore:"🖍️", amt:5},{ore:"⚱️", amt:8},{ore:"⭐", amt:1}],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear3" : {
         name : "Infinity Collector",
         recipe : [{ore:"🪨", amt:75000000},{ore:"💠", amt:50},{ore:"⚜️", amt:50},{ore:"🔋", amt:15},{ore:"🔮", amt:10},{ore:"☄️", amt:6},{ore:"💎", amt:3}],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear4" : {
         name : "Layer Materializer",
         recipe : [{ore:"🟫", amt:15000000},{ore:"🧱", amt:15000000},{ore:"🌫️", amt:15000000},{ore:"🌊", amt:15000000},{ore:"🪨", amt:15000000},{ore:"☢️", amt:15000000},{ore:"🌵", amt:60000000},{ore:"📰", amt:15000000},{ore:"📟", amt:7},{ore:"⌚", amt:2},{ore:"🔥", amt:2},],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear5" : {
         name : "Fortune III Book",
         recipe : [{ore:"🌫️", amt:150000000},{ore:"🌊", amt:150000000},{ore:"🪄", amt:75},{ore:"🎨", amt:30},{ore:"🕋", amt:25},{ore:"🕯️", amt:15},{ore:"🌀", amt:1},{ore:"⌛", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear6" : {
         name : "Haste II Beacon",
         recipe : [{ore:"🌵", amt:350000000},{ore:"⚱️", amt:300},{ore:"🗡️", amt:270},{ore:"🎀", amt:75},{ore:"🔆", amt:35},{ore:"⭐", amt:35},{ore:"💥", amt:7},{ore:"🪐", amt:3},],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear7" : {
         name : "Energy Siphoner",
         recipe : [{ore:"🌫️", amt:25000000},{ore:"🟥", amt:1000000},{ore:"🧧", amt:20500},{ore:"🔺", amt:100},{ore:"🎭", amt:5},{ore:"🎴", amt:3},{ore:"🎨", amt:1},{ore:"🕋", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear8" : {
         name : "Sugar Rush",
         recipe : [{ore:"☢️", amt:40000000},{ore:"⬛", amt:6500},{ore:"🔲", amt:700},{ore:"🔶", amt:100},{ore:"🧪", amt:10},{ore:"⚗️", amt:5},{ore:"⏹️", amt:3},{ore:"🔳", amt:1}],
-        upgrades : {}
+        active : [0.9, 1, 1.2]
     },
     "gear9" : {
         name : "SILLYYYY",
         recipe : [{ore:"🎂", amt:1},{ore:"🔮", amt:1},{ore:"🪄", amt:1},],
-        upgrades : {}
+        active : [1]
     },
     "gear10" : {
         name : "Logical Randomiser",
         recipe : [{ore:"🌐", amt:2500000},{ore:"🔄", amt:18500},{ore:"🔀", amt:6500},{ore:"➡️", amt:325},{ore:"⏫", amt:130},{ore:"⏏️", amt:10},{ore:"📕", amt:10},{ore:"📙", amt:10},{ore:"💻", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear11" : {
         name : "Storm Sneakers",
         recipe : [{ore:"☁️", amt:5500000},{ore:"🔁", amt:25000},{ore:"↘️", amt:1750},{ore:"⏪", amt:140},{ore:"⏯️", amt:50},{ore:"📗", amt:30},{ore:"📘", amt:20},{ore:"🌧️", amt:3},{ore:"🌥️", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear12" : {
         name : "Artifice Annihilator",
         recipe : [{ore:"🚪", amt:8750000},{ore:"⤴️", amt:17500},{ore:"⬅️", amt:10000},{ore:"⏬", amt:350},{ore:"⏏️", amt:45},{ore:"🔒", amt:4},{ore:"🔑", amt:3},{ore:"🖇️", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear13" : {
         name : "Repurposed Replicator",
         recipe : [{ore:"🌐", amt:15000000},{ore:"🔃", amt:317500},{ore:"⤴️", amt:15000},{ore:"➡️", amt:2925},{ore:"⏺️", amt:325},{ore:"💻", amt:15},{ore:"🖱️", amt:5},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear14" : {
         name : "Cavern Capacitator",
         recipe : [{ore:"♟️", amt:22500000},{ore:"🔂", amt:280000},{ore:"↩️", amt:57500},{ore:"▶️", amt:450},{ore:"✏️", amt:10},{ore:"🧠", amt:6},{ore:"📖", amt:5},{ore:"📐", amt:2},{ore:"📚", amt:2},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear15" : {
         name : "High Powered Vacuum",
         recipe : [{ore:"☁️", amt:6000000},{ore:"📺", amt:6000000},{ore:"🚪", amt:6000000},{ore:"🌐", amt:6000000},{ore:"♟️", amt:6000000},{ore:"🔄", amt:690000},{ore:"⬆️", amt:49750},{ore:"◀️", amt:6200},{ore:"⏺️", amt:1400},{ore:"📗", amt:60},{ore:"📕", amt:50},{ore:"📙", amt:40},{ore:"📘", amt:30},{ore:"🛡️", amt:15},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear16" : {
         name : "Unlocked Speedcap",
         recipe : [{ore:"🌐", amt:60000000},{ore:"➡️", amt:19650},{ore:"⏩", amt:3250},{ore:"⏭️", amt:2500},{ore:"▶️", amt:915},{ore:"🖱️", amt:30},{ore:"🍆", amt:5},{ore:"💔", amt:2},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear17" : {
         name : "Infinity Collector II",
         recipe : [{ore:"♟️", amt:100000000},{ore:"⤵️", amt:530000},{ore:"🔽", amt:26500},{ore:"🔼", amt:23000},{ore:"⏸️", amt:2000},{ore:"✏️", amt:70},{ore:"🧠", amt:35},{ore:"📖", amt:35},{ore:"📐", amt:15},{ore:"📚", amt:10},{ore:"🖊️", amt:3}],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear18" : {
         name : "Clover's Undoing",
         recipe : [{ore:"📺", amt:250000000},{ore:"🔀", amt:1650000},{ore:"⬅️", amt:470000},{ore:"⏩", amt:8750},{ore:"⏮️", amt:11225},{ore:"⏸️", amt:2200},{ore:"🛡️", amt:275},{ore:"🪃", amt:235},{ore:"🪓", amt:35},{ore:"🔨", amt:5},{ore:"💣", amt:3},],
-        upgrades : {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear19" : {
         name : "Structural Service",
         recipe : [{ore:"🚪", amt:1500000000},{ore:"⤴️", amt:3400000},{ore:"↪️", amt:2300000},{ore:"⏪", amt:57000},{ore:"⏯️", amt:19500},{ore:"🔒", amt:4200},{ore:"🖇️", amt:1300},{ore:"⛓️", amt:100},{ore:"🚧", amt:30},{ore:"🛎️", amt:5},],
-        upgrades : {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear20" : {
         name : "Statistical Amplifier",
         recipe : [{ore:"♟️", amt:4500000000},{ore:"↩️", amt:9000000},{ore:"⬆️", amt:4450000},{ore:"↖️", amt:1250000},{ore:"⏭️", amt:120000},{ore:"✏️", amt:10000},{ore:"📐", amt:3000},{ore:"🔎", amt:150},{ore:"📌", amt:75},{ore:"📍", amt:15},{ore:"🎓", amt:9}],
-        upgrades : {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear21" : {
         name : "Oblivion Fracturer",
         recipe : [{ore:"🦠", amt:70000000},{ore:"☣️", amt:40000000},{ore:"🎵", amt:20000000},{ore:"❓", amt:15000000},{ore:"🪇", amt:1},{ore:"🧬", amt:1},{ore:"🔭", amt:1},{ore:"🕸️", amt:1},],
-        upgrades : {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear22" : {
         name : "Replicator Prototype",
         recipe : [{ore:"🇿🇦", amt:110}, {ore:"🇹🇿", amt:100}, {ore:"🇨🇩", amt:75}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear23" : {
         name : "Hyperdrive Accelerator",
         recipe : [{ore:"🇯🇵", amt:25}, {ore:"🇧🇩", amt:25}, {ore:"🇵🇰", amt:15}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear24" : {
         name : "Superenergetic Automaton",
         recipe : [{ore:"🇨🇺", amt:15}, {ore:"🇭🇹", amt:13}, {ore:"🇬🇹", amt:10}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear25" : {  
         name : "Alteration Reiterator",
         recipe : [{ore:"🇪🇸", amt:15}, {ore:"🇮🇹", amt:13}, {ore:"🇫🇷", amt:10}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear26" : {  
         name : "Stratum Nonillonator",
         recipe : [{ore:"🇪🇨", amt:18}, {ore:"🇨🇱", amt:15}, {ore:"🇻🇪", amt:12}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear27" : {  
         name : "Biome Enchanter",
         recipe : [{ore:"🇻🇺", amt:6}, {ore:"🇫🇲", amt:5}, {ore:"🇸🇧", amt:4}, {ore:"🇰🇾", amt:3}, {ore:"🇨🇰", amt:1}, {ore:"🇫🇰", amt:1}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear28" : {  
         name : "Celestian Reaper",
         recipe : [{ore:"🇸🇩", amt:740000},{ore:"🇳🇬", amt:37500},{ore:"🇨🇳", amt:6600},{ore:"🇭🇳", amt:1800},{ore:"🇺🇸", amt:600},{ore:"🇷🇺", amt:180},{ore:"🇧🇷", amt:18},{ore:"🇫🇯", amt:1},{ore:"🇳🇿", amt:1},],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear29" : {  
         name : "Abyssal Leaper",
         recipe : [{ore:"📰", amt:1000000000},{ore:"🎲", amt:9000},{ore:"🏆", amt:1900},{ore:"🗜️", amt:1700},{ore:"⌚", amt:1400},{ore:"📝", amt:350},{ore:"🌟", amt:250},{ore:"👀", amt:70},{ore:"🪅", amt:20},{ore:"💵", amt:6}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear30" : {  
         name : "RNG Manipulator",
         recipe : [{ore:"🌫️", amt:350000},{ore:"◾", amt:350},{ore:"🧧", amt:175},{ore:"🔻", amt:1},{ore:"🤍", amt:2}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear31" : {  
         name : "Makeshift Accelerator",
         recipe : [{ore:"☢️", amt:600000},{ore:"🔵", amt:9000},{ore:"🟨", amt:10},{ore:"🔘", amt:3},{ore:"🔸", amt:2},{ore:"💙", amt:5},{ore:"❤️", amt:4}],
-        upgrades: {}
+        active : [0.9, 1, 1.2, 2]
     },
     "gear32" : {  
         name : "Quantum Entangler",
         recipe : [{ore:"📺", amt:750000},{ore:"🔃", amt:7500},{ore:"🔂", amt:3000},{ore:"⤵️", amt:1000},{ore:"🔽", amt:50},{ore:"📗", amt:25},{ore:"📘", amt:10}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear33" : {  
         name : "Subatomic Superpositioner",
         recipe : [{ore:"🚪", amt:45000000},{ore:"🔁", amt:25000},{ore:"⬅️", amt:4400},{ore:"🔼", amt:440},{ore:"⏺️", amt:75},{ore:"🔒", amt:10},{ore:"🔑", amt:10},{ore:"🖇️", amt:3}],
-        upgrades: {}
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear34": {
         name : "Potentiality Multiplier",
         recipe : [{ore:"australiumIngot", amt:250000},{ore:"🥇", amt:17600},{ore:"Fox", amt:3911},{ore:"⛔", amt:1735},{ore:"Nyerd", amt:1730},{ore:"🔈", amt:666},{ore:"🧌", amt:1120},{ore:"🎉", amt:782},{ore:"🫶", amt:782},{ore:"🚫", amt:267},{ore:"♨️", amt:66},{ore:"kaleidoscope", amt:85},{ore:"🩸", amt:34},{ore:"mushroomCats", amt:55},{ore:"qrCode", amt:2}],
+        active : [0.9, 1, 1.1, 1.2, 2]
     },
     "gear35": {
         name : "Electrifying Propagator",
         recipe : [{ore:"australiumIngot", amt:750000},{ore:"💠", amt:782000000},{ore:"⚜️", amt:750000000},{ore:"🥏", amt:586000000},{ore:"💍", amt:312500000},{ore:"🔋", amt:130000000},{ore:"🔮", amt:78000000},{ore:"☄️", amt:64500000},{ore:"💎", amt:27500000},{ore:"❄️", amt:12000000},{ore:"🧊", amt:8000000},{ore:"🌈", amt:1700000},{ore:"apatite", amt:1440000},{ore:"🏔️", amt:850000},{ore:"🪦", amt:12100},{ore:"🪤", amt:5850},{ore:"variousMinerals", amt:1520}],
+        active : [0.9, 1, 1.1, 1.2, 2]
     }
 }
 recipeElements = {};
@@ -631,6 +633,14 @@ function utilitySwitchActions() {
     player.displayStatistics.luck = Math.floor(verifiedOres.getCurrentLuck());
     updateSpeed();
     a89();
+    updateGearFaq();
+}
+function updateGearFaq() {
+    let output = ``;
+    for (let recipe in recipes) {
+        if (player.gears[recipe] && recipes[recipe].active.includes(currentWorld)) output += `${recipes[recipe].name},<br>`;
+    }
+    get("curActiveGears").innerHTML = output;
 }
 let m87 = 0;
 let m88 = 0;

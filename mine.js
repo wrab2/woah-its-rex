@@ -198,19 +198,20 @@ const generateBlock = function(location) {
         } 
     }
 }
-const bulkGenerate = function(y, amt, caveInfo) {
+const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);
     const originAmt = amt;
     const generationInfo = getLayer(y);
     if (y === player.lunaLayer) generationInfo.layer = addLuna([...generationInfo.layer], [...generationInfo.probabilities])[0];
     const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? caveList[caveInfo.type] : generationInfo.layer;
+    if (fromOffline) for (let i = thisTable.length - 1; i >= 0; i--) if (oreList[thisTable[i]]["oreTier"] === "Celestial") thisTable.splice(i, 1);
     const sm = (caveInfo !== undefined && caveInfo.type === "currentLayer");
     const isCave = (!sm && caveInfo !== undefined);
     const results = {};
     for (let i = 0; i < thisTable.length; i++) {
         let estAmt;
         if (isCave) {
-            if (caveInfo.type === "abysstoneCave") estAmt = amt*(gsProbabilities[caveList["abysstoneCave"].indexOf(thisTable[i])]*caveLuck)
+            if (caveInfo.type === "abysstoneCave") estAmt = amt*(1/oreList[thisTable[i]]["numRarity"])
             else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*caveLuck);
             else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
         } else {
@@ -221,7 +222,7 @@ const bulkGenerate = function(y, amt, caveInfo) {
         estAmt = Math.floor(estAmt);
         results[thisTable[i]] = {est: estAmt, rand: oldEst}
         amt -= estAmt;
-        if (estAmt > 0 && specialCases.indexOf(thisTable[i]) > -1 && !isCave) {
+        if (estAmt > 0 && specialCases.indexOf(thisTable[i]) > -1 && !isCave && !fromOffline) {
             const celestialRoll = checkSpecials(thisTable[i], true);
             if (celestialRoll.c !== thisTable[i]) {
                 oreList[celestialRoll.c]["decimalRarity"] = oreList[thisTable[i]]["decimalRarity"]/celestialRoll.r;
@@ -252,7 +253,7 @@ const bulkGenerate = function(y, amt, caveInfo) {
                 rng = oreList[blockToGive]["decimalRarity"];
             }
             if (isCave) {
-                if (caveInfo.type === "abysstoneCave") rng = gsProbabilities[caveList["abysstoneCave"].indexOf(blockToGive)]*caveLuck;
+                if (caveInfo.type === "abysstoneCave") rng = 1/oreList[blockToGive]["numRarity"];
                 else if (oolProbabilities[blockToGive] !== undefined) rng = oolProbabilities[blockToGive]*caveLuck;
                 else rng = oreList[blockToGive]["decimalRarity"]*caveLuck;
                 rng/=caveInfo.multi;
@@ -298,15 +299,15 @@ const bulkGenerate = function(y, amt, caveInfo) {
                     playerInventory[blockToGive][variantInvNames[i]] += estVariantAmt;
                     if (playerInventory[blockToGive][variantInvNames[i]] > 1e308) playerInventory[blockToGive][variantInvNames[i]] = 1e308;
                     if (messageIncluded(oreList[blockToGive]["oreTier"])) {
-                        spawnMessage({block: blockToGive, location: location, caveInfo: (isCave ? {"adjRarity":Math.round(1/rng), "caveType":caveInfo.type} : undefined), variant: i+1});
+                        spawnMessage({block: blockToGive, location: {"X":curX, "Y":curY}, caveInfo: (isCave ? {"adjRarity":Math.round(1/rng), "caveType":caveInfo.type} : undefined), variant: i+1});
                         logFind(blockToGive, curX, curY, namesemojis[i], player.stats.blocksMined, false, estVariantAmt, (isCave ? {cave: true, multi: caveInfo.multi} : {cave: false, multi: 1}), rng/multis[i]/(wasDuped ? 10 : 1)); 
                     }
-                    if (oreList[blockToGive]["hasLog"] && rng < 1 && rng/multis[i] < 1/player.settings.minLogRarity) verifiedOres.createBulkLog({
+                    if ((oreList[blockToGive]["hasLog"] || isCave) && rng < 1 && rng/multis[i] < 1/player.settings.minLogRarity) verifiedOres.createBulkLog({
                         block: blockToGive,
                         genAt: new Date().toUTCString(),
                         variant: i+1,
                         luck: oreList[blockToGive]["decimalRarity"]*oreList[blockToGive]["numRarity"],
-                        rng: rng/multis[i],
+                        rng: rng/multis[i]/(wasDuped ? 10 : 1),
                         mod: rngModifier,
                         rand: results[blockToGive].rand,
                         avgSpeed: player.avgSpeed,
@@ -325,26 +326,6 @@ const bulkGenerate = function(y, amt, caveInfo) {
             }
             let toGive = results[blockToGive].est - totalVariants;
             if (toGive > 0) {
-                if (oreList[blockToGive]["hasLog"] && rng < 1 && rng < 1/player.settings.minLogRarity) verifiedOres.createBulkLog({
-                    block: blockToGive,
-                    genAt: new Date().toUTCString(),
-                    variant: 1,
-                    luck: oreList[blockToGive]["decimalRarity"]*oreList[blockToGive]["numRarity"],
-                    rng: rng,
-                    mod: rngModifier,
-                    rand: results[blockToGive].rand,
-                    avgSpeed: player.avgSpeed,
-                    paradoxical: player.powerupVariables.fakeEquipped.item,
-                    world: currentWorld,
-                    withPickaxe: getItemNameFromParadoxical(player.stats.currentPickaxe),
-                    withEvent: getCurrentEventOre(),
-                    mined: true,
-                    bulkAmt: originAmt,
-                    randEdited: (Math.random.toString().replace(/\n|\r| /g, "") !== "functionrandom(){[nativecode]}"),
-                    from: new Error(),
-                    amt: toGive,
-                    caveInfo:caveInfo
-                });
                 wasDuped = false;
                 if (oreList[blockToGive]["numRarity"] >= 750000) {
                     if (player.gears["gear7"] && currentWorld < 2) gearAbility1();
@@ -365,9 +346,29 @@ const bulkGenerate = function(y, amt, caveInfo) {
                     }
                 }
                 if (messageIncluded(oreList[blockToGive]["oreTier"])) {
-                    spawnMessage({block: blockToGive, location: location, caveInfo: (isCave ? {"adjRarity":Math.round(1/rng), "caveType":caveInfo.type} : undefined), variant: 1});
+                    spawnMessage({block: blockToGive, location: {"X":curX, "Y":curY}, caveInfo: (isCave ? {"adjRarity":Math.round(1/rng), "caveType":caveInfo.type} : undefined), variant: 1});
                     logFind(blockToGive, curX, curY, namesemojis[0], player.stats.blocksMined, false, toGive, (isCave ? {cave: true, multi: caveInfo.multi} : {cave: false, multi: 1}), (rng/(wasDuped ? 10 : 1))); 
                 }
+                if ((oreList[blockToGive]["hasLog"] || isCave) && rng < 1 && rng < 1/player.settings.minLogRarity) verifiedOres.createBulkLog({
+                    block: blockToGive,
+                    genAt: new Date().toUTCString(),
+                    variant: 1,
+                    luck: oreList[blockToGive]["decimalRarity"]*oreList[blockToGive]["numRarity"],
+                    rng: rng/(wasDuped ? 10 : 1),
+                    mod: rngModifier,
+                    rand: results[blockToGive].rand,
+                    avgSpeed: player.avgSpeed,
+                    paradoxical: player.powerupVariables.fakeEquipped.item,
+                    world: currentWorld,
+                    withPickaxe: getItemNameFromParadoxical(player.stats.currentPickaxe),
+                    withEvent: getCurrentEventOre(),
+                    mined: true,
+                    bulkAmt: originAmt,
+                    randEdited: (Math.random.toString().replace(/\n|\r| /g, "") !== "functionrandom(){[nativecode]}"),
+                    from: new Error(),
+                    amt: toGive,
+                    caveInfo:caveInfo
+                });
             }
             playerInventory[blockToGive]["normalAmt"] += toGive;
             if (playerInventory[blockToGive]["normalAmt"] > 1e308) playerInventory[blockToGive]["normalAmt"] = 1e308;
@@ -537,7 +538,9 @@ function switchDistance(num) {
     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
     let teleportLayer = getLayer(layerDistanceY).layer;
     for (let i = 0; i < teleportLayer.length; i++) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
-    get("meterDisplay").textContent = `${teleportLayer} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
+    let tI;
+    if (oreList[teleportLayer]["hasImage"]) tI = `<img class="teleportImage" src="${oreList[teleportLayer]["src"]}">`;
+    get("meterDisplay").innerHTML = `${tI === undefined ? teleportLayer : tI} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
     get("meterDisplay").setAttribute("title", oreList[teleportLayer]["oreName"]);
 }
 

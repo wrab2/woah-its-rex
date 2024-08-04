@@ -293,7 +293,7 @@ function movePlayer(dir, reps, type) {
                             let variant = rollVariant();
                             if (player.gears["gear25"] && variant === 1) variant = rollVariant();
                             spawnMessage({block: "⛏️", location: {"X" : curX, "Y" : curY}, caveInfo: undefined, variant: variant, amt:1})
-                            giveBlock({type: "⛏️", x:curX, y:curY, fromReset: false, variant: variant});
+                            giveBlock({type: "⛏️", x:curX, y:curY, fromReset: false, variant: variant, amt:1});
                             checkAllAround(curX, curY);
                             playSound("Celestial")
                         }
@@ -488,8 +488,8 @@ const calcSpeed = function() {
     if (currentWorld === 1.1) {
         if (debug) return {speed: 5, reps: devReps, extra:0}
         const sr1Level = player.upgrades["pickaxe27"].level;
-        if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:0}
-        else return {speed: 7, reps: (-2 + sr1Level), extra:0}
+        if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:extraSpeed}
+        else return {speed: 7, reps: (-2 + sr1Level), extra:extraSpeed}
     }
     if (debug) return {speed: 5, reps: devReps, extra:0}
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
@@ -514,14 +514,16 @@ function displayArea() {
             if (currentWorld === 0.9) grass = -1;
             let i = 0;
             for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) mine[r] ??= [];
+            let ore;
             for (let c = curX - constraints[0]; c <= curX + 9 + (9-constraints[0]); c++) {
                 output = "";
                 for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) {
                     if (mine[r][c]) {
+                        ore = mine[r][c].ore !== undefined ? mine[r][c].ore : mine[r][c];
                         if (player.settings.usePathBlocks)
-                            output += mine[r][c].ore !== undefined ? checkDisplayVariant(mine[r][c]) : (mine[r][c] === "⛏️" ? addPickaxeIcon() : mine[r][c]);
+                            output += (ore === "⛏️" ? addPickaxeIcon() : checkDisplayVariant(mine[r][c]));
                         else
-                            output += mine[r][c] === "⚪" ? "⠀" : (mine[r][c].ore !== undefined ? checkDisplayVariant(mine[r][c]) : (mine[r][c] === "⛏️" ? addPickaxeIcon() : mine[r][c]));   
+                            output += ore === "⚪" ? "⠀" : (ore === "⛏️" ? addPickaxeIcon() : checkDisplayVariant(mine[r][c]));  
                     } else {
                         output += r === grass ? "🟩" : "⬛";
                     }
@@ -553,26 +555,29 @@ function checkDisplayVariant(location) {
     let oreToAdd;
     let includeSize;
     let specialVariant;
-    const tier = oreList[location.ore]["oreTier"];
-    let isRare = (tier !== "Layer" && commons.indexOf(tier) === -1) 
-    if (oreList[location.ore]["hasImage"]) {
-        let isLarge = tier === "Hyperdimensional" || tier === "Infinitesimal" || oreList[location.ore]["numRarity"] >= 1000000000000000;
-        if (isRare) oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[location.ore]["src"]}"></img>`;
-        else return location.ore;
+    const ore = location.ore !== undefined ? location.ore : location;
+    const tier = oreList[ore]["oreTier"];
+    let isRare = (tier !== "Layer" && commons.indexOf(tier) === -1);
+    if (oreList[ore]["hasImage"]) {
+        //if (tier === "Layer") return "⠀";
+        let isLarge = tier === "Hyperdimensional" || tier === "Infinitesimal" || oreList[ore]["numRarity"] >= 1000000000000000;
+        if (isRare) oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[ore]["src"]}"></img>`;
+        else return `<span class="mineSpan"><img class="mineImage" src="${oreList[ore]["src"]}"></img></span>`;
         includeSize = "";
         specialVariant = "Img";
     } else {
-        if (!isRare) return location.ore;
-        oreToAdd = location.ore;
+        if (!isRare) return ore;
+        oreToAdd = ore;
         includeSize = "normalRare";
         specialVariant = "";
     }
-    if (location.variant > 1) {
+    const variant = location.variant !== undefined ? location.variant : 1;
+    if (variant > 1) {
         if (location.variant === 2) {
             return `<span class="mineSpan electrifiedBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
-        } else if (location.variant === 3) {
+        } else if (variant === 3) {
             return `<span class="mineSpan radioactiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
-        } else if (location.variant === 4) {
+        } else if (variant === 4) {
             return `<span class=" mineSpan explosiveBlock${specialVariant} ${includeSize}">${oreToAdd}</span>`
         }
     } else {
@@ -797,7 +802,8 @@ function spawnMessage(obj) {
     let variant = namesemojis[obj.variant - 1];
     let variantMulti = multis[obj.variant - 1];
     //ADD TO MINE CAPACITY IF NEAR RESET
-    player.oreTracker.existingOres.push({block: block, posX : location["X"], posY : location["Y"]});
+    const loc = mine[location["Y"]][location["X"]]
+    if (loc.ore === block || loc === block) player.oreTracker.existingOres.push({block: block, posX : location["X"], posY : location["Y"]});
     let oreRarity = oreList[block]["numRarity"];
     if (oreList[block]["oreTier"] === "Infinitesimal") oreRarity = Infinity;
     let spawnElement = document.getElementById("latestSpawns");
@@ -819,9 +825,7 @@ function spawnMessage(obj) {
     }
     let rng;
     if (caveInfo !== undefined) {
-        if (caveInfo["caveType"] === "abysstoneCave") rng = Math.floor(1/gsProbabilities[caveList["abysstoneCave"].indexOf(block)]) * getCaveMulti(caveInfo["caveType"]);
-        else if (oolProbabilities[block] !== undefined) rng = Math.floor(1/oolProbabilities[block]) * getCaveMulti(caveInfo["caveType"]);
-        else rng = oreRarity * getCaveMulti(caveInfo["caveType"]);
+        rng = caveInfo["adjRarity"];
     } else rng = oreRarity;
     if (caveInfo !== undefined) output += `${variant} ${blockOutput}` + " 1/" + formatNumber(rng * variantMulti) + " Adjusted.";
     else output += `${variant} ${blockOutput}` + " 1/" + formatNumber(rng * variantMulti);
@@ -853,9 +857,9 @@ function spawnMessage(obj) {
         } else {
             spawnText = `<i><span title="${oreList[block]["oreName"]}">` + oreList[block]["spawnMessage"] + "</span></i><br>";
             if (caveInfo != undefined) {
-                spawnText += "1/" + (caveInfo["adjRarity"] * variantMulti).toLocaleString();
+                spawnText += "1/" + Math.floor(caveInfo["adjRarity"] * variantMulti).toLocaleString();
             } else {
-                spawnText += "1/" + (oreRarity * variantMulti).toLocaleString();
+                spawnText += "1/" + Math.floor(oreRarity * variantMulti).toLocaleString();
             }
             typeWriter(spawnText, messageElement)
         }
@@ -966,7 +970,7 @@ function logFind(type, x, y, variant, atMined, fromReset, amt, fromCave, bulkRar
         rng = Math.floor(1/oreList[type]["decimalRarity"]);
     }
     if (oreList[type]["oreTier"] === "Infinitesimal") rng = Infinity;
-    output += ` 1/${bulkRarity === undefined ? formatNumber(rng * multis[namesemojis.indexOf(variant)], 2) : formatNumber(1/bulkRarity, 2)}`;
+    output += ` 1/${bulkRarity === undefined ? formatNumber(rng * multis[namesemojis.indexOf(variant)], 4) : formatNumber(1/bulkRarity, 4)}`;
     output += "</span>";
     element.innerHTML = output;
     if (spawnElement.children.length > 0) {
@@ -1588,13 +1592,14 @@ function updateOfflineProgress() {
         else pickaxeMined = pickaxeStats[player.stats.currentPickaxe].mined
         let willGen = player.offlineProgress > 0 ? Math.floor((speed * (player.offlineProgress/1000))*(pickaxeMined/pickaxeStats[player.stats.currentPickaxe].rate)/10) : 0;
         if (player.powerupVariables.fakeEquipped.item !== undefined || player.powerupVariables.fakeTreeLevel.level !== undefined) {get("offlineActivate").textContent = "Cant Gen: Paradoxical Active!"; willGen = 0;}
+        else if (!verifiedOres.isRightPickaxe()) {get("offlineActivate").textContent = "Cant Gen: Wrong Pickaxe!"; willGen = 0;}
         else get("offlineActivate").textContent = `Gen ${willGen > 1000000000 ? formatNumber(willGen, 2) : willGen.toLocaleString()} Blocks.`;
         return willGen;
     }
 }
 function generateOfflineProgress() {
     const offlineAmt = updateOfflineProgress();
-    if (offlineAmt > 0) {bulkGenerate(curY, offlineAmt); player.offlineProgress = 0; updateOfflineProgress();}
+    if (offlineAmt > 0) {bulkGenerate(curY, offlineAmt, undefined, true); player.offlineProgress = 0; updateOfflineProgress();}
 }
 //TY @marbelynrye FOR MAKING THESE IMAGE DATA GATHERERS UR SO COOL FOR THAT
 //IT WORKS SO WELL!!!!

@@ -30,7 +30,7 @@ function generateCave(x, y, type) {
         }
     }
     if (player.settings.simulatedRng) {
-        bulkGenerate(curY, (500*(caveRateModifier/100)), {type: type, multi: getCaveMulti(type)});
+        bulkGenerate(curY, (400*(caveRateModifier/150)), {type: type, multi: getCaveMulti(type)}, false);
         return;
     }
     x ??= curX;
@@ -345,6 +345,7 @@ function generateCaveBlock(y, x, type) {
             mine[y][x] = {ore: blockToGive, variant: variant};
             if (oolProbabilities[blockToGive] != undefined && type !== "abysstoneCave")
                 adjRarity = (1/oolProbabilities[blockToGive]) * multi;
+            if (type === "abysstoneCave") adjRarity = 1/(gsProbabilities[caveList["abysstoneCave"].indexOf(blockToGive)]/1000)
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000 || oreList[blockToGive]["hasLog"]) {
                 playSound(tier);
                 verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, caveLuck]);

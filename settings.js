@@ -358,7 +358,7 @@ const indexOrder = {
     "worldTwo" : ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "worldTwoCommons", "barrierLayer", "borderLayer", "bacteriaCave", "biohazardCave", "musicCave", "mysteryCave"],
     "subrealmOne" : ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer", "ccCave", "moCave", "foCave", "axCave", "ioCave", "ggCave"],
     "waterWorld" : ["waterLayer", "watrCave"],
-    "galactica" : ["starLayer"]
+    "galactica" : ["starLayer", "nebulaLayer"]
 }
 let layerNum = 0;
 function switchLayerIndex(num, overrideLayer, world) {
@@ -516,6 +516,7 @@ function createIndexCards(layer) {
                 if (blackOut) indexRarity.textContent = "1/??? Base Rarity.";
                 else indexRarity.textContent = `${rarity > 1000000000000000 ? formatNumber(rarity, 3) : rarity.toLocaleString()} Base Rarity.`;
                 rarity = Math.round(rarity / verifiedOres.getCurrentLuck());
+                if (rarity < 1000 && affectedByLuck) rarity = 1000;
                 let simAmt;
                 if (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) {
                     if (pickaxeStats[player.stats.currentPickaxe].isDimensional) simAmt = pickaxeStats[player.stats.currentPickaxe].mined;

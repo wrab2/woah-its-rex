@@ -844,6 +844,13 @@ img.roundcat {
   text-wrap: wrap;
   overflow-wrap: break-word;
 }
+.teleportImage {
+  width: 1.6vw;
+  height: 1.6vw;
+  margin: auto;
+  border: 0.025vw solid white;
+  box-shadow: 0px 0px 0.5vw white;
+}
 #blockContainer {
   margin-top: 0;
   padding: 0;
@@ -2561,8 +2568,8 @@ button {
 }
 .mineImage {
   position: absolute;
-  width: 1.7vw;
-  height: 1.7vw;
+  height: 100%;
+  width: auto;
   z-index: 19;
 }
 .mineOre {
@@ -2576,8 +2583,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5.2631%;
+  height: 1.4vw;
   width: 100%;
+  margin-left: 0.2vw;
 }
 .electrifiedBlock {
   position: relative;

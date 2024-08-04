@@ -21,7 +21,7 @@ async function rollAbilities(force) {
             if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
             else bulkAmt = pickaxe.mined;
             if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
-            bulkGenerate(curY, bulkAmt)
+            bulkGenerate(curY, bulkAmt, undefined, false)
         } else {
             pickaxe.doAbility(curX, curY);
         }
@@ -866,7 +866,7 @@ function pickaxeAbility31(x, y) {
     pickaxeArrayLoop(pickaxe31Nums, x, y);
 }
 function pickaxeAbility32(x, y) {
-    bulkGenerate(y, 75000)
+    bulkGenerate(y, 75000, undefined, false)
 }
 function pickaxeArrayLoop(array, x, y) {
     for (let i = 0; i < array.length; i++) {
