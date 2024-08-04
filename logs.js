@@ -7,6 +7,7 @@ class secureLogs {
     #startTime = Date.now();
     #isRightPickaxe;
     #canGenCaves;
+    #isLoaded;
     constructor() {
         if (logCreated["created"]) location.reload();
         this.#spawnLogs = [];
@@ -239,6 +240,7 @@ class secureLogs {
         return this.#isRightPickaxe;
     }
     checkPickaxe() {
+        if (!this.#isLoaded) this.#isRightPickaxe = false;
         if (pickaxeStats[player.stats.currentPickaxe].canMineIn.includes(currentWorld)) this.#isRightPickaxe = true;
         else this.#isRightPickaxe = false;
     }
@@ -253,6 +255,12 @@ class secureLogs {
     }
     #onLoad() {
 
+    }
+    gameLoaded() {
+        this.#isLoaded = true;
+    }
+    isLoaded() {
+        return this.#isLoaded;
     }
 }
 //i lost the original code for this so gl :3c

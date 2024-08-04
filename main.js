@@ -40,6 +40,7 @@ let emojiNames;
 let messageElement;
 let eventElement;
 function init() {
+    verifiedOres.gameLoaded();
     for (let propertyName in oreList) {
         playerInventory[propertyName] = {"normalAmt":0,"electrifiedAmt":0, "radioactiveAmt":0, "explosiveAmt":0, "foundAt": undefined}
     }
@@ -325,6 +326,7 @@ const catstuff = {
     layer: undefined
 }
 document.addEventListener('keydown', (event) => {
+    if (!verifiedOres.isLoaded()) return;
     let name = event.key;
     let validInput = false;
     name = name.toLowerCase();

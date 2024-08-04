@@ -203,7 +203,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     const originAmt = amt;
     const generationInfo = getLayer(y);
     if (y === player.lunaLayer) generationInfo.layer = addLuna([...generationInfo.layer], [...generationInfo.probabilities])[0];
-    const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? caveList[caveInfo.type] : generationInfo.layer;
+    const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? [...caveList[caveInfo.type]] : [...generationInfo.layer];
     if (fromOffline) for (let i = thisTable.length - 1; i >= 0; i--) if (oreList[thisTable[i]]["oreTier"] === "Celestial") thisTable.splice(i, 1);
     const sm = (caveInfo !== undefined && caveInfo.type === "currentLayer");
     const isCave = (!sm && caveInfo !== undefined);
