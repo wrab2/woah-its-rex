@@ -1686,23 +1686,26 @@ function ct() {
             const rarity = 1/oreList[ore]["decimalRarity"];
             const totalOreRarity = (rarity * needed);
             let totalProcsNeeded;
-            if (currentOreLayer === "commons") {
-                totalProcsNeeded = totalOreRarity/abilityMined;
-                recipeLayers["commons"].highestProcs += totalProcsNeeded;
-                recipeLayers["commons"].amt++;
-            } else {
-                totalProcsNeeded = totalOreRarity/(abilityRevealed > abilityMined ? abilityRevealed : abilityMined);
-                if (oreList[ore]["oreTier"] === "Layer") totalProcsNeeded = totalOreRarity/abilityMined;
-                recipeLayers[currentOreLayer].highestProcs += totalProcsNeeded;
-                recipeLayers[currentOreLayer].amt++;
+            if (needed > 0) {
+                if (currentOreLayer === "commons") {
+                    totalProcsNeeded = totalOreRarity/abilityMined;
+                    recipeLayers["commons"].highestProcs += totalProcsNeeded;
+                    recipeLayers["commons"].amt++;
+                } else {
+                    totalProcsNeeded = totalOreRarity/(abilityRevealed > abilityMined ? abilityRevealed : abilityMined);
+                    if (oreList[ore]["oreTier"] === "Layer") totalProcsNeeded = totalOreRarity/abilityMined;
+                    recipeLayers[currentOreLayer].highestProcs += totalProcsNeeded;
+                    recipeLayers[currentOreLayer].amt++;
+                }
             }
+
         }
     }
     let totalProcs = 0;
     let commonAdd = 0;
     if (recipeLayers["commons"] !== undefined) {commonAdd = recipeLayers["commons"].highestProcs / recipeLayers["commons"].amt; delete recipeLayers["commons"]}
     for (let layer in recipeLayers) {
-        totalProcs += (recipeLayers[layer].highestProcs/recipeLayers[layer].amt)
+        if (recipeLayers[layer].amt > 0) totalProcs += (recipeLayers[layer].highestProcs/recipeLayers[layer].amt)
     }
     let timeForProcs = (Math.floor(totalProcs) * abilityRate) / speed;
     return longTime(timeForProcs * 1000);

@@ -94,14 +94,15 @@ function changeCanPlay(name, button) {
 }
 
 
-function playSound(type) {
+function playSound(type, special) {
     oldType = type;
-    if (player.settings.audioSettings[type].canPlay) {
+    if (special === "catgirl") {osaka.currentTime = 0; osaka.play();}
+    else if (player.settings.audioSettings[type].canPlay) {
         if (player.settings.useDisguisedChills) {
             allAudios["Antique"].currentTime = 0;
             allAudios["Antique"].play();
         } else {
-            allAudios[type].currentTime = 0;;
+            allAudios[type].currentTime = 0;
             allAudios[type].play();
         } 
     }

@@ -57,7 +57,7 @@ function mineBlock(x, y, cause) {
                 player.stats.blocksMined++;
                 return;
             }
-            if ((cause === "ability" || cause === "infinity") && player.settings.automineProtection && messageIncluded(oreList[mineBlockOre]["oreTier"])) return;
+            if ((cause === "ability" || cause === "infinity") && player.settings.automineProtection && messageIncluded(oreList[mineBlockOre]["oreTier"]) || ca) return;
         }
         player.stats.blocksMined++;
         giveBlock({type: mineBlockOre, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:mineBlockVariant, amt:1});
@@ -185,7 +185,7 @@ const generateBlock = function(location) {
             verifiedOres.createLog(location["Y"],location["X"],{ore: blockToGive, variant: variant}, new Error());
             verifiedOres.verifyLog(location["Y"], location["X"]);
         }
-        playSound(oreList[blockToGive]["oreTier"]);
+        playSound(oreList[blockToGive]["oreTier"], blockToGive);
         if (messageIncluded(oreList[blockToGive]["oreTier"])) spawnMessage({block: blockToGive, location: location, caveInfo: undefined, variant: variant});
         let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
         if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
@@ -206,6 +206,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? [...caveList[caveInfo.type]] : [...generationInfo.layer];
     if (fromOffline) for (let i = thisTable.length - 1; i >= 0; i--) if (oreList[thisTable[i]]["oreTier"] === "Celestial") thisTable.splice(i, 1);
     const sm = (caveInfo !== undefined && caveInfo.type === "currentLayer");
+    if (sm) caveInfo = undefined;
     const isCave = (!sm && caveInfo !== undefined);
     const results = {};
     for (let i = 0; i < thisTable.length; i++) {
@@ -257,6 +258,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                 else if (oolProbabilities[blockToGive] !== undefined) rng = oolProbabilities[blockToGive]*caveLuck;
                 else rng = oreList[blockToGive]["decimalRarity"]*caveLuck;
                 rng/=caveInfo.multi;
+                if (oreList[blockToGive]["oreTier"] === "Layer") rng = 1;
             }
             let wasDuped = false;
             if (results[blockToGive].rand >= 1 && !isCave) rng = 1;
@@ -281,7 +283,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                 if (currentActiveEvent !== undefined) {
                     if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();
                 } 
-                playSound(oreList[blockToGive]["oreTier"]);
+                playSound(oreList[blockToGive]["oreTier"], blockToGive);
             }
             for (let i = 3; i > 0; i--) {
                 variantSubtract = 0;
@@ -349,7 +351,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                     spawnMessage({block: blockToGive, location: {"X":curX, "Y":curY}, caveInfo: (isCave ? {"adjRarity":Math.round(1/rng), "caveType":caveInfo.type} : undefined), variant: 1});
                     logFind(blockToGive, curX, curY, namesemojis[0], player.stats.blocksMined, false, toGive, (isCave ? {cave: true, multi: caveInfo.multi} : {cave: false, multi: 1}), (rng/(wasDuped ? 10 : 1))); 
                 }
-                if ((oreList[blockToGive]["hasLog"] || isCave) && rng < 1 && rng < 1/player.settings.minLogRarity) verifiedOres.createBulkLog({
+                if ((oreList[blockToGive]["hasLog"] || (isCave)) && rng < 1 && rng < 1/player.settings.minLogRarity) verifiedOres.createBulkLog({
                     block: blockToGive,
                     genAt: new Date().toUTCString(),
                     variant: 1,

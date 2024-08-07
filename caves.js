@@ -29,7 +29,7 @@ function generateCave(x, y, type) {
                 caveList[type] = createGsCave();
         }
     }
-    if (player.settings.simulatedRng) {
+    if (player.settings.simulatedRng && !ca) {
         bulkGenerate(curY, (400*(caveRateModifier/150)), {type: type, multi: getCaveMulti(type)}, false);
         return;
     }
