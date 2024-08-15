@@ -481,6 +481,13 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#wormholeExterminator span{
+    background: linear-gradient(to right,#0d3dc3, #aafd0a, #c96709, #aafd0a, #0d3dc3);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
     -webkit-background-clip: text;

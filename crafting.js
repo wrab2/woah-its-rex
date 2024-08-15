@@ -163,6 +163,11 @@ const recipes = {
         recipe : [{ore:"australiumIngot", amt:7500000},{ore: "⚠️", amt:175000},{ore: "🐪", amt:150000},{ore: "🐋", amt:145000},{ore: "🏰", amt:131500},{ore: "💵", amt:131500},{ore: "🌳", amt:125000},{ore: "🦴", amt:6700},{ore: "🦚", amt:4800},{ore: "🎩", amt:3900},{ore: "🏯", amt:2725},{ore: "🍓", amt:2095},{ore: "🤖", amt:1830},{ore: "Bismuth", amt:1140},{ore: "mutatedGrowth", amt:320},{ore: "godOfTheMine", amt:5},{ore: "unstableCore", amt:1}],
         active : []
     },
+    "pickaxe33" : {
+        name: "Wormhole Exterminator",
+        recipe : [{ore:"australiumIngot", amt:66000000},{"ore":"⚙️","amt":250000000},{"ore":"🃏","amt":250000000},{"ore":"🖍️","amt":250000000},{"ore":"✂️","amt":250000000},{"ore":"⚱️","amt":250000000},{"ore":"🎲","amt":250000000},{"ore":"📟","amt":250000000},{"ore":"🗡️","amt":250000000},{"ore":"🎀","amt":250000000},{"ore":"🏆","amt":250000000},{"ore":"🗜️","amt":250000000},{"ore":"⌚","amt":206000000},{"ore":"⭐","amt":152000000},{"ore":"🔆","amt":143000000},{"ore":"🔥","amt":67200000},{"ore":"📝","amt":53800000},{"ore":"🌟","amt":41800000},{"ore":"💥","amt":28600000},{"ore":"🪐","amt":15100000},{"ore":"👀","amt":11200000},{"ore":"🏵️","amt":4130000},{"ore":"🪅","amt":3310000},{"ore":"🐪","amt":1370000},{"ore":"💵","amt":1200000},{"ore":"🦴","amt":61400},{"ore":"🎩","amt":35800},{"ore":"J1407b","amt":1},{"ore":"ascendedArtifact","amt":1}],
+        active : []
+    },
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
@@ -340,9 +345,38 @@ const recipes = {
     },
     "gear35": {
         name : "Electrifying Propagator",
-        recipe : [{ore:"australiumIngot", amt:750000},{ore:"💠", amt:782000000},{ore:"⚜️", amt:750000000},{ore:"🥏", amt:586000000},{ore:"💍", amt:312500000},{ore:"🔋", amt:130000000},{ore:"🔮", amt:78000000},{ore:"☄️", amt:64500000},{ore:"💎", amt:27500000},{ore:"❄️", amt:12000000},{ore:"🧊", amt:8000000},{ore:"🌈", amt:1700000},{ore:"apatite", amt:1440000},{ore:"🏔️", amt:850000},{ore:"🪦", amt:12100},{ore:"🪤", amt:5850},{ore:"variousMinerals", amt:1520}],
+        recipe : [{ore:"australiumIngot", amt:750000},{"ore":"💠","amt":150000000},{"ore":"⚜️","amt":150000000},{"ore":"🥏","amt":150000000},{"ore":"💍","amt":150000000},{"ore":"🔋","amt":130000000},{"ore":"🔮","amt":78200000},{"ore":"☄️","amt":64700000},{"ore":"💎","amt":27600000},{"ore":"❄️","amt":12100000},{"ore":"🧊","amt":8050000},{"ore":"🌈","amt":1700000},{"ore":"apatite","amt":1440000},{"ore":"🏔️","amt":853000},{"ore":"🪦","amt":12100},{"ore":"🪤","amt":5860},{"ore":"variousMinerals","amt":2290}],
         active : [0.9, 1, 1.1, 1.2, 2]
     }
+}
+function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
+    let layer = [];
+    for (let i = 0; i < obj.l.length; i++) {
+        layer = layer.concat([...layerList[obj.l[i]]]);
+    }
+    layer = sortLayerBase(layer)
+    while (layer.indexOf("sillyMiner") > -1) layer.splice(layer.indexOf("sillyMiner"), 1)
+    const results = []
+    const luck = obj.v;
+    for (let i = 0; i < layer.length; i++) {
+        if (!obj.e.includes(oreList[layer[i]]["oreTier"])) {
+            let rarity = oreList[layer[i]]["numRarity"]/luck;
+            if (rarity < 1000) rarity = 1000;
+            let oreAmt = Math.floor(obj.a/rarity);
+            if (oreAmt > 1000) {
+                const logMod = Math.floor(Math.log10(oreAmt));
+                const div = (Math.pow(10, logMod-2))
+                oreAmt = Math.floor(oreAmt/div)
+                oreAmt *= div;
+            } else if (oreAmt > 100) {
+                while (oreAmt%50 !== 0) oreAmt--;
+            } else if (oreAmt > 10) {
+                while (oreAmt%5 !== 0) oreAmt--;
+            }
+            if (oreAmt > 1) results.push({ore: layer[i], amt: oreAmt});
+        }
+    }
+    return results.reverse();
 }
 recipeElements = {};
 let currentRecipe = undefined;
@@ -538,6 +572,7 @@ const buttonGradients = {
     "pickaxe30Craft" : {"gradient" : "linear-gradient(to right, #feda84, #976393, #43457f, #ff9b83)","applied" : false},
     "pickaxe31Craft" : {"gradient" : "linear-gradient(to right, #feda84, #976393, #43457f, #ff9b83)","applied" : false},
     "pickaxe32Craft" : {"gradient" : "linear-gradient(to right, #000000, #FF4191, #E90074, #FFF078, #FFF078, #E90074, #FF4191, #000000)","applied" : false},
+    "pickaxe33Craft" : {"gradient" : "linear-gradient(to right, #0d3dc3, #aafd0a, #c96709, #aafd0a, #0d3dc3)","applied" : false},
     
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
@@ -653,7 +688,7 @@ const showOrders = {
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
     "g1.2" : [],
-    "p0.9": ["pickaxe32"],
+    "p0.9": ["pickaxe32", "pickaxe33"],
     "g0.9": ["gear34", "gear35"]
 }
 let galDis = false;
@@ -905,7 +940,12 @@ const oreRecipes = {
         "cost" : [{"ore":"⭕","amt":1}],
         "result" : [{"ore":"🔕", "amt":2}],
         "multiplier" : 1
-    }
+    },
+    "bellFission" : {
+        "cost" : [{"ore":"🛎️","amt":1}],
+        "result" : [{"ore":"🚧", "amt":5}, {"ore":"⛓️", "amt":10}, {"ore":"🖇️", "amt":200}, {"ore":"🔒", "amt":500}, {"ore":"🚪", "amt":250000000}],
+        "multiplier" : 1
+    },
 }
 function getRecipeById(id) {
     return oreRecipes[id];
@@ -1630,6 +1670,18 @@ const pickaxeStats = {
         src : `⛏️`,
         ability: "",
         doAbility: function(x, y) {pickaxeAbility32(x, y)},
+        canSpawnCaves:[1, 1.2, 2, 0.9],
+        canMineIn:[1, 1.2, 2, 0.9],
+        isDimensional: true
+    },
+    "pickaxe33" : {
+        mined: 65000,
+        revealed: 1,
+        luck: 575,
+        rate: 275,
+        src : `⛏️`,
+        ability: "",
+        doAbility: function(x, y) {pickaxeAbility33(x, y)},
         canSpawnCaves:[1, 1.2, 2, 0.9],
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true

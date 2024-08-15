@@ -17,6 +17,7 @@ function generateCave(x, y, type) {
     if (player.gears["gear14"]) caveRateModifier += 100;
     if (player.stats.currentPickaxe === "pickaxe12") caveRateModifier += 50;
     if (player.powerupVariables.caveBoosts.active) caveRateModifier *= 2;
+    if (player.stats.currentPickaxe === "pickaxe33") caveRateModifier *= 3;
     if (type === undefined) {  
         type = getCaveType();
         if (type === undefined) {
@@ -387,6 +388,7 @@ function getCaveMulti(type) {
 }
 const caveProbabilities1 = ["abysstoneCave", "mysteryCave", "musicCave", "biohazardCave", "bacteriaCave"];
 const caveProbabilities2 = ["ggCave", "ioCave", "axCave", "foCave", "moCave", "ccCave"]
+const caveProbabilities3 = ["watrCave"]
 let caveTypes = {
     "abysstoneCave": {rarity: 1/1000, multi: 1000},
     "mysteryCave": {rarity: 1/50, multi: 50},
@@ -432,7 +434,6 @@ let oolProbabilities = {
 }
 function getCaveType() {
     if (currentWorld === 0.9) return undefined;
-    if (currentWorld === 1.2) return "watrCave";
     let caveTypeLuck = 1;
     if (player.stats.currentPickaxe === "pickaxe12")
         caveTypeLuck = 2;
@@ -441,7 +442,11 @@ function getCaveType() {
     let chosenValue = Math.random();
     chosenValue /= caveTypeLuck;
     if (player.gears["gear27"]) chosenValue /= 1.75;
-    const arr = currentWorld === 1.1 ? caveProbabilities2 : caveProbabilities1;
+    if (player.stats.currentPickaxe === "pickaxe33") chosenValue /= 2.25;
+    let arr;
+    if (currentWorld === 1 || currentWorld === 2) arr = caveProbabilities1;
+    else if (currentWorld === 1.1) arr = caveProbabilities2;
+    else if (currentWorld === 1.2) arr = caveProbabilities3;
     for (let i = 0; i < arr.length; i++) {
         summedProbability += caveTypes[arr[i]].rarity;
         if (chosenValue < summedProbability) {

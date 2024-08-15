@@ -812,13 +812,13 @@ function removeParadoxical() {
             player.powerupVariables.fakeEquipped.item = undefined;
             player.powerupVariables.fakeEquipped.originalState = undefined;
         }
-        player.powerupVariables.fakeEquipped.removeAt = 0;
+        player.powerupVariables.fakeEquipped.removeAt = Infinity;
         utilitySwitchActions();
     } else if (player.powerupVariables.fakeTreeLevel.level !== undefined) {
         player.upgrades["pickaxe27"].level = player.powerupVariables.fakeTreeLevel.originalState;
         player.powerupVariables.fakeTreeLevel.level = undefined;
         player.powerupVariables.fakeTreeLevel.originalState = undefined;
-        player.powerupVariables.fakeTreeLevel.removeAt = 0;
+        player.powerupVariables.fakeTreeLevel.removeAt = Infinity;
     }
     updateSpeed();
     saveNewData({override: undefined, return: false});

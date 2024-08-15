@@ -111,7 +111,7 @@
             <br>
         </div>
             <div id="mainLower">
-                <div style="min-height: 0; max-height: 1000vh; overflow-y: auto; overflow-x: hidden;">
+                <div id="lowerChild">
             <p id="crafting" class="middleTitle">Crafting</p>
             <div id="craftingClick">
                 <div id="craftingSelectionContainer">
@@ -151,6 +151,7 @@
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe27`)" id="treeOfLife" style="display: none;"><span>The Tree of Life</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe31`)" id="underseaEviscerator" style="display: none;"><span>Undersea Eviscerator</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe32`)" id="dimensionalSlicer" style="display: none;"><span>Dimensional Slicer</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(`pickaxe33`)" id="wormholeExterminator" style="display: none;"><span>Wormhole Exterminator</span></button>
                 
                 </div>
                 <div id="gearCrafts" class="hidden">
@@ -231,6 +232,8 @@
                 <p class="itemDescription" id="pickaxe31Description" style="display: none;"><span id="pickaxe31Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe31Hologram'))">View Ability</button></span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
                 <p class="itemDescription" id="pickaxe32Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 75,000 blocks.<br></i><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                <p class="itemDescription" id="pickaxe33Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 50,000 blocks.<br></i><span>Has 2.25x special cave type boost, +1.5x cave luck, ~3x cave size boost.<br></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
+                
                 <!--
                     Pickaxes above
                     Gears below
@@ -269,7 +272,7 @@
                 <p class="itemDescription" id="gear31Description" style="display: none;">Sets mining speed delay to 20ms from 25ms.</p>
                 <p class="itemDescription" id="gear32Description" style="display: none;">Adds ~25 blocks per second to your speed.</p>
                 <p class="itemDescription" id="gear33Description" style="display: none;">Adds ~75 blocks per second to your speed.</p>
-                <p class="itemDescription" id="gear34Description" style="display: none;">Has a 25% chance to multiply normal ability size by 4x and simulted ability size by 2x.</p>
+                <p class="itemDescription" id="gear34Description" style="display: none;">Multiplies normal ability size by 4x and simulted ability size by 2x.</p>
                 <p class="itemDescription" id="gear35Description" style="display: none;">+50% ability activation rate.</p>
                 
             </div>
@@ -911,6 +914,7 @@
                     <div class="craftingSelections" id="forgeFission" style="display: none;">
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">Fission <span class="forgeOreDisplay">💎</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">Fission <span class="forgeOreDisplay">🧵</span></button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bellFission')">Fission <span class="forgeOreDisplay">🛎️</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('circleFission')">Fission <span class="forgeOreDisplay">⭕</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">Fission <span class="forgeOreDisplay">💚</span></button>
                         <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">Fission <span class="forgeOreDisplay">💙</span></button>
@@ -1204,6 +1208,7 @@
                             <details class="faqText">
                                 <summary>Galactica</summary>
                                 Dimensional Slicer: 75000 mined, 1 revealed, 500x luck, 1/200 proc rate (187,500 cons)
+                                Wormhole Exterminator: 60000 mined, 1 revealed, 575 luck, 1/275 proc rate, +1.5x cave luck, 2.25x cave type luck, 3x cave size. (135,909 cons)
                             </details>
                             <span class="faqSection">Tree of Life Levels:</span>
                             <span class="faqText">0: 4383 mined, 4576 revealed, 1x luck (9.1 cons)</span>

@@ -701,6 +701,7 @@ let lastX = 0;
 let lastXCheck = Date.now();
 let resetAddX = 0;
 let displayTimer = null;
+let p33CL = false;
 function updateInventory() {
     for (let propertyName in inventoryObj) {
         for (let i = 1; i < 5; i++) {
@@ -728,11 +729,21 @@ function updateInventory() {
         removeParadoxical();
     }
     if (player.powerupVariables.caveBoosts.active && Date.now() >= player.powerupVariables.caveBoosts.removeAt) {
-        player.powerupVariables.caveBoosts.removeAt = 0;
+        player.powerupVariables.caveBoosts.removeAt = Infinity;
         player.powerupVariables.caveBoosts.active = false;
-        caveLuck = 1;
+        caveLuck--;
     }
-
+    if (!p33CL) {
+        if (player.stats.currentPickaxe === "pickaxe33") {
+            p33CL = true;
+            caveLuck += 1.5;
+        }
+    } else {
+        if (player.stats.currentPickaxe !== "pickaxe33") {
+            caveLuck -= 1.5;
+            p33CL = false;
+        }
+    }
     if (currentWorld === 1.1 && player.stats.currentPickaxe !== "pickaxe27") player.stats.currentPickaxe = "pickaxe27";
     else if (currentWorld !== 1.1 && player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) player.stats.currentPickaxe = "pickaxe0";
     updatePowerupCooldowns();

@@ -285,7 +285,6 @@ function webHook(log, mined) {
     const webhookName = webhookInfo.name;
     const webhookLink = webhookInfo.link;
     const color = parseInt(oreInformation.getColors(oreList[log.block]["oreTier"])["backgroundColor"].substring(1), 16);
-    const duped = log.bulkAmt === undefined && log.amt > 1;
     fetch(webhookLink, {
     body: JSON.stringify({
         "embeds": [{
@@ -303,7 +302,7 @@ function webHook(log, mined) {
                 },
                 {
                     "name": "Rarity",
-                    "value": `1/${formatNumber(Math.round(1/(log.rng/(duped ? 10 : 1))), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${duped ? "(x2)" : ""}`,
+                    "value": `1/${formatNumber(Math.round(1/(log.rng)), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${duped ? "(x2)" : ""}`,
                     "inline": true
                 },
                 {
@@ -365,7 +364,7 @@ function serverWebhook(log, mined) {
             "fields" : [
                 {
                     "name": "Rarity",
-                    "value": `1/${formatNumber((Math.round(1/log.rng/(duped ? 10 : 1))), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}`,
+                    "value": `1/${formatNumber((Math.round(1/(log.rng))), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}`,
                     "inline": true
                 },
                 {

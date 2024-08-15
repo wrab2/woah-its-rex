@@ -948,6 +948,18 @@ function sortLayerRarities(arr) {
     }
     return arr;
 }
+function sortLayerBase(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (oreList[arr[j]]["numRarity"] < oreList[arr[j + 1]]["numRarity"]) {
+                let lesser = arr[j + 1];
+                arr[j + 1] = arr[j];
+                arr[j] = lesser;
+            }
+        }
+    }
+    return arr;
+}
 let commons = ["Common","Uncommon","Rare","Legendary","Godly"];
 function applyLuckToLayer(layer, luck) {
     for (let i = 0; i < layer.length; i++) {
