@@ -1035,6 +1035,7 @@ function checkExistingOres() {
             playSound("Infinitesimal");
             ca = true;
         } else {
+            delete mine[curY][curX+5].what;
             typeWriter("<i>lol get fucked you have to do that all over again</i>", get("spawnMessage"));
             playSound("Infinitesimal");
         }
@@ -1093,7 +1094,6 @@ function detectCatgirlOres() {
         mine[curY+1000000] ??= [];
         mine[curY+1000000][curX+1000000] = {ore:"nebula", variant:1, what: 99999};
         player.oreTracker.existingOres = [{block: "?????", posX: curX+1000000, posY: curY+1000000}];
-        checkExistingOres();
     }
     displayArea();
 }
