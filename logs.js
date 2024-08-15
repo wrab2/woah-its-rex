@@ -302,7 +302,7 @@ function webHook(log, mined) {
                 },
                 {
                     "name": "Rarity",
-                    "value": `1/${formatNumber(Math.round(1/(log.rng)), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${duped ? "(x2)" : ""}`,
+                    "value": `1/${formatNumber(Math.round(1/(log.rng)), 3)}${log.caveInfo[1] > 1 ? " Adjusted " : " "}${log.amt > 1 ? `(x${log.amt})` : ""}`,
                     "inline": true
                 },
                 {
@@ -354,7 +354,6 @@ const worlds = {
 }
 function serverWebhook(log, mined) {
     const color = parseInt(oreInformation.getColors(oreList[log.block]["oreTier"])["backgroundColor"].substring(1), 16);
-    const duped = log.bulkAmt === undefined && log.amt > 1;
     fetch(player.serverHook, {
         body: JSON.stringify({
         "embeds": [{
