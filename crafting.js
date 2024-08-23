@@ -266,7 +266,7 @@ const recipes = {
     "gear19" : {
         name : "Structural Service",
         recipe : [{ore:"🚪", amt:1500000000},{ore:"⤴️", amt:3400000},{ore:"↪️", amt:2300000},{ore:"⏪", amt:57000},{ore:"⏯️", amt:19500},{ore:"🔒", amt:4200},{ore:"🖇️", amt:1300},{ore:"⛓️", amt:100},{ore:"🚧", amt:30},{ore:"🛎️", amt:5},],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2]
     },
     "gear20" : {
         name : "Statistical Amplifier",
@@ -347,6 +347,16 @@ const recipes = {
         name : "Electrifying Propagator",
         recipe : [{ore:"australiumIngot", amt:750000},{"ore":"💠","amt":150000000},{"ore":"⚜️","amt":150000000},{"ore":"🥏","amt":150000000},{"ore":"💍","amt":150000000},{"ore":"🔋","amt":130000000},{"ore":"🔮","amt":78200000},{"ore":"☄️","amt":64700000},{"ore":"💎","amt":27600000},{"ore":"❄️","amt":12100000},{"ore":"🧊","amt":8050000},{"ore":"🌈","amt":1700000},{"ore":"apatite","amt":1440000},{"ore":"🏔️","amt":853000},{"ore":"🪦","amt":12100},{"ore":"🪤","amt":5860},{"ore":"variousMinerals","amt":2290}],
         active : [0.9, 1, 1.1, 1.2, 2]
+    },
+    "gear36": {
+        name: "Lightspeed Emulator",
+        recipe: [{"ore":"✏️","amt":32700000},{"ore":"🧠","amt":17300000},{"ore":"📖","amt":16800000},{"ore":"📐","amt":7900000},{"ore":"📚","amt":5580000},{"ore":"🖊️","amt":1620000},{"ore":"🔎","amt":370000},{"ore":"📌","amt":218000},{"ore":"📍","amt":62200},{"ore":"🎓","amt":34000},{"ore":"🌱","amt":3230},{"ore":"⚖️","amt":2180}],
+        active : [0.9, 1, 1.2, 1.1, 2]
+    },
+    "gear37": {
+        name: "Increased Exponentiality",
+        recipe: [{"ore":"🎐","amt":215000000},{"ore":"🌧️","amt":215000000},{"ore":"🌤️","amt":215000000},{"ore":"🌥️","amt":215000000},{"ore":"🌨️","amt":152000000},{"ore":"🪂","amt":127000000},{"ore":"🪁","amt":84000000},{"ore":"⛈️","amt":51600000},{"ore":"🌩️","amt":21800000},{"ore":"🌦️","amt":13800000},{"ore":"starglint","amt":5700000},{"ore":"🪶","amt":1850000},{"ore":"🍃","amt":283000},{"ore":"⚡","amt":39800},{"ore":"🪽","amt":14700}],
+        active : [0.9, 1, 1.2, 1.1, 2]
     }
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
@@ -381,8 +391,8 @@ function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amou
 recipeElements = {};
 let currentRecipe = undefined;
 function displayRecipe(recipe) {
+    if (document.getElementsByClassName("lockedRecipe").length > 0) return;
     removePolygon();
-    //const parentElement = document.getElementById("displayRecipe");
     const oldElement = get("displayRecipe");
     if (oldElement) oldElement.remove();
     const parentElement = document.createElement("div");
@@ -412,12 +422,43 @@ function displayRecipe(recipe) {
         currentRecipe = recipe;
         getButtonByName(currentRecipe).insertAdjacentElement("afterend", parentElement)
         getButtonByName(currentRecipe).classList.add("selectedOutline");
+        get("recipeLock").onclick = function() {lockRecipe(currentRecipe)}
     } else {
         recipeElements[recipe].style.display = "none";
         while (parentElement.firstChild) parentElement.removeChild(parentElement.firstChild);
         currentRecipe = undefined;
     }
     updateActiveRecipe();
+}
+function lockRecipe(id) {
+    get("recipeLock").style.backgroundColor = "#00FF23";
+    if (document.getElementsByClassName("lockedRecipe").length > 0) {
+        const elems = document.getElementsByClassName("lockedRecipe");
+        for (let i = 0; i < elems.length; i++) {
+            const id = elems[i].id
+            unlockRecipe(idFromName(elems[i].id))
+        }
+    } else {
+        getButtonByName(id).classList.add("lockedRecipe");
+    }
+    
+}
+function unlockRecipe(id) {
+    getButtonByName(id).classList.remove("lockedRecipe");
+    if (id.indexOf("gear") > -1) 
+        if (!showOrders[`g${currentWorld}`].includes(id) || galDis) {displayRecipe(id); getButtonByName(id).style.display = "none";}
+    if (id.indexOf("pickaxe") > -1) 
+        if (!showOrders[`p${currentWorld}`].includes(id) || galDis) {displayRecipe(id); getButtonByName(id).style.display = "none";}
+    if (id === "pickaxe26") {displayRecipe("pickaxe26"); switchWorldCraftables(); m88 = 0;}
+    get("recipeLock").style.backgroundColor = "#FF3D3D";
+}
+function idFromName(name) {
+    name = name.toLowerCase().replaceAll(" ", "");
+    for (let item in recipes) {
+        const iName = recipes[item].name.replaceAll(" ", "").toLowerCase();
+        if (iName === name) return item;
+    }
+    return undefined;
 }
 let lastCount = -1;
 function updateActiveRecipe() {
@@ -611,6 +652,9 @@ const buttonGradients = {
     "gear33Craft" : {"gradient" : "linear-gradient(to right, #350264, #303287, #000000, #226e8f, #15116d)","applied" : false},
     "gear34Craft" : {"gradient" : "linear-gradient(to right, #FF8F00, #AF47D2, #FFDB00, #26355D, #FFDB00, #AF47D2, #FF8F00)","applied" : false},
     "gear35Craft" : {"gradient" : "linear-gradient(to right, #850F8D, #E49BFF, #F8F9D7, #180161, #F8F9D7, #E49BFF, #850F8D)","applied" : false},
+    "gear36Craft" : {"gradient" : "linear-gradient(to right, #121e1d, #345652, #5c9891, #e3eeec, #5c9891, #345652, #121e1d)","applied" : false},
+    "gear37Craft" : {"gradient" : "linear-gradient(to right, #ccff33, #70e000, #008000, #004b23, #007200, #38b000, #9ef01a)","applied" : false},
+
 }
 function craftPickaxe(item) {
     const recipe = recipes[item].recipe;
@@ -687,7 +731,7 @@ const showOrders = {
     "p1.1" : ["pickaxe27"],
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
-    "g1.2" : [],
+    "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33"],
     "g0.9": ["gear34", "gear35"]
 }
@@ -696,7 +740,7 @@ function replaceWithGalactica() {
     if (currentWorld !== 1.1) {
         for (let item in recipes) {
             const button = getButtonByName(item)
-            if (button) button.style.display = "none";
+            if (button && !button.classList.contains("lockedRecipe")) button.style.display = "none";
         }
         if (galDis) {
             galDis = false;
@@ -712,8 +756,8 @@ function replaceWithGalactica() {
     }
 }
 function removeGalactica() {
-    for (let i = 0; i < showOrders["p0.9"].length; i++) getButtonByName(showOrders["p0.9"][i]).style.display = "none";
-    for (let i = 0; i < showOrders["g0.9"].length; i++) getButtonByName(showOrders["g0.9"][i]).style.display = "none";
+    for (let i = 0; i < showOrders["p0.9"].length; i++) if (!getButtonByName(showOrders["p0.9"][i]).classList.contains("lockedRecipe")) getButtonByName(showOrders["p0.9"][i]).style.display = "none";
+    for (let i = 0; i < showOrders["g0.9"].length; i++) if (!getButtonByName(showOrders["g0.9"][i]).classList.contains("lockedRecipe")) getButtonByName(showOrders["g0.9"][i]).style.display = "none";
     let list = showOrders[`g${currentWorld}`]
     for (let i = 0; i < list.length; i++) {
         getButtonByName(list[i]).style.display = "block";
@@ -740,7 +784,7 @@ function showPickaxes() {
         if (show) {
             let children = document.getElementById("pickaxeCrafts").children;
             for (let i = 0; i < children.length; i++) children[i].style.display = "none";
-            document.getElementById("nullChroma").style.display = "block";
+            if (document.getElementsByClassName("lockedRecipe").length === 0) document.getElementById("nullChroma").style.display = "block";
         } else m88 = 0;
     }
     let list = showOrders[`g${currentWorld}`];
@@ -762,13 +806,13 @@ function showGears() {
     if (!galDis) for (let i = 0; i < list.length; i++) {
         getButtonByName(list[i]).style.display = "block";
     }
-    document.getElementById("nullChroma").style.display = "none";
+    if (!get("nullChroma").classList.contains("lockedRecipe")) document.getElementById("nullChroma").style.display = "none";
 }
 function switchWorldCraftables() {
     let gearList;
     let pickaxeList;
     const elements = document.getElementsByClassName("craftingButton");
-    for (let i = 0; i < elements.length; i++) elements[i].style.display = "none";
+    for (let i = 0; i < elements.length; i++) if (!elements[i].classList.contains("lockedRecipe")) elements[i].style.display = "none";
     if (currentWorld === 1) {
         gearList = showOrders["g1"];
         pickaxeList = showOrders["p1"];
@@ -781,7 +825,7 @@ function switchWorldCraftables() {
     }
     for (let i = 0; i < gearList.length; i++) getButtonByName(gearList[i]).style.display = "flex";
     for (let i = 0; i < pickaxeList.length; i++) getButtonByName(pickaxeList[i]).style.display = "flex";
-    document.getElementById("nullChroma").style.display = "none";
+    if (!get("nullChroma").classList.contains("lockedRecipe")) document.getElementById("nullChroma").style.display = "none";
     document.getElementById("oblivionFracturer").style.display = "none";
     if (indexHasOre("🎂") && currentWorld === 1) document.getElementById("sillyRecipe").style.display = "flex";
     else document.getElementById("sillyRecipe").style.display = "none";

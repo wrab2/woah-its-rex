@@ -37,6 +37,8 @@ class playerTemplate {
             "gear33": false,
             "gear34": false,
             "gear35": false,
+            "gear36": false,
+            "gear37": false,
         }
         this.pickaxes = {
             "pickaxe0": true,

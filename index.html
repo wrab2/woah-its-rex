@@ -148,7 +148,7 @@
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe24`)" id="stormseersSupersparkSceptre" style="display: none;"><span>Stormseer's Superspark Sceptre</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe25`)" id="coronaryCatastrophe" style="display: none;"><span>Coronary Catastrophe</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe26`)" id="nullChroma" style="display: none;"><span>N̴̡̠͍̰̓̀̉́͘͟͜͠͠͝uͧ̆̃͂̔̂͛̆̇ͫ̍̒̍͑̅̎̾͒҉̶̶̧̡̨͘͟͟͡͞͡͏̷̧͈̣̱͚̼̹̤̘̹l̷̷̸̴̨̡̢̜͈̭̰͕̪̯̭͓͓̲̱̹̥̜̝̩̝ͤ̀̕͝͠͠͝͠l̴͋̄̋͐ͪ̒ͦ̄̆̅̂̍͂ͧ͛ͮ̏̒̓ͨ̓͊̓̆ͤ̓̇̽̎͏̷͔̬̟̣͍̗̦̝̮̱̳̼͔̻̭͍̗̦͉̗̥͍͇̭̘͉̕͜͡ ̸̸̶̨̢̳̍̐̓ͪͥ̐͋̃̉͒̓̓̀̌͑̾ͩͯ͋ͦ͗ͮͯͪͥ̅͊ͩͣͨ̆̒̂̂̽̀̀͘͘͘͜͞͠C̵̵̷̸̸̵ͦ͒͆͡͞͡͏̶̵̡͔̙̱͢ḩ̸͙͙̼̖̥̦̻͈̖̫̖̯̣̣͍͎̖̹̜͇̯ͧͥ̎̒ͨ̎̓ͫ͛̅ͨͧͤͤͫ̊̓̈̒͐ͥ̎̓ͤ̃ͧͣ͊̉̄͛͡r̵̸̴̢̢͒ͮ̈́̓ͬ̉͆ͪ̀̓͋̉́͌̾ͬ̾̐ͫ̑ͮ̒̂̈͆͆̆͌̿ͭ́͑̂ͯ͛ͩ̇̚͜͡͏̸̼̫̪̮̲͉͔͇̯̻͇̫͚̰̦̤͈͉̟̙̻̖͇͖̱͕̘̣̫̥̝͍͔͝o̷͐̏̈́ͭ̔̇ͬͣ͑̂̉̑̓̊ͯͪ͏̶̸͏̷̴̴̶̷̷̧́̀̀͘͟͢͞҉̠̩͇͙̥̫̻̮̯̳̖̙͕̹̤͈͓̻͇̘͖͔m͑͐̃́̚͏̷̶̸̴̧̢̧̡̭̰́̕̕͢͡a̷̶̛̓̉͐͋̄̍͊̓ͪ̏̑̍͋ͮ̔͋̒ͧͭ̐̋͛͆̌̚̕͏͏̶͜͢͞͏̵̸̧̢̹̯͎̫̜̪̪̥̫̖̻̝̘͖̼̰̝͈͝͝͡</span></button>
-                    <button class="craftingButton" onclick="displayRecipe(`pickaxe27`)" id="treeOfLife" style="display: none;"><span>The Tree of Life</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(`pickaxe27`)" id="theTreeOfLife" style="display: none;"><span>The Tree of Life</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe31`)" id="underseaEviscerator" style="display: none;"><span>Undersea Eviscerator</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe32`)" id="dimensionalSlicer" style="display: none;"><span>Dimensional Slicer</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe33`)" id="wormholeExterminator" style="display: none;"><span>Wormhole Exterminator</span></button>
@@ -191,13 +191,14 @@
                     <button class="craftingButton" onclick="displayRecipe('gear28')" style="display: none;" id="celestianReaper"><span>Celestian Reaper</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear34')" style="display: none;" id="potentialityMultiplier"><span>Potentiality Multiplier</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear35')" style="display: none;" id="electrifyingPropagator"><span>Electrifying Propagator</span></button>
-                
+                    <button class="craftingButton" onclick="displayRecipe('gear36')" style="display: none;" id="lightspeedEmulator"><span>Lightspeed Emulator</span></button>
+                    <button class="craftingButton" onclick="displayRecipe('gear37')" style="display: none;" id="increasedExponentiality"><span>Increased Exponentiality</span></button>
                 </div>
                 
             </div>
             <div id="displayRecipe"></div>
             <p id="craftingTimeDisplay" style="display: none;">Est. Time: 000:00:00:00</p>
-            <p id = "descriptionTitle" class="middleTitle" style="display: none;">Description</p>
+            <p id = "descriptionTitle" class="middleTitle" style="display: none;">Description<span id="recipeLockHolder"><button id="recipeLock"></button></span></p>
             <div id="craftableDescriptions">
                 <p class="itemDescription" id="pickaxe1Description" style="display: none;"><span id="pickaxe1Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe1Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
                 <p class="itemDescription" id="pickaxe2Description" style="display: none;"><span id="pickaxe2Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe2Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_</span></p>
@@ -267,14 +268,15 @@
                 <p class="itemDescription" id="gear26Description" style="display: none;">5% chance to give 30x more layer blocks on mining a layer block.</p>
                 <p class="itemDescription" id="gear27Description" style="display: none;">1.75x cave type boost.</p>
                 <p class="itemDescription" id="gear28Description" style="display: none;">Allows any Infinity Collector to mine Celestial tier ores.</p>
-                <p class="itemDescription" id="gear29Description" style="display: none;">Skips over blank tiles while mining. Can skip up to 25 tiles at once. Will be disabled if holding shift while mining (sorry mobile players).</p>
+                <p class="itemDescription" id="gear29Description" style="display: none;">Skips over blank tiles while mining. Can skip up to 25 tiles at once. Will be disabled if holding shift while mining (sorry mobile players).<br>Has a 1/250 chance to move the player an extra 50 blocks. (1/175 chance with Simulated RNG)</p>
                 <p class="itemDescription" id="gear30Description" style="display: none;">+0.3x Base Luck.</p>
                 <p class="itemDescription" id="gear31Description" style="display: none;">Sets mining speed delay to 20ms from 25ms.</p>
                 <p class="itemDescription" id="gear32Description" style="display: none;">Adds ~25 blocks per second to your speed.</p>
                 <p class="itemDescription" id="gear33Description" style="display: none;">Adds ~75 blocks per second to your speed.</p>
                 <p class="itemDescription" id="gear34Description" style="display: none;">Multiplies normal ability size by 4x and simulted ability size by 2x.</p>
                 <p class="itemDescription" id="gear35Description" style="display: none;">+50% ability activation rate.</p>
-                
+                <p class="itemDescription" id="gear36Description" style="display: none;">1.75x Movement repetitions (rounded up)</p>
+                <p class="itemDescription" id="gear37Description" style="display: none;">Luck ^1.035</p>
             </div>
         </div>
         </div>
@@ -1207,7 +1209,7 @@
                             </details>
                             <details class="faqText">
                                 <summary>Galactica</summary>
-                                Dimensional Slicer: 75000 mined, 1 revealed, 500x luck, 1/200 proc rate (187,500 cons)
+                                Dimensional Slicer: 75000 mined, 1 revealed, 500x luck, 1/200 proc rate (187,500 cons)<br>
                                 Wormhole Exterminator: 60000 mined, 1 revealed, 575 luck, 1/275 proc rate, +1.5x cave luck, 2.25x cave type luck, 3x cave size. (135,909 cons)
                             </details>
                             <span class="faqSection">Tree of Life Levels:</span>

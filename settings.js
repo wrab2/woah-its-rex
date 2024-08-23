@@ -998,7 +998,7 @@ const conversionRates = [5, 10, 30];
 let hasConverted = false;
 function convertVariants() {
     let ore = document.getElementById("oreInput").value;
-    ore = ore.replaceAll(" ", "");
+    if (oreList[ore] === undefined) ore = ore.replaceAll(" ", "");
     let variant = document.getElementById("currentSelectedVariant").innerText;
     let amt = document.getElementById("amtInput").value;
     document.getElementById("amtInput").value = "";

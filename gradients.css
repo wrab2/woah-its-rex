@@ -348,7 +348,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#treeOfLife span {
+#theTreeOfLife span {
     background: linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);
     -webkit-background-clip: text;
     color: transparent;
@@ -483,6 +483,20 @@
 }
 #wormholeExterminator span{
     background: linear-gradient(to right,#0d3dc3, #aafd0a, #c96709, #aafd0a, #0d3dc3);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#lightspeedEmulator span{
+    background: linear-gradient(to right,#121e1d, #345652, #5c9891, #e3eeec, #5c9891, #345652, #121e1d);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#increasedExponentiality span{
+    background: linear-gradient(to right,#ccff33, #70e000, #008000, #004b23, #007200, #38b000, #9ef01a);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;

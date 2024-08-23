@@ -161,7 +161,7 @@ class secureLogs {
         else if (log.variant === 2) this.#verifiedLogs["Electrified"].push(log);
         else if (log.variant === 3) this.#verifiedLogs["Radioactive"].push(log);
         else if (log.variant === 4) this.#verifiedLogs["Explosive"].push(log);
-        if (log.rng <= 1/1000000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
+        if (log.rng <= 1/2500000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
         if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
     }
     showLogs() {
@@ -216,6 +216,8 @@ class secureLogs {
         let luck = baseLuck;
         if (currentWorld === 1.1) {
             if (player.gears["gear20"]) luck *= ((baseLuck * 0.05) + 1);
+            if (player.gears["gear37"]) luck = luck ** 1.035;
+            luck *= 1.2;
             if (isNaN(luck)) return 1;
             else return luck;
         }
@@ -223,6 +225,8 @@ class secureLogs {
         luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
         if (currentWorld < 2) luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         if (player.gears["gear20"]) luck *= (baseLuck * 0.05) + 1;
+        if (player.gears["gear37"]) luck = luck ** 1.035;
+        luck *= 1.2;
         if (isNaN(luck)) return 1;
         else return luck;
     }
@@ -327,7 +331,7 @@ function webHook(log, mined) {
                 },
                 {
                     "name": "Luck",
-                    "value": `${Math.floor(log.luck).toLocaleString()}x`,
+                    "value": `${(Math.round(log.luck*1000)/1000).toLocaleString()}x`,
                     "inline": true
                 },
             ]
@@ -388,7 +392,7 @@ function serverWebhook(log, mined) {
                 },
                 {
                     "name": "Luck",
-                    "value": `${Math.floor(log.luck).toLocaleString()}x`,
+                    "value": `${(Math.round(log.luck*1000)/1000).toLocaleString()}x`,
                     "inline": true
                 },
             ]

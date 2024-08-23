@@ -250,6 +250,7 @@ function loadContent() {
 
 //MOVEMENT
 function movePlayer(dir, reps, type) {
+    if (player.gears["gear29"] && Math.random() < 1/(player.settings.simulatedRng ? 175 : 250) && type !== "single") reps += 50;
     for (let i = 0; i < reps; i++) {
         if (canMine) {
             if (verifiedOres.isRightPickaxe()) {
@@ -404,7 +405,7 @@ document.addEventListener('keydown', (event) => {
         let movements = {x:0, y:0, key:name};
         movements.x = (name === "a" ? -1 : (name === "d" ? 1 : 0));
         movements.y = (name === "s" ? 1 : (name === "w" ? -1 : 0));
-        movePlayer(movements, 1);
+        movePlayer(movements, 1, "single");
         energySiphonerDirection = "";
     }
 }, false);
@@ -493,9 +494,10 @@ const calcSpeed = function() {
         if (debug) return {speed: 5, reps: devReps, extra:0}
         const sr1Level = player.upgrades["pickaxe27"].level;
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:extraSpeed}
-        else return {speed: 7, reps: (-2 + sr1Level), extra:extraSpeed}
+        else return {speed: 7, reps: Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1)), extra:extraSpeed}
     }
-    if (debug) return {speed: 5, reps: devReps, extra:0}
+    if (player.gears["gear36"]) reps = Math.round(reps*1.75)
+    //if (debug) return {speed: 5, reps: devReps, extra:0}
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
 }
 function updateSpeed() {

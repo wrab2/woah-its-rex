@@ -563,6 +563,21 @@
   border-bottom:1px solid #333; 
   margin-bottom: 2%!important;
   font-size: 2.5vw;
+  position: relative;
+}
+#recipeLockHolder {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 1.75vw;
+  width: 1.75vw;
+}
+#recipeLock {
+  width: 100%;
+  height: 100%;
+  background-color: #FF3D3D;
+  border: none;
+  border-radius: 0px;
 }
 #pressPlay {
   overflow-y: hidden;

@@ -202,7 +202,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);
     const originAmt = amt;
     const generationInfo = getLayer(y);
-    if (y === player.lunaLayer) generationInfo.layer = addLuna([...generationInfo.layer], [...generationInfo.probabilities])[0];
+    if (y === player.luna.layer) {let lunaLayer = addLuna([...generationInfo.layer], [...generationInfo.probabilities]); generationInfo.layer = lunaLayer[0]; generationInfo.probabilities = lunaLayer[1];}
     const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? [...caveList[caveInfo.type]] : [...generationInfo.layer];
     if (fromOffline) for (let i = thisTable.length - 1; i >= 0; i--) if (oreList[thisTable[i]]["oreTier"] === "Celestial") thisTable.splice(i, 1);
     const sm = (caveInfo !== undefined && caveInfo.type === "currentLayer");
@@ -216,7 +216,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*caveLuck);
             else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
         } else {
-            estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
+            estAmt = amt*generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])];
         }
         let oldEst = estAmt;
         if (estAmt < 1 && Math.random() < estAmt) {estAmt += 1;}
@@ -779,6 +779,8 @@ function stopMining() {
 function sr1Helper(state) {
     updateTolLuck();
     removeParadoxical();
+    const lock = document.getElementsByClassName("lockedRecipe");
+    for (let i = 0; i < lock.length; i++) lock[i].classList.remove("lockedRecipe");
     if (state) {
         if (!player.settings.usingNewEmojis) {
             document.body.style.fontFamily = `system-ui, Tahoma, Verdana, sans-serif, Noto Color Emoji`;
