@@ -155,7 +155,7 @@ const recipes = {
     },
     "pickaxe31" : {
         name: "Undersea Eviscerator",
-        recipe : [{ore:"🌊", amt:500000000000},{ore:"⛵", amt:352000000},{ore:"🎣", amt:340000000},{ore:"🤿", amt:323200000},{ore:"🫧", amt:320000000},{ore:"🐟", amt:107200000},{ore:"👑", amt:42400000},{ore:"🔱", amt:40000000},{ore:"🌀", amt:4480000},{ore:"👿", amt:3720000},{ore:"🪩", amt:2800000},{ore:"💫", amt:1400000},{ore:"🐋", amt:348000},{ore:"⚓", amt:3680},{ore:"🪸", amt:1000},{ore:"HD 160529", amt:1}],
+        recipe : [{ore:"🌊", amt:500000000000},{"ore":"⛵","amt":336000000},{"ore":"🎣","amt":322000000},{"ore":"🤿","amt":306000000},{"ore":"🫧","amt":303000000},{"ore":"🐟","amt":102000000},{"ore":"👑","amt":40800000},{"ore":"🔱","amt":37900000},{"ore":"🌀","amt":4290000},{"ore":"👿","amt":3540000},{"ore":"🪩","amt":2650000},{"ore":"💫","amt":1320000},{"ore":"🐋","amt":331000},{"ore":"⚓","amt":3540},{ore:"🪸", amt:1000},{ore:"HD 160529", amt:1}],
         active : []
     },
     "pickaxe32" : {
@@ -435,7 +435,6 @@ function lockRecipe(id) {
     if (document.getElementsByClassName("lockedRecipe").length > 0) {
         const elems = document.getElementsByClassName("lockedRecipe");
         for (let i = 0; i < elems.length; i++) {
-            const id = elems[i].id
             unlockRecipe(idFromName(elems[i].id))
         }
     } else {
@@ -776,14 +775,14 @@ function showPickaxes() {
     disappear(document.getElementById("gearCrafts"));
     m87 = 0;
     m88++;
-    if (m88 === 6 && !galDis) {
+    if (m88 >= 6 && !galDis && document.getElementById("nullChroma").style.display === "none") {
         let show = true;
         if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) show = false;
         if (!player.trophyProgress["worldOneCompletion"].trophyOwned) show = false;
         if (!player.trophyProgress["worldTwoCompletion"].trophyOwned) show = false;
         if (show) {
             let children = document.getElementById("pickaxeCrafts").children;
-            for (let i = 0; i < children.length; i++) children[i].style.display = "none";
+            for (let i = 0; i < children.length; i++) if (!children[i].classList.contains("lockedRecipe")) children[i].style.display = "none";
             if (document.getElementsByClassName("lockedRecipe").length === 0) document.getElementById("nullChroma").style.display = "block";
         } else m88 = 0;
     }
@@ -792,8 +791,8 @@ function showPickaxes() {
         getButtonByName(list[i]).style.display = "block";
     }
     if (indexHasOre("🎂") && currentWorld === 1 && !galDis) document.getElementById("sillyRecipe").style.display = "flex";
-    else document.getElementById("sillyRecipe").style.display = "none";
-    document.getElementById("oblivionFracturer").style.display = "none";
+    else if (!get("sillyRecipe").classList.contains("lockedRecipe")) document.getElementById("sillyRecipe").style.display = "none";
+    if (!get("oblivionFracturer").classList.contains("lockedRecipe")) document.getElementById("oblivionFracturer").style.display = "none";
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
@@ -809,6 +808,7 @@ function showGears() {
     if (!get("nullChroma").classList.contains("lockedRecipe")) document.getElementById("nullChroma").style.display = "none";
 }
 function switchWorldCraftables() {
+    console.log(get("nullChroma").style.display);
     let gearList;
     let pickaxeList;
     const elements = document.getElementsByClassName("craftingButton");
@@ -826,9 +826,10 @@ function switchWorldCraftables() {
     for (let i = 0; i < gearList.length; i++) getButtonByName(gearList[i]).style.display = "flex";
     for (let i = 0; i < pickaxeList.length; i++) getButtonByName(pickaxeList[i]).style.display = "flex";
     if (!get("nullChroma").classList.contains("lockedRecipe")) document.getElementById("nullChroma").style.display = "none";
-    document.getElementById("oblivionFracturer").style.display = "none";
+    if (!get("oblivionFracturer").classList.contains("lockedRecipe")) document.getElementById("oblivionFracturer").style.display = "none";
     if (indexHasOre("🎂") && currentWorld === 1) document.getElementById("sillyRecipe").style.display = "flex";
-    else document.getElementById("sillyRecipe").style.display = "none";
+    else if (!get("sillyRecipe").classList.contains("lockedRecipe")) document.getElementById("sillyRecipe").style.display = "none";
+    console.log(get("nullChroma").style.display);
 }
 function toggleOreForge() {
     let element = document.getElementById("forgeContainer")
@@ -990,6 +991,11 @@ const oreRecipes = {
         "result" : [{"ore":"🚧", "amt":5}, {"ore":"⛓️", "amt":10}, {"ore":"🖇️", "amt":200}, {"ore":"🔒", "amt":500}, {"ore":"🚪", "amt":250000000}],
         "multiplier" : 1
     },
+    "wtfCraft" : {
+        "cost" : [{"ore":"⚙️","amt":250000000},{"ore":"🃏","amt":250000000},{"ore":"💠","amt":250000000},{"ore":"⚜️","amt":250000000},{"ore":"🖍️","amt":250000000},{"ore":"✂️","amt":250000000},{"ore":"⚱️","amt":250000000},{"ore":"🧪","amt":250000000},{"ore":"🎭","amt":250000000},{"ore":"🎲","amt":250000000},{"ore":"⛵","amt":250000000},{"ore":"🪜","amt":250000000},{"ore":"🥏","amt":250000000},{"ore":"🎣","amt":250000000},{"ore":"🤿","amt":250000000},{"ore":"🫧","amt":250000000},{"ore":"📟","amt":250000000},{"ore":"🍁","amt":250000000},{"ore":"🪄","amt":250000000},{"ore":"🌻","amt":250000000},{"ore":"🪚","amt":250000000},{"ore":"⚗️","amt":250000000},{"ore":"🪵","amt":250000000},{"ore":"🗿","amt":250000000},{"ore":"🔔","amt":250000000},{"ore":"🥽","amt":250000000},{"ore":"🎄","amt":250000000},{"ore":"🗡️","amt":250000000},{"ore":"🎴","amt":250000000},{"ore":"🧩","amt":250000000},{"ore":"💍","amt":250000000},{"ore":"🪙","amt":250000000},{"ore":"🔗","amt":250000000},{"ore":"🐟","amt":250000000},{"ore":"⏹️","amt":250000000},{"ore":"🎀","amt":250000000},{"ore":"🧨","amt":250000000},{"ore":"🎍","amt":250000000},{"ore":"🔋","amt":250000000},{"ore":"🪬","amt":250000000},{"ore":"🏆","amt":250000000},{"ore":"🗜️","amt":250000000},{"ore":"🧲","amt":250000000},{"ore":"🎨","amt":250000000},{"ore":"🔳","amt":250000000},{"ore":"⌚","amt":250000000},{"ore":"🕋","amt":250000000},{"ore":"🔮","amt":250000000},{"ore":"🕯️","amt":250000000},{"ore":"👑","amt":250000000},{"ore":"🎇","amt":250000000},{"ore":"🎃","amt":250000000},{"ore":"🔱","amt":250000000},{"ore":"⭐","amt":250000000},{"ore":"🌲","amt":250000000},{"ore":"☄️","amt":250000000},{"ore":"🔆","amt":250000000},{"ore":"🔥","amt":117000000},{"ore":"💎","amt":110000000},{"ore":"📝","amt":93800000},{"ore":"🧵","amt":93300000},{"ore":"🌏","amt":87900000},{"ore":"🌪️","amt":75900000},{"ore":"🌟","amt":72900000},{"ore":"💥","amt":50000000},{"ore":"❄️","amt":48500000},{"ore":"🔩","amt":44500000},{"ore":"🪞","amt":43900000},{"ore":"🥉","amt":42200000},{"ore":"🥀","amt":34800000},{"ore":"🌌","amt":34100000},{"ore":"🧊","amt":32100000},{"ore":"🧀","amt":30300000},{"ore":"🌀","amt":30300000},{"ore":"🪐","amt":26400000},{"ore":"👿","amt":25000000},{"ore":"⌛","amt":25000000},{"ore":"💸","amt":24800000},{"ore":"🥗","amt":23400000},{"ore":"👀","amt":19600000},{"ore":"🪩","amt":18700000},{"ore":"👁️","amt":9770000},{"ore":"💫","amt":9380000},{"ore":"🏵️","amt":7210000},{"ore":"🌈","amt":6820000},{"ore":"🎆","amt":6250000},{"ore":"apatite","amt":5770000},{"ore":"🪅","amt":5770000},{"ore":"💐","amt":5000000},{"ore":"🌇","amt":4360000},{"ore":"🏔️","amt":3410000},{"ore":"🚿","amt":3120000},{"ore":"⚠️","amt":2810000},{"ore":"🐪","amt":2400000},{"ore":"🐋","amt":2340000},{"ore":"🏰","amt":2110000},{"ore":"💵","amt":2100000},{"ore":"🌳","amt":2020000},{"ore":"🦴","amt":107000},{"ore":"🦚","amt":76500},{"ore":"🎩","amt":62400},{"ore":"🏯","amt":43600},{"ore":"🍓","amt":33500},{"ore":"🤖","amt":29300},{"ore":"⚓","amt":25000},{"ore":"🪤","amt":23400},{"ore":"Bismuth","amt":22500},{"ore":"variousMinerals","amt":9160},{"ore":"mutatedGrowth","amt":5110}],
+        "result" : [{"ore":"singularityEgg", "amt":1}],
+        "multiplier" : 1
+    }
 }
 function getRecipeById(id) {
     return oreRecipes[id];
@@ -1008,15 +1014,20 @@ function displayOreRecipe(id) {
         document.getElementById("forgeSettings").style.display = "block";
         currentOreRecipe = id;
         let recipe = getRecipeById(id);
-        recipe["multiplier"] = 1;
-        document.getElementById("forgeCraftingAmount").innerText = "1x";
+        document.getElementById("forgeCraftingAmount").innerText = `${recipe["multiplier"].toLocaleString()}x`;
         for (let i = 0; i < recipe["cost"].length; i++) {
             let ore = recipe["cost"][i]["ore"];
             let amt = recipe["cost"][i]["amt"];
+            amt *= recipe["multiplier"];
             let element = document.createElement("p");
             let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
             element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
-            element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${playerInventory[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
+            if (oreList[ore]["hasImage"]) {
+                element.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span>`
+            } else {
+                element.innerHTML = ore;
+            }
+            element.innerHTML += ` <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${playerInventory[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
             element.classList = "recipeOreDisplay";
             if (playerInventory[ore]["normalAmt"] >= amt)
                 element.style.color = "#6BC267";
@@ -1033,7 +1044,12 @@ function displayOreRecipe(id) {
             element.style.color = colors["textColor"];
             if (colors["textColor"] === "#ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
             else element.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
-            element.innerText = `${ore} x${(oreRecipes[id]["result"][i]["amt"] * oreRecipes[id]["multiplier"]).toLocaleString()}`;
+            if (oreList[ore]["hasImage"]) {
+                element.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span>`
+            } else {
+                element.innerHTML = ore;
+            }
+            element.innerHTML += ` x${(oreRecipes[id]["result"][i]["amt"] * oreRecipes[id]["multiplier"]).toLocaleString()}`;
             element.classList = "recipeOreDisplay";
             parent.appendChild(element);
         }
@@ -1044,39 +1060,13 @@ function multiplyRecipe(amt) {
     if (isNaN(amt)) return;
     if (amt < 1) amt = 1;
     amt = Math.floor(amt);
+    const recipe = getRecipeById(currentOreRecipe);
+    recipe["multiplier"] = amt;
+    const oldRec = currentOreRecipe;
+    currentOreRecipe = "";
+    displayOreRecipe(oldRec)
     document.getElementById("forgeCraftingAmount").innerText = `${amt.toLocaleString()}x`;
     document.getElementById('amountInputText').value = "";
-    let recipe = getRecipeById(currentOreRecipe);
-    recipe["multiplier"] = amt;
-    let parent = document.getElementById("forgeRecipeDisplay");
-    while (parent.firstChild) parent.removeChild(parent.firstChild);
-    for (let i = 0; i < recipe["cost"].length; i++) {
-        let ore = recipe["cost"][i]["ore"];
-        let amt = recipe["cost"][i]["amt"] * recipe["multiplier"];
-        let element = document.createElement("p");
-        let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
-        element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
-        element.innerHTML = `${ore} <span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${playerInventory[ore]["normalAmt"].toLocaleString()}/${amt.toLocaleString()}</span>`;
-        element.classList = "recipeOreDisplay";
-        if (playerInventory[ore]["normalAmt"] >= amt)
-            element.style.color = "#6BC267";
-        else
-            element.style.color = "#FF3D3D";
-        parent.appendChild(element);
-    }
-    for (let i = 0; i < recipe["result"].length; i++) {
-        let ore = recipe["result"][i]["ore"];
-        let element = document.createElement("p");
-        if (i === 0) element.style.borderTop = "1px solid white";
-        let colors = oreInformation.getColors(oreList[ore]["oreTier"]);
-        element.style.backgroundImage = "linear-gradient(to right, black, " + colors["backgroundColor"] + ", black)";
-        element.style.color = colors["textColor"];
-        if (colors["textColor"] === "#ffffff") element.style.textShadow = "-0.05em -0.05em 0 #000, 0.05em -0.05em 0 #000, -0.05em 0.05em 0 #000, 0.05em 0.05em 0 #000";
-        else element.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
-        element.innerText = `${ore} x${(recipe["result"][i]["amt"] * recipe["multiplier"]).toLocaleString()}`;
-        element.classList = "recipeOreDisplay";
-        parent.appendChild(element);
-    }
 }
 function craftOre(id) {
     let recipe = getRecipeById(id);

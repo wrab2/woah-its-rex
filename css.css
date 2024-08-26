@@ -2591,6 +2591,12 @@ button {
   height: 10vw;
   z-index: 19;
 }
+.hugeMineImage {
+  position: absolute;
+  width: 30vw;
+  height: 30vw;
+  z-index: 19;
+}
 .mineImage {
   position: absolute;
   height: 100%;

@@ -576,12 +576,16 @@ function oldDataToNew(data) {
     }
     return newData;
 }
-
+const replacements = {
+    "Wavaderg" : "Goober",
+    "pleidas" : "pleiades"
+}
 function loadNewData(data) {
     try {
-        if (data.blocks["Wavaderg"] !== undefined) data.blocks["Goober"] = data.blocks["Wavaderg"];
-        delete data.blocks["Wavaderg"];
+        const blocks = Object.keys(data.blocks);
+        for (let i = 0; i < blocks.length; i++) if (replacements[blocks[i]] !== undefined) {data.blocks[replacements[blocks[i]]] = data.blocks[blocks[i]]; delete data.blocks[blocks[i]];}
         for (let propertyName in data.blocks) {
+            
             if (oreList[propertyName] !== undefined) {
                 if (data.blocks[propertyName].normalAmt !== undefined) {
                     playerInventory[propertyName]["normalAmt"] = data.blocks[propertyName].normalAmt;

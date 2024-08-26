@@ -567,7 +567,10 @@ let oreList = {
     //'planetIX':{ 'decimalRarity': 1 / 900000000000, 'numRarity': 900000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Once thought to be a mere rumor, a new celestial body reveals itself to you...', 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/planetIX.png", "oreName" : "Planet IX",},
     'UHD':{ 'decimalRarity': 1 / 500000000000, 'numRarity': 500000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'this cat caused a big problem', 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/UHD.png", "oreName" : "Universe Heat Death",},
     'catgirl':{ 'decimalRarity': 1 / 1000000000000000, 'numRarity': 1000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'dhjbdfghjgdshbgsdhbgdhg...', 'oreTier': 'Infinitesimal',  'hasImage' : true, "src" : "media/ores/osaka-sata-andagi.gif", "oreName" : "Ok.",},
-    'pleidas':{ 'decimalRarity': 1 / 7500000000000000, 'numRarity': 7500000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A brilliant display of blue hues dance in the cosmos, providing a beautiful sight to all who stumble upon it...', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/ores/pleidas.webp", "oreName" : "Pleidas",},
+    'pleiades':{ 'decimalRarity': 1 / 7500000000000000, 'numRarity': 7500000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A brilliant display of blue hues dance in the cosmos, providing a beautiful sight to all who stumble upon it...', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/ores/pleidas.webp", "oreName" : "Pleidas",},
+    'noradrenaline':{ 'decimalRarity': 1 / 999999999999999999, 'numRarity': 999999999999999999, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A chill goes down your spine...', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/ores/noradrenaline.gif", "oreName" : "Noradrenaline",},
+    /*gif credits: https://rex-reincarnated.fandom.com/wiki/Epinephrine*/
+    'singularityEgg':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Infinitesimal',  'hasImage' : true, "src" : "media/ores/singularityegg.webp", "oreName" : "Singularity Egg",},
     
     "☯️" : { 'decimalRarity': 1 / 987656789, 'numRarity': 987656789, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Through light and darkness, only one may guide you to the truth...', 'oreTier': 'Celestial',  },
     "⛏️": { 'decimalRarity': 1 / 10000000, 'numRarity': 10000000, 'hasLog': false, 'isBreakable': false, 'caveExclusive': false, 'spawnMessage': 'Thoughts of what lies on the other side cloud your mind until.. a mirror image appears..?', 'oreTier': 'Celestial',  },
@@ -612,8 +615,8 @@ const layerList = {
 "srLayer" : ["sillyMiner", '🇧🇷', '🇨🇴', '🇦🇷', '🇵🇪', '🇻🇪', '🇨🇱', '🇪🇨', '🇧🇴', '🇵🇾', '🇺🇾', '🇸🇷'],
 "ocLayer" : ["sillyMiner", '🇦🇺', '🇵🇬', '🇳🇿', '🇫🇯', '🇸🇧', '🇫🇲', '🇻🇺', '🇵🇫', '🇳🇨', '🇼🇸', '🇹🇻'],
 "catcatLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳'],
-"starLayer" : ["txtfile", "cosmicIridium", "unstableCore", "pleidas", "australiumIngot", "⠀"],
-"nebulaLayer" : ["otherside", "ascendedArtifact", "J1407b", "nebula"]
+"starLayer" : ["txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "⠀"],
+"nebulaLayer" : ["noradrenaline", "otherside", "ascendedArtifact", "J1407b", "nebula"]
 }
 const createdLayers = {
 
@@ -934,7 +937,7 @@ function createGenerationProbabilities() {
         let tempArr = [];
         let tempLayer = layerDictionary[layer].layer;
         for (let i = 0; i < tempLayer.length; i++) {
-            temp += oreList[tempLayer[i]]["decimalRarity"];
+            temp = oreList[tempLayer[i]]["decimalRarity"];
             tempArr[i] = temp;
         }
         layerDictionary[layer].probabilities = tempArr;

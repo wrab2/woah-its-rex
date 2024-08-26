@@ -201,8 +201,9 @@ const generateBlock = function(location) {
 const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);
     const originAmt = amt;
-    const generationInfo = getLayer(y);
-    if (y === player.luna.layer) {let lunaLayer = addLuna([...generationInfo.layer], [...generationInfo.probabilities]); generationInfo.layer = lunaLayer[0]; generationInfo.probabilities = lunaLayer[1];}
+    const layer = getLayer(y);
+    let generationInfo = {layer: [...layer.layer], probabilities: [...layer.probabilities], layerMat: layer.layerMat};
+    if (y === player.luna.layer) {let lunaLayer = addLuna([...layer.layer], [...layer.probabilities]); generationInfo.layer = lunaLayer[0]; generationInfo.probabilities = lunaLayer[1];}
     const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? [...caveList[caveInfo.type]] : [...generationInfo.layer];
     if (fromOffline) for (let i = thisTable.length - 1; i >= 0; i--) if (oreList[thisTable[i]]["oreTier"] === "Celestial") thisTable.splice(i, 1);
     const sm = (caveInfo !== undefined && caveInfo.type === "currentLayer");
@@ -803,7 +804,11 @@ function removeParadoxical() {
     if (player.powerupVariables.fakeEquipped.item !== undefined) {
         if (player.gears[player.powerupVariables.fakeEquipped.item] !== undefined) {
             if (player.powerupVariables.fakeEquipped.item === "gear0") document.getElementById("trackerLock").style.display = "inline-flex";
-            if (player.powerupVariables.fakeEquipped.item === "gear9") document.getElementById("sillyRecipe").style.display = "none";
+            
+            if (player.powerupVariables.fakeEquipped.item === "gear9") {
+                if (get("sillyRecipe").classList.contains("lockedRecipe")) get("sillyRecipe").classList.remove("lockedRecipe")
+                document.getElementById("sillyRecipe").style.display = "none";
+            }
             if (player.powerupVariables.fakeEquipped.item === "gear24") get("allowAutoPowerup").style.display = "none";
             player.gears[player.powerupVariables.fakeEquipped.item] = false;
             player.powerupVariables.fakeEquipped.item = undefined;

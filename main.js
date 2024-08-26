@@ -497,7 +497,7 @@ const calcSpeed = function() {
         else return {speed: 7, reps: Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1)), extra:extraSpeed}
     }
     if (player.gears["gear36"]) reps = Math.round(reps*1.75)
-    //if (debug) return {speed: 5, reps: devReps, extra:0}
+    if (debug) return {speed: 5, reps: devReps, extra:0}
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
 }
 function updateSpeed() {
@@ -565,9 +565,9 @@ function checkDisplayVariant(location) {
     const tier = oreList[ore]["oreTier"];
     let isRare = (tier !== "Layer" && commons.indexOf(tier) === -1);
     if (oreList[ore]["hasImage"]) {
-        //if (tier === "Layer") return "⠀";
         let isLarge = tier === "Hyperdimensional" || tier === "Infinitesimal" || oreList[ore]["numRarity"] >= 1000000000000000;
-        if (isRare) oreToAdd = `<img class="${isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[ore]["src"]}"></img>`;
+        let isMassive = ore === "noradrenaline"
+        if (isRare) oreToAdd = `<img class="${isMassive ? "hugeMineImage" : isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[ore]["src"]}"></img>`;
         else return `<span class="mineSpan"><img class="mineImage" src="${oreList[ore]["src"]}"></img></span>`;
         includeSize = "";
         specialVariant = "Img";
