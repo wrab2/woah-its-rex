@@ -203,7 +203,6 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     const originAmt = amt;
     const layer = getLayer(y);
     let generationInfo = {layer: [...layer.layer], probabilities: [...layer.probabilities], layerMat: layer.layerMat};
-    if (y === player.luna.layer) {let lunaLayer = addLuna([...layer.layer], [...layer.probabilities]); generationInfo.layer = lunaLayer[0]; generationInfo.probabilities = lunaLayer[1];}
     const thisTable = (caveInfo !== undefined && caveInfo.type !== "currentLayer") ? [...caveList[caveInfo.type]] : [...generationInfo.layer];
     if (fromOffline) for (let i = thisTable.length - 1; i >= 0; i--) if (oreList[thisTable[i]]["oreTier"] === "Celestial") thisTable.splice(i, 1);
     const sm = (caveInfo !== undefined && caveInfo.type === "currentLayer");
@@ -264,7 +263,6 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             let wasDuped = false;
             if (results[blockToGive].rand >= 1 && !isCave) rng = 1;
             let variantDivide = player.gears["gear25"] ? 2 : 1;
-            let variantSubtract = 0;
             let totalVariants = 0;
             //do silly stuff here
             playerInventory[blockToGive]["foundAt"] ??= Date.now();
@@ -287,13 +285,12 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                 playSound(oreList[blockToGive]["oreTier"], blockToGive);
             }
             for (let i = 3; i > 0; i--) {
-                variantSubtract = 0;
-                let estVariantAmt = (results[blockToGive].est-variantSubtract)/(multis[i]/variantDivide);
+                let estVariantAmt = (results[blockToGive].est)/(multis[i]/variantDivide);
                 if (estVariantAmt < 1 && Math.random() < estVariantAmt) estVariantAmt++;
                 estVariantAmt = Math.floor(estVariantAmt);
                 totalVariants += estVariantAmt;
                 if (estVariantAmt > 0) {
-                    variantSubtract += estVariantAmt;
+                    results[blockToGive].est -= estVariantAmt;
                     if (player.gears["gear22"] && oreList[blockToGive]["numRarity"] >= 750000) {
                         if (estVariantAmt >= 10) estVariantAmt *= 1.1; 
                         else if (Math.random() < 1/10) {estVariantAmt++; wasDuped = true;}
@@ -327,7 +324,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                     });
                 }
             }
-            let toGive = results[blockToGive].est - totalVariants;
+            let toGive = results[blockToGive].est;
             if (toGive > 0) {
                 wasDuped = false;
                 if (oreList[blockToGive]["numRarity"] >= 750000) {

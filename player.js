@@ -89,6 +89,7 @@ class playerTemplate {
                 "Imaginary": {canPlay: true, volume: 50},
                 "Hyperdimensional" : {canPlay: true, volume:50},
                 "Infinitesimal" : {canPlay: true, volume:50},
+                "Polychromatical" : {canPlay: true, volume:50}
             },
             musicSettings: {
                 active: true,
@@ -96,7 +97,7 @@ class playerTemplate {
             },
             baseMineCapacity: 250000,
             minSpeed: 0,
-            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Infinitesimal"]},
+            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"]},
             canDisplay: true,
             useNumbers: false,
             inventorySettings: {invToIndex: true, craftingToIndex: true},
@@ -112,9 +113,10 @@ class playerTemplate {
             automineProtection: false,
             useNyerd: false,
             automineUpdate: 25,
-            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Infinitesimal"],
+            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"],
             lastWorld: 1,
-            simulatedRng: false
+            simulatedRng: false,
+            hideCompleted: false
         },
         this.stats = {
             currentPickaxe: "pickaxe0",
@@ -648,18 +650,28 @@ function loadNewData(data) {
         player.stats.furthestPosX = data.stats.furthestPosX;
         player.stats.furthestY = data.stats.furthestY;
         document.getElementById("blocksMined").innerText = `${player.stats.blocksMined.toLocaleString()} Blocks Mined.`;
+        const tierConcat = [];
         if (data.settings.audioSettings !== undefined) {
+            for (let propertyName in player.settings.audioSettings) if (data.settings.audioSettings[propertyName] === undefined) tierConcat.push(propertyName);
             for (let propertyName in data.settings.audioSettings) {
-                player.settings.audioSettings[propertyName].canPlay = data.settings.audioSettings[propertyName].canPlay;
-                player.settings.audioSettings[propertyName].volume = data.settings.audioSettings[propertyName].volume;
-                let text = document.getElementById(`mute${propertyName}`).innerText;
-                text = text.substring(text.indexOf(" ") + 1);
-                if (!(player.settings.audioSettings[propertyName].canPlay)) document.getElementById(`mute${propertyName}`).innerText = `Unmute ${text}`;
-                let elements = document.getElementsByClassName("spawnVolume");
-                for (let i = 0; i < elements.length; i++) {
-                    if (String(elements[i].onchange).indexOf(propertyName) > -1) {
-                        elements[i].value = player.settings.audioSettings[propertyName].volume;
-                        changeSpawnVolume(elements[i].value, propertyName);
+                if (player.settings.audioSettings[propertyName] !== undefined) {
+                    player.settings.audioSettings[propertyName].canPlay = data.settings.audioSettings[propertyName].canPlay;
+                    player.settings.audioSettings[propertyName].volume = data.settings.audioSettings[propertyName].volume;
+                    const elem = get(`mute${propertyName}`);
+                    if (elem) {
+                        let text = elem.innerText;
+                        text = text.substring(text.indexOf(" ") + 1);
+                        if (!(player.settings.audioSettings[propertyName].canPlay)){
+                            const elem = get(`mute${propertyName}`);
+                            if (elem !== null) elem.innerText = `Unmute ${text}`;
+                        }
+                        let elements = document.getElementsByClassName("spawnVolume");
+                        for (let i = 0; i < elements.length; i++) {
+                            if (String(elements[i].onchange).indexOf(propertyName) > -1) {
+                                elements[i].value = player.settings.audioSettings[propertyName].volume;
+                                changeSpawnVolume(elements[i].value, propertyName);
+                            }
+                        }
                     }
                 }
             }
@@ -676,8 +688,8 @@ function loadNewData(data) {
         data.settings.inventorySettings ??= {invToIndex: true, craftingToIndex: true};
         if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
         if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
-        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"];
-        player.settings.spawnMessageTiers = data.settings.spawnMessageTiers;
+        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"];
+        player.settings.spawnMessageTiers = data.settings.spawnMessageTiers.concat(tierConcat);
         applySpawnMessageData();
         data.settings.automineUpdate ??= 25;
         player.settings.automineUpdate = data.settings.automineUpdate;
@@ -692,8 +704,8 @@ function loadNewData(data) {
         data.settings.musicSettings ??= {active: true, volume: 100};
         if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
         data.settings.stopOnRare ??= {active: true, allowList: []};
-        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary"];
-        player.settings.stopOnRare.allowList = data.settings.stopOnRare.allowList;
+        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"];
+        player.settings.stopOnRare.allowList = data.settings.stopOnRare.allowList.concat(tierConcat);
         player.settings.stopOnRare.active = data.settings.stopOnRare.active;
         if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";
         applyStopOnRareData();
@@ -719,6 +731,8 @@ function loadNewData(data) {
         player.settings.lastWorld = data.settings.lastWorld;
         data.settings.simulatedRng ??= false;
         if (data.settings.simulatedRng) toggleSimulatedRng(get("simulatedRng"));
+        data.settings.hideCompleted ??= false;
+        if (data.settings.hideCompleted) toggleHideCompleted(get("hideCompleted"));
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {
                 if (data.powerupCooldowns[property] !== undefined && player.powerupCooldowns[property] !== undefined) {
@@ -856,7 +870,7 @@ const dailyMessages = {
     },
     "simRng" : {
         showUntil : "August 16, 2024",
-    }
+    },
 }
 function checkMessages(message) {
     if (message === "newPlayer" && player.faqOffered) return;

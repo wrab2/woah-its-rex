@@ -937,7 +937,8 @@ function createGenerationProbabilities() {
         let tempArr = [];
         let tempLayer = layerDictionary[layer].layer;
         for (let i = 0; i < tempLayer.length; i++) {
-            temp = oreList[tempLayer[i]]["decimalRarity"];
+            if (player.settings.simulatedRng) temp = oreList[tempLayer[i]]["decimalRarity"];
+            else temp += oreList[tempLayer[i]]["decimalRarity"];
             tempArr[i] = temp;
         }
         layerDictionary[layer].probabilities = tempArr;
@@ -1293,6 +1294,7 @@ class ores {
         if (tier === "Imaginary") return "rotate 4s linear 1";
         if (tier === "Hyperdimensional") return "blackout 10s linear 1";
         if (tier === "Infinitesimal") return "invisible 7s linear 1";
+        if (tier === "Polychromatical") return "chaos 4s linear 1"
         return "";
     }
 }

@@ -117,8 +117,10 @@ function playSound(type, special) {
             document.getElementById("blockDisplay").style.animation = "";
         type = oldType;
         setTimeout(() => {
-            document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type);  
-            document.getElementById("blockDisplay").style.animation = "shake 0.5s linear 4";
+            document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type); 
+            let shakeReps = 4;
+            if (type === "Polychromatical") shakeReps = 8;
+            document.getElementById("blockDisplay").style.animation = `shake 0.5s linear ${shakeReps}`;
             player.currentEffect = type;
         }, timeoutAmt);
     }

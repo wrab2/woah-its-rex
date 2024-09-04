@@ -42,7 +42,7 @@ function powerup1(x, y) {
     if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
         const multiplier = Math.floor(Math.log(player.stats.blocksMined/500000)/Math.log(10)) + 1;
         const amt = (101*multiplier)*(101*multiplier)
-        if (amt > 1000000) bulkGenerate(curY, amt, undefined, false);
+        if (amt > 1000000 || player.settings.simulatedRng) bulkGenerate(curY, amt, undefined, false);
         else {
             for (let r = y - (50 * multiplier); r < y + (50 * multiplier); r++) {
                 for (let c = x - (50 * multiplier); c < x + (50 * multiplier); c++) {

@@ -188,6 +188,9 @@ let celestial;
 let imaginary;
 let keepRunningAudio;
 let eventSpawn;
+let hyperdimensional;
+let infinitesimal;
+let polychromatical;
 let allAudios = {
     "Antique" : undefined,
     "Mystical" : undefined,
@@ -200,6 +203,7 @@ let allAudios = {
     "Celestial" : undefined,
     "Imaginary" : undefined,
     "Hyperdimensional" : undefined,
+    "Polychromatical" : undefined,
     "Infinitesimal" : undefined
 };
 let osaka;
@@ -220,6 +224,7 @@ function loadContent() {
     imaginary = new Audio("audios/imaginary.mp3");
     hyperdimensional = new Audio("audios/hyperdimensional.mp3");
     infinitesimal = new Audio("audios/infinitesimal.mp3");
+    polychromatical = new Audio("audios/polychromatical.mp3");
     osaka = new Audio("audios/lol.mp3");
     allAudios["Antique"] = chill;
     allAudios["Mystical"] = mystical;
@@ -233,6 +238,7 @@ function loadContent() {
     allAudios["Imaginary"] = imaginary;
     allAudios["Hyperdimensional"] = hyperdimensional;
     allAudios["Infinitesimal"] = infinitesimal;
+    allAudios["Polychromatical"] = polychromatical;
     for (let property in allAudios) allAudios[property].load();
     musicPlayer.songs["song1"].src = new Audio("audios/ely_audio_1.mp3");
     musicPlayer.songs["song2"].src = new Audio("audios/ely_audio_2.mp3");
@@ -1657,6 +1663,9 @@ function updateOfflineProgress() {
 function generateOfflineProgress() {
     const offlineAmt = updateOfflineProgress();
     if (offlineAmt > 0) {bulkGenerate(curY, offlineAmt, undefined, true); player.offlineProgress = 0; updateOfflineProgress();}
+}
+function preventCrash(event) {
+    if (event.key === "Enter") event.preventDefault();
 }
 //TY @marbelynrye FOR MAKING THESE IMAGE DATA GATHERERS UR SO COOL FOR THAT
 //IT WORKS SO WELL!!!!

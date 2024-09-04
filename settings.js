@@ -1106,6 +1106,7 @@ function toggleSimulatedRng(button) {
         button.style.backgroundColor = "#6BC267";
         player.settings.simulatedRng = true;
     }
+    updateAllLayers();
 }
 function togglePlacement() {
     const placer = get("toggleOrePlacer");
@@ -1306,5 +1307,14 @@ function sillyKittyCat(text) {
         curCatStep = 0;
         get("catText").value = "";
         get("catStuff").style.display = "none";
+    }
+}
+function toggleHideCompleted() {
+    if (player.settings.hideCompleted) {
+        player.settings.hideCompleted = false;
+        get("hideCompleted").style.backgroundColor = "#FF3D3D";
+    } else {
+        player.settings.hideCompleted = true;
+        get("hideCompleted").style.backgroundColor = "#6BC267";
     }
 }

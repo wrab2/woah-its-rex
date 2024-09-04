@@ -271,8 +271,10 @@ class secureLogs {
 const ignoreProperties = ["output", "x", "y"]
 function encryptLogData(log) {
     const newObj = {};
+    let i = 0;
     for (let property in log) {
-        if (property !== "output") newObj[property] = log[property];
+        if (ignoreProperties.indexOf(property) === -1) newObj[i] = log[property];
+        i++;
     }
     return toBinary(JSON.stringify(newObj));
 }

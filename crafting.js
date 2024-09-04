@@ -486,10 +486,13 @@ function updateActiveRecipe() {
                         count++;
                         toChange.style.color = "#6BC267";
                         currentRarity += oreList[ore]["numRarity"] * needed;
+                        if (player.settings.hideCompleted) toChange.style.display = "none";
+                        else toChange.style.display = "block";
                     }
                     else {
                         toChange.style.color = "#FF3D3D";
                         currentRarity += oreList[ore]["numRarity"] * amtOwned;
+                        toChange.style.display = "block";
                     }  
                 }
             }
@@ -739,8 +742,9 @@ function replaceWithGalactica() {
     if (currentWorld !== 1.1) {
         for (let item in recipes) {
             const button = getButtonByName(item)
-            if (button && !button.classList.contains("lockedRecipe")) button.style.display = "none";
+            if (button && !button.classList.contains("lockedRecipe")) button.style.display = "none"; 
         }
+        if (currentRecipe !== undefined && !get(currentRecipe).classList.contains("lockedRecipe")) if (get("displayRecipe") !== null) displayRecipe(currentRecipe);
         if (galDis) {
             galDis = false;
             removeGalactica();

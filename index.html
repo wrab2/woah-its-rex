@@ -712,7 +712,9 @@
                       <div class="inputAndButton">
                         <button class="toggleDisplay fullyRounded" onclick="changeCanDisplay(this)" id="blockUpdates">Toggle Block Updates</button>
                       </div>
-
+                      <div class="inputAndButton">
+                        <button class="toggleDisplay fullyRounded" onclick="toggleHideCompleted(this)" id="hideCompleted" style="background-color: #FF3D3D;">Hide Completed Recipe Ores</button>
+                      </div>
                       <div class="inputAndButton">
                         <button class="toggleDisplay fullyRounded" style="background-color: #FF3D3D;" onclick="changeUseNumbers(this)" id="useNumbers">Use Numbers for Pickaxe Names</button>
                       </div>
@@ -939,7 +941,7 @@
                                 <button id="setForgeAmount" onclick="multiplyRecipe(document.getElementById('amountInputText').value)">Set Multiplier</button>
                                 <br>
                                 <form id="amountInput">
-                                    <input type="text" placeholder="Amount" id="amountInputText" autocomplete="off" maxlength="3">
+                                    <input type="text" placeholder="Amount" id="amountInputText" autocomplete="off" maxlength="3" onkeydown="preventCrash(event)">
                                 </form>
                                 <button id="craftOreButton" onclick="craftOre(currentOreRecipe)"></button>
                         </div>
