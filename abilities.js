@@ -5,7 +5,7 @@ async function rollAbilities(force) {
     let m = 1;
     if (currentWorld < 2 && player.gears["gear8"]) m += 0.2;
     if (player.gears["gear23"]) m += 0.15;
-		if (player.gears["gear35"]) m += 0.5;
+	if (player.gears["gear35"]) m += 0.5;
     if (batteryEvent) m += 0.1;
     if (verifiedOres.canGenerateCaves()) {
         const caveRate = player.powerupVariables.caveBoosts.active ? 1/250 : 1/500;

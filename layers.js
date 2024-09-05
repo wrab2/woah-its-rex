@@ -936,8 +936,9 @@ function createGenerationProbabilities() {
         let temp = 0;
         let tempArr = [];
         let tempLayer = layerDictionary[layer].layer;
+        const sim = (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional);
         for (let i = 0; i < tempLayer.length; i++) {
-            if (player.settings.simulatedRng) temp = oreList[tempLayer[i]]["decimalRarity"];
+            if (sim) temp = oreList[tempLayer[i]]["decimalRarity"];
             else temp += oreList[tempLayer[i]]["decimalRarity"];
             tempArr[i] = temp;
         }
