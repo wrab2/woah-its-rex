@@ -35,6 +35,7 @@
 .inventoryImage img {
   height: 1vw;
   width: 1vw;
+  filter: drop-shadow(0.1vw 0.1vw 0.25vw black);
 }
 .craftingImage img {
   width: 3.25vw;
@@ -719,10 +720,11 @@ img.roundcat {
   width: 100%;
 }
 #stopOnRareList {
-  height: 21vw;
+  height: 22.5vw;
   width: 30%;
   position: absolute;
   right:0px;
+  top: 0px;
   background-color: white;
   z-index: 14;
   justify-content: center;
@@ -749,8 +751,9 @@ img.roundcat {
 }
 #spawnTierList {
   width: 50%;
-  height: 21vw;
+  height: 22.5vw;
   position: absolute;
+  top: 0px;
   display: none;
   justify-content: center;
   flex-wrap: wrap;
@@ -1397,6 +1400,22 @@ z-index: 20;
   80% {right:-23.5vw;}
   100% {right:-30vw;}
 }
+@keyframes extendEventActions {
+  0% {right:-15vw;}
+  20% {right:-11.5vw;}
+  40% {right:-8vw;}
+  60% {right:-4.5vw;}
+  80% {right:-1vw;}
+  100% {right:2.5vw;}
+}
+@keyframes retractEventActions {
+  0% {right:2.5vw;}
+  20% {right:-1vw;}
+  40% {right:-4.5vw;}
+  60% {right:-8vw;}
+  80% {right:-11.5vw;}
+  100% {right:-15vw;}
+}
 #sideIconHolder {
   width: 2.5vw;
   height: 100%;
@@ -1542,6 +1561,64 @@ z-index: 20;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 20;
+}
+#eventActionHolder {
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  top: 11.75vw;
+  right:-15vw;
+  height: 10vw;
+  width: 15vw;
+  border:0.1vw solid white;
+  box-shadow: 0px 0px 0.5vw white;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 20;
+}
+#actionTitle {
+  height: 2vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5vw;
+  font-weight: 750;
+  margin: 0px;
+}
+#actionCooldown {
+  height: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75vw;
+  font-weight: 500;
+  margin: 0px;
+}
+#eventStats {
+  height: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75vw;
+  font-weight: 500;
+  margin: 0px;
+}
+#actionHolder {
+  width: 100%;
+  height: 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.eventActionButton {
+  width: 50%;
+  height: 50%;
+  background: none;
+  font-size: 1vw;
+}
+.eventActionButton:hover {
+  background-color: rgba(49, 49, 49, 0.5);
 }
 #trackerArrow {
   position: relative;
@@ -1790,7 +1867,19 @@ button, .col-3 > div > button {
   margin: 0;
   text-wrap: nowrap;
 }
-
+#patreonHolder {
+  width: 100%;
+  height: 2vw;
+  font-size: 1vw;
+  border-top: 0.15vw solid #2e2e2e;
+  border-bottom: 0.15vw solid #2e2e2e;
+}
+#patreon {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0px 0px 0.3vw white);
+}
 
 #latestSpawns {
   color: white;
@@ -2091,6 +2180,13 @@ button, .col-3 > div > button {
   width: 10vw;
   height: 2vw;
   background: none;
+  font-size: 1vw;
+}
+#savedLogsButton {
+  width: 20vw;
+  height: 2vw;
+  background: none;
+  font-size: 1vw;
 }
 #logSort {
   height: 2vw;

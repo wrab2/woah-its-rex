@@ -191,7 +191,22 @@ let oreList = {
     '⚙️': { 'decimalRarity': 1 / 5000000, 'numRarity': 5000000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⚙️ Has Spawned!', 'oreTier': 'Mystical',  },
     
     
-    
+    '🎁': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🎮': { 'decimalRarity': 1 / 6890000, 'numRarity': 6890000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Mystical',  },
+    '🎫': { 'decimalRarity': 1 / 8230000, 'numRarity': 8230000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Mystical',  },
+    '🚗': { 'decimalRarity': 1 / 12700000, 'numRarity': 12700000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Mystical',  },
+    '📢': { 'decimalRarity': 1 / 68900000, 'numRarity': 68900000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Divine',  },
+    '🎑': { 'decimalRarity': 1 / 92350200, 'numRarity': 92350200, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Divine',  },
+    '📿': { 'decimalRarity': 1 / 279000000, 'numRarity': 279000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Magical beads that seem to grant your every wish drop on the ground in front of you...', 'oreTier': 'Flawless',  },
+    '🎎': { 'decimalRarity': 1 / 587650200, 'numRarity': 587650200, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'I wonder whats inside...', 'oreTier': 'Flawless',  },
+    '🗳️': { 'decimalRarity': 1 / 824900725, 'numRarity': 824900725, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A mysterious box, able to change reality at will through enough votes, appears next to you...', 'oreTier': 'Interstellar',  },
+    '⚛️': { 'decimalRarity': 1 / 3333333333, 'numRarity': 3333333333, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'The discovery of the Atom shakes the mine to its core...', 'oreTier': 'Metaversal',  },
+    '🛢️': { 'decimalRarity': 1 / 11430000000, 'numRarity': 11430000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'oil..? DID SOMEOME ASK FOR SOME FREEDOM???...', 'oreTier': 'Sacred',  },
+    '💽': { 'decimalRarity': 1 / 290000000000, 'numRarity': 290000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A disc containing all the wonders of humanity emerges from one of the gifts around you...', 'oreTier': 'Ethereal',  },
+    '🍭': { 'decimalRarity': 1 / 2500000000000, 'numRarity': 2500000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A sweet treat that you have been craving for centuries is finally unearthed...', 'oreTier': 'Imaginary', },
+
+    // 
+
     '🐸': { 'decimalRarity': 1 / 900000000000, 'numRarity': 900000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': "hehe.. ribbit...", 'oreTier': 'Celestial',  },
     '🫶': { 'decimalRarity': 1 / 1000000000000, 'numRarity': 1000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A heartfelt gesture beckons you closer, both physically and mentally...', 'oreTier': 'Imaginary',  },
     '🎉': { 'decimalRarity': 1 / 1000000000000, 'numRarity': 1000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'YIPPEEEE YIPEYIPEYIPEYIPE YIIIPPPPEEEEEEEEEE!!!...', 'oreTier': 'Imaginary',  },
@@ -571,6 +586,12 @@ let oreList = {
     'noradrenaline':{ 'decimalRarity': 1 / 999999999999999999, 'numRarity': 999999999999999999, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A chill goes down your spine...', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/ores/noradrenaline.gif", "oreName" : "Noradrenaline",},
     /*gif credits: https://rex-reincarnated.fandom.com/wiki/Epinephrine*/
     'singularityEgg':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Infinitesimal',  'hasImage' : true, "src" : "media/ores/singularityegg.webp", "oreName" : "Singularity Egg",},
+    'orbOfLife':{ 'decimalRarity': 1 / 5000000000000000000, 'numRarity': 5000000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore3.gif", "oreName" : "Orb of Life",},
+    'orbOfIntelligence':{ 'decimalRarity': 1 / 9750000000000000000, 'numRarity': 9750000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore4.gif", "oreName" : "Orb of Intelligence",},
+    'orbOfSound':{ 'decimalRarity': 1 / 16850000000000000000, 'numRarity': 16850000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore5.gif", "oreName" : "Orb of Sound",},
+    'orbOfTheUnknown':{ 'decimalRarity': 1 / 35000000000000000000, 'numRarity': 35000000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore1.gif", "oreName" : "Orb of The Unknown",},
+    'orbOfCreation':{ 'decimalRarity': 1 / 100000000000000000000, 'numRarity': 100000000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore2.gif", "oreName" : "Orb of Creation",},
+    'ah!SoSorgy!':{ 'decimalRarity': 1 / 1000000000000000000000, 'numRarity': 1000000000000000000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'CAPITALISM WILL NOT STOP MY NEED FOR SOUR PATCH KIDS!...', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/HEHEHEHEHE.png", "oreName" : "mmmm yummers chat",},
     
     "☯️" : { 'decimalRarity': 1 / 987656789, 'numRarity': 987656789, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Through light and darkness, only one may guide you to the truth...', 'oreTier': 'Celestial',  },
     "⛏️": { 'decimalRarity': 1 / 10000000, 'numRarity': 10000000, 'hasLog': false, 'isBreakable': false, 'caveExclusive': false, 'spawnMessage': 'Thoughts of what lies on the other side cloud your mind until.. a mirror image appears..?', 'oreTier': 'Celestial',  },
@@ -595,8 +616,9 @@ const layerList = {
 "radioactiveLayer" : ["sillyMiner", "Bismuth", "🤖", "⚠️", "🎆", "🧀", "🌌", "🥀", "🎇", "🔳", "⏹️", "🧩", "🔔", "⚗️", "🧪", "☢️"],
 "cactusLayer" : ["sillyMiner", "🦴", "🐪", "🏵️", "🪐", "💥", "🔥", "🔆", "⭐", "🎀", "🗡️", "📟", "⚱️", "🖍️", "🌵", ],
 "paperLayer" : ["sillyMiner", "🎩", "💵", "🪅", "👀", "🌟", "📝", "⌚", "🗜️", "🏆", "🎲", "✂️", "🃏", "⚙️", "📰"],
+"giftLayer": ["sillyMiner", "🍭", "💽", "🛢️", "⚛️", "🗳️", "🎎", "📿", "🎑", "📢", "🚗", "🎫", "🎮", "🎁"],
 "worldOneCommons" : ["godOfTheMine", "🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "🔶", "🔷", "🔸", "🔹", "🔺", "🔻", "🔘", "🔲", "🟨", "🟦", "⬛", "⬜", "🧧", "◾", "◽", "⚫", "🟤", "🟣", "🔴", "🟠", "🟡", "🔵", "🟢", "🟪", "🟥", "🟧"],
-"sillyLayer" : ["sillyMiner", "UHD", "qrCode", "kaleidoscope", "🎉", "🧌", "Nyerd", "Fox", "♾️", "💅", "😁", "🪢", "🎂"],
+"sillyLayer" : ["ah!SoSorgy!", "sillyMiner", "UHD", "qrCode", "kaleidoscope", "🎉", "🧌", "Nyerd", "Fox", "♾️", "💅", "😁", "🪢", "🎂"],
 "fluteLayer" : ["sillyMiner", "mushroomCats", "🫶", "🪈"],
 "cloudLayer" : ["starglint", "sillyMiner",  "🪽", "⚡", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
 "cloudLayer2" : ["🖐", "starglint", "sillyMiner",  "🪽", "⚡", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
@@ -621,13 +643,13 @@ const layerList = {
 const createdLayers = {
 
 }
-let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
+let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"];
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
 let galacticaLayers = ["starLayer", "nebulaLayer"]
 let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"];
 let waterWorldLayers = ["waterLayer"]
 let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer"]
-let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer"];
+let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"];
 
 //SETTING LAYERS
 const layerDictionary = {
@@ -646,6 +668,7 @@ const layerIndex = {
         5 : "radioactiveLayer",
         6 : "cactusLayer",
         7 : "paperLayer",
+        8 : "giftLayer",
         4000 : "fluteLayer",
         7777 : "sillyLayer",
         1337 : "unknownLayer"
@@ -681,7 +704,7 @@ let currentLayer = "dirtLayer";
 function setLayer(y) {
     if (currentWorld === 1) {
         let tempNum = y;
-        if (tempNum < 16000) {
+        if (tempNum < 18000) {
             tempNum = Math.floor(tempNum / 2000);
             if (tempNum !== currentLayerNum) {
                 a88();
@@ -690,7 +713,7 @@ function setLayer(y) {
                 lastRepeatedLayer = -1;
             }
         } else {
-            const repeatingLayerNum = Math.floor((y - 16000) / 10000);
+            const repeatingLayerNum = Math.floor((y - 18000) / 10000);
             if (repeatingLayerNum !== lastRepeatedLayer && repeatingLayers[repeatingLayerNum] === undefined) {
                 a88();
                 let force = false;
@@ -754,13 +777,13 @@ function setLayer(y) {
 
 function getLayer(y) {
     if (currentWorld === 1) {
-        if (y < 16000) {
+        if (y < 18000) {
             if (y === 0) return layerDictionary["grassLayer"];
             if (y === 1) return layerDictionary["dirtLayer2"];
             if (y === 1337 && hasConverted) return layerDictionary["dirtLayer3"]
             return layerDictionary[layerIndex.worldOne[Math.floor(y / 2000)]];
         } else {
-            const num = Math.floor((y - 16000) / 10000);
+            const num = Math.floor((y - 18000) / 10000);
             if (repeatingLayers[num] === undefined) setLayer(y);
             return layerDictionary[layerIndex.worldOne[repeatingLayers[num].layer]];
         }
@@ -1231,6 +1254,10 @@ class ores {
             colors : {"backgroundColor" : "#021752", "textColor" : "#ffffff"},
             tierMessage : ``,
         },
+        "Polychromatical" : {
+            colors : {"backgroundColor" : "#ff0526", "textColor" : "#ffffff"},
+            tierMessage : ``,
+        }
     }
     getTierMessage(tier) {
         return this.oreTiers[tier].tierMessage;

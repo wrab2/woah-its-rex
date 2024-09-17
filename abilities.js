@@ -7,6 +7,8 @@ async function rollAbilities(force) {
     if (player.gears["gear23"]) m += 0.15;
 	if (player.gears["gear35"]) m += 0.5;
     if (batteryEvent) m += 0.1;
+    if (randBuff.proc) m *= 2;
+    if (player.gears["gear39"]) m *= 0.5;
     if (verifiedOres.canGenerateCaves()) {
         const caveRate = player.powerupVariables.caveBoosts.active ? 1/250 : 1/500;
         if (Math.random() <= caveRate && player.settings.cavesEnabled) {
@@ -17,11 +19,13 @@ async function rollAbilities(force) {
     if (debug && force) m = 10000000;
     const pickaxe = pickaxeStats[player.stats.currentPickaxe]
     if (Math.random() <= (m/pickaxe.rate)) {
-        if (player.settings.simulatedRng && !ca) {
+        if ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) && !ca) {
             let bulkAmt = 0;
             if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
             else bulkAmt = pickaxe.mined;
+            if (player.gears["gear41"] && Math.random() < 1/10) bulkAmt += 500000;
             if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
+            if (player.gears["gear39"]) bulkAmt = Math.floor(bulkAmt*3);
             bulkGenerate(curY, bulkAmt, undefined, false)
         } else {
             pickaxe.doAbility(curX, curY);
@@ -90,7 +94,6 @@ function powerup4() {
         applyNearbyData();
     }
 }
-const paradoxicalCantGive = ["pickaxe27", "pickaxe31"]
 function powerup5() {
     if (Date.now() >= player.powerupCooldowns["powerup5"].cooldown && player.powerupCooldowns["powerup5"].unlocked) {
         if (currentWorld !== 1.1) {
@@ -98,12 +101,12 @@ function powerup5() {
             let toChooseFrom = [];
             for (let pickaxe in pickaxeStats) {
                 if (currentWorld === 2) {
-                    if (pickaxeStats[pickaxe].canMineIn.includes(2) && paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe)
-                } else if (currentWorld !== 2 && paradoxicalCantGive.indexOf(pickaxe) === -1) toChooseFrom.push(pickaxe)
+                    if (pickaxeStats[pickaxe].canMineIn.includes(2)) toChooseFrom.push(pickaxe)
+                } else if (currentWorld !== 2) toChooseFrom.push(pickaxe)
             }
             toChooseFrom = toChooseFrom.concat(Object.keys(player.gears));
             for (let i = toChooseFrom.length - 1; i >= 0; i--) {
-                if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || (pickaxeStats[toChooseFrom[i]] !== undefined && pickaxeStats[toChooseFrom[i]].isDimensional)) toChooseFrom.splice(i, 1);
+                if (player.pickaxes[toChooseFrom[i]] || player.gears[toChooseFrom[i]] || recipes[toChooseFrom[i]].pUnob) toChooseFrom.splice(i, 1);
             }
             if (toChooseFrom.length > 0) {
                 let toGive = toChooseFrom[Math.round(Math.random() * (toChooseFrom.length - 1))];
@@ -118,6 +121,7 @@ function powerup5() {
                     if (toGive === "gear0") document.getElementById("trackerLock").style.display = "none";
                     if (toGive === "gear9") document.getElementById("sillyRecipe").style.display = "block";
                     if (toGive === "gear24") get("allowAutoPowerup").style.display = "block";
+                    if (toGive === "gear45") showEventOptions();
                 }
                 updateAllLayers();
                 updateSpeed();
@@ -185,7 +189,7 @@ function gearAbility2() {
         }
         const forceKorone = Math.random() < 1/56 ? "KORONE" : false;
         repeatingLayers[reps] = {layer: 7777, force: forceKorone};
-        specialLayerLocations["sillyLayer"] ??= 16000 + (10000 * reps);
+        specialLayerLocations["sillyLayer"] ??= 18000 + (10000 * reps);
     }
 }
 

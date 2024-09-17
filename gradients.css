@@ -201,6 +201,13 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#infinityCollectorII span{
+    background: linear-gradient(to right,#2E2486, #45FFF2, #45A5FF);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #layerMaterializer span{
     background: linear-gradient(to right,#AEAEAE, #AEAEAE, #49C6FF, #6DD700, #F7F7F7, #AD7F57, #FF6312);
     -webkit-background-clip: text;
@@ -497,6 +504,83 @@
 }
 #increasedExponentiality span{
     background: linear-gradient(to right,#ccff33, #70e000, #008000, #004b23, #007200, #38b000, #9ef01a);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#forgottenRoseQuartzShell span{
+    background: linear-gradient(to right, #f7cac9, #ffdcdb, #ffffff, #b4c8ea, #91a8d0);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#armbandOfEndlessDreams span{
+    background: linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringOfLife span{
+    background: linear-gradient(to right,#403330 5%, #9A2910, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringOfIntelligence span{
+    background: linear-gradient(to right,#403330 5%, #1662A4, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringOfSound span{
+    background: linear-gradient(to right,#403330 5%, #0A9420, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringOfTheUnknown span{
+    background: linear-gradient(to right,#403330 5%, #000000, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringOfCreation span{
+    background: linear-gradient(to right,#403330 5%, #C6D224, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#superclusterCapsizer span{
+    background: linear-gradient(to right,#2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#timeDestabilizer span{
+    background: linear-gradient(to right,#FB6376, #6DD6DA, #EFD6AC);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#eventManager span{
+    background: linear-gradient(to right,#D67AB1, #9E643C, #C2F8CB);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#disengagedIncrementer span{
+    background: linear-gradient(to right,#555B6E, #679436, #FFED65);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;

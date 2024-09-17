@@ -219,7 +219,8 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             estAmt = amt*generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])];
         }
         let oldEst = estAmt;
-        if (estAmt < 1 && Math.random() < estAmt) {estAmt += 1;}
+        if (estAmt < 1 && Math.random() < estAmt) estAmt += 1; 
+        else if (Math.random() < estAmt%1) {estAmt += 1; oldEst = estAmt%1;}
         estAmt = Math.floor(estAmt);
         results[thisTable[i]] = {est: estAmt, rand: oldEst}
         amt -= estAmt;
@@ -326,6 +327,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             }
             let toGive = results[blockToGive].est;
             if (toGive > 0) {
+                if (player.gears["gear42"] && !oreInformation.tierGrOrEqTo({"tier1": oreList[blockToGive]["oreTier"], "tier2": "Hyperdimensional"})) toGive *= 2;
                 wasDuped = false;
                 if (oreList[blockToGive]["numRarity"] >= 750000) {
                     if (player.gears["gear7"] && currentWorld < 2) gearAbility1();
@@ -531,7 +533,7 @@ function switchDistance(num) {
         const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
         if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
         else layerDistanceY = specialTeleportLayer + 5000;
-        if (layerDistanceY === lastLayerInfo[1]) switchDistance(num)
+        if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
     } else {
         layerDistanceY = 1000 + (2000 * distanceMulti);
     }
@@ -807,6 +809,7 @@ function removeParadoxical() {
                 document.getElementById("sillyRecipe").style.display = "none";
             }
             if (player.powerupVariables.fakeEquipped.item === "gear24") get("allowAutoPowerup").style.display = "none";
+            if (player.powerupVariables.fakeEquipped.item === "gear45") hideEventOptions();
             player.gears[player.powerupVariables.fakeEquipped.item] = false;
             player.powerupVariables.fakeEquipped.item = undefined;
         }
@@ -823,8 +826,8 @@ function removeParadoxical() {
         player.powerupVariables.fakeTreeLevel.level = undefined;
         player.powerupVariables.fakeTreeLevel.originalState = undefined;
         player.powerupVariables.fakeTreeLevel.removeAt = Infinity;
+        utilitySwitchActions();
     }
     updateSpeed();
     saveNewData({override: undefined, return: false});
 }
-

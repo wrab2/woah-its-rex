@@ -39,6 +39,16 @@ class playerTemplate {
             "gear35": false,
             "gear36": false,
             "gear37": false,
+            "gear38": false, //random every minute, 1.4x luck or 2x proc rate or +25 reps
+            "gear39": false, //0.5x ability proc rate, 1.75x simulated generation amt
+            "gear40": false, //poly 1, 1.5x base luck
+            "gear41": false, //poly 2, 1/10 chance for +500000 simulated amount, applied before simulated amount multipliers
+            "gear42": false, //poly 3, guaranteed x2 normal amount of every tier until hyperdimensional, applies before the 1/10 for x2
+            "gear43": false, //poly 4, allows use of wormhole in sr1
+            "gear44": false, //poly 5, +50 reps, maybe unlock something new im not sure
+            "gear45": false, //change event, start event, increase event time 
+            "gear46": false, //gain +0.2x of total offline time as ores (base: 0.1x)
+            "gear47": false, //gain +0.45x of total offline time as ores (base: 0.1x)
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -73,7 +83,8 @@ class playerTemplate {
             "pickaxe30" : false,
             "pickaxe31" : false,
             "pickaxe32" : false,
-            "pickaxe33" : false
+            "pickaxe33" : false,
+            "pickaxe34" : false
         }
         this.settings = {
             audioSettings: {
@@ -204,12 +215,28 @@ class playerTemplate {
         this.serverHookName = undefined;
         this.lastOnline = Date.now();
         this.offlineProgress = 0;
+        this.p = {
+            "orbOfLife": false,
+            "orbOfIntelligence": false,
+            "orbOfSound": false,
+            "orbOfTheUnknown": false,
+            "orbOfCreation": false
+        }
+        this.eventManager = {
+            cooldown: Date.now()
+        }
     }
 }
 let player = new playerTemplate();
 const powerupOrder = ["powerup1", "powerup2", "powerup3", "powerup4", "powerup5"];
 let currentPowerupDisplayed = "powerup1";
 let powerupDisplayed = false;
+const randBuff = {
+    count: 0,
+    luck: false,
+    proc: false,
+    reps: false
+}
 const powerupList = {
     "powerup1" : {
         title: "Terrestrial Terror",
@@ -757,6 +784,8 @@ function loadNewData(data) {
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";
         if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
         else get("allowAutoPowerup").style.display = "none";
+        if (player.gears["gear45"]) showEventOptions();
+        else hideEventOptions();
         if (data.webHook !== undefined) {
             if (data.webHook.ids !== undefined) {
                 for (let id in data.webHook.ids) {
@@ -768,6 +797,15 @@ function loadNewData(data) {
                     }
                 }
             }
+        }
+        const polys = data.p;
+        if (polys !== undefined) {
+            for (let poly in polys) {
+                if (player.p[poly] !== undefined) player.p[poly] = data.p[poly]
+            }
+        }
+        if (data.eventManager !== undefined) {
+            player.eventManager.cooldown = data.eventManager.cooldown;
         }
         if (player.galacticaUnlocked && player.lastWorld !== 0.9) galacticaShortcut();
         if (data.serverHook !== undefined) player.serverHook = data.serverHook;
