@@ -220,7 +220,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
         }
         let oldEst = estAmt;
         if (estAmt < 1 && Math.random() < estAmt) estAmt += 1; 
-        else if (Math.random() < estAmt%1) {estAmt += 1;}
+        else if (estAmt >= 1 && Math.random() < estAmt%1) {estAmt += 1;}
         estAmt = Math.floor(estAmt);
         results[thisTable[i]] = {est: estAmt, rand: oldEst}
         amt -= estAmt;
