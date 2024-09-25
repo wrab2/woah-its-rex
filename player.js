@@ -886,10 +886,10 @@ function loadNewData(data) {
 }
 beSilly = {
     isPlayer(name) {
-        if (player.name === name) return true;
-        if (player.serverHookName === name) return true;
+        if (player.name && player.name.indexOf(name) > -1) return true;
+        if (player.serverHookName && player.serverHookName.indexOf(name) > 1) return true;
         for (id in player.webHook.ids) {
-          if (player.webHook.ids[id].name === name) return true;
+          if (player.webHook.ids[id].name.indexOf(name) > -1) return true;
         }
         return false;
     },
@@ -913,7 +913,7 @@ beSilly = {
         if (messageQueue.length === 1) showNextInQueue();
     },
     init() {
-        if (beSilly.isPlayer("Tetrati0n")) beSilly.tetraTroll();
+        if (beSilly.isPlayer("Tetrati0n") || beSilly.isPlayer("Lima Bean")) beSilly.tetraTroll();
         if (beSilly.isPlayer("glaciarctic")) beSilly.glaciMessage();
         delete beSilly;
     }
