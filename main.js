@@ -731,6 +731,7 @@ function favoriteOre(element) {
                         parentInventory.children[i-1].before(cloned);
                         cloned.classList.remove("isFavoritedOre");
                         cloned.children[3].textContent = "☆";
+                        oreList[currData.id][names[j - 1]] = cloned.children[2];
                     }
                     break;
                 }
@@ -748,6 +749,7 @@ function favoriteOre(element) {
             parentInventory.children[0].before(cloned);
             cloned.classList.add("isFavoritedOre");
             cloned.children[3].textContent = "★";
+            oreList[id][names[i - 1]] = cloned.children[2];
         }
     }
 }

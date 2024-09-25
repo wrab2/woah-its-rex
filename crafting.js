@@ -179,7 +179,7 @@ const recipes = {
         pUnob: true
     },
     "pickaxe35" : {
-        name: "Supercluster Capsizer",
+        name: "Galactic Engulfer",
         recipe : [{"ore":"nebula","amt":25000000000000},{"ore":"J1407b","amt":45},{"ore":"ascendedArtifact","amt":33},{"ore":"otherside","amt":17},{"ore":"noradrenaline","amt":1}],
         active : [],
         pUnob: true
