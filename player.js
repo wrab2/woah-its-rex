@@ -913,7 +913,6 @@ beSilly = {
         if (messageQueue.length === 1) showNextInQueue();
     },
     init() {
-        
         if (beSilly.isPlayer("Tetrati0n")) beSilly.tetraTroll();
         if (beSilly.isPlayer("glaciarctic")) beSilly.glaciMessage();
         delete beSilly;
@@ -990,7 +989,6 @@ function showNextInQueue() {
     if (currentDisplayedMessage.id !== undefined) get(`${currentDisplayedMessage.id}`).style.display = "none";
     currentDisplayedMessage.id = undefined;
     if (messageQueue.length > 0) {currentDisplayedMessage.id = messageQueue[0]; messageQueue.splice(0, 1)}
-    else return;
     if (dailyMessages[currentDisplayedMessage.id] !== undefined) player.viewedMessages[currentDisplayedMessage.id] = true;
     if (currentDisplayedMessage.id === undefined) {get("dailyMessages").style.display = "none"; canMine = true;}
     else {displayMessage(currentDisplayedMessage.id); canMine = false;}
