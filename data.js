@@ -57,7 +57,10 @@ function loadAllData() {
                 return false;
             }
         }
-        data ??= {blocks: {}, player: player};
+        if (data === undefined || data === null) {
+            data ??= {blocks: {}, player: player};
+            if (Date.now() >= new Date("October 1, 2024").getTime()) data.player.pb1 = true;
+        }
         loadNewData(data);
         return true;
 }

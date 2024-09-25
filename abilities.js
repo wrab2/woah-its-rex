@@ -45,8 +45,8 @@ function getTestAvg() {
 function powerup1(x, y) {
     if (!pickaxeStats[player.stats.currentPickaxe].canMineIn.includes(currentWorld)) return;
     if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
-        const multiplier = Math.floor(Math.log(player.stats.blocksMined/500000)/Math.log(10)) + 1;
-        const amt = (101*multiplier)*(101*multiplier)
+        const multiplier = Math.floor(Math.log10(player.stats.blocksMined/500000)) + 1;
+        const amt = (100*multiplier)*(100*multiplier);
         if (amt > 1000000 || player.settings.simulatedRng) bulkGenerate(curY, amt, undefined, false);
         else {
             for (let r = y - (50 * multiplier); r < y + (50 * multiplier); r++) {
@@ -66,7 +66,6 @@ function powerup2() {
         player.powerupCooldowns["powerup2"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
         player.powerupVariables.caveBoosts.removeAt = Date.now() + (player.gears["gear24"] ? 150000 * 1.5 : 150000);
         player.powerupVariables.caveBoosts.active = true;
-        caveLuck++;
         applyNearbyData();
     }
 }

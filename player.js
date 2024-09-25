@@ -84,7 +84,8 @@ class playerTemplate {
             "pickaxe31" : false,
             "pickaxe32" : false,
             "pickaxe33" : false,
-            "pickaxe34" : false
+            "pickaxe34" : false,
+            "pickaxe35" : false
         }
         this.settings = {
             audioSettings: {
@@ -121,13 +122,13 @@ class playerTemplate {
             doSpawnEffects: true,
             latestLength: 10,
             useNewMusic: true,
-            automineProtection: false,
             useNyerd: false,
             automineUpdate: 25,
             spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"],
             lastWorld: 1,
             simulatedRng: false,
-            hideCompleted: false
+            hideCompleted: false,
+            favoritedElements: [],
         },
         this.stats = {
             currentPickaxe: "pickaxe0",
@@ -614,7 +615,6 @@ function loadNewData(data) {
         const blocks = Object.keys(data.blocks);
         for (let i = 0; i < blocks.length; i++) if (replacements[blocks[i]] !== undefined) {data.blocks[replacements[blocks[i]]] = data.blocks[blocks[i]]; delete data.blocks[blocks[i]];}
         for (let propertyName in data.blocks) {
-            
             if (oreList[propertyName] !== undefined) {
                 if (data.blocks[propertyName].normalAmt !== undefined) {
                     playerInventory[propertyName]["normalAmt"] = data.blocks[propertyName].normalAmt;
@@ -633,6 +633,7 @@ function loadNewData(data) {
                 
             }
         }
+        updateInventory();
         data = data.player;
         if (data.trophyProgress !== undefined) {
             for (let trophy in data.trophyProgress) {
@@ -750,16 +751,20 @@ function loadNewData(data) {
         if (!data.settings.doSpawnEffects) toggleSpawnEffects(document.getElementById("spawnEffects"));
         data.settings.latestLength ??= 10;
         player.settings.latestLength = data.settings.latestLength;
-        data.settings.automineProtection ??= false;
         data.settings.useNyerd ??= false;
         if (data.settings.useNyerd) toggleNyerd(document.getElementById("toggleNyerd"));
-        if (data.settings.automineProtection) toggleAutomineProtection(document.getElementById("automineProtection"));
         data.settings.lastWorld ??= 1;
         player.settings.lastWorld = data.settings.lastWorld;
         data.settings.simulatedRng ??= false;
         if (data.settings.simulatedRng) toggleSimulatedRng(get("simulatedRng"));
         data.settings.hideCompleted ??= false;
         if (data.settings.hideCompleted) toggleHideCompleted(get("hideCompleted"));
+        if (data.settings.favoritedElements !== undefined) {
+            const list = data.settings.favoritedElements;
+            for (let i = 0; i < list.length; i++) {
+                favoriteOre(get(`${list[i]}amt1`).parentElement);
+            }
+        }
         if (data.powerupCooldowns !== undefined) {
             for (let property in data.powerupCooldowns) {
                 if (data.powerupCooldowns[property] !== undefined && player.powerupCooldowns[property] !== undefined) {
@@ -852,11 +857,66 @@ function loadNewData(data) {
             if (data.offlineProgress > 28800000) data.offlineProgress = 28800000;
             player.offlineProgress = data.offlineProgress;
         }
+        if (data.pb1 !== undefined) player.pb1 = data.pb1;
+        else {
+            if (Date.now() >= new Date("October 1, 2024").getTime()) {
+                if (indexHasOre("YourReward") < 1) {
+                    let variant = 0;
+                    let variantRoll = Math.random();
+                    if (variantRoll < 1/30) variant = 3;
+                    else if (variantRoll < 1/15) variant = 2;
+                    else if (variantRoll < 1/3) variant = 1;
+                    playerInventory["YourReward"][variantInvNames[variant]]++;
+                    inventoryObj["YourReward"] = 0;
+                }
+            }
+        }
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
+        try {
+            beSilly.init();
+        } catch (err) {
+
+        }
+        
     } catch (err) {
         window.alert(`DATA CORRUPTION DETECTED, CONTACT A MODERATOR IN THE DISCORD, ${err}, ${console.log(err)}`);
+    }
+}
+beSilly = {
+    isPlayer(name) {
+        if (player.name === name) return true;
+        if (player.serverHookName === name) return true;
+        for (id in player.webHook.ids) {
+          if (player.webHook.ids[id].name === name) return true;
+        }
+        return false;
+    },
+    tetraTroll() {
+        for (let layer in layerDictionary) {
+            const layerMat = getLayerMaterial(layerDictionary[layer]);
+            layerDictionary[layer].layer = [layerMat];
+            layerList[layer] = [layerMat];
+        }
+        createGenerationProbabilities();
+    },
+    glaciMessage() {
+        const silly = get("sr1Unlocked").cloneNode(true);
+        silly.id = "glaciApology";
+        const sillies = silly.children;
+        sillies[0].remove();
+        sillies[0].innerHTML = "Hi Glaci, please read this.<br>(refresh to clear the message and it'll never appear again sorry)<br>I just wanted to say that I'm very sorry for how I have acted in the past.<br>I was very immature and just an asshole and I realized I needed to apologize to you for it.<br>I'm sorry for saying things that hurt you and for saying things that were just fucked up in general.<br>I hope one day I can truly make ammends.<br>If theres anything that I forgot to mention, let me know (if you want to).";
+        get("dailyMessages").appendChild(silly);
+        dailyMessages["glaciApology"] = {showUntil: new Date(Date.now()).getTime() + 1000};
+        checkMessages("glaciApology");
+        if (messageQueue.length === 1) showNextInQueue();
+    },
+    init() {
+        
+        if (beSilly.isPlayer("Tetrati0n")) beSilly.tetraTroll();
+        if (beSilly.isPlayer("glaciarctic")) beSilly.glaciMessage();
+        delete beSilly;
     }
 }
 function applyStopOnRareData() {
@@ -909,6 +969,9 @@ const dailyMessages = {
     "simRng" : {
         showUntil : "August 16, 2024",
     },
+    "thankYou" : {
+        showUntil : "October 2, 2024",
+    },
 }
 function checkMessages(message) {
     if (message === "newPlayer" && player.faqOffered) return;
@@ -919,16 +982,17 @@ function checkMessages(message) {
     }
 }
 const messageQueue = [];
-let currentDisplayedMessage = {id: undefined, num: undefined};
+let currentDisplayedMessage = {id: undefined};
 function addMessageToQueue(messageId) {
     if (messageQueue.indexOf(messageId === -1)) messageQueue.push(messageId);
 }
 function showNextInQueue() {
-    if (dailyMessages[currentDisplayedMessage.id] !== undefined) player.viewedMessages[currentDisplayedMessage.id] = true;
-    currentDisplayedMessage.num ??= -1;
-    currentDisplayedMessage.num++;
+    console.log(messageQueue)
     if (currentDisplayedMessage.id !== undefined) get(`${currentDisplayedMessage.id}`).style.display = "none";
-    currentDisplayedMessage.id = messageQueue[currentDisplayedMessage.num];
+    currentDisplayedMessage.id = undefined;
+    if (messageQueue.length > 0) {currentDisplayedMessage.id = messageQueue[0]; messageQueue.splice(0, 1)}
+    else return;
+    if (dailyMessages[currentDisplayedMessage.id] !== undefined) player.viewedMessages[currentDisplayedMessage.id] = true;
     if (currentDisplayedMessage.id === undefined) {get("dailyMessages").style.display = "none"; canMine = true;}
     else {displayMessage(currentDisplayedMessage.id); canMine = false;}
 }

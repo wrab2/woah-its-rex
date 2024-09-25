@@ -640,13 +640,14 @@ function createInventory() {
         for (let k = 0; k < arr[j].length; k++) {
             let propertyName = arr[j][k];
             for (let i = 1; i < 5; i++) {
+                //☆★
                 let oreNum = playerInventory[propertyName][variantInvNames[i - 1]];
                 let tempElement = document.createElement('tr');
                 tempElement.classList = "oreDisplay";
                 if (i === 1) {
-                    tempElement.setAttribute("onclick", "randomFunction(\"" + propertyName + "\", 'inv')");
+                    tempElement.setAttribute("onclick", "randomFunction(\"" + propertyName + "\", 'inv', event)");
                 } else {
-                    tempElement.setAttribute("onclick", `goToConvert("${propertyName}", ${i})`);
+                    tempElement.setAttribute("onclick", `goToConvert("${propertyName}", ${i}, event)`);
                 }
                 let colors = oreInformation.getColors(oreList[propertyName]["oreTier"]);
                 tempElement.style.backgroundImage = "linear-gradient(to right, " + colors["backgroundColor"] + " 90%, black)"
@@ -656,7 +657,7 @@ function createInventory() {
                 if (oreList[propertyName]["hasImage"]) {
                     const tier = oreList[propertyName]["oreTier"]
                     if ((tier === "Infinitesimal" || tier === "Hyperdimensional" || oreList[propertyName]["numRarity"] >= 1000000000000000) && oreList[propertyName]["hasImage"]) {
-                        oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}" style="width:2.5vw; height:2.5vw;"></img></span>`;
+                        oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}" style="width:2.5vw; height:2.5vw; margin-right:0px; margin-left:0px;"></img></span>`;
                     } else {
                         oreNameBlock.innerHTML = `<span class="inventoryImage"><img src="${oreList[propertyName]["src"]}"></img></span>`;
                     }
@@ -692,17 +693,70 @@ function createInventory() {
                     oreRarityBlock.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
                     oreAmountBlock.style.textShadow = "-0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff";
                 } 
+                let favoriteBlock = document.createElement("td");
+                favoriteBlock.classList.add("inventoryElement4");
+                favoriteBlock.textContent = "☆";
+                favoriteBlock.setAttribute("onclick", "favoriteOre(this.parentElement);");
                 tempElement.appendChild(oreNameBlock);
                 tempElement.appendChild(oreRarityBlock);
                 tempElement.appendChild(oreList[propertyName][names[i - 1]]);
+                tempElement.appendChild(favoriteBlock);
                 document.getElementById(("inventory") + i).appendChild(tempElement);
             }
         }
     }
-        
-     
 }
-
+function favoriteOre(element) {
+    if (element.classList.contains("isFavoritedOre")) {
+        const pChildren = element.parentElement.children;
+        const currData = favoriteGetOre(element);
+        let currRarity = currData.ore["numRarity"];
+        if (currData.ore["caveExclusive"]) currRarity *= getCaveMultiFromOre(currData.id);
+        for (let i = 0; i < pChildren.length; i++) {
+            const thisChild = pChildren[i];
+            const thisData = favoriteGetOre(thisChild);
+            const passedTier = !oreInformation.tierGrOrEqTo({"tier1": thisData.ore["oreTier"], "tier2": currData.ore["oreTier"]});
+            const isFavorited = pChildren[i].classList.contains("isFavoritedOre")
+            if ((thisData.ore["oreTier"] === currData.ore["oreTier"]) && (thisData.id !== currData.id) && (!isFavorited) || (passedTier && !isFavorited)) {
+                let thisRarity = thisData.ore["numRarity"];
+                if (thisData.ore["caveExclusive"]) thisRarity *= getCaveMultiFromOre(thisData.id);
+                if ((currRarity >= thisRarity && thisData.id !== currData.id) || passedTier) {
+                    player.settings.favoritedElements.splice(player.settings.favoritedElements.indexOf(currData.id), 1);
+                    for (let j = 1; j < 5; j++) {
+                        const toDelete = get(`${currData.id}amt${j}`).parentElement;
+                        const cloned = toDelete.cloneNode(true);
+                        toDelete.remove();
+                        const parentInventory = get(`inventory${j}`);
+                        parentInventory.appendChild(cloned);
+                        parentInventory.children[i-1].before(cloned);
+                        cloned.classList.remove("isFavoritedOre");
+                        cloned.children[3].textContent = "☆";
+                    }
+                    break;
+                }
+            }
+        }
+    } else {
+        const id = element.children[2].id.substring(0, element.children[2].id.indexOf("amt"));
+        player.settings.favoritedElements.push(id);
+        for (let i = 1; i < 5; i++) {
+            const toDelete = get(`${id}amt${i}`).parentElement;
+            const cloned = toDelete.cloneNode(true);
+            toDelete.remove();
+            const parentInventory = get(`inventory${i}`);
+            parentInventory.appendChild(cloned);
+            parentInventory.children[0].before(cloned);
+            cloned.classList.add("isFavoritedOre");
+            cloned.children[3].textContent = "★";
+        }
+    }
+}
+function favoriteGetOre(element) {
+    let id = element.children[2].id;
+    id = id.substring(0, id.indexOf("amt"));
+    const ore = oreList[id];
+    return {ore: ore, id: id};
+}
 let variant = 1;
 let inventoryObj = {};
 let lastTime = Date.now();
@@ -741,16 +795,13 @@ function updateInventory() {
     if (player.powerupVariables.caveBoosts.active && Date.now() >= player.powerupVariables.caveBoosts.removeAt) {
         player.powerupVariables.caveBoosts.removeAt = Infinity;
         player.powerupVariables.caveBoosts.active = false;
-        caveLuck--;
     }
     if (!p33CL) {
         if (player.stats.currentPickaxe === "pickaxe33") {
             p33CL = true;
-            caveLuck += 1.5;
         }
     } else {
         if (player.stats.currentPickaxe !== "pickaxe33") {
-            caveLuck -= 1.5;
             p33CL = false;
         }
     }
@@ -1019,6 +1070,7 @@ function logFind(type, x, y, variant, atMined, fromReset, amt, fromCave, bulkRar
     if (fromReset) output += " From Void Prevention.";
     else output += " At " + formatNumber(atMined) +  " Mined.";
     let rng;
+    const caveLuck = verifiedOres.getCaveLuck();
     if (fromCave.cave) {
             if (fromCave.multi === 1000) rng = Math.floor(1/gsProbabilities[caveList["abysstoneCave"].indexOf(type)]/caveLuck) * fromCave.multi;
             else if (oolProbabilities[type] !== undefined) rng = Math.floor(1/oolProbabilities[type]/caveLuck) * fromCave.multi;
@@ -1164,26 +1216,17 @@ function goToOre(block, variantType) {
     document.getElementById("inventory" + variant).style.display = "block";
     document.getElementById("switchInventory").innerHTML = names[variant - 1] + " Inventory"
     let inventoryElements = document.getElementById("inventory" + variantNum).children;
-    let oreHeightValue
-    if (inventoryElements[0].style.display === "table")
-        oreHeightValue = inventoryElements[0].getBoundingClientRect()["height"];
-    else {
-        inventoryElements[0].style.display = "table";
-        oreHeightValue = inventoryElements[0].getBoundingClientRect()["height"];
-        inventoryElements[0].style.display = "none";
-    }
-    let multi = 0;
+    let total = 0;
     for (let i = 0; i < inventoryElements.length; i++) {
-        let ore = inventoryElements[i].innerText.substring(0, inventoryElements[i].innerText.indexOf("1") - 1);
+        const text = inventoryElements[i].children[2].id
+        let ore = text.substring(0, text.indexOf("amt"));
         let element = inventoryElements[i];
         if (element.style.display === "table") {
             if (ore === block) {
-                let total = oreHeightValue * multi;
                 document.getElementById("inventoryDisplay").scrollTop = total;
                 return;
-            } else {
-                multi++;
             }
+            total += inventoryElements[i].getBoundingClientRect()["height"];
         }
     }
 }
@@ -1244,17 +1287,17 @@ const events = {
         }
     },
     "event4" : {
-        rate: 1/1250,
+        rate: 1/12500,
         duration: 1800000,
         boost: 1.25,
         ore: "🛎️",
         message: `<i>You hear a bell start dinging in the 🚪 layer...</i>`,
         world: 2,
-        specialText: "Makes 🔕 rarer (1/500,000,000 base rarity)",
+        specialText: "Makes 🔕 rarer (1/300,000,000 base rarity)",
         specialEffect: function(state) {
             if (state) {
                 specialOreValues["🔕"] = {
-                    newBaseRarity: 500000000,
+                    newBaseRarity: 300000000,
                     layerToChange: "borderLayer"
                 }
             }
@@ -1522,6 +1565,21 @@ const events = {
         boost: 2,
         ore: "unstableCore",
         message: `<i>Vibrant, geometric shapes materialize in the mine, unleashing a massive burst of energy warping the space around you...</i>`,
+        world: 0.9,
+        specialText: "N/A",
+        specialEffect: function(state) {
+            if (state) {
+                return;
+            }
+            else return;
+        }
+    },
+    "event19" : {
+        rate: 1/75000,
+        duration: 1350000,
+        boost: 2.5,
+        ore: "noradrenaline",
+        message: `<i><span style="color:#5d0d31">An otherworldly mineral can be faintly heard from the Nebula layer...</span></i>`,
         world: 0.9,
         specialText: "N/A",
         specialEffect: function(state) {

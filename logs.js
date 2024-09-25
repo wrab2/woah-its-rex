@@ -32,7 +32,7 @@ class secureLogs {
         fromCave = fromCave === undefined ? [false, 1, "none"] : fromCave;
         let luck;
         if (fromCave[1] > 1) {
-            luck = caveLuck;
+            luck = this.getCaveLuck();
         } else {
             luck = oreList[ore]["numRarity"] * oreList[ore]["decimalRarity"];
         }
@@ -117,7 +117,7 @@ class secureLogs {
                         if (log.amt > 1) log.rng/=10;
                         if (log.variant === undefined) log.variant = variant;
                         if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
-                        if (log.rng < 1/1000000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
+                        if (log.rng < 1/5000000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
                         const webhookString = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.amt > 1 ? `(x${log.amt}) ` : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? (log.caveInfo[1] > 1 ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : "(Layer Cave)") : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x - 1000000).toLocaleString()}, Y: ${(-1 * log.y).toLocaleString()}${(log.paradoxical === "pickaxe26" ? " " : "")}`;           
                         log.output = webhookString;
                         this.#verifiedLogs["All"][i] = log;
@@ -147,12 +147,13 @@ class secureLogs {
         log.x = "Err";
         log.y = `${-1*curY}?`;
         log.withEvent ??= "None";
+        const curCaveLuck = this.getCaveLuck();
         if (log.caveInfo !== undefined) {
             const oldInfo = log.caveInfo;
-            log.caveInfo = [true, getCaveMulti(oldInfo.type), oldInfo.type, caveLuck];
-            log.luck = caveLuck;
+            log.caveInfo = [true, getCaveMulti(oldInfo.type), oldInfo.type, curCaveLuck];
+            log.luck = curCaveLuck;
         }
-        log.caveInfo ??= [false, 1, "none", caveLuck];
+        log.caveInfo ??= [false, 1, "none", curCaveLuck];
         log.output = `${player.name} has found ${names[log.variant - 1]} ${log.block} ${log.amt > 1 ? `(x${log.amt}) ` : ""}with a rarity of 1/${Math.round(1/log.rng).toLocaleString()} ${log.caveInfo[0] ? "(" + caveList[log.caveInfo[2]].slice(-1) + " Cave)" : ""} at ${player.stats.blocksMined.toLocaleString()} mined. X: ${(log.x)}, Y: ${(log.y).toLocaleString()}`;           
         log.from = (log.from.stack.indexOf("mine.js") > -1);
         Object.freeze(log);
@@ -162,7 +163,7 @@ class secureLogs {
         else if (log.variant === 2) this.#verifiedLogs["Electrified"].push(log);
         else if (log.variant === 3) this.#verifiedLogs["Radioactive"].push(log);
         else if (log.variant === 4) this.#verifiedLogs["Explosive"].push(log);
-        if (log.rng <= 1/2500000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
+        if (log.rng <= 1/5000000000 && player.serverHook !== undefined && !debug) serverWebhook(log, player.stats.blocksMined);
         if (Object.keys(player.webHook.ids).length > 0) webHook(log, player.stats.blocksMined);
     }
     showLogs() {
@@ -192,6 +193,22 @@ class secureLogs {
         } else {
             this.#clearLogs();
         }
+    }
+    filterByRarity(num) {
+        let rarity = Number(num);
+        if (rarity < 1 || isNaN(rarity)) return;
+        rarity = Math.floor(rarity);
+        const list = this.#verifiedLogs;
+        for (let subList in list) {
+            for (let i = list[subList].length - 1; i >= 0; i--) {
+                const log = list[subList][i];
+                if (log.rng > 1/rarity) {
+                    list[subList].splice(i, 1);
+                }
+            }
+        }
+        this.#clearLogs();
+        this.showLogs();
     }
     #clone(obj){
         if(obj == null || typeof(obj) != 'object')
@@ -280,10 +297,27 @@ class secureLogs {
         const toDisplay = JSON.parse(localStorage.getItem("SillyCavernsLogStorage"));
         let output = "";
         for (let log in toDisplay) {
-            const data = decryptLogData(toDisplay[log])
-            output += `<span onclick="navigator.clipboard.writeText('${toDisplay[log]}'); copiedLog(this);" oncontextmenu="removeLogFromStorage('${log}', this); return false;">SAVED LOG ${namesemojis[data[2] - 1]}${data[0]}, 1/${Math.round(1/data[4]).toLocaleString()}: Left Click To Copy Verification | Right Click To Delete</span><br>`
+            if (toDisplay[log].toDelete) {
+                fullDeleteLog(log);
+            } else {
+                const data = decryptLogData(toDisplay[log]);
+                output += `<span><span style="display:none;">${toDisplay[log]}</span>SAVED LOG ${namesemojis[data[2] - 1]}${data[0]}, 1/${Math.round(1/data[4]).toLocaleString()}: <span onclick="navigator.clipboard.writeText(this.parentElement.children[0].textContent); copiedLog(this);">Click me to copy verification!</span> | <span onclick="removeLogFromStorage('${log}', this); return false;">Click me to delete log!</span></span><br>`;
+            }
         }
         if (document.getElementById("generatedLogs") !== null) document.getElementById("generatedLogs").innerHTML = output;
+    }
+    getCaveLuck() {
+        let tempLuck = 1;
+        if (player.powerupVariables.caveBoosts.active = true) tempLuck++;
+        if (player.stats.currentPickaxe === "pickaxe33") tempLuck += 1.5;
+        return tempLuck;
+    }
+    getCaveTypeLuck() {
+        let tempLuck = 1;
+        if (player.stats.currentPickaxe === "pickaxe12") tempLuck *= 2;
+        if (player.stats.currentPickaxe === "pickaxe33") tempLuck *= 2.25;
+        if (player.gears["gear27"]) tempLuck *= 1.75;
+        return tempLuck;
     }
 }
 //i lost the original code for this so gl :3c
@@ -292,13 +326,11 @@ function encryptLogData(log) {
     const newObj = {};
     let i = 0;
     for (let property in log) {
-        if (ignoreProperties.indexOf(property) === -1) newObj[i] = log[property];
-        i++;
+        if (ignoreProperties.indexOf(property) === -1) {newObj[i] = log[property]; i++;}
     }
     return toBinary(JSON.stringify(newObj));
 }
 function decryptLogData(log) {
-    console.log(log)
     return JSON.parse(fromBinary(log));
 }
 function roundNumberToMillionth(num) {
@@ -461,16 +493,29 @@ function saveLogToStorage(log) {
     let curObj = localStorage.getItem("SillyCavernsLogStorage");
     if (curObj === null) curObj = {};
     else curObj = JSON.parse(curObj);
-    const identifier = `${log[0]}+${new Date(log[1]).getTime()}`;
+    const identifier = `${log[0]}+${performance.now()}`;
     curObj[identifier] ??= encryptLogData(log);
     localStorage.setItem("SillyCavernsLogStorage", JSON.stringify(curObj));
 }
 function removeLogFromStorage(identifier, element) {
     let curObj = JSON.parse(localStorage.getItem("SillyCavernsLogStorage"));
     if (curObj === null) return;
+    if (curObj[identifier].toDelete) {
+        curObj[identifier] = curObj[identifier].log;
+        element.textContent = "Click me to delete log!";
+        element.style.color = "white";
+    } else {
+        curObj[identifier] = {log: curObj[identifier], toDelete: true}
+        element.style.color = "red";
+        element.textContent = "Click me to restore log!";
+    }
+    localStorage.setItem("SillyCavernsLogStorage", JSON.stringify(curObj));  
+}
+function fullDeleteLog(identifier) {
+    let curObj = JSON.parse(localStorage.getItem("SillyCavernsLogStorage"));
+    if (curObj === null) return;
     delete curObj[identifier];
     localStorage.setItem("SillyCavernsLogStorage", JSON.stringify(curObj));
-    element.style.color = "red";
 }
 const verifiedOres = new secureLogs();
 Object.preventExtensions(verifiedOres);
@@ -479,3 +524,4 @@ Object.defineProperty(logCreated, "created", {
     writable: false,
 });
 Object.preventExtensions(logCreated);
+

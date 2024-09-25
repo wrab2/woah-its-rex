@@ -153,6 +153,7 @@
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe32`)" id="dimensionalSlicer" style="display: none;"><span>Dimensional Slicer</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe33`)" id="wormholeExterminator" style="display: none;"><span>Wormhole Exterminator</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe34`)" id="superclusterCapsizer" style="display: none;"><span>Supercluster Capsizer</span></button>
+                    <button class="craftingButton" onclick="displayRecipe(`pickaxe35`)" id="galacticEngulfer" style="display: none;"><span>Galactic Engulfer</span></button>
                 
                 </div>
                 <div id="gearCrafts" class="hidden">
@@ -245,7 +246,8 @@
                 <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
                 <p class="itemDescription" id="pickaxe32Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 75,000 blocks.<br></i><span style="font-size: 50%;">Icon made by @wrab</span></p>
                 <p class="itemDescription" id="pickaxe33Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 50,000 blocks.<br></i><span>Has 2.25x special cave type boost, +1.5x cave luck, ~3x cave size boost.<br></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe34Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 180,000 blocks.<br>An ore in the Nebula layer might be of importance for your journey...<br></i><span style="font-size: 50%;">Icon made by @wrab</span></p>
+                <p class="itemDescription" id="pickaxe34Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 180,000 blocks.<br></i><span style="font-size: 50%;">Icon made by @wrab</span></p>
+                <p class="itemDescription" id="pickaxe35Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 500,000 blocks.<br></i><span style="font-size: 50%;">Icon needed, submit in #media and ping me!</span></p>
                 
                 <!--
                     Pickaxes above
@@ -291,11 +293,11 @@
                 <p class="itemDescription" id="gear37Description" style="display: none;">:Luck ^1.035</p>
                 <p class="itemDescription" id="gear38Description" style="display: none;">Gives a random buff that changes every minute.<br>Choices: 1.4x Luck, 2x Proc Rate, +25 Movement Repetitions</p>
                 <p class="itemDescription" id="gear39Description" style="display: none;">1/2 Proc Rate, 3x Simulated Generation Amount</p>
-                <p class="itemDescription" id="gear40Description" style="display: none;">1.5x Base Luck</p>
-                <p class="itemDescription" id="gear41Description" style="display: none;">10% Chance for +500,000 Simulated Ability Amount</p>
-                <p class="itemDescription" id="gear42Description" style="display: none;">Guaranteed 2x of every tier until Hyperdimensional</p>
-                <p class="itemDescription" id="gear43Description" style="display: none;">Allows use of Wormhole Exterminator in Subrealm 1</p>
-                <p class="itemDescription" id="gear44Description" style="display: none;">+50 Movement Repetitions, ??????????????????</p>
+                <p class="itemDescription" id="gear40Description" style="display: none;">1.5x Base Luck<br><i>Where my life began...</i></p>
+                <p class="itemDescription" id="gear41Description" style="display: none;">10% Chance for +500,000 Simulated Ability Amount<br><i>Am I smart enough to be here...</i></p>
+                <p class="itemDescription" id="gear42Description" style="display: none;">Guaranteed 2x of every tier until Hyperdimensional<br><i>I hear strange music...</i></p>
+                <p class="itemDescription" id="gear43Description" style="display: none;">Allows use of Wormhole Exterminator in Subrealm 1<br><i>I shouldn't be here...</i></p>
+                <p class="itemDescription" id="gear44Description" style="display: none;">+50 Movement Repetitions, ??????????????????<br><i>This place birthed the stars in the sky...</i></p>
                 <p class="itemDescription" id="gear45Description" style="display: none;">Unlocks event manager buttons.</p>
                 <p class="itemDescription" id="gear46Description" style="display: none;">+0.2x offline progress rewards.</p>
                 <p class="itemDescription" id="gear47Description" style="display: none;">+0.45x offline progress rewards.</p>
@@ -787,9 +789,6 @@
                         <button class="toggleDisplay fullyRounded" onclick="toggleSpawnEffects(this);" id="spawnEffects" style="background-color: #6BC267;">Spawn Effects Enabled</button>
                       </div>
                       <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="toggleAutomineProtection(this);" id="automineProtection" style="background-color: #FF3D3D;">Automine Protection</button>
-                      </div>
-                      <div class="inputAndButton">
                         <button class="toggleDisplay fullyRounded" onclick="toggleNyerd(this);" id="toggleNyerd" style="background-color: #FF3D3D;">Nyerd</button>
                       </div>
                       <div class="inputAndButton">
@@ -819,7 +818,7 @@
                 <p class="menuCategoryTitle">Ore Logs</p>
                 <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
                 <br><br>
-                <div style="display: inline-flex; justify-content: center; align-items: center;">
+                <div id="logButtonHolder">
                     <button onclick="verifiedOres.showLogs()" id="logsButton">Generate Ore Logs</button>
                     <select name="sortType" id="logSort">
                         <option value="All">All</option>
@@ -828,8 +827,12 @@
                         <option value="Electrified">Electrified</option>
                         <option value="Radioactive">Radioactive</option>
                         <option value="Explosive">Explosive</option>
-                      </select>
-                      <button onclick="verifiedOres.displaySavedLogs()" id="savedLogsButton">Generate Saved Logs (Ignores Sort)</button>
+                    </select>
+                    <button onclick="verifiedOres.displaySavedLogs()" id="savedLogsButton">Generate Saved Logs (Ignores Sort)</button>
+                    <form style="margin: 0px;" onsubmit="event.preventDefault(); verifiedOres.filterByRarity(this.children[0].value); this.children[0].value = ''">
+                        <input type="text" class="logFilters" placeholder="Delete logs below rarity (num > 0)" >
+                    </form>
+                    
                 </div>
                     
                     <div id="logHolder"></div>
@@ -1130,9 +1133,6 @@
 
                             <span class="faqSection">Spawn Effects</span>
                             <span class="faqText">This setting allows you to turn spawn effects on or off (the shake and color changes). </span><br>
-
-                            <span class="faqSection">Automine Protection</span>
-                            <span class="faqText">This setting makes abilities and Infinity Collector unable to mine ores, and you have to manually mine them.</span><br>
                         
                             <span class="faqSection">Nyerd</span>
                             <span class="faqText">This setting changes the ore tracker arrow to the :nyerd: emoji.</span><br>
@@ -1359,6 +1359,21 @@
                     - Revamped right side of the display, added ore placer and offline progress buttons there along with the ore tracker.<br>
                     - Added new ores and replaced Wavaderg with Goober for personal reasons.<br>
                     - Bug Fixes :3c<br>
+                </p>
+            </div>
+            <div id="thankYou" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <p class="dailyText">
+                    <span style="font-size: 2vw;"><b>THANK YOU!!!</b></span><br>
+                    - HI CHAT! IT'S ME!!!<br>
+                    - Because of the recent success of this game, if you have played before October 1st, 2024, you will receive an exclusive ore after that date!!!<br>
+                    - Also, when Silly Caverns becomes #1 on Galaxy, I will increase the current luck boost to 1.5x for a while and then make the 1.2x permanent!<br>
+                    - 1 New pickaxe in Galactica to ease the way into Endgame!<br>
+                    - Added ore favoriting, just click the star to favorite the ores you like!<br>
+                    - Added ores that weren't already in Abysstone caves to the cave, and made the cave spawn in more worlds!<br>
+                    - Added a new Abysstone cave exclusive!<br>
+                    - Noradrenaline event in Galactica!<br>
+                    - siiiiiiiiiilly bug fixes mrrp meow!<br>
                 </p>
             </div>
             <div id="sr1Unlocked" class="dailyMessage">

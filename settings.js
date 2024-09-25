@@ -601,7 +601,8 @@ function addIndexColors(element, blackOut, property) {
     return element
 }
 let isPlacing = false;
-function randomFunction(ore, cause) {
+function randomFunction(ore, cause, elem) {
+    if (elem.srcElement.classList.contains("inventoryElement4")) return;
     if (isPlacing) {
         mine[curY][curX + 1] = {ore: ore, variant:1, isPlaced: true};
         displayArea();
@@ -1069,15 +1070,6 @@ function toggleSpawnEffects(button) {
         player.settings.doSpawnEffects = true;
     }
 }
-function toggleAutomineProtection(button) {
-    if (player.settings.automineProtection) {
-        button.style.backgroundColor = "#FF3D3D";
-        player.settings.automineProtection = false;
-    } else {
-        button.style.backgroundColor = "#6BC267";
-        player.settings.automineProtection = true;
-    }
-}
 function toggleNyerd(button) {
     if (player.settings.useNyerd) {
         button.style.backgroundColor = "#FF3D3D";
@@ -1120,7 +1112,8 @@ function togglePlacement() {
         isPlacing = true;
     }
 }
-function goToConvert(ore, variant) {
+function goToConvert(ore, variant, event) {
+    if (event.srcElement.classList.contains("inventoryElement4")) return;
     if (isPlacing) {
         mine[curY][curX + 1] = {ore: ore, variant:variant, isPlaced: true};
         displayArea();

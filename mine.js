@@ -57,7 +57,6 @@ function mineBlock(x, y, cause) {
                 player.stats.blocksMined++;
                 return;
             }
-            if ((cause === "ability" || cause === "infinity") && player.settings.automineProtection && messageIncluded(oreList[mineBlockOre]["oreTier"]) || ca) return;
         }
         player.stats.blocksMined++;
         giveBlock({type: mineBlockOre, x:x, y:y, fromReset: cause === "reset", fromCave:undefined, caveMulti:undefined, variant:mineBlockVariant, amt:1});
@@ -199,6 +198,8 @@ const generateBlock = function(location) {
     }
 }
 const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
+    const p = player.stats.currentPickaxe;
+    if ((p === "pickaxe0" || p === "pickaxe13") && !fromOffline && caveInfo === undefined) return;
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);
     const originAmt = amt;
     const layer = getLayer(y);
@@ -209,11 +210,12 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     if (sm) caveInfo = undefined;
     const isCave = (!sm && caveInfo !== undefined);
     const results = {};
+    const curCaveLuck = verifiedOres.getCaveLuck();
     for (let i = 0; i < thisTable.length; i++) {
         let estAmt;
         if (isCave) {
             if (caveInfo.type === "abysstoneCave") estAmt = amt*(1/oreList[thisTable[i]]["numRarity"])
-            else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*caveLuck);
+            else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*curCaveLuck);
             else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
         } else {
             estAmt = amt*generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])];
@@ -255,8 +257,8 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             }
             if (isCave) {
                 if (caveInfo.type === "abysstoneCave") rng = 1/oreList[blockToGive]["numRarity"];
-                else if (oolProbabilities[blockToGive] !== undefined) rng = oolProbabilities[blockToGive]*caveLuck;
-                else rng = oreList[blockToGive]["decimalRarity"]*caveLuck;
+                else if (oolProbabilities[blockToGive] !== undefined) rng = oolProbabilities[blockToGive]*curCaveLuck;
+                else rng = oreList[blockToGive]["decimalRarity"]*curCaveLuck;
                 rng/=caveInfo.multi;
                 if (oreList[blockToGive]["oreTier"] === "Layer") rng = 1;
             }

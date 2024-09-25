@@ -178,6 +178,12 @@ const recipes = {
         active : [],
         pUnob: true
     },
+    "pickaxe35" : {
+        name: "Supercluster Capsizer",
+        recipe : [{"ore":"nebula","amt":25000000000000},{"ore":"J1407b","amt":45},{"ore":"ascendedArtifact","amt":33},{"ore":"otherside","amt":17},{"ore":"noradrenaline","amt":1}],
+        active : [],
+        pUnob: true
+    },
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
@@ -369,17 +375,18 @@ const recipes = {
         active : [0.9, 1, 1.2, 1.1, 2]
     },
     "gear38": {
-        name: "",
+        name: "Forgotten Rose Quartz Shell",
         recipe: [{"ore":"🔕","amt":464000000},{"ore":"⭕","amt":174000000},{"ore":"🛑","amt":104000000},{"ore":"🔇","amt":31600000},{"ore":"💢","amt":4010000},{"ore":"⛔","amt":408000},{"ore":"🔈","amt":156000},{"ore":"🚫","amt":62900},{"ore":"♨️","amt":15500},{"ore":"🩸","amt":8030}],
         active : [0.9, 1, 1.2, 1.1, 2],
         pUnob: true
     },
     "gear39": {
-        name: "",
+        name: "Armband of Endless Dreams",
         recipe: [{"ore":"💻","amt":2750000000},{"ore":"⌨️","amt":2750000000},{"ore":"🖱️","amt":2750000000},{"ore":"🍆","amt":1640000000},{"ore":"💔","amt":741000000},{"ore":"🔪","amt":181000000},{"ore":"matrix","amt":113000000},{"ore":"🧂","amt":85900000},{"ore":"📽️","amt":30400000},{"ore":"🚽","amt":5670000},{"ore":"💘","amt":3280000},{"ore":"💞","amt":1190000},{"ore":"💰","amt":134000},{"ore":"☘️","amt":5940},{"ore":"🍀","amt":300}],
         active : [0.9, 1, 1.2, 1.1, 2],
         pUnob: true
     },
+    //1.044e17
     "gear40": {
         name: "Ring of Life",
         recipe: [{"ore": "orbOfLife", "amt": 1}],
@@ -466,7 +473,7 @@ function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amou
             } else if (oreAmt > 10) {
                 while (oreAmt%5 !== 0) oreAmt--;
             }
-            if (oreAmt > 1) results.push({ore: layer[i], amt: oreAmt});
+            if (oreAmt > 0) results.push({ore: layer[i], amt: oreAmt});
         }
     }
     return results.reverse();
@@ -559,11 +566,11 @@ function updateActiveRecipe() {
                     totalCount++;
                     let needed = recipe[i].amt;
                     let amtOwned = playerInventory[ore]["normalAmt"];
-                    totalRarity += oreList[ore]["numRarity"] * needed;
+                    if (oreList[ore]["oreTier"] !== "Infinitesimal") totalRarity += oreList[ore]["numRarity"] * needed;
                     if (oreList[ore]["hasImage"]) {
-                        toChange.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned.toLocaleString()}/${needed.toLocaleString()}</span>`
+                        toChange.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned > 1000000000000 ? formatNumber(amtOwned, 3) : amtOwned.toLocaleString()}/${needed > 1000000000000 ? formatNumber(needed, 3) : needed.toLocaleString()}</span>`
                     } else {
-                        toChange.innerHTML = `<span style="filter: drop-shadow(0 0 0.2vw white)">${ore}</span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned.toLocaleString()}/${needed.toLocaleString()}</span>`;
+                        toChange.innerHTML = `<span style="filter: drop-shadow(0 0 0.2vw white)">${ore}</span><span style='text-shadow: -0.05em -0.05em 0 #fff, 0.05em -0.05em 0 #fff, -0.05em 0.05em 0 #fff, 0.05em 0.05em 0 #fff;'>${amtOwned > 1000000000000 ? formatNumber(amtOwned, 3) : amtOwned.toLocaleString()}/${needed > 1000000000000 ? formatNumber(needed, 3) : needed.toLocaleString()}</span>`;
                     }
                     if(amtOwned >= needed) {
                         if (oreList[ore]["oreTier"] !== "Infinitesimal") {
@@ -644,7 +651,7 @@ function createPickaxeRecipes() {
                 recipeElement.classList = `recipeOreDisplay`;
                 const oreTier = oreList[ore]["oreTier"];
                 if (oreList[ore]["hasImage"]) {
-                    recipeElement.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span>${amtHave.toLocaleString()}/${amtNeeded.toLocaleString()}`
+                    recipeElement.innerHTML = `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></img></span>${amtHave > 1000000000000 ? formatNumber(amtHave, 3) : amtHave.toLocaleString()}/${amtNeeded > 1000000000000 ? formatNumber(amtNeeded, 3) : amtNeeded.toLocaleString()}`
                 } else {
                     recipeElement.innerText = `${ore} ${amtHave.toLocaleString()}/${amtNeeded.toLocaleString()}`;
                 }
@@ -704,6 +711,7 @@ const buttonGradients = {
     "pickaxe32Craft" : {"gradient" : "linear-gradient(to right, #000000, #FF4191, #E90074, #FFF078, #FFF078, #E90074, #FF4191, #000000)","applied" : false},
     "pickaxe33Craft" : {"gradient" : "linear-gradient(to right, #0d3dc3, #aafd0a, #c96709, #aafd0a, #0d3dc3)","applied" : false},
     "pickaxe34Craft" : {"gradient" : "linear-gradient(to right, #2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769)","applied" : false},
+    "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
     
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
@@ -834,7 +842,7 @@ const showOrders = {
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
-    "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34"],
+    "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35"],
     "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "gear42", "gear43", "gear44"]
 }
 let galDis = false;
@@ -1643,7 +1651,7 @@ const pickaxeStats = {
         luck: 1,
         rate: 1,
         src: `<img class="mineImage" src="media/theKeyIcon.png"></img>`,
-        doAbility: function(x, y) { null; },
+        doAbility: function(x, y) {},
         canSpawnCaves:[1, 2],
         canMineIn:[1, 2],
 },
@@ -1852,7 +1860,18 @@ const pickaxeStats = {
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
     },
-    
+    "pickaxe35" : {
+        mined: 500000,
+        revealed: 1,
+        luck: 650,
+        rate: 300,
+        src : "⛏️",
+        ability: "",
+        doAbility: function(x, y) {},
+        canSpawnCaves:[1, 1.2, 2, 0.9],
+        canMineIn:[1, 1.2, 2, 0.9],
+        isDimensional: true,
+    },
 }
  //378 510 for 30
  //309 423 for 29

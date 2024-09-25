@@ -18,6 +18,7 @@ function generateCave(x, y, type) {
     if (player.stats.currentPickaxe === "pickaxe12") caveRateModifier += 50;
     if (player.powerupVariables.caveBoosts.active) caveRateModifier *= 2;
     if (player.stats.currentPickaxe === "pickaxe33") caveRateModifier *= 3;
+    const thisCaveLuck = verifiedOres.getCaveLuck();
     if (type === undefined) {  
         type = getCaveType();
         if (type === undefined) {
@@ -53,7 +54,7 @@ function generateCave(x, y, type) {
             let pointY = points[i].y;
             points.splice(i, 1);
             mine[pointY] ??= [];
-            mineCaveShape(pointX, pointY, type);
+            mineCaveShape(pointX, pointY, type, thisCaveLuck);
             if (pointY > 0) {
                 if (Math.random() < rate) {
                     addRandom = Math.random();
@@ -141,7 +142,7 @@ const caveShape = [
     {x: 1, y: -3},
     {x: -1, y: -3},
 ]
-function mineCaveShape(x, y, type) {
+function mineCaveShape(x, y, type, luck) {
     let px;
     let py;
     for (let i = 0; i < caveShape.length; i++) {
@@ -149,12 +150,12 @@ function mineCaveShape(x, y, type) {
         py = y + caveShape[i].y;
         if (py > 0) {
         mine[py] ??= [];
-            if (mine[py][px] === undefined) generateCaveBlock(py, px, type);
-            if (mine[py][px] !== undefined) mineCaveBlock(px, py, type);
+            if (mine[py][px] === undefined) generateCaveBlock(py, px, type, luck);
+            if (mine[py][px] !== undefined) mineCaveBlock(px, py, type, "gen", luck);
         }
     }
 }
-function mineCaveBlock(c, r, type, cause) {
+function mineCaveBlock(c, r, type, cause, luck) {
     let block = mine[r][c];
     if (block !== undefined) {
         if (block.isPlaced) {mine[r][c] = "⚪"; checkAllAround(c, r); return;}
@@ -199,22 +200,22 @@ function mineCaveBlock(c, r, type, cause) {
         }
     } else {
         if (mine[r + 1][c] === undefined) {
-            generateCaveBlock(r + 1, c, type);
+            generateCaveBlock(r + 1, c, type, luck);
             blocksRevealedThisReset++;
         }
         //CHECK TO THE RIGHT OF THE BLOCK
         if (mine[r][c + 1] === undefined) {
-            generateCaveBlock(r, c + 1, type);
+            generateCaveBlock(r, c + 1, type, luck);
             blocksRevealedThisReset++;
         }
         //CHECK TO THE LEFT OF THE BLOCK
         if (mine[r][c - 1] === undefined) {
-            generateCaveBlock(r, c - 1, type);
+            generateCaveBlock(r, c - 1, type, luck);
             blocksRevealedThisReset++;
         }
         //CHECK ABOVE THE BLOCK 
         if (r - 1 > 0 && mine[r - 1][c] === undefined) {
-            generateCaveBlock(r - 1, c, type)
+            generateCaveBlock(r - 1, c, type, luck)
             blocksRevealedThisReset++;
         }
     }
@@ -259,12 +260,24 @@ function createGsCave() {
                 outputArr.push(layerList[worldTwoLayers[i]][j]);
         }
     }
+    for (let i = 0; i < galacticaLayers.length; i++) {
+        for (let j = 0; j < layerList[galacticaLayers[i]].length; j++) {
+            if (oreList[layerList[galacticaLayers[i]][j]]["numRarity"] > 1)
+                outputArr.push(layerList[galacticaLayers[i]][j]);
+        }
+    }
+    for (let i = 0; i < subRealmOneLayers.length; i++) {
+        for (let j = 0; j < layerList[subRealmOneLayers[i]].length; j++) {
+            if (oreList[layerList[subRealmOneLayers[i]][j]]["numRarity"] > 1)
+                outputArr.push(layerList[subRealmOneLayers[i]][j]);
+        }
+    }
     let toRemove = oreInformation.getOresByTier("Celestial");
     for (let i = 0; i < toRemove.length; i++) {
         while (outputArr.indexOf(toRemove[i]) > -1)
             outputArr.splice(outputArr.indexOf(toRemove[i]), 1);
     }
-    outputArr.push("🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "📘", "📙", "📕", "📗", "✡️");
+    outputArr.push("🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "📘", "📙", "📕", "📗", "✡️", "estrogen???");
     for (let i = 0; i < outputArr.length; i++) {
         for (let j = 0; j < outputArr.length - i - 1; j++) {
             if (oreList[outputArr[j]]["numRarity"] < oreList[outputArr[j + 1]]["numRarity"]) {
@@ -273,6 +286,16 @@ function createGsCave() {
                 outputArr[j] = lesser;
             }
         }
+    }
+    let n = outputArr.length - 1;
+    while (n >= 0) {
+        const ore = outputArr[n];
+        toSubt = 0;
+        while (outputArr.lastIndexOf(ore) !== outputArr.indexOf(ore)) {
+            outputArr.splice(outputArr.indexOf(ore), 1);
+            toSubt++;
+        }
+        n -= toSubt + 1;
     }
     let temp = 0;
     for (let i = 0; i < outputArr.length; i++) {
@@ -284,8 +307,7 @@ function createGsCave() {
     gsProbabilities.push(1)
     return outputArr;
 }
-let caveLuck = 1;
-function generateCaveBlock(y, x, type) {
+function generateCaveBlock(y, x, type, luck) {
     if (currentWorld === 2 && y === 10000) {
         if (Math.random() < 1/20000) {
             mine[y][x] = "✴️";
@@ -295,7 +317,7 @@ function generateCaveBlock(y, x, type) {
             return;
         }
     }
-    let chosenValue = Math.random() / caveLuck;
+    let chosenValue = Math.random() / luck;
     let probabilityTable;
     let arr;
     if (type === "currentLayer") {
@@ -349,14 +371,14 @@ function generateCaveBlock(y, x, type) {
             if (type === "abysstoneCave") adjRarity = 1/(gsProbabilities[caveList["abysstoneCave"].indexOf(blockToGive)]/1000)
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000 || oreList[blockToGive]["hasLog"]) {
                 playSound(tier);
-                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, caveLuck]);
+                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, luck]);
                 verifiedOres.verifyLog(y, x);
             }
             if (messageIncluded(tier)) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: {"adjRarity" : adjRarity, "caveType" : type}, variant: variant});
             let canCollect = (currentWorld < 2 && (player.gears["gear3"] || player.gears["gear17"]));
             if (!canCollect) (canCollect = currentWorld === 2 && player.gears["gear17"]);
             if (tier === "Celestial" && !player.gears["gear28"]) canCollect = false;
-            if (canCollect) mineCaveBlock(x, y, type, "infinity");
+            if (canCollect) mineCaveBlock(x, y, type, "infinity", luck);
             if (player.settings.stopOnRare.active && stopIncluded(tier)) stopMining();
         }
     } else {
@@ -386,9 +408,14 @@ function getCaveMulti(type) {
     if (caveTypes[type] !== undefined) return caveTypes[type].multi;
     else return 1;
 }
-const caveProbabilities1 = ["abysstoneCave", "mysteryCave", "musicCave", "biohazardCave", "bacteriaCave"];
-const caveProbabilities2 = ["ggCave", "ioCave", "axCave", "foCave", "moCave", "ccCave"]
-const caveProbabilities3 = ["watrCave"]
+const worldCaveProbabilities = {
+    1 : [],
+    2 : [],
+    1 : [],
+    1 : [],
+    1 : [],
+    1 : [],
+}
 let caveTypes = {
     "abysstoneCave": {rarity: 1/1000, multi: 1000},
     "mysteryCave": {rarity: 1/50, multi: 50},
@@ -408,17 +435,15 @@ let caveList = {
 "musicCave" : ["🎷", "🪘", "🪩", "🥁", "🪇", "🎹", "🎵"],
 "biohazardCave" : ["🧫", "⚠️", "🛸", "🥀", "🍄", "🕸️", "💉", "☣️"],
 "bacteriaCave" : ["⚕️", "🌡️", "💊", "💸", "🧵", "🧬", "🍥", "🦠"],
-"abysstoneCave" : ["✡️", "🕳️"],
+"abysstoneCave" : ["estrogen???", "✡️", "🕳️"],
 "ioCave" : ['🇻🇮', '🇹🇰', '🇲🇵', '🇯🇪', '🇨🇽', '🇻🇬', '🇮🇴'],
 "moCave" : ['🇹🇨', '🇵🇳', '🇲🇶', '🇬🇵', '🇨🇰', '🇦🇸', '🇲🇴'],
 "ccCave" : ['🇼🇫', '🇷🇪', '🇾🇹', '🇬🇺', '🇨🇼', '🇦🇮', '🇨🇨'],
-"ggCave" : ['🇧🇱', '🇲🇸', '🇮🇪', '🇦🇼', '🇬🇬'],
+"ggCave" : ['🇧🇱', '🇬🇱', '🇲🇸', '🇮🇪', '🇦🇼', '🇬🇬'],
 "axCave" : ['🇧🇶', '🇸🇭', '🇳🇺', '🇬🇮', '🇬🇫', '🇧🇲', '🇦🇽'],
 "foCave" : ['🇭🇰', '🇮🇲', '🇵🇲', '🇬🇸', '🇳🇫', '🇫🇰', '🇰🇾', '🇫🇴'],
 "watrCave" : ["eternalCoral", "🌊"],
 }
-
-
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 let oolProbabilities = {
     "🥀" : 1/420000000,
@@ -432,21 +457,35 @@ let oolProbabilities = {
     "⭐" : 1/25000000,
     "🔆" : 1/25000000,
 }
+function getWorldCaveTypes(world) {
+    let toGive;
+    switch(world) {
+        case 1:
+        case 2:
+            toGive = ["abysstoneCave", "mysteryCave", "musicCave", "biohazardCave", "bacteriaCave"];
+            break;
+        case 1.1:
+            toGive = ["abysstoneCave", "ggCave", "ioCave", "axCave", "foCave", "moCave", "ccCave"];
+            break;
+        case 1.2:
+            toGive = ["abysstoneCave", "watrCave"];
+            break;
+        case 0.9:
+            toGive = ["abysstoneCave"];
+            break;
+        default:
+            toGive = [];
+    }
+    return toGive;
+}
 function getCaveType() {
     if (currentWorld === 0.9) return undefined;
-    let caveTypeLuck = 1;
-    if (player.stats.currentPickaxe === "pickaxe12")
-        caveTypeLuck = 2;
+    let caveTypeLuck = verifiedOres.getCaveTypeLuck();
     let caveType = undefined;
     let summedProbability = 0;
     let chosenValue = Math.random();
     chosenValue /= caveTypeLuck;
-    if (player.gears["gear27"]) chosenValue /= 1.75;
-    if (player.stats.currentPickaxe === "pickaxe33") chosenValue /= 2.25;
-    let arr;
-    if (currentWorld === 1 || currentWorld === 2) arr = caveProbabilities1;
-    else if (currentWorld === 1.1) arr = caveProbabilities2;
-    else if (currentWorld === 1.2) arr = caveProbabilities3;
+    const arr = getWorldCaveTypes(currentWorld);
     for (let i = 0; i < arr.length; i++) {
         summedProbability += caveTypes[arr[i]].rarity;
         if (chosenValue < summedProbability) {
@@ -454,7 +493,7 @@ function getCaveType() {
             break;
         }
     }
-    if (!player.gears["gear21"] && caveType === "abysstoneCave") caveType = "bacteriaCave";
+    if (!player.gears["gear21"] && caveType === "abysstoneCave") caveType = undefined;
     return caveType;
 }
 
