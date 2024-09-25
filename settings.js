@@ -602,7 +602,7 @@ function addIndexColors(element, blackOut, property) {
 }
 let isPlacing = false;
 function randomFunction(ore, cause, elem) {
-    if (elem.srcElement.classList.contains("inventoryElement4")) return;
+    if (elem && elem.srcElement.classList.contains("inventoryElement4")) return;
     if (isPlacing) {
         mine[curY][curX + 1] = {ore: ore, variant:1, isPlaced: true};
         displayArea();
