@@ -221,7 +221,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             estAmt = amt*generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])];
         }
         let oldEst = estAmt;
-        if (Math.random() < estAmt%1) estAmt += 1; 
+        if (Math.random() < estAmt%1) estAmt++;
         estAmt = Math.floor(estAmt);
         results[thisTable[i]] = {est: estAmt, rand: oldEst}
         amt -= estAmt;
