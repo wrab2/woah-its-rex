@@ -987,7 +987,6 @@ function addMessageToQueue(messageId) {
     if (messageQueue.indexOf(messageId === -1)) messageQueue.push(messageId);
 }
 function showNextInQueue() {
-    console.log(messageQueue)
     if (currentDisplayedMessage.id !== undefined) get(`${currentDisplayedMessage.id}`).style.display = "none";
     currentDisplayedMessage.id = undefined;
     if (messageQueue.length > 0) {currentDisplayedMessage.id = messageQueue[0]; messageQueue.splice(0, 1)}
