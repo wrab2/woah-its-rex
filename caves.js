@@ -55,7 +55,7 @@ function generateCave(x, y, type) {
             points.splice(i, 1);
             mine[pointY] ??= [];
             mineCaveShape(pointX, pointY, type, thisCaveLuck);
-            if (pointY > 0) {
+            if (pointY > 0 && pointY !== 10000) {
                 if (Math.random() < rate) {
                     addRandom = Math.random();
                     if (addRandom < 0.7) add = 3;
