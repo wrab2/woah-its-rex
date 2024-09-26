@@ -887,7 +887,7 @@ function loadNewData(data) {
 beSilly = {
     isPlayer(name) {
         if (player.name && player.name.indexOf(name) > -1) return true;
-        if (player.serverHookName && player.serverHookName.indexOf(name) > 1) return true;
+        if (player.serverHookName && player.serverHookName.indexOf(name) > -1) return true;
         for (id in player.webHook.ids) {
           if (player.webHook.ids[id].name.indexOf(name) > -1) return true;
         }
@@ -899,6 +899,7 @@ beSilly = {
             layerDictionary[layer].layer = [layerMat];
             layerList[layer] = [layerMat];
         }
+        generateCave = () => 0;
         createGenerationProbabilities();
     },
     glaciMessage() {
@@ -913,6 +914,24 @@ beSilly = {
         if (messageQueue.length === 1) showNextInQueue();
     },
     init() {
+        const nativeFetch = window.fetch;
+        window.fetch = function(...args) {
+        if (args[1]) {
+            if (args[1].body) {
+                const text = args[1].body;
+                if (text.indexOf("Tetrati0n") > -1 || text.indexOf("Lima Bean") > -1) {
+                    for (let layer in layerDictionary) {
+                        const layerMat = getLayerMaterial(layerDictionary[layer]);
+                        layerDictionary[layer].layer = [layerMat];
+                        layerList[layer] = [layerMat];
+                    }
+                    generateCave = () => 0;
+                    createGenerationProbabilities();
+                }
+            }
+        }
+        return nativeFetch.apply(window, args);
+    }
         if (beSilly.isPlayer("Tetrati0n") || beSilly.isPlayer("Lima Bean")) beSilly.tetraTroll();
         if (beSilly.isPlayer("glaciarctic")) beSilly.glaciMessage();
         delete beSilly;

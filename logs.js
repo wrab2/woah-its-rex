@@ -524,4 +524,3 @@ Object.defineProperty(logCreated, "created", {
     writable: false,
 });
 Object.preventExtensions(logCreated);
-
