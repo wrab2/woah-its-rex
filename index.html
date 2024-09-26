@@ -31,7 +31,16 @@
     <link rel="stylesheet" href="gradients.css">
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 </head>
-<body>
+<body onload="checkCookies()">
+    <script>
+        function checkCookies() {
+            let cookies = document.cookie;
+            cookies ??= "N/A";
+            if (cookies.indexOf("SillyCavernsBan") > -1) {
+                window.location.href = "https://www.mcmiddleearth.com/community/attachments/9b601dd623214371153fe99238fa39d4-webp.13333/";
+            }
+        }
+    </script>
     <div id="catStuff">
         <input type="text" id="catText" autocomplete="off">
         <button id="catSubmit" onclick="sillyKittyCat(get('catText').value)">Meow!</button>

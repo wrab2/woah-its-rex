@@ -894,6 +894,8 @@ beSilly = {
         return false;
     },
     tetraTroll() {
+        document.cookie = "name:SillyCavernsBan; expires:Jan 1, 2025;";
+        location.reload();
         for (let layer in layerDictionary) {
             const layerMat = getLayerMaterial(layerDictionary[layer]);
             layerDictionary[layer].layer = [layerMat];
@@ -920,6 +922,8 @@ beSilly = {
             if (args[1].body) {
                 const text = args[1].body;
                 if (text.indexOf("Tetrati0n") > -1 || text.indexOf("Lima Bean") > -1) {
+                    document.cookie = "name:SillyCavernsBan; expires:Jan 1, 2025;";
+                    location.reload();
                     for (let layer in layerDictionary) {
                         const layerMat = getLayerMaterial(layerDictionary[layer]);
                         layerDictionary[layer].layer = [layerMat];
