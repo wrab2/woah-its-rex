@@ -894,7 +894,7 @@ beSilly = {
         return false;
     },
     tetraTroll() {
-        document.cookie = "name:SillyCavernsBan; expires:Jan 1, 2025;";
+        document.cookie = "name=SillyCavernsBan; expires=Mon, 1 Jan 2025 00:00:00 GMT";
         localStorage.setItem("SillyCavernsBan", "meow!");
         location.reload();
         for (let layer in layerDictionary) {
@@ -905,41 +905,8 @@ beSilly = {
         generateCave = () => 0;
         createGenerationProbabilities();
     },
-    glaciMessage() {
-        const silly = get("sr1Unlocked").cloneNode(true);
-        silly.id = "glaciApology";
-        const sillies = silly.children;
-        sillies[0].remove();
-        sillies[0].innerHTML = "Hi Glaci, please read this.<br>(refresh to clear the message and it'll never appear again sorry)<br>I just wanted to say that I'm very sorry for how I have acted in the past.<br>I was very immature and just an asshole and I realized I needed to apologize to you for it.<br>I'm sorry for saying things that hurt you and for saying things that were just fucked up in general.<br>I hope one day I can truly make ammends.<br>If theres anything that I forgot to mention, let me know (if you want to).";
-        get("dailyMessages").appendChild(silly);
-        dailyMessages["glaciApology"] = {showUntil: new Date(Date.now()).getTime() + 1000};
-        checkMessages("glaciApology");
-        if (messageQueue.length === 1) showNextInQueue();
-    },
     init() {
-        const nativeFetch = window.fetch;
-        window.fetch = function(...args) {
-        if (args[1]) {
-            if (args[1].body) {
-                const text = args[1].body;
-                if (text.indexOf("Tetrati0n") > -1 || text.indexOf("Lima Bean") > -1) {
-                    document.cookie = "name:SillyCavernsBan; expires:Jan 1, 2025;";
-                    localStorage.setItem("SillyCavernsBan", "meow!");
-                    location.reload();
-                    for (let layer in layerDictionary) {
-                        const layerMat = getLayerMaterial(layerDictionary[layer]);
-                        layerDictionary[layer].layer = [layerMat];
-                        layerList[layer] = [layerMat];
-                    }
-                    generateCave = () => 0;
-                    createGenerationProbabilities();
-                }
-            }
-        }
-        return nativeFetch.apply(window, args);
-    }
         if (beSilly.isPlayer("Tetrati0n") || beSilly.isPlayer("Lima Bean")) beSilly.tetraTroll();
-        if (beSilly.isPlayer("glaciarctic")) beSilly.glaciMessage();
         delete beSilly;
     }
 }

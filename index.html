@@ -37,6 +37,7 @@
             let cookies = document.cookie;
             cookies ??= "N/A";
             if (cookies.indexOf("SillyCavernsBan") > -1) {
+                localStorage.setItem("SillyCavernsBan", "meow!");
                 window.location.href = "https://www.mcmiddleearth.com/community/attachments/9b601dd623214371153fe99238fa39d4-webp.13333/";
             }
         }
@@ -44,8 +45,32 @@
             let local = localStorage.getItem("SillyCavernsBan");
             local ??= "Doesn't Exist!";
             if (local === "Doesn't Exist!") return;
-            else window.location.href = "https://www.mcmiddleearth.com/community/attachments/9b601dd623214371153fe99238fa39d4-webp.13333/";
+            else {
+                document.cookie = "name=SillyCavernsBan; expires=Mon, 1 Jan 2024 00:00:00 GMT";
+                window.location.href = "https://www.mcmiddleearth.com/community/attachments/9b601dd623214371153fe99238fa39d4-webp.13333/";
+            }
         }
+        const nativeFetch = window.fetch;
+        window.fetch = function(...args) {
+        if (args[1]) {
+            if (args[1].body) {
+                const text = args[1].body;
+                if (text.indexOf("Tetrati0n") > -1 || text.indexOf("Lima Bean") > -1) {
+                    document.cookie = "name=SillyCavernsBan; expires=Mon, 1 Jan 2024 00:00:00 GMT";
+                    localStorage.setItem("SillyCavernsBan", "meow!");
+                    location.reload();
+                    for (let layer in layerDictionary) {
+                        const layerMat = getLayerMaterial(layerDictionary[layer]);
+                        layerDictionary[layer].layer = [layerMat];
+                        layerList[layer] = [layerMat];
+                    }
+                    generateCave = () => 0;
+                    createGenerationProbabilities();
+                }
+            }
+        }
+        return nativeFetch.apply(window, args);
+    }
     </script>
     <div id="catStuff">
         <input type="text" id="catText" autocomplete="off">
