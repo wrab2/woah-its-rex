@@ -651,7 +651,10 @@ function attemptSwitchWorld(to) {
     if (to === 1 && currentWorld !== 1) {switchWorld(1); return;}
     if (to === 1.2 && currentWorld !== 1.2) {switchWorld(1.2); return;}
     if (to === 0) {showTrophyRoom(true); return;}
-    if (to === 0.9 && player.galacticaUnlocked) {switchWorld(0.9); return;}
+    if (to === 0.9 && player.galacticaUnlocked || indexHasOre("Omnipotent God of The Mine") > 0) {switchWorld(0.9); return;}
+    if (to === 11252023) {
+        goToAnniversary();
+    }
 }
 function switchWorld(to) {
     player.settings.lastWorld = to;
