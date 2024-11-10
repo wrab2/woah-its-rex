@@ -57,7 +57,6 @@ function powerup1(x, y) {
         }
         displayArea();
         player.powerupCooldowns["powerup1"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
-        applyNearbyData();
     }
     
 }
@@ -66,7 +65,6 @@ function powerup2() {
         player.powerupCooldowns["powerup2"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
         player.powerupVariables.caveBoosts.removeAt = Date.now() + (player.gears["gear24"] ? 150000 * 1.5 : 150000);
         player.powerupVariables.caveBoosts.active = true;
-        applyNearbyData();
     }
 }
 
@@ -81,7 +79,6 @@ function powerup3() {
         player.powerupVariables.currentChosenOre.removeAt = Date.now() + (player.gears["gear24"] ? 600000 * 1.5 : 600000);;
         updateAllLayers();
         player.powerupCooldowns["powerup3"].cooldown = Date.now() + (player.gears["gear24"] ? 3000000 * 0.75 : 3000000);
-        applyNearbyData();
     }
 }
 function powerup4() {
@@ -90,7 +87,6 @@ function powerup4() {
         player.powerupVariables.commonsAffected.removeAt = Date.now() + (player.gears["gear24"] ? 300000 * 1.5 : 300000);
         player.powerupCooldowns["powerup4"].cooldown = Date.now() + (player.gears["gear24"] ? 1200000 * 0.75 : 1200000);
         updateAllLayers();
-        applyNearbyData();
     }
 }
 function powerup5() {
@@ -142,13 +138,22 @@ function powerup5() {
                 goDirection(tempDirection);
                 player.powerupVariables.fakeTreeLevel.removeAt = Date.now() + (player.gears["gear24"] ? 60000 * 1.5 : 60000);
                 player.powerupCooldowns["powerup5"].cooldown = Date.now() + (player.gears["gear24"] ? 3600000 * 0.75 : 3600000);
+                if (currentRecipeId === "pickaxe27" || pinInformation.pinned === "pickaxe27") {
+                    bypassLockParadoxical();
+                }
                 utilitySwitchActions();
             }
         }
-        applyNearbyData();
     }
 }
-
+function bypassLockParadoxical() {
+    if (player.upgrades["pickaxe27"].level < 5) {
+        removeRecipeElements();
+        addRecipeInformation("pickaxe27");
+    } else {
+        removeRecipeElements();
+    }
+}
 let ability1RemoveTime = 0;
 let ability1Stacks = 0;
 let energySiphonerCooldown = 0;
@@ -195,7 +200,7 @@ function gearAbility2() {
 let pickaxe1Nums = [];
 function pickaxeAbility1(x, y) {
     x -= 7;
-    y -= 7;
+    y -= 14;
     if (player.gears["gear34"]) {pickaxeArrayLoop(increaseAbilitySize(pickaxe1Nums, 1), x, y); return;}
     pickaxeArrayLoop(pickaxe1Nums, x, y);
 }
@@ -889,7 +894,7 @@ function pickaxeAbilityMineBlock(x, y) {
     if (y > 0) {
         mine[y] ??= [];
         if (mine[y][x] === undefined) 
-            generateBlock({"Y":y, "X":x});
+            generateBlock({"Y":y, "X":x}, true);
         mineBlock(x, y, "ability"); 
     }
 }

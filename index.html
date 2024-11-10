@@ -12,7 +12,9 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://github.com/AndreasMadsen/xorshift/blob/master/xorshift.js"></script>
     <!--Importing JS Files-->
+    <script src="prng.min.js"></script>
     <script src="settings.js"></script>
     <script src="achievements.js"></script>
     <script src="layers.js"></script>
@@ -31,84 +33,544 @@
     <link rel="stylesheet" href="gradients.css">
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
 </head>
-<body onload="checkCookies(); checkLocalStorage();">
-    <script>
-        function checkCookies() {
-            let cookies = document.cookie;
-            cookies ??= "N/A";
-            if (cookies.indexOf("SillyCavernsBan") > -1) {
-                localStorage.setItem("SillyCavernsBan", "meow!");
-                window.location.href = "https://www.mcmiddleearth.com/community/attachments/9b601dd623214371153fe99238fa39d4-webp.13333/";
-            }
-        }
-        function checkLocalStorage() {
-            let local = localStorage.getItem("SillyCavernsBan");
-            local ??= "Doesn't Exist!";
-            if (local === "Doesn't Exist!") return;
-            else {
-                document.cookie = "name=SillyCavernsBan; expires=Mon, 1 Jan 2024 00:00:00 GMT";
-                window.location.href = "https://www.mcmiddleearth.com/community/attachments/9b601dd623214371153fe99238fa39d4-webp.13333/";
-            }
-        }
-        const nativeFetch = window.fetch;
-        window.fetch = function(...args) {
-        if (args[1]) {
-            if (args[1].body) {
-                const text = args[1].body;
-                if (text.indexOf("Tetrati0n") > -1 || text.indexOf("Lima Bean") > -1) {
-                    document.cookie = "name=SillyCavernsBan; expires=Mon, 1 Jan 2024 00:00:00 GMT";
-                    localStorage.setItem("SillyCavernsBan", "meow!");
-                    location.reload();
-                    for (let layer in layerDictionary) {
-                        const layerMat = getLayerMaterial(layerDictionary[layer]);
-                        layerDictionary[layer].layer = [layerMat];
-                        layerList[layer] = [layerMat];
-                    }
-                    generateCave = () => 0;
-                    createGenerationProbabilities();
-                }
-            }
-        }
-        return nativeFetch.apply(window, args);
-    }
-    </script>
+<body>
     <div id="catStuff">
+        <p id="catDescriptions">I have nothing to say to you.</p>
         <input type="text" id="catText" autocomplete="off">
         <button id="catSubmit" onclick="sillyKittyCat(get('catText').value)">Meow!</button>
     </div>
-    <div id="blackScreen"></div>
-    <div id="trophyRoom">
-        <div id="requirementTextArea">
-            <div id="textBottom">
-
-            </div>
+    <div id="loungeHolder" style="display: none;">
+        <div id="loungeHeader">
+            <p id="loungeTitle">Silly Lounge!</p>
+            <button id="loungeExit" onclick="toggleLounge()">Exit</button>
         </div>
-        <div id="trophyMargin">
-            <p id="trophyTitle">Trophy Room</p>
-            <button id="leaveTrophyRoom" onclick="showTrophyRoom(false)">Return Home</button>
+        <div id="loungeMenuList">
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeGameSettings', this)">Game Settings</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeAudioSettings', this)">Audio Settings</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWebhookSettings', this)">Webhook Settings</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeData', this)">Data</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeLogs', this)">Logs</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOverallStatistics', this)">Overall Statistics</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOreIndex', this)">Ore Index</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWorlds', this)">Worlds</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeMilestones', this);">Milestones</button>
+            <button class="loungeMenuLocationButton"onclick="showLoungeScreen('loungeForgeAndVariants', this)">Forge/Variants</button>
         </div>
-        <div id="shelfStart">
-            <img class="shelfStartPlank">
-            <div id="shelfStartMargin"></div>
-            <img class="shelfStartPlank">
-        </div>
-        <div class="shelfComponent">
-            <div class="chainConnector"></div>
-            <div class="mainShelfContent">
-                <div class="trophyImages">
-                    <div class="trophyDisplayImage">
-                        <img class="trophy unownedTrophy" onclick="displayRequirementAtLocation(this)" id="worldOneCompletion" src="media/worldOneTrophy.PNG">
+        <div id="loungeMenuLocation">
+            <div id="loungeGameSettings" style="display: none;">
+                <div class="inputAndButton">
+                    <button class="stopOnRareButton" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
+                    <button class="stopOnRareSelector" onclick="toggleStopRareList()" id="stopOnRareDisplay">Show Tiers</button>
+                    <div id="stopOnRareList" style="display: none;">
+                        <span class="stopOnRareTierDivider"></span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Antique</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Mystical</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Divine</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Flawless</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Interstellar</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Metaversal</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Sacred</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Ethereal</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Imaginary</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Celestial</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Hyperdimensional</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Infinitesimal</span>
+                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Polychromatical</span>
                     </div>
-                    <div class="trophyDisplayImage" style="width: 40%;">
-                        <img class="trophy unownedTrophy" onclick="displayRequirementAtLocation(this)" id="worldTwoCompletion" src="media/worldTwoTrophy.webp">
-                    </div>
-                    <div class="trophyDisplayImage">
-                        <img class="trophy unownedTrophy" onclick="displayRequirementAtLocation(this)" id="subrealmOneCompletion" src="media/subrealmOneTrophy.webp">
+                  </div>
+                  <div class="inputAndButton" id="spawnMessageHolder">
+                    <button class="gameSetting" onclick="toggleSpawnMessageList()" id="changeSMrarityDisplay">Show Spawn Message Tiers</button>
+                    <div id="spawnTierList" style="display: none;">
+                        <span class="spawnMessageTierDivider"></span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Antique</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Mystical</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Divine</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Flawless</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Interstellar</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Metaversal</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Sacred</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Ethereal</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Imaginary</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Celestial</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Hyperdimensional</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Infinitesimal</span>
+                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Polychromatical</span>
                     </div>
                 </div>
-                <div class="horizontalPlank"></div>
+                <div class="inputAndButton">
+                    <input autocomplete ="off" type="text" class="textInput" id="minSpeedInput" placeholder="Default: 0">
+                    <button class="inputButton" onclick="changeMinMiningSpeed(document.getElementById('minSpeedInput'))">Set Min Speed</button>
+                  </div>
+                  <div class="inputAndButton">
+                    <input autocomplete ="off" type="text" class="textInput" id="mineCapacitySetter" placeholder="Default: 250000, >= 250">
+                    <button class="inputButton" onclick="updateCapacity(document.getElementById('mineCapacitySetter'))">Update Capacity</button>
+                  </div>
+                  <div class="inputAndButton">
+                    <input autocomplete ="off" type="text" class="textInput" id="latestSetter" placeholder="1-999">
+                    <button class="inputButton" onclick="changeLatestMax(document.getElementById('latestSetter'))">Latest Ores Length</button>
+                  </div>
+                  <div class="inputAndButton">
+                    <input autocomplete ="off" type="text" class="textInput" id="automineUpdate" placeholder="Default: 25, > 0">
+                    <button class="inputButton" onclick="updateAutomineUpdateSpeed(document.getElementById('automineUpdate'))">Change Block Update Speed</button>
+                  </div>
+                  <div class="inputAndButton">
+                    <input autocomplete ="off" type="text" class="textInput" id="logRarityInput" placeholder="Default: 1, >= 1">
+                    <button class="inputButton" onclick="switchHighRarity(get('logRarityInput'))">Set Minimum Log RNG</button>
+                </div>
+                <button class="gameSetting toggledOff" onclick="toggleSimulatedRng(this)" id="simulatedRng">Toggle Simulated RNG</button>
+                <button class="gameSetting toggledOff" onclick="toggleAccurateSpeed(this);" id="toggleAccurateSpeed">Accurate Speed</button>
+                <button class="gameSetting toggledOn" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
+                <button class="gameSetting toggledOn" onclick="switchToIndex(this, 1)" id="craftIndex">Travel to layer index on crafting click</button>
+                <button class="gameSetting toggledOff" onclick="toggleHideCompleted(this)" id="hideCompleted">Hide Completed Recipe Ores</button>
+                <button class="gameSetting toggledOff" onclick="switchFont();" id="switchFont">Use Different Emojis (for improper display)</button>
+                <button class="gameSetting toggledOn" onclick="toggleCaves();" id="caveToggle">Toggle Caves</button>
+                <button class="gameSetting toggledOn" onclick="toggleSpawnEffects(this);" id="spawnEffects">Spawn Effects Enabled</button>
+                <button class="gameSetting toggledOff" onclick="toggleNyerd(this);" id="toggleNyerd">Nyerd</button>
+                <button class="gameSetting toggledOff" onclick="AFKmode(this);">AFK Mode</button>
             </div>
-            <div class="chainConnector"></div>
+            <div id="loungeAudioSettings" style="display: none;">
+                <div id="musicStuff">
+                    <button id="musicButton" onclick="toggleMusic()">Mute Music</button>
+                    <label class="slidecontainer">
+                        <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
+                    </label>
+                </div>
+                <div id="musicSettings">
+                    <div id="disguisedChillHolder">
+                        <button class="toggleDisplay otherAudio" onclick="enableDisguisedChills();" id="disguisedChills" style="background-color: #FF3D3D; float: left;">Disguised Chills</button>
+                        <button class="toggleDisplay otherAudio" onclick="switchMusicType(this);" id="newMusic" style="background-color: #6BC267; float: right;">Use New Music</button>
+                    </div>
+                </div>
+
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Antique', this)" id="muteAntique">Mute Antiques</button>
+                        <button class="testButton" onclick="testSound('Antique', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Antique')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #5A865A 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Mystical', this)"id="muteMystical">Mute Mysticals</button>
+                        <button class="testButton" onclick="testSound('Mystical', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value,  'Mystical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6F40B0 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Divine', this)"id="muteDivine">Mute Divines</button>
+                        <button class="testButton" onclick="testSound('Divine', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Divine')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFFEAB 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Flawless', this)"id="muteFlawless">Mute Flawless</button>
+                        <button class="testButton" onclick="testSound('Flawless', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Flawless')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #31E8FF 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Interstellar', this)"id="muteInterstellar">Mute Interstellars</button>
+                        <button class="testButton" onclick="testSound('Interstellar', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Interstellar')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFA124 50%);">
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Metaversal', this)"id="muteMetaversal">Mute Metaversals</button>
+                        <button class="testButton" onclick="testSound('Metaversal', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Metaversal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #3BD216 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Sacred', this)"id="muteSacred">Mute Sacreds</button>
+                        <button class="testButton" onclick="testSound('Sacred', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Sacred')" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, #FF3C3C  50%);">
+                        </label> 
+                    </div>
+                    
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Ethereal', this)"id="muteEthereal">Mute Ethereals</button>
+                        <button class="testButton" onclick="testSound('Ethereal', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="30" value="15" onchange="changeSpawnVolume(this.value, 'Ethereal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ac47ff 50%);">
+                        </label>
+                    </div>
+                    
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Celestial', this)"id="muteCelestial">Mute Celestials</button>
+                        <button class="testButton" onclick="testSound('Celestial', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Celestial')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #870000 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Imaginary', this)"id="muteImaginary">Mute Imaginaries</button>
+                        <button class="testButton" onclick="testSound('Imaginary', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Imaginary')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #41FF6D 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Hyperdimensional', this)"id="muteHyperdimensional">Mute Hyperdimensionals</button>
+                        <button class="testButton" onclick="testSound('Hyperdimensional', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Hyperdimensional')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #041407 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Infinitesimal', this)"id="muteInfinitesimal">Mute Infinitesimals</button>
+                        <button class="testButton" onclick="testSound('Infinitesimal', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Infinitesimal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #021752 50%);">
+                        </label>
+                    </div>
+                </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Polychromatical', this)"id="mutePolychromatical">Mute Polychromaticals</button>
+                        <button class="testButton" onclick="testSound('Polychromatical', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Polychromatical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ff0526 50%);">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="loungeData" style="display: none;">
+                <div class="dataDiv">
+                    <button class="dataButton" id="dataExport" onclick="exportData()">Export Data</button>
+                    <input type="text" id="dataText">
+                    <button class="dataButton" id="dataImport" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
+                    <label for="dataFileUpload" id="dataFileLabel" class="dataButton">
+                        Upload Save File
+                    </label>
+                    <input type="file" id="dataFileUpload" accept=".txt">
+                    <button class="dataButton" id="forceSave" onclick="saveAllData(true)">Force Cloud Save (Galaxy)</button>
+                </div>
+            </div>
+            <div id="loungeLogs" style="display: none;">
+                <div id="logsButtons">
+                    <button onclick="verifiedOres.showLogs()" id="logsButton">Generate Ore Logs</button>
+                    <select name="sortType" id="logSort">
+                        <option value="All">All</option>
+                        <option value="Cave">Cave</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Electrified">Electrified</option>
+                        <option value="Radioactive">Radioactive</option>
+                        <option value="Explosive">Explosive</option>
+                    </select>
+                    <button onclick="verifiedOres.displaySavedLogs()" id="savedLogsButton">Generate Saved Logs (Ignores Sort)</button>
+                    <form style="margin: 0px;" onsubmit="event.preventDefault(); verifiedOres.filterByRarity(this.children[0].value); this.children[0].value = ''">
+                        <input type="text" class="logFilters" placeholder="Delete logs below rarity (num > 0)" >
+                    </form>
+                </div>
+                <div id="logHolder">
+                    
+                </div>
+            </div>
+            <div id="loungeOverallStatistics" style="display: none;">
+                <div id="statisticsHolder">
+                    <div id="tierStatSelectors">
+                        <button class="tierSelector" style="background-color: #31E8FF;" onclick="showTierStats(this.textContent)">Flawless</button>
+                        <button class="tierSelector" style="background-color: #FF8041;" onclick="showTierStats(this.textContent)">Interstellar</button>
+                        <button class="tierSelector" style="background-color: #3BD216;" onclick="showTierStats(this.textContent)">Metaversal</button>
+                        <button class="tierSelector" style="background-color: #FF3C3C;" onclick="showTierStats(this.textContent)">Sacred</button>
+                        <button class="tierSelector" style="background-color: #AC47FF;" onclick="showTierStats(this.textContent)">Ethereal</button>
+                        <button class="tierSelector" style="background-color: #41FF6D;" onclick="showTierStats(this.textContent)">Imaginary</button>
+                        <button class="tierSelector" style="background-color: #041407;" onclick="showTierStats(this.textContent)">Hyperdimensional</button>
+                        <button class="tierSelector" style="background-color: #FF0526;" onclick="showTierStats(this.textContent)">Polychromatical</button>
+                        <button class="tierSelector" style="background-color: #6C0000;" onclick="showTierStats(this.textContent)">Celestial</button>
+                        <button class="tierSelector" style="background-color: #021752;" onclick="showTierStats(this.textContent)">Infinitesimal</button>
+                        <button class="tierSelector" onclick="updateTimes()">Player Stats</button>
+                    </div>
+                    <div id="tierStatsHolder" style="display: none;">
+                        <table id="currentTierInformation" style="display: none;">
+                            <tr class="tierInfoRow">
+                                <td>Variant Statistics For: </td>
+                            </tr>
+                            <tr class="tierInfoRow">
+                                <td>Normal Amount:</td>
+                            </tr>
+                            <tr class="tierInfoRow">
+                                <td>Electrified Amount:</td>
+                            </tr>
+                            <tr class="tierInfoRow">
+                                <td>Radioactive Amount:</td>
+                            </tr>
+                            <tr class="tierInfoRow">
+                                <td>Explosive Amount:</td>
+                            </tr>
+                            <tr class="tierInfoRow">
+                                <td>Completion Progress: 0% at 0/0 Found</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="playerStatisticsHolder" style="display: none;">
+                        <p class="playerStat" id="statsTotalTime">Total Time</p>
+                        <p class="playerStat" id="statsSessionTime">Session Time</p>
+                        <p class="playerStat" id="statsCavesGenerated">Caves Generated</p>
+                        <p class="playerStat"id="statsBlocksMined">Blocks Mined</p>
+                        <p class="playerStat" id="statsSessionReset">Session Resets</p>
+                        <p class="playerStat" id="sessionMined">Mined</p>
+                        <p class="playerStat" id="statsReset">Resets</p>
+                        <p class="playerStat" id="furthestPosX">Resets</p>
+                        <p class="playerStat" id="furthestNegX">Resets</p>
+                        <p class="playerStat" id="furthestY">Resets</p>
+                    </div>
+                </div>
+            </div>
+            <div id="loungeOreIndex" style="display: none;">
+                <div id="worldIndexTop">
+                    <button class="switchIndexWorld" id="worldIndexLeft" onclick="nextLayers(-1)"></button>
+                    <div id="loungeLayersHolder">
+                        
+                    </div>
+                    <button class="switchIndexWorld" id="worldIndexRight" onclick="nextLayers(1)"></button>
+                </div>
+                <div id="loungeIndexCards">
+                    <div id="loungeCardHolder">
+
+                    </div>
+                    <div class="indexCard" id="indexCardCopy">
+                        <span class="indexCardBackground"></span>
+                        <p class="indexCardText indexCardOre">😭</p>
+                        <div class="indexCardTop">
+                            <p class="indexCardText indexCardTier">Tier:<span style="color:#FF0526;" class="indexTierSpan">Polychromatical</span></p>
+                            <p class="indexCardText indexCardFound">Found On: Jan 1st, 2024</p>
+                        </div>
+                        <p class="indexCardText indexCardLuck" style="border-top:0.1vw solid var(--main-border-color)">1/1,000,000,000,000,000,000 Base Rarity</p>
+                        <p class="indexCardText indexCardLuck indexCardRng" style="border-bottom:0.1vw solid var(--main-border-color)">1/1,000,000,000,000,000,000 With Luck</p>
+                        <p class="indexCardText indexCardVariants">😭😭😭😭</p>
+                        <p class="indexCardText indexCardEvent"></p>
+                    </div>
+                </div>
+            </div>
+            <div id="loungeMilestones" class="milestoneParent" style="display: none;">
+                <div id="milestoneWrapper">
+                    <div id="milestonesHolder">
+                        <div class="horizontalConnector" id="connectorCopy">
+                            <div class="horizontalConnectorLight redConnector"></div>
+                        </div>
+                        <div class="verticalConnector" id="connector2Copy">
+                            <div class="verticalConnectorLight redConnector"></div>
+                        </div>
+                        <div class="milestoneInfoHolder" id="copyMilestone">
+                            <p class="milestoneInfoTitle"></p>
+                            <p class="milestoneInfoDescription"></p>
+                            <p class="milestoneInfoCompleted"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="loungeWorlds" style="display: none;">
+                <div id="loungeWorldImage"></div>
+                <div id="worldInformation">
+                    <p id="worldTitle"></p>
+                    <p id="worldDescription"></p>
+                </div>
+                <div id="teleportHolder" onmousewheel="switchPortal(event);">
+                    <button class="scrollTeleport" id="teleportUp" onclick="switchPortal({deltaY: -100})"></button>
+                    <img id="portalLock" src="media/portalChain.png">
+                    <div id="worldPortalHolder">
+                        <button id="worldPortal" onclick="attemptSwitchWorld(switchPortal.currentPortal)"></button>
+                    </div>
+                    <button class="scrollTeleport" id="teleportDown" onclick="switchPortal({deltaY: 100})"></button>
+                </div>
+            </div>
+            <div id="loungeForgeAndVariants">
+                <p class="loungeMenuTitle">Variant Conversions</p>
+                <div id="variantActions">
+                    <button class="variantActionButton" onclick="convertVariant('Electrified')">Convert All Electrified But 1</button>
+                    <button class="variantActionButton" onclick="convertVariant('Radioactive')">Convert All Radioactive But 1</button>
+                    <button class="variantActionButton" onclick="convertVariant('Explosive')">Convert All Explosive But 1</button>
+                </div>
+                <div id="mainVariantArea">
+                    <input type="text" class="variantInput" id="variantInputName" placeholder="Click an Ore in a Variant Inventory!" autocomplete="off">
+                    <input type="text" class="variantInput" id="variantInputAmt" placeholder="Enter Amount to Convert!" autocomplete="off">
+                    <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Electrified')">Convert Electrified</button>
+                    <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Radioactive')">Convert Radioactive</button>
+                    <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Explosive')">Convert Explosive</button>
+                    <button class="variantType" onclick="allButOne(get('variantInputName').value)">Convert All But 1</button>
+                </div>
+                <p class="loungeMenuTitle">Ore Forge</p>
+                <div id="forgeRecipeHolder">
+                    <div id="forgeCost">
+
+                    </div>
+                    <div id="forgeCenterHolder">
+
+                        <img id="forgeArrow" src="media/rightone.png">
+                        <p id="forgeMultiplier">
+                            1x
+                        </p>
+                        <button id="forgeOre"><span id="forgeHover" onclick="craftOre()">Forge!</span></button>
+                        <div id="forgeSetMulti">
+                            <input type="text" id="forgeMultiInput" placeholder="Enter Multiplier!">
+                            <button id="forgeChangeMulti" onclick="multiplyRecipe(Number(get('forgeMultiInput').value))">Set Multi!</button>
+                        </div>
+                    </div>
+                    <div id="forgeOutput">
+
+                    </div>
+                </div>
+                <div id="forgeRecipeInformation">
+                    <div id="oreFissionList">
+                        <p class="forgeType">Fissions</p>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">Fission 💚</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">Fission 💙</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowFission')">Fission 💛</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeFission')">Fission 🧡</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redFission')">Fission ❤️</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleFission')">Fission 💜</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownFission')">Fission 🤎</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackFission')">Fission 🖤</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteFission')">Fission 🤍</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">Fission 💎</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">Fission 🧵</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('circleFission')">Fission ⭕</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bellFission')">Fission 🛎️</button>
+                    </div>
+                    <div id="oreCraftList">
+                        <p class="forgeType">Crafts</p>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenCraft')">Craft 💚</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueCraft')">Craft 💙</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowCraft')">Craft 💛</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeCraft')">Craft 🧡</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redCraft')">Craft ❤️</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleCraft')">Craft 💜</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownCraft')">Craft 🤎</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackCraft')">Craft 🖤</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteCraft')">Craft 🤍</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('frisbeeCraft')">Craft 🥏</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('diamondCraft')">Craft 💠</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('gearCraft')">Craft ⚙️</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bowCraft')">Craft 🎀</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('batteryCraft')">Craft 🔋</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bambooCraft')">Craft 🎍</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('fishCraft')">Craft 🐟</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('hotspringCraft')">Craft ♨️</button>
+                        <button class="forgeCraftingButton" onclick="displayOreRecipe('wtfCraft')">Craft why</button>
+                    </div>
+                </div>
+            </div>
+            <div id="loungeWebhookSettings" style="display: none;">
+                <div id="webhookSettings">
+                    <span id="webhookDescription">If you have generated a key in the Discord server, enter it below.<br>To create custom webhooks, click on the "new" button.<br>Enter the name you would like to use in the first box.<br>Enter the rarity you want to webhook in the next box, just type a number above 7 to represent the rarity.<br>Enter a unique ID for the webhook in the next box, can be anything as long as it is not the same as another ID.<br>In the last box, enter the webhook integration link from the Discord channel you want to send finds to.</span>
+                    <span class="createdWebhooksLabel">Server Webhook Key</span>
+                    <div id="serverHook">
+                        <div class="inputAndButton">
+                            <input autocomplete ="off" type="text" class="textInput" id="webhookLinkSet" placeholder="Leave blank to reset">
+                            <button class="inputButton" onclick="setWebhookLink(get('webhookLinkSet'))">Set Webhook Key</button>
+                        </div>
+                    </div>
+                    <span class="createdWebhooksLabel">Create Custom Webhook</span>
+                    <br>
+                    <button id="createNewWebhook" onclick="addToNew()">New</button>
+                    <div id="customHookContainer">
+                        
+                        <div class="webhookInfoInputSection" id="newHookCopyable">
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Name">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Rarity">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Id">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <input autocomplete ="off" type="text" class="webhookInfo"  placeholder="Link">
+                            </div>
+                            <div class="webhookInfoSection">
+                                <button class="webhookInfo createButton" onclick="createWebhookId(this.parentElement.parentElement)">Create!</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="createdWebhooks">
+                        <span class="createdWebhooksLabel">Created Webhoook Ids</span>
+                        <div class="createdHookDisplay" id="createdHookCopyable">
+                            <span class="createdHookInfo">Name</span>
+                            <span class="createdHookInfo">Rarity</span>
+                            <span class="createdHookInfo">Id</span>
+                            <button class="createdHookInfo deleteHookButton" onclick="removeWebhookId(this.parentElement)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loungeRight">
+            <div id="loungeStatistics">
+                <p class="loungeStatisticText" id="updateLuck">1x Luck</p>
+                <p class="loungeStatisticText" id="updateGenerations">0 Generations/Min</p>
+                <p class="loungeStatisticText" id="updateLayer">Mining in: N/A</p>
+                <p class="loungeStatisticText" id="updateDirection">Current Direction: N/A</p>
+                <p class="loungeStatisticText" id="updateCL">1x Cave Luck</p>
+                <p class="loungeStatisticText" id="updateCTL">1x Cave Type Luck</p>
+                <p class="loungeStatisticText" id="updateCM">0 Cave Modifier</p>
+                <p class="loungeStatisticText" id="updatePowerups">0 Powerups Ready</p>
+                <p class="loungeStatisticText" id="updateSpeed">0/0 Speed</p>
+                <p class="loungeStatisticText" id="updateOreCount">No Ores Yet (Will be Ore Spawn Count: 0-Inf when ores spawn)</p>
+                <p class="loungeStatisticText" id="updateEvent">Current Event: None</p>
+                <p class="loungeStatisticText" id="updateLastOre">Last Ore Spawned: N/A</p>
+            </div>
+            <div id="loungeSettings">
+                <button class="loungeSettingButton" onclick="toggleUpdates(this)">Update Elements</button>
+                <button class="loungeSettingButton" onclick="toggleUnused(this)">Delete Unused Elements</button>
+            </div>
         </div>
     </div>
     <p class="latestFind htmlTemplate" style="display: none;"></p>
@@ -130,35 +592,40 @@
         <div id="mainTop">
             <div style="height: 2vw;">
                 <button id="resetMine" class="topButtons" onclick="toSurface()">To Surface</button>
-                <button id="settings" class="topButtons" onmouseover="toggleMenu()" onmouseleave="toggleMenu()">Menu</button>
+                <button id="settings" class="topButtons" onclick="toggleLounge()">Lounge</button>
                 <p id="lastAutosave" class="topButtons">Please Login to Galaxy for Cloud autosave. <a href="https://galaxy.click/" target="_blank">Login Here.</a></p>
             </div>
-            <div id="menuHolder" onmouseover="keepShowingMenu()" onmouseleave="toggleMenu()">
-                <button class="menuButton" onclick="showMenuScreen('settings')">Settings</button>
-                <button class="menuButton"onclick="showMenuScreen('data')">Data</button>
-                <button class="menuButton"onclick="showMenuScreen('logs')">Logs</button>
-                <button class="menuButton"onclick="showMenuScreen('statistics')">Statistics</button>
-                <button class="menuButton"onclick="showMenuScreen('index')">Ore Index</button>
-                <button class="menuButton"onclick="showMenuScreen('locations')">Locations</button>
-                <button class="menuButton"onclick="showMenuScreen('faq')">FAQ</button>
-            </div>
             <div id="mineResetProgress">
-                <span id="resetNumber"></span><span id="resetPercent"></span>
+                <span id="resetNumber"></span>
+                <div id="resetProgressBar">
+                    <span id="resetPercent"></span>
+                </div>
             </div>
-            <p id="blocksMined">0 Blocks Mined</p>
-            <p id="location">X: 0 | Y: 0</p>
-            <p id="spawnMessage">Spawn Messages Appear Here!</p>
-            <br>
+            <p id="blocksMined" class="mainStat">0 Blocks Mined</p>
+            <p id="locationX" class="mainStat">X: 0</p>
+            <p id="locationY" class="mainStat">X: 0</p>
         </div>
-            <div id="mainLower">
-                <div id="lowerChild">
-            <p id="crafting" class="middleTitle">Crafting</p>
+        <div id="mainLower">
+            <div id="lowerChild">
+
+            <p id="crafting" class="middleTitle">Crafting!</p>
+            <div id="craftingWorldSelect" class="worldSelectStyles">
+                <button id="worldSelectButton" class="worldSelectStyles" onclick="toggleCraftingWorld()">Items From World: W1</button>
+                    <div id="worldSelectables" class="worldSelectStyles">
+                        <button class="worldCraftSelector" onclick="selectCraftingWorld(this.textContent)">G</button>
+                        <button class="worldCraftSelector" onclick="selectCraftingWorld(this.textContent)">W1</button>
+                        <button class="worldCraftSelector" onclick="selectCraftingWorld(this.textContent)">SR1</button>
+                        <button class="worldCraftSelector" onclick="selectCraftingWorld(this.textContent)">WW</button>
+                        <button class="worldCraftSelector" onclick="selectCraftingWorld(this.textContent)">W2</button>
+                        <button class="worldCraftSelector" onclick="selectCraftingWorld('???')">???</button>
+                    </div>
+            </div>
             <div id="craftingClick">
                 <div id="craftingSelectionContainer">
-                    <button onclick="showPickaxes()" class="craftingSelector" style="border-left: none;">Pickaxes</button>
-                    <button onclick="showGears()" class="craftingSelector" style="border-right: none;">Gears</button>
+                    <button onclick="showPickaxes()" class="craftingSelector" style="border-right: 0.2vw solid var(--main-border-color);">Pickaxes</button>
+                    <button onclick="showGears()" class="craftingSelector" style="border-left: 0.2vw solid var(--main-border-color);">Gears</button>
                 </div>
-                <div id="pickaxeCrafts">
+                <div id="pickaxeCrafts" class="craftingList">
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe1`)" id="mulchMallet"><span>Mulch Mallet</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe2`)" id="mudSickle"><span>Mud Sickle</span></button>
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe3`)" id="dirtRavager"><span>Dirt Ravager</span></button>
@@ -196,7 +663,7 @@
                     <button class="craftingButton" onclick="displayRecipe(`pickaxe35`)" id="galacticEngulfer" style="display: none;"><span>Galactic Engulfer</span></button>
                 
                 </div>
-                <div id="gearCrafts" class="hidden">
+                <div id="gearCrafts" class="hidden craftingList">
                     <button class="craftingButton" onclick="displayRecipe('gear30')" id="rngManipulator"><span>RNG Manipulator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear31')" id="makeshiftAccelerator"><span>Makeshift Accelerator</span></button>
                     <button class="craftingButton" onclick="displayRecipe('gear46')" id="timeDestabilizer"><span>Time Destabilizer</span></button>
@@ -248,173 +715,117 @@
                 </div>
                 
             </div>
-            <div id="displayRecipe"></div>
-            <p id="craftingTimeDisplay" style="display: none;">Est. Time: 000:00:00:00</p>
-            <p id = "descriptionTitle" class="middleTitle" style="display: none;">Description<span id="recipeLockHolder"><button id="recipeLock"></button></span></p>
-            <div id="craftableDescriptions">
-                <p class="itemDescription" id="pickaxe1Description" style="display: none;"><span id="pickaxe1Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe1Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
-                <p class="itemDescription" id="pickaxe2Description" style="display: none;"><span id="pickaxe2Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe2Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_</span></p>
-                <p class="itemDescription" id="pickaxe3Description" style="display: none;"><span id="pickaxe3Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe3Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @lemurkin</span></p>
-                <p class="itemDescription" id="pickaxe29Description" style="display: none;"><span id="pickaxe29Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe29Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe30Description" style="display: none;"><span id="pickaxe30Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe30Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe28Description" style="display: none;"><span id="pickaxe28Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe28Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @thecatofalltime</span></p>
-                <p class="itemDescription" id="pickaxe4Description" style="display: none;"><span id="pickaxe4Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe4Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mrfloaties</span></p>
-                <p class="itemDescription" id="pickaxe5Description" style="display: none;"><span id="pickaxe5Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe5Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @monocrexem_</span></p>
-                <p class="itemDescription" id="pickaxe6Description" style="display: none;"><span id="pickaxe6Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe6Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe7Description" style="display: none;"><span id="pickaxe7Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe7Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @thecatofalltime</span></p>
-                <p class="itemDescription" id="pickaxe8Description" style="display: none;"><span id="pickaxe8Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe8Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe9Description" style="display: none;"><span id="pickaxe9Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe9Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
-                <p class="itemDescription" id="pickaxe10Description" style="display: none;"><span id="pickaxe10Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe10Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe11Description" style="display: none;"><span id="pickaxe11Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe11Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe12Description" style="display: none;"><span id="pickaxe12Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe12Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
-                <p class="itemDescription" id="pickaxe13Description" style="display: none;">The Key to World 2.<br>Requires 77 Leaf Destroyer.<br>Has the power of pickaxe 0.<br>World 1 gears will NOT work in world 2, except for the ore tracker.<br>All World 2 gears will work in World 1 (Speed gears will only be used in World 1 when all are owned).<br><span style="font-size: 50%;">Icon made by @marcelacoplao</span></p>
-                <p class="itemDescription" id="pickaxe14Description" style="display: none;"><span id="pickaxe14Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe14Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @hulfe</span></p>
-                <p class="itemDescription" id="pickaxe15Description" style="display: none;"><span id="pickaxe15Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe15Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe16Description" style="display: none;"><span id="pickaxe16Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe16Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe17Description" style="display: none;"><span id="pickaxe17Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe17Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
-                <p class="itemDescription" id="pickaxe18Description" style="display: none;"><span id="pickaxe18Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe18Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @mckirbchungs</span></p>
-                <p class="itemDescription" id="pickaxe19Description" style="display: none;"><span id="pickaxe19Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe19Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe20Description" style="display: none;"><span id="pickaxe20Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe20Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe21Description" style="display: none;"><span id="pickaxe21Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe21Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe22Description" style="display: none;"><span id="pickaxe22Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe22Hologram'))">View Ability</button></span><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe23Description" style="display: none;"><span id="pickaxe23Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe23Hologram'))">View Ability</button></span><span style="font-size: 50%;"></span>Has an ability proc rate of 1/75, but takes 2 activations to begin mining. The further apart the points, the more it'll mine.<br>Has 8.25x luck.<br>Creates 4 points and mines between the top left and bottom right points, and the top right and bottom left points.<br><i>Disclaimer: I thought it'd be funny to not reset the activation points on reset.</i><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe24Description" style="display: none;"><span id="pickaxe24Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe24Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe25Description" style="display: none;"><span id="pickaxe25Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe25Hologram'))">View Ability</button></span><span style="font-size: 50%;">Ability design created by @etherealelysia.</span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe26Description" style="display: none;">Has an ability proc rate of 1/150.<br>Has 175x luck.<br>Y҉òu̷'͠v̡e̷ ̕r͡e̴a͡c̡h͞e͝d͡ ̛t̀h̕e̶ ͟ȩv̕e̴n̴t̛ ͡h̵o͞r͠i̡z̛o͏n̡;̕ ̨h̴èr͞e̵'͘s̕ ͢w̶h͢ér͟e͟ ̷y͟o͠u͡ ̵m͜a̧k̕é ͠t̶h̕e͘ ͜u̶l̷t̶i҉ḿa̵t̢e̵ ̶c̸h͘o̶i̕c͢é.͞.̴ ́i̷s͝ ͞i͞t͢ ͡w̷o͢r͢t͝h́ ͘s̕a̴c͢r̕i͏f͏i͝c͡i͏n̡g͢ ̵e̕v̵e͝r͘y̡t̢h͝i͢ņǵ ͝y̷o̶u͝'͝v̧e͏ ̨w̶o̸r͡k̕e̶d̶ ̴f͜ǫr͠ ̡t̸o̶ ͝t̛h͢e͟ ͝v̧o҉i͡d̛.̵.͡?͡<br><br>Draws from past creations and through corruption, magnifies it fivefold.<br><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe27Description" style="display: none;">The main pickaxe of Subrealm 1.<br>Can be upgraded in The Workshop.<br>Has an ability proc rate of 1/500.<br><span id="treeOfLifeLuck">Has x luck.</span><br>Speed is locked at <span id="treeOfLifeSpeed">10ms</span> and lowers by 1ms for every upgrade (only in Subrealm). The only luck gear that works here is Statistical Amplifier.<br>All other gears function normally.<br>Paradoxical Progression will give access to the next level instead of a random item.<br><span style="font-size: 50%;">Ability design created by @memorysaga.</span><br><span style="font-size: 50%;">Icon Needed, submit in #media and ping me!</span></p>
-                <p class="itemDescription" id="pickaxe31Description" style="display: none;"><span id="pickaxe31Hologram" class="hologram"><button onclick="createPolygon(get('pickaxe31Hologram'))">View Ability</button></span><br><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <button id="pickaxe27Craft" class="craftPickaxeButton" onclick="craftPickaxe('pickaxe27')" style="display:none; width: 100%; background-image:linear-gradient(to right, #0CAE5B, #40EE95, #A67B51, #613B16, #A67B51, #40EE95, #0CAE5B);">Equip!</button>
-                <p class="itemDescription" id="pickaxe32Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 75,000 blocks.<br></i><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe33Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 50,000 blocks.<br></i><span>Has 2.25x special cave type boost, +1.5x cave luck, ~3x cave size boost.<br></span><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe34Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 180,000 blocks.<br></i><span style="font-size: 50%;">Icon made by @wrab</span></p>
-                <p class="itemDescription" id="pickaxe35Description" style="display: none;"><i style="font-size: 1.25vw; font-weight: 1000;">Dimensional:<br>Mines blocks from an alternate dimension, lowers RNG accuracy but increases block output.<br>Mines 500,000 blocks.<br></i><span style="font-size: 50%;">Icon needed, submit in #media and ping me!</span></p>
-                
-                <!--
-                    Pickaxes above
-                    Gears below
-                -->
-                <p class="itemDescription" id="gear0Description" style="display: none;">Allows you to access the ore tracker menu, pointing you towards the nearest rare ore that had a spawn message with it owned.</p>
-                <p class="itemDescription" id="gear1Description" style="display: none;">Boosts ability luck by 1.1x.</p>
-                <p class="itemDescription" id="gear2Description" style="display: none;">Sets mining speed delay to 15ms from 25ms.</p>
-                <p class="itemDescription" id="gear7Description" style="display: none;">Decreases mining speed by 3ms for 10s after activation, and can stack 5 more activations, each adding 5s to the duration. Goes on a 5s cooldown when the time ends. Can be activated by mining any Antique+ (1/750k+).</p>
-                <p class="itemDescription" id="gear3Description" style="display: none;">Instantly mines any rare ore that spawns, excluding celestials.</p>
-                <p class="itemDescription" id="gear8Description" style="display: none;">Increases ability proc rates by 20%.</p>
-                <p class="itemDescription" id="gear4Description" style="display: none;">For every block mined, gives you an additional layer block from the current layer.<br>Can duplicate layer blocks.</p>
-                <p class="itemDescription" id="gear5Description" style="display: none;">Increases ability luck by 1.6x. Stacks with Real Candilium.</p>
-                <p class="itemDescription" id="gear6Description" style="display: none;">Sets mining speed delay to 10ms from 25ms.</p>
-                <p class="itemDescription" id="gear9Description" style="display: none;">Generates a Silly Layer at a random position in the Repeating Layers.</p>
-                <p class="itemDescription" id="gear10Description" style="display: none;">+0.25x Luck.<br>Stacks with all other luck additions.</p>
-                <p class="itemDescription" id="gear11Description" style="display: none;">-3ms Mining Speed.<br>Stacks with all other speed buffs.</p>
-                <p class="itemDescription" id="gear12Description" style="display: none;">+0.35x Luck.<br>Stacks with all other luck additions.</p>
-                <p class="itemDescription" id="gear13Description" style="display: none;">Has a 75% chance to duplicate any common ore, (1 - 750,000)</p>
-                <p class="itemDescription" id="gear14Description" style="display: none;">Enables cave spawns in World 2 and moderately increases cave size.<br>Currently, this will allow miners to obtain ores from World 1 that spawn in caves, this will be a thing until new cave types are made for World 2.</p>
-                <p class="itemDescription" id="gear15Description" style="display: none;">Has a 50% chance to give you 2 extra layer blocks upon mining a layer block.</p>
-                <p class="itemDescription" id="gear16Description" style="display: none;">-5ms Mining Speed.<br>Stacks with all other speed buffs.</p>
-                <p class="itemDescription" id="gear17Description" style="display: none;">Wait... what do you mean its the same as the first? Why is it called the 2nd if its the exact same thing???</p>
-                <p class="itemDescription" id="gear18Description" style="display: none;">+2.5x Luck.<br>Stacks with all other luck additions.</p>
-                <p class="itemDescription" id="gear19Description" style="display: none;">-8ms Mining Speed and each movement with automine gains +10 blocks moved.<br>Stacks with all other speed buffs.</p>
-                <p class="itemDescription" id="gear20Description" style="display: none;">Multiplies all luck by 5% of your current pickaxe's luck +1. (Cannot lower luck)</p>
-                <p class="itemDescription" id="gear21Description" style="display: none;">Enables the spawn of Abysstone Caves.<br>These caves can spawn any layer Antique+, excluding Celestial tier ores, from any world, with a 1/1000 cave spawn chance.<br>Some ores might not be able to be found in this cave due to having the exact same rarity as another ore, I do not care, have fun :3</p>
-                <p class="itemDescription" id="gear22Description" style="display: none;">Has a 10% chance to duplicate any rare ore mined. (1/750k+)</p>
-                <p class="itemDescription" id="gear23Description" style="display: none;">+15% ability activation rate.</p>
-                <p class="itemDescription" id="gear24Description" style="display: none;">Automatically cycles through powerups and activates them if they are ready. -25% cooldown time, +50% activation time.</p>
-                <p class="itemDescription" id="gear25Description" style="display: none;">Will roll 1 extra time for a variant if an ore is normal.</p>
-                <p class="itemDescription" id="gear26Description" style="display: none;">5% chance to give 30x more layer blocks on mining a layer block.</p>
-                <p class="itemDescription" id="gear27Description" style="display: none;">1.75x cave type boost.</p>
-                <p class="itemDescription" id="gear28Description" style="display: none;">Allows any Infinity Collector to mine Celestial tier ores.</p>
-                <p class="itemDescription" id="gear29Description" style="display: none;">Skips over blank tiles while mining. Can skip up to 25 tiles at once. Will be disabled if holding shift while mining (sorry mobile players).<br>Has a 1/250 chance to move the player an extra 50 blocks. (1/175 chance with Simulated RNG)</p>
-                <p class="itemDescription" id="gear30Description" style="display: none;">+0.3x Base Luck.</p>
-                <p class="itemDescription" id="gear31Description" style="display: none;">Sets mining speed delay to 20ms from 25ms.</p>
-                <p class="itemDescription" id="gear32Description" style="display: none;">Adds ~25 blocks per second to your speed.</p>
-                <p class="itemDescription" id="gear33Description" style="display: none;">Adds ~75 blocks per second to your speed.</p>
-                <p class="itemDescription" id="gear34Description" style="display: none;">Multiplies normal ability size by 4x and simulted ability size by 2x.</p>
-                <p class="itemDescription" id="gear35Description" style="display: none;">+50% ability activation rate.</p>
-                <p class="itemDescription" id="gear36Description" style="display: none;">1.75x Movement repetitions (rounded up)</p>
-                <p class="itemDescription" id="gear37Description" style="display: none;">:Luck ^1.035</p>
-                <p class="itemDescription" id="gear38Description" style="display: none;">Gives a random buff that changes every minute.<br>Choices: 1.4x Luck, 2x Proc Rate, +25 Movement Repetitions</p>
-                <p class="itemDescription" id="gear39Description" style="display: none;">1/2 Proc Rate, 3x Simulated Generation Amount</p>
-                <p class="itemDescription" id="gear40Description" style="display: none;">1.5x Base Luck<br><i>Where my life began...</i></p>
-                <p class="itemDescription" id="gear41Description" style="display: none;">10% Chance for +500,000 Simulated Ability Amount<br><i>Am I smart enough to be here...</i></p>
-                <p class="itemDescription" id="gear42Description" style="display: none;">Guaranteed 2x of every tier until Hyperdimensional<br><i>I hear strange music...</i></p>
-                <p class="itemDescription" id="gear43Description" style="display: none;">Allows use of Wormhole Exterminator in Subrealm 1<br><i>I shouldn't be here...</i></p>
-                <p class="itemDescription" id="gear44Description" style="display: none;">+50 Movement Repetitions, ??????????????????<br><i>This place birthed the stars in the sky...</i></p>
-                <p class="itemDescription" id="gear45Description" style="display: none;">Unlocks event manager buttons.</p>
-                <p class="itemDescription" id="gear46Description" style="display: none;">+0.2x offline progress rewards.</p>
-                <p class="itemDescription" id="gear47Description" style="display: none;">+0.45x offline progress rewards.</p>
-            
-            </div>
         </div>
         </div>
         </div>
         <div class="col-7">
+        <div id="scrollableCraft">
+            <div id="extraPickaxeInformation">
+                <p id="extraInformationText" class="extraInfoText">pickaxe does x</p>
+                <p id="extraInformationIcon" class="extraInfoText">Icon made by x</p>
+                <button id="toggleExtraInformation" onclick="toggleExtraInformation()"></button>
+            </div>
+            <div id="craftingContainer">
+                <div id="pinAndCraft">
+                    <button id="pinRecipe" class="recipePin" onclick="pinRecipe()"></button>
+                    <button id="unpinRecipe"class="recipePin" style="display: none;" onclick="unpinRecipe()"></button>
+                    <span id="newCraftingHolderheader" class="recipePin" style="display: none;" onclick=""></span>
+                    <button id="newCraftItem" class="craftPickaxeButton">Craft!</button>
+                </div>
+                
+                <div id="newCraftingRecipeHolder"></div>
+                <p id="estimatedTimeHolder">Time Goes Here</p>
+            </div>
+            <div id="newCraftingHolder">
+                <p id="newCraftingName" class="newCraftingText">Pickaxe Name</p>
+                <p id="newCraftingTier" class="newCraftingText">Tier 0</p>
+                <div id="pickaxeHolder">
+                    <div id="newCraftingImageHolder">
+                        <img id="newCraftingAbilityImage" class="newCraftingImage newCraftingText" src="" alt="No Ability Found">
+                        <img id="newCraftingPickaxeIcon" class="newCraftingImage newCraftingText" src="" alt="No Icon Found">
+                    </div>
+                    <p id="newCraftingStatTitle" class="newCraftingText">Stats:</p>
+                    <p id="newCraftingMined" class="newCraftingText">0 Ability Mined</p>
+                    <p id="newCraftingRevealed" class="newCraftingText">0 Ability Revealed</p>
+                    <p id="newCraftingLuck" class="newCraftingText">0x Luck</p>
+                    <p id="newCraftingRate" class="newCraftingText">1/0 Ability Activation Rate</p>
+                    <p id="newCraftingCons" class="newCraftingText">0 Pickaxe Consistency</p>
+                </div>
+                <div id="gearHolder">
+                    <p id="newCraftingGearDescription" class="newCraftingText">Effect:</p>
+                    <p id="newCraftingGearEffect" class="newCraftingText"></p>
+                </div>
+                <button id="collapseRecipe" onclick="collapseRecipe()"><span>Collapse<span></span></span></button>
+                <button id="lockRecipe" onclick="lockRecipe()">Unlocked</button>
+
+        </div>
+        </div>
             <div id="mainSticky">
             <div class="mobile">
-                    <button onclick="goDirection('a')" class="movementButton horizontalArrow" id="leftAutoMine"></button>
-                    <button onclick="goDirection('s')" class="movementButton verticalArrow" id="downAutoMine"></button>
-                    <button onclick="goDirection('w')" class="movementButton verticalArrow" id="upAutoMine"></button>
-                    <button onclick="goDirection('d')" class="movementButton horizontalArrow" id="rightAutoMine"></button>
-                    <button onclick="teleport()" class="movementButton"id="teleportButton">Teleport!</button>
-                    <button onclick="moveOne('a', this)" class="movementButton horizontalArrow"id="leftOne"></button>
-                    <button onclick="moveOne('s', this)" class="movementButton verticalArrow"id="downOne"></button>
-                    <button onclick="moveOne('w', this)" class="movementButton verticalArrow"id="upOne"></button>
-                    <button onclick="moveOne('d', this)" class="movementButton horizontalArrow"id="rightOne"></button>
-                    <button onclick="switchDistance(1)" class="movementButton"id="meterDisplay" oncontextmenu="{switchDistance(-1); return false;}">🟫 1,000m</button>
+                    <button onclick="handleMovement('a', this)" class="movementButton horizontalArrow" id="leftAutoMine"></button>
+                    <button onclick="handleMovement('s', this)" class="movementButton verticalArrow" id="downAutoMine"></button>
+                    <button onclick="handleMovement('w', this)" class="movementButton verticalArrow" id="upAutoMine"></button>
+                    <button onclick="handleMovement('d', this)" class="movementButton horizontalArrow" id="rightAutoMine"></button>
+                    <button onclick="teleport()" class="secondaryButton"id="teleportButton">Teleport!</button>
+                    <p id="messageType" class="secondaryButton">Current Message: N/A</p>
+                    <button onclick="toggleMainDisplay()" id="toggleMainDisplay" class="secondaryButton">Display: Enabled</button>
+                    <button onclick="switchMovementType()" id="switchMovementType" class="secondaryButton">Mining: Auto</button>
+                    <button onclick="switchDistance(1)" class="secondaryButton"id="meterDisplay" oncontextmenu="{switchDistance(-1); return false;}">🟫 1,000m</button>
             </div>
-            <div id="eventMessages">
-                Event Messages Appear Here!
+            <div id="topMessageHolder">
+                <div id="topMessages">
+                    All Messages Appear Here!
+                </div>
             </div>
-            <span id="catPlayerStats">Meow!</span>
+
             <div id="blockContainer">
-                <div id="powerupHolder" onmousewheel="scrollPowerups(event)">
-                    <button id="powerupTop" class="powerupStyling" onclick="switchPowerupDisplay(1)">
-                        <span id="topPowerupLabel" class="powerupLabel">1</span>
-                        <span id="topPowerupReady" class="powerupLabel powerupStatus"></span>
-                    </button>
-                    <button id="mainPowerup" class="powerupStyling" onclick="triggerPowerupExtension()">
-                        <span id="mainPowerupLabel" class="powerupLabel">1</span>
-                        <span id="mainPowerupReady" class="powerupLabel powerupStatus"></span>
-                    </button> 
-                    <button id="powerupBottom" class="powerupStyling" onclick="switchPowerupDisplay(-1)">
-                        <span id="bottomPowerupLabel" class="powerupLabel">1</span>
-                        <span id="bottomPowerupReady" class="powerupLabel powerupStatus"></span>
-                    </button>
-    
-                    <div id="powerupInfoExtension" style="display: none;">
-                        <div id="powerupLock">
-                            <div id="powerupLockChain"></div>
-                            <p id="powerupRequirement">
-                                
-                            </p>
-                        </div>
-                        <button id="allowAutoPowerup" onclick="toggleCanAuto(currentPowerupDisplayed)">
-                            Allow Auto?
+                <div id="powerupHolder" onmousewheel="scrollPowerups(event);" style="display: none;">
+                    <button id="allowAutoPowerup" onclick="toggleCanAuto()">Allow Auto?</button>
+                    <div id="powerupLock">
+                        <img id="powerupChain">
+                        <p id="powerupRequirement"></p>
+                    </div>
+                    <div id="powerupSelections">
+                        <button class="selectPowerup" onclick="displayPowerup(0);">1</button>
+                        <button class="selectPowerup" onclick="displayPowerup(1);">2</button>
+                        <button class="selectPowerup" onclick="displayPowerup(2);">3</button>
+                        <button class="selectPowerup" onclick="displayPowerup(3);">4</button>
+                        <button class="selectPowerup" onclick="displayPowerup(4);">5</button>
+                    </div>
+                    <p id="powerupName">
+                        <span id="powerupNameGradient">Name!</span>
+                    </p>
+                    <p id="powerupDescription">
+                        chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words chat words 
+                    </p>
+                    <p id="powerupInformation">
+                        stuff here meow???
+                    </p>
+                    <div id="powerupButtonHolder">
+                        <button class="powerupActivation" id="activatePowerup">
+                            Activate!
                         </button>
-                        <p id="powerupTitle">
-                            <span>
-                                Re-Repurpused Replicator
-                            </span>
-                        </p>
-                        <p id="powerupDescription">
-                            Makes commons affected by up to 3.5x luck for a short duration. Has a cooldown of 20 minutes.
-                        </p>
-                        <div id="powerupBottomArea">
-                            <div id="powerupTimes">
-                                <button id="powerupCooldown">
-                                    Activate!
-                                </button>
-                                <div id="powerupActive">
-                                    Not Active!
-                                </div>
-                            </div>
-                            <div id="powerupLabels">
-                                <p id="powerupInformation">
-                                    
-                                </p>
-                            </div>
-                        </div>
+                        <span class="powerupActivation" id="powerupIsActive">
+                            Not Active!
+                        </span>
                     </div>
                 </div>
+
                 <div id="blockDisplay">
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
+                    <div class="blockDisplayRow"></div>
                     <div class="blockDisplayRow"></div>
                     <div class="blockDisplayRow"></div>
                     <div class="blockDisplayRow"></div>
@@ -436,13 +847,6 @@
                     <div class="blockDisplayRow"></div>
                 </div>
                 <p id="displayDisabled">Display is Disabled.</p>
-                <button id="galacticaCrafts" onclick="replaceWithGalactica()"></button>
-                <div id="sideIconHolder">
-                    <button class="sideIcon" style="background-image:url('media/radar.gif');" onclick="toggleSideMenu('oreTrackerHolder')"></button>
-                    <button class="sideIcon" style="background-image:url('media/placer.png');" id="toggleOrePlacer" onclick="togglePlacement()"></button>
-                    <button class="sideIcon" style="background-image:url('media/offlineProgress.png');" id="toggleOfflineProgress" onclick="toggleSideMenu('offlineHolder')"></button>
-                    <button class="sideIcon" style="background-image:url('media/eventStuff.png');" id="eventOptionManager" onclick="toggleSideMenu('eventActionHolder')"></button>
-                </div>
                 <div id="offlineHolder">
                     <p id="offlineTitle">Offline Progression</p>
                     <p id="offlineStats">00:00:00/08:00:00</p>
@@ -492,21 +896,47 @@
                 <!--<button id="secretButton" onclick="toggleCelestials(true)"></button>-->
             </div>
         </div>
-        <div id="latestDisplayBottom"></div>
-                <div id="latestSpawns" class="latestDisplay">Latest Spawns Will Appear Here</div>
-                <div id="latestFinds" class="latestDisplay">Latest Finds Will Appear Here</div>
-    </div>
+            <div id="bottomButtonHolder">
+                <button class="bottomButton" style="background-image:url('media/radar.gif');" onclick="toggleSideMenu('oreTrackerHolder')"></button>
+                <button class="bottomButton" style="background-image:url('media/placer.png');" id="toggleOrePlacer" onclick="togglePlacement()"></button>
+                <button class="bottomButton" style="background-image:url('media/offlineProgress.png');" id="toggleOfflineProgress" onclick="toggleSideMenu('offlineHolder')"></button>
+                <button class="bottomButton" style="background-image:url('media/eventStuff.png');" id="eventOptionManager" onclick="toggleSideMenu('eventActionHolder')"></button>
+                <button class="bottomButton" id="displayPowerups" onclick="toggleSideMenu('powerupHolder')">Powerups</button>
+            </div>
+                    <div id="latestOres">
+                        <div id="latestTemplate" class="latestHolder" style="display: none;">
+                            <div class="latestTable">
+                                <div class="latestSpawnOre latestSection">
+                                
+                                </div>
+                                <div class="latestSpawnBase latestSection">
+                                    
+                                </div>
+                                <div class="latestWasMined latestSection">
+                                    MINED: FALSE
+                                </div>
+                                <div class="latestSpawnRNG latestSection">
+                                    1/? RNG
+                                </div>
+                                <div class="latestBlockCount latestSection">
+                                    AT ? MINED
+                                </div>
+                                <div class="latestBlockCount latestSection">
+                                    AMT: ?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         <div class="col-3"> 
-            <div style="height: 2vw; display: flex; justify-content: center;">
-                <button id="inventoryLeft" onclick="switchInventory(-1)" class="inventoryButtons"><</button>
-                <button id="switchInventory" class="inventoryButtons">Normal Inventory</button>
-                <button id="inventoryRight" onclick="switchInventory(1)" class="inventoryButtons">></button>
+            <div id="invVariantHolder">
+                <button class="inventoryVariantButton selectedInventory" onclick="switchInventory(0)">🟫</button>
+                <button class="inventoryVariantButton" onclick="switchInventory(1)">⚡️</button>
+                <button class="inventoryVariantButton" onclick="switchInventory(2)">☢️</button>
+                <button class="inventoryVariantButton" onclick="switchInventory(3)">💥</button>
             </div>
             <div id="inventoryDisplay">
-                <table id="inventory1" class="inventoryHolder" style="display:block;"></table>
-                <table id="inventory2" class="inventoryHolder" style="display:none;"></table>
-                <table id="inventory3" class="inventoryHolder" style="display:none;"></table>
-                <table id="inventory4" class="inventoryHolder" style="display:none;"></table>
+                <table id="inventory" class="inventoryHolder" style="display:block;"></table>
             </div>
             <a href="https://discord.gg/aVXkHB7Y4w" id="discord" target="_blank">
                 <img src="media/discord-logo.png" alt="Discord" style="width: 25%; height: 25%;">
@@ -514,913 +944,73 @@
             </a>
             <div id="patreonHolder">
                 <a href="https://www.patreon.com/thecatofalltime" id="patreon" target="_blank">
-                    <p class="patreonText">Donate! :3c</p>
+                    <p class="patreonText">Or, click here to donate!</p>
                 </a>
-            </div>
-        </div>
-        <div id="menuSelectionContainer">
-            <div class ="menuCategory" id="frame-settings">
-                <p class="menuCategoryTitle">Settings</p>
-                <div id="settingsSelector">
-                    <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
-                    <button class="settingsTopButton" onclick="switchSettings('game')">Game Settings</button>
-                    <button class="settingsTopButton" onclick="switchSettings('audio')">Audio Settings</button>
-                    <button class="settingsTopButton" onclick="switchSettings('webhook')">Webhook Settings</button>
-                </div>
-                <br><br>
-                <div id="audioSettings" style="display: none;">
-                    <div id="musicStuff">
-                        <button id="musicButton" onclick="toggleMusic()">Mute Music</button>
-                        <p>Music Volume</p>
-                        <label class="slidecontainer">
-                            <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
-                        </label>
-                    </div>
-                    <div class="inputAndButton2" style="width: 30%; margin-left: 0; margin-bottom: 1%;" id="disguisedChillHolder">
-                        <button class="toggleDisplay fullyRounded" onclick="enableDisguisedChills();" id="disguisedChills" style="background-color: #FF3D3D; float: left;">Disguised Chills</button>
-                        <button class="toggleDisplay fullyRounded" onclick="switchMusicType(this);" id="newMusic" style="background-color: #6BC267; float: right;">Use New Music</button>
-                    </div>
-                    <div id="soundScrollContainer">
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Antique', this)" id="muteAntique">Mute Antiques</button>
-                                <button class="testButton" onclick="testSound('Antique', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Antique')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #5A865A 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Mystical', this)"id="muteMystical">Mute Mysticals</button>
-                                <button class="testButton" onclick="testSound('Mystical', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value,  'Mystical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6F40B0 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Divine', this)"id="muteDivine">Mute Divines</button>
-                                <button class="testButton" onclick="testSound('Divine', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Divine')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFFEAB 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Flawless', this)"id="muteFlawless">Mute Flawless</button>
-                                <button class="testButton" onclick="testSound('Flawless', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Flawless')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #31E8FF 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Interstellar', this)"id="muteInterstellar">Mute Interstellars</button>
-                                <button class="testButton" onclick="testSound('Interstellar', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Interstellar')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFA124 50%);">
-                                </label>
-                            </div>
-                            
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Metaversal', this)"id="muteMetaversal">Mute Metaversals</button>
-                                <button class="testButton" onclick="testSound('Metaversal', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Metaversal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #3BD216 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Sacred', this)"id="muteSacred">Mute Sacreds</button>
-                                <button class="testButton" onclick="testSound('Sacred', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Sacred')" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, #FF3C3C  50%);">
-                                </label> 
-                            </div>
-                            
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Ethereal', this)"id="muteEthereal">Mute Ethereals</button>
-                                <button class="testButton" onclick="testSound('Ethereal', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="30" value="15" onchange="changeSpawnVolume(this.value, 'Ethereal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ac47ff 50%);">
-                                </label>
-                            </div>
-                            
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Celestial', this)"id="muteCelestial">Mute Celestials</button>
-                                <button class="testButton" onclick="testSound('Celestial', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Celestial')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #870000 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Imaginary', this)"id="muteImaginary">Mute Imaginaries</button>
-                                <button class="testButton" onclick="testSound('Imaginary', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Imaginary')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #41FF6D 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Hyperdimensional', this)"id="muteHyperdimensional">Mute Hyperdimensionals</button>
-                                <button class="testButton" onclick="testSound('Hyperdimensional', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Hyperdimensional')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #041407 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Infinitesimal', this)"id="muteInfinitesimal">Mute Infinitesimals</button>
-                                <button class="testButton" onclick="testSound('Infinitesimal', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Infinitesimal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #021752 50%);">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="spawnSoundSettings">
-                            <div class="soundMuteButtonHolder">
-                                <button class="muteButton" onclick="changeCanPlay('Polychromatical', this)"id="mutePolychromatical">Mute Polychromaticals</button>
-                                <button class="testButton" onclick="testSound('Polychromatical', this)">Preview</button>
-                            </div>
-                            <div class="soundSliderHolder">
-                                <label class="spawnSoundContainer">
-                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Polychromatical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #5bc97e 50%);">
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div id="webhookSettings" style="display: none;">
-                    <span class="createdWebhooksLabel" style="font-size: 1vw;">If you have the link to the Silly Caverns tracker, enter the link and your discord username below.<br>
-                        If you want a webhook for another server, create a custom ID below. Name is the name that will appear in the embed, can be a ping. Rarity is the rarity that the ID will check, is a number >1 that represents the RNG you want to webhook (The ID chosen depends on the rarity of the ore, with the embed being sent to the link that the rarity falls under). ID is the ID that the information will fall under. Link is the webhook link you want to use for that ID.</span>
-                    <span class="createdWebhooksLabel">Server Webhook Link</span>
-                    <div id="serverHook">
-                        <div class="inputAndButton">
-                            <input autocomplete ="off" type="text" class="textInput roundedLeft" id="webhookLinkSet" placeholder="Leave blank to reset">
-                            <button class="inputButton roundedRight" onclick="setWebhookLink(get('webhookLinkSet'))">Set Webhook Link</button>
-                        </div>
-                        <div class="inputAndButton">
-                            <input autocomplete ="off" type="text" class="textInput roundedLeft" id="webhookNameSet" placeholder="Enter your Discord username">
-                            <button class="inputButton roundedRight" onclick="setWebhookName(get('webhookNameSet'))">Set Webhook Name</button>
-                        </div>
-                    </div>
-                    <span class="createdWebhooksLabel">Create Custom Webhook</span>
-                    <br>
-                    <button id="createNewWebhook" onclick="addToNew()">New</button>
-                    <div id="customHookContainer">
-                        
-                        <div class="webhookInfoInputSection" id="newHookCopyable">
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Name">
-                            </div>
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Rarity">
-                            </div>
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Id">
-                            </div>
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo"  placeholder="Link">
-                            </div>
-                            <div class="webhookInfoSection">
-                                <button class="webhookInfo createButton" onclick="createWebhookId(this.parentElement.parentElement)">Create!</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="createdWebhooks">
-                        <span class="createdWebhooksLabel">Created Webhoook Ids</span>
-                        <div class="createdHookDisplay" id="createdHookCopyable">
-                            <span class="createdHookInfo">Name</span>
-                            <span class="createdHookInfo">Rarity</span>
-                            <span class="createdHookInfo">Id</span>
-                            <button class="createdHookInfo deleteHookButton" onclick="removeWebhookId(this.parentElement)">Delete</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div id="gameSettings" style="display: none;">
-                      <div class="inputAndButton">
-                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="minSpeedInput" placeholder="Default: 0">
-                        <button class="inputButton roundedRight" onclick="changeMinMiningSpeed(document.getElementById('minSpeedInput'))">Set Min Speed</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="mineCapacitySetter" placeholder="Default: 250000, >= 250">
-                        <button class="inputButton roundedRight" onclick="updateCapacity(document.getElementById('mineCapacitySetter'))">Update Capacity</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="latestSetter" placeholder="1-999">
-                        <button class="inputButton roundedRight" onclick="changeLatestMax(document.getElementById('latestSetter'))">Change Latest Ores Max Length</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <input autocomplete ="off" type="text" class="textInput roundedLeft" id="automineUpdate" placeholder="Default: 25, > 0">
-                        <button class="inputButton roundedRight" onclick="updateAutomineUpdateSpeed(document.getElementById('automineUpdate'))">Change Block Update Speed</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="stopOnRareButton roundedLeft" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
-                        <button class="stopOnRareSelector roundedRight" onclick="toggleStopRareList()" id="stopOnRareDisplay">Show Tiers</button>
-                        <div id="stopOnRareList" style="display: none;">
-                            <span class="stopOnRareTierDivider"></span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Antique</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Mystical</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Divine</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Flawless</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Interstellar</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Metaversal</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Sacred</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Ethereal</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Imaginary</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Celestial</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Hyperdimensional</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Infinitesimal</span>
-                            <span class="stopOnRareTier" onclick="allowList(this.textContent)">Polychromatical</span>
-                        </div>
-                      </div>
-                      <div class="inputAndButton" id="spawnMessageHolder">
-                        <button class="fullyRounded" onclick="toggleSpawnMessageList()" id="changeSMrarityDisplay">Show Spawn Message Tiers</button>
-                        <div id="spawnTierList" style="display: none;">
-                            <span class="spawnMessageTierDivider"></span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Antique</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Mystical</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Divine</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Flawless</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Interstellar</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Metaversal</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Sacred</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Ethereal</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Imaginary</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Celestial</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Hyperdimensional</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Infinitesimal</span>
-                            <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Polychromatical</span>
-                        </div>
-                    </div>
-                        <div class="inputAndButton">
-                            <input autocomplete ="off" type="text" class="textInput roundedLeft" id="logRarityInput" placeholder="Default: 1, >= 1">
-                            <button class="inputButton roundedRight" onclick="switchHighRarity(get('logRarityInput'))">Set Minimum Log RNG</button>
-                        </div>
-                        <div class="inputAndButton">
-                            <button class="toggleDisplay fullyRounded" onclick="toggleSimulatedRng(this)" id="simulatedRng" style="background-color: #FF3D3D;">Toggle Simulated RNG</button>
-                          </div>
-                        <div class="inputAndButton">
-                          <button class="invSettingButton fullyRounded" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
-                        </div>
-                        <div class="inputAndButton">
-                          <button class="invSettingButton fullyRounded" onclick="switchToIndex(this, 1)" id="craftIndex">Travel to layer index on crafting click</button>
-                        </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="changeCanDisplay(this)" id="blockUpdates">Toggle Block Updates</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="toggleHideCompleted(this)" id="hideCompleted" style="background-color: #FF3D3D;">Hide Completed Recipe Ores</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" style="background-color: #FF3D3D;" onclick="changeUseNumbers(this)" id="useNumbers">Use Numbers for Pickaxe Names</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="switchFont();" id="switchFont" style="background-color: #FF3D3D;">Use Different Emojis (for improper display)</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="togglePathBlocks();" id="pathBlocks">Invisible Path Blocks</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="toggleCaves();" id="caveToggle">Toggle Caves</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="toggleSpawnEffects(this);" id="spawnEffects" style="background-color: #6BC267;">Spawn Effects Enabled</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="toggleNyerd(this);" id="toggleNyerd" style="background-color: #FF3D3D;">Nyerd</button>
-                      </div>
-                      <div class="inputAndButton">
-                        <button class="toggleDisplay fullyRounded" onclick="AFKmode();" id="afkMode" style="background-color: #FF3D3D;">AFK Mode</button>
-                      </div>
-                </div>
-            </div>
-            <div class="menuCategory" id="frame-data">
-                <p class="menuCategoryTitle">Data</p>
-                <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
-                <br><br>
-                <div class="dataDiv">
-                    <div style="display: inline-flex; justify-content: center; height: 100%;">
-                        <button class="dataButton" onclick="exportData()">Export Data</button>
-                        <input type="text" id="dataText">
-                        <button class="dataButton" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
-                        <label for="dataFileUpload" id="dataFileLabel">
-                            Upload Save File
-                        </label>
-                        <input type="file" id="dataFileUpload" accept=".txt">
-                        <button class="dataButton" onclick="saveAllData(true)">Force Cloud Save (Galaxy)</button>
-                    </div>
-                        
-                </div>
-            </div>
-            <div class ="menuCategory" id="frame-logs">
-                <p class="menuCategoryTitle">Ore Logs</p>
-                <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
-                <br><br>
-                <div id="logButtonHolder">
-                    <button onclick="verifiedOres.showLogs()" id="logsButton">Generate Ore Logs</button>
-                    <select name="sortType" id="logSort">
-                        <option value="All">All</option>
-                        <option value="Cave">Cave</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Electrified">Electrified</option>
-                        <option value="Radioactive">Radioactive</option>
-                        <option value="Explosive">Explosive</option>
-                    </select>
-                    <button onclick="verifiedOres.displaySavedLogs()" id="savedLogsButton">Generate Saved Logs (Ignores Sort)</button>
-                    <form style="margin: 0px;" onsubmit="event.preventDefault(); verifiedOres.filterByRarity(this.children[0].value); this.children[0].value = ''">
-                        <input type="text" class="logFilters" placeholder="Delete logs below rarity (num > 0)" >
-                    </form>
-                    
-                </div>
-                    
-                    <div id="logHolder"></div>
-            </div>
-            <div class ="menuCategory" id="frame-statistics">
-                <p class="menuCategoryTitle">Player Statistics</p>
-                <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
-                <br><br>
-                <div style="overflow-y: auto; height: 100%;">
-                    <div id="statisticsTableHolder">
-                        <table id="statsTable">
-                            <tr>
-                                <th class="statsRow">Tier</th>
-                                <th class="statsRow">Total</th>
-                                <th class="statsRow">Normal</th>
-                                <th class="statsRow">Electrified</th>
-                                <th class="statsRow">Radioactive</th>
-                                <th class="statsRow">Explosive</th>
-                                <th class="statsRow">Completion</th>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="playerStatisticsHolder">
-                        <p class="playerStat" id="statsTotalTime">Total Time</p>
-                        <p class="playerStat" id="statsSessionTime">Session Time</p>
-                        <p class="playerStat" id="statsCavesGenerated">Caves Generated</p>
-                        <p class="playerStat"id="statsBlocksMined">Blocks Mined</p>
-                        <p class="playerStat" id="statsSpeed">Speed</p>
-                        <p class="playerStat" id="statsSessionReset">Session Resets</p>
-                        <p class="playerStat" id="sessionMined">Mined</p>
-                        <p class="playerStat" id="statsReset">Resets</p>
-                        <p class="playerStat" id="furthestPosX">Resets</p>
-                        <p class="playerStat" id="furthestNegX">Resets</p>
-                        <p class="playerStat" id="furthestY">Resets</p>
-                    </div>
-                </div>
-                
-                
-            </div>
-            <div class ="menuCategory" id="frame-index">
-                <p class="menuCategoryTitle">Ore Index</p>
-                <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
-                <br><br>
-                <div id="indexDisplay">
-                        <div id="indexButtonHolder">
-                        <button class="indexDirectionButton" onclick="switchLayerIndex(-1)" style="float: left;"><</button>
-                        <p id="indexSwitchButton">Layer Placeholder</p>
-                        <button class="indexDirectionButton" onclick="switchLayerIndex(1)" style="float: right;">></button>
-                        </div>
-                        </div>
-                
-                <div id="oreCardHolder">
-                    
-                </div>
-            </div>
-            <div class ="menuCategory" id="frame-locations">
-                <p class="menuCategoryTitle">Locations</p>
-                <div id="locationSelector">
-                    <button class="settingsTopButton" onclick="closeMenu()">Back to Game</button>
-                    <button class="settingsTopButton" onclick="showPortalRoom(true)">The Portal Room</button>
-                    <button class="settingsTopButton" onclick="showOreForge(true)">Silly Caverns Forge</button>
-                    <button class="settingsTopButton" onclick="showVariantConversion(true)">Variant Conversions</button>
-                    <button class="settingsTopButton" onclick="showWorkshop(true)" id="theWorkshop" style="display: none;">The Workshop</button>
-                </div>
-                <div id="portalRoom">
-                    <div id="portalArrows">
-                        <img class="portalSwitcher" id="leftArrowPortal" src="media/leftArrowIcon.png" onclick="getNextPortalPosition(-1)">
-                        <img class="portalSwitcher" id="rightArrowPortal" src="media/rightArrowIcon.png" onclick="getNextPortalPosition(1)">
-                    </div>
-                    <div id="portalHolder">
-                        <div id="leftPortal">
-                        
-                        </div>
-                        <div id="portal">
-    
-                        </div>
-                        <div id="rightPortal">
-                            
-                        </div>
-                    </div>
-                    <div id="portalLabelHolder">
-                        <p id="leftPortalName">Subrealm One</p>
-                        <p id="portalName">World One</p>
-                        <p id="rightPortalName">World Two</p>
-                    </div>
-                    <div id="portalLockReason">
-                        <p id="portalLockText">Locked! Reason</p>
-                        <img id="portalChain" src="media/portalChain.png">
-                    </div>
-                </div>
-                <br><br>
-                <div id="conversionContainer">
-                    <p id="conversionTitle">Variant Conversion Machine!</p>
-                    <p id="conversionDescription">How to use: Click on an ore in a variant inventory, or manually input the information!<br>
-                    Current Rates: One Explosive Ore -> 30 Normal Ores | One Radioactive Ore -> 10 Normal Ores | One Electrified Ore -> 5 Normal Ores.</p>
-                    <div id="machineHolder">
-                        <form id="machineForm">
-                            <input type="text" id="oreInput" maxlength="99" autocomplete="off">
-                            <input type="text" id="amtInput" maxlength="7" autocomplete="off">
-                            <div id="variantSelect" onmouseover="toggleVariantList(true)" onmouseleave="toggleVariantList(false)">
-                                <p id="currentSelectedVariant">Electrified</p>
-                                <p class="potentialVariant" onclick="switchCurrentSelectedVariant('Electrified')">Electrified</p>
-                                <p class="potentialVariant" onclick="switchCurrentSelectedVariant('Radioactive')">Radioactive</p>
-                                <p class="potentialVariant" onclick="switchCurrentSelectedVariant('Explosive')">Explosive</p>
-                            </div>
-                        </form>
-                        <button id="variantConvert" onclick="convertVariants()">Convert!</button>
-                    </div>
-                    <div id="underMachine">
-                        <button id="convertAll" onclick="convertAllButOne()">Convert All Variants But One</button>
-                    </div>
-                    <p id="machineError"></p>
-                </div>
-                <div id="forgeContainer">
-                    <p id="forgeTitle">The Silly Caverns Forge</p>
-                    <div id="descriptionContainer">
-                        <p class="buttonDescriptor" id="leftForge">Here's where you combine worse ores into a better ore.</p>
-                        <p class="buttonDescriptor" id="rightForge">Here's where you break a better ore down into worse ores.</p>
-                    </div>
-                    <div id="forgeSelectionContainer">
-                        <button class="forgeTypeSelect" onclick="showOreCrafts(true)">Ore Crafts!</button>
-                        <button class="forgeTypeSelect" onclick="showOreFissions(true)">Ore Fissions!</button>
-                    </div>
-                    <hr id="forgeSeparator">
-                    <div class="craftingSelections" id="forgeCraft">
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bowCraft')">Craft <span class="forgeOreDisplay">🎀</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('frisbeeCraft')">Craft <span class="forgeOreDisplay">🥏</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('diamondCraft')">Craft <span class="forgeOreDisplay">💠</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('gearCraft')">Craft <span class="forgeOreDisplay">⚙️</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('batteryCraft')">Craft <span class="forgeOreDisplay">🔋</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bambooCraft')">Craft <span class="forgeOreDisplay">🎍</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('fishCraft')">Craft <span class="forgeOreDisplay">🐟</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenCraft')">Craft <span class="forgeOreDisplay">💚</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueCraft')">Craft <span class="forgeOreDisplay">💙</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowCraft')">Craft <span class="forgeOreDisplay">💛</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeCraft')">Craft <span class="forgeOreDisplay">🧡</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redCraft')">Craft <span class="forgeOreDisplay">❤️</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleCraft')">Craft <span class="forgeOreDisplay">💜</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownCraft')">Craft <span class="forgeOreDisplay">🤎</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackCraft')">Craft <span class="forgeOreDisplay">🖤</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteCraft')">Craft <span class="forgeOreDisplay">🤍</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('wtfCraft')">Craft <span class="forgeOreDisplay">why</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('hotspringCraft')">Craft <span class="forgeOreDisplay">♨️</span></button>
-                    </div>
-                    <div class="craftingSelections" id="forgeFission" style="display: none;">
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">Fission <span class="forgeOreDisplay">💎</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">Fission <span class="forgeOreDisplay">🧵</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bellFission')">Fission <span class="forgeOreDisplay">🛎️</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('circleFission')">Fission <span class="forgeOreDisplay">⭕</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">Fission <span class="forgeOreDisplay">💚</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">Fission <span class="forgeOreDisplay">💙</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowFission')">Fission <span class="forgeOreDisplay">💛</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeFission')">Fission <span class="forgeOreDisplay">🧡</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redFission')">Fission <span class="forgeOreDisplay">❤️</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleFission')">Fission <span class="forgeOreDisplay">💜</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownFission')">Fission <span class="forgeOreDisplay">🤎</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackFission')">Fission <span class="forgeOreDisplay">🖤</span></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteFission')">Fission <span class="forgeOreDisplay">🤍</span></button>
-                    </div>
-                    <hr id="forgeSeparator">
-                    <div id="forgeRecipeDisplayContainer">
-                        <div id="forgeRecipeDisplay" style="display:none;">
-                            
-                        </div>
-                        <div id="forgeSettings" style="display: none;">
-                            <p id="forgeCraftingAmount">1x</p>
-                                <button id="setForgeAmount" onclick="multiplyRecipe(document.getElementById('amountInputText').value)">Set Multiplier</button>
-                                <br>
-                                <form id="amountInput">
-                                    <input type="text" placeholder="Amount" id="amountInputText" autocomplete="off" maxlength="3" onkeydown="preventCrash(event)">
-                                </form>
-                                <button id="craftOreButton" onclick="craftOre(currentOreRecipe)"></button>
-                        </div>
-                    </div>
-                </div>
-                <div id="workshopContainer">
-                    <p id="workshopTitle">The Workshop</p>
-                    <div id="workshopImageHolder">
-                        <div class="workshopImage">
-                            <img id="treeOfLifeThumbnail" src="media/treeThumbnail.png">
-                        </div>
-                    </div>
-                    <div id="workshopInformationHolder">
-                        <div class="workshopInformation">
-                            <p class="workshopInformationName">The Tree of Life</p>
-                            <p class="workshopInformationLevelDescriptor"></p>
-                            <p class="workshopInformationLevel"></p>
-                            <button class="workshopDisplayUpgrade" onmouseover="displayUpgrade('pickaxe27', this)" onclick="craftUpgrade('pickaxe27')">Upgrade!</button>
-                        </div>
-                        <div id="upgradeRecipeHolder"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="menuCategory" id="frame-faq">
-                <p class="menuCategoryTitle">FAQ</p>
-                <div id="faqTopButtons">
-                    <button class="faqButton" onclick="closeMenu()">Back to Game</button>
-                    <button class="faqButton" onclick="showFaqPage(0)">How do I play?</button>
-                    <button class="faqButton" onclick="showFaqPage(1)">The Menu</button>
-                    <button class="faqButton" onclick="showFaqPage(2)">Settings</button>
-                    <button class="faqButton" onclick="showFaqPage(3)">Ore Tiers</button>
-                    <button class="faqButton" onclick="showFaqPage(4)">Caves</button>
-                    <button class="faqButton" onclick="showFaqPage(5)">Powerups</button>
-                    <button class="faqButton" onclick="showFaqPage(6)">Other Questions</button>
-                    <button class="faqButton" onclick="showFaqPage(7)">Pickaxes</button>
-                    <button class="faqButton" onclick="showFaqPage(9)">Gears</button>
-                    <button class="faqButton" onclick="showFaqPage(8)">Events</button>
-                </div>
-                <br><br>
-                <div id="faqContentHolder">
-                    <!--
-                        <span class="faqTitle"></span>
-                        <span class="faqSection"></span>
-                        <span class="faqText"></span>
-                    -->
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">How do I play?</span><br>
-                            <span class="faqSection">Movement:</span>
-                            <span class="faqText">You can either hold W, A, S, D to manually move in that direction, press the buttons with 1 arrow to move 1 block in that direction, press any of the arrow keys to automine in that direction, or press the buttons with 3 arrows to automine in that direction.</span><br>
-                            
-                            <span class="faqSection">Rare Spawns</span>
-                            <span class="faqText">One thing you have to pay attention to is spawn sounds. Rare ores all have a noise to indicate they have been spawned in the mine, and it is generally recommended to always collect these ores.</span><br>
-
-                            <span class="faqSection">Crafting</span>
-                            <span class="faqText">Crafting is the most important part of the game. It allows you to create better pickaxes and make gears that will help you progress. New pickaxes will either let you mine more blocks through abilities or gain more luck. Gears are just like upgrades in other games and can increase luck, speed, and other silly things that will help with progression.</span>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">The Menu</span>
-                            <span class="faqText">The menu contains a lot of important tabs that you should make note of!</span><br>
-
-                            <span class="faqSection">Settings</span>
-                            <span class="faqText">The settings tab allows you to change many things about the game (explained in the settings section). It is also where you can control spawn sound volume, and determine what spawn sounds get played.</span><br>
-
-                            <span class="faqSection">Data</span>
-                            <span class="faqText">The data tab has everything with your data. Pressing export will paste your save file into the text box, and asks if you want to download it as a file. It is recommended to make backups of your data regularly in case browser data is lost. Paste data into the text box and press import to import that data. This will overwrite your current data, so make sure it is what you want. Importing nothing performs a hard reset on your game.</span><br>
-
-                            <span class="faqSection">Logs</span>
-                            <span class="faqText">The logs tab is where you can generate ore logs for your current session. This only logs Flawless tier and above ores, along with any rare cave ores. These are also how you can provide proof of ores in the Discord. </span><br>
-
-                            <span class="faqSection">Statistics</span>
-                            <span class="faqText">The statistics tab shows you some things about yourself, such as total ores owned in the rare tiers, total time played, session time, blocks mined, and caves generated (more statistics will come eventually).</span><br>
-
-                            <span class="faqSection">Ore Index</span>
-                            <span class="faqText">The ore index tab gives you information on the ores in each layer in the world you are currently in. Higher tiers will be blacked out until the ore is found. Each index card will also tell you the rarity of the ore, how rare it is with your current luck, and what variants of the ore you own. </span><br>
-
-                            <span class="faqSection">Locations</span>
-                            <span class="faqText">The locations tab provides some very helpful areas. The first one is the forge, which allows you to craft certain ores you might need, or fission rare ores you have into a bunch of more common ores. The second is variant conversion, which can be more easily accessed by clicking on an ore in your inventory that is a variant. It will allow you to convert these variants into their normal selves, gaining more the rarer the variant. The third location is the workshop, which is currently only visible in Subrealm 1. The workshop will allow you to upgrade certain items, making them work better than usual.</span><br>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Settings</span><br>
-
-                            <span class="faqSection">Simulated RNG</span>
-                            <span class="faqText">This setting changes block generation to calculate averages of what you should get in certain amounts of blocks generated opposed to rolling for each ore individually. Heavily increased game performance, slightly lowered RNG accuracy. Any generation above 35,899 blocks will have a different RNG formula applied to it.</span><br>
-
-                            <span class="faqSection">Minimum Speed</span>
-                            <span class="faqText">This setting allows you to set a cap on your speed in case the game runs slowly. It will slow you down if you exceed this speed.</span><br>
-
-                            <span class="faqSection">Capacity</span>
-                            <span class="faqText">This setting allows you to change your mine capacity. It is recommended to keep it under 5,000,000 as there can be performance issues with high mine capacities.</span><br>
-
-                            <span class="faqSection">Latest Ores Max Length</span>
-                            <span class="faqText">This setting allows you to change the amount of ores that will show up in latest spawns and latest finds. </span><br>
-                            
-                            <span class="faqSection">Block Update Speed</span>
-                            <span class="faqText">This setting allows you to change the speed at which the display will update when automining. (uses ms)</span><br>
-
-                            <span class="faqSection">Stop On Rare</span>
-                            <span class="faqText">This setting is one of the more important ones, and will stop you mining if you spawn an ore of the specified tier. Click on tiers and select which tiers you would like to be automatically stopped on.</span><br>
-
-                            <span class="faqSection">Minimum Spawn Message</span>
-                            <span class="faqText">This setting sets the tiers an ore has to be for it to generate a spawn message and appear in latest spawns and latest finds.</span><br>
-
-                            <span class="faqSection">Travel To Index On Click</span>
-                            <span class="faqText">These settings allow you to specify if clicking an ore in a crafting recipe or in the normal inventory will open the index page for it.</span><br>
-
-                            <span class="faqSection">Toggle Block Updates</span>
-                            <span class="faqText">This settings either enables or disables the blocks on the screen, and can increase performance.</span><br>
-
-                            <span class="faqSection">Use Numbers For Pickaxe Names</span>
-                            <span class="faqText">This setting switches pickaxe names to become numbers, like "Pickaxe 1" instead of the pickaxes actual name.</span><br>
-
-                            <span class="faqSection">Use Different Emojis</span>
-                            <span class="faqText">This setting attempts to switch the emoji font to one that has correct emoji sizes if the current emoji font breaks the display. (doesn't work on all devices)</span><br>
-
-                            <span class="faqSection">Invisible Path Blocks</span>
-                            <span class="faqText">This setting switches the white circles to nothing, can negatively impact performance but looks better.</span><br>
-
-                            <span class="faqSection">Toggle Caves</span>
-                            <span class="faqText">This setting allows you to switch caves on or off. Caves spawn after Geode Staff and can provide a lot more resources.</span><br>
-
-                            <span class="faqSection">1/250m+ RNG Logs</span>
-                            <span class="faqText">This setting changes logs to only include ores that have an RNG of over 1/250,000,000. RNG is how rare an ore is including player luck instead of how rare the ore normally is.</span><br>
-
-                            <span class="faqSection">Spawn Effects</span>
-                            <span class="faqText">This setting allows you to turn spawn effects on or off (the shake and color changes). </span><br>
-                        
-                            <span class="faqSection">Nyerd</span>
-                            <span class="faqText">This setting changes the ore tracker arrow to the :nyerd: emoji.</span><br>
-
-                            <span class="faqSection">AFK Mode</span>
-                            <span class="faqText">Removes most elements on the screen to highly increase performance.</span>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Ore Tiers</span><br><br>
-
-                            <span class="faqSection">Antique : </span><span class="faqText">1/750,000+ (750k)</span>
-                            <span class="faqSection">Mystical : </span><span class="faqText">1/5,000,000+ (5m)</span>
-                            <span class="faqSection">Divine : </span><span class="faqText">1/25,000,000+ (25m)</span>
-                            <span class="faqSection">Flawless : </span><span class="faqText">1/160,000,000+ (160m) and the first tier to log normally.</span>
-                            <span class="faqSection">Interstellar : </span><span class="faqText">1/750,000,000+ (750m) and the first tier to have spawn effects</span>
-                            <span class="faqSection">Metaversal : </span><span class="faqText">1/1,500,000,000+ (1.5b)</span>
-                            <span class="faqSection">Sacred : </span><span class="faqText">1/5,000,000,000+ (5b)</span>
-                            <span class="faqSection">Ethereal : </span><span class="faqText">1/100,000,000,000+ (100b)</span>
-                            <span class="faqSection">Imaginary : </span><span class="faqText">1/1,000,000,000,000+ (1t)</span>
-                            <span class="faqSection">Celestial : </span><span class="faqText">Secret ores with special spawn conditions, ranges from 1/10,000 (10k) to 1/13,000,000,000,000,000 (13qd)</span>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Caves</span>
-                            <span class="faqText">Caves generate in the mine at a rate of 1/500 after crafting Geode Staff. They will mine a little over 1,500 blocks and will give you whatever was mined. They don't increase blocks mined.</span><br>
-
-                            <span class="faqSection">Cave Types</span>
-                            <span class="faqText">Cave types have a chance of generating when a cave is generated. These have special blocks instead of the normal layer, and have their own loot tables. These loot tables contain cave exclusives, which can only be generated in that specific cave type and are not affected by any luck as of now. Any cave exclusive will log, no matter the rarity.</span><br>
-
-                            <span class="faqSection">Abysstone Caves</span>
-                            <span class="faqText">Abysstone caves are unlocked with a special, secret gear in World 2. They are the rarest cave type and generate any ore from World 1 and World 2, excluding celestials and any cave exclusives. It has its own exclusive ore, which is celestial tier.</span><br>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Powerups And Other Things Like Them</span><br>
-
-                            <span class="faqSection">Terrestrial Terror</span>
-                            <span class="faqText">Mines a 101x101 block area around the player using the players current luck. The size gets multiplied by log10(your blocks mined / 500,000)</span><br>
-                            
-                            <span class="faqSection">The Spelunker</span>
-                            <span class="faqText">Increases cave size, doubles cave spawn rate, and gives 2x cave luck for 2:30 minutes.</span><br>
-                            
-                            <span class="faqSection">Illogical Randomiser</span>
-                            <span class="faqText">Makes a random ore from the layer you are in 1.5x more common. Will display which ore is chosen.</span><br>
-                            
-                            <span class="faqSection">Re-Repurposed Replicator</span>
-                            <span class="faqText">Makes any common ore that wouldn't usually be affected by luck have up to 3.5x luck applied to it.</span><br>
-                            
-                            <span class="faqSection">Paradoxical Progression</span>
-                            <span class="faqText">Gives you any unowned pickaxe or gear for at least 1 minute. Will not give World 1 pickaxes in World 2, and is disabled in Subworld 1. The given item is wiped on refresh.</span><br>
-                            
-                            <span class="faqSection">Ore Tracker</span>
-                            <span class="faqText">Unlocked by crafting the ore tracker gear. Points you in the direction of the nearest rare ore that had a spawn message and gives you its coordinates upon clicking "Track Ores!". Will also display the variant of the ore if it has one.</span><br>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Other Questions</span>
-                            <span class="faqSection">What are variants?</span>
-                            <span class="faqText">Variants are versions of ores that have a much lower chance to spawn. They have no functional use, but can be converted to normal, giving more ores the rarer the variant. They look special on the display, glowing their respective color.</span>
-
-                            <span class="faqSection">What happens when I dig down?</span>
-                            <span class="faqText">In World 2 and Subrealm 1, the last layer of the world will keep generating infinitely as you go down. In World 1, there's a special mechanic that keeps generating layers the further down you go.</span>
-                            <span class="faqText">These layers are usually repeated versions of the main layers, with a small chance to have something added to them. There are also a few secret layers that have a very low chance of generating. These special layers, along with the lowest point you've been, will be added to the teleport list on generation. An index page for the secret layers will also be created once you have mined a certain amount in those layers.</span><br>
-
-                            <span class="faqSection">What is "Void Prevention"?</span>
-                            <span class="faqText">Void prevention is when the game automatically mines a rare ore you spawned because it was near the end of the mine lifespan. It is there to prevent ore loss from the mine resetting.</span><br>
-
-                            <span class="faqTitle">How do i find [layer]? (and other secrets)</span>
-                            <span class="faqText">This section will be spoilered in case people do not want to reveal how to find certain layers or want to figure things out for themselves. Click on the section to reveal the text.</span>
-                            <details class="faqText">
-                                <summary class="faqSection">Cloud Layer</summary>
-                                Found by digging above the surface in World 2
-                            </details>
-                            <details class="faqText">
-                                <summary class="faqSection">❌ Layer</summary>
-                                Found by digging down to the barrier in World 2 and mining along it until a hole spawns. The hole is a different ore that isn't barrier and spawns at a rate of 1/5,000 (5k).
-                            </details>
-                            <details class="faqText">
-                                <summary class="faqSection">Abysstone Gear</summary>
-                                Viewing: Click the gears tab a few times in World 2 and it will appear.
-                            </details>
-                            <details class="faqText">
-                                <summary class="faqSection">Something after Coronary Catastrophe...</summary>
-                                Viewing: Obtain every world completion trophy and click the pickaxes tab 6 times.<br>
-                                The celestials required to craft it:<br>
-                                Pickaxe: Mine down into the barrier to have a chance to obtain it<br>
-                                Yin-Yang: Mine in World 2 with the Key equipped.<br>
-                            </details>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Pickaxes</span>
-                            <span class="faqSection">What is pickaxe consistency (cons)?</span>
-                            <span class="faqText">Pickaxe consistency is the average amount of blocks you would be mining per block mined. It is calculated with the formula: (revealed * luck / proc)</span><br>
-                            <span class="faqText">Mulch Mallet: 48 mined, 140 revealed, 1x luck, 1/50 proc rate (2 cons)</span>
-                            <span class="faqText">Mud Sickle: 96 Mined, 156 revealed, 1.1x luck, 1/50 proc rate (3.5 cons)</span>
-                            <span class="faqText">Dirt Ravager: 228 mined, 468 revealed, 1.1x luck, 1/100 proc rate (5.1 cons)</span>
-                            <span class="faqText">Crystalline Excavator: 248 mined, 354 revealed, 1.275x luck, 1/60 proc rate (7.5 cons)</span>
-                            <span class="faqText">Ballast Breaker: 309 mined, 432 revealed, 1.2x luck, 1/50 proc rate (10.15 cons)</span>
-                            <span class="faqText">Tropical Carver: 378 mined, 510 revealed, 1.3x luck, 1/45 proc rate (14.7 cons)</span>
-                            <span class="faqText">Void Crusher: 437 mined, 597 revealed, 1.25x luck, 1/35 proc rate (21.3 cons)</span>
-                            <span class="faqText">Geode Staff: 604 mined, 796 revealed, 1.3x luck, 1/35 proc rate (29.5 cons)</span>
-                            <span class="faqText">Earth Soiler: 822 mined, 1207 revealed, 1.3x luck, 1/40 proc rate (44 cons)</span>
-                            <span class="faqText">Crypt Smasher: 1036 mined, 2731 revealed, 1.75x luck, 1/65 proc rate (73.5 cons)</span>
-                            <span class="faqText">Labyrinthian Tide: 1264 mined, 2095 revealed, 3.75x luck, 1/60 proc rate (130.9 cons)</span>
-                            <span class="faqText">77 Leaf Destroyer: 1445 mined, 1665 revealed, 5x luck, 1/35 proc rate (237.8 cons)</span>
-                            <span class="faqText">Planet Buster: 1989 mined, 2803 revealed, 7.5x luck, 1/50 proc rate (420.4 cons)</span>
-                            <span class="faqText">Whirlpool of Fate: 2564 mined, 3288 revealed, 25x luck, 1/80 proc rate  (1027.5 cons)</span>
-                            <span class="faqText">Wings of Glory: 7269 mined, 8025 revealed, 60x luck, 1/250 proc rate, 2 blocks/move (1920x2 cons)</span><br>
-                            <span class="faqText">Extreme Echolocator: 40 mined, 51 revealed, 1.05x luck, 1/45 proc rate (1.19 cons)</span>
-                            <span class="faqText">Corundum Caver: 112 mined, 140 revealed, 1.075x luck, 1/75 proc rate (2.021 cons)</span>
-                            <span class="faqText">Starborne Slasher: 218 mined, 292 revealed, 1.3x luck, 1/100 proc rate (3.796 cons)</span>
-                            <span class="faqText">Nyabomb: 826 mined, 936 revealed, 1x luck, 1/150 proc rate (6.24 cons)</span>
-                            <span class="faqText">Lunar Lightsabre: 1005 mined, 1160 revealed, 1.5x luck, 1/150 proc rate (11.6 cons)</span>
-                            <span class="faqText">Gemstone Engraver: 656 mined, 754 revealed, 2x luck, 1/60 proc rate (25.13 cons)</span>
-                            <span class="faqText">Gambler's Fallacy: 1082 mined, 1343 revealed, 3x luck, 1/75 proc rate (53.72 cons)</span>
-                            <span class="faqText">Exponential Centrifuge: 1946 mined, 4489 revealed, 2x luck, 1/75 proc rate (119.7 cons)</span>
-                            <span class="faqText">Singularity Slammer: 2498 mined, 5632 revealed, 4x luck, 1/120 proc rate (187 cons)</span>
-                            <span class="faqText">Staff of Binding: 4518 mined, 6325 revealed, 8.25x luck, 1/150 proc rate (347.87 cons)</span>
-                            <span class="faqText">Stormseer's Superspark Sceptre: 7964 mined, 9800 revealed, 12.5x luck, 1/175 proc rate (700 cons)</span>
-                            <span class="faqText">Coronary Catastrophe: 15131 mined, 18594 revealed, 50x luck, 1/300 proc rate (3099 cons)</span><br>
-                            <details class="faqText">
-                                <summary>?????</summary>
-                                Null Chroma: 21021 mined, 26494 revealed, 175x luck, 1/150 proc rate (30909 cons)
-                            </details>
-                            <details class="faqText">
-                                <summary>???watr???</summary>
-                                Undersea Eviscerator: 34321 mined, 35899 revealed, 425x luck, 1/200 proc rate (76289 cons)
-                            </details>
-                            <details class="faqText">
-                                <summary>Galactica</summary>
-                                Dimensional Slicer: 75000 mined, 1 revealed, 500x luck, 1/200 proc rate (187,500 cons)<br>
-                                Wormhole Exterminator: 60000 mined, 1 revealed, 575 luck, 1/275 proc rate, +1.5x cave luck, 2.25x cave type luck, 3x cave size. (135,909 cons)
-                            </details>
-                            <span class="faqSection">Tree of Life Levels:</span>
-                            <span class="faqText">0: 4383 mined, 4576 revealed, 1x luck (9.1 cons)</span>
-                            <span class="faqText">1: 19928 mined, 20978 revealed, 3x luck, (125.86 cons)</span>
-                            <span class="faqText">2: 30397 mined, 33246 revealed, 10x luck, (664.92 cons)</span>
-                            <span class="faqText">3: 37468 mined, 41654 revealed, 20x luck, (1666.16 cons)</span>
-                            <span class="faqText">4: 46650 mined, 54781 revealed, 40x luck, 2 reps (4382.48 cons * 2)</span>
-                            <span class="faqText">5: 54298 mined, 63893 revealed, 100x luck, 3 reps (12778.6 cons * 3)</span>
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Events:</span><br>
-                        
-                        </p>
-                    </div>
-                    <div class="faqPage">
-                        <p>
-                            <span class="faqTitle">Gears</span>
-                            <span class="faqText">Gears are like upgrades, with each one having an effect to make progression easier. Below is a list of the current gears that are active:</span><br>
-                            <span class="faqText" id="curActiveGears"></span>
-                        
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
         <div id="dailyMessages">
             <div id="newPlayer" class="dailyMessage">
-                <p class="dailyText">You appear to be new to this game, would you like to see how to play? The information can be viewed at any time by selecting 'FAQ' in the menu.</p>
-                <button class="newPlayerButton" style="background-color:#6BC267;" onclick="doTutorial()">Yes</button>
-                <button class="newPlayerButton" style="background-color:#FF3D3D;" onclick="player.faqOffered = true; showNextInQueue()">No</button>
+                <p class="dailyText">Welcome to The Silly Caverns! It's great to have you here :><br>This game is simple, mine blocks, upgrade, mine more!<br>If you ever feel stuck, feel free to check out Milestones in The Silly Lounge!</p>
+                <button class="newPlayerButton" style="background-color:#6BC267;" onclick="showNextInQueue()">LETS GAMBLE!!!</button>
             </div>
             <div id="chooseName" class="dailyMessage">
                 <p class="dailyText">It doesn't appear like you have a name yet! Pick one out for yourself!<br>(Make sure your name is appropriate as it will appear when you generate ore logs)</p>
-                <form id="nameHolder">
-                    <input id="enterName" type="text" placeholder="Enter Name" autocomplete="off">
-                </form>
-                <button id="submitName" onclick="(player.name = get('enterName').value); showNextInQueue();">Confirm!</button>
-            </div>
-            <div id="worldTwoRevamp" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    - World Two Revamp!!! (kinda)<br>
-                    - Balanced the commons (and some rares) for all World 2 craftables.<br>
-                    - 2 New World 2 gears.<br>
-                    - Bug Fixes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>
-                    - Let me know if progression needs any more tweaking and I'll try to make it better.
-                </p>
-            </div>
-            <div id="summerEvent" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    <b>Summer Event + Powerup Revamp!</b><br>
-                    - 9 New event ores found in a few World 1 layers.<br>
-                    - 1 New celestial.<br>
-                    - Overhauled Powerup UI.<br>
-                    - Changed a few powerup effects.<br>
-                    - A few QOL changes with crafting.<br>
-                    - Bug Fixes!!!!!!!!!!!!!!!! YAYYYYYYYYYY!!!!!!<br>
-                </p>
-            </div>
-            <div id="waterWorld" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    <b>WATR</b><br>
-                    - New World<br>
-                    - 2 new ore tiers<br>
-                    - New endgame pickaxe<br>
-                    - Minimum log RNG is now an input setting<br>
-                    - Added Webhook section to the settings, put any webhook link here for an embed webhook in any desired channel.<br>
-                    - Added limited event section to the index<br>
-                    - Bug Fixes<br>
-                </p>
-            </div>
-            <div id="simRng" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    <b>Dimensional Update</b><br>
-                    - New Simulated RNG setting, view information in the FAQ!<br>
-                    - New World! Mostly used for crafting purposes but has many very rare ores.<br>
-                    - New Pickaxe! Uses the power of alternate dimensions to mine an insane amount of blocks.<br>
-                    - 2 New Gears!<br>
-                    - Added offline progress, stacks up to 8 hours and you get a percentage of what you would normally get in that time.<br>
-                    - Revamped right side of the display, added ore placer and offline progress buttons there along with the ore tracker.<br>
-                    - Added new ores and replaced Wavaderg with Goober for personal reasons.<br>
-                    - Bug Fixes :3c<br>
-                </p>
-            </div>
-            <div id="thankYou" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
-                <p class="dailyText">
-                    <span style="font-size: 2vw;"><b>THANK YOU!!!</b></span><br>
-                    - HI CHAT! IT'S ME!!!<br>
-                    - Because of the recent success of this game, if you have played before October 1st, 2024, you will receive an exclusive ore after that date!!!<br>
-                    - Also, when Silly Caverns becomes #1 on Galaxy, I will increase the current luck boost to 1.5x for a while and then make the 1.2x permanent!<br>
-                    - 1 New pickaxe in Galactica to ease the way into Endgame!<br>
-                    - Added ore favoriting, just click the star to favorite the ores you like!<br>
-                    - Added ores that weren't already in Abysstone caves to the cave, and made the cave spawn in more worlds!<br>
-                    - Added a new Abysstone cave exclusive!<br>
-                    - Noradrenaline event in Galactica!<br>
-                    - siiiiiiiiiilly bug fixes mrrp meow!<br>
-                </p>
+                <input id="enterName" type="text" placeholder="Enter Name" autocomplete="off" onkeyup="if(event.key === 'Enter') {(player.name = get('enterName').value); showNextInQueue();}">
+                <button id="submitName" onclick="if (setPlayerName(get('enterName').value)) {showNextInQueue();}">Confirm!</button>
             </div>
             <div id="sr1Unlocked" class="dailyMessage">
-                <button class="closeDailyMessage" onclick="showNextInQueue()">X</button>
+                <button class="closeDailyMessage" onclick="showNextInQueue()">❌</button>
                 <p class="dailyText">
-                    Hey! I notice you mined a Flawless tier ore!<br>
-                    I think there's something new for you to check out in the Portal Room, you should head on over there!
+                    Hey! I noticed you mined a Flawless tier ore!<br>
+                    I think there's something new for you to check out in Worlds!
+                </p>
+            </div>
+            <div id="uiUpdate" class="dailyMessage">
+                <button class="closeDailyMessage" onclick="showNextInQueue()">❌</button>
+                <p class="dailyText">
+                    The UI Overhaul is finally complete!<br>
+                    Almost every aspect of the game has had its design redone!!<br>
+                    Scroll to see everything :3<br><br>
+
+                    Misc. Changes:<br>
+                    <span style="font-size: min(2vh, 1vw);">
+                    - Stop on rare will not stop if the ore is automined, wont be 100% consistent depending on overlapping abilities.<br>
+                    - 8 New Ores<br>
+                    - Multiple new pickaxe icons<br>
+                    - Gave Gamblers Fallacy a new ability<br>
+                    - Added seeded generation<br>
+                    - Changed the webhook to be server based, learn more in the discord server!<br><br>
+                    </span>
+                    UI Changes:<br>
+                    <span style="font-size: min(2vh, 1vw);">
+                    - Revamped Entire Game UI<br>
+                    - Merged all messages into the topbar<br>
+                    - Message indicator to display if the current message is an event or an ore spawn<br>
+                    - Easy access to toggle the display<br>
+                    - Auto/Single mining toggle<br>
+                    - Made mine reset progress look cooler<br>
+                    - Redid variant inventories, also increases performance while looking better<br>
+                    - Redid crafting UI to allow you to view recipes and item information more easily<br>
+                    - Added a button to change what world items in the crafting list are from<br>
+                    - Added indicators to latest finds (mined/unmined/voided)<br>
+                    - Added the Silly Lounge to replace the menu (it's kind of like a budget afk mode, deletes lots of elements and stops lots of element updates)<br>
+                    - Redid game settings UI<br>
+                    - New setting, accurate speed, that should get most people up to their max speed with simulated rng on.<br>
+                    - Redid audio settings UI (I FINALLY GAVE MUSIC VOLUME STYLING OH MY GOD)<br>
+                    - Redid Data UI<br>
+                    - Redid Logs UI<br>
+                    - Heavily shortened log verification<br>
+                    - Redid Statistics UI, now includes all tiers and has x% and x/x for completion<br>
+                    - Redid Ore Index UI, easier to switch between worlds and select layers from said worlds. More accurate rarities with Simulated RNG, locked layers say [Research Required] before you are able to view them<br>
+                    - Redid Worlds UI, world information included, unlock requirement, and what works there (probably inaccurate)<br>
+                    - watr portal<br>
+                    - Added Milestones to replace the trophy room<br>
+                    - This serves as a kind of progression guide, and the old trophies are found at the end of their respective paths<br>
+                    - Redid Forge / Variant Conversion UI. Merged them into one page.<br>
+                    - Added more conversion options, should be helpful<br>
+                    - Tree Of Life now uses normal crafting!! yayayay!!<br>
+                    </span>
+
                 </p>
             </div>
         </div>
@@ -1440,4 +1030,8 @@
         <span class="eventMonths indexTextOutline"></span>
     </div>
 </div>
+<table id="spawnTemplate">
+
+</table>
+
 </body>

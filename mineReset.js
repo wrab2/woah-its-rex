@@ -14,7 +14,7 @@ function toSurface() {
         insertIntoLayers({"ore":"🐢","layers":["paperLayer"], "useLuck":true});
         insertIntoLayers({"ore":"🐰","layers":["paperLayer"], "useLuck":true});
         a13 = true;
-        typeWriter("<i>The air becomes hard to breathe as particle flow slows to a halt...</i>", get("spawnMessage"), true)
+        typeWriter("<i>The air becomes hard to breathe as particle flow slows to a halt...</i>", 3)
         document.getElementById("teleportButton").disabled = true;
         eventSpawn.currentTime = 0;
         eventSpawn.play();
@@ -34,7 +34,7 @@ function toSurface() {
     mine[curY][curX] = "⛏️";
     checkAllAround(curX, curY, 1);
     displayArea();
-    document.getElementById("resetNumber").innerHTML = blocksRevealedThisReset.toLocaleString() + "/" + mineCapacity.toLocaleString() + " Blocks Revealed This Reset";
+    document.getElementById("resetNumber").innerHTML = blocksRevealedThisReset.toLocaleString() + " Revealed.";
 }
 let resetting = false;
 function mineReset() {
@@ -55,5 +55,16 @@ function mineReset() {
     curX = 1000000;
     checkAllAround(curX, curY, 1);
     mine[curY][curX] = "⛏️";
+    for (let i = spawnsToSearch.length - 1; i >= 0; i--) {
+        if (spawnsToSearch[i].element) {
+            const e = spawnsToSearch[i].element;
+            e.children[0].children[2].textContent = "MINED: VOIDED";
+            e.classList.add("voidedLatestOre");
+            e.classList.remove("notMinedLatestOre");
+        }
+        spawnsToSearch.splice(i, 1);
+    }
+    removeProgressBar();
+    displayArea.lastPercent = -10;
     canMine = true;
 }

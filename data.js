@@ -92,7 +92,7 @@ function exportData() {
     else if (localStorage.getItem("newTestingData") !== null) data = localStorage.getItem("newTestingData");
     else data = !debug ? localStorage.getItem("playerData") : localStorage.getItem("testingData");
     data = JSON.parse(data)
-    if (data.player.serverHook !== undefined) delete data.player.serverHook;
+    if (data.player.webhookKey !== undefined) delete data.player.webhookKey;
     data = JSON.stringify(data);
     data = toBinary(data);
     let textField = document.getElementById("dataText");

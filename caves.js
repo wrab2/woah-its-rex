@@ -13,11 +13,7 @@ function checkValidLocation(x, y) {
 }
 function generateCave(x, y, type) {
     let rate = 1;
-    let caveRateModifier = 150;
-    if (player.gears["gear14"]) caveRateModifier += 100;
-    if (player.stats.currentPickaxe === "pickaxe12") caveRateModifier += 50;
-    if (player.powerupVariables.caveBoosts.active) caveRateModifier *= 2;
-    if (player.stats.currentPickaxe === "pickaxe33") caveRateModifier *= 3;
+    const caveRateModifier = verifiedOres.getCaveModifier();
     const thisCaveLuck = verifiedOres.getCaveLuck();
     if (type === undefined) {  
         type = getCaveType();
@@ -317,7 +313,8 @@ function generateCaveBlock(y, x, type, luck) {
             return;
         }
     }
-    let chosenValue = Math.random() / luck;
+    const caveVals = {rand: aleaRandom(), count: gameInfo.overallCount, seed: gameInfo.seed};
+    let chosenValue = caveVals.rand / luck;
     let probabilityTable;
     let arr;
     if (type === "currentLayer") {
@@ -362,8 +359,9 @@ function generateCaveBlock(y, x, type, luck) {
             if (oreList[blockToGive]["numRarity"] >= 750000) {
                 caveOreLocations.push({"X":x, "Y":y, "type":type, "caveMulti":multi});
             }
-            let variant = rollVariant();
-            if (player.gears["gear25"] && variant === 1) variant = rollVariant();
+            let vInfo = rollVariant();
+            if (player.gears["gear25"] && vInfo.v === 1) vInfo = rollVariant();
+            const variant = vInfo.v;
             const tier = oreList[blockToGive]["oreTier"];
             mine[y][x] = {ore: blockToGive, variant: variant};
             if (oolProbabilities[blockToGive] != undefined && type !== "abysstoneCave")
@@ -371,7 +369,7 @@ function generateCaveBlock(y, x, type, luck) {
             if (type === "abysstoneCave") adjRarity = 1/(gsProbabilities[caveList["abysstoneCave"].indexOf(blockToGive)]/1000)
             if (oreList[blockToGive]["numRarity"] >= 25000000 || adjRarity >= 250000000 || oreList[blockToGive]["hasLog"]) {
                 playSound(tier);
-                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, luck]);
+                verifiedOres.createLog(y,x,{ore: blockToGive, variant: variant}, new Error(), [true, getCaveMulti(type), type, luck], caveVals, vInfo);
                 verifiedOres.verifyLog(y, x);
             }
             if (messageIncluded(tier)) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: {"adjRarity" : adjRarity, "caveType" : type}, variant: variant});
@@ -383,13 +381,14 @@ function generateCaveBlock(y, x, type, luck) {
         }
     } else {
         if (oreList[blockToGive]["numRarity"] >= 750000) {
-            let variant = rollVariant();
-            if (player.gears["gear25"] && variant === 1) variant = rollVariant();
+            let vInfo = rollVariant();
+            if (player.gears["gear25"] && vInfo.v === 1) vInfo = rollVariant();
+            const variant = vInfo.v;
             const tier = oreList[blockToGive]["oreTier"];
             mine[y][x] = {ore: blockToGive, variant: variant};
             playSound(tier);
             if (oreList[blockToGive]["hasLog"]) {
-                verifiedOres.createLog(y, x, {ore: blockToGive, variant: variant}, new Error(), [false, 1]);
+                verifiedOres.createLog(y, x, {ore: blockToGive, variant: variant}, new Error(), [false, 1], caveVals, vInfo);
                 verifiedOres.verifyLog(y, x);
             }
             if (messageIncluded(tier)) spawnMessage({block: blockToGive, location: {"Y" : y, "X" : x}, caveInfo: undefined, variant: variant});
