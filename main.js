@@ -891,8 +891,22 @@ function updateInventory(m = true) {
     }
 
     //Make Sure TOL Isn't in W1, Make sure TOL is in SR1
-    if ((currentWorld === 1.1 && player.stats.currentPickaxe !== "pickaxe27") && !(player.gears["gear43"] && player.stats.currentPickaxe === "pickaxe33")) {player.stats.currentPickaxe = "pickaxe27"; utilitySwitchActions();}
-    else if ((currentWorld !== 1 || player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) && currentWorld !== 1.1) {player.stats.currentPickaxe = "pickaxe0"; utilitySwitchActions();}
+    if (player.stats.currentPickaxe === "pickaxe27" && currentWorld !== 1.1) {
+        if (currentWorld !== 1) {
+            player.stats.currentPickaxe = "pickaxe0"; 
+            utilitySwitchActions();
+        } else if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) {
+            player.stats.currentPickaxe = "pickaxe0"; 
+            utilitySwitchActions();
+        }
+    } else if (currentWorld === 1.1) {
+        if (player.stats.currentPickaxe !== "pickaxe27") {
+            if (!player.gears["gear43"] || player.stats.currentPickaxe !== "pickaxe33") {
+                player.stats.currentPickaxe = "pickaxe27"; 
+                utilitySwitchActions();
+            }
+        }
+    }
 
     //Check Powerup Contitions and Update Cooldowns
     checkAllConditions();
