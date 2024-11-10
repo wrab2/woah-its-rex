@@ -727,6 +727,7 @@ function loadNewData(data) {
         if (data.settings.favoritedElements !== undefined) {
             const list = data.settings.favoritedElements;
             for (let i = 0; i < list.length; i++) {
+                if (replacements[list[i]] !== undefined) list[i] = replacements[list[i]];
                 favoriteOre(get(`${list[i]}Holder`));
             }
         }
