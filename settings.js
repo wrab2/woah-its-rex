@@ -1050,7 +1050,7 @@ const portalLocations = {
     0.9: {
         title: "Galactica",
         desc: "The Endgame World!<br><br>All gears work here!<br><br>Undersea Eviscerator works here!<br><br>Unlock Requirement: Omnipotent God of The Mine!<br><br>\"<i>Sometimes when I look up into the sky, I can see cheese</i>\" - Remsy",
-        req: function() {return player.galacticaUnlocked;},
+        req: function() {return player.galacticaUnlocked || indexHasOre("Omnipotent God of The Mine") > 0;},
         to: 0.9,
         hue: "190deg",
         url: "galacticaImage.png"
