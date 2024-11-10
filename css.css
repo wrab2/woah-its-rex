@@ -85,7 +85,8 @@
   filter: drop-shadow(0.1vw 0.1vw 0.25vw black);
 }
 .craftingImage img {
-  height: 100%;
+  height: min(3vh, 1.5vw);
+  width: min(3vh, 1.5vw);
   margin-left: -1.75vw;
   margin-right: 0.5vw;
 }
