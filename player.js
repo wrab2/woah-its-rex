@@ -750,6 +750,7 @@ function loadNewData(data) {
         player.sr1Unlocked = data.sr1Unlocked;
         data.galacticaUnlocked ??= false;
         player.galacticaUnlocked = data.galacticaUnlocked;
+        if (indexHasOre("Omnipotent God of The Mine") > 0) player.galacticaUnlocked = true;
         //unlock locked features
         if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
         if (indexHasOre("🎂") || player.gears["gear9"]) document.getElementById("sillyRecipe").style.display = "block";

@@ -745,6 +745,7 @@ function prepareGalactica() {
     createMine();
     layerNum = 0;
     player.galacticaEntered = true;
+    player.galacticaUnlocked = true;
 }
 function prepareWatr() {
     allLayers = waterWorldLayers;
