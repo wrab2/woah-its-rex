@@ -1902,10 +1902,10 @@
 }
 #dailyMessages {
   position: absolute;
-  width: min(120vh,60vw);
-  height: min(20vw, 40vh);
-  left: min(40vh,20vw);
-  top: min(10vh,5vw);
+  width: 60vw;
+  height: min(20vw,40vh);
+  left: 20vw;
+  top: 10vh;
   display: block;
   z-index: 10000000;
   padding: 0;
