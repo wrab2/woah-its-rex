@@ -153,7 +153,9 @@ function aleaRandom() {
     }
     gameInfo.count++;
     gameInfo.overallCount++;
-    return rand();
+    let r = rand();
+    if (r === 0) aleaRandom();
+    else return r;
 }
 const generateBlock = function(location, wbm) {
     wbm ??= false;
