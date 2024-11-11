@@ -149,7 +149,7 @@ function aleaRandom() {
     if (gameInfo.count === gameInfo.loopLength) {
         gameInfo.count = 0
         gameInfo.loops += 123000;
-        rand = new PRNG.Alea(gameInfo.seed, gameInfo.loops);
+        rand = new PRNG.Alea(gameInfo.seed, gameInfo.loops).fract53;
     }
     gameInfo.count++;
     gameInfo.overallCount++;
