@@ -116,7 +116,7 @@ function init() {
                 gameInfo.overallCount = 0;
                 gameInfo.loops = 0;
                 gameInfo.seed = JSON.parse(text);
-                rand = new PRNG.Alea(gameInfo.seed, gameInfo.loops);
+                rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
           }))
           .catch((err) => {
             console.log("Failed To Generate Seed!")
@@ -124,7 +124,7 @@ function init() {
     }
 }
 function finishInit() {
-    rand = new PRNG.Alea(gameInfo.seed, gameInfo.loops);
+    rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
     gameInfo.count = 0;
     gameInfo.loops = 0;
     gameInfo.overallCount = 0;

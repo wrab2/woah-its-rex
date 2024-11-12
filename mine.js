@@ -134,7 +134,8 @@ function giveBlock(obj) {
     inventoryObj[obj.type] = 0;
 }
 function rollVariant() {
-    let vRand = {r:  Math.round(aleaRandom() * 499 + 1), c:gameInfo.count, s:gameInfo.seed, v: 1};
+    const r = aleaRandom();
+    let vRand = {r:  Math.round(r * 499 + 1), rand: r, count:gameInfo.count, seed:gameInfo.seed, v: 1};
     if (vRand.r === 1) {vRand.v = 4;} // 1:500
     else if (vRand.r <= 3) {vRand.v = 3;} // 1:250
     else if (vRand.r <= 13) {vRand.v = 2;} // 1:50
@@ -149,13 +150,11 @@ function aleaRandom() {
     if (gameInfo.count === gameInfo.loopLength) {
         gameInfo.count = 0
         gameInfo.loops += 123000;
-        rand = new PRNG.Alea(gameInfo.seed, gameInfo.loops).fract53;
+        rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
     }
     gameInfo.count++;
     gameInfo.overallCount++;
-    let r = rand();
-    if (r === 0) return aleaRandom();
-    else return r;
+    return rand();
 }
 const generateBlock = function(location, wbm) {
     wbm ??= false;

@@ -190,7 +190,7 @@ class secureLogs {
                 if (list[i - 1] !== undefined) times = list[i].genAt - list[i - 1].genAt;
                 else times = list[i].genAt;
                 if (times === 0) times = 1;
-                output += `<span><span style="font-size:0vw;">${encryptLogData(list[i], times)}</span><span onclick="copyText(this.parentElement.children[0]); copiedLog(this); return false;">Click Me To Copy Verification</span> | <span onclick="saveLogToStorage(decryptLogData(this.parentElement.children[0].textContent))">Click Me To Save Me</span></span><br>`
+                output += `<span><span style="font-size:0vw;">${encryptLogData(list[i], false)}</span><span onclick="copyText(this.parentElement.children[0]); copiedLog(this); return false;">Click Me To Copy Verification</span> | <span onclick="saveLogToStorage(decryptLogData(this.parentElement.children[0].textContent))">Click Me To Save Me</span></span><br>`
             }
             if (document.getElementById("generatedLogs") !== undefined) document.getElementById("generatedLogs").innerHTML = output;
     }
