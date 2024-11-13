@@ -434,7 +434,7 @@ function serverWebhook(log, mined, key) {
         "verification" : log.generationInfo,
     }
     if (log.variantInfo !== undefined) {
-        logObj["varVerification"] = {rand: log.variantInfo.rand, count: log.variantInfo.count, seed: log.variantInfo.seed};
+        logObj["varVerification"] = {"rand": log.variantInfo.r, "count": log.variantInfo.c, "seed": log.variantInfo.s};
     }
     fetch("https://endurable-fragrant-visitor.glitch.me", {
         method: "POST",

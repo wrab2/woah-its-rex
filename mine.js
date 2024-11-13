@@ -135,10 +135,10 @@ function giveBlock(obj) {
 }
 function rollVariant() {
     const r = aleaRandom();
-    let vRand = {r:  Math.round(r * 499 + 1), rand: r, count:gameInfo.count, seed:gameInfo.seed, v: 1};
-    if (vRand.r === 1) {vRand.v = 4;} // 1:500
-    else if (vRand.r <= 3) {vRand.v = 3;} // 1:250
-    else if (vRand.r <= 13) {vRand.v = 2;} // 1:50
+    let vRand = {rand:  Math.round(r * 499 + 1), r: r, c:gameInfo.count, s:gameInfo.seed, v: 1};
+    if (vRand.rand === 1) {vRand.v = 4;} // 1:500
+    else if (vRand.rand <= 3) {vRand.v = 3;} // 1:250
+    else if (vRand.rand <= 13) {vRand.v = 2;} // 1:50
     return vRand;
 }
 let cat = 1;
