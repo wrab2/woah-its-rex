@@ -430,7 +430,11 @@ function serverWebhook(log, mined, key) {
         "formattedTitle" : ` has found ${names[log.variant - 1]} ${oreList[log.block]["eId"] ? oreList[log.block]["eId"] : log.block} ${log.amt > 1 ? `(x${log.amt})` : ""}! ${log.caveInfo[1] > 1 ? `(${caveList[log.caveInfo[2]].slice(-1)} Cave)` : ""}`,
         "formattedLuck" : `${(Math.round(log.luck*1000)/1000).toLocaleString()}x`,
         "formattedEvent" : log.withEvent,
-        "rng" : log.rng
+        "rng" : log.rng,
+        "verification" : log.generationInfo,
+    }
+    if (log.variantInfo !== undefined) {
+        log["varVerification"] = {rand: log.variantInfo.rand, count: log.variantInfo.count, seed: log.variantInfo.seed};
     }
     fetch("https://endurable-fragrant-visitor.glitch.me", {
         method: "POST",
