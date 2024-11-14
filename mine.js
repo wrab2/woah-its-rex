@@ -134,8 +134,8 @@ function giveBlock(obj) {
     inventoryObj[obj.type] = 0;
 }
 function rollVariant() {
-    const r = aleaRandom();
-    let vRand = {rand:  Math.round(r * 499 + 1), r: r, c:gameInfo.count, s:gameInfo.seed, v: 1};
+    let vRand = {r: aleaRandom(), c:gameInfo.overallCount, s:gameInfo.seed, v: 1};
+    vRand.rand = Math.round(vRand.r * 499 + 1)
     if (vRand.rand === 1) {vRand.v = 4;} // 1:500
     else if (vRand.rand <= 3) {vRand.v = 3;} // 1:250
     else if (vRand.rand <= 13) {vRand.v = 2;} // 1:50
@@ -145,7 +145,7 @@ let cat = 1;
 let mainProbabilityTable;
 let mainGenerationTable;
 let lunaY = 1;
-const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠godOfTheMine";
+const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠godOfTheMine♾️";
 function aleaRandom() {
     if (gameInfo.count === gameInfo.loopLength) {
         gameInfo.count = 0
@@ -423,6 +423,7 @@ const checkSpecials = function(block, get) {
     let rand = 1000;
     if (block === "🔮") rand = 10000;
     if (block === "godOfTheMine") rand = 3;
+    if (block === "♾️") rand = 1000000000;
     if (Math.random() < 1/rand || get) {
         switch(block) {
             case "💙" : 
@@ -498,6 +499,9 @@ const checkSpecials = function(block, get) {
             break;
             case "godOfTheMine" :
                 if (player.stats.currentPickaxe === "pickaxe31") block = "Omnipotent God of The Mine";
+                break;
+            case "♾️":
+                block = "True Infinity";
                 break;
         }
     }

@@ -552,7 +552,7 @@ function displayRecipe(recipe) {
                 minedElem.style.height = "1.5vw";
                 revealedElem.textContent = `${formatNumber(treeInfo.revealed)}${nextInfo === undefined ? "" : ` -> ${formatNumber(nextInfo.revealed)}`} Ability Revealed.`;
                 rateElem.textContent = `1/${pickaxe.rate.toLocaleString()} Ability Activation Rate.`;
-                luckElem.textContent = `${formatNumber(treeInfo.luck)}${nextInfo === undefined ? "" : ` -> ${formatNumber(nextInfo.luck)}`} Ability Revealed.`;
+                luckElem.textContent = `${formatNumber(treeInfo.luck)}x${nextInfo === undefined ? "" : ` -> ${formatNumber(nextInfo.luck)}x`} Luck.`;
                 let blocksUsed = (treeInfo.mined > treeInfo.revealed ? treeInfo.mined : treeInfo.revealed);
                 let cons = blocksUsed * treeInfo.luck / pickaxe.rate;
                 consElem.textContent = `${(Math.round(cons*1000)/1000).toLocaleString()} Pickaxe Consistency.`;
@@ -2147,7 +2147,7 @@ const gearInformation = {
         tier: 1,
     },
     "gear14" : {
-        effect:"Enables cave spawns in World 2 and moderately increases cave size.<br>Currently, this will allow miners to obtain ores from World 1 that spawn in caves, this will be a thing until new cave types are made for World 2 (lol this isnt happening its been like 9 months).",
+        effect:"Enables cave spawns in World 2 and moderately increases cave size.",
         tier: 3,
         },
     "gear15" : {

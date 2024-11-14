@@ -579,6 +579,9 @@
 .currentCraftingWorld {
   box-shadow: inset 0px 0px 0.25vw #00FF23;
 }
+.currentIndexWorld {
+  box-shadow: inset 0px 0px 0.25vw #00FF23;
+}
 #loungeHolder {
   height: 100vh;
   width: 100vw;

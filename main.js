@@ -137,6 +137,7 @@ function finishInit() {
     utilitySwitchActions();
     if (player.settings.lastWorld !== 1) switchWorld(player.settings.lastWorld, true);
     else createMine();
+    addIndexLayers.current = String(currentWorld);
     addIndexLayers(String(currentWorld));
     createMilestones();
     inventoryTimer = setInterval(updateInventory, 500);
@@ -695,6 +696,8 @@ function switchInventory(num) {
         if (oreList[ore]["oreTier"] === "Infinitesimal") rarity = Infinity;
         else if (cave) rarity *= getCaveMultiFromOre(ore);
         rarity *= multis[num];
+        if (ore === "Goober") rarity = ":3";
+        if (ore === "luna2") rarity = "cronch";
         e.children[1].textContent = `1/${getNumFormat(rarity)}${cave ? "*" : ""}`;
         inventoryObj[ore] = 0;
     }
@@ -761,8 +764,10 @@ function createInventory() {
             if (propertyName === "luna2") rarity = "cronch";
             if (oreList[propertyName]["caveExclusive"]) {
                 rarity *= getCaveMultiFromOre(propertyName);
+                rarity *= multis[gameInfo.selectedInventory];
                 oreRarityBlock.innerText = "1/" + (rarity >= 1000000000000 ? formatNumber(rarity, 2) : rarity.toLocaleString()) + "*";
             } else {
+                if (!isNaN(rarity)) rarity *= multis[gameInfo.selectedInventory];
                 oreRarityBlock.innerText = "1/" + (rarity >= 1000000000000 ? formatNumber(rarity, 2) : rarity.toLocaleString());
             }
             oreRarityBlock.classList = "inventoryElement2";
@@ -1008,6 +1013,18 @@ function updateInventory(m = true) {
         checkAllAround(curX, curY); 
         displayArea();
     }
+    //Silly ore!
+    if (Math.random() < 1/4000000) {
+        spawnCatEye();
+    }
+}
+function spawnCatEye() {
+    let v = rollVariant();
+    if (player.gears["gear25"]) v = rollVariant();
+    const variant = v.v;
+    playerInventory["cateye"][variantInvNames[variant-1]]++;
+    typeWriter(oreList["cateye"]["spawnMessage"], 2);
+    inventoryObj["cateye"] = 0;
 }
 const blockAmts = [];
 let lastBlockAmt = 0;

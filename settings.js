@@ -185,17 +185,19 @@ function changeStopOnRare(button) {
 }
 function flashRed(element) {
     element.style.animation = "flashRed 1s linear 1";
-    setTimeout(() => {
+    element.onanimationend = () => {
         element.style.animation = "";
         element.value = "";
-    }, 1000);
+        element.onanimationend = undefined;
+    }
 }
 function flashGreen(element) {
     element.style.animation = "flashGreen 1s linear 1";
-    setTimeout(() => {
+    element.onanimationend = () => {
         element.style.animation = "";
         element.value = "";
-    }, 1000);
+        element.onanimationend = undefined;
+    }
 }
 //latestDisplay
 //inventoryDisplay
@@ -318,71 +320,36 @@ function randomFunction(ore, cause, elem) {
         if (ore === "🕳️")
             return;
         if (!shouldIgnore(ore) || indexHasOre(ore)) {
-            for (let i = 0; i < worldOneLayers.length; i++) {
-                if (layerList[worldOneLayers[i]].includes(ore)) {
-                    layer = worldOneLayers[i];
-                    world = 1;
-                    break;
-                }
-            }
-            if (layer === undefined) {
-                for (let i = 0; i < worldTwoLayers.length; i++) {
-                    if (layerList[worldTwoLayers[i]].includes(ore)) {
-                        layer = worldTwoLayers[i];
-                        world = 2;
-                        break;
+            for (const worldList in indexOrder) {
+                if (worldList !== "events") {
+                    const list = indexOrder[worldList];
+                    for (const layerIndex in list) {
+                        const toSearch = list[layerIndex].l;
+                        for (let i = 0; i < toSearch.length; i++) {
+                            if (caveList[toSearch[i]] !== undefined) {
+                                if (caveList[toSearch[i]].indexOf(ore) > -1 && ((ore === "estrogen???" || ore === "✡️") && toSearch[i] === "abysstoneCave")) {
+                                    layer = toSearch[i];
+                                    world = worldList;
+                                    break;
+                                }
+                            }
+                            else if (layerList[toSearch[i]].indexOf(ore) > -1) {
+                                layer = toSearch[i];
+                                world = worldList;
+                                break;
+                            }
+                        }
                     }
                 }
             }
-            if (layer === undefined) {
-                for (let i = 0; i < subRealmOneLayers.length; i++) {
-                    if (layerList[subRealmOneLayers[i]].includes(ore)) {
-                        layer = subRealmOneLayers[i];
-                        world = 1.1;
-                        break;
-                    }
-                }
-            }
-            if (layer === undefined) {
-                for (let i = 0; i < galacticaLayers.length; i++) {
-                    if (layerList[galacticaLayers[i]].includes(ore)) {
-                        layer = galacticaLayers[i];
-                        world = 0.9;
-                        break;
-                    }
-                }
-            }
-            if (layer === undefined) {
-                for (let cave in caveTypes) {
-                    if (caveList[cave].includes(ore)) {
-                        layer = cave;
-                        break;
-                    }
-                }
-            }
-            if (layer === undefined) {
-                for (let i = specialLayers.length - 1; i >= 0; i--) {
-                    if (layerList[specialLayers[i]].includes(ore)) {
-                        layer = specialLayers[i];
-                        break;
-                    }
-                }
-            }
-            if (layerList["worldOneCommons"].includes(ore)) {
-                layer = "worldOneCommons";
-                world = 1;
-            }
-            if (layerList["worldTwoCommons"].includes(ore)) {
-                layer = "worldTwoCommons";
-                world = 2;
-            }
-            
             if (layer != undefined) {
                 for (const s in indexOrder) {
                     for (const l in indexOrder[s]) {
                         if ((indexOrder[s][l].l.includes(layer)) && indexOrder[s][l].req()) {
                             toggleLounge();
                             if (showLoungeScreen.current !== "loungeOreIndex") showLoungeScreen("loungeOreIndex", document.querySelectorAll(".loungeMenuLocationButton")[6]);
+                            addIndexLayers.current = String(world);
+                            addIndexLayers(addIndexLayers.current);
                             createIndexCards(layer);
                             return;
                         }
@@ -477,12 +444,14 @@ function addIndexLayers(world) {
                     else if (world === "2") {
                         if (thisMat === "✖️") button.textContent = `${thisMat} ${8000}m`
                         else if (thisMat === "❌") button.textContent = `${thisMat} ${8001}-∞m`
-                        else button.textContent = `${thisMat} ${(i - 1) * 2000}-∞m`
+                        else button.textContent = `${thisMat} ${(i - 1) * 2000}m`
                     } else button.textContent = `${thisMat} ${i * 2000}m`
                 } else {
                     button.textContent = `${thisMat} ????m`
                 }
                 button.setAttribute("onclick", `createIndexCards("${list[i]}")`);
+                button.classList.add(`indexButton${list[i]}`);
+                if (createIndexCards.indexing === list[i]) button.classList.add("currentIndexWorld")
             } else {
                 button.textContent = "[Research Required]";
                 button.disabled = true;
@@ -508,6 +477,10 @@ function getIndexLayerOre(list) {
     return undefined;
 }
 function createIndexCards(layer) {
+    const r = document.getElementsByClassName("currentIndexWorld");
+    for (let i = 0; i < r.length; i++) r[i].classList.remove("currentIndexWorld");
+    const n = document.getElementsByClassName(`indexButton${layer}`);
+    if (n.length > 0) n[0].classList.add("currentIndexWorld");
     createIndexCards.indexing = layer;
     const h = get("loungeCardHolder");
     const ic = layer.indexOf("Commons") > -1

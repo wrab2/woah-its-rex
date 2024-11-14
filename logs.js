@@ -475,6 +475,10 @@ function copiedLog(element) {
     element.style.animation = "";
     setTimeout(() => {
         element.style.animation = "textGreen 1s linear 1";
+        element.onanimationend = () => {
+            element.style.animation = "";
+            element.onanimationend = undefined;
+        }
     }, 25);
 }
 function saveLogToStorage(log) {
