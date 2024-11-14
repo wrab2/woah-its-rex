@@ -1025,6 +1025,7 @@ function spawnCatEye() {
     playerInventory["cateye"][variantInvNames[variant-1]]++;
     typeWriter(oreList["cateye"]["spawnMessage"], 2);
     inventoryObj["cateye"] = 0;
+    playSound("Infinitesimal")
 }
 const blockAmts = [];
 let lastBlockAmt = 0;
