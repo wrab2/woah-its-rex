@@ -845,8 +845,9 @@ function loadNewData(data) {
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
-        const anniversaryData = JSON.parse(localStorage.getItem("sillyCavernsAnniversaryData"));
+        let anniversaryData = localStorage.getItem("sillyCavernsAnniversaryData");
         if (anniversaryData !== null) {
+            anniversaryData = JSON.parse(anniversaryData);
             if (anniversaryData["hk"] && indexHasOre("First Anniversary Cake") === 0) playerInventory["First Anniversary Cake"][variantInvNames[smallVariantRoll()]]++;
             if (anniversaryData["sf"] && indexHasOre("Sakura") === 0) playerInventory["Sakura"][variantInvNames[smallVariantRoll()]]++;
             if (anniversaryData["p8"] && indexHasOre("Hyper") === 0) playerInventory["Hyper"][variantInvNames[smallVariantRoll()]]++;
