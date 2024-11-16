@@ -655,8 +655,7 @@ function attemptSwitchWorld(to) {
     if (to === 1.1 && player.sr1Unlocked && currentWorld !== 1.1) {switchWorld(1.1); return;}
     if (to === 1 && currentWorld !== 1) {switchWorld(1); return;}
     if (to === 1.2 && currentWorld !== 1.2) {switchWorld(1.2); return;}
-    if (to === 0) {showTrophyRoom(true); return;}
-    if (to === 0.9 && player.galacticaUnlocked || indexHasOre("Omnipotent God of The Mine") > 0) {switchWorld(0.9); return;}
+    if (to === 0.9 && (player.galacticaUnlocked || indexHasOre("Omnipotent God of The Mine") > 0)) {switchWorld(0.9); return;}
     if (to === 11252023) {
         goToAnniversary();
     }
@@ -853,4 +852,20 @@ function removeParadoxical() {
     }
     updateSpeed();
     saveNewData({override: undefined, return: false});
+}
+function goToAnniversary() {
+    const anniversaryData = localStorage.getItem("sillyCavernsAnniversaryData");
+    if (anniversaryData === null || anniversaryData === undefined) {
+        localStorage.setItem("sillyCavernsAnniversaryData", JSON.stringify({sf: false, p8: false, hk: false}));
+    }
+    clearInterval(dataTimer);
+    clearInterval(sinceLastAutosaveTimer);
+    clearInterval(limitedTimer);
+    clearInterval(inventoryTimer);
+    clearInterval(loopTimer);
+    clearInterval(secondaryTimer);
+    clearInterval(displayTimer);
+    if (musicPlayer.currentSong !== undefined) musicPlayer["songs"][musicPlayer.currentSong].src.pause();
+    keepRunningAudio.pause();
+    document.body.innerHTML = '<iframe src="https://ambercatgirl.github.io/silly-caverns-anniversary-event/" title="The Silly Caverns" style="width:100vw; height:100vh; overflow:hidden;"></iframe>';
 }

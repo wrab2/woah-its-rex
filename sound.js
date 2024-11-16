@@ -93,7 +93,6 @@ function changeCanPlay(name, button) {
     player.settings.audioSettings[name].canPlay = !player.settings.audioSettings[name].canPlay;
 }
 
-
 function playSound(type, special) {
     oldType = type;
     if (special === "catgirl") {osaka.currentTime = 0; osaka.play();}
@@ -106,7 +105,6 @@ function playSound(type, special) {
             allAudios[type].play();
         } 
     }
-    
     if ((player.settings.doSpawnEffects && oreInformation.tierGrOrEqTo({"tier1":type, "tier2": "Interstellar"}) && (player.currentEffect === '' ? true : (oreInformation.tierGrOrEqTo({"tier1":type, "tier2":player.currentEffect})))) && messageIncluded(type)) {
         let timeoutAmt = 0;
         if (document.getElementById("blockContainer").style.animation !== "") {
@@ -116,7 +114,7 @@ function playSound(type, special) {
         if (document.getElementById("blockDisplay").style.animation !== "")
             document.getElementById("blockDisplay").style.animation = "";
         type = oldType;
-        setTimeout(() => {
+        playSoundTimeout = setTimeout(() => {
             document.getElementById("blockContainer").style.animation = oreInformation.getEffectByTier(type); 
             let shakeReps = 4;
             if (type === "Polychromatical") shakeReps = 8;

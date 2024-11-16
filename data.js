@@ -226,7 +226,7 @@ function cloudSave(data,forceCloudSave) {
 
 	}
 }
-
+let sinceLastAutosaveTimer;
 window.addEventListener("message", e => {
 	if (e.origin === cloudsaving.website_name) {
 		//this is the initial message
@@ -271,5 +271,7 @@ window.addEventListener("message", e => {
 				}
 			}
 		}
-	}
+	} else if (e.origin === "https://ambercatgirl.github.io") {
+        localStorage.setItem("sillyCavernsAnniversaryData", e.data);
+    }
 })

@@ -836,11 +836,7 @@ function loadNewData(data) {
         else {
             if (Date.now() >= new Date("October 1, 2024").getTime()) {
                 if (indexHasOre("YourReward") < 1) {
-                    let variant = 0;
-                    let variantRoll = Math.random();
-                    if (variantRoll < 1/30) variant = 3;
-                    else if (variantRoll < 1/15) variant = 2;
-                    else if (variantRoll < 1/3) variant = 1;
+                    let variant = smallVariantRoll();
                     playerInventory["YourReward"][variantInvNames[variant]]++;
                     inventoryObj["YourReward"] = 0;
                 }
@@ -849,12 +845,29 @@ function loadNewData(data) {
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
+        const anniversaryData = JSON.parse(localStorage.getItem("sillyCavernsAnniversaryData"));
+        if (anniversaryData !== null) {
+            if (anniversaryData["hk"] && indexHasOre("First Anniversary Cake") === 0) playerInventory["First Anniversary Cake"][variantInvNames[smallVariantRoll()]]++;
+            if (anniversaryData["sf"] && indexHasOre("Sakura") === 0) playerInventory["Sakura"][variantInvNames[smallVariantRoll()]]++;
+            if (anniversaryData["p8"] && indexHasOre("Hyper") === 0) playerInventory["Hyper"][variantInvNames[smallVariantRoll()]]++;
+            inventoryObj["First Anniversary Cake"] = 0;
+            inventoryObj["Sakura"] = 0;
+            inventoryObj["Hyper"] = 0;
+        }
         updateInventory(false);
+        
         try {
             beSilly.init();
         } catch (err) {
 
         }
+}
+function smallVariantRoll() {
+    let variantRoll = Math.random();
+    if (variantRoll < 1/30) return 3;
+    else if (variantRoll < 1/15) return 2;
+    else if (variantRoll < 1/3) return 1;
+    return 0;
 }
 beSilly = {
     isPlayer(name) {
@@ -921,8 +934,11 @@ const dailyMessages = {
         showUntil : "June 25, 0000",
     },
     "uiUpdate" : {
-        showUntil : "December 1, 2025",
+        showUntil : "December 1, 2024",
     },
+    "theAnniversary" : {
+        showUntil : "December 31, 2024",
+    }
 }
 function checkMessages(message) {
     if (message === "newPlayer" && player.faqOffered) return;
