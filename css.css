@@ -209,6 +209,7 @@
   left: min(2vh,1vw);
   width: min(48vh,24vw);
   height: min(42vh,21vw);
+  max-height: min-content;
   border-radius: min(2vh,1vw);
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
   background-color: var(--main-lbg-color);
@@ -303,6 +304,7 @@
 #newCraftingRecipeHolder {
   width: 100%;
   height: min(29.2vh,14.6vw);
+  max-height: min-content;
   overflow: auto;
   line-height: 100%;
   border-top: min(0.4vh,0.2vw) solid var(--main-border-color);
@@ -323,7 +325,7 @@
   width: min(48vh,24vw);
   left: 0vw;
   top: min(25.4vh,12.7vw);
-  height: min(37.8vh,18.9vw);
+  max-height: min(37.8vh,18.9vw);
   background-color: var(--main-bg-color);
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
   border-radius: min(1vh,0.5vw);
@@ -437,6 +439,7 @@
   background-color: var(--main-bg-color);
   border: none;
   border-right: 0.2vw solid var(--main-border-color);
+	border-top-left-radius: min(2vh, 1vw);
 }
 #collapseRecipe span span{
   background-image: url(media/downone.png);
