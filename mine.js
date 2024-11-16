@@ -865,7 +865,7 @@ function goToAnniversary() {
     clearInterval(loopTimer);
     clearInterval(secondaryTimer);
     clearInterval(displayTimer);
-    if (musicPlayer.currentSong !== undefined) musicPlayer["songs"][musicPlayer.currentSong].src.pause();
+    if (musicPlayer["songs"][musicPlayer.currentSong] !== undefined) musicPlayer["songs"][musicPlayer.currentSong].src.pause();
     keepRunningAudio.pause();
     document.body.innerHTML = '<iframe src="https://ambercatgirl.github.io/silly-caverns-anniversary-event/" title="The Silly Caverns" style="width:100vw; height:100vh; overflow:hidden;"></iframe>';
 }
