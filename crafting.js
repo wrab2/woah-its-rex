@@ -631,7 +631,7 @@ function pinRecipe() {
     newPin.appendChild(get("lockRecipe"));
     newPin.appendChild(get("pinAndCraft"));
     newPin.appendChild(get("newCraftingRecipeHolder"));
-    newPin.appendChild(get("estimatedTimeHolder"));
+    newPin.appendChild(get("estimatedTime"));
     document.body.appendChild(newPin);
     get("pinRecipe").style.display = "none";
     get("unpinRecipe").style.display = "block";
@@ -644,8 +644,8 @@ function pinRecipe() {
     dragElement(get("pinnedRecipeHolder"));
     const locs = get("craftingContainer").getBoundingClientRect();
     get("craftingContainer").style.display = "none";
-    newPin.style.top = (locs.y) + "px";
-    newPin.style.left = (locs.right - locs.width) + "px";
+    newPin.style.top = (locs.top) * (100/document.documentElement.clientHeight)+"vh";
+    newPin.style.left = (locs.left) * (100/document.documentElement.clientWidth)+"vw";
     pinInformation.pinned = currentRecipeId;
 }
 function unpinRecipe() {
@@ -657,7 +657,7 @@ function unpinRecipe() {
     oldParent.appendChild(get("lockRecipe"));
     oldParent.appendChild(get("pinAndCraft"));
     oldParent.appendChild(get("newCraftingRecipeHolder"));
-    oldParent.appendChild(get("estimatedTimeHolder"));
+    oldParent.appendChild(get("estimatedTime"));
     get("pinRecipe").style.display = "block";
     get("unpinRecipe").style.display = "none";
     get("newCraftingHolderheader").style.display = "none";
@@ -718,38 +718,39 @@ function toggleExtraInformation() {
 }
 function collapseRecipe() {
     if (pinInformation.collapsed) {
+      //fold
         pinInformation.collapsed = false;
-        get("newCraftingRecipeHolder").style.display = "block";
+        get("newCraftingRecipeHolder").style.height = "min(29.2vh,14.6vw)";
         get("pinnedRecipeHolder").style.height = "min(42vh, 21vw)";
-        get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/upone.png')";
-        const textEdit = get("collapseRecipe").children[0];
-        textEdit.innerHTML = textEdit.innerHTML.replace("Expand", "Collapse");
-    } else {
-        pinInformation.collapsed = true;
-        get("newCraftingRecipeHolder").style.display = "none";
-        get("pinnedRecipeHolder").style.height = "min(8.8vh,4.4vw)";
         get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/downone.png')";
         const textEdit = get("collapseRecipe").children[0];
         textEdit.innerHTML = textEdit.innerHTML.replace("Collapse", "Expand");
+    } else {
+      //unfold
+        pinInformation.collapsed = true;
+        get("newCraftingRecipeHolder").style.height = "100%";
+        get("pinnedRecipeHolder").style.height = "min-content";
+        get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/upone.png')";
+        const textEdit = get("collapseRecipe").children[0];
+        textEdit.innerHTML = textEdit.innerHTML.replace("Expand", "Collapse");
     }
     
 }
 //i copy pasted all this shit lol
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    document.getElementById(elmnt.id + "header").onpointerdown = dragMouseDown;
-  } else {
-    elmnt.onpointerdown = dragMouseDown;
-  }
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  let el = get("newCraftingHolderheader")
+  el.onpointerdown = dragMouseDown;
 
   function dragMouseDown(e) {
+    el.classList.add("held")
     e = e || window.event;
     e.preventDefault();
     pos3 = e.clientX;
     pos4 = e.clientY;
-    document.onpointerup = closeDragElement;
-    document.onpointermove = elementDrag;
+    el.onpointerup = closeDragElement;
+    el.onpointerout = closeDragElement;
+    el.onpointermove = elementDrag;
   }
 
   function elementDrag(e) {
@@ -766,8 +767,10 @@ function dragElement(elmnt) {
   }
 
   function closeDragElement() {
-    document.onpointerup = null;
-    document.onpointermove = null;
+    el.classList.remove("held")
+    el.onpointerup = null;
+    el.onpointerout = null;
+    el.onpointermove = null;
   }
 }
 function removeRecipeElements() {
@@ -923,10 +926,10 @@ function createOreElement(have, need, ore) {
     if (oreList[ore]["hasImage"]) {
         htmlOutput += `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></span>`;
     } else {
-        htmlOutput += `${ore} `;
+        htmlOutput += `${ore}`;
     }
     if (have !== undefined) {
-        htmlOutput += `${have > 1000000000000 ? formatNumber(have, 3) : have.toLocaleString()}/`;
+        htmlOutput += ` ${have > 1000000000000 ? formatNumber(have, 3) : have.toLocaleString()}/`;
     }
     htmlOutput += `${need > 1000000000000 ? formatNumber(need, 3) : need.toLocaleString()}`;
     recipeElement.innerHTML = htmlOutput;

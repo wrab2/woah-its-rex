@@ -1167,11 +1167,12 @@ sillyKittyCat.lunaType = "C";
 function toggleHideCompleted() {
     if (player.settings.hideCompleted) {
         player.settings.hideCompleted = false;
-        get("hideCompleted").style.backgroundColor = "#FF3D3D";
+        get("hideCompleted").style.filter = "";
     } else {
         player.settings.hideCompleted = true;
-        get("hideCompleted").style.backgroundColor = "#6BC267";
+        get("hideCompleted").style.filter = "invert(56%) sepia(33%) saturate(6891%) hue-rotate(89deg) brightness(123%) contrast(125%)";
     }
+    updateActiveRecipe()
 }
 //lounge stuff down here
 function updateLoungeStats() {
