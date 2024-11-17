@@ -84,11 +84,12 @@
   margin-left: 0.75vw;
   filter: drop-shadow(0.1vw 0.1vw 0.25vw black);
 }
+.craftingImage {
+  width: min(3vh, 1.5vw);
+}
 .craftingImage img {
   height: min(3vh, 1.5vw);
   width: min(3vh, 1.5vw);
-  margin-left: -1.75vw;
-  margin-right: 0.5vw;
 }
 .movementButton {
   width:20%;
@@ -208,12 +209,12 @@
   left: min(2vh,1vw);
   width: min(48vh,24vw);
   height: min(42vh,21vw);
+  max-height: min-content;
   border-radius: min(2vh,1vw);
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
   background-color: var(--main-lbg-color);
   display: inline-flex;
   flex-wrap: wrap;
-  overflow: hidden;
   z-index: 100;
 }
 .newCraftingText {
@@ -303,6 +304,7 @@
 #newCraftingRecipeHolder {
   width: 100%;
   height: min(29.2vh,14.6vw);
+  max-height: min-content;
   overflow: auto;
   line-height: 100%;
   border-top: min(0.4vh,0.2vw) solid var(--main-border-color);
@@ -323,7 +325,7 @@
   width: min(48vh,24vw);
   left: 0vw;
   top: min(25.4vh,12.7vw);
-  height: min(37.8vh,18.9vw);
+  max-height: min(37.8vh,18.9vw);
   background-color: var(--main-bg-color);
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
   border-radius: min(1vh,0.5vw);
@@ -333,6 +335,20 @@
   z-index: 21;
   margin-left: min(-0.1vh, -0.05vw);
   margin-top: min(-0.1vh, -0.05vw);
+}
+#HideCompleted {
+  position: absolute;
+  left: 0px;
+  width: min(4vh,2vw);
+  height: min(4vh,2vw);
+  background:none;
+  border: none;
+  background-image: url('media/hide.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#estimatedTime {
+  width: 100%;
 }
 #estimatedTimeHolder {
   width: 100%;
@@ -369,9 +385,18 @@
   background-position: center;
   touch-action: none;
   width: 25%;
+  cursor: move;
 }
 #newCraftingHolderheader:hover {
   background-color: var(--main-hl-color);
+}
+#newCraftingHolderheader.held::before {
+  content: " ";
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  z-index: 21;
+  margin: -150px -150px;
 }
 #unpinRecipe {
   background-image: url(media/returnIcon.png);
@@ -414,9 +439,10 @@
   background-color: var(--main-bg-color);
   border: none;
   border-right: 0.2vw solid var(--main-border-color);
+	border-top-left-radius: min(2vh, 1vw);
 }
 #collapseRecipe span span{
-  background-image: url(media/upone.png);
+  background-image: url(media/downone.png);
   background-position: right;
   background-repeat: no-repeat;
   position: absolute;
@@ -2068,6 +2094,7 @@
   border: none;
   margin: 0;
   width: 100%;
+  white-space: pre;
 }
 #displayRecipe {
   margin-top: -0.25vw;

@@ -121,7 +121,6 @@
                 <button class="gameSetting toggledOff" onclick="toggleAccurateSpeed(this);" id="toggleAccurateSpeed">Accurate Speed</button>
                 <button class="gameSetting toggledOn" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
                 <button class="gameSetting toggledOn" onclick="switchToIndex(this, 1)" id="craftIndex">Travel to layer index on crafting click</button>
-                <button class="gameSetting toggledOff" onclick="toggleHideCompleted(this)" id="hideCompleted">Hide Completed Recipe Ores</button>
                 <button class="gameSetting toggledOff" onclick="switchFont();" id="switchFont">Use Different Emojis (for improper display)</button>
                 <button class="gameSetting toggledOn" onclick="toggleCaves();" id="caveToggle">Toggle Caves</button>
                 <button class="gameSetting toggledOn" onclick="toggleSpawnEffects(this);" id="spawnEffects">Spawn Effects Enabled</button>
@@ -734,7 +733,10 @@
                 </div>
                 
                 <div id="newCraftingRecipeHolder"></div>
-                <p id="estimatedTimeHolder">Time Goes Here</p>
+                <div id="estimatedTime">
+                  <button id="hideCompleted" onclick="toggleHideCompleted()"></button>
+                  <p id="estimatedTimeHolder">Time Goes Here</p>
+                </div>
             </div>
             <div id="newCraftingHolder">
                 <p id="newCraftingName" class="newCraftingText">Pickaxe Name</p>
@@ -755,7 +757,7 @@
                     <p id="newCraftingGearDescription" class="newCraftingText">Effect:</p>
                     <p id="newCraftingGearEffect" class="newCraftingText"></p>
                 </div>
-                <button id="collapseRecipe" onclick="collapseRecipe()"><span>Collapse<span></span></span></button>
+                <button id="collapseRecipe" onclick="collapseRecipe()"><span>Expand<span></span></span></button>
                 <button id="lockRecipe" onclick="lockRecipe()">Unlocked</button>
 
         </div>
