@@ -272,6 +272,12 @@ window.addEventListener("message", e => {
 			}
 		}
 	} else if (e.origin === "https://ambercatgirl.github.io") {
-        localStorage.setItem("sillyCavernsAnniversaryData", e.data);
+        try {
+            const isCorrectData = JSON.parse(e.data);
+            if (Object.keys(isCorrectData).length === 3) localStorage.setItem("sillyCavernsAnniversaryData", e.data);
+        } catch (err) {
+            localStorage.setItem("sillyCavernsAnniversaryData", JSON.stringify({hk: false, p8:false, sf: false}));
+        }
+
     }
 })

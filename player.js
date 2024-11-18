@@ -847,13 +847,18 @@ function loadNewData(data) {
         showNextInQueue();
         let anniversaryData = localStorage.getItem("sillyCavernsAnniversaryData");
         if (anniversaryData !== null) {
-            anniversaryData = JSON.parse(anniversaryData);
-            if (anniversaryData["hk"] && indexHasOre("First Anniversary Cake") === 0) playerInventory["First Anniversary Cake"][variantInvNames[smallVariantRoll()]]++;
-            if (anniversaryData["sf"] && indexHasOre("Sakura") === 0) playerInventory["Sakura"][variantInvNames[smallVariantRoll()]]++;
-            if (anniversaryData["p8"] && indexHasOre("Hyper") === 0) playerInventory["Hyper"][variantInvNames[smallVariantRoll()]]++;
-            inventoryObj["First Anniversary Cake"] = 0;
-            inventoryObj["Sakura"] = 0;
-            inventoryObj["Hyper"] = 0;
+            try {
+                anniversaryData = JSON.parse(anniversaryData);
+                if (anniversaryData["hk"] && indexHasOre("First Anniversary Cake") === 0) playerInventory["First Anniversary Cake"][variantInvNames[smallVariantRoll()]]++;
+                if (anniversaryData["sf"] && indexHasOre("Sakura") === 0) playerInventory["Sakura"][variantInvNames[smallVariantRoll()]]++;
+                if (anniversaryData["p8"] && indexHasOre("Hyper") === 0) playerInventory["Hyper"][variantInvNames[smallVariantRoll()]]++;
+                inventoryObj["First Anniversary Cake"] = 0;
+                inventoryObj["Sakura"] = 0;
+                inventoryObj["Hyper"] = 0;
+            } catch (err) {
+                localStorage.setItem("sillyCavernsAnniversaryData", JSON.stringify({hk: false, p8:false, sf: false}));
+            }
+
         }
         updateInventory(false);
         
