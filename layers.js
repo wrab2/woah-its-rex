@@ -1105,7 +1105,7 @@ const limitedOres = {
         "timeType" : "month",
         "timeValues" : [11]
     },
-    "⛄": {
+    "🪷": {
         "layers" : ["rockLayer"],
         "timeType" : "month",
         "timeValues" : [11]
