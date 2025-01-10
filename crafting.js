@@ -1168,7 +1168,7 @@ function showGears() {
     let list;
     list = showOrders[`p${toggleCraftingWorld.world}`]
     for (let i = 0; i < list.length; i++) {
-        getButtonByName(list[i]).style.display = "flex";
+        showItem(list[i])
     }
     get("nullChroma").style.display = "none";
     setListHeight();

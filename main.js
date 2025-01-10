@@ -2054,6 +2054,8 @@ const polyIds = {
     "orbOfSound" : "gear42",
     "orbOfTheUnknown" : "gear43",
     "orbOfCreation" : "gear44",
+    "orbOfFlight" : "pickaxe36",
+    "orbOfFire" : "gear48",
 }
 function checkPolys() {
     const polys = Object.keys(polyLocations);
