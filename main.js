@@ -85,9 +85,7 @@ function init() {
             document.getElementById("topMessages").innerText = "Happy Birthday " + birthdays[propertyName] + "!!!";
         }
     }
-    if (Date.now() > new Date("November 15 2024").getTime() && Date.now() < new Date("December 31 2024").getTime()) {
-        portalLocations[11252023] = {title: "Silly Caverns Anniversary",desc: "The event world for the silly caverns anniversary.<br>More details unknown, further research required.<br>Available Until: Jan 1, 2025<br>NOTE: THIS REDIRECTS YOU OFF THE MAIN GAME<br><br>?????? works here?<br><br>?????? works here?<br><br>Unlock Requirement: N/A<br><br>Goals: Mine 100K Blocks, Mine 1 Zenith Ore, Craft Pickaxe 8",req: function() {return true;},to: 11252023,hue: "-90deg",url: "ores/NYERD.webp"}
-    }
+    portalLocations[11252023] = {title: "Silly Caverns Anniversary",desc: "The event world for the silly caverns anniversary.<br>More details unknown, further research required.<br>Available Until: FOREVER NOW NYERDS<br>NOTE: THIS REDIRECTS YOU OFF THE MAIN GAME<br><br>?????? works here?<br><br>?????? works here?<br><br>Unlock Requirement: N/A<br><br>Goals: Mine 100K Blocks, Mine 1 Zenith Ore, Craft Pickaxe 8",req: function() {return true;},to: 11252023,hue: "-90deg",url: "ores/NYERD.webp"}
     fetch("emoji.json")
     .then((response) => response.json())
     .then((json) => setEmojiNames(json))
@@ -858,6 +856,7 @@ let lastXCheck = Date.now();
 let resetAddX = 0;
 let displayTimer = null;
 let smallDisplay = false;
+let ChangeSessionLuck = Date.now();
 const thisUniqueId = Math.floor(Math.random() * 100000000000) + Math.floor(Math.random() * 100000000000);
 let idSet = false;
 function updateInventory(m = true) {
@@ -1016,8 +1015,15 @@ function updateInventory(m = true) {
         checkAllAround(curX, curY); 
         displayArea();
     }
+
+    //Increase luck based on session time with the poly
+    if (Date.now() > ChangeSessionLuck) {
+        verifiedOres.checkSessionTimeForLuck();
+        ChangeSessionLuck = Date.now() + 60000;
+    }
+
     //Silly ore!
-    if (Math.random() < 1/4000000) {
+    if (Math.random() < 1/10000000) {
         spawnCatEye();
     }
 }
@@ -2039,6 +2045,8 @@ const polyLocations = {
     "orbOfSound" : "fluteLayer",
     "orbOfTheUnknown" : "borderLayer",
     "orbOfCreation" : "nebulaLayer",
+    "orbOfFlight" : "cloudLayer",
+    "orbOfFire" : "cactusLayer"
 }
 const polyIds = {
     "orbOfLife" : "gear40",

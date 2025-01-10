@@ -558,6 +558,20 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#pickaxeOfFlight span{
+    background: linear-gradient(to right,#403330 5%, #2c8769, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringOfFire span{
+    background: linear-gradient(to right,#403330 5%, #2b1660, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #superclusterCapsizer span{
     background: linear-gradient(to right,#2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769);
     -webkit-background-clip: text;

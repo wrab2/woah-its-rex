@@ -187,6 +187,15 @@ const recipes = {
         active : [],
         pUnob: true
     },
+    "pickaxe36": {
+        name: "Pickaxe of Flight",
+        recipe: [{"ore": "orbOfFlight", "amt": 1}],
+        active : [],
+        req: function() {
+            return player.p.orbOfFlight;
+        },
+        pUnob: true
+    },
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
@@ -450,6 +459,15 @@ const recipes = {
         recipe: [{"ore":"🎁","amt":2500000000},{"ore":"🎮","amt":53100},{"ore":"🎫","amt":44400},{"ore":"🚗","amt":28800},{"ore":"📢","amt":5310},{"ore":"🎑","amt":3960},{"ore":"📿","amt":1310},{"ore":"🎎","amt":600},{"ore":"🗳️","amt":400},{"ore":"⚛️","amt":100},{"ore":"🛢️","amt":30}],
         active : [0.9, 1, 1.2, 1.1, 2],
     },
+    "gear48": {
+        name: "Ring of Fire",
+        recipe: [{"ore": "orbOfFire", "amt": 1}],
+        active : [0.9, 1, 1.2, 1.1, 2],
+        req: function() {
+            return player.p.orbOfFire;
+        },
+        pUnob: true
+    },
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
     let layer = [];
@@ -570,7 +588,7 @@ function displayRecipe(recipe) {
                 }
             }
         } else {
-            get("newCraftingHolder").style.height = "min(28vh,14vw)";
+            get("newCraftingHolder").style.height = "min(26vh,13vw)";
             get("craftingContainer").style.top = `min(${2*origins["gear"].top}vh,${origins["gear"].top}vw)`;
             get("craftingContainer").style.left = `min(${2*origins["gear"].left}vh,${origins["gear"].left}vw)`;
             get("craftingContainer").style.borderBottomLeftRadius = `0.5vw`;
@@ -926,7 +944,7 @@ function createOreElement(have, need, ore) {
     if (oreList[ore]["hasImage"]) {
         htmlOutput += `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></span>`;
     } else {
-        htmlOutput += `${ore}`;
+        htmlOutput += `${ore} `;
     }
     if (have !== undefined) {
         htmlOutput += ` ${have > 1000000000000 ? formatNumber(have, 3) : have.toLocaleString()}/`;
@@ -979,7 +997,7 @@ const buttonGradients = {
     "pickaxe33Craft" : {"gradient" : "linear-gradient(to right, #0d3dc3, #aafd0a, #c96709, #aafd0a, #0d3dc3)","applied" : false},
     "pickaxe34Craft" : {"gradient" : "linear-gradient(to right, #2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769)","applied" : false},
     "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
-    
+    "pickaxe36Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "gear1Craft" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
@@ -1029,7 +1047,8 @@ const buttonGradients = {
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
-
+    "gear48Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #000000, #403330 95%)","applied" : false},
+    
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
@@ -1123,8 +1142,8 @@ const showOrders = {
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
-    "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "gear42", "gear43", "gear44"]
+    "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "gear42", "gear43", "gear44", "gear48"]
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -2091,6 +2110,20 @@ const pickaxeStats = {
         tier: 13,
         icon: "",
     },
+    "pickaxe36" : {
+        mined: 7500000,
+        revealed: 1,
+        luck: 10000,
+        rate: 1000,
+        src : "⛏️",
+        ability: "",
+        doAbility: function(x, y) {},
+        canSpawnCaves:[1, 1.2, 2, 0.9],
+        canMineIn:[1, 1.2, 2, 0.9],
+        isDimensional: true,
+        tier: 14,
+        icon: "",
+    },
 }
 const gearInformation = {
     "gear0" : {
@@ -2254,7 +2287,7 @@ const gearInformation = {
         tier: 10,
     },
     "gear40" : {
-        effect:"1.5x Base Luck<br><i>Where my life began...</i>",
+        effect:"Multiplies base luck by 1.5x<br><i>Where my life began...</i>",
         tier: 11,
     },
     "gear41" : {
@@ -2262,7 +2295,7 @@ const gearInformation = {
         tier: 12,
     },
     "gear42" : {
-        effect:"Guaranteed 2x of every tier until Hyperdimensional<br><i>I hear strange music...</i>",
+        effect:"Uncapped +0.01x luck for every Hyperdimensional Tier ore owned<br><i>I hear strange music...</i>",
         tier: 13,
     },
     "gear43" : {
@@ -2270,7 +2303,7 @@ const gearInformation = {
         tier: 10,
     },
     "gear44" : {
-        effect:"+50 Movement Repetitions, ??????????????????<br><i>This place birthed the stars in the sky...</i>",
+        effect:"+50 Movement Repetitions<br><i>This place birthed the stars in the sky...</i>",
         tier: 14,
     },
     "gear45" : {
@@ -2284,6 +2317,10 @@ const gearInformation = {
     "gear47" : {
         effect:"+0.45x offline progress rewards.",
         tier: 0,
+    },
+    "gear48" : {
+        effect:"Uncapped Luck * (Session time in minutes * 0.01) +1<br><i>It's so hot here...</i>",
+        tier: 14,
     },
 }
 function ct() {

@@ -39,16 +39,18 @@ class playerTemplate {
             "gear35": false,
             "gear36": false,
             "gear37": false,
-            "gear38": false, //random every minute, 1.4x luck or 2x proc rate or +25 reps
-            "gear39": false, //0.5x ability proc rate, 1.75x simulated generation amt
+            "gear38": false, 
+            "gear39": false, 
             "gear40": false, //poly 1, 1.5x base luck
             "gear41": false, //poly 2, 1/10 chance for +500000 simulated amount, applied before simulated amount multipliers
-            "gear42": false, //poly 3, guaranteed x2 normal amount of every tier until hyperdimensional, applies before the 1/10 for x2
+            "gear42": false, //poly 3, 
             "gear43": false, //poly 4, allows use of wormhole in sr1
-            "gear44": false, //poly 5, +50 reps, maybe unlock something new im not sure
-            "gear45": false, //change event, start event, increase event time 
-            "gear46": false, //gain +0.2x of total offline time as ores (base: 0.1x)
-            "gear47": false, //gain +0.45x of total offline time as ores (base: 0.1x)
+            "gear44": false, //poly 5, +50 reps
+            "gear45": false, 
+            "gear46": false, 
+            "gear47": false, 
+            "gear48": false, //+0.1x luck per minute of session time
+            
         }
         this.pickaxes = {
             "pickaxe0": true,
@@ -85,7 +87,8 @@ class playerTemplate {
             "pickaxe32" : false,
             "pickaxe33" : false,
             "pickaxe34" : false,
-            "pickaxe35" : false
+            "pickaxe35" : false,
+            "pickaxe36": false,
         }
         this.settings = {
             audioSettings: {
@@ -224,7 +227,9 @@ class playerTemplate {
             "orbOfIntelligence": false,
             "orbOfSound": false,
             "orbOfTheUnknown": false,
-            "orbOfCreation": false
+            "orbOfCreation": false,
+            "orbOfFlight": false,
+            "orbOfFire": false
         }
         this.eventManager = {
             cooldown: Date.now()
@@ -860,6 +865,7 @@ function loadNewData(data) {
             }
 
         }
+        verifiedOres.countHyperdimensionalOres();
         updateInventory(false);
         
         try {

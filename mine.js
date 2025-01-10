@@ -119,6 +119,9 @@ function giveBlock(obj) {
             playerInventory["bitcoin"]["normalAmt"]++;
             inventoryObj["bitcoin"] = 0;
         }
+        if (oreList[obj.type]["oreTier"] === "Hyperdimensional") {
+            verifiedOres.addHyperdimensionalCount(obj.amt)
+        }
         playerInventory[obj.type]["foundAt"] ??= Date.now();
     } else {
         if (oreRarity === 1) {
@@ -145,7 +148,7 @@ let cat = 1;
 let mainProbabilityTable;
 let mainGenerationTable;
 let lunaY = 1;
-const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠godOfTheMine♾️";
+const specialCases = "💙🌻🔋⌛🦾👀🌈🍃⛔🎉🔒📽️🧂🏯🖊️🏔️💔🩸💎🔮💠godOfTheMine♾️👁️";
 function aleaRandom() {
     if (gameInfo.count === gameInfo.loopLength) {
         gameInfo.count = 0
@@ -302,7 +305,11 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                     if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();
                 } 
                 playSound(oreList[blockToGive]["oreTier"], blockToGive);
+                if (oreList[blockToGive]["oreTier"] === "Hyperdimensional") {
+                    verifiedOres.addHyperdimensionalCount(results[blockToGive].est);
+                }
             }
+
             for (let i = 3; i > 0; i--) {
                 let estVariantAmt = (results[blockToGive].est)/(multis[i]/variantDivide);
                 const variantRandom = {r: aleaRandom(), c: gameInfo.overallCount, s: gameInfo.seed};
@@ -348,7 +355,6 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             }
             let toGive = results[blockToGive].est;
             if (toGive > 0) {
-                if (player.gears["gear42"] && !oreInformation.tierGrOrEqTo({"tier1": oreList[blockToGive]["oreTier"], "tier2": "Hyperdimensional"})) toGive *= 2;
                 wasDuped = false;
                 if (oreList[blockToGive]["numRarity"] >= 750000) {
                     if (player.gears["gear7"] && currentWorld < 2) gearAbility1();
@@ -424,6 +430,7 @@ const checkSpecials = function(block, get) {
     if (block === "🔮") rand = 10000;
     if (block === "godOfTheMine") rand = 3;
     if (block === "♾️") rand = 1000000000;
+    if (block === "👁️") rand = 1920000000;
     if (Math.random() < 1/rand || get) {
         switch(block) {
             case "💙" : 
@@ -502,6 +509,9 @@ const checkSpecials = function(block, get) {
                 break;
             case "♾️":
                 block = "True Infinity";
+                break;
+            case "👁️":
+                block = "Flaroreon";
                 break;
         }
     }

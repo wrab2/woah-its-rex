@@ -268,13 +268,14 @@
   text-align: center;
 }
 #newCraftingGearEffect {
-  height: min(12vh,6vw);
+  height: min(10vh,5vw);
   font-size: min(2vh,1vw);
   line-height: min(2vh,1vw);
   width: 100%;
   display: flex;
   align-items: baseline;
   justify-content: center;
+  flex-wrap: wrap;
 }
 #newCraftingMined {
   height: min(3vh,1.5vw);
@@ -4262,36 +4263,35 @@ button {
 .electrifiedBlock {
   position: relative;
   z-index: 99999;
-  color:rgba(247, 243, 104, 0.35);
   text-shadow: 0px 0px 3vw #e365fc, 0px 0px 3vw #e365fc, 0px 0px 3vw #e365fc, 0px 0px 3vw #e365fc;
+  filter: hue-rotate(75deg);
 }
 .radioactiveBlock {
   position: relative;
   z-index: 99999;
-  color:rgba(201,252,58, 0.35);
   text-shadow: 0px 0px 3vw #c9fc3a, 0px 0px 3vw #c9fc3a, 0px 0px 3vw #c9fc3a, 0px 0px 3vw #c9fc3a;
+  filter: hue-rotate(-90deg);
 }
 .explosiveBlock {
   position: relative;
   z-index: 99999;
-  color:rgba(252, 73, 45);
   text-shadow:0px 0px 3vw #ff4b33, 0px 0px 3vw #ff4b33, 0px 0px 3vw #ff4b33, 0px 0px 3vw #fc492d;
+  filter: hue-rotate(210deg);
 }
 .electrifiedBlockImg {
   position: relative;
   z-index: 99999;
-  filter: drop-shadow(0px 0px 2vw #e365fc);
-
+  filter: drop-shadow(0px 0px 2vw #e365fc) hue-rotate(30deg);
 }
 .radioactiveBlockImg {
   position: relative;
   z-index: 99999;
-  filter: drop-shadow(0px 0px 2vw #c9fc3a);
+  filter: drop-shadow(0px 0px 2vw #c9fc3a) hue-rotate(-90deg);
 }
 .explosiveBlockImg {
   position: relative;
   z-index: 99999;
-  filter: drop-shadow(0px 0px 2vw #ff4b33);
+  filter: drop-shadow(0px 0px 2vw #ff4b33) hue-rotate(125deg);
 }
 .normalSpawnMessage {
   text-shadow: 0px 0px 0.1vw #ffffff;
