@@ -2113,7 +2113,7 @@ const pickaxeStats = {
     "pickaxe36" : {
         mined: 7500000,
         revealed: 1,
-        luck: 10000,
+        luck: 1500,
         rate: 1000,
         src : "⛏️",
         ability: "",
