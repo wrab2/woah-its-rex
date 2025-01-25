@@ -3210,8 +3210,8 @@ img.roundcat {
 #displayCloudIcon {
 	width: 100%;
 	height: 100%;
-	-webkit-mask-image: url('/media/cloud.svg');
-	mask-image: url('/media/cloud.svg');
+	-webkit-mask-image: url('media/cloud.svg');
+	mask-image: url('media/cloud.svg');
 	mask-size: 80%;
 	mask-position: center;
 	mask-repeat: no-repeat;
