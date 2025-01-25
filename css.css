@@ -2262,7 +2262,9 @@
   overflow-y: hidden;
   background-image:url("media/silly caverns picture.png");
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size:contain;
+	background-position: top center;
+	background-color: #FFF;
   height: 100vh;
   width: 100vw;
 }
@@ -2481,7 +2483,7 @@ img.roundcat {
 }
 .play-button {
   position: absolute;
-  top: 28%;
+  top: 15vw;
   left: 50%;
   transform: translate(-50%, -50%);
   color: black;

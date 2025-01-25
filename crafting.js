@@ -580,6 +580,7 @@ function displayRecipe(recipe) {
                 let cons = blocksUsed * treeInfo.luck / pickaxe.rate;
                 consElem.textContent = `${(Math.round(cons*1000)/1000).toLocaleString()} Pickaxe Consistency.`;
                 let curSrc = pickaxe.ability;
+								abilityElem.style.display = "block"
                 abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
                 let stp = pickaxe.src;
                 stp  = stp.substring(stp.indexOf("src") + 5, stp.indexOf("</img>") - 2);
