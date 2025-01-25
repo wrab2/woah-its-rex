@@ -11,6 +11,7 @@ function showLoungeScreen(id, button) {
         showLoungeScreen.cButton = undefined;
         showLoungeScreen.current = undefined;
         get(cid).style.display = "none";
+				return
     } else {
         get(id).style.display = "inline-flex";
         get(showLoungeScreen.current).style.display = "none";
@@ -19,6 +20,13 @@ function showLoungeScreen(id, button) {
         button.classList.add("selectedLoungeArea");
         showLoungeScreen.current = id;  
     }
+		if(id === "loungeGameSettings"){
+			get("minSpeedInput").value = player.settings.minSpeed
+			get("mineCapacitySetter").value = player.settings.baseMineCapacity
+			get("latestSetter").value = player.settings.latestLength
+			get("automineUpdate").value = player.settings.automineUpdate
+			get("logRarityInput").value = player.settings.minLogRarity
+		}
     checkMilestoneStatus();
     checkIndexStatus();
 }
@@ -187,7 +195,6 @@ function flashRed(element) {
     element.style.animation = "flashRed 1s linear 1";
     element.onanimationend = () => {
         element.style.animation = "";
-        element.value = "";
         element.onanimationend = undefined;
     }
 }
@@ -195,7 +202,6 @@ function flashGreen(element) {
     element.style.animation = "flashGreen 1s linear 1";
     element.onanimationend = () => {
         element.style.animation = "";
-        element.value = "";
         element.onanimationend = undefined;
     }
 }
