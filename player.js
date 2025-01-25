@@ -237,7 +237,8 @@ class playerTemplate {
         this.completedMilestones = [],
         this.watrEntered = false,
         this.galacticaEntered = false,
-        this.sr1Entered = false
+        this.sr1Entered = false,
+				this.unlockedEvents = Array.from({length: Object.keys(events).length}, () => false)
     }
 }
 let player = new playerTemplate();
@@ -832,6 +833,8 @@ function loadNewData(data) {
         player.galacticaEntered = data.galacticaEntered;
         data.sr1Entered ??= false;
         player.sr1Entered = data.sr1Entered;
+				data.unlockedEvents ??= Array.from({length: Object.keys(events).length}, () => false)
+        player.unlockedEvents = data.unlockedEvents;
         data.completedMilestones ??= [];
         player.completedMilestones = [...data.completedMilestones];
         data.loungeSettings ??= {updateElements: true, deleteUnusedElements: true}

@@ -144,7 +144,7 @@ function finishInit() {
     if (player.settings.lastWorld !== 1) switchWorld(player.settings.lastWorld, true);
     else createMine();
     addIndexLayers.current = String(currentWorld);
-    addIndexLayers(String(currentWorld));
+    addIndexLayers(currentWorld!==1.2?String(currentWorld):"1");
     createMilestones();
     inventoryTimer = setInterval(updateInventory, 500);
     canMine = true;
@@ -1415,8 +1415,8 @@ let currentActiveEvent;
 specialOreValues = {
 
 }
-const events = {
-    "event1" : {
+const events = [
+    {
         rate: 1/5000,
         duration: 1500000,
         boost: 1.5,
@@ -1441,7 +1441,7 @@ const events = {
             }
         },
     },
-    "event2" : {
+    {
         rate: 1/2500,
         duration: 3000000,
         boost: 2,
@@ -1454,7 +1454,7 @@ const events = {
             else return;
         }
     },
-    "event3" : {
+    {
         rate: 1/4000,
         duration: 1800000,
         boost: 1.375,
@@ -1467,7 +1467,7 @@ const events = {
             else return;
         }
     },
-    "event4" : {
+    {
         rate: 1/12500,
         duration: 1800000,
         boost: 1.25,
@@ -1487,7 +1487,7 @@ const events = {
             }
         }
     },
-    "event5" : {
+    {
         rate: 1/3000,
         duration: 1800000,
         boost: 2,
@@ -1504,14 +1504,14 @@ const events = {
             }
         }
     },
-    "event6" : {
+    {
         rate: 1/10000,
         duration: 900000,
         boost: 1.15,
         ore: "⌛",
         message: `<i><span style="background-image:linear-gradient(to right, #c2842d, #edae26, #d45419, #8a1b0c);" class="eventGradient">The passage of time seems to speed up as it's source is unearthed...</span></i>`,
         world: 1,
-        specialText: "Decreases base mining speed by 1",
+        specialText: "Decreases base mining speed by 1ms",
         specialEffect: function(state) {
             if (state) {
                 baseSpeed--;
@@ -1523,7 +1523,7 @@ const events = {
             }
         }
     },
-    "event7" : {
+    {
         rate: 1/15000,
         duration: 1200000,
         boost: 1.3,
@@ -1550,7 +1550,7 @@ const events = {
             }
         }
     },
-    "event8" : {
+    {
         rate: 1/3500,
         duration: 3000000,
         boost: 1.75,
@@ -1567,7 +1567,7 @@ const events = {
             }
         }
     },
-    "event9" : {
+    {
         rate: 1/5000,
         duration: 2700000,
         boost: 1.25,
@@ -1584,14 +1584,14 @@ const events = {
             }
         }
     },
-    "event10" : {
+    {
         rate: 1/1000000,
         duration: 9000000,
         boost: 1,
         ore: "✈️",
         message: `<i><span class="rainbowBackground">Lyle! Lyle, wake up! You gotta wake up, please!...</span></i>`,
         world: 1,
-        specialText: "Makes ✈️ obtainable",
+        specialText: "Makes ✈️ obtainable in 🎂 layer",
         specialEffect: function(state) {
             if (state) {
                 insertIntoLayers({"ore":"✈️", "layers":["sillyLayer"], "useLuck":true});
@@ -1606,7 +1606,7 @@ const events = {
             }
         }
     },
-    "event11" : {
+    {
         rate: 1/4000,
         duration: 2700000,
         boost: 1.25,
@@ -1619,7 +1619,7 @@ const events = {
             else return;
         }
     },
-    "event12" : {
+    {
         rate: 1/15000,
         duration: 180000,
         boost: 5,
@@ -1637,7 +1637,7 @@ const events = {
             else delete specialOreValues["🖱️"];
         }
     },
-    "event13" : {
+    {
         rate: 1/22000,
         duration: 1200000,
         boost: 1.13,
@@ -1655,7 +1655,7 @@ const events = {
             else delete specialOreValues["🪶"];
         }
     },
-    "event14" : {
+    {
         rate: 1/12500,
         duration: 900000,
         boost: 1.4,
@@ -1673,7 +1673,7 @@ const events = {
             else delete specialOreValues["🏹"];
         }
     },
-    "event15" : {
+    {
         rate: 1/30000,
         duration: 600000,
         boost: 1.5,
@@ -1695,7 +1695,7 @@ const events = {
             }
         }
     },
-    "event16" : {
+    {
         rate: 1/50000,
         duration: 2700000,
         boost: 1.17,
@@ -1710,7 +1710,7 @@ const events = {
             else document.body.style.filter = "";
         }
     },
-    "event16" : {
+    {
         rate: 1/1250,
         duration: 1800000,
         boost: 1,
@@ -1725,7 +1725,7 @@ const events = {
             else removeFromLayers({"ore":"🪸", "layers":["waterLayer"]});
         }
     },
-    "event17" : {
+    {
         rate: 1/5000,
         duration: 3600000,
         boost: 2.75,
@@ -1740,7 +1740,7 @@ const events = {
             else return;
         }
     },
-    "event18" : {
+    {
         rate: 1/19000,
         duration: 2700000,
         boost: 2,
@@ -1755,7 +1755,7 @@ const events = {
             else return;
         }
     },
-    "event19" : {
+    {
         rate: 1/75000,
         duration: 1350000,
         boost: 2.5,
@@ -1770,9 +1770,10 @@ const events = {
             else return;
         }
     },
-}
+]
 function activateEvent(name) {
     if (name === undefined) return;
+		player.unlockedEvents[name] = true
     currentActiveEvent = {name: name, removeAt: Date.now() + events[name].duration, extraBoost: 0}
     events[name].specialEffect(true);
     const text = events[name].message;
@@ -1833,10 +1834,10 @@ function eventActions(input) {
     if (input === "c") {
         endEvent();
         const toChoose = collectWorldEvents(currentWorld);
-        if (toChoose.indexOf("event10") > -1) toChoose.splice(toChoose.indexOf("event10"), 1)
-        const selector = Math.round(Math.random() * (toChoose.length - 1));
+        if (toChoose.includes("9")) toChoose.splice(toChoose.indexOf("9"), 1)
+        const selector = Math.floor(Math.random() * toChoose.length);
         const chosen = toChoose[selector];
-        if (chosen === undefined) return;
+        if (chosen === undefined) return ;
         activateEvent(chosen);
         player.eventManager.cooldown = Date.now() + 900000;
         wasUsed = true;

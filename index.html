@@ -53,6 +53,7 @@
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOverallStatistics', this)">Overall Statistics</button>
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOreIndex', this)">Ore Index</button>
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWorlds', this)">Worlds</button>
+            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeEventIndex', this)">Event Index</button>
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeMilestones', this);">Milestones</button>
             <button class="loungeMenuLocationButton"onclick="showLoungeScreen('loungeForgeAndVariants', this)">Forge/Variants</button>
         </div>
@@ -396,6 +397,43 @@
                     </div>
                 </div>
             </div>
+
+						<div id="loungeEventIndex" style="display: none;">
+							<div id="eventIndexTop">
+								<div id="loungeEventWorldsHolder">
+									<button class="loungeEventSelector" onclick="createEventCards(1, this)">World One</button>
+									<button class="loungeEventSelector" onclick="createEventCards(2, this)">World Two</button>
+									<button class="loungeEventSelector" onclick="createEventCards(1.1, this)">Subrealm One</button>
+									<button class="loungeEventSelector" onclick="createEventCards(0.9, this)">Galactica</button>
+									<button class="loungeEventSelector" onclick="createEventCards(1.2, this)">watr watr</button>	
+								</div>
+						</div>
+						<div id="loungeEventCards">
+								<div id="loungeEventHolder"></div>
+
+								<div class="eventCard" id="eventCardCopy">
+									<table>
+										<tbody>
+											<tr>
+												<td class="eventCardOre">
+
+												</td>
+												<td class="eventTexts">
+													<div class="eventSpawnMessage"></div><br>
+
+													<div class="eventEffect"></div>
+													<div class="eventSideEffect"></div><br>
+													<div class="eventSpawnRate"></div>
+													<div class="eventDuration"></div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+						</div>
+						</div>
+
             <div id="loungeMilestones" class="milestoneParent" style="display: none;">
                 <div id="milestoneWrapper">
                     <div id="milestonesHolder">

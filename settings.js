@@ -80,15 +80,24 @@ function checkInventoryStatus() {
 checkInventoryStatus.created = true;
 function checkIndexStatus() {
     if (toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current !== "loungeOreIndex") {
-        const h = get("loungeCardHolder");
-        while (h.firstChild) h.firstChild.remove();
+        get("loungeCardHolder").innerText = ""
     }
     else if (!toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current === "loungeOreIndex") {
-        const h = get("loungeCardHolder");
-        while (h.firstChild) h.firstChild.remove();
-    } else if (toggleLounge.toggled && get("loungeCardHolder").children.length === 0 && showLoungeScreen.current === "loungeOreIndex" && createIndexCards.indexing !== undefined) {
+        get("loungeCardHolder").innerText = ""
+    } 
+		else if (toggleLounge.toggled && get("loungeCardHolder").children.length === 0 && showLoungeScreen.current === "loungeOreIndex" && createIndexCards.indexing !== undefined) {
         createIndexCards(createIndexCards.indexing);
-    }
+    } 
+		//event index
+		if (toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current !== "loungeEventIndex") {
+			get("loungeEventHolder").innerText = ""
+		}
+		else if (!toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current === "loungeEventIndex") {
+			get("loungeEventHolder").innerText = ""
+		} 
+		else if (toggleLounge.toggled && get("loungeEventHolder").children.length === 0 && showLoungeScreen.current === "loungeEventIndex") {
+			createEventCards(createEventCards.indexing)
+		}
 }
 function toggleUnused(b) {
     if (player.loungeSettings.deleteUnusedElements) {
@@ -429,6 +438,7 @@ const indexOrder = {
     }
 }
 function addIndexLayers(world) {
+	console.log("here")
     const elems = document.getElementsByClassName("loungeLayerSelector");
     for (let i = elems.length - 1; i >= 0; i--) elems[i].remove();
     for (const layer in indexOrder[world]) {
@@ -584,6 +594,7 @@ function createIndexCards(layer) {
     }
 }
 createIndexCards.indexing = undefined;
+createEventCards.indexing = undefined
 function formatIndexNum(num) {
     if (num >= 1000000000000000) return formatNumber(num, 2);
     else return num.toLocaleString();
@@ -593,6 +604,51 @@ function showSpawnMessage(card){
 	let current = Number(card.firstChild.style.opacity)
 	card.firstChild.style.opacity = (current+1)%2
 }
+function createEventCards(world, button) {
+	const buttons = get('loungeEventWorldsHolder').children
+	let req = Object.keys(portalLocations)
+	req.splice(req.indexOf("11252023"),1)
+	for(let i=0; i<buttons.length; i++){
+		if(!portalLocations[req[i]].req()){
+			buttons[i].disabled = true
+			buttons[i].textContent = "[Research Required]"
+		}
+		else {
+			buttons[i].disabled = false
+			buttons[i].textContent = portalLocations[req[i]].title
+		}
+	}
+
+	if(world !== createEventCards.indexing){
+		document.getElementsByClassName("currentEventWorld")[0]?.classList.remove("currentEventWorld")
+		button?.classList.add("currentEventWorld")
+	}
+	createEventCards.indexing = world
+	get('loungeEventHolder').innerText=""
+	const worldEvents = collectWorldEvents(world).sort((a,b) => events[b].rate - events[a].rate)
+	for (const i of worldEvents){
+		const hidden = !player.unlockedEvents[i]
+		const copying = get("eventCardCopy").cloneNode(true)
+		copying.id = ""
+		get('loungeEventHolder').prepend(copying)
+		if (hidden) {
+			document.getElementsByClassName("eventCardOre")[0].textContent = "?"
+		
+		}
+		else {
+			if (events[i].ore.length < 5) document.getElementsByClassName("eventCardOre")[0].textContent = events[i].ore
+			else {
+				document.getElementsByClassName("eventCardOre")[0].innerHTML = `<img src=${oreList[events[i].ore].src}>`
+			}
+			document.getElementsByClassName("eventSpawnMessage")[0].innerHTML = events[i].message
+			document.getElementsByClassName("eventDuration")[0].innerHTML = "Duration: "+msToTime(events[i].duration)
+			document.getElementsByClassName("eventEffect")[0].innerHTML = "Ore boost: x"+events[i].boost
+			if(events[i].specialText!=="N/A")document.getElementsByClassName("eventSideEffect")[0].innerHTML = "Side effect: "+events[i].specialText
+		}
+		document.getElementsByClassName("eventSpawnRate")[0].textContent = "Rate: 1/"+formatNumber(1/events[i].rate)+" every 500ms"
+	}
+}
+
 let testSoundTimeout = null;
 function testSound(name, element) {
     if (allAudios[name].currentTime === 0) {
