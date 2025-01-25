@@ -138,12 +138,10 @@
 }
 #latestOres {
   width: 100%;
-  overflow-y: scroll;
+	position: relative;
 }
 #latestOresHolder {
   width: 100%;
-  height: 31.5vw;
-  overflow-y: scroll!important;
 }
 .latestHolder {
   width: 50vw;
@@ -2949,8 +2947,7 @@ img.roundcat {
   border-top: 0.2vw solid var(--main-border-color);
   display: flex;
   justify-content: end;
-  position: sticky;
-  top:34.5vw;
+  position: relative;
   background-color: var(--main-lbg-color);
 }
 .bottomButton {
@@ -3074,6 +3071,12 @@ img.roundcat {
 }
 #galacticaCrafts:hover {
   transform: scale(105%);
+}
+#sidebar{
+	z-index: 50;
+	width: 100%;
+	position: relative;
+	height: 0;
 }
 #offlineHolder {
   width: 30vw;
@@ -3388,9 +3391,7 @@ button, .col-3 > div > button {
   height: 34.5vw;
   width: 100%;
   top:0px;
-  z-index: 99999;
   background-color: var(--main-lbg-color);
-  border-bottom:0.2vw solid var(--main-border-color);
   margin-bottom: 0px;
 }
 .col-2 {

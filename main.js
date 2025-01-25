@@ -924,19 +924,6 @@ function updateInventory(m = true) {
     lastTime = Date.now();
     if (Date.now() >= ability1RemoveTime && energySiphonerActive) removeSiphoner();
 
-
-    const bodyCheck = document.body.getBoundingClientRect();
-    if (bodyCheck.height < 550) {
-        document.getElementById("mainSticky").style.position = "relative";
-        document.getElementById("bottomButtonHolder").style.position = "relative";
-        document.getElementById("bottomButtonHolder").style.top = "0";
-    } 
-    else {
-        document.getElementById("mainSticky").style.position = "sticky";
-        document.getElementById("bottomButtonHolder").style.position = "sticky";
-        document.getElementById("bottomButtonHolder").style.top = "34.5vw";
-    }
-
     if (currentActiveEvent !== undefined) {
         if (Date.now() >= currentActiveEvent.removeAt) endEvent();
     } else {
