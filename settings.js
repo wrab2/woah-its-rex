@@ -528,11 +528,22 @@ function createIndexCards(layer) {
     }
     for (key in list) {
         const copying = get("indexCardCopy").cloneNode(true);
-        copying.id = "";
-        get("loungeCardHolder").prepend(copying);
         const ore = list[key];
         const tier = oreList[ore]["oreTier"];
         const hide = (oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Sacred"}) && oreList[ore]["foundAt"] === undefined) && indexHasOre(ore) === 0;
+        copying.id = "";
+
+				let msg = oreList[ore]['spawnMessage']
+				if(msg !== ""){
+					let spawnMessage = document.createElement('span');
+					spawnMessage.classList.add('oreIndexSpawnMessage');
+					spawnMessage.style.opacity=0;
+					if (hide) spawnMessage.textContent = "???";
+					else spawnMessage.textContent = msg
+					copying.prepend(spawnMessage);
+				}
+
+        get("loungeCardHolder").prepend(copying);
         if (oreList[ore]["hasImage"]) {
             document.querySelector(".indexCardOre").innerHTML = `<span class="indexCardImageOre ${hide ? "indexCardBlackout" : ""}"><img src="${oreList[ore]["src"]}"></span>`;
         } else {
@@ -576,6 +587,11 @@ createIndexCards.indexing = undefined;
 function formatIndexNum(num) {
     if (num >= 1000000000000000) return formatNumber(num, 2);
     else return num.toLocaleString();
+}
+function showSpawnMessage(card){
+	if (!card.firstChild.classList) return
+	let current = Number(card.firstChild.style.opacity)
+	card.firstChild.style.opacity = (current+1)%2
 }
 let testSoundTimeout = null;
 function testSound(name, element) {

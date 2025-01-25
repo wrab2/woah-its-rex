@@ -191,12 +191,12 @@ let oreList = {
     '⚙️': { 'decimalRarity': 1 / 5000000, 'numRarity': 5000000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '⚙️ Has Spawned!', 'oreTier': 'Mystical',  },
     
     
-    '🎁': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🎮': { 'decimalRarity': 1 / 6890000, 'numRarity': 6890000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Mystical',  },
-    '🎫': { 'decimalRarity': 1 / 8230000, 'numRarity': 8230000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Mystical',  },
-    '🚗': { 'decimalRarity': 1 / 12700000, 'numRarity': 12700000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Mystical',  },
-    '📢': { 'decimalRarity': 1 / 68900000, 'numRarity': 68900000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Divine',  },
-    '🎑': { 'decimalRarity': 1 / 92350200, 'numRarity': 92350200, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Divine',  },
+    '🎁': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎁  Has Spawned!', 'oreTier': 'Layer',  },
+    '🎮': { 'decimalRarity': 1 / 6890000, 'numRarity': 6890000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎮  Has Spawned!', 'oreTier': 'Mystical',  },
+    '🎫': { 'decimalRarity': 1 / 8230000, 'numRarity': 8230000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎫  Has Spawned!', 'oreTier': 'Mystical',  },
+    '🚗': { 'decimalRarity': 1 / 12700000, 'numRarity': 12700000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🚗  Has Spawned!', 'oreTier': 'Mystical',  },
+    '📢': { 'decimalRarity': 1 / 68900000, 'numRarity': 68900000, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '📢  Has Spawned!', 'oreTier': 'Divine',  },
+    '🎑': { 'decimalRarity': 1 / 92350200, 'numRarity': 92350200, 'hasLog': false, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': '🎑  Has Spawned!', 'oreTier': 'Divine',  },
     '📿': { 'decimalRarity': 1 / 279000000, 'numRarity': 279000000, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'Magical beads that seem to grant your every wish drop on the ground in front of you...', 'oreTier': 'Flawless',  },
     '🎎': { 'decimalRarity': 1 / 587650200, 'numRarity': 587650200, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'I wonder whats inside...', 'oreTier': 'Flawless',  },
     '🗳️': { 'decimalRarity': 1 / 824900725, 'numRarity': 824900725, 'hasLog': true, 'isBreakable': true, 'caveExclusive': false, 'spawnMessage': 'A mysterious box, able to change reality at will through enough votes, appears next to you...', 'oreTier': 'Interstellar',  },
