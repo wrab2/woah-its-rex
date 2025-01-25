@@ -529,6 +529,7 @@ function displayRecipe(recipe) {
         const abilityElem = get("newCraftingAbilityImage");
         const iconElem = get("newCraftingPickaxeIcon");
         if (recipe.indexOf("pickaxe") > -1) {
+            get("extraPickaxeInformation").style.display=""
             get("gearHolder").style.display = "none";
             get("pickaxeHolder").style.display = "";
             let pickaxe = pickaxeStats[recipe];
@@ -549,9 +550,14 @@ function displayRecipe(recipe) {
                 luckElem.textContent = `${pickaxe.luck.toLocaleString()}x Luck.`;
                 let blocksUsed = (pickaxe.mined > pickaxe.revealed ? pickaxe.mined : pickaxe.revealed);
                 let cons = blocksUsed * pickaxe.luck / pickaxe.rate;
-                consElem.textContent = `${(Math.round(cons*1000)/1000).toLocaleString()} Pickaxe Consistency.`;
+                consElem.textContent = `${formatNumber(cons, 2)} Pickaxe Consistency.`;
                 let curSrc = pickaxe.ability;
-                abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
+                if(pickaxe.revealed === 1){
+                  abilityElem.style.display = "none"
+                } else{
+                  abilityElem.style.display = "block"
+                  abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
+                }
                 let stp = pickaxe.src;
                 stp  = stp.substring(stp.indexOf("src") + 5, stp.indexOf("</img>") - 2);
                 curSrc = stp;
@@ -587,6 +593,7 @@ function displayRecipe(recipe) {
                 }
             }
         } else {
+            get("extraPickaxeInformation").style.display="none"
             get("craftingContainer").style.top = "0px";
 						get("scrollableCraft").style.flexDirection = "column"
             get("craftingContainer").style.borderBottomLeftRadius = `0.5vw`;
@@ -1837,7 +1844,7 @@ const pickaxeStats = {
         canMineIn:[1],
         extraInformation: "Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck and slightly increased cave size.",
         tier: 7,
-        icon: "@marcelacoplao",
+        icon: "@verrdant",
 },
     
     "pickaxe13": {
@@ -1849,6 +1856,7 @@ const pickaxeStats = {
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 2],
         canMineIn:[1, 2],
+        extraInformation: "Unlocks World 2",
         tier: 0,
         icon: "@marcelacoplao",
 },
@@ -2099,14 +2107,14 @@ const pickaxeStats = {
         revealed: 1,
         luck: 650,
         rate: 300,
-        src : "⛏️",
+        src : `<img class="mineImage" src="media/galacticEngulfer.png"></img>`,
         ability: "",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9],
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
         tier: 13,
-        icon: "",
+        icon: "@verrdant",
     },
     "pickaxe36" : {
         mined: 7500000,

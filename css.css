@@ -245,13 +245,15 @@
 }
 #newCraftingAbilityImage {
   width: 50%;
+  min-width: 50%;
   padding: min(0.4vh,0.2vw);
   object-fit: contain;
   image-rendering: pixelated;
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
 }
 #newCraftingPickaxeIcon {
-  width: 50%;
+  min-width: 50%;
+  width: 100%;
   padding: min(0.4vh,0.2vw);
   object-fit: contain;
   image-rendering: pixelated;
