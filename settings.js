@@ -883,6 +883,8 @@ function convertOre(ore, amt, type) {
         hasConverted = true;
     }
     resetVariantVals();
+		verifiedOres.countHyperdimensionalOres()
+		verifiedOres.addHyperdimensionalCount(0)
 }
 function allButOne(ore) {
     if (playerInventory[ore] === undefined) {oreNotFound(); return;}
