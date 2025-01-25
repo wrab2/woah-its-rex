@@ -532,9 +532,8 @@ function displayRecipe(recipe) {
             get("gearHolder").style.display = "none";
             get("pickaxeHolder").style.display = "";
             let pickaxe = pickaxeStats[recipe];
-            get("newCraftingHolder").style.height = "min(52.9vh,26.45vw)";
             get("craftingContainer").style.top = `min(${2 * origins["pickaxe"].top}vh,${origins["pickaxe"].top}vw)`;
-            get("craftingContainer").style.left = `min(${2 *origins["pickaxe"].left}vh,${origins["pickaxe"].left}vw)`;
+						get("scrollableCraft").style.flexDirection = "row"
             get("craftingContainer").style.borderBottomLeftRadius = `0`;
             get("craftingContainer").style.borderTopRightRadius = `0.5vw`;
             extraInfo.innerHTML = pickaxeStats[recipe].extraInformation;
@@ -588,9 +587,8 @@ function displayRecipe(recipe) {
                 }
             }
         } else {
-            get("newCraftingHolder").style.height = "min(26vh,13vw)";
-            get("craftingContainer").style.top = `min(${2*origins["gear"].top}vh,${origins["gear"].top}vw)`;
-            get("craftingContainer").style.left = `min(${2*origins["gear"].left}vh,${origins["gear"].left}vw)`;
+            get("craftingContainer").style.top = "0px";
+						get("scrollableCraft").style.flexDirection = "column"
             get("craftingContainer").style.borderBottomLeftRadius = `0.5vw`;
             get("craftingContainer").style.borderTopRightRadius = `0`;
             get("gearHolder").style.display = "";

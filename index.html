@@ -725,20 +725,6 @@
                 <p id="extraInformationIcon" class="extraInfoText">Icon made by x</p>
                 <button id="toggleExtraInformation" onclick="toggleExtraInformation()"></button>
             </div>
-            <div id="craftingContainer">
-                <div id="pinAndCraft">
-                    <button id="pinRecipe" class="recipePin" onclick="pinRecipe()"></button>
-                    <button id="unpinRecipe"class="recipePin" style="display: none;" onclick="unpinRecipe()"></button>
-                    <span id="newCraftingHolderheader" class="recipePin" style="display: none;" onclick=""></span>
-                    <button id="newCraftItem" class="craftPickaxeButton">Craft!</button>
-                </div>
-                
-                <div id="newCraftingRecipeHolder"></div>
-                <div id="estimatedTime">
-                  <button id="hideCompleted" onclick="toggleHideCompleted()"></button>
-                  <p id="estimatedTimeHolder">Time Goes Here</p>
-                </div>
-            </div>
             <div id="newCraftingHolder">
                 <p id="newCraftingName" class="newCraftingText">Pickaxe Name</p>
                 <p id="newCraftingTier" class="newCraftingText">Tier 0</p>
@@ -762,6 +748,20 @@
                 <button id="lockRecipe" onclick="lockRecipe()">Unlocked</button>
 
         </div>
+				<div id="craftingContainer">
+					<div id="pinAndCraft">
+							<button id="pinRecipe" class="recipePin" onclick="pinRecipe()"></button>
+							<button id="unpinRecipe"class="recipePin" style="display: none;" onclick="unpinRecipe()"></button>
+							<span id="newCraftingHolderheader" class="recipePin" style="display: none;" onclick=""></span>
+							<button id="newCraftItem" class="craftPickaxeButton">Craft!</button>
+					</div>
+					
+					<div id="newCraftingRecipeHolder"></div>
+					<div id="estimatedTime">
+						<button id="hideCompleted" onclick="toggleHideCompleted()"></button>
+						<p id="estimatedTimeHolder">Time Goes Here</p>
+					</div>
+			</div>
         </div>
             <div id="mainSticky">
             <div class="mobile">

@@ -179,12 +179,15 @@
 }
 #newCraftingHolder {
   width: min(48vh,24vw);
-  height: min(42.9vh,26.45vw);
   border-radius: min(2vh,1vw);
+	min-height: min(26vh, 13vw);
+  height: max-content;
+	padding-bottom: min(2vh, 1vw);
+	margin-bottom: max(-2vh, -1vw);
   margin-top: 0;
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
   background-color: var(--main-lbg-color);
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   overflow: hidden;
   pointer-events: all;
@@ -200,6 +203,7 @@
   display: none;
   overflow-y: auto;
   pointer-events: none;
+	flex-direction: column;
 }
 #pinnedRecipeHolder {
   position: absolute;
@@ -266,7 +270,7 @@
   text-align: center;
 }
 #newCraftingGearEffect {
-  height: min(10vh,5vw);
+  height: min-content;
   font-size: min(2vh,1vw);
   line-height: min(2vh,1vw);
   width: 100%;
@@ -320,20 +324,19 @@
   justify-content: center;
 }
 #craftingContainer {
-  position: absolute;
+	height: min-content;
+  position: relative;
   width: min(48vh,24vw);
-  left: 0vw;
-  top: min(25.4vh,12.7vw);
   max-height: min(37.8vh,18.9vw);
   background-color: var(--main-bg-color);
   border: min(0.5vh,0.25vw) solid var(--main-border-color);
   border-radius: min(1vh,0.5vw);
   border-top-left-radius: 0vw;
+	border-top: none;
   border-bottom-left-radius: 0vw;
   pointer-events: all!important;
   z-index: 21;
   margin-left: min(-0.1vh, -0.05vw);
-  margin-top: min(-0.1vh, -0.05vw);
 }
 #HideCompleted {
   position: absolute;
