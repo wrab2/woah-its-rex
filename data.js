@@ -201,8 +201,8 @@ function exportDataAsFile(textToWrite, fileNameToSaveAs, fileType) {
 
 //galaxy api stuff
 let cloudsaving = {
-	//website_name: "https://galaxy.click", 
-	website_name:"http://localhost:4321",
+	website_name: "https://galaxy.click", 
+	//website_name:"http://localhost:4321",
 	ongalaxy: window.top !== window.self, //if the game runs embedded or not
 	logged_in: false,
 	dosave: true, //toggles cloud save if every other condition is met
