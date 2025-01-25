@@ -3438,6 +3438,11 @@ button, .col-3 > div > button {
   background-color: var(--main-lbg-color);
   margin-bottom: 0px;
 }
+@media screen and (max-height: 34.5vw) {
+	#mainSticky{
+		position: relative;
+	}
+}
 .col-2 {
   overflow-y: scroll;
   overscroll-behavior-y: contain;
