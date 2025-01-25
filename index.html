@@ -297,7 +297,6 @@
                         Upload Save File
                     </label>
                     <input type="file" id="dataFileUpload" accept=".txt">
-                    <button class="dataButton" id="forceSave" onclick="saveAllData(true)">Force Cloud Save (Galaxy)</button>
                 </div>
             </div>
             <div id="loungeLogs" style="display: none;">
@@ -592,7 +591,6 @@
             <div style="height: 2vw;">
                 <button id="resetMine" class="topButtons" onclick="toSurface()">To Surface</button>
                 <button id="settings" class="topButtons" onclick="toggleLounge()">Lounge</button>
-                <p id="lastAutosave" class="topButtons">Please Login to Galaxy for Cloud autosave. <a href="https://galaxy.click/" target="_blank">Login Here.</a></p>
             </div>
             <div id="mineResetProgress">
                 <span id="resetNumber"></span>
@@ -823,6 +821,11 @@
             </div>
         </div>
 				<div id="sidebar">
+					<div id="cloudSaving">
+						<p>Cloud saving status: <span id="cloudStatus">waiting for connection with galaxy</span></p>
+						<span id="cloudLastSave">Last cloud save: during Waxing Crescent moon</span><br>
+						<button id="forceSave" onclick="saveAllData(true)">Force cloud save</button>
+					</div>
 					<div id="offlineHolder">
 						<p id="offlineTitle">Offline Progression</p>
 						<p id="offlineStats">00:00:00/08:00:00</p>
@@ -902,6 +905,9 @@
 			</div>
 				</div>
             <div id="bottomButtonHolder">
+                <button class="bottomButton" id="displayCloud" onclick="toggleSideMenu('cloudSaving')">
+									<div id="displayCloudIcon" style="background-color: #3179ff;"></div>
+								</button>
                 <button class="bottomButton" style="background-image:url('media/radar.gif');" onclick="toggleSideMenu('oreTrackerHolder')"></button>
                 <button class="bottomButton" style="background-image:url('media/placer.png');" id="toggleOrePlacer" onclick="togglePlacement()"></button>
                 <button class="bottomButton" style="background-image:url('media/offlineProgress.png');" id="toggleOfflineProgress" onclick="toggleSideMenu('offlineHolder')"></button>

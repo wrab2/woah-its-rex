@@ -123,6 +123,11 @@ function init() {
             console.log("Failed To Generate Seed!")
           });
     }
+		if(!cloudsaving.ongalaxy){
+			get('displayCloudIcon').style.backgroundColor = "#a51010"
+			get('cloudStatus').innerText = "Error"
+			get('cloudLastSave').innerHTML = "Please Login to Galaxy for Cloud autosave. <a href='https://galaxy.click/' target='_blank'>Login Here.</a>"
+		}
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
@@ -1947,7 +1952,8 @@ function toggleSideMenu(id) {
         "oreTrackerHolder" : "Tracker",
         "offlineHolder" : "Offline",
         "eventActionHolder" : "EventActions",
-        "powerupHolder" : "Powerup"
+        "powerupHolder" : "Powerup",
+        "cloudSaving": "EventActions"
     }
     const thisAnimation = animations[id];
     if (thisAnimation === undefined) return;

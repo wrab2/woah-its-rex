@@ -201,26 +201,23 @@ function exportDataAsFile(textToWrite, fileNameToSaveAs, fileType) {
 
 //galaxy api stuff
 let cloudsaving = {
-	website_name: "https://galaxy.click", 
-	//website_name:"http://localhost:4321",//for testing with local instance of galaxy
-	ongalaxy: false, //if the game runs embedded to galaxy or not
+	//website_name: "https://galaxy.click", 
+	website_name:"http://localhost:4321",
+	ongalaxy: window.top !== window.self, //if the game runs embedded or not
 	logged_in: false,
 	dosave: true, //toggles cloud save if every other condition is met
-	save_interval: 900000, //15 minutes, game like this doesn't really need to make backups very often
-	next_save_time: Date.now() + 10000 //10s delay
+	save_interval: 900000, //15 minutes
+	next_save_time: Date.now() + 30000,
+	last_save_success: Date.now() - 870000
 }
 
 function cloudSave(data,forceCloudSave) {
 	if(cloudsaving.ongalaxy && cloudsaving.logged_in && ((cloudsaving.dosave && Date.now() >= cloudsaving.next_save_time)||forceCloudSave)){
-		//save if the user is on galaxy, logged in and
-		//(saving is enabled a minimum save interval is reached)or(forced save parameter is true) 
-		//forced save can be used for example to save when some button is clicked manually
 		cloudsaving.next_save_time = Date.now() + cloudsaving.save_interval
-		//reset interval
 		window.top.postMessage({
 			action: "save",
 			slot: 0,
-			label: "Autosave",//how it's going to be called in cloud saves tab in the sidebar
+			label: "Autosave",
 			data: data,
 		}, cloudsaving.website_name)
 
@@ -231,8 +228,6 @@ window.addEventListener("message", e => {
 	if (e.origin === cloudsaving.website_name) {
 		//this is the initial message
 		if (e.data.type === "info") {
-			cloudsaving.ongalaxy = e.data.galaxy
-			//it's now known that the player is on galaxy
 			if(e.data.logged_in){
 				cloudsaving.logged_in = true;
                 sinceLastAutosaveTimer = setInterval(timeSinceLastAutosave, 500);
@@ -241,11 +236,20 @@ window.addEventListener("message", e => {
 					action: "load",
 					slot: 0,
 				}, cloudsaving.website_name);
+				get('cloudStatus').innerText = "Waiting for cloud save data"
+			} else {
+				get('displayCloudIcon').style.backgroundColor = "#a51010"
+				get('cloudStatus').innerText = "Error"
+				get('cloudLastSave').innerHTML = "Please Login to Galaxy for Cloud autosave."
 			}
 		} 
 		//this is a response to the load request
+		
 		else if (e.data.type === "save_content"){
 			if(!e.data.error) {
+				get('cloudStatus').innerText = "Synced"
+				get('displayCloudIcon').style.backgroundColor = "green"
+				get('forceSave').style.display = "inline"
 				let cloud_data = JSON.parse(e.data.content)
 				let local_data;
 				if (localStorage.getItem("newPlayerData") !== null) {
@@ -262,13 +266,22 @@ window.addEventListener("message", e => {
 			}
 			else {
 				if(e.data.message === "empty_slot"){
-					//there's no cloud save, do nothing ig
-					//maybe ask if user wants to enable it or not
+				get('displayCloudIcon').style.backgroundColor = "green"
+					get('cloudStatus').innerText = "Synced"
+					get('cloudLastSave').innerHTML = ""
 				}
 				else {
 					//probably something is wrong with the server, don't save in this session
+					get('displayCloudIcon').style.backgroundColor = "#a51010"
+					get('cloudStatus').innerText = "Error"
+					get('cloudLastSave').innerHTML = "Server error."
 					cloudsaving.dosave = false
 				}
+			}
+		}
+		else if (e.data.type === "saved"){
+			if(!e.data.error) {
+				cloudsaving.last_save_success = Date.now()
 			}
 		}
 	} else if (e.origin === "https://ambercatgirl.github.io") {
