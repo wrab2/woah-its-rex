@@ -56,7 +56,7 @@ const milestoneList = {
             title: "#MULCHGANGFORLIFE",
             description: "Craft Mulch Mallet!",
             check: function() {
-                return player.pickaxes["pickaxe1"];
+                return player.pickaxes["pickaxe1"] && player.powerupVariables.fakeEquipped.item !== "pickaxe1";
             },
             owned: false,
             distH: 0,
@@ -69,7 +69,7 @@ const milestoneList = {
             title: "Did you roll in mud as a kid?",
             description: "Craft Mud Sickle!",
             check: function() {
-                return player.pickaxes["pickaxe2"];
+                return player.pickaxes["pickaxe2"] && player.powerupVariables.fakeEquipped.item !== "pickaxe2";
             },
             owned: false,
             distH: 0,
@@ -95,7 +95,7 @@ const milestoneList = {
             title: "aggressive dirt muncher",
             description: "Craft Dirt Ravager!",
             check: function() {
-                return player.pickaxes["pickaxe3"];
+                return player.pickaxes["pickaxe3"] && player.powerupVariables.fakeEquipped.item !== "pickaxe3";
             },
             owned: false,
             distH: 0,
@@ -108,7 +108,7 @@ const milestoneList = {
             title: "OooOoo Shiny :3",
             description: "Craft Crystalline Excavator!",
             check: function() {
-                return player.pickaxes["pickaxe28"];
+                return player.pickaxes["pickaxe28"] && player.powerupVariables.fakeEquipped.item !== "pickaxe28";
             },
             owned: false,
             distH: 0,
@@ -121,7 +121,7 @@ const milestoneList = {
             title: "woah! this mines too!",
             description: "Craft Ballast Breaker!",
             check: function() {
-                return player.pickaxes["pickaxe29"];
+                return player.pickaxes["pickaxe29"] && player.powerupVariables.fakeEquipped.item !== "pickaxe29";
             },
             owned: false,
             distH: 0,
@@ -134,7 +134,7 @@ const milestoneList = {
             title: "<tropical_music.mp3>",
             description: "Craft Tropical Carver!",
             check: function() {
-                return player.pickaxes["pickaxe30"];
+                return player.pickaxes["pickaxe30"] && player.powerupVariables.fakeEquipped.item !== "pickaxe30";
             },
             owned: false,
             distH: 0,
@@ -147,7 +147,7 @@ const milestoneList = {
             title: "why crush on the void?",
             description: "Craft Void Crusher!",
             check: function() {
-                return player.pickaxes["pickaxe4"];
+                return player.pickaxes["pickaxe4"] && player.powerupVariables.fakeEquipped.item !== "pickaxe4";
             },
             owned: false,
             distH: 0,
@@ -160,7 +160,7 @@ const milestoneList = {
             title: "GD mods?",
             description: "Craft Geode Staff!",
             check: function() {
-                return player.pickaxes["pickaxe5"];
+                return player.pickaxes["pickaxe5"] && player.powerupVariables.fakeEquipped.item !== "pickaxe5";
             },
             owned: false,
             distH: 0,
@@ -173,7 +173,7 @@ const milestoneList = {
             title: "nooo not the earth :sob:",
             description: "Craft Earth Soiler!",
             check: function() {
-                return player.pickaxes["pickaxe6"];
+                return player.pickaxes["pickaxe6"] && player.powerupVariables.fakeEquipped.item !== "pickaxe6";
             },
             owned: false,
             distH: 0,
@@ -186,7 +186,7 @@ const milestoneList = {
             title: "smashing crypts = sus",
             description: "Craft Crypt Smasher!",
             check: function() {
-                return player.pickaxes["pickaxe7"];
+                return player.pickaxes["pickaxe7"] && player.powerupVariables.fakeEquipped.item !== "pickaxe7";
             },
             owned: false,
             distH: 0,
@@ -199,7 +199,7 @@ const milestoneList = {
             title: "Shaiwase - VIP?",
             description: "Craft Labyrinthian Tide",
             check: function() {
-                return player.pickaxes["pickaxe8"];
+                return player.pickaxes["pickaxe8"] && player.powerupVariables.fakeEquipped.item !== "pickaxe8";
             },
             owned: false,
             distH: 0,
@@ -212,7 +212,7 @@ const milestoneList = {
             title: "why stop at 57 leafs?",
             description: "Craft 77 Leaf Destroyer!",
             check: function() {
-                return player.pickaxes["pickaxe9"];
+                return player.pickaxes["pickaxe9"] && player.powerupVariables.fakeEquipped.item !== "pickaxe9";
             },
             owned: false,
             distH: 0,
@@ -225,7 +225,7 @@ const milestoneList = {
             title: "oooo a key to what??",
             description: "Craft The Key!",
             check: function() {
-                return player.pickaxes["pickaxe13"];
+                return player.pickaxes["pickaxe13"] && player.powerupVariables.fakeEquipped.item !== "pickaxe13";
             },
             owned: false,
             distH: 0,
@@ -238,7 +238,7 @@ const milestoneList = {
             title: "planet taster :3",
             description: "Craft Planet Buster!",
             check: function() {
-                return player.pickaxes["pickaxe10"];
+                return player.pickaxes["pickaxe10"] && player.powerupVariables.fakeEquipped.item !== "pickaxe10";
             },
             owned: false,
             distH: 0,
@@ -251,7 +251,7 @@ const milestoneList = {
             title: "SPIN SPIN SPIN SPIN SPIN...",
             description: "Craft Whirlpool of Fate!",
             check: function() {
-                return player.pickaxes["pickaxe11"];
+                return player.pickaxes["pickaxe11"] && player.powerupVariables.fakeEquipped.item !== "pickaxe11";
             },
             owned: false,
             distH: 0,
@@ -264,7 +264,7 @@ const milestoneList = {
             title: "birb wing pickaxe!! :D",
             description: "Craft Wings of Glory!",
             check: function() {
-                return player.pickaxes["pickaxe12"];
+                return player.pickaxes["pickaxe12"] && player.powerupVariables.fakeEquipped.item !== "pickaxe12";
             },
             owned: false,
             distH: 0,
@@ -638,7 +638,7 @@ const milestoneList = {
             title: "the fog is coming...",
             description: "Craft RNG Manipulator",
             check: function() {
-                return player.gears["gear30"];
+                return player.gears["gear30"] && player.powerupVariables.fakeEquipped.item !== "gear30";
             },
             owned: false,
             distH: -1,
@@ -654,7 +654,7 @@ const milestoneList = {
             title: "i... am SPEED!",
             description: "Craft Makeshift Accelerator!",
             check: function() {
-                return player.gears["gear31"];
+                return player.gears["gear31"] && player.powerupVariables.fakeEquipped.item !== "gear31";
             },
             owned: false,
             distH: -1,
@@ -670,7 +670,7 @@ const milestoneList = {
             title: "i can LEAVE???",
             description: "Craft Time Destabilizer!",
             check: function() {
-                return player.gears["gear46"];
+                return player.gears["gear46"] && player.powerupVariables.fakeEquipped.item !== "gear46";
             },
             owned: false,
             distH: -1,
@@ -686,7 +686,7 @@ const milestoneList = {
             title: "remember, you have to press the button",
             description: "Craft the Ore Tracker!",
             check: function() {
-                return player.gears["gear0"];
+                return player.gears["gear0"] && player.powerupVariables.fakeEquipped.item !== "gear0";
             },
             owned: false,
             distH: -1,
@@ -702,7 +702,7 @@ const milestoneList = {
             title: "rex reference?? mmmm luck..",
             description: "Craft Real Candilium!",
             check: function() {
-                return player.gears["gear1"];
+                return player.gears["gear1"] && player.powerupVariables.fakeEquipped.item !== "gear1";
             },
             owned: false,
             distH: 1,
@@ -715,7 +715,7 @@ const milestoneList = {
             title: "rex reference 2?? AND MORE SPEED?",
             description: "Craft Real Vitriol!",
             check: function() {
-                return player.gears["gear2"];
+                return player.gears["gear2"] && player.powerupVariables.fakeEquipped.item !== "gear2";
             },
             owned: false,
             distH: 1,
@@ -731,7 +731,7 @@ const milestoneList = {
             title: "eaded the ore.. sorgy..",
             description: "Craft Energy Siphoner!",
             check: function() {
-                return player.gears["gear7"];
+                return player.gears["gear7"] && player.powerupVariables.fakeEquipped.item !== "gear7";
             },
             owned: false,
             distH: -1,
@@ -744,7 +744,7 @@ const milestoneList = {
             title: "my pickaxe is strong now!!",
             description: "Craft Sugar Rush!",
             check: function() {
-                return player.gears["gear8"];
+                return player.gears["gear8"] && player.powerupVariables.fakeEquipped.item !== "gear8";
             },
             owned: false,
             distH: -1,
@@ -760,7 +760,7 @@ const milestoneList = {
             title: "no, you cant get the plane event",
             description: "Craft Event Manager!",
             check: function() {
-                return player.gears["gear45"];
+                return player.gears["gear45"] && player.powerupVariables.fakeEquipped.item !== "gear45";
             },
             owned: false,
             distH: 1,
@@ -773,7 +773,7 @@ const milestoneList = {
             title: "afk mode ACTIVATED!",
             description: "Craft Infinity Collector!",
             check: function() {
-                return player.gears["gear3"];
+                return player.gears["gear3"] && player.powerupVariables.fakeEquipped.item !== "gear3";
             },
             owned: false,
             distH: 2,
@@ -786,7 +786,7 @@ const milestoneList = {
             title: "MORE LAYER!!!",
             description: "Craft Layer Materializer!",
             check: function() {
-                return player.gears["gear4"];
+                return player.gears["gear4"] && player.powerupVariables.fakeEquipped.item !== "gear4";
             },
             owned: false,
             distH: 2,
@@ -898,7 +898,7 @@ const milestoneList = {
             title: "free rare ores!",
             description: "Craft Replicator Prototype!",
             check: function() {
-                return player.gears["gear22"];
+                return player.gears["gear22"] && player.powerupVariables.fakeEquipped.item !== "gear22";
             },
             owned: false,
             distH: 4,
@@ -911,7 +911,7 @@ const milestoneList = {
             title: "even better pickaxe :awaa:",
             description: "Craft Hyperdrive Accelerator!",
             check: function() {
-                return player.gears["gear23"];
+                return player.gears["gear23"] && player.powerupVariables.fakeEquipped.item !== "gear23";
             },
             owned: false,
             distH: 4,
@@ -927,7 +927,7 @@ const milestoneList = {
             title: "i forgot these existed",
             description: "Craft Superenergetic Automaton!",
             check: function() {
-                return player.gears["gear24"];
+                return player.gears["gear24"] && player.powerupVariables.fakeEquipped.item !== "gear24";
             },
             owned: false,
             distH: 5,
@@ -943,7 +943,7 @@ const milestoneList = {
             title: "free rare ores v2!",
             description: "Craft Alteration Reiterator!",
             check: function() {
-                return player.gears["gear25"];
+                return player.gears["gear25"] && player.powerupVariables.fakeEquipped.item !== "gear25";
             },
             owned: false,
             distH: 6,
@@ -959,7 +959,7 @@ const milestoneList = {
             title: "more layer yay!",
             description: "Craft Stratum Nonillonator!",
             check: function() {
-                return player.gears["gear26"];
+                return player.gears["gear26"] && player.powerupVariables.fakeEquipped.item !== "gear26";
             },
             owned: false,
             distH: 7,
@@ -975,7 +975,7 @@ const milestoneList = {
             title: "this Might be good",
             description: "Craft Biome Enchanter!",
             check: function() {
-                return player.gears["gear27"];
+                return player.gears["gear27"] && player.powerupVariables.fakeEquipped.item !== "gear27";
             },
             owned: false,
             distH: 8,
@@ -992,7 +992,7 @@ const milestoneList = {
             title: "you when simulated rng:",
             description: "Craft Celestian Reaper!",
             check: function() {
-                return player.gears["gear28"];
+                return player.gears["gear28"] && player.powerupVariables.fakeEquipped.item !== "gear28";
             },
             owned: false,
             distH: 8,
@@ -1008,7 +1008,7 @@ const milestoneList = {
             title: "infinite luck!! (real)",
             description: "Craft Fortune III Book!",
             check: function() {
-                return player.gears["gear5"];
+                return player.gears["gear5"] && player.powerupVariables.fakeEquipped.item !== "gear5";
             },
             owned: false,
             distH: -1,
@@ -1024,7 +1024,7 @@ const milestoneList = {
             title: "at this point im getting sued",
             description: "Craft Haste II Beacon!",
             check: function() {
-                return player.gears["gear6"];
+                return player.gears["gear6"] && player.powerupVariables.fakeEquipped.item !== "gear6";
             },
             owned: false,
             distH: -1,
@@ -1040,7 +1040,7 @@ const milestoneList = {
             title: "silly silly!",
             description: "Craft SILLYYYY!",
             check: function() {
-                return player.gears["gear9"];
+                return player.gears["gear9"] && player.powerupVariables.fakeEquipped.item !== "gear9";
             },
             owned: false,
             distH: 2,
@@ -1082,7 +1082,7 @@ const milestoneList = {
             title: "ULTIMATE SPEED!",
             description: "Craft Abyssal Leaper!",
             check: function() {
-                return player.gears["gear29"];
+                return player.gears["gear29"] && player.powerupVariables.fakeEquipped.item !== "gear29";
             },
             owned: false,
             distH: -1,
@@ -1095,7 +1095,7 @@ const milestoneList = {
             title: "leave. now",
             description: "Craft Disengaged Incrementer.",
             check: function() {
-                return player.gears["gear47"];
+                return player.gears["gear47"] && player.powerupVariables.fakeEquipped.item !== "gear47";
             },
             owned: false,
             distH: -1,
@@ -1182,7 +1182,7 @@ const milestoneList = {
             title: "bat moment fr",
             description: "Craft Extreme Echolocator!",
             check: function() {
-                return player.pickaxes["pickaxe14"];
+                return player.pickaxes["pickaxe14"] && player.powerupVariables.fakeEquipped.item !== "pickaxe14";
             },
             owned: false,
             distH: 1,
@@ -1195,7 +1195,7 @@ const milestoneList = {
             title: "what does this name mean-",
             description: "Craft Corundum Caver!",
             check: function() {
-                return player.pickaxes["pickaxe15"];
+                return player.pickaxes["pickaxe15"] && player.powerupVariables.fakeEquipped.item !== "pickaxe15";
             },
             owned: false,
             distH: 1,
@@ -1208,7 +1208,7 @@ const milestoneList = {
             title: "dont slash the stars </3",
             description: "Craft Starborne Slasher!",
             check: function() {
-                return player.pickaxes["pickaxe16"];
+                return player.pickaxes["pickaxe16"] && player.powerupVariables.fakeEquipped.item !== "pickaxe16";
             },
             owned: false,
             distH: 2,
@@ -1221,7 +1221,7 @@ const milestoneList = {
             title: "CAT!!!",
             description: "Craft Nyabomb!",
             check: function() {
-                return player.pickaxes["pickaxe17"];
+                return player.pickaxes["pickaxe17"] && player.powerupVariables.fakeEquipped.item !== "pickaxe17";
             },
             owned: false,
             distH: 3,
@@ -1234,7 +1234,7 @@ const milestoneList = {
             title: "is this how i spell lightsabre idk",
             description: "Craft Lunar Lightsabre!",
             check: function() {
-                return player.pickaxes["pickaxe18"];
+                return player.pickaxes["pickaxe18"] && player.powerupVariables.fakeEquipped.item !== "pickaxe18";
             },
             owned: false,
             distH: 3,
@@ -1247,7 +1247,7 @@ const milestoneList = {
             title: "i could sell this thing",
             description: "Craft Gemstone Engraver!",
             check: function() {
-                return player.pickaxes["pickaxe19"];
+                return player.pickaxes["pickaxe19"] && player.powerupVariables.fakeEquipped.item !== "pickaxe19";
             },
             owned: false,
             distH: 3,
@@ -1260,7 +1260,7 @@ const milestoneList = {
             title: "LETS GO GAMBLING!",
             description: "Craft Gambler's Fallacy!",
             check: function() {
-                return player.pickaxes["pickaxe20"];
+                return player.pickaxes["pickaxe20"] && player.powerupVariables.fakeEquipped.item !== "pickaxe20";
             },
             owned: false,
             distH: 3,
@@ -1273,7 +1273,7 @@ const milestoneList = {
             title: "surely this is good",
             description: "Craft Exponential Centrifuge!",
             check: function() {
-                return player.pickaxes["pickaxe21"];
+                return player.pickaxes["pickaxe21"] && player.powerupVariables.fakeEquipped.item !== "pickaxe21";
             },
             owned: false,
             distH: 3,
@@ -1286,7 +1286,7 @@ const milestoneList = {
             title: "binding..,,,",
             description: "Craft Staff of Binding!",
             check: function() {
-                return player.pickaxes["pickaxe23"];
+                return player.pickaxes["pickaxe23"] && player.powerupVariables.fakeEquipped.item !== "pickaxe23";
             },
             owned: false,
             distH: 3,
@@ -1299,7 +1299,7 @@ const milestoneList = {
             title: "not typing the full name",
             description: "Craft SSS!",
             check: function() {
-                return player.pickaxes["pickaxe24"];
+                return player.pickaxes["pickaxe24"] && player.powerupVariables.fakeEquipped.item !== "pickaxe24";
             },
             owned: false,
             distH: 3,
@@ -1312,7 +1312,7 @@ const milestoneList = {
             title: "lag.",
             description: "Craft Coronary Catastrophe!",
             check: function() {
-                return player.pickaxes["pickaxe25"];
+                return player.pickaxes["pickaxe25"] && player.powerupVariables.fakeEquipped.item !== "pickaxe25";
             },
             owned: false,
             distH: 3,
@@ -1328,7 +1328,7 @@ const milestoneList = {
             title: "nerdy ahh name",
             description: "Craft Quantum Entangler!",
             check: function() {
-                return player.gears["gear32"];
+                return player.gears["gear32"] && player.powerupVariables.fakeEquipped.item !== "gear32";
             },
             owned: false,
             distH: 2,
@@ -1344,7 +1344,7 @@ const milestoneList = {
             title: "british spelling :rolling_eyes:",
             description: "Craft Logical Randomiser!",
             check: function() {
-                return player.gears["gear10"];
+                return player.gears["gear10"] && player.powerupVariables.fakeEquipped.item !== "gear10";
             },
             owned: false,
             distH: 3,
@@ -1360,7 +1360,7 @@ const milestoneList = {
             title: "speedy v2 :3",
             description: "Craft Storm Sneakers!",
             check: function() {
-                return player.gears["gear11"];
+                return player.gears["gear11"] && player.powerupVariables.fakeEquipped.item !== "gear11";
             },
             owned: false,
             distH: 4,
@@ -1373,7 +1373,7 @@ const milestoneList = {
             title: "what does this mean v2",
             description: "Craft Artifice Annihilator!",
             check: function() {
-                return player.gears["gear12"];
+                return player.gears["gear12"] && player.powerupVariables.fakeEquipped.item !== "gear12";
             },
             owned: false,
             distH: 5,
@@ -1386,7 +1386,7 @@ const milestoneList = {
             title: "free commons!!",
             description: "Craft Repurposed Replicator!",
             check: function() {
-                return player.gears["gear13"];
+                return player.gears["gear13"] && player.powerupVariables.fakeEquipped.item !== "gear13";
             },
             owned: false,
             distH: 6,
@@ -1402,7 +1402,7 @@ const milestoneList = {
             title: "youll need caves i think",
             description: "Craft Cavern Capacitator!",
             check: function() {
-                return player.gears["gear14"];
+                return player.gears["gear14"] && player.powerupVariables.fakeEquipped.item !== "gear14";
             },
             owned: false,
             distH: 4,
@@ -1415,7 +1415,7 @@ const milestoneList = {
             title: "is it cheap atleast",
             description: "Craft High Powered Vacuum!",
             check: function() {
-                return player.gears["gear15"];
+                return player.gears["gear15"] && player.powerupVariables.fakeEquipped.item !== "gear15";
             },
             owned: false,
             distH: 5,
@@ -1428,7 +1428,7 @@ const milestoneList = {
             title: "smol.",
             description: "Craft Subatomic Superpositioner!",
             check: function() {
-                return player.gears["gear33"];
+                return player.gears["gear33"] && player.powerupVariables.fakeEquipped.item !== "gear33";
             },
             owned: false,
             distH: 6,
@@ -1441,7 +1441,7 @@ const milestoneList = {
             title: "SPEED V3!!",
             description: "Craft Unlocked Speedcap!",
             check: function() {
-                return player.gears["gear16"];
+                return player.gears["gear16"] && player.powerupVariables.fakeEquipped.item !== "gear16";
             },
             owned: false,
             distH: 7,
@@ -1454,7 +1454,7 @@ const milestoneList = {
             title: "read item description",
             description: "Craft Infinity Collector II!",
             check: function() {
-                return player.gears["gear17"];
+                return player.gears["gear17"] && player.powerupVariables.fakeEquipped.item !== "gear17";
             },
             owned: false,
             distH: 8,
@@ -1470,7 +1470,7 @@ const milestoneList = {
             title: "community would be mad if main path",
             description: "Craft Singularity Slammer!",
             check: function() {
-                return player.pickaxes["pickaxe22"];
+                return player.pickaxes["pickaxe22"] && player.powerupVariables.fakeEquipped.item !== "pickaxe22";
             },
             owned: false,
             distH: 4,
@@ -1486,7 +1486,7 @@ const milestoneList = {
             title: "doesnt need a clover, bad",
             description: "Craft Clover's Undoing!",
             check: function() {
-                return player.gears["gear18"];
+                return player.gears["gear18"] && player.powerupVariables.fakeEquipped.item !== "gear18";
             },
             owned: false,
             distH: 4,
@@ -1502,7 +1502,7 @@ const milestoneList = {
             title: "BEST ITEM IN THE GAME",
             description: "Craft Structural Service!",
             check: function() {
-                return player.gears["gear19"];
+                return player.gears["gear19"] && player.powerupVariables.fakeEquipped.item !== "gear19";
             },
             owned: false,
             distH: 4,
@@ -1518,7 +1518,7 @@ const milestoneList = {
             title: "BETTER ITEM.",
             description: "Craft Statistical Amplifier!",
             check: function() {
-                return player.gears["gear20"];
+                return player.gears["gear20"] && player.powerupVariables.fakeEquipped.item !== "gear20";
             },
             owned: false,
             distH: 4,
@@ -1531,7 +1531,7 @@ const milestoneList = {
             title: "click the gear tab lots lol",
             description: "Craft Oblivion Fracturer!",
             check: function() {
-                return player.gears["gear21"];
+                return player.gears["gear21"] && player.powerupVariables.fakeEquipped.item !== "gear21";
             },
             owned: false,
             distH: 5,
@@ -1588,7 +1588,7 @@ const milestoneList = {
             title: "LAG V2 OMG",
             description: "Craft Null Chroma! Requires:\r\nW1 Trophy, W2 Trophy, SR1 Trophy!",
             check: function() {
-                return player.pickaxes["pickaxe26"];
+                return player.pickaxes["pickaxe26"] && player.powerupVariables.fakeEquipped.item !== "pickaxe26";
             },
             owned: false,
             distH: 3,
@@ -1656,7 +1656,7 @@ const milestoneList = {
             title: "the flash is here",
             description: "Craft Lightspeed Emulator!",
             check: function() {
-                return player.gears["gear36"];
+                return player.gears["gear36"] && player.powerupVariables.fakeEquipped.item !== "gear36";
             },
             owned: false,
             distH: 4,
@@ -1682,7 +1682,7 @@ const milestoneList = {
             title: "exponents = good, trust",
             description: "Craft Increased Exponentiality!",
             check: function() {
-                return player.gears["gear37"];
+                return player.gears["gear37"] && player.powerupVariables.fakeEquipped.item !== "gear37";
             },
             owned: false,
             distH: 6,
@@ -1711,7 +1711,7 @@ const milestoneList = {
             title: "..i guess they do",
             description: "Craft Electrifying Propagator!",
             check: function() {
-                return player.gears["gear35"];
+                return player.gears["gear35"] && player.powerupVariables.fakeEquipped.item !== "gear35";
             },
             owned: false,
             distH: 5,
@@ -1750,7 +1750,7 @@ const milestoneList = {
             title: "the name???",
             description: "Craft Forgotten Rose Quartz Shell!",
             check: function() {
-                return player.gears["gear38"];
+                return player.gears["gear38"] && player.powerupVariables.fakeEquipped.item !== "gear38";
             },
             owned: false,
             distH: 8,
@@ -1763,7 +1763,7 @@ const milestoneList = {
             title: "the name???????",
             description: "Craft Armband of Endless Dreams!",
             check: function() {
-                return player.gears["gear39"];
+                return player.gears["gear39"] && player.powerupVariables.fakeEquipped.item !== "gear39";
             },
             owned: false,
             distH: 9,
