@@ -47,7 +47,8 @@ let oreList = {
     'intercept' : { 'decimalRarity': 1 / 10000000000000000, 'numRarity': 10000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "A shape of seemingly infinite size emerges from the mines, engulfing everything around it...", 'oreTier': 'Infinitesimal', "hasImage":true, "src" : "media/ores/intercept.png", "oreName":"Intercept", "eId": "<:intercept:1268367354870370436>"},
     'aFleetingSoul' : { 'decimalRarity': 1 / 6666000000000000, 'numRarity': 6666000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "Hollowed souls howl from their buried tomb, echoing the death of a civilization long lost. The pained cry dissipating as abruptly as it started...", 'oreTier': 'Hyperdimensional', "hasImage":true, "src" : "media/ores/aFleetingSoul.png", "oreName":"A Fleeting Soul", "eId":"<:aFleetingSoul:1267216891777253417>"},
     
-    //summer event fuck i forgot my bad chat
+    //summer event fuck i forgot my bad chat 
+    //Dont worry
     //🏐🌴🐙🐬🍧🏖️🏄‍♂️🎋☀️
     '🏐' : { 'decimalRarity': 1 / 1475000, 'numRarity': 1475000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': "🏐 Has Spawned!", 'oreTier': 'Antique', },
     '🌴' : { 'decimalRarity': 1 / 10400000, 'numRarity': 10400000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': "🌴 Has Spawned!", 'oreTier': 'Mystical', },
@@ -454,7 +455,7 @@ let oreList = {
     //🏳️‍⚧️ 🇺🇳 
     '🇺🇳' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🏁': { 'decimalRarity': 1 / 12500000000000, 'numRarity': 12500000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Imaginary',  },
-    '🏳️‍⚧️' : { 'decimalRarity': 1 / 500000000000000, 'numRarity': 500000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Imaginary',  },
+    '🏳️‍⚧️' : { 'decimalRarity': 1 / 500000000000000, 'numRarity': 500000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'the woke mind virus in tsc...', 'oreTier': 'Imaginary',  },
     
     '🍀': { 'decimalRarity': 1 / 234000000000000, 'numRarity': 234000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'This is it..? The symbol of luck itself, a simple four-leafed clover..?', 'oreTier': 'Imaginary',  },
     '☘️': { 'decimalRarity': 1 / 12300000000000, 'numRarity': 12300000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A peculiar three-leafed clover.. there must be more to this strange aura it emanates, this feels.. incomplete...', 'oreTier': 'Imaginary',  },
@@ -533,6 +534,24 @@ let oreList = {
     '🔄': { 'decimalRarity': 1 / 175, 'numRarity': 175, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🔃': { 'decimalRarity': 1 / 100, 'numRarity': 100, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     
+    // johns family and friends (most of them are johnical)
+    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer', },
+    //jonah is found in the door layer, john will say "my old coworker johan, please go find him in the door layer, hes currently taking care of all the doors, but he forgot to give me back my 20 bucks so please bring back 5 of him (so i get 120 dollars 🤑)"
+    '🤽🏻': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: oh man you found my good buddy Jonah (not to be confused with johan, i remember that one time we went to home depot and we accidentally bought twenty thousand doors, turns out they were mitosing door, ', 'oreTier': 'Johnical',  },
+    //jackson is found in the europe layer in SR1, john will say "please help me find jackson, he is located in the europe layer in SR1, i need to tell him about the WCP, get me 10 of him, (so that i can get his reaction 10 times)"
+    '🤽🏼': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: jackson and i were best buddies in school untill he fell into a wormhole that brought him straight to the vatican city, we used to meet up during lunch time to undermine the TnnA fountations authority', 'oreTier': 'Johnical',  },
+    //noah is found in the chess layer, john will say "locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 5 of him though because 5 is better than 1"
+    '🤽🏽': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: noah was who first me to checkmarxism, at his local library i am very greatful for his contributions to the WCP', 'oreTier': 'Johnical',  },
+    //ron is found in the tv layer, john will say "help me find ron, im pretty sure hes still sleeping at his house in the tv layer"
+    '🤽🏾': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: ron... i still remember when we first thought about the second Miku-Feline war back in the day, he was such a good advisor', 'oreTier': 'Johnical',  },
+    //johan is found in the black x layer, so i made him 10x more common you can change this though, john will say "get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)"
+    '🤽🏿': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: johan (not to be confused with jonah) is jonahs brother, i met him once at a wedding, very nice guy', 'oreTier': 'Johnical',  },
+    //shawn is found in the cake layer, john will say "im really hungry right now so can you get me 5 shawns, theyre currently holding a party in the cake layer, i need to ask them if they can give me a spare slice of cake"
+    '🤽🏻‍♂️': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: woah they have red velvet cake at the party, truly incredible', 'oreTier': 'Johnical',  },
+    //🤽🏼‍♂️: jay 🤽🏽‍♂️: rowan 🤽🏾‍♂️: don 🤽🏿‍♂️: jordan 🤽‍♀️: jane 🤽🏻‍♀️: janine 🤽🏼‍♀️: joan 🤽🏽‍♀️: johanna (joan's sister) 🤽🏾‍♀️: jocelyn 🤽🏿‍♀️: rowhen 🐃 (johns pet) evil john (image somewhere in this page) josh (too scary to show on this wiki) 
+
     'stars' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/stars.png", "oreName": "Stars"},
     '🟫': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🧱': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
@@ -665,7 +684,9 @@ const layerList = {
 "catcatLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳'],
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
-"deepWaterLayer" : ["deepWater"]
+"deepWaterLayer" : ["deepWater"],
+"jimLayer":[], // todo
+"johnLayer":[] // todo
 }
 const createdLayers = {
 
