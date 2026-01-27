@@ -11,7 +11,7 @@ async function rollAbilities(force) {
     if (player.gears["gear39"]) m *= 0.5;
     if (verifiedOres.canGenerateCaves()) {
         const caveRate = player.powerupVariables.caveBoosts.active ? 1/250 : 1/500;
-        if ((player.settings.cavesEnabled || !player.pickaxes.pickaxe26) && Math.random() <= caveRate) {
+        if ( Math.random() <= caveRate) {
             player.stats.cavesGenerated++;
             generateCave();
         }

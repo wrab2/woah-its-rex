@@ -116,7 +116,6 @@ class playerTemplate {
             useNumbers: false,
             inventorySettings: {invToIndex: true, craftingToIndex: true},
             usePathBlocks: true,
-            cavesEnabled: true,
             useDisguisedChills: false,
             usingNewEmojis: false,
             minRarityNum: 0,
@@ -567,9 +566,6 @@ function oldDataToNew(data) {
         if (data[3][16] != undefined) {
             newData.player.settings.usePathBlocks = data[3][16];
         }
-        if (data[3][17] != undefined) {
-            newData.player.settings.cavesEnabled = data[3][17];
-        }
         if (data[3][18] != undefined) {
             newData.player.settings.useDisguisedChills = data[3][18]
         }
@@ -685,7 +681,6 @@ function loadNewData(data) {
         mineCapacity = mineCapacity < 250 ? 250 : mineCapacity;
         document.getElementById("resetNumber").innerText = `0 Revealed.`;
         data.settings.cavesEnabled ??= true;
-        if (!data.settings.cavesEnabled) toggleCaves(document.getElementById("caveToggle"));
         data.settings.inventorySettings ??= {invToIndex: true, craftingToIndex: true};
         if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
         if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);

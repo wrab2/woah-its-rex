@@ -21,19 +21,6 @@ function showLoungeScreen(id, button) {
         showLoungeScreen.current = id;  
     }
 		if(id === "loungeGameSettings"){
-			if(!player.pickaxes.pickaxe26){
-				get("caveToggle").disabled = true
-				get("caveToggle").style.backgroundColor = "#333333"
-				get("caveToggle").textContent = "Can't disable caves without Null Chroma"
-			} else {
-				get("caveToggle").disabled = false
-				get("caveToggle").textContent = "Toggle Caves"
-				if (player.settings.cavesEnabled) {
-					get("caveToggle").style.backgroundColor = "#6BC267";
-				} else {
-					get("caveToggle").style.backgroundColor = "#FF3D3D";
-				}
-			}
 			get("mineCapacitySetter").value = player.settings.baseMineCapacity
 			get("latestSetter").value = player.settings.latestLength
 			get("automineUpdate").value = player.settings.automineUpdate
@@ -250,20 +237,6 @@ function changeSpawnVolume(percent, name) {
 }
 
 let minMiningSpeed = 0;
-
-
-function toggleCaves() {
-    //do nothing without null
-    if(!player.pickaxes.pickaxe26)return
-    if (player.settings.cavesEnabled) {
-        player.settings.cavesEnabled = false;
-        document.getElementById("caveToggle").style.backgroundColor = "#FF3D3D";
-    }
-    else {
-        player.settings.cavesEnabled = true;
-        document.getElementById("caveToggle").style.backgroundColor = "#6BC267";
-    }
-}
 
 function updateCapacity(element) {
     elementValue = element.value;
