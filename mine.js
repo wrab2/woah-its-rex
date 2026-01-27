@@ -46,7 +46,9 @@ function mineBlock(x, y, cause) {
         mineBlockVariant = undefined;
     }
     if (mineBlockOre === "⚪") return;
-    if (!unbreakable.includes(mineBlockOre)) {
+    if (!unbreakable.includes(mineBlockOre)|| 
+			pickaxeStats[player.stats.currentPickaxe].tier >= unbreakableTiers[unbreakable.indexOf(mineBlockOre)]
+		)	{
         if (cause !== "infinity") checkAllAround(x, y);
         else placeLayerAround(x, y);
         if (oreList[mineBlockOre]["numRarity"] >= 750000) {

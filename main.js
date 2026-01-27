@@ -306,7 +306,9 @@ function movePlayer(dir, reps, type) {
                 }
                 let block = mine[curY + dir.y][curX + dir.x];
                 block = block.ore === undefined ? block : block.ore;
-                if (!unbreakable.includes(block)) { 
+                if (!unbreakable.includes(block)|| 
+					pickaxeStats[player.stats.currentPickaxe].tier >= unbreakableTiers[unbreakable.indexOf(block)]
+				) { 
                     mine[curY][curX] = "⚪";
                     curY += dir.y;
                     curX += dir.x;
