@@ -561,18 +561,18 @@ let oreList = {
     '🤽🏼‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: me and joan are both mikufans (QwQuiz reference!!!), thats how we met', 'oreTier': 'Johnical',  },
     //johanna (joan's sister) is located in the abysstone cave, john will say "holdon i brb rq my cat can tell you about johanna JHhhhhhhhhhHHN BNJHU8I97U\\\\\\\\\\\\\\\\\0-OI999999999999999999999999999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU"
     '🤽🏽‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: okay im back now, johanna is joans sister, she helped me create the WCP, truly an innovator', 'oreTier': 'Johnical',  },
-    //jocelyn is located in the jane cave
-    '🤽🏾‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John:', 'oreTier': 'Johnical',  },
-    //rowhen is located in the biohazard cave
-    '🤽🏿‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John:', 'oreTier': 'Johnical',  },
+    //jocelyn is located in the jane cave, john says this about her "i was jocelyns successor in the WCP, so please get me 1 of her"
+    '🤽🏾‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: meow :3', 'oreTier': 'Johnical',  },
+    //rowhen is located in the biohazard cave john says this about them "this is rowen's cousin, please get me 1 of her"
+    '🤽🏿‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John:🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️', 'oreTier': 'Johnical',  },
     //the water buffalo is obtained by crafting every other normal family member, john will say "can you please please please please please get me my water buffalo back, hes our family pet (you might want to do this after all the other requests)"
     '🐃':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'how the hell did you get this as a spawn message :3', 'oreTier': 'Johnical',  },
-    //evil john can be obtained by rejecting 5 of johns requests in 1 session (like a CLT) then it will spawn in the john later (he can always request it though so it might be impossible to fulfill a request without denying it)
+    //evil john can be obtained by rejecting 5 of johns requests in 1 session (like a CLT) then it will spawn in the john later (he can always request it though so it might be impossible to fulfill a request without denying it), he will not say anything when requesting it, and it will say "found in ???" or however you make it say what layer its found in
     'evilJohn' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'you quiver in fear at the sight of a familar face but EVIL and RED', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/evil_john.png", "oreName" : "Evil John"},
-    //josh is
+    //josh is obtainable with a repeating layer trigger on the john layer, john will say "i lost my roomate, i cant find him anywhere "
+    //also i didnt finish implementing the CLT please finish it i dont wanna mess things up !
     'josh' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Josh: hi im johns roomate, tell him hi for me', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/josh.png", "oreName" : "Josh"},
 
-    //evil john (image somewhere in this page) josh (too scary to show on this wiki) 
     'stars' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/stars.png", "oreName": "Stars"},
     '🟫': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🧱': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
@@ -951,6 +951,12 @@ function a87(num, force, g) {
             if (Math.random() < 1/35 || force) {
                 if (g) return "paperLayer";
                 insertIntoLayers({"ore":"📜", "layers":["paperLayer"], "useLuck":true});
+                added = true;
+            }
+        case 8:
+            if (Math.random() < 1/10 || force) {
+                if (g) return "johnLayer";
+                insertIntoLayers({"ore":"josh", "layers":["johnLayer"], "useLuck":true});
                 added = true;
             }
             break;
