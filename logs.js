@@ -473,7 +473,8 @@ function serverWebhook(log, mined, key) {
     if (log.variantInfo !== undefined) {
         logObj["varVerification"] = {"rand": log.variantInfo.r, "count": log.variantInfo.c, "seed": log.variantInfo.s};
     }
-    fetch("https://endurable-fragrant-visitor.glitch.me", {
+    //fetch("https://endurable-fragrant-visitor.glitch.me", {
+    fetch("http://0.0.0.0", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
