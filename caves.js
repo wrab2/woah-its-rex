@@ -430,7 +430,7 @@ let caveTypes = {
     "axCave" : {rarity: 1/29, multi: 29},
     "foCave" : {rarity: 1/28, multi: 28},
     "watrCave" : {rarity: 1/25, multi:25},
-    "janeCave" : {rarity: 1/100000 multi:100000},
+    "janeCave" : {rarity: 1/100000, multi:100000},
 
 }
 let caveList = {

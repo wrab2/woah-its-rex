@@ -534,13 +534,10 @@ let oreList = {
     '🔄': { 'decimalRarity': 1 / 175, 'numRarity': 175, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🔃': { 'decimalRarity': 1 / 100, 'numRarity': 100, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     
-    // johns family and friends (most of them are johnical)
-    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer', },
-    //jonah is found in the door layer, john will say "my old coworker johan, please go find him in the door layer, hes currently taking care of all the doors, but he forgot to give me back my 20 bucks so please bring back 5 of him (so i get 120 dollars 🤑)"
+    // johns family and friends 
+    //jonah is found in the door layer, john will say "my old coworker johan, please go find him, hes currently taking care of all the doors, but he forgot to give me back my 20 bucks so please bring back 5 of him (so i get 120 dollars 🤑)"
     '🤽🏻': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: oh man you found my good buddy Jonah (not to be confused with johan, i remember that one time we went to home depot and we accidentally bought twenty thousand doors, turns out they were mitosing door, ', 'oreTier': 'Johnical',  },
-    //jackson is found in the europe layer in SR1, john will say "please help me find jackson, he is located in the europe layer in SR1, i need to tell him about the WCP, get me 10 of him, (so that i can get his reaction 10 times)"
+    //jackson is found in the europe layer in SR1, john will say "please help me find jackson, i need to tell him about the WCP, get me 2 of him, (so that i can get his reaction twice)"
     '🤽🏼': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: jackson and i were best buddies in school untill he fell into a wormhole that brought him straight to the vatican city, we used to meet up during lunch time to undermine the TnnA fountations authority', 'oreTier': 'Johnical',  },
     //noah is found in the chess layer, john will say "locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 5 of him though because 5 is better than 1"
     '🤽🏽': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: noah was who first me to checkmarxism, at his local library i am very greatful for his contributions to the WCP', 'oreTier': 'Johnical',  },
@@ -548,10 +545,34 @@ let oreList = {
     '🤽🏾': { 'decimalRarity': 1 / 500000000000000000, 'numRarity': 500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: ron... i still remember when we first thought about the second Miku-Feline war back in the day, he was such a good advisor', 'oreTier': 'Johnical',  },
     //johan is found in the black x layer, so i made him 10x more common you can change this though, john will say "get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)"
     '🤽🏿': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: johan (not to be confused with jonah) is jonahs brother, i met him once at a wedding, very nice guy', 'oreTier': 'Johnical',  },
-    //shawn is found in the cake layer, john will say "im really hungry right now so can you get me 5 shawns, theyre currently holding a party in the cake layer, i need to ask them if they can give me a spare slice of cake"
+    //shawn spawns in the cake layer, john will say "im really hungry right now so can you get me 5 shawns, theyre currently holding a party in the cake layer, i need to ask them if they can give me a spare slice of cake"
     '🤽🏻‍♂️': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: woah they have red velvet cake at the party, truly incredible', 'oreTier': 'Johnical',  },
-    //🤽🏼‍♂️: jay 🤽🏽‍♂️: rowan 🤽🏾‍♂️: don 🤽🏿‍♂️: jordan 🤽‍♀️: jane 🤽🏻‍♀️: janine 🤽🏼‍♀️: joan 🤽🏽‍♀️: johanna (joan's sister) 🤽🏾‍♀️: jocelyn 🤽🏿‍♀️: rowhen 🐃 (johns pet) evil john (image somewhere in this page) josh (too scary to show on this wiki) 
+    //jay spawns in the cactus layer, john will say "i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer, please get me 5 of them though because thats a prime number"
+    '🤽🏼‍♂️': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: please make sure that jay does not bring me any bonsai cactus plants, last time it grew so much it blocked an entire room', 'oreTier': 'Johnical',  },
+    //rowan spawns in the jim layer, john will say "pick up 5 rowans please, i need them for a very important deal"
+    '🤽🏽‍♂️': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: my good buddy rowan (we called him marcus roman in school), he always had the best school projects, once he got a huge ball of plastic and turned it into a maze', 'oreTier': 'Johnical',  },
+    //don spawns in the radioactive layer, john will say "i need you to find me don, NOW, my nuclear reactors are not functioning correctly without them nearby"
+    '🤽🏾‍♂️': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: don and i met at the Communal pit in 1752, they were so good at climbing i instantly gave them a job', 'oreTier': 'Johnical',  },
+    //jordan spawns in the seychelles layer (africa sr1) john will say "find me jordan (not the country), they need to show up to my housewarming party get me 2 of them though because thats not a power of 3"
+    '🤽🏿‍♂️': { 'decimalRarity': 1 / 50000000000000000, 'numRarity': 50000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: you wont BELIEVE what country jordan and i met', 'oreTier': 'Johnical',  },
+    //janine is located in the germ cave john will say "janine is my sister (jane)'s bestie, please find 1 of her"
+    '🤽🏻‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: i dont have much to say about janine, but thank you for finding her', 'oreTier': 'Johnical',  },
+    //joan is located in the music cave john will say "me and joan were planning on going to the new adachi rei concert, please Find her so she can give me my ticket"
+    '🤽🏼‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: me and joan are both mikufans (QwQuiz reference!!!), thats how we met', 'oreTier': 'Johnical',  },
+    //johanna (joan's sister) is located in the abysstone cave, john will say "holdon i brb rq my cat can tell you about johanna JHhhhhhhhhhHHN BNJHU8I97U\\\\\\\\\\\\\\\\\0-OI999999999999999999999999999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+    '🤽🏽‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: okay im back now, johanna is joans sister, she helped me create the WCP, truly an innovator', 'oreTier': 'Johnical',  },
+    //jocelyn is located in the jane cave
+    '🤽🏾‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John:', 'oreTier': 'Johnical',  },
+    //rowhen is located in the biohazard cave
+    '🤽🏿‍♀️': { 'decimalRarity': 1 / 5000000000000, 'numRarity': 5000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John:', 'oreTier': 'Johnical',  },
+    //the water buffalo is obtained by crafting every other normal family member, john will say "can you please please please please please get me my water buffalo back, hes our family pet (you might want to do this after all the other requests)"
+    '🐃':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'how the hell did you get this as a spawn message :3', 'oreTier': 'Johnical',  },
+    //evil john can be obtained by rejecting 5 of johns requests in 1 session (like a CLT) then it will spawn in the john later (he can always request it though so it might be impossible to fulfill a request without denying it)
+    'evilJohn' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'you quiver in fear at the sight of a familar face but EVIL and RED', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/evil_john.png", "oreName" : "Evil John"},
+    //josh is
+    'josh' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Josh: hi im johns roomate, tell him hi for me', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/josh.png", "oreName" : "Josh"},
 
+    //evil john (image somewhere in this page) josh (too scary to show on this wiki) 
     'stars' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/stars.png", "oreName": "Stars"},
     '🟫': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🧱': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
@@ -575,6 +596,9 @@ let oreList = {
     '✖️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '❌': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🕳️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer', },
     'bitcoin' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'erm', 'oreTier': 'Common',  },
     'Nyerd' : { 'decimalRarity': 1 / 450000000000, 'numRarity': 450000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "you're a NYERD!!!", 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/NYERD.webp", "oreName" : "nyerd", "eId":"<:nyerd:1232461600087343156>"},
     'Fox' : { 'decimalRarity': 1 / 200000000000, 'numRarity': 200000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'what the fox is going on here!!', 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/STUPID_FOX.webp", "oreName" : "fox",},
