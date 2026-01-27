@@ -134,7 +134,7 @@
   vertical-align: middle;
   box-shadow: 0px 0px min(0.4vh,0.2vw) var(--main-shadow-color);
   position: relative;
-  z-index: 9999999999999999;
+  z-index: 11000;
 }
 #latestOres {
   width: 100%;
@@ -196,7 +196,7 @@
 #scrollableCraft {
   width: min(98vh,49vw);
   height: min(140vh,70vw);
-  z-index: 9999999999;
+  z-index: 10200;
   position: absolute;
   top: min(16vh,8vw);
   left: min(52vh,26vw);
@@ -5029,4 +5029,60 @@ background-size: 100%;
 }
 .attemptingPickaxeCelestial{
   margin: 0.5em 0 -0.5em 0
+}
+
+.john-window-main{
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: #ff000040;
+	z-index: 15000
+}
+.john-background{
+	width: 50vw;
+}
+.john-name {
+	width: min-width;
+	font-size: 30px;
+	color: white;
+	font-weight:bolder;
+	background-color: #0a0a0a;
+	border: 2px solid gray;
+	border-radius: 10px;
+	margin: 0 auto 0 auto;
+}
+.john-portrait{
+	position: absolute;
+	top: 40px;
+	width: min-width;
+	font-size: min(30vw, 80vh);
+	margin: 0 auto 0 auto;
+}
+.john-background-water{
+	position:absolute;
+	top: 50vh;
+	margin:0;
+	left:0;
+	height: 100vh;
+	width:100vw;
+	overflow:hidden;
+	background-color:cyan;
+}
+.john-quest-window{
+	position: absolute;
+	right:10;
+	display:block;
+	height: 200px;
+	background-color: gray;
+	border-radius: 10px;
+	border: 2px solid yellow;
+	max-height: 90vh;
+	max-width:50vw;
+}
+.john-speech {
+	border-bottom: 2px solid yellow
 }
