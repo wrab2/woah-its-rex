@@ -164,6 +164,7 @@ function aleaRandom() {
 const generateBlock = function(location, wbm) {
     wbm ??= false;
     blocksRevealedThisReset++;
+	if(location["Y"]==200e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽"
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;
@@ -556,7 +557,8 @@ function rebuildSpecialLayerObject() {
 function switchDistance(num) {
     const lastLayerInfo = [distanceMulti, layerDistanceY];
     distanceMulti += num;
-    const layerNums = allLayers.length - 1;
+    const layerNums = allLayers.length - 1; 
+	//what is going on here
     const specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
     if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
     if (distanceMulti < 0) {

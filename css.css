@@ -5031,7 +5031,8 @@ background-size: 100%;
   margin: 0.5em 0 -0.5em 0
 }
 
-.john-window-main{
+#john-window-main{
+	visibility: hidden;
 	position: absolute;
 	display: flex;
 	flex-direction: row;
