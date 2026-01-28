@@ -231,6 +231,7 @@ let keepRunningAudio;
 let eventSpawn;
 let hyperdimensional;
 let infinitesimal;
+let johnical;
 let polychromatical;
 let allAudios = {
     "Antique" : undefined,
@@ -244,6 +245,7 @@ let allAudios = {
     "Celestial" : undefined,
     "Imaginary" : undefined,
     "Hyperdimensional" : undefined,
+    "Johnical" : undefined,
     "Polychromatical" : undefined,
     "Infinitesimal" : undefined
 };
@@ -266,6 +268,7 @@ function loadContent() {
     hyperdimensional = new Audio("audios/hyperdimensional.mp3");
     infinitesimal = new Audio("audios/infinitesimal.mp3");
     polychromatical = new Audio("audios/polychromatical.mp3");
+    johnical = new Audio("audios/johnical.mp3");
     osaka = new Audio("audios/lol.mp3");
     allAudios["Antique"] = chill;
     allAudios["Mystical"] = mystical;
@@ -279,6 +282,7 @@ function loadContent() {
     allAudios["Imaginary"] = imaginary;
     allAudios["Hyperdimensional"] = hyperdimensional;
     allAudios["Infinitesimal"] = infinitesimal;
+    allAudios["Johnical"] = johnical;
     allAudios["Polychromatical"] = polychromatical;
     for (let property in allAudios) allAudios[property].load();
     musicPlayer.songs["song1"].src = new Audio("audios/ely_audio_1.mp3");

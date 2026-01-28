@@ -104,7 +104,8 @@ class playerTemplate {
                 "Imaginary": {canPlay: true, volume: 50},
                 "Hyperdimensional" : {canPlay: true, volume:50},
                 "Infinitesimal" : {canPlay: true, volume:50},
-                "Polychromatical" : {canPlay: true, volume:50}
+                "Polychromatical" : {canPlay: true, volume:50},
+                "Johnical" : {canPlay: true, volume:50}
             },
             musicSettings: {
                 active: true,

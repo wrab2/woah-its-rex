@@ -275,6 +275,17 @@
                         </label>
                     </div>
                 </div>
+                <div class="spawnSoundSettings">
+                    <div class="soundMuteButtonHolder">
+                        <button class="muteButton" onclick="changeCanPlay('Johnical', this)"id="muteJohnical">Mute Johnical</button>
+                        <button class="testButton" onclick="testSound('Johnical', this)">Preview</button>
+                    </div>
+                    <div class="soundSliderHolder">
+                        <label class="spawnSoundContainer">
+                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Johnical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #9cc7ff 50%);">
+                        </label>
+                    </div>
+                </div>
             </div>
             <div id="loungeData" style="display: none;">
                 <div class="dataDiv">
@@ -994,11 +1005,15 @@
 			<div class="john-talking-window"><!--window with quests and stories-->
 				<table class="john-quest-window">
 					<tr>
-						<td>hello im john help me find m famil and friends</td>
+						<td id="john-speech">hello im john help me find m famil and friends</td>
 					</tr>
-					
+
 					<tr>
-						<td>🐃0/10</td>
+						<td id="ore-story">you find me this ore blah blah blah</td>
+					</tr>
+
+					<tr>
+						<td id="john-quest-progress">🐃0/10</td>
 					</tr>
 
 					<tr>
