@@ -866,12 +866,6 @@ function loadNewData(data) {
         }
         verifiedOres.countHyperdimensionalOres();
         updateInventory(false);
-        
-        try {
-            beSilly.init();
-        } catch (err) {
-
-        }
 }
 function smallVariantRoll() {
     let variantRoll = Math.random();
@@ -901,10 +895,6 @@ beSilly = {
         generateCave = () => 0;
         createGenerationProbabilities();
     },
-    init() {
-        if (beSilly.isPlayer("Tetrati0n") || beSilly.isPlayer("Lima Bean")) beSilly.tetraTroll();
-        delete beSilly;
-    }
 }
 function applyStopOnRareData() {
     const elementList = document.getElementsByClassName("stopOnRareTier");
