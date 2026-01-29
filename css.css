@@ -4420,7 +4420,6 @@ button {
   justify-content: center;
   height: 1.4vw;
   width: 100%;
-  margin-left: 0.2em;
 }
 .electrifiedBlock {
   position: relative;
@@ -5040,26 +5039,35 @@ background-size: 100%;
 	height: 100vh;
 	top: 0;
 	left: 0;
-	background-color: #ff000040;
+	background-color: #00a2ff40;
 	z-index: 15000
 }
 .john-background{
 	width: 50vw;
 }
-.john-name {
-	width: min-width;
+#john-name {
+  position: absolute;
+	width: 200px;
 	font-size: 30px;
+	top: 30vh;
+  left: min(100px, 5vw);
 	color: white;
 	font-weight:bolder;
 	background-color: #0a0a0a;
 	border: 2px solid gray;
 	border-radius: 10px;
 	margin: 0 auto 0 auto;
+  animation-duration: 2s;
+}
+@keyframes john-name-up {
+  0% { opacity: 0;}
+  50% { opacity: 0;}
+  100% { opacity: 1;}
 }
 #john-portrait{
 	position: absolute;
-	top: 50px;
-  left: 40px;
+	top: calc(50px + 30vh);
+  left: min(100px, 5vw);
 	width: 200px;
   height: 200px;
 	font-size: min(30vw, 80vh);
@@ -5068,18 +5076,13 @@ background-size: 100%;
   animation-duration: 2s;
 }
 @keyframes john-swim-up {
-  from {
-    margin-top: 500px;
-  }
-
-  to {
-    margin-top: 0px;
-  }
+  from { margin-top: 500px;}
+  to { margin-top: 0px;}
 }
 .john-background-water{
 	position:absolute;
-	top: 50px;
-  left: -160px;
+	top: calc(50px + 30vh);
+  left: calc( min(100px, 5vw) - 200px );
 	margin:0;
 	width: 150vw;
   height: 200px;
@@ -5089,22 +5092,40 @@ background-size: 100%;
 .john-water-blue {
   background-color: #29b6f6;
   position: absolute;
-  top:250px;
+  top: calc(250px + 30vh);
   height: 100vh;
   width: 100vw;
   left:0;
 }
 .john-quest-window{
 	position: absolute;
-	right:10;
+  padding: 0 10px;
+	right: 40px;
+  top: 40px;
 	display:block;
-	height: 200px;
-	background-color: gray;
+	height: min-content;
+	background-color: #183ca1;
 	border-radius: 10px;
-	border: 2px solid yellow;
+	border: 2px solid #24769c;
 	max-height: 90vh;
 	max-width:50vw;
+  color: white;
 }
-.john-speech {
-	border-bottom: 2px solid yellow
+#john-speech {
+	border-bottom: 2px solid #329fd1;
+  padding: 5px 0 10px 0;
+  min-height: 60px;
+}
+#john-quest-progress {
+  font-size: x-large;
+	border-bottom: 2px solid #329fd1;
+}
+#john-quest-controls {
+  padding: 10px;
+}
+#john-quest-controls button{
+  background-color: #3a5397;
+  font-size: large;
+  border: 3px solid #24769c;
+  border-radius: 3px;
 }

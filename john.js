@@ -63,13 +63,15 @@ function checkJohn(x,y){
 
 function johnOpen(){
 	get("john-window-main").style.visibility="visible"
-	get("john-portrait").style.animationName=""
 	get("john-portrait").style.animationName="john-swim-up"
+	get("john-name").style.animationName="john-name-up"
 	setTimeout(()=>playSound("Johnical"), 1000)
 	john.opened = true
 }
 function johnClose(){
 	get("john-window-main").style.visibility="hidden"
+	get("john-portrait").style.animationName=""
+	get("john-name").style.animationName=""
 	john.opened = false
 }
 

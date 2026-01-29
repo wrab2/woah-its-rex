@@ -164,7 +164,7 @@ function aleaRandom() {
 const generateBlock = function(location, wbm) {
     wbm ??= false;
     blocksRevealedThisReset++;
-	if(location["Y"]==200e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽"
+	if(location["Y"]==200e3-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;

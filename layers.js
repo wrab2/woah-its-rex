@@ -612,7 +612,7 @@ let oreList = {
     '✖️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '❌': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🕳️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer','hasImage' : true, "src" : "media/john/john.svg",  },
     '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer', },
     'bitcoin' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'erm', 'oreTier': 'Common',  },
