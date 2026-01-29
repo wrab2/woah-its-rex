@@ -5109,6 +5109,7 @@ background-size: 100%;
 	border: 2px solid #24769c;
 	max-height: 90vh;
 	max-width:50vw;
+  width: 450px;
   color: white;
 }
 #john-speech {

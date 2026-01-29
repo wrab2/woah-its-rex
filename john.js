@@ -30,6 +30,7 @@ const johnQuests = [
 function completeQuest(){
 	const thisQuest = johnQuests[player.john.questsCompleted]
 	const thisOre = playerInventory[thisQuest.ore]
+	/*commented out because not working rn
 	const count = (thisOre.normalAmt + thisOre.electrifiedAmt + thisOre.radioactiveAmt + thisOre.explosiveAmt) || 0
 	if(count >= thisQuest.amount){
 		//yay quest is completed :DDD
@@ -39,8 +40,12 @@ function completeQuest(){
 		playSound("Johnical")
 		return 
 	}
+	*/
 	//quest is not yet completed :c
-	insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+	get("john-speech").textContent=`${thisQuest.story}`
+	get("john-ore-story").textContent=`${thisQuest.ore_stry}`
+	get("john-quest-progress").textContent=`${thisQuest.ore} 0/${thisQuest.amount}`
+	//insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
 	return
 }
 function rejectQuest(){
