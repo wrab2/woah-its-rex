@@ -1763,7 +1763,7 @@ const milestoneList = {
             distV: 22,
             unlocks: ["jp2.5.2"],
             connector: [],
-            element: undefined;
+            element: undefined,
         },
         "jp2.5.2" : {
             title: "johns roomate",
@@ -1805,7 +1805,7 @@ const milestoneList = {
             distV: 21,
             unlocks: ["jp3.2"],
             connector: [],
-            element: undefined;
+            element: undefined,
         },
         "jp3.2" : {
             title: "THEIF!!!!",

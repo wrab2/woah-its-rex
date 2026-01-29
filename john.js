@@ -50,7 +50,7 @@ function rejectQuest(){
 
 function checkJohn(x,y){
 	if (currentWorld!==1.2 || //watr
-		y!==(200e6-1) || 
+		y!==(200e3-1) || //temporarily e3, will be e6 
 		x!==1e6 //1e6 is actually 0 in game
 	) { return false }
 	else {

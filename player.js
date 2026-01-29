@@ -113,7 +113,7 @@ class playerTemplate {
             },
             baseMineCapacity: 250000,
             minSpeed: 0,
-            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"]},
+            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal",]},
             useNumbers: false,
             inventorySettings: {invToIndex: true, craftingToIndex: true},
             usePathBlocks: true,
@@ -126,7 +126,7 @@ class playerTemplate {
             useNewMusic: true,
             useNyerd: false,
             automineUpdate: 25,
-            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"],
+            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal"],
             lastWorld: 1,
             simulatedRng: false,
             hideCompleted: false,
@@ -685,7 +685,7 @@ function loadNewData(data) {
         data.settings.inventorySettings ??= {invToIndex: true, craftingToIndex: true};
         if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
         if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
-        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"];
+        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal"];
         player.settings.spawnMessageTiers = data.settings.spawnMessageTiers.concat(tierConcat);
         applySpawnMessageData();
         data.settings.automineUpdate ??= 25;
@@ -699,7 +699,7 @@ function loadNewData(data) {
         data.settings.musicSettings ??= {active: true, volume: 100};
         if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
         data.settings.stopOnRare ??= {active: true, allowList: []};
-        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"];
+        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal"];
         player.settings.stopOnRare.allowList = data.settings.stopOnRare.allowList.concat(tierConcat);
         player.settings.stopOnRare.active = data.settings.stopOnRare.active;
         if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";
