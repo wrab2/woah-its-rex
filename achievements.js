@@ -1754,7 +1754,7 @@ const milestoneList = {
         pathUnlocked: false,
         "jp2.5.1" : {
             title: "do NOT call john at 3 am",
-            description: "summon evil john \r\n(by denying  5 john quests)",
+            description: "summon evil john \r\n(by denying  5 john quests)\r\n he is found in the john layer",
             check: function() {
                 //silly function
             },
