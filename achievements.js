@@ -585,7 +585,7 @@ const milestoneList = {
             owned: false,
             distH: 9,
             distV: 4,
-            unlocks: ["tp1.91"],
+            unlocks: ["tp1.91", "tpjohn"],
             connector: [],
             element: undefined
         },
@@ -628,6 +628,22 @@ const milestoneList = {
             distH: 5,
             distV: 2,
             unlocks: [],
+            connector: [],
+            element: undefined
+        },
+    },
+    "tierPath3" : {
+        pathUnlocked: false,
+        "tpjohn" : {
+            title: "🤽‍♂️🤽‍♂️🤽‍♂️",
+            description: "Mine your first Johnical Ore!",
+            check: function() {
+                return hasTier("Johnical");
+            },
+            owned: false,
+            distH: 9,
+            distV: 3,
+            unlocks: ["tp2.2"],
             connector: [],
             element: undefined
         },
@@ -1134,7 +1150,7 @@ const milestoneList = {
             element: undefined
         },
         "app1.3" : {
-            title: "pregnant man isnt coming back",
+            title: "pregnant man isnt coming back\r\n(john replaced him)",
             description: "Find Silly Layer in the Repeating Layers!",
             check: function() {
                 return indexHasOre("🎂") > 0;
@@ -1606,7 +1622,7 @@ const milestoneList = {
             owned: false,
             distH: 3,
             distV: 25,
-            unlocks: ["egp1.3", "wp1"],
+            unlocks: ["egp1.3", "wp1", "jp1.1"],
             connector: [],
             element: undefined
         },
@@ -1646,6 +1662,161 @@ const milestoneList = {
             distH: 3,
             distV: 28,
             unlocks: ["gap1.1"],
+            connector: [],
+            element: undefined
+        },
+    },
+    "johnPath1" : {
+        pathUnlocked: false,
+        "jp1.1" : {
+            title: "petah the john is here",
+            description: "find the john layer",
+            check: function() {
+                return indexHasOre("🤽‍♂️") > 0;
+            },
+            owned: false,
+            distH: 2,
+            distV: 25,
+            unlocks: ["jp1.2"],
+            connector: [],
+            element: undefined
+        },
+        "jp1.2" : {
+            title: "this is confusing",
+            description: "find john (not the layer)",
+            check: function() {
+                //please add a function here !!!!!!
+            },
+            owned: false,
+            distH: 1,
+            distV: 25,
+            unlocks: ["jp2.1"],
+            connector: [],
+            element: undefined
+        },
+    },
+    "johnPath2" : {
+        pathUnlocked: false,
+        "jp2.1" : {
+            title: "thank you john",
+            description: "recieve johns water polo ball\r\n(obtained after fulfilling 1 quest)",
+            check: function() {
+                //add a function here cause i dont have a gear to check for
+            },
+            owned: false,
+            distH: 1,
+            distV: 24,
+            unlocks: ["jp2.2"],
+            connector: [],
+            element: undefined
+        },
+        "jp2.2" : {
+            title: "do NOT scratch it",
+            description: "recieve johns family heirloom\r\n(obtained after fulfilling 5 quests)",
+            check: function() {
+                //function !!!!!!
+            },
+            owned: false,
+            distH: 1,
+            distV: 23,
+            unlocks: ["jp2.3"],
+            connector: [],
+            element: undefined
+        },
+            "jp2.3" : {
+            title: "checkmarxism",
+            description: "recieve the recepie for the hyper checkmarkinator\r\n(obtained after fulfilling 10 quests)",
+            check: function() {
+                //function four
+            },
+            owned: false,
+            distH: 1,
+            distV: 22,
+            unlocks: ["jp2.4"],
+            connector: [],
+            element: undefined
+        },
+            "jp2.4" : {
+            title: "why would you ever mine left",
+            description: "get john's awesome hat\r\n(obtained after fulfilling 15 quests)",
+            check: function() {
+                //function :3+2
+            },
+            owned: false,
+            distH: 1,
+            distV: 21,
+            unlocks: ["jp3.1","jp2.5.1"],
+            connector: [],
+            element: undefined
+        },
+    },
+    "johnPath2.5" : {
+        pathUnlocked: false,
+        "jp2.5.1" : {
+            title: "do NOT call john at 3 am",
+            description: "summon evil john \r\n(by denying  5 john quests)",
+            check: function() {
+                //silly function
+            },
+            owned: false,
+            distH: 0,
+            distV: 22,
+            unlocks: ["jp2.5.2"],
+            connector: [],
+            element: undefined;
+        },
+        "jp2.5.2" : {
+            title: "johns roomate",
+            description: "find josh (john layer CLT)",
+            check: function() {
+                //unbeliavable function
+            },
+            owned: false,
+            distH: 0,
+            distV: 23,
+            unlocks: ["2.5.3"],
+            connector: [],
+            element: undefined
+        },
+        "jp2.5.3" : {
+            title: "johns lost pet :c",
+            description: "craft 🐃",
+            check: function() {
+                return indexHasOre("🐃") > 0;
+            },
+            owned: false,
+            distH: 0,
+            distV: 23,
+            unlocks: [""],
+            connector: [],
+            element: undefined
+        },
+    },
+    "johnPath3" : {
+        pathUnlocked: false,
+        "jp3.1" : {
+            title: "you're no longer homeless",
+            description: "get john's house keys\r\n(obtained after fulfilling EVERY quest)",
+            check: function() {
+                //johnical function
+            },
+            owned: false,
+            distH: 0,
+            distV: 21,
+            unlocks: ["jp3.2"],
+            connector: [],
+            element: undefined;
+        },
+        "jp3.2" : {
+            title: "THEIF!!!!",
+            description: "steal's johns poker chips (found in johns house)",
+            check: function() {
+                //!!
+            },
+            owned: false,
+            distH: -1,
+            distV: 21,
+            unlocks: [""],
             connector: [],
             element: undefined
         },
