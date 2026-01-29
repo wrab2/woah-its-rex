@@ -17,7 +17,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["doorLayer"],
-		order:0 //just for convenience
+		order:1 //just for convenience
 	},
 	{
 		story:"please help me find jackson, i need to tell him about the WCP, get me 2 of him, (so that i can get his reaction twice)",
@@ -26,7 +26,7 @@ const johnQuests = [
 		amount:2,
 		cave: false,
 		layers:["vaLayer"],
-		order:0 //just for convenience
+		order:2 //just for convenience
 	},
 		{
 		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 5 of him though because 5 is better than 1",
@@ -35,7 +35,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["chessLayer"],
-		order:0 //just for convenience
+		order:3 //just for convenience
 	},
 		{
 		story:"help me find ron, im pretty sure hes still sleeping at his house, ever since i kicked him out of the WCP he became a alcoholic (get me 5 of him so i can make fun of him frice)",
@@ -44,7 +44,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["tvLayer"],
-		order:0 //just for convenience
+		order:4 //just for convenience
 	},
 		{
 		story:"get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)",
@@ -53,7 +53,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["barrierLayer"],
-		order:0 //just for convenience
+		order:5 //just for convenience
 	},
 		{
 		story:"im really hungry right now so can you get me 5 shawns, theyre currently holding a party, i need to ask them if they can give me a spare slice of cake",
@@ -62,7 +62,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["sillyLayer"],
-		order:0 //just for convenience
+		order:6 //just for convenience
 	},
 		{
 		story:"i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer (like any true cactus monarch #reference), please get me 5 of them though because thats a prime number",
@@ -71,7 +71,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["cactusLayer"],
-		order:0 //just for convenience
+		order:7 //just for convenience
 	},
 		{
 		story:"pick up 5 rowans please, i need them for a very important deal",
@@ -80,7 +80,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["jimLayer"],
-		order:0 //just for convenience
+		order:8 //just for convenience
 	},
 		{
 		story:"i need you to find me 5 dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
@@ -89,7 +89,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["radioactiveLayer"],
-		order:0 //just for convenience
+		order:9 //just for convenience
 	},
 		{
 		story:"find me jordan (not the country), they need to show up to my housewarming party get me 2 of them though because thats not a power of 3",
@@ -98,7 +98,7 @@ const johnQuests = [
 		amount:2,
 		cave: false,
 		layers:["scLayer"],
-		order:0 //just for convenience
+		order:10 //just for convenience
 	},
 		{
 		story:"janine is my sister (jane)'s bestie, please find 1 of her",
@@ -107,7 +107,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["bacteriaCave"],
-		order:0 //just for convenience
+		order:11//just for convenience
 	},
 		{
 		story:"me and joan were planning on going to the new adachi rei concert, please Find her so she can give me my ticket",
@@ -116,7 +116,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["musicCave"],
-		order:0 //just for convenience
+		order:12//just for convenience
 	},
 		{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
@@ -125,7 +125,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["abysstoneCave"],
-		order:0 //just for convenience
+		order:13//just for convenience
 	},
 		{
 		story:"i was jocelyns successor in the WCP, so please get me her",
@@ -134,7 +134,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["janeCave"],
-		order:0 //just for convenience
+		order:14//just for convenience
 	},
 		{
 		story:"this is rowen's cousin, please get me 1 of her",
@@ -143,7 +143,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["biohazardCave"],
-		order:0 //just for convenience
+		order:15//just for convenience
 	},
 			{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
@@ -152,7 +152,7 @@ const johnQuests = [
 		amount:1,
 		cave: false,
 		layers:[""], // Hes in the forge
-		order:0 //just for convenience
+		order:16//just for convenience
 	},
 			{
 		story:"please get me uhh... who the hell is this?",
@@ -161,7 +161,7 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:[""], // Hes a CLT from denying 5 john requests, but once you get him you can get him anytime (so you dont get softlocked)
-		order:0 //just for convenience
+		order:17//just for convenience
 	},
 			{
 		story:"i lost my roomate, i cant find him anywhere so you gotta find him for me",
@@ -170,7 +170,7 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:[""], // repeating john layer CLT
-		order:0 //just for convenience
+		order:18//just for convenience
 	},
 ]
 
