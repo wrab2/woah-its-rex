@@ -5056,22 +5056,43 @@ background-size: 100%;
 	border-radius: 10px;
 	margin: 0 auto 0 auto;
 }
-.john-portrait{
+#john-portrait{
 	position: absolute;
-	top: 40px;
-	width: min-width;
+	top: 50px;
+  left: 40px;
+	width: 200px;
+  height: 200px;
 	font-size: min(30vw, 80vh);
 	margin: 0 auto 0 auto;
+  background-image: url("/media/john/john.svg");
+  animation-duration: 2s;
+}
+@keyframes john-swim-up {
+  from {
+    margin-top: 500px;
+  }
+
+  to {
+    margin-top: 0px;
+  }
 }
 .john-background-water{
 	position:absolute;
-	top: 50vh;
+	top: 50px;
+  left: -160px;
 	margin:0;
-	left:0;
-	height: 100vh;
-	width:100vw;
-	overflow:hidden;
-	background-color:cyan;
+	width: 150vw;
+  height: 200px;
+	overflow: hidden;
+  background-image: url("/media/john/water\ tile.svg");
+}
+.john-water-blue {
+  background-color: #29b6f6;
+  position: absolute;
+  top:250px;
+  height: 100vh;
+  width: 100vw;
+  left:0;
 }
 .john-quest-window{
 	position: absolute;
