@@ -15,3 +15,7 @@ john layer index (with all his friends)
 josh (repeating layer CLT)
 
 make johns text a speech bubble
+
+SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
+
+after you complete all 18 quests, you get srwatr , which is johns house with all of his friends , theres also really rare ores such as 🏚️ 🏡 🏘️ , john can also request previous quests but with the amounts multiplied by a thousand which will . do  something !

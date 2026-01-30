@@ -1131,7 +1131,7 @@ switchPortal.currentPortal = 1;
 function isUnlocked(portal) {
     return portalLocations[portal].req();
 }
-//SILLINESS BELOW!!!!!!!
+//SILLINESS BELOW!!!!!!! (well, this sure was a SILLY cavern !)
 function showCatText() {
     get("catStuff").style.display = "flex";
 }
