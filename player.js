@@ -88,7 +88,8 @@ class playerTemplate {
             "pickaxe33" : false,
             "pickaxe34" : false,
             "pickaxe35" : false,
-            "pickaxe36": false,
+            "pickaxe36" : false,
+            "pickaxe37" : false
         }
         this.settings = {
             audioSettings: {

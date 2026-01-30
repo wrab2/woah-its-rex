@@ -162,7 +162,7 @@ function gearAbility1() {
         const time = Date.now();
         if (ability1Stacks === 0 && time >= energySiphonerCooldown) {
             energySiphonerActive = true;
-            ability1RemoveTime = time + 10000; //die
+            ability1RemoveTime = time + 10000; //live :3
             ability1Stacks++;
             activateSiphoner();
             return;
