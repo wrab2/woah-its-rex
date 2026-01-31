@@ -2,7 +2,7 @@
 player.john = {
 		spokeWith: true,
 		questsCompleted: [],
-		currentQuest: 0,
+		currentQuest: 11,
 	}
 
 const john = { //this doesn't presist between refreshes
@@ -177,7 +177,25 @@ const johnQuests = [
 function johnActivateQuest() {
 	if(player.john.spokeWith && player.john.currentQuest !== undefined){
 		const thisQuest = johnQuests[player.john.currentQuest]
+		if(thisQuest.cave){
+			return insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+		}
+		if (thisQuest.ore === "🐃") return
+		if (thisQuest.ore === "evilJohn") return
+		if (thisQuest.ore === "josh") return
 		insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+	}
+}
+function johnStopQuest() {
+	if(player.john.spokeWith && player.john.currentQuest !== undefined){
+		const thisQuest = johnQuests[player.john.currentQuest]
+		if(thisQuest.cave){
+			return //insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+		}
+		if (thisQuest.ore === "🐃") return
+		if (thisQuest.ore === "evilJohn") return
+		if (thisQuest.ore === "josh") return
+		removeFromLayers({"ore":thisQuest.ore, "layers":thisQuest.layers})
 	}
 }
 
@@ -188,7 +206,7 @@ function completeQuest(){
 	const count = (thisOre.normalAmt + thisOre.electrifiedAmt + thisOre.radioactiveAmt + thisOre.explosiveAmt) || 0
 	if(true || count >= thisQuest.amount){
 		//yay quest is completed :DDD
-        removeFromLayers({"ore":thisOre, "layers":thisQuest.layers})
+        
 		player.john.questsCompleted.push(thisQuest.order)
 		/* potentially john will announce his rewards :cat2: !!?? :exploding_head:
 		if(player.john.questsCompleted.length === 1)johnSay("somrthing is unlocked or now will happen")

@@ -1115,6 +1115,26 @@ function removeFromLayers(obj) {
     }
 }
 
+function insertIntoCaves(obj) {
+    let ore = obj["ore"];
+    let caveTypes = obj["layers"];
+    let useLuck = obj["useLuck"];
+    const luck = verifiedOres.getCaveLuck();
+    for (const caves of caveTypes){
+        let cave = caveList[caves]
+        if(!cave.includes(ore)){
+            if (useLuck) oreList[ore]["decimalRarity"] = 1/(oreList[ore]["numRarity"] / luck);
+            for (let j =0; j<cave.length; j++){
+                if (oreList[cave[j]]["numRarity"] < oreList[ore]["numRarity"]) {
+                    cave.splice(j, 0, ore);
+                    updateAllLayers();
+                    break;  
+                }
+            }
+        }
+    }
+}
+
 const limitedOres = {
     "❤️‍🔥" : {
         "layers" : ["foggyLayer"],
