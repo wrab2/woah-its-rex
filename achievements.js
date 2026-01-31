@@ -1685,7 +1685,7 @@ const milestoneList = {
             title: "this is confusing",
             description: "find john (not the layer)",
             check: function() {
-                //please add a function here !!!!!!
+                return player.john.spokeWith === true
             },
             owned: false,
             distH: 1,
@@ -1774,7 +1774,7 @@ const milestoneList = {
             owned: false,
             distH: 0,
             distV: 23,
-            unlocks: ["2.5.3"],
+            unlocks: ["jp2.5.3"],
             connector: [],
             element: undefined
         },
@@ -1787,7 +1787,7 @@ const milestoneList = {
             owned: false,
             distH: 0,
             distV: 23,
-            unlocks: [""],
+            unlocks: [],
             connector: [],
             element: undefined
         },
@@ -1816,7 +1816,7 @@ const milestoneList = {
             owned: false,
             distH: -1,
             distV: 21,
-            unlocks: [""],
+            unlocks: [],
             connector: [],
             element: undefined
         },
