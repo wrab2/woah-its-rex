@@ -2,7 +2,7 @@
 
 improve speech bubble
 
-make names work with johnical rarity
+✅ (im unsure what this means but i think its done?) make names work with johnical rarity
 
 add estimated time to quests
 
@@ -12,13 +12,13 @@ add evil john CLT (deny 5 requests), once you get him once you dont need the CLT
 
 checkmark layer
 
-hyper checkmarkinator
+☑️hyper checkmarkinator
 
 john layer index (with all his friends)
 
 josh (repeating layer CLT)
 
-make johns text a speech bubble
+✅make johns text a speech bubble
 
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 
