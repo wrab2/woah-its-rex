@@ -139,7 +139,7 @@ const johnQuests = [
 		{
 		story:"this is rowen's cousin, please get me 1 of her",
 		ore_stry:"rowhen is found in the biohazard caves",
-		ore:"",
+		ore:"🤽🏿‍♀️",
 		amount:1,
 		cave: true,
 		layers:["biohazardCave"],
