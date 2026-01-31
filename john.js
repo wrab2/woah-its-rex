@@ -190,7 +190,7 @@ function johnStopQuest() {
 	if(player.john.spokeWith && player.john.currentQuest !== undefined){
 		const thisQuest = johnQuests[player.john.currentQuest]
 		if(thisQuest.cave){
-			return //insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+			return removeFromCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
 		}
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
@@ -208,6 +208,7 @@ function completeQuest(){
 		//yay quest is completed :DDD
         
 		player.john.questsCompleted.push(thisQuest.order)
+		johnStopQuest()
 		/* potentially john will announce his rewards :cat2: !!?? :exploding_head:
 		if(player.john.questsCompleted.length === 1)johnSay("somrthing is unlocked or now will happen")
 		else if(player.john.questsCompleted.length === 2)johnSay("etc..")

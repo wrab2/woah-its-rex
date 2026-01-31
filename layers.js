@@ -1001,7 +1001,9 @@ function createAllLayers() {
     layerDictionary["dirtLayer3"] = {layer: createLayer([layerList["dirtLayer3"], layerList["worldOneCommons"]]), probabilities: [], layerMat: layerFromArr(layerList["dirtLayer"])};
     layerDictionary["cloudLayer2"] = {layer: createLayer([layerList["cloudLayer2"], layerList["worldTwoCommons"]]), probabilities: [], layerMat: layerFromArr(layerList["cloudLayer"])};
     layerDictionary["deepWaterLayer"] = {layer: createLayer([layerList["deepWaterLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["deepWaterLayer"])};
-	let tier = "Uncommon";
+	layerDictionary["jimLayer"] = {layer: createLayer([layerList["jimLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["jimLayer"])};
+	layerDictionary["johnLayer"] = {layer: createLayer([layerList["johnLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer"])};
+    let tier = "Uncommon";
     let arr = [];
     while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {
         let tierOres = oreInformation.getOresByTier(tier);
@@ -1131,6 +1133,16 @@ function insertIntoCaves(obj) {
                     break;  
                 }
             }
+        }
+    }
+}
+function removeFromCaves(obj) {
+    let ore = obj["ore"];
+    let caves = obj["layers"];
+    for (let i = 0; i < caves.length; i++) {
+        if (caveList[caves[i]].includes(ore)) {
+            caveList[caves[i]].splice(caveList[caves[i]].indexOf(ore), 1);
+            updateAllLayers();
         }
     }
 }
