@@ -1,14 +1,14 @@
 
 player.john = {
-		spokeWith: false,
-		questsCompleted: 0,
+		spokeWith: true,
+		questsCompleted: [],
+		currentQuest: 0,
 	}
 
-const john = {
+const john = { //this doesn't presist between refreshes
 	opened: false,
-	rejQuests: 0,
+	rejectedQuests: 0,
 }
-// i did everything but put the order cause . ! its gotta be like a slot machine ! ! !
 const johnQuests = [
 	{
 		story:"my old coworker johan, please go find him, hes currently taking care of all the doors, but he forgot to give me back my 20 bucks so please bring back 5 of him (so i get 120 dollars 🤑)",
@@ -17,7 +17,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["doorLayer"],
-		order:1 //just for convenience
+		order:1  
 	},
 	{
 		story:"please help me find jackson, i need to tell him about the WCP, get me 2 of him, (so that i can get his reaction twice)",
@@ -26,7 +26,7 @@ const johnQuests = [
 		amount:2,
 		cave: false,
 		layers:["vaLayer"],
-		order:2 //just for convenience
+		order:2  
 	},
 		{
 		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 5 of him though because 5 is better than 1",
@@ -35,7 +35,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["chessLayer"],
-		order:3 //just for convenience
+		order:3  
 	},
 		{
 		story:"help me find ron, im pretty sure hes still sleeping at his house, ever since i kicked him out of the WCP he became a alcoholic (get me 5 of him so i can make fun of him frice)",
@@ -44,7 +44,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["tvLayer"],
-		order:4 //just for convenience
+		order:4  
 	},
 		{
 		story:"get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)",
@@ -53,7 +53,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["barrierLayer"],
-		order:5 //just for convenience
+		order:5  
 	},
 		{
 		story:"im really hungry right now so can you get me 5 shawns, theyre currently holding a party, i need to ask them if they can give me a spare slice of cake",
@@ -62,7 +62,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["sillyLayer"],
-		order:6 //just for convenience
+		order:6  
 	},
 		{
 		story:"i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer (like any true cactus monarch #reference), please get me 5 of them though because thats a prime number",
@@ -71,7 +71,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["cactusLayer"],
-		order:7 //just for convenience
+		order:7  
 	},
 		{
 		story:"pick up 5 rowans please, i need them for a very important deal",
@@ -80,7 +80,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["jimLayer"],
-		order:8 //just for convenience
+		order:8  
 	},
 		{
 		story:"i need you to find me 5 dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
@@ -89,7 +89,7 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["radioactiveLayer"],
-		order:9 //just for convenience
+		order:9  
 	},
 		{
 		story:"find me jordan (not the country), they need to show up to my housewarming party get me 2 of them though because thats not a power of 3",
@@ -98,7 +98,7 @@ const johnQuests = [
 		amount:2,
 		cave: false,
 		layers:["scLayer"],
-		order:10 //just for convenience
+		order:10  
 	},
 		{
 		story:"janine is my sister (jane)'s bestie, please find 1 of her",
@@ -107,7 +107,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["bacteriaCave"],
-		order:11//just for convenience
+		order:11 
 	},
 		{
 		story:"me and joan were planning on going to the new adachi rei concert, please Find her so she can give me my ticket",
@@ -116,7 +116,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["musicCave"],
-		order:12//just for convenience
+		order:12 
 	},
 		{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
@@ -125,7 +125,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["abysstoneCave"],
-		order:13//just for convenience
+		order:13 
 	},
 		{
 		story:"i was jocelyns successor in the WCP, so please get me her",
@@ -134,7 +134,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["janeCave"],
-		order:14//just for convenience
+		order:14 
 	},
 		{
 		story:"this is rowen's cousin, please get me 1 of her",
@@ -143,7 +143,7 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["biohazardCave"],
-		order:15//just for convenience
+		order:15 
 	},
 			{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
@@ -152,7 +152,7 @@ const johnQuests = [
 		amount:1,
 		cave: false,
 		layers:[""], // Hes in the forge
-		order:16//just for convenience
+		order:16 
 	},
 			{
 		story:"please get me uhh... who the hell is this?",
@@ -161,7 +161,7 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:[""], // Hes a CLT from denying 5 john requests, but once you get him you can get him anytime (so you dont get softlocked)
-		order:17//just for convenience
+		order:17 
 	},
 			{
 		story:"i lost my roomate, i cant find him anywhere so you gotta find him for me",
@@ -170,50 +170,66 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:[""], // repeating john layer CLT
-		order:18//just for convenience
+		order:18 
 	},
 ]
 
-function completeQuest(){
-	const thisQuest = johnQuests[player.john.questsCompleted]
-	const thisOre = playerInventory[thisQuest.ore]
-	/*commented out because not working rn
-	const count = (thisOre.normalAmt + thisOre.electrifiedAmt + thisOre.radioactiveAmt + thisOre.explosiveAmt) || 0
-	if(count >= thisQuest.amount){
-		//yay quest is completed :DDD
-		//if(thisQuest.order === 0)johnSay("somrthing is unlocked or now will happen")
-		//else if(thisQuest.order === 2)johnSay("etc..")
-		player.john.activeQuest++
-		playSound("Johnical")
-		return 
+function johnActivateQuest() {
+	if(player.john.spokeWith && player.john.currentQuest !== undefined){
+		const thisQuest = johnQuests[player.john.currentQuest]
+		insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
 	}
-	*/
-	//quest is not yet completed :c
-	get("john-speech").textContent=`${thisQuest.story}`
-	get("john-ore-story").textContent=`${thisQuest.ore_stry}`
-	get("john-quest-progress").textContent=`${thisQuest.ore} 0/${thisQuest.amount}`
-	//insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+}
+
+function completeQuest(){
+	const thisQuest = johnQuests[player.john.currentQuest]//johnQuests.filter((e)=> e.order === player.john.currentQuest)
+	const thisOre = playerInventory[thisQuest.ore]
+	
+	const count = (thisOre.normalAmt + thisOre.electrifiedAmt + thisOre.radioactiveAmt + thisOre.explosiveAmt) || 0
+	if(true || count >= thisQuest.amount){
+		//yay quest is completed :DDD
+        removeFromLayers({"ore":thisOre, "layers":thisQuest.layers})
+		player.john.questsCompleted.push(thisQuest.order)
+		/* potentially john will announce his rewards :cat2: !!?? :exploding_head:
+		if(player.john.questsCompleted.length === 1)johnSay("somrthing is unlocked or now will happen")
+		else if(player.john.questsCompleted.length === 2)johnSay("etc..")
+		*/
+		let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
+		if (questPool.length > 0){
+			let nextQuest =  questPool[Math.floor(Math.random()*questPool.length)]
+			player.john.currentQuest = johnQuests.indexOf(nextQuest)
+		}
+		playSound("Johnical")
+	}
+	johnActivateQuest()
+	johnRefresh()
 	return
 }
 function rejectQuest(){
-	//I have no idea what should happen here and if it should be possible to do at all
-	rejQuests++
+	john.rejectedQuests++
 }
 
 function checkJohn(x,y){
 	if (currentWorld!==1.2 || //watr
-		y!==(200e3-1) || //temporarily e3, will be e6 
+		y!==(200-1) || //put it 199, will be at 199,999,999 
 		x!==1e6 //1e6 is actually 0 in game
 	) { return false }
 	else {
 		stopMining()
-		if (!player.john.spokeWith) //johnFirstEncounter()
+		if (!player.john.spokeWith) johnFirstEncounter()
 		johnOpen()
 		return true
 	}
 }
 
+function johnFirstEncounter(){
+	player.john.spokeWith = true
+	johnActivateQuest()
+	displayMessage("johnSaysHi");
+}
+
 function johnOpen(){
+	johnRefresh()
 	get("john-window-main").style.visibility="visible"
 	get("john-portrait").style.animationName="john-swim-up"
 	get("john-name").style.animationName="john-name-up"
@@ -227,3 +243,9 @@ function johnClose(){
 	john.opened = false
 }
 
+function johnRefresh() { //updates values in john window
+	let quest = johnQuests[player.john.currentQuest]
+	get("john-speech").textContent=`${quest.story}`
+	get("john-ore-story").textContent=`${quest.ore_stry}`
+	get("john-quest-progress").textContent=`${quest.ore} ${playerInventory[quest.ore].normalAmt}/${quest.amount}`
+}

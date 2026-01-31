@@ -124,6 +124,7 @@ function init() {
             console.log("Failed To Generate Seed!")
           });
     }
+    johnActivateQuest()
 		if(!cloudsaving.ongalaxy){
 			get('displayCloudIcon').style.backgroundColor = "#a51010"
 			get('cloudStatus').innerText = "Error"
