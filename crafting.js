@@ -197,7 +197,7 @@ const recipes = {
         pUnob: true
     },
     /* commented out cause idk the recepie yet!
-    "pickaxe37": {
+    "hyperCheckmarkinator": {
         name: "Hyper Checkmarkinator",
         recipe: [{"ore": "some ores here", "amt": 1}],
         active : [],
@@ -1014,7 +1014,7 @@ const buttonGradients = {
     "pickaxe34Craft" : {"gradient" : "linear-gradient(to right, #2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769)","applied" : false},
     "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
     "pickaxe36Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
-    "pickaxe37Craft" : {"gradient" : "linear-gradient(to right, #7fb447 #ffffff #7fb447", "applied": false},
+    "hyperCheckmarkinatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447 #ffffff #7fb447", "applied": false},
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "gear1Craft" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
