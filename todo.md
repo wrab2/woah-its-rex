@@ -1,6 +1,8 @@
 ✅make a first time meeting popup "hi im johm n help me find my family and friends"
 
-make first time popup better
+improve speech bubble
+
+make names work with johnical rarity
 
 add estimated time to quests
 
