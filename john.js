@@ -264,7 +264,7 @@ function johnClose(){
 
 function johnRefresh() { //updates values in john window
 	let quest = johnQuests[player.john.currentQuest]
-	get("john-speech").textContent=`${quest.story}`
+	get("john-speech-bubble").textContent=`${quest.story}`
 	get("john-ore-story").textContent=`${quest.ore_stry}`
 	get("john-quest-progress").textContent=`${quest.ore} ${playerInventory[quest.ore].normalAmt}/${quest.amount}`
 }

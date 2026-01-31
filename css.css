@@ -73,6 +73,7 @@
 
 .oreDisplay {
   margin: 0;
+  cursor: default;
   font-weight: 500;
   width: 100%!important;
   height: 1.25vw;
@@ -5112,11 +5113,6 @@ background-size: 100%;
   width: 450px;
   color: white;
 }
-#john-speech {
-	border-bottom: 2px solid #329fd1;
-  padding: 5px 0 10px 0;
-  min-height: 60px;
-}
 #john-quest-progress {
   font-size: x-large;
 	border-bottom: 2px solid #329fd1;
@@ -5129,4 +5125,36 @@ background-size: 100%;
   font-size: large;
   border: 3px solid #24769c;
   border-radius: 3px;
+}
+#bubble-container {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  height: 30vh;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#john-speech-bubble {
+	position: relative;
+  margin-bottom: 20px;
+	background: #ffffff;
+	border-radius: .4em;
+  width:250px;
+  padding: 4px;
+}
+
+#john-speech-bubble:after  {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #ffffff;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -20px;
 }
