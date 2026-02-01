@@ -691,7 +691,8 @@ const layerList = {
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["deepWater"],
 "jimLayer":[], // todo
-"johnLayer":[] // todo
+"johnLayer":[], // todo
+"johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽‍♂️', '🤽', '🤽‍♀️',],
 }
 const createdLayers = {
 
@@ -1003,6 +1004,7 @@ function createAllLayers() {
     layerDictionary["deepWaterLayer"] = {layer: createLayer([layerList["deepWaterLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["deepWaterLayer"])};
 	layerDictionary["jimLayer"] = {layer: createLayer([layerList["jimLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["jimLayer"])};
 	layerDictionary["johnLayer"] = {layer: createLayer([layerList["johnLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer"])};
+    layerDictionary["johnMetaLayer"] = {layer: createLayer([layerList["johnMetaLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnMetaLayer"])};
     let tier = "Uncommon";
     let arr = [];
     while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {
