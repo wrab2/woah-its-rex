@@ -145,7 +145,7 @@ const johnQuests = [
 		layers:["biohazardCave"],
 		order:15 
 	},
-			{
+		{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
 		ore_stry:"water buffalo 🐃 is found in the forge, you might want to do this one last as its the hardest by far (and you cant do it before 10 requests)",
 		ore:"🐃",
@@ -154,7 +154,7 @@ const johnQuests = [
 		layers:[""], // Hes in the forge
 		order:16 
 	},
-			{
+		{
 		story:"please get me uhh... who the hell is this?",
 		ore_stry:"Evil John is found in ??? (you might want to check milestones)",
 		ore:"evilJohn",
@@ -163,7 +163,7 @@ const johnQuests = [
 		layers:[""], // Hes a CLT from denying 5 john requests, but once you get him you can get him anytime (so you dont get softlocked)
 		order:17 
 	},
-			{
+		{
 		story:"i lost my roomate, i cant find him anywhere so you gotta find him for me",
 		ore_stry:"josh is found in the john layer (sometimes)",
 		ore:"josh",
@@ -171,6 +171,24 @@ const johnQuests = [
 		cave: false,
 		layers:[""], // repeating john layer CLT
 		order:18 
+	},
+		{
+		story:"i dropped my wallet yesterday, can you go get jack (hes the one who got my wallet)",
+		ore_stry:"jack is found in the deep water layer",
+		ore:"jack",
+		amount:1,
+		cave: true,
+		layers:["deepWaterLayer"],
+		order:19 
+	},
+		{
+		story:"please get me 10 heavenly johns, i need to attone for my sins",
+		ore_stry:"heavenly john is found in the cloud layer",
+		ore:"heavenlyJohn",
+		amount:10,
+		cave: true,
+		layers:["cloudLayer", "cloudLayer2"],
+		order:20 
 	},
 ]
 

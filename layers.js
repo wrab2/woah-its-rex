@@ -545,14 +545,17 @@ let oreList = {
     '🤽🏽‍♂️': { 'decimalRarity': 1 / 5e17, 'numRarity': 5e17, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: my good buddy rowan (we called him marcus roman in school), he always had the best school projects, once he got a huge ball of plastic and turned it into a maze', 'oreTier': 'Johnical', "oreName" : "Rowan" },
     '🤽🏾‍♂️': { 'decimalRarity': 1 / 5e17, 'numRarity': 5e17, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: don and i met at the Communal pit in 1752, they were so good at climbing i instantly gave them a job', 'oreTier': 'Johnical', "oreName" : "Ron" },
     '🤽🏿‍♂️': { 'decimalRarity': 1 / 5e17, 'numRarity': 5e17, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: you wont BELIEVE what country jordan and i met', 'oreTier': 'Johnical', "oreName" : "Jordan" },
-    '🤽🏻‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: i dont have much to say about janine, but thank you for finding her', 'oreTier': 'Johnical', "oreName" : "Janine" },
-    '🤽🏼‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: me and joan are both mikufans (QwQuiz reference!!!), thats how we met', 'oreTier': 'Johnical', "oreName" : "Joan" },
-    '🤽🏽‍♀️': { 'decimalRarity': 1 / 5e11, 'numRarity': 5e11, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: okay im back now, johanna is joans sister, she helped me create the WCP, truly an innovator', 'oreTier': 'Johnical', "oreName" : "Johanna" },
-    '🤽🏾‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: meow :3', 'oreTier': 'Johnical', "oreName" : "Rowhen", "oreName" : "Jocelyn"},
-    '🤽🏿‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John:🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️', 'oreTier': 'Johnical',  },
+    '🤽🏻‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John: i dont have much to say about janine, but thank you for finding her', 'oreTier': 'Johnical', "oreName" : "Janine" },
+    '🤽🏼‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John: me and joan are both mikufans (QwQuiz reference!!!), thats how we met', 'oreTier': 'Johnical', "oreName" : "Joan" },
+    '🤽🏽‍♀️': { 'decimalRarity': 1 / 5e11, 'numRarity': 5e11, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John: okay im back now, johanna is joans sister, she helped me create the WCP, truly an innovator', 'oreTier': 'Johnical', "oreName" : "Johanna" },
+    '🤽🏾‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John: meow :3', 'oreTier': 'Johnical', "oreName" : "Rowhen", "oreName" : "Jocelyn"},
+    '🤽🏿‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John:🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️', 'oreTier': 'Johnical',  },
     '🐃':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'how the hell did you get this as a spawn message :3', 'oreTier': 'Johnical',  },
     'evilJohn' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'you quiver in fear at the sight of a familar face but EVIL and RED', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/evil_john.png", "oreName" : "Evil John"},
     'josh' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Josh: hi im johns roomate, tell him hi for me', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/josh.png", "oreName" : "Josh"},
+    'jack' : { 'decimalRarity': 1 / 5e19, 'numRarity': 5e19, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: what the hell why does he look like that maybe i dont need my wallet back anymore', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/jack.png", "oreName" : "Jack"},
+    //heavenly john spawns in the cloud layer, john will say "please get me 10 heavenly johns, i need to attone for my sins"
+    'heavenlyJohn' : { 'decimalRarity': 1 / 5e18, 'numRarity': 5e18, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: do you think he accepts bribes', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/heavenly_john.png", "oreName" : "Heavenly John"},
 
     'stars' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/stars.png", "oreName": "Stars"},
     '🟫': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
@@ -691,7 +694,7 @@ const layerList = {
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["deepWater"],
 "jimLayer":[], // todo
-"johnLayer":["sillyMiner",'🤽‍♂️'], // todo
+"johnLayer":["sillyMiner",'🤽‍♂️'], // todo also why does he have silly miner
 "johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️'],
 }
 const createdLayers = {
