@@ -267,7 +267,7 @@ function johnRefresh() { //updates values in john window
 	let quest = johnQuests[player.john.currentQuest]
 	get("top-john-speech-bubble").textContent=`${quest.story}`
 	get("john-ore-story").textContent=`${quest.ore_stry}`
-	get("john-quest-progress").textContent=`${quest.ore} ${playerInventory[quest.ore].normalAmt}/${quest.amount}`
+	get("john-quest-progress").innerHTML = (oreList[quest.ore].hasImage ? `<img src=${oreList[quest.ore].src}>`: quest.ore) + `${playerInventory[quest.ore].normalAmt}/${quest.amount}`
 	estimateJohnQuestTime()
 }
 
