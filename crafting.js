@@ -2364,7 +2364,7 @@ function ct(john=false) {
     let rId
     let recipe
     if(john){
-        recipe = {ore:johnQuests[player.john.currentQuest].ore,amt:johnQuests[player.john.currentQuest].amount}
+        recipe = [{ore:johnQuests[player.john.currentQuest].ore,amt:johnQuests[player.john.currentQuest].amount}]
     } else {
         rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
         recipe = pickaxeUsing !== "pickaxe27" ? recipes[rId].recipe : player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? "RETURN" : upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
