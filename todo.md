@@ -1,4 +1,4 @@
-add estimated time to quests
+☑️(??)add estimated time to quests
 
 add evil john CLT (deny 5 requests), once you get him once you dont need the CLT to get him anymore
 
