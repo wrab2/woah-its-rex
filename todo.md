@@ -1,4 +1,4 @@
-☑️(??)add estimated time to quests
+☑️(??)add estimated time to quests(no eta for evil john and josh yet)
 
 add evil john CLT (deny 5 requests), once you get him once you dont need the CLT to get him anymore
 
@@ -18,4 +18,4 @@ add events (naval battles), and add gears
 
 add some ores to deep water, Jim jane and john layers
 
-add 🐈 and 🤯 (Incredibly important)
+add 🐈 and 🤯 (Incredibly important(aren't they supposed to be in checkmark layer🐈🐈🐈🤯🤯🤯))
