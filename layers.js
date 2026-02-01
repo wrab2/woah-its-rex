@@ -1026,7 +1026,11 @@ function layerFromArr(arr) {
 }
 function updateAllLayers() {
     const luck = verifiedOres.getCurrentLuck();
-    for (let layer in layerDictionary) layerDictionary[layer].layer = applyLuckToLayer(layerDictionary[layer].layer, luck);
+    for (let layer in layerDictionary) {
+        if(layer !== "johnMetaLayer"){
+            layerDictionary[layer].layer = applyLuckToLayer(layerDictionary[layer].layer, luck);
+        }
+    }
     oreList["luna"]["decimalRarity"] = 1/(oreList["luna"]["numRarity"] / luck);
     createGenerationProbabilities();
 }

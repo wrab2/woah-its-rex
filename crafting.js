@@ -2419,3 +2419,17 @@ function ct() {
     let timeForProcs = (Math.floor(totalProcs) * abilityRate) / speed;
     return longTime(timeForProcs * 1000);
 }
+
+function caveOreEstimatedTime(ore){
+    let result = 0
+    const oreRarity = oreList[ore].numRarity
+    const speed = calcSpeed().reps * (1000/calcSpeed().speed) + calcSpeed().extra
+    let caveRate = 500
+    if (player.powerupVariables.caveBoosts.active) caveRate = caveRate/2
+    const caveRarity = getCaveMultiFromOre(ore)
+    const caveSize = (400*(verifiedOres.getCaveModifier()/150))
+    const caveLuck = verifiedOres.getCaveLuck()
+    const caveTypeLuck = verifiedOres.getCaveTypeLuck()
+    result = (oreRarity/caveLuck)/caveSize *caveRate *caveRarity  /caveTypeLuck /speed
+    return result // seconds
+}
