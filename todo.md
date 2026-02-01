@@ -1,12 +1,4 @@
-✅make a first time meeting popup "hi im johm n help me find my family and friends"
-
-improve speech bubble
-
-✅✅ (im unsure what this means but i think its done?(it was in fact not done before this commit)) make names work with johnical rarity
-
 add estimated time to quests
-
-✅make it possible to close john
 
 add evil john CLT (deny 5 requests), once you get him once you dont need the CLT to get him anymore
 
@@ -17,8 +9,6 @@ checkmark layer
 john layer index (with all his friends)
 
 josh (repeating layer CLT)
-
-✅make johns text a speech bubble
 
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 

@@ -5101,16 +5101,16 @@ background-size: 100%;
 .john-quest-window{
 	position: absolute;
   padding: 0 10px;
-	right: 40px;
-  top: 40px;
+	left: 40px;
+  top: calc(260px + 30vh);
 	display:block;
 	height: min-content;
 	background-color: #183ca1;
 	border-radius: 10px;
 	border: 2px solid #24769c;
 	max-height: 90vh;
-	max-width:50vw;
-  width: 450px;
+	max-width:90vw;
+  width: 500px;
   color: white;
 }
 #john-quest-progress {
@@ -5130,21 +5130,22 @@ background-size: 100%;
   height: 100%;
   position: absolute;
   top: 0;
+  left: min(100px, 5vw);
   height: 30vh;
   display: flex;
   flex-direction: column-reverse;
 }
 
-#john-speech-bubble {
+#top-john-speech-bubble {
 	position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 	background: #ffffff;
 	border-radius: .4em;
   width:250px;
   padding: 4px;
 }
 
-#john-speech-bubble:after  {
+#top-john-speech-bubble:after  {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -5157,4 +5158,42 @@ background-size: 100%;
 	border-left: 0;
 	margin-left: -10px;
 	margin-bottom: -20px;
+}
+
+#sayings-bubble-container {
+  height: 100%;
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: calc(min(100px, 5vw) + 180px);
+  height: calc(30vh + 180px);
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#right-john-speech-bubble {
+	position: relative;
+  margin-bottom: 25px;
+	background: #ffffff;
+	border-radius: .4em;
+  width:250px;
+  padding: 4px;
+  max-height: 100px;
+  
+}
+
+#right-john-speech-bubble:after  {
+	content: '';
+	position: absolute;
+	bottom: 12px;
+	left: 0;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #ffffff;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+
 }

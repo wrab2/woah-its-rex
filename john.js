@@ -244,7 +244,7 @@ function checkJohn(x,y){
 function johnFirstEncounter(){
 	player.john.spokeWith = true
 	johnActivateQuest()
-	displayMessage("johnSaysHi");
+	johnSay("hi im johm n help me find my famil y and friends")
 }
 
 function johnOpen(){
@@ -257,6 +257,7 @@ function johnOpen(){
 }
 function johnClose(){
 	get("john-window-main").style.visibility="hidden"
+	get("sayings-bubble-container").style.visibility = "hidden"
 	get("john-portrait").style.animationName=""
 	get("john-name").style.animationName=""
 	john.opened = false
@@ -264,7 +265,12 @@ function johnClose(){
 
 function johnRefresh() { //updates values in john window
 	let quest = johnQuests[player.john.currentQuest]
-	get("john-speech-bubble").textContent=`${quest.story}`
+	get("top-john-speech-bubble").textContent=`${quest.story}`
 	get("john-ore-story").textContent=`${quest.ore_stry}`
 	get("john-quest-progress").textContent=`${quest.ore} ${playerInventory[quest.ore].normalAmt}/${quest.amount}`
+}
+
+function johnSay(johnsWisdom){
+	get("right-john-speech-bubble").textContent = johnsWisdom
+	get("sayings-bubble-container").style.visibility = "visible"
 }
