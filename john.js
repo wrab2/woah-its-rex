@@ -244,7 +244,7 @@ function checkJohn(x,y){
 function johnFirstEncounter(){
 	player.john.spokeWith = true
 	johnActivateQuest()
-	johnSay("hi im johm n help me find my famil y and friends")
+	johnSay("hello im john, please help me reunite my family and friends, if help me ill give you my awesome gears, also you might want to skip some of my quests if they take too long (you can always do them later)")
 }
 
 function johnOpen(){
