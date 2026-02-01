@@ -406,7 +406,7 @@ const indexOrder = {
         "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"], req: function() {return player.sr1Unlocked}},
     },
     1.2: {
-        "watrWatr" : {l: ["deepWaterLayer","johnMetaLayer"], req: function() {return player.john.spokeWith}},
+        "watrWatr" : {l: ["waterLayer","deepWaterLayer","johnMetaLayer"], req: function() {return player.john.spokeWith}},
     },
     0.9: {
         "galactica" : {l: ["starLayer", "nebulaLayer"], req: function() {return player.galacticaUnlocked}},
