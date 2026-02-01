@@ -154,7 +154,7 @@ function finishInit() {
 }
 function assignImageNames() {
     for (let ore in oreList) {
-        if (oreList[ore]["hasImage"]) {
+        if (oreList[ore]["hasImage"] || oreList[ore]["oreName"]) {
             oreList[ore]["srcElement"].parentElement.setAttribute("title", oreList[ore]["oreName"])
         }
     }

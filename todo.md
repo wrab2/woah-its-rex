@@ -2,7 +2,7 @@
 
 improve speech bubble
 
-✅ (im unsure what this means but i think its done?) make names work with johnical rarity
+✅✅ (im unsure what this means but i think its done?(it was in fact not done before this commit)) make names work with johnical rarity
 
 add estimated time to quests
 
