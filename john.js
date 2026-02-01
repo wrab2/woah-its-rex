@@ -268,9 +268,28 @@ function johnRefresh() { //updates values in john window
 	get("top-john-speech-bubble").textContent=`${quest.story}`
 	get("john-ore-story").textContent=`${quest.ore_stry}`
 	get("john-quest-progress").textContent=`${quest.ore} ${playerInventory[quest.ore].normalAmt}/${quest.amount}`
+	estimateJohnQuestTime()
 }
 
 function johnSay(johnsWisdom){
 	get("right-john-speech-bubble").textContent = johnsWisdom
 	get("sayings-bubble-container").style.visibility = "visible"
+}
+
+function estimateJohnQuestTime(){
+	let thisQuest = johnQuests[player.john.currentQuest]
+	let amount = thisQuest.amount
+	if(true){}
+	let time
+	if (thisQuest.ore === "🐃") time = 0
+	else if (thisQuest.ore === "evilJohn") time = 0
+	//unbelievable code structure
+	else if (thisQuest.ore === "josh") time = 0
+	else if(thisQuest.cave){
+		time = 1000*caveOreEstimatedTime(thisQuest.ore)*thisQuest.amount
+	} else {
+		get("john-quest-eta").textContent=`Estimated time: ${ct(true)}`
+		return 
+	}
+	get("john-quest-eta").textContent=`Estimated time: ${longTime(time)}`
 }

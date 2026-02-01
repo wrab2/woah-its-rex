@@ -2341,7 +2341,7 @@ const gearInformation = {
         tier: 14,
     },
 }
-function ct() {
+function ct(john=false) {
     const nums = calcSpeed();
     nums.speed = nums.speed < 1 ? 0 : nums.speed;
     const speed = (1000 / nums.speed) * nums.reps + nums.extra;
@@ -2361,8 +2361,15 @@ function ct() {
     if (randBuff.proc) m *= 2;
     if (player.gears["gear39"]) m *= 0.5;
     const abilityRate = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].rate/m : 500/m;
-    const rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
-    const recipe = pickaxeUsing !== "pickaxe27" ? recipes[rId].recipe : player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? "RETURN" : upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
+    let rId
+    let recipe
+    if(john){
+        recipe = {ore:johnQuests[player.john.currentQuest].ore,amt:johnQuests[player.john.currentQuest].amount}
+    } else {
+        rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
+        recipe = pickaxeUsing !== "pickaxe27" ? recipes[rId].recipe : player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? "RETURN" : upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
+        console.log(recipe)
+    }
     if (recipe === "RETURN") return msToTime(0);
     const recipeLayers = {
     }
@@ -2421,6 +2428,7 @@ function ct() {
 }
 
 function caveOreEstimatedTime(ore){
+    //this function takes one ore as a string
     let result = 0
     const oreRarity = oreList[ore].numRarity
     const speed = calcSpeed().reps * (1000/calcSpeed().speed) + calcSpeed().extra

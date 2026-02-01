@@ -5115,6 +5115,9 @@ background-size: 100%;
 }
 #john-quest-progress {
   font-size: x-large;
+}
+#john-quest-eta{
+  font-size: small;
 	border-bottom: 2px solid #329fd1;
 }
 #john-quest-controls {
