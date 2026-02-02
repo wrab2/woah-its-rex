@@ -489,12 +489,18 @@ const checkSpecials = function(block, get) {
             case "🏔️" : 
             block = "🌋";
             break;
+            case "☑️" : 
+            block = "✔️";
+            break;     
             case "💔" : 
             if (curDirection === "")
                 block = "❤️‍🩹";
             break;
             case "🩸" : 
             block = "💧";
+            break;
+            case "🤣" : 
+            block = "🚁";
             break;
             case "🔮" :
             if (curDirection === "") {

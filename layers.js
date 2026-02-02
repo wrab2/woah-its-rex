@@ -4,6 +4,7 @@ let oreList = {
     '💗': { 'decimalRarity': 1 / 150000000000, 'numRarity': 150000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A distant pulse resonates with your heart, synchronising its beat with yours...', 'oreTier': 'Ethereal',  },
     '❤️‍🔥': { 'decimalRarity': 1 / 50000000000, 'numRarity': 50000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A compassionate warmth envelops your heart in a fiery yet comforting embrace...', 'oreTier': 'Sacred',  },
     '😻': { 'decimalRarity': 1 / 5000000005, 'numRarity': 5000000005, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'holy shit is this a real cat??', 'oreTier': 'Celestial',  },
+    '🐈‍⬛': { 'decimalRarity': 1 / 1e12, 'numRarity': 1e12, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'go to EEP', 'oreTier': 'Celestial',  },
     '🏝️': { 'decimalRarity': 1 / 275320000, 'numRarity': 275320000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Huge, beaming crystals emerge from the ground, creating an ephemeral atmosphere...', 'oreTier': 'Flawless',  },
     '✨': { 'decimalRarity': 1 / 240800000, 'numRarity': 240800000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'From every corner of festive depths, bursts of color erupt like fireworks against the velvet sky...', 'oreTier': 'Flawless',  },
     '⛄': { 'decimalRarity': 1 / 183640000, 'numRarity': 183640000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'In the quiet solitude of a winter landscape, a seed of ice blossoms into a testament to resilience and renewal...', 'oreTier': 'Flawless',  },
@@ -22,6 +23,7 @@ let oreList = {
     '🪫': { 'decimalRarity': 1 / 36000000000, 'numRarity': 36000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '🪫 Has Spawned..?', 'oreTier': 'Celestial',  },
     '📛': { 'decimalRarity': 1 / 256000000000000, 'numRarity': 256000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '📛 Has Spawned..?', 'oreTier': 'Celestial',  },
     '🌼': { 'decimalRarity': 1 / 9500000000, 'numRarity': 9500000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '🌼 Has Spawned..?', 'oreTier': 'Celestial',  },
+    '✔️': { 'decimalRarity': 1 / 500000000, 'numRarity': 500000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '✔️ Has Spawned..?', 'oreTier': 'Celestial',  },
     '🏳️‍🌈': { 'decimalRarity': 1 / 2750000000000, 'numRarity': 2750000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '🏳️‍🌈 Has Spawned..?', 'oreTier': 'Celestial',  },
     '🎊': { 'decimalRarity': 1 / 1000000000000000, 'numRarity': 1000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '🎊 Has Spawned..?', 'oreTier': 'Celestial',  },    
     '💧': { 'decimalRarity': 1 / 13000000000000000, 'numRarity': 13000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '💧 Has Spawned..?', 'oreTier': 'Celestial',  },    
@@ -159,6 +161,13 @@ let oreList = {
     '⚗️': { 'decimalRarity': 1 / 9750000, 'numRarity': 9750000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '⚗️ Has Spawned!', 'oreTier': 'Mystical',  },
     '🧪': { 'decimalRarity': 1 / 7500000, 'numRarity': 7500000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '🧪 Has Spawned!', 'oreTier': 'Mystical',  },
     
+    '😹': { 'decimalRarity': 1 / 1000000000000, 'numRarity': 1000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'my cat got merged with the joy emoji :cry:', 'oreTier': 'Imaginary',  },
+    '🐈': { 'decimalRarity': 1 / 33333333333333, 'numRarity': 33333333333333, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'meyuriow old year :3', 'oreTier': 'Imaginary',  },
+    '🤯': { 'decimalRarity': 1 / 33333333333334, 'numRarity': 33333333333333, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'happy new year', 'oreTier': 'Imaginary',  },
+    '🫃': { 'decimalRarity': 1 / 10000000000005, 'numRarity': 10000000000005, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'after being kicked from the silly layer, they moved to the checkmark layer...', 'oreTier': 'Imaginary',  },
+    '😂': { 'decimalRarity': 1 / 3000000000000000, 'numRarity': 3000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'geforce now', 'oreTier': 'Hyperdimensional',  },
+    '🤣': { 'decimalRarity': 1 / 1e21, 'numRarity': 1e21, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'rolling on the floor meowing', 'oreTier': 'Polychromatical',  },
+
 
     '🍖': { 'decimalRarity': 1 / 160000000000, 'numRarity': 160000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "In this alternate earth, the desert thrived, and is the most habitable environment in this world...", 'oreTier': 'Celestial',  },
     "🦴": { 'decimalRarity': 1 / 175000000000, 'numRarity': 175000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Deep within the arid sands lay fossils of an olden age, one can only wonder what beasts roamed the earth back then...', 'oreTier': 'Ethereal',  },
@@ -497,6 +506,7 @@ let oreList = {
     '🟪': { 'decimalRarity': 1 / 55, 'numRarity': 55, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🟥': { 'decimalRarity': 1 / 40, 'numRarity': 40, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🟧': { 'decimalRarity': 1 / 30, 'numRarity': 30, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
+    //☑️✔️🛄😹🐈🐈‍⬛🤯🫃😂🤣🚁
 
     '❔' : { 'noLuck': true, 'decimalRarity': 1 / 1111111111, 'numRarity': 1111111111, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': ':trol:', 'oreTier': 'Interstellar',  },
     '📘': { 'decimalRarity': 1 / 1900000, 'numRarity': 1900000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '📘 Has Spawned!', 'oreTier': 'Antique',  },
@@ -533,8 +543,12 @@ let oreList = {
     '🔂': { 'decimalRarity': 1 / 250, 'numRarity': 250, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🔄': { 'decimalRarity': 1 / 175, 'numRarity': 175, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🔃': { 'decimalRarity': 1 / 100, 'numRarity': 100, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
+    '☑️': { 'decimalRarity': 1 / 500000, 'numRarity': 500000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Godly',  }, // this isnt a w2 common but it fits in with the rest
+    '🛄': { 'decimalRarity': 1 / 450000000000, 'numRarity': 450000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal',  }, //nether is ts
+    //😹🐈🐈‍⬛🤯🫃😂🤣
+
+
     
-    // johns family and friends 
     '🤽🏻': { 'decimalRarity': 1 / 5e17, 'numRarity': 5e17, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: oh man you found my good buddy Jonah (not to be confused with johan, i remember that one time we went to home depot and we accidentally bought twenty thousand doors, turns out they were mitosing door, ', 'oreTier': 'Johnical', "oreName" : "Jonah"},
     '🤽🏼': { 'decimalRarity': 1 / 5e17, 'numRarity': 5e17, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: jackson and i were best buddies in school untill he fell into a wormhole that brought him straight to the vatican city, we used to meet up during lunch time to undermine the TnnA fountations authority', 'oreTier': 'Johnical', "oreName" : "Jackson" },
     '🤽🏽': { 'decimalRarity': 1 / 5e17, 'numRarity': 5e17, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: noah was who first me to checkmarxism, at his local library i am very greatful for his contributions to the WCP', 'oreTier': 'Johnical', "oreName" : "Noah" },
@@ -578,10 +592,13 @@ let oreList = {
     '♟️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '✖️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '❌': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🕳️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer','hasImage' : true, "src" : "media/john/john.svg",  },
-    '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
-    '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer', },
+    '✅': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🕳️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',   },
+    '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer','hasImage' : true, "src" : "media/john/john.svg", "oreName" : "John" },
+    '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "oreName" : "Jim" },
+    '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',"oreName" : "Jane" },
+    'deepWater':{ 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  'hasImage' : true, "src" : "media/ores/deepWater.png", "oreName" : "deepWater", "oreName" : "Deep Water"},
+
     'bitcoin' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'erm', 'oreTier': 'Common',  },
     'Nyerd' : { 'decimalRarity': 1 / 450000000000, 'numRarity': 450000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "you're a NYERD!!!", 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/NYERD.webp", "oreName" : "nyerd", "eId":"<:nyerd:1232461600087343156>"},
     'Fox' : { 'decimalRarity': 1 / 200000000000, 'numRarity': 200000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'what the fox is going on here!!', 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/STUPID_FOX.webp", "oreName" : "fox",},
@@ -641,8 +658,8 @@ let oreList = {
     'TheHowlingMoon':{ 'decimalRarity': 1 / 29500000000000000000, 'numRarity': 29500000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "The Moon's Penumbra turns to Leer at You, its Blue Blood Corrupted...", 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/howlingmoon.png", "oreName" : "The Howling Moon",},
     'Pasta':{ 'decimalRarity': 1 / 1000000000000000, 'numRarity': 1000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Something about pasta...', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/ores/pasta.png", "oreName" : "Pasta",},
     'Star Core':{ 'decimalRarity': 1 / 950000000000000, 'numRarity': 950000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "The gears spin and spin, generating the energy to make the star's radiant glow...", 'oreTier': 'Imaginary',  'hasImage' : true, "src" : "media/ores/starcore.png", "oreName" : "Star Core",},
-	
-	'deepWater':{ 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  'hasImage' : true, "src" : "media/ores/deepWater.png", "oreName" : "deepWater", "oreName" : "Deep Water"},
+	'🚁':{ 'decimalRarity': 1 / 1e24, 'numRarity': 1e24, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'What. The. Hell. ?!?! HOW', 'oreTier': 'Polychromatical'},
+
     
     "☯️" : { 'decimalRarity': 1 / 987656789, 'numRarity': 987656789, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Through light and darkness, only one may guide you to the truth...', 'oreTier': 'Celestial',  },
     "⛏️": { 'decimalRarity': 1 / 10000000, 'numRarity': 10000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'Thoughts of what lies on the other side cloud your mind until.. a mirror image appears..?', 'oreTier': 'Celestial',  },
@@ -679,6 +696,7 @@ const layerList = {
 "chessLayer" : ["sillyMiner", "⚖️", "🌱", "🎓", "📍", "📌", "🔎", "🖊️", "📚", "📐", "📖", "🧠", "✏️", "♟️"],
 "barrierLayer" : ["❔",  "✴️", "✖️"],
 "borderLayer" : ["sillyMiner", "🩸", "♨️", "🚫", "🔈", "⛔", "💢", "🔇", "🛑", "⭕", "🔕", "❌"],
+"checkmarkLayer" : ["sillyMiner", "🤣", "🤯", "😂", "🫃", "🐈‍⬛", "🐈", "😹", "🛄", "✔️", "☑️", "✅"], 
 "worldTwoCommons" : ["Omniscient Clover", "🍀", "☘️", "📘", "📙", "📕", "📗", "⏏️", "▶️", "⏸️", "⏯️", "⏺️", "⏭️", "⏮️", "⏩", "⏪", "⏬", "⏫", "◀️", "🔼", "🔽", "➡️", "↖️", "↘️", "⬇️", "⬆️", "⬅️", "↪️", "↩️", "⤴️", "⤵️", "🔀", "🔁", "🔂", "🔄", "🔃"],
 "grassLayer" : ["sillyMiner", "🌹", "🟩"],
 "unknownLayer" : [],
@@ -693,7 +711,7 @@ const layerList = {
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["deepWater"],
 "jimLayer":["sillyMiner",'🤽'], // todo
-"johnLayer":["sillyMiner",'🤽‍♂️'], // todo also why does he have silly miner
+"johnLayer":["sillyMiner",'🤽‍♂️'], // todo
 "johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️'],
 }
 const createdLayers = {
@@ -702,14 +720,14 @@ const createdLayers = {
 let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"];
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
 let galacticaLayers = ["starLayer", "nebulaLayer"]
-let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"];
-let waterWorldLayers = ["waterLayer"]
-let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer"]
-let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"];
+let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer",];
+let waterWorldLayers = ["waterLayer"] // i feel like jim should be here
+let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer", "johnLayer", "checkmarkLayer"]
+let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"]; // this does NOT look like every layer
 
-const unbreakable = ["✖️","❔","⛏️","deepWater"]
+const unbreakable = ["✖️","❔","⛏️","deepWater", "✅"]
 //required tier to break the unbreakable
-const unbreakableTiers = [20, 20, 20, 13]
+const unbreakableTiers = [20, 20, 20, 13, 15]
 //SETTING LAYERS
 const layerDictionary = {
     //{layer : [], num : 0}
@@ -740,7 +758,8 @@ const layerIndex = {
         3 : "globeLayer",
         4 : "chessLayer",
         5 : "borderLayer",
-        6 : "barrierLayer"
+        6 : "barrierLayer",
+        10 : "checkmarkLayer" // because 10 is better than 7
     },
     subrealmOne : {
         0 : "scLayer",
@@ -1189,6 +1208,11 @@ const limitedOres = {
         "layers" : ["cactusLayer"],
         "timeType" : "month",
         "timeValues" : [1]
+    },
+    "🐈‍⬛" : {
+        "layers" : ["checkmarkLayer"],
+        "timeType" : "hour",
+        "timeValues" : [0,1,2]
     },
     "😻" : {
         "layers" : ["dirtLayer"],

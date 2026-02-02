@@ -2029,7 +2029,7 @@ const milestoneList = {
             title: "Mine Layer Trigger Celestials",
             description: "<span>The Repeating Layers can sometimes get a bit... corrupted... keep mining down!<br>Remaining:",
             check: function() {
-                const cels = ["🐸","📜","🍖","🚨","🪦","🪸","🚬","🥈", "🐞"];
+                const cels = ["🐸","📜","🍖","🚨","🪦","🪸","🚬","🥈", "🐞", "josh"];
                 let output = "";
                 for (let i = 0; i < cels.length; i++) {
                     if (!(indexHasOre(cels[i]) > 0)) {
@@ -2050,7 +2050,7 @@ const milestoneList = {
             title: "Mine Normal Replacement Celestials",
             description: "<span>Some ores have even rarer variants, typically being 1/1000.<br>Remaining:",
             check: function() {
-                const cels = ["⏳","🍂","👁‍🗨","📛","🏳️‍🌈","🎊","💧","🌋","🖋️","⛩️","🎥","🌶️","watermelonDiamond"];
+                const cels = ["⏳","🍂","👁‍🗨","📛","🏳️‍🌈","🎊","💧","🌋","🖋️","⛩️","🎥","🌶️","watermelonDiamond", "✔️", "🚁"];
                 let output = "";
                 for (let i = 0; i < cels.length; i++) {
                     if (!(indexHasOre(cels[i]) > 0)) {
