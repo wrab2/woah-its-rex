@@ -177,7 +177,7 @@ const johnQuests = [
 		ore_stry:"jack is found in the deep water layer",
 		ore:"jack",
 		amount:1,
-		cave: true,
+		cave: false,
 		layers:["deepWaterLayer"],
 		order:19 
 	},
@@ -186,7 +186,7 @@ const johnQuests = [
 		ore_stry:"heavenly john is found in the cloud layer",
 		ore:"heavenlyJohn",
 		amount:10,
-		cave: true,
+		cave: false,
 		layers:["cloudLayer", "cloudLayer2"],
 		order:20 
 	},
