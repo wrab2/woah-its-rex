@@ -554,7 +554,6 @@ let oreList = {
     'evilJohn' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'you quiver in fear at the sight of a familar face but EVIL and RED', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/evil_john.png", "oreName" : "Evil John"},
     'josh' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Josh: hi im johns roomate, tell him hi for me', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/josh.png", "oreName" : "Josh"},
     'jack' : { 'decimalRarity': 1 / 5e19, 'numRarity': 5e19, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: what the hell why does he look like that maybe i dont need my wallet back anymore', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/jack.png", "oreName" : "Jack"},
-    //heavenly john spawns in the cloud layer, john will say "please get me 10 heavenly johns, i need to attone for my sins"
     'heavenlyJohn' : { 'decimalRarity': 1 / 5e18, 'numRarity': 5e18, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: do you think he accepts bribes', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/heavenly_john.png", "oreName" : "Heavenly John"},
 
     'stars' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/stars.png", "oreName": "Stars"},
