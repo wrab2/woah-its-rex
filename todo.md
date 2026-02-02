@@ -6,7 +6,7 @@ checkmark layer
 
 ☑️hyper checkmarkinator
 
-john layer index (with all his friends)
+☑john layer index (with all his friends)
 
 josh (repeating layer CLT)
 
