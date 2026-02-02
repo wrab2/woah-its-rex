@@ -692,7 +692,7 @@ const layerList = {
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["deepWater"],
-"jimLayer":[], // todo
+"jimLayer":["sillyMiner",'🤽'], // todo
 "johnLayer":["sillyMiner",'🤽‍♂️'], // todo also why does he have silly miner
 "johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️'],
 }
@@ -717,6 +717,7 @@ const layerDictionary = {
 const repeatingLayers = {
 
 }
+const waterRepeatingLayers = []
 const layerIndex = {
     worldOne : {
         0 : "dirtLayer",
@@ -752,7 +753,9 @@ const layerIndex = {
     },
     waterWorld: {
         0 : "waterLayer",
-		1 : "deepWaterLayer"
+		1 : "deepWaterLayer",
+		2 : "johnLayer",
+		3 : "jimLayer"
     },
 galacticaLayers : {
     0 : "starLayer",
@@ -818,7 +821,24 @@ function setLayer(y) {
         tempNum = tempNum > allLayers.length - 1 ? allLayers.length - 1 : tempNum;
         currentLayer = layerIndex.subrealmOne[tempNum];
     } else if (currentWorld === 1.2) {
-        currentLayer = "waterLayer";
+		let tempNum = y;
+		if(y < 100e3) currentLayer = "waterLayer";
+		else {
+			currentLayer = "deepWaterLayer";
+			if(player.john.spokeWith && y>1e6){
+				let layerNum = Math.floor((y-1e6)/100e3)
+				if(waterRepeatingLayers[layerNum] == undefined){
+					let newLayer = "deepWaterLayer"
+					let layerRng = Math.random()
+					if(layerRng < 1/10) newLayer = "johnLayer"
+					else if(layerRng < 1/3 + 1/10) newLayer = "jimLayer"
+					waterRepeatingLayers[layerNum] = newLayer
+				}
+				currentLayer = waterRepeatingLayers[layerNum]
+			}			
+		}
+		
+        
     }
     else {
         let tempNum = y;
@@ -869,6 +889,10 @@ function getLayer(y) {
         
     } else if (currentWorld === 1.2) {
         if (y < 100000) return layerDictionary["waterLayer"];
+		else if(y > 1e6) {
+			if(waterRepeatingLayers[Math.floor((y-1e6)/100e3)] == undefined)setLayer(y)
+		return layerDictionary[ waterRepeatingLayers[Math.floor((y-1e6)/100e3)] ]	
+		}
 		else return layerDictionary["deepWaterLayer"];
     } else if (currentWorld === 0.9) {
         if (y === 0) return layerDictionary["starLayer"];
