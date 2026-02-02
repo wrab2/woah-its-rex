@@ -29,19 +29,19 @@ const johnQuests = [
 		order:2  
 	},
 		{
-		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 5 of him though because 5 is better than 1",
+		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 10 of him though because 10 is better than 1",
 		ore_stry:"noah is found in the chess layer in W2",
 		ore:"🤽🏽",
-		amount:5,
+		amount:10,
 		cave: false,
 		layers:["chessLayer"],
 		order:3  
 	},
 		{
-		story:"help me find ron, im pretty sure hes still sleeping at his house, ever since i kicked him out of the WCP he became a alcoholic (get me 5 of him so i can make fun of him frice)",
+		story:"help me find ron, im pretty sure hes still sleeping at his house, ever since i kicked him out of the WCP he became a alcoholic (get me 10 of him so i can make fun of him tenfold)",
 		ore_stry:"ron is found in the tv layer in W2",
 		ore:"🤽🏾",
-		amount:5,
+		amount:10,
 		cave: false,
 		layers:["tvLayer"],
 		order:4  
@@ -56,19 +56,19 @@ const johnQuests = [
 		order:5  
 	},
 		{
-		story:"im really hungry right now so can you get me 5 shawns, theyre currently holding a party, i need to ask them if they can give me a spare slice of cake",
+		story:"im really hungry right now so can you get me 10 shawns, theyre currently holding a party, i need to ask them if they can give me a spare slice of cake",
 		ore_stry:"shawn is found in the cake (silly) layer in W1",
 		ore:"🤽🏻‍♂️",
-		amount:5,
+		amount:10,
 		cave: false,
 		layers:["sillyLayer"],
 		order:6  
 	},
 		{
-		story:"i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer (like any true cactus monarch #reference), please get me 5 of them though because thats a prime number",
+		story:"i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer (like any true cactus monarch #reference), thankfully though you only need one as hes a dictator he does not have anyone else in power other than him",
 		ore_stry:"jay is found in the cactus layer in W1",
 		ore:"🤽🏼‍♂️",
-		amount:5,
+		amount:1,
 		cave: false,
 		layers:["cactusLayer"],
 		order:7  
@@ -83,19 +83,19 @@ const johnQuests = [
 		order:8  
 	},
 		{
-		story:"i need you to find me 5 dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
+		story:"i need you to find me 5 hundred dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
 		ore_stry:"don is found in the radioactive layer in W1",
 		ore:"🤽🏾‍♂️",
-		amount:5,
+		amount:500,
 		cave: false,
 		layers:["radioactiveLayer"],
 		order:9  
 	},
 		{
-		story:"find me jordan (not the country), they need to show up to my housewarming party get me 2 of them though because thats not a power of 3",
+		story:"find me jordan (not the country), they need to show up to my housewarming party get me 10 of them though because thats not a power of 3",
 		ore_stry:"jordan is found in the seychelles layer (africa) in SR1",
 		ore:"🤽🏿‍♂️",
-		amount:2,
+		amount:10,
 		cave: false,
 		layers:["scLayer"],
 		order:10  
