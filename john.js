@@ -84,7 +84,7 @@ const johnQuests = [
 	},
 		{
 		story:"i need you to find me 5 dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
-		ore_stry:"ron is found in the radioactive layer in W1",
+		ore_stry:"don is found in the radioactive layer in W1",
 		ore:"🤽🏾‍♂️",
 		amount:5,
 		cave: false,
