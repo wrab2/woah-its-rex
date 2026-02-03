@@ -290,6 +290,10 @@ function loadContent() {
     musicPlayer.songs["song2"].src = new Audio("audios/ely_audio_2.mp3");
     musicPlayer.songs["song3"].src = new Audio("audios/ely_audio_3.mp3");
     musicPlayer.songs["song4"].src = new Audio("audios/mooing_audio_1.mp3");
+    musicPlayer.songs["song5"].src = new Audio("song5fakeMIDI.mp3");
+    musicPlayer.songs["song6"].src = new Audio("song6.mp3");
+    musicPlayer.songs["song7"].src = new Audio("song7.mp3");
+
     for (let property in musicPlayer.songs) {
         musicPlayer.songs[property].src.load();
         musicPlayer.songs[property].src.volume = musicPlayer.songs[property].baseVolume;

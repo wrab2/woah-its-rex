@@ -1,16 +1,8 @@
-✅add estimated time to quests
-
-✅ add evil john CLT (deny 5(0) requests), once you get him once you dont need the CLT to get him anymore
-
-✅ checkmark layer
-
 ☑️ hyper checkmarkinator
 
 add new layers to teleport lists
 
 ☑️ john layer index (with all his friends)
-
-✅ josh (repeating layer CLT)
 
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 
@@ -18,7 +10,7 @@ after you complete all 20 quests, you get srwatr , which is johns house with all
 
 add events (naval battles), and add gears
 
-add some ores to deep water, Jim jane and john layers
+add some ores to deep water, Jim jane and john layers (and also jane caves)
 
 not a todo but important: make hyper checkmarkinator have tier 15
 
