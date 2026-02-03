@@ -738,6 +738,7 @@ const repeatingLayers = {
 
 }
 const waterRepeatingLayers = []
+const w2RepeatingLayers = []
 const layerIndex = {
     worldOne : {
         0 : "dirtLayer",
@@ -761,7 +762,7 @@ const layerIndex = {
         4 : "chessLayer",
         5 : "borderLayer",
         6 : "barrierLayer",
-        10 : "checkmarkLayer" // because 10 is better than 7
+        10 : "checkmarkLayer" // because 10 is better than 7 //so is 11
     },
     subrealmOne : {
         0 : "scLayer",
@@ -778,10 +779,10 @@ const layerIndex = {
 		2 : "johnLayer",
 		3 : "jimLayer"
     },
-galacticaLayers : {
-    0 : "starLayer",
-    1 : "nebulaLayer",
-}
+	galacticaLayers : {
+		0 : "starLayer",
+		1 : "nebulaLayer",
+	}
 }
 let lastRepeatedLayer = -1;
 let currentLayer = "dirtLayer";
@@ -837,11 +838,13 @@ function setLayer(y) {
                 }
             }
         }
-    } else if (currentWorld === 1.1) {
+    } 
+	else if (currentWorld === 1.1) {
         let tempNum = Math.floor(y / 2000);
         tempNum = tempNum > allLayers.length - 1 ? allLayers.length - 1 : tempNum;
         currentLayer = layerIndex.subrealmOne[tempNum];
-    } else if (currentWorld === 1.2) {
+    } 
+	else if (currentWorld === 1.2) {
 		let tempNum = y;
 		if(y < 100e3) currentLayer = "waterLayer";
 		else {
@@ -858,9 +861,19 @@ function setLayer(y) {
 				currentLayer = waterRepeatingLayers[layerNum]
 			}			
 		}
-		
-        
-    }
+    } 
+	else if (currentWorld === 2){
+		if (y>10e3 && y<1e6) return layerDictionary["borderLayer"]
+		//150k depth per layer
+		let layerNum = Math.floor((y-1e6)/150e3)
+		if (johnRewarded("hyper checkminator")){
+			let layerRng = Math.random()
+			if (layerRng < 1/40) {
+				return w2RepeatingLayers[layerNum] = "checkmarkLayer"
+			}
+		} 
+		return w2RepeatingLayers[layerNum] = "borderLayer"
+	}
     else {
         let tempNum = y;
         if (tempNum < 10000) {
@@ -898,7 +911,14 @@ function getLayer(y) {
         } else {
             if (y === 10000) return layerDictionary["barrierLayer"];
             else if (curY < 10000) return layerDictionary["chessLayer"];
-            else return layerDictionary["borderLayer"];
+            else if (y < 1e6) return layerDictionary["borderLayer"];
+			else {
+				layerNum = Math.floor((y-1e6)/150e3)
+				if (w2RepeatingLayers[layerNum] === undefined){
+					setLayer(y)
+				}
+				return layerDictionary[w2RepeatingLayers[layerNum]]
+			}
         }
     } else if (currentWorld === 1.1) {
         if (y === 0) return layerDictionary["grassLayer"];

@@ -6,6 +6,8 @@ add evil john CLT (deny 5 requests), once you get him once you dont need the CLT
 
 ☑️hyper checkmarkinator
 
+new layers to teleport list
+
 ☑john layer index (with all his friends)
 
 josh (repeating layer CLT)

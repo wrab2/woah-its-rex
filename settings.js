@@ -401,6 +401,7 @@ const indexOrder = {
         "worldTwoCommons" : {l: ["worldTwoCommons"], req: function() {return true;}},
         "worldTwoSpecial1" : {l: ["barrierLayer"], req: function() {return indexHasOre("✴️") > 0}},
         "worldTwoSpecial2" : {l: ["borderLayer"], req: function() {return indexHasOre("❌") > 1000000}},
+        "worldTwoSpecial3" : {l: ["checkmarkLayer"], req: function() {return indexHasOre("✅") > 10}},
     },
     1.1: {
         "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"], req: function() {return player.sr1Unlocked}},
@@ -444,6 +445,7 @@ function addIndexLayers(world) {
                     else if (world === "2") {
                         if (thisMat === "✖️") button.textContent = `${thisMat} 8000m`
                         else if (thisMat === "❌") button.textContent = `${thisMat} 8001-∞m`
+                        else if (thisMat === "✅") button.textContent = `${thisMat} ????m`
                         else button.textContent = `${thisMat} ${(i - 1) * 2000}m`
                     } else button.textContent = `${thisMat} ${i * 2000}m`
                 } else {

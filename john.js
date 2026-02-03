@@ -9,6 +9,17 @@ const john = { //this doesn't presist between refreshes
 	opened: false,
 	rejectedQuests: 0,
 }
+
+const johnRewards = {
+	"hairloom": 1,
+	"naval events": 3,
+	"hyper checkminator": 10,
+}
+function johnRewarded(reward) {
+	if(player.john.questsCompleted.length >= johnRewards[reward]) return true
+	return false
+}
+
 const johnQuests = [
 	{
 		story:"my old coworker johan, please go find him, hes currently taking care of all the doors, but he forgot to give me back my 20 bucks so please bring back 5 of him (so i get 120 dollars 🤑)",
