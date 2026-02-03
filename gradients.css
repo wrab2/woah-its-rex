@@ -555,14 +555,14 @@
     -webkit-text-fill-color: transparent;
 }
 #pickaxeOfFlight span{
-    background: linear-gradient(to right,#403330 5%, #2c8769, #403330 95%);
+    background: linear-gradient(to right,#403330 5%, #2C8769, #403330 95%);  /* why are the colours sometimes capitalized and sometimes not smh this game SUCKS */
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 #ringOfFire span{
-    background: linear-gradient(to right,#403330 5%, #2b1660, #403330 95%);
+    background: linear-gradient(to right,#403330 5%, #2B1660, #403330 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
@@ -598,6 +598,48 @@
 }
 #galacticEngulfer span{
     background: linear-gradient(to right,#000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#hyperCheckmarkinator span{
+    background: linear-gradient(to right, #0b7f3f, #4dff9a, #ffffff, #4dff9a, #0b7f3f);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#familyHeirloom span{
+    background: linear-gradient(to right,#0b2a3d 5%, #1e6fa3, #a7d8f0, #1e6fa3, #0b2a3d 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#waterPoloBall span{
+    background: linear-gradient(to right,#0a0a0a 5%, #ff7a00, #ffb347, #ff7a00, #0a0a0a 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#waterPoloHat span{
+    background: linear-gradient(to right,#083c44 5%, #00cfd6, #9ff6ff, #00cfd6, #083c44 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#ringEnabler span{
+    background: linear-gradient(to right,#403330 5%, #1662A4, #403330, #0A9420, #403330, #C6D224, #403330, #2b1660, #000000, #403330 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#casinoChips span{
+    background: linear-gradient(to right,#1a1a1a 5%, #ff2d95, #ffd700, #00e5ff, #9b5cff, #1a1a1a 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
