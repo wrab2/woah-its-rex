@@ -5180,6 +5180,7 @@ background-size: 100%;
 	background: #ffffff;
 	border-radius: .4em;
   width:400px;
+  max-width: calc(100vw - (min(100px, 5vw) + 180px));
   padding: 4px;
   max-height: 100px;
   min-height: 40px;

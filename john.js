@@ -207,19 +207,19 @@ function johnActivateQuest() {
 	if(player.john.spokeWith && player.john.currentQuest !== undefined){
 		const thisQuest = johnQuests[player.john.currentQuest]
 		if(thisQuest.cave){
-			return insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+			return insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":true});
 		}
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
 		if (thisQuest.ore === "josh") return
-		insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+		insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":true});
 	}
 }
 function johnStopQuest() {
 	if(player.john.spokeWith && player.john.currentQuest !== undefined){
 		const thisQuest = johnQuests[player.john.currentQuest]
 		if(thisQuest.cave){
-			return removeFromCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":false});
+			return removeFromCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":true});
 		}
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
@@ -247,10 +247,6 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["hyper checkminator"]){
 			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer")
 		}
-		/* potentially john will announce his rewards :cat2: !!?? :exploding_head:
-		if(player.john.questsCompleted.length === 1)johnSay("somrthing is unlocked or now will happen")
-		else if(player.john.questsCompleted.length === 2)johnSay("etc..")
-		*/
 		let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
 		if (questPool.length > 0){
 			let nextQuest =  questPool[Math.floor(Math.random()*questPool.length)]
@@ -264,6 +260,19 @@ function completeQuest(){
 }
 function rejectQuest(){
 	john.rejectedQuests++
+	if(john.rejectedQuests < 50)johnSay("haha yes you can always come back to this quest later but don't spawn my evil doppleganger by rejecting quests 50 times in one session")
+	else if(john.rejectedQuests === 50){
+		johnSay("oh no **he** is here. and he's in repeating john layer.")
+		insertIntoLayers({"ore":"evilJohn", "layers":["johnLayer"], "useLuck":true});
+	}
+	johnStopQuest()
+	let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
+	if (questPool.length > 0){
+		let nextQuest =  questPool[Math.floor(Math.random()*questPool.length)]
+		player.john.currentQuest = johnQuests.indexOf(nextQuest)
+	}
+	johnActivateQuest()
+	johnRefresh()
 }
 
 function checkJohn(x,y){
