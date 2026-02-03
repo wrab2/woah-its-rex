@@ -2368,7 +2368,6 @@ function ct(john=false) {
     } else {
         rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
         recipe = pickaxeUsing !== "pickaxe27" ? recipes[rId].recipe : player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? "RETURN" : upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
-        //console.log(recipe)
     }
     if (recipe === "RETURN") return msToTime(0);
     const recipeLayers = {

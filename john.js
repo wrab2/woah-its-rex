@@ -10,7 +10,7 @@ const john = { //this doesn't presist between refreshes
 	rejectedQuests: 0,
 }
 
-const johnRewards = {
+const johnRewards = { //shortcut for how many quests you need to complete to get it
 	"hairloom": 1,
 	"naval events": 3,
 	"hyper checkminator": 10,
@@ -238,6 +238,15 @@ function completeQuest(){
         
 		player.john.questsCompleted.push(thisQuest.order)
 		johnStopQuest()
+		if(player.john.questsCompleted.length === johnRewards["hairloom"]){
+			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. x600 cave luck.")
+		}
+		else if(player.john.questsCompleted.length === johnRewards["naval events"]){
+			johnSay("did you hear 👂👂👂👂 that")
+		}
+		else if(player.john.questsCompleted.length === johnRewards["hyper checkminator"]){
+			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer")
+		}
 		/* potentially john will announce his rewards :cat2: !!?? :exploding_head:
 		if(player.john.questsCompleted.length === 1)johnSay("somrthing is unlocked or now will happen")
 		else if(player.john.questsCompleted.length === 2)johnSay("etc..")
