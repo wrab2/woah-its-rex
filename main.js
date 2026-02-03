@@ -150,7 +150,7 @@ function finishInit() {
     createMilestones();
     inventoryTimer = setInterval(updateInventory, 500);
     canMine = true;
-    console.log("meow");
+    console.log("🤽‍♂️🤽‍♂️ john has taken over the console 🤽‍♂️🤽‍♂️");
 }
 function assignImageNames() {
     for (let ore in oreList) {

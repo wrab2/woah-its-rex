@@ -1,17 +1,17 @@
-☑️ hyper checkmarkinator
+add events (naval battles), and add gears (i made their css alr in gradients.css)
+
+☑️ hyper checkmarkinator (half done)
 
 add new layers to teleport lists
 
-☑️ john layer index (with all his friends)
+after you complete all 20 quests, you get srwatr (where you can steal johns casino chips somehow?), which is johns house with all of his friends , theres also really rare ores such as 🏚️ 🏡 🏘️ , john can also request previous quests but with the amounts multiplied by a thousand which will . do  something ! (slight increases)
 
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 
-after you complete all 20 quests, you get srwatr , which is johns house with all of his friends , theres also really rare ores such as 🏚️ 🏡 🏘️ , john can also request previous quests but with the amounts multiplied by a thousand which will . do  something !
-
-add events (naval battles), and add gears
-
 add some ores to deep water, Jim jane and john layers (and also jane caves)
 
-not a todo but important: make hyper checkmarkinator have tier 15
+☑️ john layer index (with all his friends)
 
-add another song cause tsc music is peak fr
+another TOL upgrade, with the isreal flag made out of the most evil things (our cats, the usa flag, and probably a few johns in there)
+
+a few checkmark gears maybe?? like 1-2 not a whole worlds worth

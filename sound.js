@@ -136,8 +136,8 @@ const musicPlayer = {
         "song3" : {baseVolume: 0.05, src: "1"},
         "song4" : {baseVolume: 0.15, src: "1"},
         "song5" : {baseVolume: 0.05, src: "1"},
-        "song6" : {baseVolume: 0.05, src: "1"},
-        "song7" : {baseVolume: 0.05, src: "1"},
+        "song6" : {baseVolume: 0.15, src: "1"},
+        "song7" : {baseVolume: 0.15, src: "1"},
 
     },
     currentSong : ""
