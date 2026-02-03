@@ -565,8 +565,8 @@ let oreList = {
     '🤽🏾‍♀️': { 'decimalRarity': 1 / 5e10, 'numRarity': 5e10, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John: meow :3', 'oreTier': 'Johnical',  "oreName" : "Jocelyn"},
     '🤽🏿‍♀️': { 'decimalRarity': 1 / 5e12, 'numRarity': 5e12, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'John:🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️', 'oreTier': 'Johnical', "oreName" : "Rowhen", },
     '🐃':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'how the hell did you get this as a spawn message :3', 'oreTier': 'Johnical',  },
-    'evilJohn' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'you quiver in fear at the sight of a familar face but EVIL and RED', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/evil_john.png", "oreName" : "Evil John"},
-    'josh' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Josh: hi im johns roomate, tell him hi for me', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/josh.png", "oreName" : "Josh"},
+    'evilJohn' : { 'decimalRarity': 1 / 1e18, 'numRarity': 1e18, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'you quiver in fear at the sight of a familar face but EVIL and RED', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/evil_john.png", "oreName" : "Evil John"},
+    'josh' : { 'decimalRarity': 1 / 1e18, 'numRarity': 1e18, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Josh: hi im johns roomate, tell him hi for me', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/josh.png", "oreName" : "Josh"},
     'jack' : { 'decimalRarity': 1 / 5e19, 'numRarity': 5e19, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: what the hell why does he look like that maybe i dont need my wallet back anymore', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/jack.png", "oreName" : "Jack"},
     'heavenlyJohn' : { 'decimalRarity': 1 / 5e18, 'numRarity': 5e18, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: do you think he accepts bribes', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/heavenly_john.png", "oreName" : "Heavenly John"},
 
@@ -714,9 +714,11 @@ const layerList = {
 "deepWaterLayer" : ["deepWater"],
 "jimLayer":["sillyMiner",'🤽'], 
 "johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"],
-"johnLayer_CLT":["sillyMiner",'🤽‍♂️'], //I don't understand how to add celestial layer trigger so let's do this instead for now 
+"johnLayer_CLT":['🤽‍♂️'],
 "johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️', "heavenlyJohn", "jack"],
 }
+layerList.johnLayer_CLT = structuredClone(layerList.johnLayer)
+
 const createdLayers = {
 
 }
@@ -846,7 +848,6 @@ function setLayer(y) {
         currentLayer = layerIndex.subrealmOne[tempNum];
     } 
 	else if (currentWorld === 1.2) {
-		let tempNum = y;
 		if(y < 100e3) currentLayer = "waterLayer";
 		else {
 			currentLayer = "deepWaterLayer";
@@ -856,7 +857,10 @@ function setLayer(y) {
 					let newLayer = "deepWaterLayer"
 					let layerRng = Math.random()
 					if(layerRng < 1/10) {
-						if(Math.random()<1/50) newLayer = "johnLayer_CLT"
+						if(Math.random()<1/20) {
+                            newLayer = "johnLayer_CLT"
+                            eventSpawn.play()
+                        }
 						else newLayer = "johnLayer"
 					}
 					else if(layerRng < 1/3 + 1/10) newLayer = "jimLayer"
@@ -935,8 +939,17 @@ function getLayer(y) {
     } else if (currentWorld === 1.2) {
         if (y < 100000) return layerDictionary["waterLayer"];
 		else if(y > 1e6) {
-			if(waterRepeatingLayers[Math.floor((y-1e6)/100e3)] == undefined)setLayer(y)
-		return layerDictionary[ waterRepeatingLayers[Math.floor((y-1e6)/100e3)] ]	
+            const layerNum = Math.floor((y-1e6)/100e3)
+			if(waterRepeatingLayers[layerNum] == undefined)setLayer(y)
+
+            try{
+                if(waterRepeatingLayers[layerNum].includes("CLT")) layerIsTriggered=true
+                else layerIsTriggered=false
+            } catch {
+                layerIsTriggered=false
+            }
+
+		return layerDictionary[ waterRepeatingLayers[layerNum] ]	
 		}
 		else return layerDictionary["deepWaterLayer"];
     } else if (currentWorld === 0.9) {
@@ -1076,6 +1089,7 @@ function createAllLayers() {
 	layerDictionary["jimLayer"] = {layer: createLayer([layerList["jimLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["jimLayer"])};
 	layerDictionary["johnLayer"] = {layer: createLayer([layerList["johnLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer"])};
     layerDictionary["johnMetaLayer"] = {layer: createLayer([layerList["johnMetaLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnMetaLayer"])};
+    layerDictionary["johnLayer_CLT"] = {layer: createLayer([layerList["johnLayer_CLT"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer_CLT"])};
     let tier = "Uncommon";
     let arr = [];
     while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {

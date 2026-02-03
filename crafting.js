@@ -2381,10 +2381,12 @@ function ct(john=false) {
                 currentOreLayer = "commons";
             } else {
                 for (let layer in layerDictionary) {
-                    if (layerDictionary[layer].layer.includes(ore)) {
-                        recipeLayers[layer] ??= {ore: ore, highestProcs : 0, amt:0}
-                        currentOreLayer = layer;
-                        break;
+                    if(layer!=="johnMetaLayer"){
+                        if (layerDictionary[layer].layer.includes(ore)) {
+                            recipeLayers[layer] ??= {ore: ore, highestProcs : 0, amt:0}
+                            currentOreLayer = layer;
+                            break;
+                        }
                     }
                 }
                 if (currentOreLayer === undefined) {

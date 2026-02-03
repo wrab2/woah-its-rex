@@ -184,7 +184,7 @@ const johnQuests = [
 		ore:"josh",
 		amount:10,
 		cave: false,
-		layers:[""], // repeating john layer CLT
+		layers:["johnLayer_CLT"], // repeating john layer CLT
 		order:18 
 	},
 		{
@@ -215,7 +215,6 @@ function johnActivateQuest() {
 		}
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
-		if (thisQuest.ore === "josh") return
 		insertIntoLayers({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":true});
 	}
 }
@@ -227,7 +226,6 @@ function johnStopQuest() {
 		}
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
-		if (thisQuest.ore === "josh") return
 		removeFromLayers({"ore":thisQuest.ore, "layers":thisQuest.layers})
 	}
 }
@@ -279,7 +277,7 @@ function rejectQuest(){
 	if(john.rejectedQuests < 50)johnSay("haha yes you can always come back to this quest later but don't spawn my evil doppleganger by rejecting quests 50 times in one session")
 	else if(john.rejectedQuests === 50){
 		johnSay("oh no he is here, and he's in a repeating john layer. ! you might want to watch out 👀👀👀👀")
-		insertIntoLayers({"ore":"evilJohn", "layers":["johnLayer"], "useLuck":true});
+		insertIntoLayers({"ore":"evilJohn", "layers":["johnLayer","johnLayer_CLT"], "useLuck":true});
 	}
 	johnStopQuest()
 	let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
@@ -345,9 +343,6 @@ function estimateJohnQuestTime(){
 	if(true){}
 	let time
 	if (thisQuest.ore === "🐃") time = 0
-	else if (thisQuest.ore === "evilJohn") time = 0
-	//unbelievable code structure
-	else if (thisQuest.ore === "josh") time = 0
 	else if(thisQuest.cave){
 		time = 1000*caveOreEstimatedTime(thisQuest.ore)*thisQuest.amount
 	} else {
