@@ -632,11 +632,30 @@
     -webkit-text-fill-color: transparent;
 }
 #ringEnabler span{
-    background: linear-gradient(to right,#403330 5%, #1662A4, #403330, #0A9420, #403330, #C6D224, #403330, #2b1660, #000000, #403330 95%);
+    background: linear-gradient(
+        90deg,
+        #403330,
+        #1662A4,
+        #0A9420,
+        #C6D224,
+        #2b1660,
+        #000000,
+        #403330
+    );
+    background-size: 400% 400%;
+    animation: shiftGradient 8s ease-in-out infinite;
+
     -webkit-background-clip: text;
-    color: transparent;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
+}
+
+@keyframes shiftGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 }
 #casinoChips span{
     background: linear-gradient(to right,#1a1a1a 5%, #ff2d95, #ffd700, #00e5ff, #9b5cff, #1a1a1a 95%);
