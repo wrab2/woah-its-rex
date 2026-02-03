@@ -651,6 +651,8 @@ let oreList = {
     'Charybdis':{ 'decimalRarity': 1 / 1500000000000000, 'numRarity': 1500000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A red planet shaped like the eye of a dragon is discovered, a breathtaking cosmic presence that defies all explanation...', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/ores/charybdis.png", "oreName" : "",},
     'cateye':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'The universal eye of a universal being chooses to spend its existence with you...', 'oreTier': 'Infinitesimal',  'hasImage' : true, "src" : "media/ores/cateye.png", "oreName" : "CATEYE"},
     'True Infinity':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'An incomprehensible thought appears before you in a recognizable shape...', 'oreTier': 'Infinitesimal',  'hasImage' : true, "src" : "media/ores/trueInfinity.png", "oreName" : "True Infinity",},
+    'silly':{ 'decimalRarity': 1 / 200000000000000000000, 'numRarity': 200000000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'meow mrrp nya!!', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/silly.png", "oreName" : "Silly :3",},
+    'silly':{ 'decimalRarity': 1 / 210000000000000000000, 'numRarity': 210000000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛🐈‍⬛', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/masa.png", "oreName" : "Masa 🤯",},
     'First Anniversary Cake':{ 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Infinitesimal',  'hasImage' : true, "src" : "media/ores/cakeeeeeee.png", "oreName" : "First Anniversary Cake",},
     'orbOfFlight':{ 'decimalRarity': 1 / 250000000000000000000, 'numRarity': 250000000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore6.gif", "oreName" : "Orb of Flight",},
     'orbOfFire':{ 'decimalRarity': 1 / 500000000000000000000, 'numRarity': 500000000000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'meowww :3', 'oreTier': 'Polychromatical',  'hasImage' : true, "src" : "media/ores/ore7.gif", "oreName" : "Orb of Fire",},
@@ -711,8 +713,8 @@ const layerList = {
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["deepWater"],
 "jimLayer":["sillyMiner",'🤽'], // todo
-"johnLayer":["sillyMiner",'🤽‍♂️'], // todo
-"johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️'],
+"johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"], // todo
+"johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️', "heavenlyJohn", "jack"],
 }
 const createdLayers = {
 
