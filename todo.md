@@ -18,6 +18,6 @@ add events (naval battles), and add gears
 
 add some ores to deep water, Jim jane and john layers
 
-☑️☑️☑️☑️☑️☑️ add 🐈 and 🤯 (Incredibly important(aren't they supposed to be in checkmark layer🐈🐈🐈🤯🤯🤯)(yes thats why they're incredibly important))
-
 not a todo but important: make hyper checkmarkinator have tier 15
+
+add another song cause tsc music is peak fr
