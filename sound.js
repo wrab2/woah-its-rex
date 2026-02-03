@@ -143,14 +143,23 @@ const musicPlayer = {
     currentSong : ""
 }
 function selectSong() {
-    for (let property in musicPlayer.songs) if (!musicPlayer.songs[property].src.paused) {
-        const editingSong = musicPlayer.songs[property].src;
-        editingSong.onended = "";
-        editingSong.pause();
-        editingSong.currentTime = 0;
+    for (let property in musicPlayer.songs) {
+        if (!musicPlayer.songs[property].src.paused) {
+            const editingSong = musicPlayer.songs[property].src;
+            editingSong.onended = "";
+            editingSong.pause();
+            editingSong.currentTime = 0;
+        }
     }
+
+    const songKeys = Object.keys(musicPlayer.songs);
     let selectedSong = musicPlayer.currentSong;
-    while (selectedSong === musicPlayer.currentSong) selectedSong = `song${Math.round((Math.random() * 3)) + 1}`;
+
+    while (selectedSong === musicPlayer.currentSong) {
+        const randomIndex = Math.floor(Math.random() * songKeys.length);
+        selectedSong = songKeys[randomIndex];
+    }
+
     musicPlayer.currentSong = selectedSong;
     const song = musicPlayer.songs[selectedSong].src;
     song.currentTime = 0;
