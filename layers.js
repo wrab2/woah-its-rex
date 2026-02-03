@@ -712,8 +712,9 @@ const layerList = {
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["deepWater"],
-"jimLayer":["sillyMiner",'🤽'], // todo
-"johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"], // todo
+"jimLayer":["sillyMiner",'🤽'], 
+"johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"],
+"johnLayer_CLT":["sillyMiner",'🤽‍♂️'], //I don't understand how to add celestial layer trigger so let's do this instead for now 
 "johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️', "heavenlyJohn", "jack"],
 }
 const createdLayers = {
@@ -854,7 +855,10 @@ function setLayer(y) {
 				if(waterRepeatingLayers[layerNum] == undefined){
 					let newLayer = "deepWaterLayer"
 					let layerRng = Math.random()
-					if(layerRng < 1/10) newLayer = "johnLayer"
+					if(layerRng < 1/10) {
+						if(Math.random()<1/50) newLayer = "johnLayer_CLT"
+						else newLayer = "johnLayer"
+					}
 					else if(layerRng < 1/3 + 1/10) newLayer = "jimLayer"
 					waterRepeatingLayers[layerNum] = newLayer
 				}
