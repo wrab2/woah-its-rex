@@ -11,9 +11,13 @@ const john = { //this doesn't presist between refreshes
 }
 
 const johnRewards = { //shortcut for how many quests you need to complete to get it
-	"hairloom": 1,
-	"naval events": 3,
+	"naval events": 1,
+	"heirloom": 3,
+	"water polo ball" :5,
 	"hyper checkminator": 10,
+	"hat" : 15,
+	"house keys" : 19,
+	"ring enabler" : 20,
 }
 function johnRewarded(reward) {
 	if(player.john.questsCompleted.length >= johnRewards[reward]) return true
@@ -238,14 +242,26 @@ function completeQuest(){
         
 		player.john.questsCompleted.push(thisQuest.order)
 		johnStopQuest()
-		if(player.john.questsCompleted.length === johnRewards["hairloom"]){
-			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. x600 cave luck.")
+		if(player.john.questsCompleted.length === johnRewards["naval events"]){
+			johnSay("did you hear 👂👂👂👂 that, it looks like my past sins (war crimes) have come back to haunt me and all the naval events i have participated in have come back")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["naval events"]){
-			johnSay("did you hear 👂👂👂👂 that")
+		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
+			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around 1100x cave luck (the formula is (event completed) ^1.1 cave luck")
+		}
+		else if(player.john.questsCompleted.length === johnRewards["water polo ball"]){
+			johnSay("one of my friends that you gave to me dropped their water polo ball, honestly you can keep it !")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["hyper checkminator"]){
-			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer")
+			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer (1m blocks or lower)")
+		}
+		else if(player.john.questsCompleted.length === johnRewards["hat"]){
+			johnSay("my current hat is getting pretty worn out from all this swimming, here. take it !")
+		}
+		else if(player.john.questsCompleted.length === johnRewards["house keys"]){
+			johnSay("thank you thank you thank you so so so much, i dont have anything else to give to you though other than my house.... eh whatever its fine i trust you enough just dont steal anything thanks")
+		}
+		else if(player.john.questsCompleted.length === johnRewards["ring enabler"]){
+			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome gear that'll let you progress further")
 		}
 		let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
 		if (questPool.length > 0){
@@ -262,7 +278,7 @@ function rejectQuest(){
 	john.rejectedQuests++
 	if(john.rejectedQuests < 50)johnSay("haha yes you can always come back to this quest later but don't spawn my evil doppleganger by rejecting quests 50 times in one session")
 	else if(john.rejectedQuests === 50){
-		johnSay("oh no **he** is here. and he's in repeating john layer.")
+		johnSay("oh no he is here, and he's in a repeating john layer. ! you might want to watch out 👀👀👀👀")
 		insertIntoLayers({"ore":"evilJohn", "layers":["johnLayer"], "useLuck":true});
 	}
 	johnStopQuest()
@@ -278,7 +294,7 @@ function rejectQuest(){
 function checkJohn(x,y){
 	if (currentWorld!==1.2 || //watr
 		y!==(200-1) || //put it 199, will be at 199,999,999 
-		x!==1e6 //1e6 is actually 0 in game
+		x!==1e6 //1e6 is actually 0 in game (thats dumb why did amber do that)
 	) { return false }
 	else {
 		stopMining()
