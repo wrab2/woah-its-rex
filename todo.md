@@ -15,3 +15,5 @@ add some ores to deep water, Jim jane and john layers (and also jane caves)
 another TOL upgrade, with the isreal flag made out of the most evil things (our cats, the usa flag, and probably a few johns in there)
 
 a few checkmark gears maybe?? like 1-2 not a whole worlds worth
+
+add more milestones (checkmark milestones, ring milestones, TOL6 milestone)
