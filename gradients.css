@@ -633,13 +633,13 @@
 }
 #ringEnabler span{
     background: linear-gradient(
-        90deg,
+        90deg in lch,
         #403330,
         #1662A4,
         #0A9420,
+        #000000,
         #C6D224,
         #2b1660,
-        #000000,
         #403330
     );
     background-size: 400% 400%;
