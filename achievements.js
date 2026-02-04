@@ -1698,8 +1698,8 @@ const milestoneList = {
     "johnPath2" : {
         pathUnlocked: false,
         "jp2.1" : {
-            title: "thank you john",
-            description: "recieve johns water polo ball\r\n(obtained after fulfilling 1 quest)",
+            title: "do NOT scratch it",
+            description: "recieve johns heirloom\r\n(obtained after fulfilling 3 quests)",
             check: function() {
                 //add a function here cause i dont have a gear to check for
             },
@@ -1711,8 +1711,8 @@ const milestoneList = {
             element: undefined
         },
         "jp2.2" : {
-            title: "do NOT scratch it",
-            description: "recieve johns family heirloom\r\n(obtained after fulfilling 5 quests)",
+            title: "thank you john",
+            description: "recieve johns friends water polo ball\r\n(obtained after fulfilling 5 quests)",
             check: function() {
                 //function !!!!!!
             },
@@ -1754,7 +1754,7 @@ const milestoneList = {
         pathUnlocked: false,
         "jp2.5.1" : {
             title: "do NOT call john at 3 am",
-            description: "summon evil john \r\n(by denying  5 john quests)\r\n he is found in the john layer",
+            description: "summon evil john \r\n(by denying 50 john quests)\r\n he is found in the john layer",
             check: function() {
                 //silly function
             },
