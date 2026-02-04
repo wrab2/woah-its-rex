@@ -1670,22 +1670,22 @@ const milestoneList = {
         pathUnlocked: false,
         "jp1.1" : {
             title: "petah the john is here",
-            description: "find the john layer",
+            description: "find john",
             check: function() {
-                return indexHasOre("🤽‍♂️") > 0;
+                return player.john.spokeWith
             },
             owned: false,
             distH: 2,
             distV: 25,
-            unlocks: ["jp1.2"],
+            unlocks: ["jp1.2", "jp2.5.1"],
             connector: [],
             element: undefined
         },
         "jp1.2" : {
             title: "this is confusing",
-            description: "find john (not the layer)",
+            description: "find the john layer (not the guy)",
             check: function() {
-                return player.john.spokeWith
+                return indexHasOre("🤽‍♂️") > 0;
             },
             owned: false,
             distH: 1,
@@ -1746,7 +1746,7 @@ const milestoneList = {
             owned: false,
             distH: 1,
             distV: 21,
-            unlocks: ["jp3.1","jp2.5.1"],
+            unlocks: ["jp3.1"],
             connector: [],
             element: undefined
         },
@@ -1760,8 +1760,8 @@ const milestoneList = {
                 return indexHasOre("evilJohn") > 0;
             },
             owned: false,
-            distH: 0,
-            distV: 22,
+            distH: 2,
+            distV: 26,
             unlocks: ["jp2.5.2"],
             connector: [],
             element: undefined,
@@ -1773,8 +1773,8 @@ const milestoneList = {
                 return indexHasOre("josh") > 0;
             },
             owned: false,
-            distH: 0,
-            distV: 23,
+            distH: 2,
+            distV: 28,
             unlocks: ["jp2.5.3"],
             connector: [],
             element: undefined
@@ -1786,8 +1786,8 @@ const milestoneList = {
                 return indexHasOre("🐃") > 0;
             },
             owned: false,
-            distH: 0,
-            distV: 23,
+            distH: 2,
+            distV: 27,
             unlocks: [],
             connector: [],
             element: undefined
