@@ -1036,6 +1036,8 @@ function updateInventory(m = true) {
     if (Math.random() < 1/10000000) {
         spawnCatEye();
     }
+
+    rollNavalEvent()
 }
 function spawnCatEye() {
     let v = rollVariant();

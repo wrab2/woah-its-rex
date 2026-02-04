@@ -3,6 +3,9 @@ player.john = {
 		spokeWith: true,
 		questsCompleted: [],
 		currentQuest: 11,
+		navalEvents: [],
+		navalEventStartedTime:0,
+		currentNavalEventId:-1,
 	}
 
 const john = { //this doesn't presist between refreshes
@@ -242,6 +245,7 @@ function completeQuest(){
 		johnStopQuest()
 		if(player.john.questsCompleted.length === johnRewards["naval events"]){
 			johnSay("did you hear 👂👂👂👂 that, it looks like my past sins (war crimes) have come back to haunt me and all the naval events i have participated in have come back")
+			setupNavalEvents()
 		}
 		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
 			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around 1100x cave luck (the formula is (event completed) ^1.1 cave luck")
