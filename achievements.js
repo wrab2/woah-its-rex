@@ -1685,7 +1685,7 @@ const milestoneList = {
             title: "this is confusing",
             description: "find john (not the layer)",
             check: function() {
-                return player.john.spokeWith === true
+                return player.john.spokeWith
             },
             owned: false,
             distH: 1,
@@ -1701,6 +1701,7 @@ const milestoneList = {
             title: "do NOT scratch it",
             description: "recieve johns heirloom\r\n(obtained after fulfilling 3 quests)",
             check: function() {
+                return johnRewarded("heirloom")
                 //add a function here cause i dont have a gear to check for
             },
             owned: false,
@@ -1714,7 +1715,7 @@ const milestoneList = {
             title: "thank you john",
             description: "recieve johns friends water polo ball\r\n(obtained after fulfilling 5 quests)",
             check: function() {
-                //function !!!!!!
+                return johnRewarded("water polo ball")
             },
             owned: false,
             distH: 1,
@@ -1727,7 +1728,7 @@ const milestoneList = {
             title: "checkmarxism",
             description: "recieve the recepie for the hyper checkmarkinator\r\n(obtained after fulfilling 10 quests)",
             check: function() {
-                //function four
+                return johnRewarded("hyper checkminator")
             },
             owned: false,
             distH: 1,
@@ -1740,7 +1741,7 @@ const milestoneList = {
             title: "why would you ever mine left",
             description: "get john's awesome hat\r\n(obtained after fulfilling 15 quests)",
             check: function() {
-                //function :3+2
+                return johnRewarded("hat")
             },
             owned: false,
             distH: 1,
@@ -1756,7 +1757,7 @@ const milestoneList = {
             title: "do NOT call john at 3 am",
             description: "summon evil john \r\n(by denying 50 john quests)\r\n he is found in the john layer",
             check: function() {
-                //silly function
+                return indexHasOre("evilJohn") > 0;
             },
             owned: false,
             distH: 0,
@@ -1769,7 +1770,7 @@ const milestoneList = {
             title: "johns roomate",
             description: "find josh (john layer CLT)",
             check: function() {
-                //unbeliavable function
+                return indexHasOre("josh") > 0;
             },
             owned: false,
             distH: 0,
@@ -1798,7 +1799,7 @@ const milestoneList = {
             title: "you're no longer homeless",
             description: "get john's house keys\r\n(obtained after fulfilling EVERY quest)",
             check: function() {
-                //johnical function
+                return johnRewarded("house keys")
             },
             owned: false,
             distH: 0,
