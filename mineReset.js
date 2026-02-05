@@ -68,3 +68,4 @@ function mineReset() {
     displayArea.lastPercent = -10;
     canMine = true;
 }
+//evil mine reset code 🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️🤽‍♂️
