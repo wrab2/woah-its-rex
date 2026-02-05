@@ -787,7 +787,7 @@ function createWebhookId(parent) {
     const children = parent.children;
     const webhookName = children[0].children[0].value;
     const rarityNum = Number(children[1].children[0].value);
-    const idName = children[2].children[0].value;
+    const idName = String(Date.now())
     const webhookLink = children[3].children[0].value;
     if (isNaN(rarityNum) || webhookLink === undefined || idName === undefined || webhookName === undefined) return;
     if (player.webHook.ids[idName] !== undefined) {
