@@ -552,19 +552,11 @@
             </div>
             <div id="loungeWebhookSettings" style="display: none;">
                 <div id="webhookSettings">
-                    <span id="webhookDescription">If you have generated a key in the Discord server, enter it below.<br>To create custom webhooks, click on the "new" button.<br>Enter the name you would like to use in the first box.<br>Enter the rarity you want to webhook in the next box, just type a number above 7 to represent the rarity.<br>Enter a unique ID for the webhook in the next box, can be anything as long as it is not the same as another ID.<br>In the last box, enter the webhook integration link from the Discord channel you want to send finds to.</span>
-                    <span class="createdWebhooksLabel">Server Webhook Key</span>
-                    <div id="serverHook">
-                        <div class="inputAndButton">
-                            <input autocomplete ="off" type="text" class="textInput" id="webhookLinkSet" placeholder="Leave blank to reset">
-                            <button class="inputButton" onclick="setWebhookLink(get('webhookLinkSet'))">Set Webhook Key</button>
-                        </div>
-                    </div>
+                    <span id="webhookDescription">To create custom webhooks, click on the "new" button.<br>Enter the name you would like to use in the first box.<br>Enter the rarity you want to webhook in the next box, just type a number above 7 to represent the rarity.<br>Enter a unique ID for the webhook in the next box, can be anything as long as it is not the same as another ID.<br>In the last box, enter the webhook integration link from the Discord channel you want to send finds to.</span>
                     <span class="createdWebhooksLabel">Create Custom Webhook</span>
                     <br>
                     <button id="createNewWebhook" onclick="addToNew()">New</button>
                     <div id="customHookContainer">
-                        
                         <div class="webhookInfoInputSection" id="newHookCopyable">
                             <div class="webhookInfoSection">
                                 <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Name">
