@@ -52,8 +52,8 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 		} 
 		get("navalEventTitle").textContent = currentNavalEvent.title
 		get("navalEventText").textContent = 
-			String(`${Math.random()<0.5?"👑 $winner vs $loser ":"$loser vs 👑 $winner "}`
-			+currentNavalEvent.description)
+			String(`${Math.random()<0.5?"👑 $winner vs $loser ":"$loser vs 👑 $winner "}, `
+			+currentNavalEvent.description+" "+currentNavalEvent.contribution)
 			.replace(/\$winner/g, currentNavalEvent.winner)
 			.replace(/\$loser/g, currentNavalEvent.loser)
 		let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
@@ -70,23 +70,33 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 let navaleventtempid = 0
 
 class navalEvent {
-	constructor(title, text, winner, loser, minutes, fast_layer){
+	constructor(title, text, winner, loser){
 		navaleventtempid++
+		let duration = text.length*60000
+		//30 minutes - 2 hours, change this later
+		duration = Math.max(2*60*60*1000, Math.min(30*60000, duration))
 		navalEventsList.push({
 			title: title,
 			description: text,
 			winner:winner,
 			loser:loser,
-			duration: minutes*60e3, //converts m to ms
+			duration: duration,
+			contribution: johnContributions[0],
 			id: navaleventtempid,
-			layer: fast_layer
+			layer: ["waterLayer"]
 		})
 	}
 }
+const johnContributions = [
+	"all thanks to john helping $winner or destroying $loser's fleet",
+	"john killed all the fish",
+	"etc",
+]
+
 
 //example events
 new navalEvent(
 	"bloody sea battle 1999",
-	"john helped the $winner fleet win by killing all the fish in the ocean",
-	"USS","HMS",30,["waterLayer"]
+	"fish was hurt",
+	"USS","HMS"
 )
