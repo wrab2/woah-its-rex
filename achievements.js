@@ -2155,7 +2155,7 @@ const milestoneList = {
         },
         "acp1.7" : {
             title: "All those speed gears for nothing!",
-            description: "Teleport to surface, a lot, and then mine in Paper layer with your slower speeds.\r\nMine 🐢",
+            description: "Teleport to surface, a lot, and then mine in Paper layer with your slower speeds.\r\nMine 🐢, theres also 🐰",
             check: function() {
                 return indexHasOre("🐢") > 0;
             },
