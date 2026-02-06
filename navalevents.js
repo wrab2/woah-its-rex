@@ -16,7 +16,7 @@ const battleshipIcon = get("displayShipIcon")
 function rollNavalEvent(){ //this will run on every inventory update so 2 times a second
 	if(!johnRewarded("naval events"))return
 	if(Date.now() < navalEventEndTime) { //event is not over
-		if(currentLayer == currentNavalEvent.layer){
+		if(currentLayer === currentNavalEvent.layer[0]){
 			//makes event go by 3x faster if you are in its layer
 			player.john.navalEventStartedTime -= 1000
 			navalEventEndTime -= 1000
@@ -40,8 +40,8 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 		return
 	}
 	//chance is 1/3600 every 500ms which is ~2/hour to get any uncompleted event
-	if(availableNavalEvents.length > 0 && Math.random()<1/10){
-		currentNavalEvent = availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
+	if(availableNavalEvents.length > 0 && Math.random()<1/1){
+		currentNavalEvent =availableNavalEvents[0]// availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
 		player.john.currentNavalEvent = currentNavalEvent.id
 		player.john.navalEventStartedTime = Date.now()
 		navalEventEndTime = Date.now() + currentNavalEvent.duration
@@ -51,7 +51,11 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 			toggleSideMenu('navalEventInfo')
 		} 
 		get("navalEventTitle").textContent = currentNavalEvent.title
-		get("navalEventText").textContent = currentNavalEvent.description
+		get("navalEventText").textContent = 
+			String(`${Math.random()<0.5?"👑 $winner vs $loser ":"$loser vs 👑 $winner "}`
+			+currentNavalEvent.description)
+			.replace(/\$winner/g, currentNavalEvent.winner)
+			.replace(/\$loser/g, currentNavalEvent.loser)
 		let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
 		if(oreList[questLayerOre].hasImage){
 			get("navalEventLayer").innerHTML = `<img src="${oreList[questLayerOre].src}">`
@@ -66,23 +70,23 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 let navaleventtempid = 0
 
 class navalEvent {
-	constructor(title, text, minutes, fast_layer){
+	constructor(title, text, winner, loser, minutes, fast_layer){
 		navaleventtempid++
 		navalEventsList.push({
 			title: title,
 			description: text,
+			winner:winner,
+			loser:loser,
 			duration: minutes*60e3, //converts m to ms
 			id: navaleventtempid,
 			layer: fast_layer
 		})
 	}
 }
+
 //example events
-new navalEvent("big sea battle 1 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 2 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 3 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 4 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 5 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 6 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 7 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
-new navalEvent("big sea battle 8 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent(
+	"bloody sea battle 1999",
+	"john helped the $winner fleet win by killing all the fish in the ocean",
+	"USS","HMS",30,["waterLayer"]
+)
