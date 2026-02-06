@@ -53,8 +53,8 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 		get("navalEventTitle").textContent = currentNavalEvent.title
 		get("navalEventText").textContent = currentNavalEvent.description
 		let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
-		if(oreList[questLayerOre].hasimage){
-			get("navalEventLayer").innerHtml = `<img src="${oreList[questLayerOre].src}">`
+		if(oreList[questLayerOre].hasImage){
+			get("navalEventLayer").innerHTML = `<img src="${oreList[questLayerOre].src}">`
 		} else {
 			get("navalEventLayer").textContent = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
 		}

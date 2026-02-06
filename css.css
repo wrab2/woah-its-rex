@@ -3258,6 +3258,9 @@ img.roundcat {
   margin: 0px;
   background-color: #111314;
 }
+#navalEventLayer > img {
+  width: 1.5em;
+}
 
 #cloudSaving {
   position: absolute;
