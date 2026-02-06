@@ -12,6 +12,7 @@ function setupNavalEvents(){ //only runs on startup and after getting naval even
 	}
 }
 
+const battleshipIcon = get("displayShipIcon")
 function rollNavalEvent(){ //this will run on every inventory update so 2 times a second
 	if(!johnRewarded("naval events"))return
 	if(Date.now() < navalEventEndTime) { //event is not over
@@ -19,7 +20,12 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 			//makes event go by 3x faster if you are in its layer
 			player.john.navalEventStartedTime -= 1000
 			navalEventEndTime -= 1000
+			//battleshipIcon style = amazing green flashing animation
+		} else {
+			//battleshipIcon style = amazing red flashing animation
 		}
+		//update time display
+		get("navalEventTime").textContent = longTime((navalEventEndTime - Date.now()))
 		return
 	}
 	else if(navalEventEndTime !== 0) { //event is over, reward applies now
@@ -30,6 +36,7 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 		player.john.navalEventStartedTime = 0
 		navalEventEndTime = 0
 		//there needs to be something to trigger luck update in logs.js
+		//battleshipIcon style = gray
 		return
 	}
 	//chance is 1/3600 every 500ms which is ~2/hour to get any uncompleted event
@@ -38,19 +45,32 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 		player.john.currentNavalEvent = currentNavalEvent.id
 		player.john.navalEventStartedTime = Date.now()
 		navalEventEndTime = Date.now() + currentNavalEvent.duration
+		
 		//notify that the event has started and display it somewhere
-		//open naval event panel() or whatever
-		console.log("john says hi from the past")
+		if(!get("navalEventInfo").classList.contains("displayedSideMenu")){
+			toggleSideMenu('navalEventInfo')
+		} 
+		get("navalEventTitle").textContent = currentNavalEvent.title
+		get("navalEventText").textContent = currentNavalEvent.description
+		let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
+		if(oreList[questLayerOre].hasimage){
+			get("navalEventLayer").innerHtml = `<img src="${oreList[questLayerOre].src}">`
+		} else {
+			get("navalEventLayer").textContent = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
+		}
+		
+			//battleshipIcon style = amazing red flashing animation
 	}
 }
 
 let navaleventtempid = 0
 
 class navalEvent {
-	constructor(text, minutes, fast_layer){
+	constructor(title, text, minutes, fast_layer){
 		navaleventtempid++
 		navalEventsList.push({
-			title: text,
+			title: title,
+			description: text,
 			duration: minutes*60e3, //converts m to ms
 			id: navaleventtempid,
 			layer: fast_layer
@@ -58,10 +78,11 @@ class navalEvent {
 	}
 }
 //example events
-new navalEvent("big sea battle 1 that lasted exactly 3 minutes", 3, ["dirtLayer"])
-new navalEvent("big sea battle 2 that lasted exactly 3 minutes", 3, ["dirtLayer"])
-new navalEvent("big sea battle 3 that lasted exactly 3 minutes", 3, ["dirtLayer"])
-new navalEvent("big sea battle 4 that lasted exactly 3 minutes", 3, ["dirtLayer"])
-new navalEvent("big sea battle 5 that lasted exactly 3 minutes", 3, ["dirtLayer"])
-new navalEvent("big sea battle 6 that lasted exactly 3 minutes", 3, ["dirtLayer"])
-new navalEvent("big sea battle 7 that lasted exactly 3 minutes", 3, ["dirtLayer"])
+new navalEvent("big sea battle 1 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 2 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 3 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 4 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 5 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 6 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 7 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])
+new navalEvent("big sea battle 8 that lasted exactly 3 minutes", "grove street vs ballas. A fierce battle was held where john sunk 1500 aircraft carriers with nothing but sheer will", 3, ["johnLayer"])

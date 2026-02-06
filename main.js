@@ -1968,7 +1968,8 @@ function toggleSideMenu(id) {
         "offlineHolder" : "Offline",
         "eventActionHolder" : "EventActions",
         "powerupHolder" : "Powerup",
-        "cloudSaving": "EventActions"
+        "cloudSaving": "EventActions",
+        "navalEventInfo": "EventActions"
     }
     const thisAnimation = animations[id];
     if (thisAnimation === undefined) return;

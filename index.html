@@ -859,9 +859,11 @@
         </div>
 				<div id="sidebar">
                     <div id="navalEventInfo">
-                        <p>Current naval event: <span id="navalEventText"></span></p>
-                        <span>Mining in <span id="navalEventLayer"></span> layer will make time go by faster</span>
-                        <span>Time remaining: <span id="navalEventTime"></span></span>
+                        <div id="navalEventHat"></div>
+						<div id="navalEventTitle">Battle for big water 1906 asdf asdf asdf asdf asdf asdf asdf</div>
+                        <span id="navalEventText">Lorem Ipsum is bogus text in (more or less accurate) latin. It is used by designers as a placeholder for text that they don't have yet. Say you're</span>
+                        <span>Mining in <span id="navalEventLayer"></span> layer will accelerate the event</span>
+                        <span>Remaining time: <span id="navalEventTime"></span></span>
                     </div>
 					<div id="cloudSaving">
 						<p>Cloud saving status: <span id="cloudStatus">waiting for connection with galaxy</span></p>
@@ -947,7 +949,7 @@
 			    </div>
 			</div>
             <div id="bottomButtonHolder">
-                <button class="bottomButton" id="displayShip" onclick="toggleSideMenu('warEventHolder')">
+                <button class="bottomButton" id="displayShip" onclick="toggleSideMenu('navalEventInfo')">
                     <div id="displayShipIcon" style="background-color: #00cf4f;"></div>
                 </button>
                 <button class="bottomButton" id="displayCloud" onclick="toggleSideMenu('cloudSaving')">
