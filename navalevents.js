@@ -194,7 +194,7 @@ new navalEvent(
 	"Carthaginians and Etruscans","Greeks"
 )
 new navalEvent(
-	"awesome battle x1",
+	"awesome naval x1",
 	"",
 	"Ionians", "Phoenicians"
 )
@@ -525,7 +525,7 @@ new navalEvent(
 	"Cretan Saracens", "Byzantines"
 )
 new navalEvent(
-	"awesome battle x2",
+	"awesome naval x2",
 	"",
 	"Arabs", "Venetian squadron"
 )
@@ -560,7 +560,7 @@ new navalEvent(
 	"Byzantines under Nasar", "Aghlabids"
 )
 new navalEvent(
-	"awesome battle x3",
+	"awesome naval x3",
 	"",
 	"Frisians", "Vikings"
 )
@@ -570,7 +570,7 @@ new navalEvent(
 	"Aghlabids", "Byzantines"
 )
 new navalEvent(
-	"awesome battle x4",
+	"awesome naval x4",
 	"",
 	"Byzantines under Himerios", "Arabs"
 )
@@ -595,7 +595,7 @@ new navalEvent(
 	"Vietnamese", "Southern Han"
 )
 new navalEvent(
-	"awesome battle x5",
+	"awesome naval x5",
 	"",
 	"Christians", "Tunisians"
 )
@@ -615,7 +615,7 @@ new navalEvent(
 	"Vietnamese", "Chinese Song"
 )
 new navalEvent(
-	"awesome battle x6",
+	"awesome naval x6",
 	"",
 	"Venetians under Orseolo", "Narentan pirates"
 )
@@ -625,12 +625,12 @@ new navalEvent(
 	"Swedes and Danes", "Norwegians"
 )
 new navalEvent(
-	"awesome battle x7",
+	"awesome naval x7",
 	"",
 	"Venetians under Pietro Orseolo II", "Arabs"
 )
 new navalEvent(
-	"awesome battle x8",
+	"awesome naval x8",
 	"pisans had a space in the wikipedia page, how could the editors make this mistake",
 	"Pisans", "Arabs"
 )
@@ -645,7 +645,7 @@ new navalEvent(
 	"Danes under Ulf Jarl", "Swedes and Norwegians under Anund Jacob and Olaf II Haraldsson (Olaf the Stout)"
 )
 new navalEvent(
-	"awesome battle x9",
+	"awesome naval x9",
 	"",
 	"Byzantine-Ragusan squadron", "Muslim corsair fleet"
 )
@@ -655,7 +655,7 @@ new navalEvent(
 	"Estonians", "Novgorod"
 )
 new navalEvent(
-	"awesome battle x10",
+	"awesome naval x10",
 	"",
 	"Byzantines", "Arabs"
 )
@@ -1021,114 +1021,114 @@ new navalEvent(
 //thats all for medival, oh god im only like 10% through the page
 )
 new navalEvent(
+	"Battle of Chaul",
 	"",
-	"",
-	"", ""
+	"Alliance of Mamluk, Gujrat and Calicut", "Portuguese"
 )
 new navalEvent(
+	"Battle of Diu",
 	"",
-	"",
-	"", ""
+	"Portugal's Indian viceroy", "Combined Egyptian-Gujarat Sultanate fleet"
 )
 new navalEvent(
+	"awesome naval battle x18",
 	"",
-	"",
-	"", ""
+	"Maltese under Prégent de Bidoux", "Venetians"
 )
 new navalEvent(
+	"awesome naval battle x19",
 	"",
-	"",
-	"", ""
+	"Genoese under Andrea Doria", "Moors"
 )
 new navalEvent(
+	"Battle of St. Mathieu",
 	"",
-	"",
-	"", ""
+	"English", "French"
 )
 new navalEvent(
+	"Battle of Tunmen",
 	"",
-	"",
-	"", ""
+	"Ming Chinese", "Portuguese"
 )
 new navalEvent(
+	"Battle of Xicaowan",
 	"",
-	"",
-	"", ""
+	"Ming Chinese", "Portuguese"
 )
 new navalEvent(
+	"awesome naval battle x20",
 	"",
-	"",
-	"", ""
+	"Swedes and Lübeckers", "Pirates"
 )
 new navalEvent(
+	"awesome naval battle x21",
 	"",
-	"",
-	"", ""
+	"Ottoman Turks under Barbarossa", "Spanish"
 )
 new navalEvent(
+	"awesome naval battle x22",
 	"",
-	"",
-	"", ""
+	"Swedes/Danes/Prussians", "9 Lübeck ships"
 )
 new navalEvent(
+	"awesome naval battle x23",
 	"",
-	"",
-	"", ""
+	"Swedes/Danes/Prussians", "10 Lübeck ships"
 )
 new navalEvent(
+	"Battle of Preveza",
 	"",
-	"",
-	"", ""
+	"Ottoman Turks under Barbarossa", "Spanish-Venetian-Papal fleet"
 )
 new navalEvent(
+	"Raid on Ōmishima",
 	"",
-	"",
-	"", ""
+	"Tsuruhime", "Ōuchi Yoshitaka"
 )
 new navalEvent(
+	"Ningbo Massacre",
 	"",
-	"",
-	"", ""
+	"Ningbo Massacre", "Portugal"
 )
 new navalEvent(
+	"Battle of the Solent",
 	"",
-	"",
-	"", ""
+	"English", "French"
 )
 new navalEvent(
+	"Battle of Ponza",
 	"",
-	"",
-	"", ""
+	"Ottoman Turks under Sinan Pasha", "Genoese under Andrea Doria"
 )
 new navalEvent(
+	"awesome naval battle x24",
 	"",
-	"",
-	"", ""
+	"Portuguese", "English and French"
 )
 new navalEvent(
+	"Battle of Gravelines",
 	"",
-	"",
-	"", ""
+	"English under Count Egmont", "French under Marshal de Thermes"
 )
 new navalEvent(
+	"Battle of Djerba",
 	"",
-	"",
-	"", ""
+	"Turks", "Christians"
 )
 new navalEvent(
+	"Action of 30 May",
 	"",
-	"",
-	"", ""
+	"Swedes", "Danes"
 )
 new navalEvent(
+	"Action of 30 May",
 	"",
-	"",
-	"", ""
+	"Danes/Lübeckers under Trolle", "Swedes under Bagge "
 )
 new navalEvent(
+	"Action of 12 July",
 	"",
-	"",
-	"", ""
+	"Danish", "Swedish"
 )
 new navalEvent(
 	"",
