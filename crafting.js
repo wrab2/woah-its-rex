@@ -2233,14 +2233,14 @@ const pickaxeStats = {
         revealed: 1,
         luck: 750,
         rate: 600,
-        src : "⛏️",
+        src : `<img class="mineImage" src="media/hypermark checkminator.png"></img>`,
         ability: "",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9],
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
         tier: 15,
-        icon: "",
+        icon: "@adrianinoninja",
     },
 }
 const gearInformation = {
