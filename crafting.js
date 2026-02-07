@@ -530,13 +530,18 @@ function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amou
 recipeElements = {};
 let currentRecipeId = undefined;
 function displayRecipe(recipe) {
-    //if(Object.keys(johnRewards).includes(currentRecipeId))return
     if (recipe === currentRecipeId) {
         if (pinInformation.pinned === undefined && !pinInformation.locked) removeRecipeElements();
         getButtonByName(currentRecipeId).classList.remove("selectedOutline");
         currentRecipeId = undefined;
         get("scrollableCraft").style.display = "none";
     } else {
+        if(Object.keys(johnRewards).includes(currentRecipeId)){
+            //updating john's rewards instead of actual recipes 🐈🐈🐈🐈🐈
+            currentRecipeId = recipe
+            updateActiveRecipe()
+            return
+        }
         if (!pinInformation.locked) removeRecipeElements();
         if (currentRecipeId !== undefined) {
             buttonGradients[`${currentRecipeId}Craft`]["applied"] = false;
@@ -899,20 +904,15 @@ let lastCount = -1;
 function updateActiveRecipe() {
     if(Object.keys(johnRewards).includes(currentRecipeId)){
         //this isn't a recipe this is john's reward durr 🤯🤯🤯🤯🤯🤯
-        /*AHHHHHH
-        johnGearLocked will have locked screen with chains
-        newCraftingGearEffect will be hidden and johnGearLocked will be shown
-        that's it
-        */
         get("pinAndCraft").style.visibility = "hidden"
         get("craftingContainer").style.visibility = "hidden"
         if(johnRewarded(currentRecipeId)){
             //have gear
             get("newCraftingGearEffect").style.visibility = "visible"
+            get("newCraftingGearEffect").textContent = gearInformation[currentRecipeId].effect
             get("johnGearLocked").style.display = "none"
         } else {
             //don't
-            console.log
             get("newCraftingGearEffect").style.visibility = "hidden"
             get("johnGearLocked").innerHTML = `${player.john.questsCompleted.length} / ${(recipes[currentRecipeId].recipe[0].amt)} quests completed. 
             Speak 🗣️🗣️ with john <img src=media/john/john.svg width="15em"> to learn more!`
