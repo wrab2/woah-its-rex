@@ -357,6 +357,8 @@ let oreList = {
     '🇵🇲': { 'decimalRarity': 1 / 5888888888, 'numRarity': 5888888888, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Sacred', },
     '🇮🇲': { 'decimalRarity': 1 / 34500000000, 'numRarity': 34500000000, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Ethereal', },
     '🇭🇰': { 'decimalRarity': 1 / 734000000000, 'numRarity': 734000000000, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Imaginary', },
+    '🇮🇱': { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'this is ALLEGEDLY an ore', 'oreTier': 'Hyperdimensional', },
+
 
     '⚕️': { 'decimalRarity': 1 / 50000000000, 'numRarity': 50000000000, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'Gently materializing, a healing symbol radiates a serene energy, offering tranquility...', 'oreTier': 'Sacred',  },
     '🌙': { 'decimalRarity': 1 / 26262626262, 'numRarity': 26262626262, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'Lunar rays of light dance upon your iris, captivating your adoring gaze...', 'oreTier': 'Imaginary',  },
