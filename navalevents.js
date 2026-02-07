@@ -1453,355 +1453,356 @@ new navalEvent(
 	"Spanish-Neapolitans under Ribera", "Turks"
 )
 new navalEvent(
+	"awesome naval battle x31",
 	"",
-	"",
-	"", ""
+	"Neapolitans/Sicilian galleys", "Larger Turkish galley fleet"
 )
 new navalEvent(
-	"",
+	"Battle of Ragusa",
 	"",
-	"", ""
+	"Spanish under Ribera", "Venetians"
 )
 new navalEvent(
+	"Battle of Playa Honda",
 	"",
-	"",
-	"", ""
+	"Spanish", "Dutch"
 )
 new navalEvent(
-	"",
+	"Battle of Cape Palos",
 	"",
-	"", ""
+	"Algerines", "Spanish"
 )
 new navalEvent(
+	"Raid on La Goulette",
 	"",
-	"",
-	"", ""
+	"Spanish under d'Aragona", "Tunisians"
 )
 new navalEvent(
-	"",
+	"Action of 2 July",
 	"",
-	"", ""
+	"Dutch under Lambert and Spanish under Vidazábal", "Algerines"
 )
 new navalEvent(
+	"Action of 19 February",
 	"",
-	"",
-	"", ""
+	"Danish", "French pirates"
 )
 new navalEvent(
-	"",
+	"Capture of Nassau Huis",
 	"",
-	"", ""
+	"English", "Dutch East India Company"
 )
 new navalEvent(
+	"awesome naval battle x32",
 	"",
-	"",
-	"", ""
+	"Dutch", "French"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x33",
 	"",
-	"", ""
+	"English", "Portuguese"
 )
 new navalEvent(
+	"Action of 11 May",
 	"",
-	"",
-	"", ""
+	"Venetians under Nani", "Spanish under Silva"
 )
 new navalEvent(
-	"",
+	"Action of 26 June",
 	"",
-	"", ""
+	"Tuscans", "Bizertans"
 )
 new navalEvent(
+	"awesome naval battle x34",
 	"",
-	"",
-	"", ""
+	"British East India Company", "Portuguese"
 )
 new navalEvent(
-	"",
+	"Battle of Macau",
 	"",
-	"", ""
+	"Portuguese", "Dutch East India Company"
 )
 new navalEvent(
+	"awesome naval battle x35",
 	"",
-	"",
-	"", ""
+	"English and Dutch", "Portuguese"
 )
 new navalEvent(
+	"awesome naval battle x36",
 	"",
-	"",
-	"", ""
+	"Dutch ships under Swartenhondt", "Spanish squadron"
 )
 new navalEvent(
-	"",
+	"Action of 3 October",
 	"",
-	"", ""
+	"A combined squadron of fifteen Neapolitan (Spain), Tuscan, and Papal galleys", "A squadron of six Algerian ships"
 )
 new navalEvent(
+	"Battle of Blavet",
 	"",
-	"",
-	"", ""
+	"French Rochellais rebels", "French"
 )
 new navalEvent(
-	"",
+	"Battle off Hormuz",
 	"",
-	"", ""
+	"Portuguese", "English and Dutch"
 )
 new navalEvent(
+	"Action of 26 June",
 	"",
-	"",
-	"", ""
+	"Bizertans", "Maltese"
 )
 new navalEvent(
-	"",
+	"Naval battle of Pertuis Breton",
 	"",
-	"", ""
+	"French Huguenot under Soubise", "French Royalists with hired Dutch ships"
 )
 new navalEvent(
+	"Naval battle of Saint-Martin de Ré",
 	"",
-	"",
-	"", ""
+	"French Royalists under Montmorency with hired English and Dutch ships", "French Huguenots under Guiton and Soubise"
 )
 new navalEvent(
-	"",
+	"Action of 1626",
 	"",
-	"", ""
+	"Danes", "Dunkirkers"
 )
 new navalEvent(
+	"Battle of Oliwa",
 	"",
-	"",
-	"", ""
+	"Poles", "Swedes"
 )
 new navalEvent(
+	"Action of 21 June",
 	"",
-	"",
-	"", ""
+	"English", "Venetians/French"
 )
 new navalEvent(
-	"",
+	"Capture of the Honduran treasure fleet",
 	"",
-	"", ""
+	"Dutch ships under Ita", "2 Spanish treasure ships"
 )
 new navalEvent(
+	"Battle in the Bay of Matanzas",
 	"",
-	"",
-	"", ""
+	"Dutch ships under Ita", "Spanish treasure fleet "
 )
 new navalEvent(
-	"",
+	"Third La Rochelle expedition",
 	"",
-	"", ""
+	"French Royalists", "English"
 )
 new navalEvent(
+	"Battle of Dungeness",
 	"",
-	"",
-	"", ""
+	"Dutch under Hein", "Dunkirkers"
 )
 new navalEvent(
-	"",
+	"Battle of Duyon River",
 	"",
-	"", ""
+	"Portuguese", "Acehnese"
 )
 new navalEvent(
+	"Action of 16 September",
 	"",
-	"",
-	"", ""
+	"Swedes", "Holy Roman Empire"
 )
 new navalEvent(
-	"",
+	"Action of 4 September",
 	"",
-	"", ""
+	"Danes", "Hanseatics"
 )
 new navalEvent(
+	"Battle of the Slaak",
 	"",
-	"",
-	"", ""
+	"Dutch Zeeland fleet under Hollare", "Spanish invasion fleet"
 )
 new navalEvent(
+	"Battle of Liaoluo Bay",
 	"",
-	"",
-	"", ""
+	"Ming China", "Allied fleet of Dutch East India Company and Chinese pirates"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x37",
 	"",
-	"", ""
+	"Maltese galleys", "Turkish vessels"
 )
 new navalEvent(
+	"awesome naval battle x38",
 	"",
-	"",
-	"", ""
+	"Maltese galleys under Valdina", "Tripolitans"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x39",
 	"",
-	"", ""
+	"Maltese under Villages", "Turks"
 )
 new navalEvent(
+	"awesome naval battle x40",
 	"",
-	"",
-	"", ""
+	"Maltese privateers", "Turks"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x41",
 	"",
-	"", ""
+	"Dunkirkers squadron under Collaart", "Dutch guardships"
 )
 new navalEvent(
+	"awesome naval battle x42",
 	"",
-	"",
-	"", ""
+	"Spanish", "Dutch West India Company convoy"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x43",
 	"",
-	"", ""
+	"Dutch Zeeland squadron under Evertsen", "Dunkirkers under Collaart"
 )
 new navalEvent(
+	"Battle off Lizard Point",
 	"",
-	"",
-	"", ""
+	"8 Spanish ships under Horna", "Dutch convoy and escort"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x44",
 	"",
-	"", ""
+	"Spanish under Hoces", "Dutch"
 )
 new navalEvent(
+	"awesome naval battle x45",
 	"",
-	"",
-	"", ""
+	"Maltese galleys", "Tripolitan sailing ships"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x46",
 	"",
-	"", ""
+	"Venetians under Capello", "Algerines"
 )
 new navalEvent(
+	"Battle of Getaria",
 	"",
-	"",
-	"", ""
+	"French under de Sourdis", "Spanish galleons under Hoces"
 )
 new navalEvent(
-	"",
+	"Battle of Cabañas",
 	"",
-	"", ""
+	"Spanish treasure fleet", "Dutch under Jol"
 )
 new navalEvent(
+	"Battle of Vado",
 	"",
-	"",
-	"", ""
+	"French", "Spanish"
 )
 new navalEvent(
-	"",
+	"Battle of Goa",
 	"",
-	"", ""
+	"Portuguese", "Dutch East India Company"
 )
 new navalEvent(
+	"Action of 18 February",
 	"",
-	"",
-	"", ""
+	"Dutch under Tromp", "Dunkirk fleet under Miguel de Horna"
 )
 new navalEvent(
+	"Action of 30 September",
 	"",
-	"",
-	"", ""
+	"Dutch", "Portuguese"
 )
 new navalEvent(
-	"",
+	"Battle of the Downs",
 	"",
-	"", ""
+	"Dutch under Tromp", "Spanish under de Oquendo"
 )
 new navalEvent(
+	"awesome naval battle x47",
 	"",
-	"",
-	"", ""
+	"Spanish under Horna", "Stronger French force"
 )
 new navalEvent(
-	"",
+	"Action of 12–17 January",
 	"",
-	"", ""
+	"Dutch fleet under Loos", "Spanish/Portuguese fleet under de Mascarenhas"
 )
 new navalEvent(
+	"Action of 15 June",
 	"",
-	"",
-	"", ""
+	"Dunkirkers", "Dutch"
 )
 new navalEvent(
-	"",
+	"Battle of Cádiz",
 	"",
-	"", ""
+	"French under Brézé", "Spanish under Gomez de Sandoval"
 )
 new navalEvent(
+	"awesome naval battle x48",
 	"",
-	"",
-	"", ""
+	"Spanish", "French"
 )
 new navalEvent(
-	"",
+	"Second Battle of Tarragona",
 	"",
-	"", ""
+	"French under de Sourdis", "Spanish"
 )
 new navalEvent(
+	"Third Battle of Tarragona",
 	"",
-	"",
-	"", ""
+	"Spanish", "French"
 )
 new navalEvent(
+	"awesome naval battle x49",
 	"",
-	"",
-	"", ""
+	"Spanish under Pietersen", "French and Portuguese"
 )
 new navalEvent(
-	"",
+	"Battle of Cape St. Vincent",
 	"",
-	"", ""
+	"Spanish", "Dutch under Gijssels"
 )
 new navalEvent(
+	"Battle of Barcelona",
 	"",
-	"",
-	"", ""
+	"French under Brézé", "Spanish under Ciudad Real"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x50",
 	"",
-	"", ""
+	"Portuguese", "Spanish"
 )
 new navalEvent(
+	"Battle of the Gianh River",
 	"",
-	"",
-	"", ""
+	"Nguyễn navy", "Dutch East India Company"
 )
 new navalEvent(
-	"",
+	"Battle of Cartagena",
 	"",
-	"", ""
+	"French", "Spanish"
 )
 new navalEvent(
+	"Action of 16 May",
 	"",
-	"",
-	"", ""
+	"Danes", "Dutch ships hired to support Sweden"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x51",
 	"",
-	"", ""
+	"Danes", "33 hired Dutch ships"
 )
 new navalEvent(
+	"Action of 7 July",
 	"",
-	"",
-	"", ""
+	"Danes", "Swedes"
 )
 new navalEvent(
+	"Action of 28 September",
 	"",
-	"",
-	"", ""
+	"Maltese galleys", "Turkish sailing ships"
 )
 new navalEvent(
-	"",
+	"Battle of Femern",
 	"",
-	"", ""
+	"Swedish/Dutch", "Danish"
 )
+//thats all for early 17th century
 new navalEvent(
 	"",
 	"",
