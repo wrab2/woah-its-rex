@@ -294,6 +294,15 @@ function loadContent() {
     musicPlayer.songs["song5"].src = new Audio("audios/song5fakeMIDI.mp3");
     musicPlayer.songs["song6"].src = new Audio("audios/song6.mp3");
     musicPlayer.songs["song7"].src = new Audio("audios/song7.mp3");
+    musicPlayer.songs["song8"].src = new Audio("audios/song8.mp3");
+    musicPlayer.songs["song9"].src = new Audio("audios/song9.mp3");
+    musicPlayer.songs["song10"].src = new Audio("audios/song10.mp3");
+    musicPlayer.songs["song11"].src = new Audio("audios/song11.mp3");
+    musicPlayer.songs["song12"].src = new Audio("audios/song12.mp3");
+    musicPlayer.songs["song13"].src = new Audio("audios/song13.mp3");
+    musicPlayer.songs["song14"].src = new Audio("audios/song14.mp3");
+    musicPlayer.songs["song14"].src = new Audio("audios/song15.mp3");
+
 
     for (let property in musicPlayer.songs) {
         musicPlayer.songs[property].src.load();
