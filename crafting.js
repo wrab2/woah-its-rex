@@ -815,7 +815,8 @@ const cwnames = {
     "2" : "W2",
     "1.1" : "SR1",
     "1.2" : "WW",
-    "???" : "???"
+    "???" : "???",
+    "john": '<img src="media/john/john.svg">',
 } 
 function toggleCraftingWorld() {
     setWorldSelectors();
@@ -829,17 +830,17 @@ function toggleCraftingWorld() {
     }
     showSelectedWorld();
     //const text = getWorldText();
-    get("worldSelectButton").textContent = `Items From World: ${cwnames[vars.world]}`;
+    get("worldSelectButton").innerHTML = `Items From World: ${cwnames[vars.world]}`;
     switchWorldCraftables(vars.world)
 }
 function selectCraftingWorld(num) {
-    if (num !== "???") {
+    if (!["???","john"].includes(num) ) {
         toggleCraftingWorld.world = Number(worldFromName(num));
         toggleCraftingWorld(1);
     } else {
-			toggleCraftingWorld.world = num
-        switchWorldCraftables("???");
-				toggleCraftingWorld()
+        toggleCraftingWorld.world = num
+        switchWorldCraftables(num);
+        toggleCraftingWorld()
     }
 }
 function worldFromName(x) {
@@ -1162,7 +1163,9 @@ const showOrders = {
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
     "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "gear42", "gear43", "gear44", "gear48"],
     "p???": ["pickaxe26"],
-		"g???": ["gear21"],
+    "g???": ["gear21"],
+    "pjohn": ["hyper_checkminator"],
+    "gjohn": ["heirloom","water_polo_ball","hat","ring_enabler"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -1186,6 +1189,10 @@ function showGears() {
     get("nullChroma").style.display = "none";
 }
 function showItem(id) {
+    if(Object.keys(johnRewards).includes(id)){
+        getButtonByName(id).style.display = "flex";
+        return
+    }
     let canCont = true;
     if (recipes[id].req !== undefined) {
         if (!recipes[id].req()) canCont = false;
@@ -1205,7 +1212,7 @@ function switchWorldCraftables(world=currentWorld) {
     gearList = showOrders[`g${world}`];
     for (let i = 0; i < gearList.length; i++) showItem(gearList[i]);
     for (let i = 0; i < pickaxeList.length; i++) showItem(pickaxeList[i]);
-    if (world !== "???") {
+    if (!["???","john"].includes(world)) {
         if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
         else document.getElementById("sillyRecipe").style.display = "none";
         if (toggleCraftingWorld.world === 1.1 && !player.gears["gear43"]) getButtonByName("pickaxe33").style.display = "none";
@@ -1219,10 +1226,11 @@ function setWorldSelectors() {
         "1.1" : function() {return player.sr1Unlocked;},
         "1.2" : function() {return player.watrEntered && currentWorld !== 1.1;},
         "???" : function() {return player.trophyProgress["subrealmOneCompletion"].trophyOwned && player.trophyProgress["worldOneCompletion"].trophyOwned && player.trophyProgress["worldTwoCompletion"].trophyOwned && currentWorld !== 1.1;},
+        "john": ()=>{return player.john.spokeWith},
     }
     const e = document.getElementsByClassName("worldCraftSelector");
     for (let i = 0; i < e.length; i++) {
-        if (er[worldFromName(e[i].textContent)]()) e[i].style.display = "flex";
+        if (er[worldFromName(e[i].innerHTML)]()) e[i].style.display = "flex";
         else e[i].style.display = "none";
     }
 }

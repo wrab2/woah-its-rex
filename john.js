@@ -16,11 +16,11 @@ const john = { //this doesn't presist between refreshes
 const johnRewards = { //shortcut for how many quests you need to complete to get it
 	"naval events": 1,
 	"heirloom": 3,
-	"water polo ball" :5,
-	"hyper checkminator": 10,
+	"water_polo_ball" :5,
+	"hyper_checkminator": 10,
 	"hat" : 15,
 	"house keys" : 19,
-	"ring enabler" : 20,
+	"ring_enabler" : 20,
 }
 function johnRewarded(reward) {
 	if(player.john.questsCompleted.length >= johnRewards[reward]) return true
@@ -250,10 +250,10 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
 			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around 11,000x cave luck (the formula is 1.03 ^ (events completed) cave luck but softcaps after 250)")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["water polo ball"]){
-			johnSay("one of my friends that you gave to me dropped their water polo ball, honestly you can keep it !")
+		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
+			johnSay("one of my friends that you gave to me dropped their water_polo_ball, honestly you can keep it !")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["hyper checkminator"]){
+		else if(player.john.questsCompleted.length === johnRewards["hyper_checkminator"]){
 			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer (1m blocks or lower)")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["hat"]){
@@ -262,7 +262,7 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["house keys"]){
 			johnSay("thank you thank you thank you so so so much, i dont have anything else to give to you though other than my house.... eh whatever its fine i trust you enough just dont steal anything thanks")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["ring enabler"]){
+		else if(player.john.questsCompleted.length === johnRewards["ring_enabler"]){
 			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome gear that'll let you progress further")
 		}
 		let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))

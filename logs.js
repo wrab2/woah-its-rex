@@ -322,7 +322,7 @@ class secureLogs {
         let tempLuck = 1;
         if (player.powerupVariables.caveBoosts.active) tempLuck++;
         if (player.stats.currentPickaxe === "pickaxe33") tempLuck += 1.5;
-        if(johnRewarded("hairloom")){
+        if(johnRewarded("heirloom")){
             let navalEventsAmt = player.john.navalEvents.length
             //softcap
             if(navalEventsAmt > 250)navalEventsAmt = 250 + ((navalEventsAmt-250)**0.7)

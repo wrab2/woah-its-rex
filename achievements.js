@@ -1713,9 +1713,9 @@ const milestoneList = {
         },
         "jp2.2" : {
             title: "thank you john",
-            description: "recieve johns friends water polo ball\r\n(obtained after fulfilling 5 quests)",
+            description: "recieve johns friends water_polo_ball\r\n(obtained after fulfilling 5 quests)",
             check: function() {
-                return johnRewarded("water polo ball")
+                return johnRewarded("water_polo_ball")
             },
             owned: false,
             distH: 1,
@@ -1728,7 +1728,7 @@ const milestoneList = {
             title: "checkmarxism",
             description: "recieve the recepie for the hyper checkmarkinator\r\n(obtained after fulfilling 10 quests)",
             check: function() {
-                return johnRewarded("hyper checkminator")
+                return johnRewarded("hyper_checkminator")
             },
             owned: false,
             distH: 1,

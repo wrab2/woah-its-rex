@@ -874,7 +874,7 @@ function setLayer(y) {
 		if (y>10e3 && y<1e6) return layerDictionary["borderLayer"]
 		//150k depth per layer
 		let layerNum = Math.floor((y-1e6)/150e3)
-		if (johnRewarded("hyper checkminator")){
+		if (johnRewarded("hyper_checkminator")){
 			let layerRng = Math.random()
 			if (layerRng < 1/40) {
 				return w2RepeatingLayers[layerNum] = "checkmarkLayer"

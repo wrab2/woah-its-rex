@@ -607,6 +607,9 @@
 #worldSelectButton:hover {
   background-color: var(--main-hl-color);
 }
+#worldSelectButton img {
+  max-width: 1.5em;
+}
 .currentCraftingWorld {
   box-shadow: inset 0px 0px 0.25vw #00FF23;
 }

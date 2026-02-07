@@ -603,35 +603,35 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#hyperCheckmarkinator span{
+#hyper_checkminator span{
     background: linear-gradient(to right, #0b7f3f, #4dff9a, #ffffff, #4dff9a, #0b7f3f);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#familyHeirloom span{
+#heirloom span{
     background: linear-gradient(to right,#0b2a3d 5%, #1e6fa3, #a7d8f0, #1e6fa3, #0b2a3d 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#waterPoloBall span{
+#water_polo_ball span{
     background: linear-gradient(to right,#0a0a0a 5%, #ff7a00, #ffb347, #ff7a00, #0a0a0a 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#waterPoloHat span{
+#hat span{
     background: linear-gradient(to right,#083c44 5%, #00cfd6, #9ff6ff, #00cfd6, #083c44 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#ringEnabler span{
+#ring_enabler span{
     background: linear-gradient(
         90deg in lch,
         #403330,
