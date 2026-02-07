@@ -670,354 +670,355 @@ new navalEvent(
 	"Norwegians under Harald Hardrada", "Danes"
 )
 new navalEvent(
+	"Battle of Dyrrhachium",
 	"",
-	"",
-	"", ""
+	"Venetian-Byzantine fleet", "Normans"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x10.5",
 	"",
-	"", ""
+	"Normans under Robert Guiscard (20 vessels?)", "Venetians or Byzantines"
 )
 new navalEvent(
+	"Battle of Ibelin",
 	"",
-	"",
-	"", ""
+	"Venetians", "Fatimid Egyptians"
 )
 new navalEvent(
-	"",
+	"Battle of Bigano",
 	"",
-	"", ""
+	"Venetians", "Normans/Roger II of Sicily"
 )
 new navalEvent(
+	"Battle of Cape Malea",
 	"",
-	"",
-	"", ""
+	"Venetians and Byzantine Greeks", "Normans"
 )
 new navalEvent(
-	"",
+	"Siege of Ascalon",
 	"",
-	"", ""
+	"Venetians", "Fatimid Arabs"
 )
 new navalEvent(
+	"awesome naval battle x11 (not wayland)",
 	"",
-	"",
-	"", ""
+	"Celtic ships", "Viking squadron"
 )
 new navalEvent(
-	"",
+	"Battle of Tangdao",
 	"",
-	"", ""
+	"Song forces", "Jin forces"
 )
 new navalEvent(
+	"Battle of Caishi",
 	"",
-	"",
-	"", ""
+	"Song forces", "Jin forces"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x12",
 	"",
-	"", ""
+	"Venetians and the Vatican", "Genoese and Pisans"
 )
 new navalEvent(
+	"Battle of Mizushima",
 	"",
-	"",
-	"", ""
+	"Taira clan", "Minamoto clan"
 )
 new navalEvent(
-	"",
+	"Battle of Fimreite",
 	"",
-	"", ""
+	"Birkebeiners", "Norway"
 )
 new navalEvent(
+	"Battle of Yashima",
 	"",
-	"",
-	"", ""
+	"Minamoto clan", "Taira clan"
 )
 new navalEvent(
-	"",
+	"Battle of Dan-no-ura",
 	"",
-	"", ""
+	"Minamoto clan", "Taira clan"
 )
 new navalEvent(
+	"Battle of Demetritzes",
 	"",
-	"",
-	"", ""
+	"Byzantines under Alexios Branas", "Normans"
 )
 new navalEvent(
+	"Battle of Damme",
 	"",
-	"",
-	"", ""
+	"English under William Longsword", "French under King Philip II"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Second Battle of Dover",
+	"24 Aug, off Dover; AKA The \"Fight off Sandwich\". ",
+	"English under Hubert de Burgh", "French under Eustace the Monk"
 )
 new navalEvent(
-	"",
+	"First Battle of Meloria",
 	"",
-	"", ""
+	"Pisans under Ansaldo de Mari", "Genoese"
 )
 new navalEvent(
+	"Battle of Acre",
 	"",
-	"",
-	"", ""
+	"Venetians", "Genoese"
 )
 new navalEvent(
-	"",
+	"Battle of Settepozzi",
 	"",
-	"", ""
+	"A Venetian fleet of 38 ships under Gilberto Dandolo", "Byzantine-Genoese fleet of 48 ships"
 )
 new navalEvent(
+	"Battle of Saseno",
 	"",
-	"",
-	"", ""
+	"Genoese", "Venetians"
 )
 new navalEvent(
-	"",
+	"Battle of Trapani",
 	"",
-	"", ""
+	"Venetians", "Genoese"
 )
 new navalEvent(
+	"Battle of Demetrias",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Coalition of Lombard and Venetian lords of Euboea and Crete"
 )
 new navalEvent(
+	"Algeciras",
 	"",
-	"",
-	"", ""
+	"Morocco and Granada", "Castilians"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x13",
 	"",
-	"", ""
+	"Conrad Lancia", "Muslims"
 )
 new navalEvent(
+	"Yamen",
 	"",
-	"",
-	"", ""
+	"Yuan dynasty", "Song dynasty"
 )
 new navalEvent(
-	"",
+	"Action of 11 October 1282",
 	"",
-	"", ""
+	"Peter de Queralt", "Angevin fleet"
 )
 new navalEvent(
+	"Battle of Nicotera",
 	"",
-	"",
-	"", ""
+	"Peter de Queralt", "Angevin fleet"
 )
 new navalEvent(
-	"",
+	"Battle of Malta",
 	"",
-	"", ""
+	"Aragonese-Sicilians under Roger of Lauria", "Angevins"
 )
 new navalEvent(
+	"Battle of the Gulf of Naples",
 	"",
-	"",
-	"", ""
+	"Aragonese-Sicilians under Roger of Lauria", "Neapolitans"
 )
 new navalEvent(
-	"",
+	"Second Battle of Meloria",
 	"",
-	"", ""
+	"Genoese", "Pisan fleet"
 )
 new navalEvent(
+	"awesome naval battle x14",
 	"",
-	"",
-	"", ""
+	"11 Catalan galleys", "25 French galleys under Guillaume de Lodève"
 )
 new navalEvent(
+	"Battle of Les Formigues",
 	"",
-	"",
-	"", ""
+	"Aragonese-Sicilians under Roger of Lauria", "French under di Mari and de Orreo"
 )
 new navalEvent(
-	"",
+	"Battle of the Counts",
 	"",
-	"", ""
+	"Aragonese-Sicilians under Roger of Lauria", "Angevins"
 )
 new navalEvent(
+	"Third Battle of Bach Dang",
 	"",
-	"",
-	"", ""
+	"Vietnamese", "Mongols"
 )
 new navalEvent(
-	"",
+	"Battle of Laiazzo",
 	"",
-	"", ""
+	"Genoese", "Venetians"
 )
 new navalEvent(
+	"Battle of Curzola",
 	"",
-	"",
-	"", ""
+	"Genoese fleet under Lamba Doria", "Venetians under Andrea Dandolo"
 )
 new navalEvent(
-	"",
+	"Battle of Cape Orlando",
 	"",
-	"", ""
+	"Angevins under Roger of Lauria", "Sicilians under d'Oria"
 )
 new navalEvent(
+	"Battle of Ponza",
 	"",
-	"",
-	"", ""
+	"Angevins under Roger of Lauria", "Sicilians under d'Oria"
 )
 new navalEvent(
-	"",
+	"Battle of Zierikzee",
 	"",
-	"", ""
+	"French fleet under Genoese admiral Renier Grimaldi", "Flemish fleet"
 )
 new navalEvent(
+	"Battle of Chios",
 	"",
-	"",
-	"", ""
+	"Knights Hospitaller and Genoese of the Lordship of Chios", "Aydinid fleet"
 )
 new navalEvent(
+	"Battle of Arnemuiden",
 	"",
-	"",
-	"", ""
+	"Philip VI of France", "English fleet of Edward III of England"
 )
 new navalEvent(
-	"",
+	"Battle of Sluys",
 	"",
-	"", ""
+	"Edward III of England", "Franco-Genoese fleet of Philip VI of France"
 )
 new navalEvent(
+	"Battle of L'Espagnols-sur-Mer",
 	"",
-	"",
-	"", ""
+	"50 English ships under Edward III and the Black Prince", "40 Castilian ships"
 )
 new navalEvent(
-	"",
+	"Battle of La Loiera",
 	"",
-	"", ""
+	"Venetians and Aragonese", "Genoese"
 )
 new navalEvent(
+	"Battle of Sapienza",
 	"",
-	"",
-	"", ""
+	"Genoese under Paganino Doria", "Venetians under Niccolò Pisani"
 )
 new navalEvent(
-	"",
+	"Battle of Lake Poyang",
 	"",
-	"", ""
+	"Mings under Zhu Yuanzhang", "Hans under Chen Youliang"
 )
 new navalEvent(
+	"Battle of La Rochelle",
 	"",
-	"",
-	"", ""
+	"Castilian fleet", "English fleet"
 )
 new navalEvent(
-	"",
+	"Action of 30 May 1378",
 	"",
-	"", ""
+	"Venetians under Vettor Pisani", "Genoese"
 )
 new navalEvent(
+	"Battle of Pola",
 	"",
-	"",
-	"", ""
+	"Genoese under Luciano Doria", "Venetians under Vittore Pisani"
 )
 new navalEvent(
+	"Battle of Chioggia",
 	"",
-	"",
-	"", ""
+	"Venetians under Andrea Contarini", "Genoese"
 )
 new navalEvent(
-	"",
+	"Battle of Margate",
 	"",
-	"", ""
+	"English fleet under Richard, Earl of Arundel", "Franco-Castilian-Flemish wine fleet under Sir Jean de Bucq"
 )
 new navalEvent(
+	"Battle of Modon",
 	"",
-	"",
-	"", ""
+	"Venetians under Carlo Zeno", "Genoese fleet under the French Marshal Boucicaut"
 )
 new navalEvent(
-	"",
+	"Battle of Gallipoli",
 	"",
-	"", ""
+	"Venetians", "Ottoman Turks"
 )
 new navalEvent(
+	"Battle of Harfleur",
 	"",
-	"",
-	"", ""
+	"English", "French"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x15",
 	"",
-	"", ""
+	"English under the Earl of Huntingdon", "French and Genoese"
 )
 new navalEvent(
+	"Battle of La Rochelle",
 	"",
-	"",
-	"", ""
+	"Castilians", "Flemish-Hanseatic fleet"
 )
 new navalEvent(
-	"",
+	"Battle of Wieringen",
 	"",
-	"", ""
+	"Burgundian fleet", "Fleet of Jacqueline of Bavaria"
 )
 new navalEvent(
+	"Battle of the Echinades",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Fleet of Carlo I Tocco"
 )
 new navalEvent(
+	"awesome naval battle x16",
 	"",
-	"",
-	"", ""
+	"Venetians and Florentines under Pietro Loredano and Paolodi Vanni Rucellai", "Genoans under Francesco Spinola"
 )
 new navalEvent(
-	"",
+	"Battle of San Vincenzo",
 	"",
-	"", ""
+	"Neapolitans", "Florentines"
 )
 new navalEvent(
+	"Fall of Constantinople",
 	"",
-	"",
-	"", ""
+	"Ottoman Turks", "Byzantines"
 )
 new navalEvent(
-	"",
+	"Fall of Constantinople the second",
 	"",
-	"", ""
+	"Genoese", "Turks"
 )
 new navalEvent(
+	"Battle of Bornholm",
 	"",
-	"",
-	"", ""
+	"3 Polish ships", "Danish-Livonian fleet"
 )
 new navalEvent(
-	"",
+	"Battle of Vistula Lagoon",
 	"",
-	"", ""
+	"Polish and Prussian Confederation", "Teutonic Order fleet"
 )
 new navalEvent(
+	"awesome naval battle x17",
 	"",
-	"",
-	"", ""
+	"French", "Genoese"
 )
 new navalEvent(
-	"",
+	"Battle of Guinea",
 	"",
-	"", ""
+	"11 Portuguese ships", "35 Castilian ships"
 )
 new navalEvent(
+	"Battle of Rapallo",
 	"",
-	"",
-	"", ""
+	"Genoese fleet under Francesco Spinola", "French fleet under de Miolans"
 )
 new navalEvent(
+	"Battle of Zonchio",
 	"",
-	"",
-	"", ""
+	"Turks under Daoud Pasha", "Venetians under Antonio Grimani"
 )
 new navalEvent(
-	"",
+	"Second Battle of Lepanto",
 	"",
-	"", ""
+	"Turks under Kemal Reis", "Venetians"
+//thats all for medival, oh god im only like 10% through the page
 )
 new navalEvent(
 	"",
