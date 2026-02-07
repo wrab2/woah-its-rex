@@ -195,7 +195,7 @@ new navalEvent(
 	"Carthaginians and Etruscans","Greeks"
 )
 new navalEvent(
-	"awesome naval x1",
+	"awesome naval battle x1",
 	"",
 	"Ionians", "Phoenicians"
 )
@@ -526,7 +526,7 @@ new navalEvent(
 	"Cretan Saracens", "Byzantines"
 )
 new navalEvent(
-	"awesome naval x2",
+	"awesome naval battle x2",
 	"",
 	"Arabs", "Venetian squadron"
 )
@@ -561,7 +561,7 @@ new navalEvent(
 	"Byzantines under Nasar", "Aghlabids"
 )
 new navalEvent(
-	"awesome naval x3",
+	"awesome naval battle x3",
 	"",
 	"Frisians", "Vikings"
 )
@@ -571,7 +571,7 @@ new navalEvent(
 	"Aghlabids", "Byzantines"
 )
 new navalEvent(
-	"awesome naval x4",
+	"awesome naval battle x4",
 	"",
 	"Byzantines under Himerios", "Arabs"
 )
@@ -596,7 +596,7 @@ new navalEvent(
 	"Vietnamese", "Southern Han"
 )
 new navalEvent(
-	"awesome naval x5",
+	"awesome naval battle x5",
 	"",
 	"Christians", "Tunisians"
 )
@@ -616,7 +616,7 @@ new navalEvent(
 	"Vietnamese", "Chinese Song"
 )
 new navalEvent(
-	"awesome naval x6",
+	"awesome naval battle x6",
 	"",
 	"Venetians under Orseolo", "Narentan pirates"
 )
@@ -626,12 +626,12 @@ new navalEvent(
 	"Swedes and Danes", "Norwegians"
 )
 new navalEvent(
-	"awesome naval x7",
+	"awesome naval battle x7",
 	"",
 	"Venetians under Pietro Orseolo II", "Arabs"
 )
 new navalEvent(
-	"awesome naval x8",
+	"awesome naval battle x8",
 	"pisans had a space in the wikipedia page, how could the editors make this mistake",
 	"Pisans", "Arabs"
 )
@@ -646,7 +646,7 @@ new navalEvent(
 	"Danes under Ulf Jarl", "Swedes and Norwegians under Anund Jacob and Olaf II Haraldsson (Olaf the Stout)"
 )
 new navalEvent(
-	"awesome naval x9",
+	"awesome naval battle x9",
 	"",
 	"Byzantine-Ragusan squadron", "Muslim corsair fleet"
 )
@@ -656,7 +656,7 @@ new navalEvent(
 	"Estonians", "Novgorod"
 )
 new navalEvent(
-	"awesome naval x10",
+	"awesome naval battle x10",
 	"",
 	"Byzantines", "Arabs"
 )
