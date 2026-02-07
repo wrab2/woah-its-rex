@@ -476,6 +476,26 @@ const recipes = {
         },
         pUnob: true
     },
+    "heirloom": {
+        name: "John's Family Heirloom",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["heirloom"]}],
+        active : [0.9, 1, 1.2, 1.1, 2],
+    },
+    "water_polo_ball": {
+        name: "Stolen Water Polo Ball",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["water_polo_ball"]}],
+        active : [0.9, 1, 1.2, 1.1, 2],
+    },
+    "hat": {
+        name: "John's Hat",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["hat"]}],
+        active : [0.9, 1, 1.2, 1.1, 2],
+    },
+    "ring_enabler": {
+        name: "John's Ring Enabler",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["ring_enabler"]}],
+        active : [0.9, 1, 1.2, 1.1, 2],
+    },
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
     let layer = [];
@@ -510,6 +530,7 @@ function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amou
 recipeElements = {};
 let currentRecipeId = undefined;
 function displayRecipe(recipe) {
+    //if(Object.keys(johnRewards).includes(currentRecipeId))return
     if (recipe === currentRecipeId) {
         if (pinInformation.pinned === undefined && !pinInformation.locked) removeRecipeElements();
         getButtonByName(currentRecipeId).classList.remove("selectedOutline");
@@ -876,6 +897,35 @@ function idFromName(name) {
 }
 let lastCount = -1;
 function updateActiveRecipe() {
+    if(Object.keys(johnRewards).includes(currentRecipeId)){
+        //this isn't a recipe this is john's reward durr 🤯🤯🤯🤯🤯🤯
+        /*AHHHHHH
+        johnGearLocked will have locked screen with chains
+        newCraftingGearEffect will be hidden and johnGearLocked will be shown
+        that's it
+        */
+        get("pinAndCraft").style.visibility = "hidden"
+        get("craftingContainer").style.visibility = "hidden"
+        if(johnRewarded(currentRecipeId)){
+            //have gear
+            get("newCraftingGearEffect").style.visibility = "visible"
+            get("johnGearLocked").style.display = "none"
+        } else {
+            //don't
+            console.log
+            get("newCraftingGearEffect").style.visibility = "hidden"
+            get("johnGearLocked").innerHTML = `${player.john.questsCompleted.length} / ${(recipes[currentRecipeId].recipe[0].amt)} quests completed. 
+            Speak 🗣️🗣️ with john <img src=media/john/john.svg width="15em"> to learn more!`
+            //I don't know why but font size here is apparently 1px ??? ^
+            get("johnGearLocked").style.display = "block"
+        }
+        return
+    } else {
+        get("pinAndCraft").style.visibility = "visible"
+        get("craftingContainer").style.visibility = "visible"
+        get("newCraftingGearEffect").style.visibility = "visible"
+        get("johnGearLocked").style.display = "none"
+    }
     let totalCount = 0;
     let count = 0;
     let thisId = currentRecipeId;
@@ -2368,6 +2418,22 @@ const gearInformation = {
     "gear48" : {
         effect:"Uncapped Luck * (Session time in minutes * 0.01) +1<br><i>It's so hot here...</i>",
         tier: 14,
+    },
+    "heirloom": {
+        effect:"cave luck * 1.03^naval events completed",
+        tier: 11,
+    },
+    "water_polo_ball": {
+        effect:"idk",
+        tier: 11,
+    },
+    "hat": {
+        effect:"idk",
+        tier: 12,
+    },
+    "ring_enabler": {
+        effect:"john allows you to progress further",
+        tier: 0,
     },
 }
 function ct(john=false) {

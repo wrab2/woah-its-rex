@@ -14,8 +14,8 @@ function setupNavalEvents(){ //only runs on startup and after getting naval even
 	fillCurrentEventInfo()
 }
 
-const battleshipIcon = get("displayShipIcon")
 function fillCurrentEventInfo(){
+	const battleshipIcon = get("displayShipIcon")
 	get("navalProgressBar").style.width = player.john.navalEvents.length / navalEventsList.length * 10+"%"
 	get("navalProgressBarText").textContent = `${player.john.navalEvents.length}/${navalEventsList.length}`
 	
@@ -48,6 +48,7 @@ function fillCurrentEventInfo(){
 
 function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 	if(!johnRewarded("naval events"))return
+	const battleshipIcon = get("displayShipIcon")
 
 	if(Date.now() < navalEventEndTime) { //event is not over
 		//update time display

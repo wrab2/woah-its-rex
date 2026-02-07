@@ -5325,3 +5325,11 @@ background-size: 100%;
 #john-quest-progress img{
   width: 1.3em;
 }
+#johnGearLocked {
+  background-image: url("media/questChains.png");
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #292929;
+  border-radius: 5%;
+}

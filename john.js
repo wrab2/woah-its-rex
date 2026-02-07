@@ -1,5 +1,6 @@
 
-player.john = {
+window.onload = ()=>{ //this will be removed later
+	player.john = {
 		spokeWith: true,
 		questsCompleted: [1],
 		currentQuest: 11,
@@ -7,7 +8,7 @@ player.john = {
 		navalEventStartedTime:0,
 		currentNavalEventId:-1,
 	}
-
+}
 const john = { //this doesn't presist between refreshes
 	opened: false,
 	rejectedQuests: 0,
