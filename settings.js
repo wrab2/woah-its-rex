@@ -753,17 +753,13 @@ function longTime(milliseconds) {
     let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
     let days = Math.floor((milliseconds / 1000 / 60 / 60 / 24) % 365);
     let years = Math.floor((milliseconds / 1000 / 60 / 60 / 24 / 365));
-    const finalTime = [
-        years.toString().padStart(20, "0"),
-        days.toString().padStart(3, "0"),
-        hours.toString().padStart(2, "0"),
-        minutes.toString().padStart(2, "0"),
-        seconds.toString().padStart(2, "0")
-    ].join(":");
-    for (let i = 0; i < finalTime.indexOf(":") + 1; i++) if (finalTime[i] !== "0") {
-        return (finalTime[i] === ":" ? finalTime.substring(i + 1) : finalTime.substring(i));
-    }
-    return finalTime;
+    let str = ""
+    str += years===0? "" : years+":"
+    str += (str===""&&days===0) ? "" : String(days).padStart(3, "0")+":"
+    str += String(hours).padStart(2, "0")+":"
+        +String(minutes).padStart(2, "0")+":"
+        +String(seconds).padStart(2, "0")
+    return str
 }
 function switchHighRarity(element) {
     const value = Number(element.value);
