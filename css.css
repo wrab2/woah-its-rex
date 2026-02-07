@@ -3180,7 +3180,7 @@ img.roundcat {
 #galacticaCrafts {
   border: none;
   background: none;
-  background-image: url("media/space.png");
+  background-image: url("media/space.png"); /* when the hell is this used what */
   position: absolute;
   top: 0.1vw;
   left: 2.5vw;
