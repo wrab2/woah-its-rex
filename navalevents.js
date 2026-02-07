@@ -1338,94 +1338,94 @@ new navalEvent(
 )
 //thats all for the 16th century, now for the 17th century.....
 new navalEvent(
+	"Battle of Bantam",
 	"",
-	"",
-	"", ""
+	"Dutch", "Portuguese"
 )
 new navalEvent(
+	"Battle of the Narrow Seas",
 	"",
-	"",
-	"", ""
+	"Dutch under van Duivenvoorde", "Spanish under Spinola"
 )
 new navalEvent(
+	"Battle of Sluis",
 	"",
-	"",
-	"", ""
+	"Dutch under de Moor", "Spanish under Spinola"
 )
 new navalEvent(
+	"Action of October 1604",
 	"",
-	"",
-	"", ""
+	"Tuscans", "Tunisians"
 )
 new navalEvent(
+	"Battle of the Channel",
 	"",
-	"",
-	"", ""
+	"Dutch under Haultain", "Spanish fleet of transport ships"
 )
 new navalEvent(
+	"Attack on Salinas de Araya",
 	"",
-	"",
-	"", ""
+	"Spanish under Fajardo", "Dutch smugglers and privateers"
 )
 new navalEvent(
+	"Battle of Cape St. Vincent",
 	"",
-	"",
-	"", ""
+	"Spanish under Fajardo", "Dutch under Haultain"
 )
 new navalEvent(
+	"Battle of Cape Rachado",
 	"",
-	"",
-	"", ""
+	"Portuguese fleet under Castro", "Dutch under de Jonge"
 )
 new navalEvent(
+	"Second battle of Cape Rachado",
 	"",
-	"",
-	"", ""
+	"Dutch under de Jonge", "Portuguese"
 )
 new navalEvent(
+	"Battle of Gibraltar",
 	"",
-	"",
-	"", ""
+	"Dutch under van Heemskerk", "Spanish"
 )
 new navalEvent(
+	"Action of 20 October",
 	"",
-	"",
-	"", ""
+	"Tuscans under Beauregard", "Turkish trade fleet"
 )
 new navalEvent(
+	"Raid on La Goulette",
 	"",
-	"",
-	"", ""
+	"Spanish-French", "Tunis"
 )
 new navalEvent(
+	"Action of 1609",
 	"",
-	"",
-	"", ""
+	"Venetians", "Turks"
 )
 new navalEvent(
+	"Battle of Paphos",
 	"",
-	"",
-	"", ""
+	"Turks under Khalil", "French under Fressinet"
 )
 new navalEvent(
+	"Nossa Senhora da Graça incident",
 	"",
-	"",
-	"", ""
+	"Portuguese", "Japanese"
 )
 new navalEvent(
+	"Raid on La Goulette",
 	"",
-	"",
-	"", ""
+	"Sicilian-Spanish galley fleet", "Tunisians"
 )
 new navalEvent(
+	"Battle of Swally",
 	"",
-	"",
-	"", ""
+	"British East India Company", "Portuguese"
 )
 new navalEvent(
+	"Battle of Cape Corvo",
 	"",
-	"",
-	"", ""
+	"Sicilian-Spanish galley fleet under d'Aragona", "Turkish trade fleet"
 )
 new navalEvent(
 	"",
