@@ -20,8 +20,6 @@
     <script src="data.js"></script>
     <script src="caves.js"></script>
     <script src="commands.js"></script>
-    <script src="john.js"></script>
-    <script src="navalevents.js"></script>
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="gradients.css">
@@ -860,10 +858,11 @@
 				<div id="sidebar">
                     <div id="navalEventInfo">
                         <div id="navalEventHat"></div>
-						<div id="navalEventTitle">Battle for big water 1906 asdf asdf asdf asdf asdf asdf asdf</div>
-                        <span id="navalEventText">Lorem Ipsum is bogus text in (more or less accurate) latin. It is used by designers as a placeholder for text that they don't have yet. Say you're</span>
-                        <span>Mining in <span id="navalEventLayer"></span> layer will accelerate the event</span>
-                        <span>Remaining time: <span id="navalEventTime"></span></span>
+						<div id="navalEventTitle">No active event</div>
+                        <span id="navalEventText">---</span>
+                        <span id="navalEventLayer"></span>
+                        <span id="navalEventTime"></span>
+                        <div id="totalEventProgress"><span id="navalProgressBarText"></span><div id="navalProgressBar"></div></div>
                     </div>
 					<div id="cloudSaving">
 						<p>Cloud saving status: <span id="cloudStatus">waiting for connection with galaxy</span></p>
@@ -949,8 +948,8 @@
 			    </div>
 			</div>
             <div id="bottomButtonHolder">
-                <button class="bottomButton" id="displayShip" onclick="toggleSideMenu('navalEventInfo')">
-                    <div id="displayShipIcon" style="background-color: #00cf4f;"></div>
+                <button class="bottomButton" id="displayShip" style="display:none" onclick="toggleSideMenu('navalEventInfo')">
+                    <div id="displayShipIcon" style="background-color: #999999;"></div>
                 </button>
                 <button class="bottomButton" id="displayCloud" onclick="toggleSideMenu('cloudSaving')">
                     <div id="displayCloudIcon" style="background-color: #3179ff;"></div>
@@ -1125,5 +1124,8 @@
 <table id="spawnTemplate">
 
 </table>
+
+    <script src="john.js"></script>
+    <script src="navalevents.js"></script>
 
 </body>

@@ -5,27 +5,67 @@ let currentNavalEvent = {}
 
 function setupNavalEvents(){ //only runs on startup and after getting naval events from john
 	if(!johnRewarded("naval events"))return
+	get("displayShip").style.display = "block"
 	availableNavalEvents = navalEventsList.filter((e)=>!player.john.navalEvents.includes(e.id))
 	if(player.john.currentNavalEventId !== -1){ //an event is/was already active
 		currentNavalEvent = availableNavalEvents.filter((e)=>e.id === player.john.currentNavalEventId)
 		navalEventEndTime = player.john.navalEventStartedTime + currentNavalEvent.duration
 	}
+	fillCurrentEventInfo()
 }
 
 const battleshipIcon = get("displayShipIcon")
-function rollNavalEvent(){ //this will run on every inventory update so 2 times a second
+function fillCurrentEventInfo(){
+	get("navalProgressBar").style.width = player.john.navalEvents.length / navalEventsList.length * 10+"%"
+	get("navalProgressBarText").textContent = `${player.john.navalEvents.length}/${navalEventsList.length}`
+	
+	if(navalEventEndTime === 0){//there is no event no event
+		battleshipIcon.classList.remove("navalGreenFlashing")
+		battleshipIcon.classList.remove("navalRedFlashing")
+		get("navalEventTitle").textContent = "No active event"
+		get("navalEventText").textContent = "---"
+		get("navalEventLayer").textContent = ""
+		get("navalEventTime").textContent = ""
+		return
+	}
+	//event is active
+	get("navalEventTitle").textContent = currentNavalEvent.title + ` (#${currentNavalEvent.id})`
+	get("navalEventText").textContent = 
+		String(`${Math.random()<0.5 ? 
+			"👑 $winner vs $loser"
+			:"$loser vs 👑 $winner"}, `
+		+currentNavalEvent.description+" "+currentNavalEvent.contribution)
+		.replace(/\$winner/g, currentNavalEvent.winner)
+		.replace(/\$loser/g, currentNavalEvent.loser)
+
+	let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
+	get("navalEventLayer").innerHTML = `Mining in ${oreList[questLayerOre].hasImage?
+		'<img src="${oreList[questLayerOre].src}"'
+		:questLayerOre
+	} layer will accelerate the event`
+
+}
+
+function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 	if(!johnRewarded("naval events"))return
+
 	if(Date.now() < navalEventEndTime) { //event is not over
+		//update time display
+		get("navalEventTime").textContent = "Remaining time: "+longTime((navalEventEndTime - Date.now()))
+
 		if(currentLayer === currentNavalEvent.layer[0]){
-			//makes event go by 3x faster if you are in its layer
+			//500ms is base time reduction per update
+			//1000 makes event go by 3x faster
 			player.john.navalEventStartedTime -= 1000
 			navalEventEndTime -= 1000
-			//battleshipIcon style = amazing green flashing animation
+
+			battleshipIcon.classList.add("navalGreenFlashing")
+			battleshipIcon.classList.remove("navalRedFlashing")
 		} else {
-			//battleshipIcon style = amazing red flashing animation
+			//wrong layer
+			battleshipIcon.classList.remove("navalGreenFlashing")
+			battleshipIcon.classList.add("navalRedFlashing")
 		}
-		//update time display
-		get("navalEventTime").textContent = longTime((navalEventEndTime - Date.now()))
 		return
 	}
 	else if(navalEventEndTime !== 0) { //event is over, reward applies now
@@ -36,36 +76,26 @@ function rollNavalEvent(){ //this will run on every inventory update so 2 times 
 		player.john.navalEventStartedTime = 0
 		navalEventEndTime = 0
 		//there needs to be something to trigger luck update in logs.js
-		//battleshipIcon style = gray
+
+		fillCurrentEventInfo()
 		return
 	}
 	//chance is 1/3600 every 500ms which is ~2/hour to get any uncompleted event
 	if(availableNavalEvents.length > 0 && Math.random()<1/1){
+		//start the event
 		currentNavalEvent =availableNavalEvents[0]// availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
 		player.john.currentNavalEvent = currentNavalEvent.id
 		player.john.navalEventStartedTime = Date.now()
 		navalEventEndTime = Date.now() + currentNavalEvent.duration
 		
-		//notify that the event has started and display it somewhere
+		//open event info panel after the event has started
 		if(!get("navalEventInfo").classList.contains("displayedSideMenu")){
 			toggleSideMenu('navalEventInfo')
 		} 
-		get("navalEventTitle").textContent = currentNavalEvent.title
-		get("navalEventText").textContent = 
-			String(`${Math.random()<0.5?"👑 $winner vs $loser ":"$loser vs 👑 $winner "}, `
-			+currentNavalEvent.description+" "+currentNavalEvent.contribution)
-			.replace(/\$winner/g, currentNavalEvent.winner)
-			.replace(/\$loser/g, currentNavalEvent.loser)
-		let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
-		if(oreList[questLayerOre].hasImage){
-			get("navalEventLayer").innerHTML = `<img src="${oreList[questLayerOre].src}">`
-		} else {
-			get("navalEventLayer").textContent = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
-		}
-		
-			//battleshipIcon style = amazing red flashing animation
+		fillCurrentEventInfo()
 	}
 }
+
 
 let navaleventtempid = 0
 
@@ -74,7 +104,7 @@ class navalEvent {
 		navaleventtempid++
 		let duration = text.length*60000
 		//30 minutes - 2 hours, change this later
-		duration = Math.max(2*60*60*1000, Math.min(30*60000, duration))
+		duration = Math.min(2*60*60*1000, Math.max(30*60000, duration))
 		navalEventsList.push({
 			title: title,
 			description: text,
@@ -99,7 +129,7 @@ const johnContributions = [
 	"$loser used notepad++, which when john hijacked the update servers to ship a rat in the files messed up $loser's strategy",
 	"john convinced $winner to bet all of their budget on green, which when they won really helped with their victory",
 	"john was very intimidating to $loser",
-	"john ''wall-tur'' (his full name) built a wall around $loser's ships, trapping them",
+	"john \"wall-tur\" (his full name) built a wall around $loser's ships, trapping them",
 	"john convinced $loser's fleet to go on a vacation right before the battle, causing them to miss it entirely",
 	"john placed like a LOT of blahajes around the battlefield, which really scared $loser's crew",
 	"john poisoned the water supply with estrogen, causing $winner's fleet to be way more prepared (the estrogen was very helpful)",
@@ -153,7 +183,7 @@ new navalEvent(
 new navalEvent(
 	"Battle of the Delta",
 	"",
-	"Ramesses III","The ''Sea Peoples''"
+	"Ramesses III","The \"Sea Peoples\""
 )
 new navalEvent(
 	"Egypt invasion of Cyprus",

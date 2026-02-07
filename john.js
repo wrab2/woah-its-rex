@@ -1,7 +1,7 @@
 
 player.john = {
 		spokeWith: true,
-		questsCompleted: [],
+		questsCompleted: [1],
 		currentQuest: 11,
 		navalEvents: [],
 		navalEventStartedTime:0,

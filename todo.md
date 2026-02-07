@@ -1,7 +1,5 @@
 add events (naval battles), and add gears (i made their css alr in gradients.css)
 
-make naval event button hidden until 1 quest is completed, display completed/total amount of quests, display something when quest is inactive, add animations to the warship button, add naval events setup function to startup, make it setup information in naval events box
-
 ☑️ hyper checkmarkinator (half done)
 
 add new layers to teleport lists

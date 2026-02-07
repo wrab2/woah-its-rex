@@ -150,6 +150,7 @@ function finishInit() {
     createMilestones();
     inventoryTimer = setInterval(updateInventory, 500);
     canMine = true;
+    setupNavalEvents()
     console.log("🤽‍♂️🤽‍♂️ john has taken over the console 🤽‍♂️🤽‍♂️");
 }
 function assignImageNames() {

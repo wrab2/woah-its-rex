@@ -3258,8 +3258,60 @@ img.roundcat {
   margin: 0px;
   background-color: #111314;
 }
+#totalEventProgress{
+  height: 1.5em;
+  background-color:rgb(0, 53, 114);
+}
+#navalProgressBarText {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+#navalProgressBar{
+  height: 100%;
+  width: 0%;
+  background-color: #009425;
+}
 #navalEventLayer > img {
   width: 1.5em;
+}
+.navalRedFlashing {
+  animation: navalEventWrongLayer;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+.navalGreenFlashing {
+  animation: navalEventCorrectLayer;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  background-color: #208b00 !important;
+}
+.displayShipIcon {
+  background-color: #999999;
+}
+@keyframes navalEventWrongLayer {
+  0%,
+	50%,
+	100% {
+		background-color: #9c4646;
+	}
+
+	25%,
+	75% {
+		background-color: #999999;
+	}
+}
+@keyframes navalEventCorrectLayer {
+  0%,
+	50%,
+	100% {
+		background-color: #208b00;
+	}
+
+	25%,
+	75% {
+		background-color: #4c9237;
+	}
 }
 
 #cloudSaving {
