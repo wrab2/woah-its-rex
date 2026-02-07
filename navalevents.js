@@ -144,10 +144,10 @@ const johnContributions = [
 	"🤽‍♂️💥💥💥💥💥💥💥⛴️🏇",
 	"john got a huge magnet to attract the $loser's ships",
 	"john forced $loser's crew to play Rex:R",
-/*	"", (add more)
-	"",
-	"",
-	"",
+	"john opened his fridge, freezing over the world causing $loser's ships to get stuck in ice",
+	"john played water polo with $winner's crew really raising their motivation",
+	"john was forced to Add Four Thousand naval battles, and out of spite they killed $loser's crew",
+	"john dug a really big hole sinking $loser's ships",
 	"", 
 	"",
 	"",
@@ -169,7 +169,7 @@ const johnContributions = [
 	"",
 	"",
 	"",
-	"", */
+	"", 
 ]
 
 
@@ -1428,29 +1428,29 @@ new navalEvent(
 	"Sicilian-Spanish galley fleet under d'Aragona", "Turkish trade fleet"
 )
 new navalEvent(
+	"awesome naval battle x30",
 	"",
-	"",
-	"", ""
+	"English", "Portuguese"
 )
 new navalEvent(
+	"Action of 17 July",
 	"",
-	"",
-	"", ""
+	"Dutch under Spilbergen", "Spanish under Pulgar"
 )
 new navalEvent(
+	"Raid on La Goulette",
 	"",
-	"",
-	"", ""
+	"Sicilian-Spanish galley fleet under Ribera", "Tunisans"
 )
 new navalEvent(
+	"Action of 29 April",
 	"",
-	"",
-	"", ""
+	"Tuscans under Inghirami", "Turks"
 )
 new navalEvent(
+	"Battle of Cape Celidonia",
 	"",
-	"",
-	"", ""
+	"Spanish-Neapolitans under Ribera", "Turks"
 )
 new navalEvent(
 	"",
