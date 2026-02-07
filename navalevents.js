@@ -460,214 +460,214 @@ new navalEvent(
 )
 // Thats all of the ancient naval battles, now onto the middle ages...
 new navalEvent(
+	"Battle of Corsica",
 	"",
-	"",
-	"", ""
+	"Western Roman Empire under Flavius Ricimer", "Vandals"
 )
 new navalEvent(
+	"Battle of Cartagena",
 	"",
-	"",
-	"", ""
+	"Vandals", "Western Roman Empire"
 )
 new navalEvent(
+	"Battle of Cape Bon",
 	"",
-	"",
-	"", ""
+	"Vandals", "East and West Romans under Basiliscus"
 )
 new navalEvent(
+	"Battle of Sena Gallica",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Ostrogoths"
 )
 new navalEvent(
+	"Battle of the Masts",
 	"",
-	"",
-	"", ""
+	"Arabs under Uthman", "Byzantines under Constans II"
 )
 new navalEvent(
+	"Battle of Baekgang",
 	"",
-	"",
-	"", ""
+	"Tang China and Silla", "Yamato Japan and Baekje"
 )
 new navalEvent(
+	"Battle of Gibeolpo",
 	"",
-	"",
-	"", ""
+	"Silla", "Tang China"
 )
 new navalEvent(
+	"First Arab siege of Constantinople",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Arabs"
 )
 new navalEvent(
+	"Battle of Carthage",
 	"",
-	"",
-	"", ""
+	"Arabs", "Greeks under John the Patrician"
 )
 new navalEvent(
+	"Second Arab siege of Constantinople",
 	"",
-	"",
-	"", ""
+	"Byzantines under Leo III the Isaurian", "Arabs"
 )
 new navalEvent(
+	"Battle of Keramaia",
 	"",
-	"",
-	"", ""
+	"Cibyrrhaeots", "Umayyad Caliphate"
 )
 new navalEvent(
+	"Siege of Constantinople",
 	"",
-	"",
-	"", ""
+	"Byzantine central imperial fleet", "Rebel provincial fleets"
 )
 new navalEvent(
+	"Battle of Thasos",
 	"",
-	"",
-	"", ""
+	"Cretan Saracens", "Byzantines"
 )
 new navalEvent(
+	"awesome battle x2",
 	"",
-	"",
-	"", ""
+	"Arabs", "Venetian squadron"
 )
 new navalEvent(
+	"Battle of Ostia",
 	"",
-	"",
-	"", ""
+	"Italian city-states", "Muslims"
 )
 new navalEvent(
+	"Battle of Sandwich",
 	"",
-	"",
-	"", ""
+	"Kentishmen under Æthelstan", "Viking fleet"
 )
 new navalEvent(
+	"Battle of Kardia",
 	"",
-	"",
-	"", ""
+	"Byzantine admiral Niketas Ooryphas", "Cretan Saracens under the renegade Photios"
 )
 new navalEvent(
+	"Battle of the Gulf of Corinth",
 	"",
-	"",
-	"", ""
+	"Byzantine admiral Niketas Ooryphas", "Cretan Saracens under the renegade Photios"
 )
 new navalEvent(
+	"Battle of Cephalonia",
 	"",
-	"",
-	"", ""
+	"Byzantines under Nasar", "Aghlabids"
 )
 new navalEvent(
+	"Battle of Stelai",
 	"",
-	"",
-	"", ""
+	"Byzantines under Nasar", "Aghlabids"
 )
 new navalEvent(
+	"awesome battle x3",
 	"",
-	"",
-	"", ""
+	"Frisians", "Vikings"
 )
 new navalEvent(
+	"Battle of Milazzo",
 	"",
-	"",
-	"", ""
+	"Aghlabids", "Byzantines"
 )
 new navalEvent(
+	"awesome battle x4",
 	"",
-	"",
-	"", ""
+	"Byzantines under Himerios", "Arabs"
 )
 new navalEvent(
+	"Battle of Chios",
 	"",
-	"",
-	"", ""
+	"Syrian-Cilician fleet", "Byzantine squadron under Himerios"
 )
 new navalEvent(
+	"Battle of Lang-shan Jiang",
 	"",
-	"",
-	"", ""
+	"Wuyue", "Yang Wu"
 )
 new navalEvent(
+	"Rus'-Byzantine War",
 	"",
-	"",
-	"", ""
+	"Byzantine fleet under Theophanes", "Kievan Rus' fleet under Igor of Kiev"
 )
 new navalEvent(
+	"First Battle of Bach Dang River",
 	"",
-	"",
-	"", ""
+	"Vietnamese", "Southern Han"
 )
 new navalEvent(
+	"awesome battle x5",
 	"",
-	"",
-	"", ""
+	"Christians", "Tunisians"
 )
 new navalEvent(
+	"Battle of the Straits",
 	"",
-	"",
-	"", ""
+	"Fatimid fleet", "Byzantine fleet under Niketas Abalantes"
 )
 new navalEvent(
+	"Battle on the Yangtze",
 	"",
-	"",
-	"", ""
+	"Song forces", "Tang forces"
 )
 new navalEvent(
+	"Second Battle of Bach Dang",
 	"",
-	"",
-	"", ""
+	"Vietnamese", "Chinese Song"
 )
 new navalEvent(
+	"awesome battle x6",
 	"",
-	"",
-	"", ""
+	"Venetians under Orseolo", "Narentan pirates"
 )
 new navalEvent(
+	"Battle of Swold",
 	"",
-	"",
-	"", ""
+	"Swedes and Danes", "Norwegians"
 )
 new navalEvent(
+	"awesome battle x7",
 	"",
-	"",
-	"", ""
+	"Venetians under Pietro Orseolo II", "Arabs"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"awesome battle x8",
+	"pisans had a space in the wikipedia page, how could the editors make this mistake",
+	"Pisans", "Arabs"
 )
 new navalEvent(
+	"Battle of Lemnos",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Rus' fleet"
 )
 new navalEvent(
+	"Battle of the Helgeå",
 	"",
-	"",
-	"", ""
+	"Danes under Ulf Jarl", "Swedes and Norwegians under Anund Jacob and Olaf II Haraldsson (Olaf the Stout)"
 )
 new navalEvent(
+	"awesome battle x9",
 	"",
-	"",
-	"", ""
+	"Byzantine-Ragusan squadron", "Muslim corsair fleet"
 )
 new navalEvent(
+	"Battle at Iron Gate",
 	"",
-	"",
-	"", ""
+	"Estonians", "Novgorod"
 )
 new navalEvent(
+	"awesome battle x10",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Arabs"
 )
 new navalEvent(
+	"Rus'-Byzantine War",
 	"",
-	"",
-	"", ""
+	"Byzantines", "Rus' squadron"
 )
 new navalEvent(
+	"Battle of Niså",
 	"",
-	"",
-	"", ""
+	"Norwegians under Harald Hardrada", "Danes"
 )
 new navalEvent(
 	"",
