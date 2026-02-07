@@ -89,7 +89,7 @@ class playerTemplate {
             "pickaxe34" : false,
             "pickaxe35" : false,
             "pickaxe36" : false,
-            "hyperCheckmarkinator" : false
+            "hypermarkCheckminator" : false
         }
         this.settings = {
             audioSettings: {

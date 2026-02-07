@@ -18,7 +18,7 @@ const johnRewards = { //shortcut for how many quests you need to complete to get
 	"naval events": 1,
 	"heirloom": 3,
 	"water_polo_ball" :5,
-	"hyper_checkminator": 10,
+	"hypermark_checkminator": 10,
 	"hat" : 15,
 	"house keys" : 19,
 	"ring_enabler" : 20,
@@ -254,7 +254,7 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
 			johnSay("one of my friends that you gave to me dropped their water polo ball, honestly you can keep it !")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["hyper_checkminator"]){
+		else if(player.john.questsCompleted.length === johnRewards["hypermark_checkminator"]){
 			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer (1m blocks or lower)")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["hat"]){

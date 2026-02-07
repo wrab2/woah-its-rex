@@ -603,7 +603,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#hyper_checkminator span{
+#hypermark_checkminator span{
     background: linear-gradient(to right, #0b7f3f, #4dff9a, #ffffff, #4dff9a, #0b7f3f);
     -webkit-background-clip: text;
     color: transparent;

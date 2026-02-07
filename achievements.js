@@ -1726,9 +1726,9 @@ const milestoneList = {
         },
             "jp2.3" : {
             title: "checkmarxism",
-            description: "recieve the recepie for the hyper checkmarkinator\r\n(obtained after fulfilling 10 quests)",
+            description: "recieve the recepie for the hypermark checkminator\r\n(obtained after fulfilling 10 quests)",
             check: function() {
-                return johnRewarded("hyper_checkminator")
+                return johnRewarded("hypermark_checkminator")
             },
             owned: false,
             distH: 1,
