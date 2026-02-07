@@ -75,8 +75,6 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 		player.john.currentNavalEvent = -1
 		player.john.navalEventStartedTime = 0
 		navalEventEndTime = 0
-		//there needs to be something to trigger luck update in logs.js
-
 		fillCurrentEventInfo()
 		return
 	}

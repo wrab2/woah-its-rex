@@ -322,7 +322,12 @@ class secureLogs {
         let tempLuck = 1;
         if (player.powerupVariables.caveBoosts.active) tempLuck++;
         if (player.stats.currentPickaxe === "pickaxe33") tempLuck += 1.5;
-        if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) tempLuck += 1000000000
+        if(johnRewarded("hairloom")){
+            let navalEventsAmt = player.john.navalEvents.length
+            //softcap
+            if(navalEventsAmt > 250)navalEventsAmt = 250 + ((navalEventsAmt-250)**0.7)
+            tempLuck *= (1.03**player.john.navalEvents.length) || 1
+        }
         return tempLuck;
     }
     getCaveTypeLuck() {

@@ -248,7 +248,7 @@ function completeQuest(){
 			setupNavalEvents()
 		}
 		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
-			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around 1100x cave luck (the formula is (event completed) ^1.1 cave luck")
+			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around 11,000x cave luck (the formula is 1.03 ^ (events completed) cave luck but softcaps after 250)")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["water polo ball"]){
 			johnSay("one of my friends that you gave to me dropped their water polo ball, honestly you can keep it !")
