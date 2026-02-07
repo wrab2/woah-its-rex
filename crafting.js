@@ -196,13 +196,13 @@ const recipes = {
         },
         pUnob: true
     },
-    /* commented out cause idk the recepie yet!
-    "hyperCheckmarkinator": {
+    "hypermark_checkminator": { //so how is this called bruh 😭😭😭✅✅✅✅✅✅✅😭😭
         name: "Hyper Checkmarkinator",
-        recipe: [{"ore": "some ores here", "amt": 1}],
+        recipe: [{"ore": "✅", "amt": 10},{"ore": "🐋", "amt": 10}],
         active : [],
-        pUnob: true // idfk what pUnob does lowkey
-    */
+        pUnob: true, // idfk what pUnob does lowkey (me neither)
+        pickaxe: true
+    },
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
@@ -536,15 +536,19 @@ function displayRecipe(recipe) {
         currentRecipeId = undefined;
         get("scrollableCraft").style.display = "none";
     } else {
-        if(Object.keys(johnRewards).includes(currentRecipeId)){
-            //updating john's rewards instead of actual recipes 🐈🐈🐈🐈🐈
+        /*why did I add this here was I trying to do🐈🐈🐈🐈🐈
+        if(Object.keys(johnRewards).includes(currentRecipeId) && !recipes[recipe].pickaxe){
+            
+        //updating john's gear rewards instead of actual recipes 🐈🐈🐈🐈🐈
             currentRecipeId = recipe
+            addRecipeInformation(currentRecipeId)
             updateActiveRecipe()
             return
         }
+            */
         if (!pinInformation.locked) removeRecipeElements();
-        if (currentRecipeId !== undefined) {
-            buttonGradients[`${currentRecipeId}Craft`]["applied"] = false;
+        if (currentRecipeId !== undefined ) {
+            if(!Object.keys(johnRewards).includes(currentRecipeId)) buttonGradients[`${currentRecipeId}Craft`]["applied"] = false;
             getButtonByName(currentRecipeId).classList.remove("selectedOutline");
         }
         else get("scrollableCraft").style.display = "inline-flex";
@@ -562,7 +566,7 @@ function displayRecipe(recipe) {
         const consElem = get("newCraftingCons");
         const abilityElem = get("newCraftingAbilityImage");
         const iconElem = get("newCraftingPickaxeIcon");
-        if (recipe.indexOf("pickaxe") > -1) {
+        if (recipe.indexOf("pickaxe") > -1 || recipes[recipe].pickaxe) {
             get("extraPickaxeInformation").style.display=""
             get("gearHolder").style.display = "none";
             get("pickaxeHolder").style.display = "";
@@ -654,6 +658,7 @@ function addRecipeInformation(recipe) {
     let thisRecipe = recipes[recipe].recipe;
     if (recipe === "pickaxe27") thisRecipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
     const append = get("newCraftingRecipeHolder");
+    append.textContent=""
     for (let i = 0; i < thisRecipe.length; i++) {
         const ore = thisRecipe[i].ore;
         const have = playerInventory[ore]["normalAmt"];
@@ -832,8 +837,10 @@ function dragElement(elmnt) {
   }
 }
 function removeRecipeElements() {
-    const t = get("newCraftingRecipeHolder").children;
-    for (let i = t.length - 1; i >= 0; i--) t[i].remove();
+    get("newCraftingRecipeHolder").textContent=""
+    //huh???
+    //const t = get("newCraftingRecipeHolder").children;
+    //for (let i = t.length - 1; i >= 0; i--) t[i].remove();
 }
 const cwnames = {
     "0.9" : "G",
@@ -902,7 +909,7 @@ function idFromName(name) {
 }
 let lastCount = -1;
 function updateActiveRecipe() {
-    if(Object.keys(johnRewards).includes(currentRecipeId)){
+    if(Object.keys(johnRewards).includes(currentRecipeId) && !recipes[currentRecipeId].pickaxe){
         //this isn't a recipe this is john's reward durr 🤯🤯🤯🤯🤯🤯
         get("pinAndCraft").style.visibility = "hidden"
         get("craftingContainer").style.visibility = "hidden"
@@ -1065,7 +1072,7 @@ const buttonGradients = {
     "pickaxe34Craft" : {"gradient" : "linear-gradient(to right, #2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769)","applied" : false},
     "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
     "pickaxe36Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
-    "hypermarkCheckminatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447 #ffffff #7fb447", "applied": false},
+    "hypermark_checkminatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447 #ffffff #7fb447", "applied": false},
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "gear1Craft" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
@@ -2219,6 +2226,20 @@ const pickaxeStats = {
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
         tier: 14,
+        icon: "",
+    },
+    "hypermark_checkminator" : {
+        mined: 2000000,
+        revealed: 1,
+        luck: 750,
+        rate: 600,
+        src : "⛏️",
+        ability: "",
+        doAbility: function(x, y) {},
+        canSpawnCaves:[1, 1.2, 2, 0.9],
+        canMineIn:[1, 1.2, 2, 0.9],
+        isDimensional: true,
+        tier: 15,
         icon: "",
     },
 }
