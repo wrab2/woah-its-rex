@@ -4,13 +4,11 @@
 
 ---
 
-john (not meta john) and jim layers indexes
+✅ john (not meta john) and jim layers indexes
 
 ✅ make tol6 show up
 
 ✅ make orb of unknown an sr1 ore that enables you to use tol6 everywhere (I decided to leave in in ❌ but nerf)
-
-make evil jim reasonably common to craft 🇮🇱
 
 ---
 make naval events select a random one each time with a random but seeded contribution 

@@ -1074,6 +1074,9 @@
   align-items: center;
   justify-content: center;
 }
+.loungeLayerSelector img {
+  max-width: 1.5em;
+}
 .indexCard {
   width: 32.8%;
   height: min(20vh, 10vw);

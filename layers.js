@@ -713,7 +713,7 @@ const layerList = {
 "catcatLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳'],
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
-"deepWaterLayer" : ["deepWater"],
+"deepWaterLayer" : ["🚁"/*don't know what to put here*/,"deepWater"],
 "jimLayer":["sillyMiner",'🤽'], 
 "johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"],
 "johnLayer_CLT":['🤽‍♂️'],

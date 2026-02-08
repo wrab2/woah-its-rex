@@ -146,7 +146,7 @@ function finishInit() {
     if (player.settings.lastWorld !== 1) switchWorld(player.settings.lastWorld, true);
     else createMine();
     addIndexLayers.current = String(currentWorld);
-    addIndexLayers(currentWorld)
+    addIndexLayers(String(currentWorld))
     createMilestones();
     inventoryTimer = setInterval(updateInventory, 500);
     canMine = true;

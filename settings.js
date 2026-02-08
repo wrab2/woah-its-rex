@@ -412,7 +412,9 @@ const indexOrder = {
         "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"], req: function() {return player.sr1Unlocked}},
     },
     1.2: {
-        "watrWatr" : {l: ["waterLayer","deepWaterLayer","johnMetaLayer"], req: function() {return player.john.spokeWith}},
+        "watrWatr" : {l: ["waterLayer"], req: function() {return player.john.spokeWith}},
+        "watrWatrDeep" : {l: ["deepWaterLayer"], req: function() {return indexHasOre("deepWater")}},
+        "watrWatrJohn" : {l: ["johnMetaLayer","johnLayer","jimLayer"], req: function() {return player.john.spokeWith}},
     },
     0.9: {
         "galactica" : {l: ["starLayer", "nebulaLayer"], req: function() {return player.galacticaUnlocked}},
@@ -443,18 +445,27 @@ function addIndexLayers(world) {
                 else if (world === "events") {allOres = ["🟩"]}
                 else allOres = layerList[list[i]];
                 const thisMat = getIndexLayerOre(allOres);
+                let thisMatImage
+                if(oreList[thisMat].hasImage){ thisMatImage = "<img src="+oreList[thisMat].src+">"}
+                else thisMatImage = thisMat
                 if (layer.indexOf("worldOneSpecial") === -1) {
-                    if (world === "caves") button.textContent = `${thisMat} 0-∞m`;
+                    if (world === "caves") button.textContent = `${thisMatImage} 0-∞m`;
                     else if (list[i].indexOf("Commons") > -1) button.textContent = `${allOres[allOres.length-1]} 0-${(world === "2")?'7999m':'∞m'}`;
                     else if (list[i] === "event") button.textContent = "Limited Ores"
                     else if (world === "2") {
-                        if (thisMat === "✖️") button.textContent = `${thisMat} 8000m`
-                        else if (thisMat === "❌") button.textContent = `${thisMat} 8001-∞m`
-                        else if (thisMat === "✅") button.textContent = `${thisMat} ????m`
-                        else button.textContent = `${thisMat} ${(i - 1) * 2000}m`
-                    } else button.textContent = `${thisMat} ${i * 2000}m`
+                        if (thisMat === "✖️") button.textContent = `${thisMatImage} 8000m`
+                        else if (thisMat === "❌") button.textContent = `${thisMatImage} 8001-∞m`
+                        else if (thisMat === "✅") button.textContent = `${thisMatImage} ????m`
+                        else button.innerHTML = `${thisMatImage} ${(i - 1) * 2000}m`
+                    } 
+                    else if (world === "1.2"){
+                        if (thisMat === "🌊") button.innerHTML = `${thisMat} 0m`
+                        if (thisMat === "deepWater") button.innerHTML = `${thisMatImage} 100,000m`
+                        if (["🤽‍♂️","🤽"].includes(thisMat)) button.innerHTML = `${thisMatImage} ???m`
+                    }
+                    else button.innerHTML = `${thisMatImage} ${i * 2000}m`
                 } else {
-                    button.textContent = `${thisMat} ????m`
+                    button.innerHTML = `${thisMat} ????m`
                 }
                 button.setAttribute("onclick", `createIndexCards("${list[i]}")`);
                 button.classList.add(`indexButton${list[i]}`);
