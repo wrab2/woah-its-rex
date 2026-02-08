@@ -2375,169 +2375,169 @@ new navalEvent(
 )
 // NOW 18th century :sob:
 new navalEvent(
+	"War of the Spanish Succession",
 	"",
-	"",
-	"", ""
+	"Anglo-Dutch", "French and Spanish"
 )
 new navalEvent(
+	"War of the Spanish Succession",
 	"",
-	"",
-	"", ""
+	"French under Coëtlogon", "Anglo-Dutch merchant fleet under Vlacq"
 )
 new navalEvent(
+	"Battle of Orford Ness",
 	"",
-	"",
-	"", ""
+	"English under Whetstone", "Swedish under Psilander"
 )
 new navalEvent(
+	"Battle of Cabrita Point",
 	"",
-	"",
-	"", ""
+	"English, Portuguese and Dutch under Leake", "Spanish and French under Desjean"
 )
 new navalEvent(
+	"Battle of Hogland",
 	"",
-	"",
-	"", ""
+	"Sweden under Anckarstjerna", "Russia"
 )
 new navalEvent(
+	"Battle of Santa Cruz de Tenerife",
 	"",
-	"",
-	"", ""
+	"Bourbon Spanish", "English under Jennings"
 )
 new navalEvent(
+	"Action of 2 May",
 	"",
-	"",
-	"", ""
+	"French under Forbin", "English"
 )
 new navalEvent(
+	"Battle at The Lizard",
 	"",
-	"",
-	"", ""
+	"2 French squadrons under Forbin and Duguay-Trouin", "British convoy and escort under Edwards"
 )
 new navalEvent(
+	"Wager's Action",
 	"",
-	"",
-	"", ""
+	"British under Wager", "French-Spanish under du Casse and Fernández de Santillán"
 )
 new navalEvent(
+	"Action of 25 June",
 	"",
-	"",
-	"", ""
+	"Maltese", "Tripolitans"
 )
 new navalEvent(
+	"Capture of the galleon San Joaquin",
 	"",
-	"",
-	"", ""
+	"British under Littleton", "Spanish under Villanueva"
 )
 new navalEvent(
+	"Battle of Rio de Janeiro",
 	"",
-	"",
-	"", ""
+	"French under Duguay-Trouin", "Portuguese"
 )
 new navalEvent(
+	"awesome naval battle x65",
 	"",
-	"",
-	"", ""
+	"Maltese", "Algerines"
 )
 new navalEvent(
+	"Action of 1713",
 	"",
-	"",
-	"", ""
+	"Portuguese", "Indians"
 )
 new navalEvent(
+	"Battle of Gangut",
 	"",
-	"",
-	"", ""
+	"Russians under Apraksin", "Swedish"
 )
 new navalEvent(
+	"Battle of Fehmarn",
 	"",
-	"",
-	"", ""
+	"Danes under Gabel", "Swedish under Wachtmeister"
 )
 new navalEvent(
+	"Battle of Dynekilen",
 	"",
-	"",
-	"", ""
+	"Danes under Tordenskjold", "Swedish under Strömstierna"
 )
 new navalEvent(
+	"Battle of Gothenburg",
 	"",
-	"",
-	"", ""
+	"Swedish under Strömstierna", "Danish under Tordenskjold "
 )
 new navalEvent(
+	"Battle of Slankamen",
 	"",
-	"",
-	"", ""
+	"Ottomans", "Austrians"
 )
 new navalEvent(
+	"Battle of Matapan",
 	"",
-	"",
-	"", ""
+	"Catholic coalition of Venice, Portugal, Malta and the Papal States", "Turks"
 )
 new navalEvent(
+	"Battle of Strömstad",
 	"",
-	"",
-	"", ""
+	"Swedish under Giertta", "Danish under Tordenskjold"
 )
 new navalEvent(
+	"Action of 1718",
 	"",
-	"",
-	"", ""
+	"Portuguese", "Indians"
 )
 new navalEvent(
+	"Battle of Cape Passaro",
 	"",
-	"",
-	"", ""
+	"British under Byng", "Spanish under de Gaztañeta"
 )
 new navalEvent(
+	"awesome naval battle x66",
 	"",
-	"",
-	"", ""
+	"Swedes under King Carl XII", "Danes under Paulssen"
 )
 new navalEvent(
+	"Battle of Cape Fear River",
 	"",
-	"",
-	"", ""
+	"British under Rhett", "Pirates under Bonnet"
 )
 new navalEvent(
+	"Battle of Ocracoke",
 	"",
-	"",
-	"", ""
+	"British Navy", "Blackbeard"
 )
 new navalEvent(
+	"Capture of Eilean Donan Castle",
 	"",
-	"",
-	"", ""
+	"British Government", "Jacobites"
 )
 new navalEvent(
+	"Battle of Ösel Island",
 	"",
-	"",
-	"", ""
+	"Russians under Senyavin", "Swedes under Wrangel"
 )
 new navalEvent(
+	"Assault on Strömstad",
 	"",
-	"",
-	"", ""
+	"Danes under Rosenpalm", "Swedish under Örnfelt"
 )
 new navalEvent(
+	"Battle of Cape St. Vincent",
 	"",
-	"",
-	"", ""
+	"Spanish under Torres", "English under Cavendish"
 )
 new navalEvent(
+	"Raid on Nassau",
 	"",
-	"",
-	"", ""
+	"British under Rogers", "Spanish under Cornejo"
 )
 new navalEvent(
+	"Capture of John Rackham",
 	"",
-	"",
-	"", ""
+	"British", "Pirates"
 )
 new navalEvent(
+	"Battle of Cape Lopez",
 	"",
-	"",
-	"", ""
+	"British", "Pirates"
 )
 new navalEvent(
 	"",

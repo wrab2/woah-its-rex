@@ -179,7 +179,7 @@ class playerTemplate {
                 level: 0,
                 maxLevel: 6,
                 bought: 0,
-                levelLuck: [1, 3, 10, 20, 40, 100]
+                levelLuck: [1, 3, 10, 20, 40, 100, 700]
             }
         },
         this.wasUsing = undefined;
