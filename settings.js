@@ -446,7 +446,7 @@ function addIndexLayers(world) {
                 else allOres = layerList[list[i]];
                 const thisMat = getIndexLayerOre(allOres);
                 let thisMatImage
-                if(oreList[thisMat].hasImage){ thisMatImage = "<img src="+oreList[thisMat].src+">"}
+                if(oreList[thisMat] && oreList[thisMat].hasImage){ thisMatImage = "<img src="+oreList[thisMat].src+">"}
                 else thisMatImage = thisMat
                 if (layer.indexOf("worldOneSpecial") === -1) {
                     if (world === "caves") button.textContent = `${thisMatImage} 0-∞m`;

@@ -2,8 +2,6 @@
 
 ☑️☑️ ☑️hyper checkmarkinator (change recipe later)
 
-fix empty index page !
-
 add new layers to teleport lists
 
 rework ring of fire; and the rest of them ngl
