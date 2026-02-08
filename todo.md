@@ -11,11 +11,11 @@
 ✅ make orb of unknown an sr1 ore that enables you to use tol6 everywhere (I decided to leave in in ❌ but nerf)
 
 ---
-make naval events select a random one each time with a random but seeded contribution 
+✅ make naval events select a random one each time with a random but seeded contribution 
 
 add new layers to teleport lists
 
-rework ring of fire
+rework ring of fire; and the rest of them ngl
 
 srwater, (at 19 quests) with all of johns friends, its johns house and also rare ores such as 🏚️ 🏡 🏘️
 

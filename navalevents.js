@@ -82,7 +82,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 	//chance is 1/3600 every 500ms which is ~2/hour to get any uncompleted event
 	if(availableNavalEvents.length > 0 && Math.random()<1/1){
 		//start the event
-		currentNavalEvent =availableNavalEvents[0]// availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
+		currentNavalEvent = availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
 		player.john.currentNavalEvent = currentNavalEvent.id
 		player.john.navalEventStartedTime = Date.now()
 		navalEventEndTime = Date.now() + currentNavalEvent.duration
@@ -97,6 +97,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 
 
 let navaleventtempid = 0
+const contribRNG = new Math.seedrandom("hi this is again me john 🤽‍♂️, seeding 🌱🫘 the rng 🔢🤽‍♂️🤽‍♂️")
 
 class navalEvent {
 	constructor(title, text, winner, loser){
@@ -110,7 +111,7 @@ class navalEvent {
 			winner:winner,
 			loser:loser,
 			duration: duration,
-			contribution: johnContributions[0],
+			contribution: johnContributions[Math.floor(contribRNG()*johnContributions.length)],
 			id: navaleventtempid,
 			layer: ["waterLayer"]
 		})
