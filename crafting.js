@@ -171,9 +171,6 @@ const recipes = {
         recipe : [{ore:"australiumIngot", amt:66000000},{"ore":"⚙️","amt":250000000},{"ore":"🃏","amt":250000000},{"ore":"🖍️","amt":250000000},{"ore":"✂️","amt":250000000},{"ore":"⚱️","amt":250000000},{"ore":"🎲","amt":250000000},{"ore":"📟","amt":250000000},{"ore":"🗡️","amt":250000000},{"ore":"🎀","amt":250000000},{"ore":"🏆","amt":250000000},{"ore":"🗜️","amt":250000000},{"ore":"⌚","amt":206000000},{"ore":"⭐","amt":152000000},{"ore":"🔆","amt":143000000},{"ore":"🔥","amt":67200000},{"ore":"📝","amt":53800000},{"ore":"🌟","amt":41800000},{"ore":"💥","amt":28600000},{"ore":"🪐","amt":15100000},{"ore":"👀","amt":11200000},{"ore":"🏵️","amt":4130000},{"ore":"🪅","amt":3310000},{"ore":"🐪","amt":1370000},{"ore":"💵","amt":1200000},{"ore":"🦴","amt":61400},{"ore":"🎩","amt":35800},{"ore":"J1407b","amt":1},{"ore":"ascendedArtifact","amt":1}],
         active : [],
         pUnob: true,
-        req: function() {
-            return (toggleCraftingWorld.world === 1.1 || toggleCraftingWorld.world === 1.1) ? player.gears["gear43"] : true;
-        }
     },
     "pickaxe34" : {
         name: "Supercluster Capsizer",
@@ -412,7 +409,7 @@ const recipes = {
         recipe: [{"ore": "orbOfLife", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
-            return player.p.orbOfLife;
+            return polyRequirements.orbOfLife();
         },
         pUnob: true
     },
@@ -421,7 +418,7 @@ const recipes = {
         recipe: [{"ore": "orbOfIntelligence", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
-            return player.p.orbOfIntelligence;
+            return polyRequirements.orbOfIntelligence();
         },
         pUnob: true
     },
@@ -430,7 +427,7 @@ const recipes = {
         recipe: [{"ore": "orbOfSound", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
-            return player.p.orbOfSound;
+            return polyRequirements.orbOfSound();
         },
         pUnob: true
     },
@@ -439,7 +436,7 @@ const recipes = {
         recipe: [{"ore": "orbOfTheUnknown", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
-            return player.p.orbOfTheUnknown;
+            return polyRequirements.orbOfTheUnknown();
         },
         pUnob: true
     },
@@ -448,7 +445,7 @@ const recipes = {
         recipe: [{"ore": "orbOfCreation", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
-            return player.p.orbOfCreation;
+            return polyRequirements.orbOfCreation();
         },
         pUnob: true
     },
@@ -472,7 +469,7 @@ const recipes = {
         recipe: [{"ore": "orbOfFire", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
-            return player.p.orbOfFire;
+            return polyRequirements.orbOfFire();
         },
         pUnob: true
     },
@@ -1203,7 +1200,7 @@ const showOrders = {
     "p2" : ["pickaxe13", "pickaxe14", "pickaxe15", "pickaxe16", "pickaxe17", "pickaxe18", "pickaxe19", "pickaxe20", "pickaxe21", "pickaxe22", "pickaxe23", "pickaxe24", "pickaxe25"],
     "g1" : ["gear30", "gear31", "gear46", "gear0", "gear1", "gear2", "gear7", "gear8", "gear45", "gear3", "gear4", "gear5", "gear6", "gear9", "gear29", "gear47"],
     "g2" : ["gear32", "gear10", "gear11", "gear12", "gear33", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20"],
-    "p1.1" : ["pickaxe27", "pickaxe33"],
+    "p1.1" : ["pickaxe27"],
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
@@ -1223,7 +1220,6 @@ function showPickaxes() {
     }
     if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
     else document.getElementById("sillyRecipe").style.display = "none";
-    if (toggleCraftingWorld.world === 1.1 && !player.gears["gear43"]) getButtonByName("pickaxe33").style.display = "none";
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
@@ -1262,7 +1258,6 @@ function switchWorldCraftables(world=currentWorld) {
     if (!["???","john"].includes(world)) {
         if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
         else document.getElementById("sillyRecipe").style.display = "none";
-        if (toggleCraftingWorld.world === 1.1 && !player.gears["gear43"]) getButtonByName("pickaxe33").style.display = "none";
     }
 }
 function setWorldSelectors() {
@@ -2130,7 +2125,7 @@ const pickaxeStats = {
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
         canSpawnCaves:[1, 1.1],
-        canMineIn:[1, 1.1],
+        canMineIn:[1, 1.1, 1.2, 2, 0.9],
         tier: 8,
         icon: "",
     }, 
@@ -2408,7 +2403,7 @@ const gearInformation = {
         tier: 13,
     },
     "gear43" : {
-        effect:"Allows use of Wormhole Exterminator in Subrealm 1<br><i>I shouldn't be here...</i>",
+        effect:"Allows use of Tree of Life in World 2, Watr Watr and Galactica<br><i>I shouldn't be here...</i>",
         tier: 10,
     },
     "gear44" : {
@@ -2474,11 +2469,12 @@ function ct(john=false) {
         recipe = [{ore:johnQuests[player.john.currentQuest].ore,amt:johnQuests[player.john.currentQuest].amount}]
     } else {
         rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
-        recipe = (/*pickaxeUsing !== "pickaxe27"*/false) ? //what was the purpose of this it made it show 0 outside of sr1
-        recipes[rId].recipe : 
-        player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? 
-        "RETURN" : 
-        upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
+        if(rId === "pickaxe27"){
+            if(player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel) recipe = "RETURN"
+            else recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe
+        } else {
+            recipe = recipes[rId].recipe
+        }
     }
     if (recipe === "RETURN") return msToTime(0);
     const recipeLayers = {

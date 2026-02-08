@@ -329,10 +329,12 @@ function movePlayer(dir, reps, type) {
                 let block = mine[curY + dir.y][curX + dir.x];
                 block = block.ore === undefined ? block : block.ore;
                 if (!checkJohn(curX + dir.x, curY + dir.y) && (
-						!unbreakable.includes(block)|| 
-						pickaxeStats[player.stats.currentPickaxe].tier >= unbreakableTiers[unbreakable.indexOf(block)]
-					)
-				) { 
+                        !unbreakable.includes(block) || (player.stats.currentPickaxe == "pickaxe27"?
+                        pickaxeStats[player.stats.currentPickaxe].tier + player.upgrades.pickaxe27.level :
+                        pickaxeStats[player.stats.currentPickaxe].tier) 
+                        >= unbreakableTiers[unbreakable.indexOf(block)]
+                    )
+                ) { 
                     mine[curY][curX] = "⚪";
                     curY += dir.y;
                     curX += dir.x;
@@ -929,9 +931,9 @@ function updateInventory(m = true) {
         player.powerupVariables.caveBoosts.active = false;
     }
 
-    //Make Sure TOL Isn't in W1, Make sure TOL is in SR1
+    //Make Sure TOL Isn't on when you can't use it, Make sure TOL is in SR1
     if (player.stats.currentPickaxe === "pickaxe27" && currentWorld !== 1.1) {
-        if (currentWorld !== 1) {
+        if (currentWorld !== 1 && !player.gears["gear43"]) {
             player.stats.currentPickaxe = "pickaxe0"; 
             utilitySwitchActions();
         } else if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) {
@@ -940,10 +942,8 @@ function updateInventory(m = true) {
         }
     } else if (currentWorld === 1.1) {
         if (player.stats.currentPickaxe !== "pickaxe27") {
-            if (!player.gears["gear43"] || player.stats.currentPickaxe !== "pickaxe33") {
-                player.stats.currentPickaxe = "pickaxe27"; 
-                utilitySwitchActions();
-            }
+            player.stats.currentPickaxe = "pickaxe27"; 
+            utilitySwitchActions();
         }
     }
 
@@ -2078,26 +2078,21 @@ const polyIds = {
     "orbOfFlight" : "pickaxe36",
     "orbOfFire" : "gear48",
 }
+const polyRequirements = {
+    "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
+    "orbOfLife" : ()=>{return false},
+    "orbOfIntelligence" : ()=>{return false},
+    "orbOfSound" : ()=>{return false},
+    "orbOfCreation" : ()=>{return false},
+    "orbOfFlight" : ()=>{return false},
+    "orbOfFire" : ()=>{return false},
+}
 function checkPolys() {
     const polys = Object.keys(polyLocations);
-    for (let i = 0; i < polys.length; i++) {
-        const poly = polys[i];
-        if (player.p[poly]) {
+    for (const poly of polys) {
+        if(polyRequirements[poly]()){
             insertIntoLayers({"ore":`${poly}`, "layers":polyLocations[`${poly}`], "useLuck":true});
-            if (currentWorld === 0.9) showItem(polyIds[`${poly}`]);
-        }
-        else {
-            if (!player.p["orbOfLife"] && indexHasOre("noradrenaline") > 0) {
-                player.p["orbOfLife"] = true;
-                insertIntoLayers({"ore":"orbOfLife", "layers":["dirtLayer"], "useLuck":true});
-            }
-            if (i > 0) {
-                if (indexHasOre(polys[i - 1]) > 0) {
-                    insertIntoLayers({"ore":`${polys[i - 1]}`, "layers":polyLocations[`${polys[i - 1]}`], "useLuck":true});
-                    player.p[poly] = true;
-                    switchWorldCraftables();
-                }
-            }
+            if (currentWorld === 0.9) showItem(polyIds[poly]);
         }
     }
 }
