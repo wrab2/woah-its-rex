@@ -150,8 +150,8 @@ const johnContributions = [
 	"john was forced to Add Four Thousand naval battles, and out of spite they killed $loser's crew",
 	"john dug a really big hole sinking $loser's ships",
 	"john created a slipstream in front of a $winner's fleet which allowed them to sail a lot quicker", 
-	"john lured $loser's fleet in subrealm one without infinity collector and they decided to quit",
-	"",
+	"john lured $loser's fleet in subrealm one without infinity collector and they decided to quit", // smh i did sr1 without any gears imagine being $loser in this
+	"john took all of $loser's hyperdimensionals causing them to be very sad because they were sentimental of them frfr",
 	"",
 	"",
 	"",
@@ -3441,7 +3441,7 @@ new navalEvent(
 	"Danish", "British"
 )
 new navalEvent(
-	"Awesome naval battle x21",
+	"awesome naval battle x67",
 	"Atlas is captured",
 	"Spanish", "French (Atlas)"
 )
@@ -3926,7 +3926,7 @@ new navalEvent(
 	"Spanish under Pérez", "Mexicans"
 )
 new navalEvent(
-	"Awesome naval battle x22",
+	"awesome naval battle x68",
 	"",
 	"Russians", "Turks"
 )
@@ -3975,1001 +3975,1002 @@ new navalEvent(
 	"",
 	"Portuguese under Napier", "Portuguese Miguelites"
 )
-//next is mid 19th century
+//next is late 18th century
 new navalEvent(
+	"Action of 28 November",
 	"",
-	"",
-	"", ""
+	"Spanish under Stuart", "Algerines"
 )
 new navalEvent(
+	"Battle of Calicut",
 	"",
-	"",
-	"", ""
+	"Portuguese", "Marathas"
 )
 new navalEvent(
-	"",
+	"Action of 16 April",
 	"",
-	"", ""
+	"Spanish", "Algerines"
 )
 new navalEvent(
+	"Action of 8 June 1755",
 	"",
-	"",
-	"", ""
+	"British under Boscawen", "French under Hocquart"
 )
 new navalEvent(
+	"Battle of Minorca",
 	"",
-	"",
-	"", ""
+	"French under La Galissonnière", "British under Byng"
 )
 new navalEvent(
-	"",
+	"Battle of Chandannagar",
 	"",
-	"", ""
+	"British under Clive and Watson", "French Indies Company"
 )
 new navalEvent(
+	"Battle of Cartagena",
 	"",
-	"",
-	"", ""
+	"British under Osborn", "French under Duquesne"
 )
 new navalEvent(
+	"Action oF 29 April",
 	"",
-	"",
-	"", ""
+	"British under Denis", "French under Rohan"
 )
 new navalEvent(
-	"",
+	"BAttle of Cuddalore",
 	"",
-	"", ""
+	"British under Pocock", "French under d'Aché"
 )
 new navalEvent(
+	"Battle of Cape Palos",
 	"",
-	"",
-	"", ""
+	"Spanish", "AlGerines"
 )
 new navalEvent(
+	"Battle of NeGapatam",
 	"",
-	"",
-	"", ""
+	"British under POcock", "French under d'Aché"
 )
 new navalEvent(
-	"",
+	"Le Havre raid",
 	"",
-	"", ""
+	"British under Rodney", "French under Charles, Prince of Soubise"
 )
 new navalEvent(
+	"BaTtle of Lagos",
 	"",
-	"",
-	"", ""
+	"British under Boscawen", "French under La Clue-Sabran"
 )
 new navalEvent(
+	"Battle of Frisches Haff",
 	"",
-	"",
-	"", ""
+	"Swedish", "Prussians"
 )
 new navalEvent(
-	"",
+	"Battle of Quiberon Bay",
 	"",
-	"", ""
+	"British under Hawke", "French under Brienne"
 )
 new navalEvent(
+	"Battle of Bishops Court",
 	"",
-	"",
-	"", ""
+	"British under Elliot", "French under Thurot"
 )
 new navalEvent(
+	"Battle of Pointe-aux-Trembles",
 	"",
-	"",
-	"", ""
+	"British under Swanton", "French under Vauquelin"
 )
 new navalEvent(
-	"",
+	"Battle of Restigouche",
 	"",
-	"", ""
+	"British under Byron", "French relief force"
 )
 new navalEvent(
+	"Battle of the Windward Passage",
 	"",
-	"",
-	"", ""
+	"British under Holmes", "French"
 )
 new navalEvent(
+	"Action of 17 July",
 	"",
-	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
-	"",
+	"Battle of Cape Finisterre",
 	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
+	"Action of 31 May",
 	"",
-	"",
-	"", ""
+	"British under Sawyer and Pownoll", "Spanish"
 )
 new navalEvent(
-	"",
+	"Siege of Havana",
 	"",
-	"", ""
+	"British", "Spanish"
 )
 new navalEvent(
+	"Action of 30 October",
 	"",
-	"",
-	"", ""
+	"British under Parker", "Spanish"
 )
 new navalEvent(
-	"",
+	"Siege of Colónia do Sacramento",
 	"",
-	"", ""
+	"Spanish under Cevallos", "Portuguese"
 )
 new navalEvent(
+	"Second Siege of Colónia do Sacramento",
 	"",
-	"",
-	"", ""
+	"Spanish under Cevallos", "Portuguese"
 )
 new navalEvent(
+	"Larache expedition",
 	"",
-	"",
-	"", ""
+	"Moroccans under Mohammed III", "French under du Chaffault"
 )
 new navalEvent(
-	"",
+	"Battle of Nauplia",
 	"",
-	"", ""
+	"Turks", "Russians"
 )
 new navalEvent(
+	"Battle of Chesma",
 	"",
-	"",
-	"", ""
+	"Russians", "Turkish"
 )
 new navalEvent(
+	"Battle of Patras",
 	"",
-	"",
-	"", ""
+	"Russians", "Turkish"
 )
 new navalEvent(
-	"",
+	"First Battle of Kerch Strait",
 	"",
-	"", ""
+	"Russians under Tchitchagov and Seniavin", "Turks"
 )
 new navalEvent(
+	"Battle of Machias",
 	"",
-	"",
-	"", ""
+	"Americans under O'Brien", "British"
 )
 new navalEvent(
+	"Raid on Saint John",
 	"",
-	"",
-	"", ""
+	"Americans under O'Brien", "British"
 )
 new navalEvent(
-	"",
+	"Raid of Nassau",
 	"",
-	"", ""
+	"Americans under Hopkins and Nicholas", "British under Browne"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Battle of Block Island",
+	"BFDI reference ??",
+	"British", "Americans under Hopkins"
 )
 new navalEvent(
+	"Battle of Turtle Gut Inlet",
 	"",
-	"",
-	"", ""
+	"Americans under Barry", "British under Hudson and Graeme"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"The great john war V1",
+	"very awesome battle",
+	"John, Jim, Jane", "Evil John"
 )
 new navalEvent(
+	"Raid on Canso",
 	"",
-	"",
-	"", ""
+	"Americans under Jones", "British"
 )
 new navalEvent(
-	"",
+	"Battle of Valcour Island",
 	"",
-	"", ""
+	"British under Carleton", "Americans under Arnold"
 )
 new navalEvent(
+	"Battle off Yarmouth",
 	"",
-	"",
-	"", ""
+	"British", "Americans"
 )
 new navalEvent(
+	"Capture of USS Hancock",
 	"",
-	"",
-	"", ""
+	"British", "Americans"
 )
 new navalEvent(
-	"",
+	"Siege of Fort Mifflin",
 	"",
-	"", ""
+	"British under Howe", "Americans under Hazelwood"
 )
 new navalEvent(
+	"Battle off Barbados",
 	"",
-	"",
-	"", ""
+	"British under Biddle", "Americans"
 )
 new navalEvent(
+	"Frederica Naval Action",
 	"",
-	"",
-	"", ""
+	"Americans", "British under Elbert"
 )
 new navalEvent(
-	"",
+	"North Channel Naval Duel",
 	"",
-	"", ""
+	"Americans under Jones", "British"
 )
 new navalEvent(
+	"Battle off Liverpool",
 	"",
-	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
-	"",
+	"Action of 11 September",
 	"",
-	"", ""
+	"French", "British"
 )
 new navalEvent(
+	"Battle of St. Lucia",
 	"",
-	"",
-	"", ""
+	"British under Barrington", "French under d'Estaing"
 )
 new navalEvent(
-	"",
+	"Action of 31 January",
 	"",
-	"", ""
+	"British under Pownoll", "French"
 )
 new navalEvent(
+	"Action of 13 May",
 	"",
-	"",
-	"", ""
+	"British under Wallace", "French"
 )
 new navalEvent(
+	"Battle of Grenada",
 	"",
-	"",
-	"", ""
+	"French under d'Estaing", "British under Byron"
 )
 new navalEvent(
-	"",
+	"Penobscot Expedition",
 	"",
-	"", ""
+	"British under Collier", "Americans under Lovell and Saltonstall"
 )
 new navalEvent(
+	"Battle of Lake Pontchartrain",
 	"",
-	"",
-	"", ""
+	"American-Spanish under Pickles", "British"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Action of 11 Sep",
+	"911 :joy:",
+	"French", "British under Mackenzie"
 )
 new navalEvent(
+	"Action of 14 September",
 	"",
-	"",
-	"", ""
+	"British under Montagu", "Spanish"
 )
 new navalEvent(
+	"Action of 6 October",
 	"",
-	"",
-	"", ""
+	"French", "British under Farmer"
 )
 new navalEvent(
-	"",
+	"Action of 11 November",
 	"",
-	"", ""
+	"British under Graeme", "Spanish"
 )
 new navalEvent(
+	"Action of 20 November",
 	"",
-	"",
-	"", ""
+	"British", "Spanish"
 )
 new navalEvent(
+	"Action of 12 December",
 	"",
-	"",
-	"", ""
+	"British under Inglis", "Spanish"
 )
 new navalEvent(
-	"",
+	"John War V2 (theres no johns in this one but instead our cats)",
 	"",
-	"", ""
+	"Silly", "Masa"
 )
 new navalEvent(
+	"Battle of Martinique",
 	"",
-	"",
-	"", ""
+	"British under Parker", "French under Lamotte"
 )
 new navalEvent(
+	"Battle of Guadeloupe",
 	"",
-	"",
-	"", ""
+	"British under Rowley", "French"
 )
 new navalEvent(
-	"",
+	"Action of 8 January",
 	"",
-	"", ""
+	"British under Rodney", "Spanish"
 )
 new navalEvent(
+	"Battle of Cape St. Vincent",
 	"",
-	"",
-	"", ""
+	"British under Rodney", "Spanish under Lángara"
 )
 new navalEvent(
+	"Battle of Martinique",
 	"",
-	"",
-	"", ""
+	"French under de Guichen", "British under Rodney"
 )
 new navalEvent(
-	"",
+	"Action of 15 June",
 	"",
-	"", ""
+	"British under Pownoll", "French"
 )
 new navalEvent(
+	"Action of 9 August",
 	"",
-	"",
-	"", ""
+	"Spanish-French under Córdova", "British under Moutray"
 )
 new navalEvent(
+	"Action of 10 August",
 	"",
-	"",
-	"", ""
+	"British under Williams", "French under Rumain"
 )
 new navalEvent(
-	"",
+	"Action of 13 August",
 	"",
-	"", ""
+	"British under MacBride", "French under Clonard"
 )
 new navalEvent(
+	"Action of 30 September",
 	"",
-	"",
-	"", ""
+	"British under Montagu", "French"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x69",
 	"",
-	"", ""
+	"Spanish-French under Córdova", "British"
 )
 new navalEvent(
+	"Action of 4 January",
 	"",
-	"",
-	"", ""
+	"British under Goodall and Mulgrave", "French under Tanouarn and Grimouard"
 )
 new navalEvent(
-	"",
+	"Action of 4 February",
 	"",
-	"", ""
+	"British under Moreton", "Dutch under Krul"
 )
 new navalEvent(
+	"Action of 25 February",
 	"",
-	"",
-	"", ""
+	"British under Mann", "Spanish"
 )
 new navalEvent(
+	"Battle of Fort Royal",
 	"",
-	"",
-	"", ""
+	"French under de Grasse", "British under Hood"
 )
 new navalEvent(
-	"",
+	"Action of 1 May",
 	"",
-	"", ""
+	"British under Collier", "Spanish under Winthuysen"
 )
 new navalEvent(
+	"Battle of Blomindon",
 	"",
-	"",
-	"", ""
+	"British", "Americans"
 )
 new navalEvent(
+	"Action of 30 May",
 	"",
-	"",
-	"", ""
+	"British under Williams and Pakenham", "Dutch under Oorthuys and Melvill"
 )
 new navalEvent(
-	"",
+	"Naval battle off Cape Breton",
 	"",
-	"", ""
+	"French under La Pérouse and Latouche", "British convoy"
 )
 new navalEvent(
+	"Battle of Saldanha Bay",
 	"",
-	"",
-	"", ""
+	"British under Johnstone", "Dutch"
 )
 new navalEvent(
+	"Action of 2 September",
 	"",
-	"",
-	"", ""
+	"British under Douglas", "French"
 )
 new navalEvent(
-	"",
+	"Battle of the Chesapeake",
 	"",
-	"", ""
+	"French under de Grasse", "British under Graves"
 )
 new navalEvent(
+	"Capture of HMS Savage",
 	"",
-	"",
-	"", ""
+	"Americans", "British under Stirling"
 )
 new navalEvent(
-	"",
+	"Second Battle of Ushant",
 	"",
-	"", ""
+	"British under Kempenfelt", "French under de Guichen"
 )
 new navalEvent(
+	"Action of 15 January",
 	"",
-	"",
-	"", ""
+	"British", "Spanish"
 )
 new navalEvent(
-	"",
+	"Battle of St. Kitts",
 	"",
-	"", ""
+	"British under Hood", "French under de Grasse"
 )
 new navalEvent(
+	"Action of 16 March",
 	"",
-	"",
-	"", ""
+	"British under Pole", "Spanish"
 )
 new navalEvent(
+	"Battle of Delaware Bay",
 	"",
-	"",
-	"", ""
+	"Americans under Barney", "British under Mason and Rogers"
 )
 new navalEvent(
-	"",
+	"Battle of the Saintes",
 	"",
-	"", ""
+	"British under Rodney", "French under de Grasse"
 )
 new navalEvent(
+	"Battle of the Mona Passage",
 	"",
-	"",
-	"", ""
+	"British under Hood", "French under Framond"
 )
 new navalEvent(
+	"Battle of Ushant",
 	"",
-	"",
-	"", ""
+	"British under Barrington, Jervis and Maitland", "French"
 )
 new navalEvent(
-	"",
+	"Battle off Halifax",
 	"",
-	"", ""
+	"British", "Americans under Ropes"
 )
 new navalEvent(
+	"Action of 4 September",
 	"",
-	"",
-	"", ""
+	"British under Trollope", "French"
 )
 new navalEvent(
+	"Action of 15 September",
 	"",
-	"",
-	"", ""
+	"British under Elphinstone", "French under Latouche"
 )
 new navalEvent(
-	"",
+	"Battle of Kedges Strait",
 	"",
-	"", ""
+	"British", "Americans"
 )
 new navalEvent(
+	"Action of 6 December",
 	"",
-	"",
-	"", ""
+	"British", "French under de Borda"
 )
 new navalEvent(
-	"",
+	"Action of 12 December",
 	"",
-	"", ""
+	"British under Luttrell", "Americans and French under Baudin"
 )
 new navalEvent(
+	"Battle of the Delaware Capes",
 	"",
-	"",
-	"", ""
+	"British under Frederick", "Americans"
 )
 new navalEvent(
-	"",
+	"Action of 22 January",
 	"",
-	"", ""
+	"British under Russell", "French under Kergariou-Locmaria"
 )
 new navalEvent(
+	"Action of 15 February",
 	"",
-	"",
-	"", ""
+	"British under Linzee", "French"
 )
 new navalEvent(
+	"Action of 17 February",
 	"",
-	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
-	"",
+	"Action of 11 April",
 	"",
-	"", ""
+	"British under Graves", "French under Villaret de Joyeuse"
 )
 new navalEvent(
+	"Battle of Cuddalore",
 	"",
-	"",
-	"", ""
+	"French under Suffren", "British under Hughes"
 )
 new navalEvent(
+	"Bombardment of Algiers",
 	"",
-	"",
-	"", ""
+	"Algerines under Mohammed V", "Spanish under Barceló"
 )
 new navalEvent(
-	"",
+	"Bombardment of Algiers",
 	"",
-	"", ""
+	"Algerines under Mohammed V", "Spanish-Neapolitan-Maltese-Portuguese under Barceló and Mazarredo"
 )
 new navalEvent(
+	"awesome naval battle x70",
 	"",
-	"",
-	"", ""
+	"Russians", "Turks"
 )
 new navalEvent(
+	"Siege of Ochakov",
 	"",
-	"",
-	"", ""
+	"Russians under Nassau-Siegen and Jones", "Turkish under Hüseyin Pasha and Hasan Pasha"
 )
 new navalEvent(
-	"",
+	"Battle of Fidonisi",
 	"",
-	"", ""
+	"Russians under Voinovich", "Ottomans under Hasan Pasha"
 )
 new navalEvent(
+	"Battle of Ochakov",
 	"",
-	"",
-	"", ""
+	"Russians under Potemkin", "Turkish under Hüseyin Pasha and Hasan Pasha"
 )
 new navalEvent(
+	"Action of 26 May",
 	"",
-	"",
-	"", ""
+	"Portuguese", "Algerines"
 )
 new navalEvent(
-	"",
+	"Action of 2 June",
 	"",
-	"", ""
+	"Russians", "Turks"
 )
 new navalEvent(
+	"Battle of Svensksund",
 	"",
-	"",
-	"", ""
+	"Russians under Nassau-Siegen", "Swedes under Ehrensvärd"
 )
 new navalEvent(
+	"awesome naval battle x71",
 	"",
-	"",
-	"", ""
+	"Russians", "Swedes"
 )
 new navalEvent(
-	"",
+	"Battle of Elgsö",
 	"",
-	"", ""
+	"Swedes under Armfelt", "Russians under Treneven"
 )
 new navalEvent(
+	"Battle of Reval",
 	"",
-	"",
-	"", ""
+	"Russians under Chichagov", "Swedes under Charles XIII"
 )
 new navalEvent(
+	"Battle of Fredrikshamn",
 	"",
-	"",
-	"", ""
+	"Swedes under Gustav III", "Russians"
 )
 new navalEvent(
-	"",
+	"Battle of Andros",
 	"",
-	"", ""
+	"Ottomans and Algerians", "Russians under Katsonis"
 )
 new navalEvent(
+	"Battle of Björkösund",
 	"",
-	"",
-	"", ""
+	"Swedish", "Russians under Nassau-Siegen"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Battle of Svensksund",
+	"The largest naval battle in the Baltic Sea of all times; extremely heavy losses by Russians ",
+	"Swedish under Gustav III and Cronstedt", "Russians under Nassau-Siegen"
 )
 new navalEvent(
+	"Battle of Kerch Strait",
 	"",
-	"",
-	"", ""
+	"Russians under Ushakov", "Turks"
 )
 new navalEvent(
-	"",
+	"Battle of the Sulina",
 	"",
-	"", ""
+	"Russians", "Turks"
 )
 new navalEvent(
+	"Battle of Tulcea",
 	"",
-	"",
-	"", ""
+	"Russians", "Turks"
 )
 new navalEvent(
-	"",
+	"Siege of Izmail",
 	"",
-	"", ""
+	"Russians under Suvorov", "Turks under Mehmed Pasha"
 )
 new navalEvent(
+	"Battle of Măcin",
 	"",
-	"",
-	"", ""
+	"Russians under Repnin", "Turkish rowing vessels under Yusuf Pasha"
 )
 new navalEvent(
+	"Battle of Cape Kaliakra",
 	"",
-	"",
-	"", ""
+	"Russians under Ushakov", "Turks"
 )
 new navalEvent(
-	"",
+	"Bombardment of Tangier",
 	"",
-	"", ""
+	"Morocco", "Spain"
 )
 new navalEvent(
+	"Battle of Tellicherry",
 	"",
-	"",
-	"", ""
+	"British under Strachan", "French"
 )
 new navalEvent(
+	"Action of 18 June",
 	"",
-	"",
-	"", ""
+	"British under Pellew", "French"
 )
 new navalEvent(
-	"",
+	"Siege of Toulon",
 	"",
-	"", ""
+	"French Republicans under Napoleon", "French Royalists"
 )
 new navalEvent(
+	"Raid on Genoa",
 	"",
-	"",
-	"", ""
+	"British under Gell", "French"
 )
 new navalEvent(
+	"Action of 20 October",
 	"",
-	"",
-	"", ""
+	"British under Saumarez", "French"
 )
 new navalEvent(
-	"",
+	"Action of 24 October",
 	"",
-	"", ""
+	"French", "British"
 )
 new navalEvent(
+	"Siege of San Fiorenzo",
 	"",
-	"",
-	"", ""
+	"Anglo-Corsican", "French"
 )
 new navalEvent(
-	"",
+	"Siege of Bastia",
 	"",
-	"", ""
+	"Anglo-Corsican", "French"
 )
 new navalEvent(
+	"Action of 23 April",
 	"",
-	"",
-	"", ""
+	"British under Warren", "French"
 )
 new navalEvent(
-	"",
+	"Action of 5 May",
 	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
+	"Action of 7 May",
 	"",
-	"",
-	"", ""
+	"British under Boyles", "French under Linois"
 )
 new navalEvent(
+	"Frigate action of 29 May",
 	"",
-	"",
-	"", ""
+	"British under Laforey", "French"
 )
 new navalEvent(
-	"",
+	"The Glorious First of June",
 	"",
-	"", ""
+	"British under Howe", "French under Villaret de Joyeuse"
 )
 new navalEvent(
+	"Action of 8 June",
 	"",
-	"",
-	"", ""
+	"French under Martin", "Sardinians"
 )
 new navalEvent(
+	"Battle of Mykonos",
 	"",
-	"",
-	"", ""
+	"British under Paget", "French"
 )
 new navalEvent(
-	"",
+	"Siege of Calvi",
 	"",
-	"", ""
+	"Anglo-Corsican under Hood, Nelson and Stuart", "French under Casabianca"
 )
 new navalEvent(
+	"awesome naval battle x72",
 	"",
-	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
+	"Action of 21 October",
 	"",
-	"",
-	"", ""
+	"British under Pellew", "French under Thévenard"
 )
 new navalEvent(
-	"",
+	"Action of 6 November",
 	"",
-	"", ""
+	"French under Nielly", "British under Bligh"
 )
 new navalEvent(
+	"Croisière du Grand Hiver",
 	"",
-	"",
-	"", ""
+	"British under Smith", "French under Villaret de Joyeuse"
 )
 new navalEvent(
-	"",
+	"Capture of the Dutch fleet at Den Helder",
 	"",
-	"", ""
+	"French", "Dutch under de Winter"
 )
 new navalEvent(
+	"Battle of the Gulf of Roses",
 	"",
-	"",
-	"", ""
+	"Spanish under Lángara", "French"
 )
 new navalEvent(
-	"",
+	"Action of 8 March",
 	"",
-	"", ""
+	"British", "French under Lejoille"
 )
 new navalEvent(
+	"Battle of Genoa",
 	"",
-	"",
-	"", ""
+	"Anglo-Neapolitans under Hotham", "French under Martin"
 )
 new navalEvent(
+	"Action of 10 April",
 	"",
-	"",
-	"", ""
+	"British under Colpoys", "French"
 )
 new navalEvent(
-	"",
+	"Biscay campaign of June 1795",
 	"",
-	"", ""
+	"British under Cornwallis", "French under Vence"
 )
 new navalEvent(
+	"Cornwallis's Retreat",
 	"",
-	"",
-	"", ""
+	"British under Cornwallis", "French under Villaret de Joyeuse"
 )
 new navalEvent(
+	"Battle of Groix",
 	"",
-	"",
-	"", ""
+	"British under Hood", "French under Villaret de Joyeuse"
 )
 new navalEvent(
-	"",
+	"Action of 24 June",
 	"",
-	"", ""
+	"British under Towry", "French under Perrée"
 )
 new navalEvent(
+	"Battle of the Hyères Islands",
 	"",
-	"",
-	"", ""
+	"Anglo-Neapolitans under Hotham and Nelson", "French under Martin"
 )
 new navalEvent(
+	"Action of 22 August",
 	"",
-	"",
-	"", ""
+	"British under Alms", "Batavians"
 )
 new navalEvent(
-	"",
+	"Battle of the Levant Convoy",
 	"",
-	"", ""
+	"French under Richery", "British"
 )
 new navalEvent(
+	"Action of 12 May",
 	"",
-	"",
-	"", ""
+	"British under Halsted", "Batavians"
 )
 new navalEvent(
-	"",
+	"Action of 31 May",
 	"",
-	"", ""
+	"British under Nelson", "French"
 )
 new navalEvent(
+	"Atlantic raid of June 1796",
 	"",
-	"",
-	"", ""
+	"British under Williams", "French"
 )
 new navalEvent(
-	"",
+	"Action of 13 October",
 	"",
-	"", ""
+	"British under Bowen", "Spanish"
 )
 new navalEvent(
+	"Action of 13 January",
 	"",
-	"",
-	"", ""
+	"British under Pellew and Reynolds", "French under Lacrosse"
 )
 new navalEvent(
+	"Action of 25 January",
 	"",
-	"",
-	"", ""
+	"Spanish", "British under Lord Garlies"
 )
 new navalEvent(
-	"",
+	"Bali Strait incident",
 	"",
-	"", ""
+	"British", "French under Sercey
 )
 new navalEvent(
+	"Battle of Cape St. Vincent",
 	"",
-	"",
-	"", ""
+	"British under Jervis", "Spanish under Córdoba"
 )
 new navalEvent(
+	"Invasion of Trinidad",
 	"",
-	"",
-	"", ""
+	"British under Abercromby", "Spanish under Chacón"
 )
 new navalEvent(
-	"",
+	"Action of 26 March",
 	"",
-	"", ""
+	"Austrians and Venetians", "French"
 )
 new navalEvent(
+	"Battle of Jean-Rabel",
 	"",
-	"",
-	"", ""
+	"British", "French"
 )
 new navalEvent(
+	"Action of 26 April",
 	"",
-	"",
-	"", ""
+	"British under Martin", "Spanish"
 )
 new navalEvent(
-	"",
+	"Action of 16 May",
 	"",
-	"", ""
+	"Danish under Bille", "Tripolitans under Yusuf Karamanli"
 )
 new navalEvent(
+	"Assault on Cádiz",
 	"",
-	"",
-	"", ""
+	"Spanish under Mazzarredo and Gravina", "British under Nelson and Jervis"
 )
 new navalEvent(
-	"",
+	"Battle of Santa Cruz de Tenerife",
 	"",
-	"", ""
+	"Spanish under Gutiérrez", "British under Nelson"
 )
 new navalEvent(
+	"Battle of Camperdown",
 	"",
-	"",
-	"", ""
+	"British under Duncan", "Dutch under de Winter"
 )
 new navalEvent(
-	"",
+	"Battle of the Raz de Sein",
 	"",
-	"", ""
+	"British under Hood", "French under Lhéritier"
 )
 new navalEvent(
+	"Action of 30 May",
 	"",
-	"",
-	"", ""
+	"British under Laforey", "French"
 )
 new navalEvent(
+	"Action of 27 June",
 	"",
-	"",
-	"", ""
+	"British under Foote", "French"
 )
 new navalEvent(
-	"",
+	"Action of 30 June",
 	"",
-	"", ""
+	"British under Stirling ", "French"
 )
 new navalEvent(
+	"Capture of La Croyable",
 	"",
-	"",
-	"", ""
+	"Americans under Decatur", "French"
 )
 new navalEvent(
+	"Action of 15 July",
 	"",
-	"",
-	"", ""
+	"British under Dixon", "Spanish"
 )
 new navalEvent(
-	"",
+	"Battle of the Nile",
 	"",
-	"", ""
+	"British under Nelson", "Moored French fleet under Brueys"
 )
 new navalEvent(
+	"Action of 18 August",
 	"",
-	"",
-	"", ""
+	"French under Lejoille", "British under Thompson"
 )
 new navalEvent(
+	"Action of 12 October",
 	"",
-	"",
-	"", ""
+	"British under Warren", "French invasion force under Bompart"
 )
 new navalEvent(
-	"",
+	"Action of 24 October",
 	"",
-	"", ""
+	"British under King", "Batavians"
 )
 new navalEvent(
+	"deltarune chapter 2 acid tunnel battle",
 	"",
-	"",
-	"", ""
+	"kris and ralsei", "rouxls kaard"
+// i HAD to add this fr
 )
 new navalEvent(
-	"",
+	"Action of 14 December",
 	"",
-	"", ""
+	"French", "British"
 )
 new navalEvent(
+	"Action of 19 January",
 	"",
-	"",
-	"", ""
+	"Spanish under Mourelle", "British"
 )
 new navalEvent(
-	"",
+	"Action of 6 February",
 	"",
-	"", ""
+	"British under Bowen", "Spanish"
 )
 new navalEvent(
+	"Action of 9 February",
 	"",
-	"",
-	"", ""
+	"British under Ball", "French"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"USS Constellation vs L'Insurgente",
+	"dumb name for a battle",
+	"Americans under Truxton", "French"
 )
 new navalEvent(
+	"Action of 28 February",
 	"",
-	"",
-	"", ""
+	"British under Cooke", "French under Beaulieu"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Battle of Qena",
+	"dude they forgot to capitalize Ottoman thats embarassing as hell",
+	"ottoman empire, Arab forces from Hijaz and Egyptian Fellahin", "France under Captain Morandi"
 )
 new navalEvent(
+	"Action of 18 June",
 	"",
-	"",
-	"", ""
+	"British under Lord Keith", "French under Perrée"
 )
 new navalEvent(
+	"Action of 7 July",
 	"",
-	"",
-	"", ""
+	"Spanish", "British under Maitland"
 )
 new navalEvent(
-	"",
+	"Battle of Abukir (1799)",
 	"",
-	"", ""
+	"French", "Ottomans"
 )
 new navalEvent(
+	"Action of 15 August",
 	"",
-	"",
-	"", ""
+	"Algerines", "Portuguese"
 )
 new navalEvent(
-	"",
+	"Action of 16 October",
 	"",
-	"", ""
+	"British under Pierrepont", "Spanish"
 )
 new navalEvent(
+	"Cutting out of the Hermione",
 	"",
-	"",
-	"", ""
+	"British under Hamilton", "Spanish"
 )
 new navalEvent(
-	"",
+	"Battle of Port Louis",
 	"",
-	"", ""
+	"British", "French under l'Hermite"
 )
 new navalEvent(
 	"",
