@@ -4799,7 +4799,7 @@ new navalEvent(
 new navalEvent(
 	"Bali Strait incident",
 	"",
-	"British", "French under Sercey
+	"British", "French under Sercey"
 )
 new navalEvent(
 	"Battle of Cape St. Vincent",
