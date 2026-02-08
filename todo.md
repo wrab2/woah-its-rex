@@ -2,16 +2,7 @@
 
 ☑️☑️ ☑️hyper checkmarkinator (change recipe later)
 
----
-
-✅ john (not meta john) and jim layers indexes
-
-✅ make tol6 show up
-
-✅ make orb of unknown an sr1 ore that enables you to use tol6 everywhere (I decided to leave in in ❌ but nerf)
-
----
-✅ make naval events select a random one each time with a random but seeded contribution 
+fix empty index page !
 
 add new layers to teleport lists
 
@@ -34,8 +25,6 @@ add more milestones (checkmark milestones, ring milestones, TOL6 milestone)
 make the john milestones less buggy maybe
 
 fumo fishing (i have no idea if this will be in this update)
-
-
 
 
 
