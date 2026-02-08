@@ -1804,575 +1804,576 @@ new navalEvent(
 )
 //thats all for early 17th century
 new navalEvent(
+	"Battle of Tamandare Bay",
 	"",
-	"",
-	"", ""
+	"Dutch under Lichthart", "Portuguese under Paiva"
 )
 new navalEvent(
+	"awesome naval battle x52",
 	"",
-	"",
-	"", ""
+	"Scottish", "Algerian Barbary pirates"
 )
 new navalEvent(
-	"",
+	"Action of September 1645",
 	"",
-	"", ""
+	"Ottomans", "Combined Christian fleet"
 )
 new navalEvent(
+	"Action of 1 October",
 	"",
-	"",
-	"", ""
+	"Combined Christian fleets", "Turks"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x53",
 	"",
-	"", ""
+	"French under du Mé", "Spanish"
 )
 new navalEvent(
+	"Battles of La Naval de Manila",
 	"",
-	"",
-	"", ""
+	"Two Spanish galleons with Spanish and Filipino crew", "Dutch invasion fleet"
 )
 new navalEvent(
-	"",
+	"Action of 26 May",
 	"",
-	"", ""
+	"Venetians", "Turks"
 )
 new navalEvent(
+	"Battle of Orbetello",
 	"",
-	"",
-	"", ""
+	"Spanish", "French invasion fleet commanded by Brézé"
 )
 new navalEvent(
+	"Action of 27 January",
 	"",
-	"",
-	"", ""
+	"Venetians under Morosini", "45 Ottoman galleys under Koca Musa Pasha"
 )
 new navalEvent(
-	"",
+	"Battle of Puerto de Cavite",
 	"",
-	"", ""
+	"Spanish", "Dutch"
 )
 new navalEvent(
+	"Establishment of the Neapolitan Republic",
 	"",
-	"",
-	"", ""
+	"Spanish", "French"
 )
 new navalEvent(
-	"",
+	"Battle of Focchies",
 	"",
-	"", ""
+	"Venetians", "Large Turkish fleet "
 )
 new navalEvent(
+	"awesome naval battle x54",
 	"",
-	"",
-	"", ""
+	"Parliamentarians", "French"
 )
 new navalEvent(
-	"",
+	"Action of 23 November",
 	"",
-	"", ""
+	"Spanish", "French"
 )
 new navalEvent(
+	"Action of 10 July",
 	"",
-	"",
-	"", ""
+	"Venetians under Mocenigo", "Turks"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Battle of Plymouth",
+	"plymouth the sddm !?",
+	"de Ruyter's 36 men-of-war", "Ayscue's 45 men-of-war"
 )
 new navalEvent(
+	"Battle of Elba",
 	"",
-	"",
-	"", ""
+	"Dutch under van Galen", "English under Badiley "
 )
 new navalEvent(
-	"",
+	"Battle of the Kentish Knock",
 	"",
-	"", ""
+	"English under Blake", "Dutch under de With "
 )
 new navalEvent(
+	"Battle of Dungeness",
 	"",
-	"",
-	"", ""
+	"Dutch under Tromp", "English under Blake "
 )
 new navalEvent(
-	"",
+	"Battle of Portland",
 	"",
-	"", ""
+	"English under Blake", "Dutch under Tromp"
 )
 new navalEvent(
+	"Battle of Leghorn",
 	"",
-	"",
-	"", ""
+	"Dutch under Johan van Galen", "English under Badiley and Appleton"
 )
 new navalEvent(
-	"",
+	"Battle of the Gabbard",
 	"",
-	"", ""
+	"English", "Dutch"
 )
 new navalEvent(
+	"Battle of Scheveningen",
 	"",
-	"",
-	"", ""
+	"Dutch under Tromp", "English blockading fleet under Albemarle"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x55",
 	"",
-	"", ""
+	"Maltese privateers", "Turks"
 )
 new navalEvent(
+	"Action of 2 May",
 	"",
-	"",
-	"", ""
+	"Dutch", "Portuguese"
 )
 new navalEvent(
-	"",
+	"First Battle of the Dardanelles",
 	"",
-	"", ""
+	"Turks under Murat", "Venetians under Delfino"
 )
 new navalEvent(
+	"awesome naval battle x56",
 	"",
-	"",
-	"", ""
+	"Venetians", "Turks"
 )
 new navalEvent(
-	"",
+	"Bombardment of Algiers",
 	"",
-	"", ""
+	"English", "Algerines"
 )
 new navalEvent(
+	"Action of 14 April",
 	"",
-	"",
-	"", ""
+	"English under Blake", "Barbary ships"
 )
 new navalEvent(
+	"Second Battle of the Dardanelles",
 	"",
-	"",
-	"", ""
+	"Venetians under Mocenigo", "Turks under Mustafa"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x57",
 	"",
-	"", ""
+	"French under Vendôme", "Spanish"
 )
 new navalEvent(
-	"",
-	"",
-	"", ""
+	"Battle of Kotlin",
+	"kothlin the java thing !?",
+	"Russia", "Sweden"
 )
 new navalEvent(
+	"Third Battle of the Dardanelles",
 	"",
-	"",
-	"", ""
+	"Venetians and Maltese under Marcello", "Turks under Chinam Pasha"
 )
 new navalEvent(
-	"",
+	"Battle of Nöteborg",
 	"",
-	"", ""
+	"Swedish", "Russians"
 )
 new navalEvent(
+	"Battle of Santa Cruz de Tenerife",
 	"",
-	"",
-	"", ""
+	"English under Blake", "Spanish"
 )
 new navalEvent(
+	"Action of 3 May",
 	"",
-	"",
-	"", ""
+	"Venetians under Mocenigo", "Algerines"
 )
 new navalEvent(
-	"",
+	"Action of 18 May",
 	"",
-	"", ""
+	"Venetians under Mocenigo", "Turks and Algerines"
 )
 new navalEvent(
+	"Fourth Battle of the Dardanelles",
 	"",
-	"",
-	"", ""
+	"Venetians, Maltese and Papal forces under Mocenigo", "Turks"
 )
 new navalEvent(
-	"",
+	"Siege of Lemnos",
 	"",
-	"", ""
+	"Ottomans", "Venetians"
 )
 new navalEvent(
+	"awesome naval battle x58",
 	"",
-	"",
-	"", ""
+	"Venetians under Contarini", "Turks"
 )
 new navalEvent(
-	"",
+	"Battle of the Sound",
 	"",
-	"", ""
+	"Danish-allied Dutch", "Swedish"
 )
 new navalEvent(
+	"Capture of Kalamata",
 	"",
-	"",
-	"", ""
+	"Venetians", "Ottomans"
 )
 new navalEvent(
+	"Battle of Ebeltoft",
 	"",
-	"",
-	"", ""
+	"Swedish", "Dutch/Danes"
 )
 new navalEvent(
-	"",
+	"Battle of Nyborg",
 	"",
-	"", ""
+	"Dutch/Danes under de Ruyter", "Swedes"
 )
 new navalEvent(
+	"awesome naval battle x59",
 	"",
-	"",
-	"", ""
+	"Venetians", "Turks"
 )
 new navalEvent(
-	"",
+	"Action of 27 August",
 	"",
-	"", ""
+	"Venetians and Maltese", "Turks"
 )
 new navalEvent(
+	"Action of 29 September",
 	"",
-	"",
-	"", ""
+	"Venetians", "Turkish \"Alexandria Caravan\""
 )
 new navalEvent(
-	"",
+	"Action of 29 December",
 	"",
-	"", ""
+	"English squadron under Allin", "Dutch merchant fleet"
 )
 new navalEvent(
+	"Action of March 1665",
 	"",
-	"",
-	"", ""
+	"French under Beaufort", "Algerines"
 )
 new navalEvent(
-	"",
+	"Battle of Lowestoft",
 	"",
-	"", ""
+	"English under York", "Dutch under Van Wassenaer"
 )
 new navalEvent(
+	"Battle of Vågen",
 	"",
-	"",
-	"", ""
+	"Dutch merchant fleet", "English"
 )
 new navalEvent(
-	"",
+	"Battle of Cherchell",
 	"",
-	"", ""
+	"French under Beaufort", "Algerines"
 )
 new navalEvent(
+	"Battle of Port Delphino",
 	"",
-	"",
-	"", ""
+	"French under d'Escrainville", "Turks"
 )
 new navalEvent(
-	"",
+	"Four Days Battle",
 	"",
-	"", ""
+	"Dutch under de Ruyter", "English under Albemarle and Rupert"
 )
 new navalEvent(
+	"St James's Day Battle",
 	"",
-	"",
-	"", ""
+	"English under Albemarle and Rupert", "Dutch under de Ruyter"
 )
 new navalEvent(
-	"",
+	"Action of 25 February",
 	"",
-	"", ""
+	"Venetians under Molin", "Turks and Tunisians"
 )
 new navalEvent(
+	"Invasion of Surinam",
 	"",
-	"",
-	"", ""
+	"Dutch under Crijnssen", "English under Byam"
 )
 new navalEvent(
+	"Battle of the James River",
 	"",
-	"",
-	"", ""
+	"Dutch under Crijnssen", "Virginia tobacco fleet"
 )
 new navalEvent(
-	"",
+	"Raid on the Medway",
 	"",
-	"", ""
+	"Dutch", "English"
 )
 new navalEvent(
+	"Battle of Martinique",
 	"",
-	"",
-	"", ""
+	"English under Harman", "French"
 )
 new navalEvent(
-	"",
+	"Action of 8 March",
 	"",
-	"", ""
+	"Venetians", "Turks"
 )
 new navalEvent(
+	"Action of 2 May",
 	"",
-	"",
-	"", ""
+	"French", "Turks"
 )
 new navalEvent(
-	"",
+	"Action of 1668",
 	"",
-	"", ""
+	"Barbary \"Turks\"", "Venetians"
 )
 new navalEvent(
+	"Action of June 1669",
 	"",
-	"",
-	"", ""
+	"Privateers", "\"Alexandria Caravan\" escort"
 )
 new navalEvent(
+	"Battle of Cádiz",
 	"",
-	"",
-	"", ""
+	"English Mary Rose", "Algerines"
 )
 new navalEvent(
-	"",
+	"Action of 28-29 December",
 	"",
-	"", ""
+	"English Mary Rose", "Algerines"
 )
 new navalEvent(
+	"Action of 17 August",
 	"",
-	"",
-	"", ""
+	"English/Dutch ships", "Algerines"
 )
 new navalEvent(
-	"",
+	"Battle of Saraighat",
 	"",
-	"", ""
+	"Ahom Kingdom", "Mughals"
 )
 new navalEvent(
+	"awesome naval battle x60",
 	"",
-	"",
-	"", ""
+	"Privateers", "Turkish galleys"
 )
 new navalEvent(
-	"",
+	"Action of 12 March",
 	"",
-	"", ""
+	"English under Holmes", "Dutch merchant fleet"
 )
 new navalEvent(
+	"First Battle of Schooneveld",
 	"",
-	"",
-	"", ""
+	"Dutch", "England/France"
 )
 new navalEvent(
+	"Second Battle of Schooneveld",
 	"",
-	"",
-	"", ""
+	"Dutch", "England/France"
 )
 new navalEvent(
-	"",
+	"Battle of Texel",
 	"",
-	"", ""
+	"Dutch", "England/France"
 )
 new navalEvent(
+	"Battle of Masulipatnam",
 	"",
-	"",
-	"", ""
+	"Dutch East India Company", "English East India Company "
 )
 new navalEvent(
-	"",
+	"Battle of Ronas Voe",
 	"",
-	"", ""
+	"English Navy", "Dutch East India Company"
 )
 new navalEvent(
+	"Battle of the Lipari Islands",
 	"",
-	"",
-	"", ""
+	"French under Vivonne", "Spanish under de la Cueva"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x61",
 	"",
-	"", ""
+	"English", "Tripolitans"
 )
 new navalEvent(
+	"Attack on Shipping in Tripoli",
 	"",
-	"",
-	"", ""
+	"English", "Tripolitans"
 )
 new navalEvent(
-	"",
+	"Battle of Palermo",
 	"",
-	"", ""
+	"French under Vivonne", "Dutch/Spanish under de la Cerda and den Haen"
 )
 new navalEvent(
+	"Battle of Bornholm",
 	"",
-	"",
-	"", ""
+	"Dutch/Danish under Iuel", "Swedes under Creutz"
 )
 new navalEvent(
-	"",
+	"Battle of Öland",
 	"",
-	"", ""
+	"Dutch/Danish under Iuel", "Swedes under Creutz"
 )
 new navalEvent(
+	"First Battle of Tobago",
 	"",
-	"",
-	"", ""
+	"Dutch under Binckes", "French under d'Estrées"
 )
 new navalEvent(
-	"",
+	"Battle of Møn",
 	"",
-	"", ""
+	"Danes", "Swedes"
 )
 new navalEvent(
+	"Battle of Køge Bay",
 	"",
-	"",
-	"", ""
+	"Danes and Dutch", "Swedes"
 )
 new navalEvent(
-	"",
+	"Second Battle of Tobago",
 	"",
-	"", ""
+	"French under d'Estrées", "Dutch under Binckes"
 )
 new navalEvent(
+	"Bombardment of Chios",
 	"",
-	"",
-	"", ""
+	"French", "Tripolitans"
 )
 new navalEvent(
+	"Action of 30 September",
 	"",
-	"",
-	"", ""
+	"Spanish", "Brandenburgers"
 )
 new navalEvent(
-	"",
+	"Bombardment of Algiers",
 	"",
-	"", ""
+	"Algerines", "French"
 )
 new navalEvent(
+	"Battle of Penghu",
 	"",
-	"",
-	"", ""
+	"Qing dynasty", "Kingdom of Tungning"
 )
 new navalEvent(
-	"",
+	"Bombardment of Tripoli",
 	"",
-	"", ""
+	"French under d'Estrées", "Tripolitans"
 )
 new navalEvent(
+	"awesome naval battle x62",
 	"",
-	"",
-	"", ""
+	"Turks and Algerines under Mezzomorto", "Venetians"
 )
 new navalEvent(
-	"",
+	"Bombardment of Algiers",
 	"",
-	"", ""
+	"Algerines", "French"
 )
 new navalEvent(
+	"Battle of Bantry Bay",
 	"",
-	"",
-	"", ""
+	"French", "English"
 )
 new navalEvent(
+	"Action of 26 March",
 	"",
-	"",
-	"", ""
+	"Turks and Algerines under Mezzomorto", "Venetians under Valier"
 )
 new navalEvent(
-	"",
+	"Battle of Beachy Head",
 	"",
-	"", ""
+	"French", "Anglo-Dutch"
 )
 new navalEvent(
+	"Naval battle off St. John",
 	"",
-	"",
-	"", ""
+	"French", "English"
 )
 new navalEvent(
-	"",
+	"Battle of Barfleur and La Hougue",
 	"",
-	"", ""
+	"French", "English"
 )
 new navalEvent(
+	"Battle of Barfleur and La Hougue",
 	"",
-	"",
-	"", ""
+	"English/Dutch", "French"
 )
 new navalEvent(
-	"",
+	"awesome naval battle x63",
 	"",
-	"", ""
+	"French", "Spanish"
 )
 new navalEvent(
+	"awesome naval battle x64",
 	"",
-	"",
-	"", ""
+	"French", "Tripolitans"
 )
 new navalEvent(
+	"Battle of Daman",
 	"",
-	"",
-	"", ""
+	"Portuguese", "Omani"
 )
 new navalEvent(
-	"",
+	"Battle of Texel",
 	"",
-	"", ""
+	"French under Bart", "Dutch under de Vries and others"
 )
 new navalEvent(
+	"Battle of the Oinousses Islands",
 	"",
-	"",
-	"", ""
+	"Turkish", "Venetians under Zeno"
 )
 new navalEvent(
-	"",
+	"Action of 16 April",
 	"",
-	"", ""
+	"French", "English"
 )
 new navalEvent(
+	"Action of 18 April",
 	"",
-	"",
-	"", ""
+	"Dano-Swedish", "English"
 )
 new navalEvent(
-	"",
+	"Action of 10 August",
 	"",
-	"", ""
+	"English", "Swedish"
 )
 new navalEvent(
+	"Battle of Zeytinburnu",
 	"",
-	"",
-	"", ""
+	"Turks under Mezzomorto", "Venetians under Contarini"
 )
 new navalEvent(
-	"",
+	"Anglo-Swedish skirmish",
 	"",
-	"", ""
+	"English", "Swedish"
 )
 new navalEvent(
+	"Battle of Dogger Bank",
 	"",
-	"",
-	"", ""
+	"French", "Dutch"
 )
 new navalEvent(
-	"",
+	"Second Azov campaign",
 	"",
-	"", ""
+	"Russians", "Ottomans"
 )
 new navalEvent(
+	"Battle of Mamora",
 	"",
-	"",
-	"", ""
+	"Portugal", "Morocco"
 )
 new navalEvent(
-	"",
+	"Action of 14 July 1696",
 	"",
-	"", ""
+	"French under D'Iberville", "English"
 )
 new navalEvent(
+	"Siege of Pemaquid",
 	"",
-	"",
-	"", ""
+	"French and Abenaki", "English"
 )
 new navalEvent(
-	"",
+	"Battle of Hudson's Bay",
 	"",
-	"", ""
+	"French", "English"
 )
+// NOW 18th century :sob:
 new navalEvent(
 	"",
 	"",
