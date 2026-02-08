@@ -46,8 +46,11 @@ function mineBlock(x, y, cause) {
         mineBlockVariant = undefined;
     }
     if (mineBlockOre === "⚪") return;
-    if (!unbreakable.includes(mineBlockOre)|| 
-			pickaxeStats[player.stats.currentPickaxe].tier >= unbreakableTiers[unbreakable.indexOf(mineBlockOre)]
+    if ((!unbreakable.includes(mineBlockOre) || (player.stats.currentPickaxe == "pickaxe27"?
+            pickaxeStats[player.stats.currentPickaxe].tier + player.upgrades.pickaxe27.level :
+            pickaxeStats[player.stats.currentPickaxe].tier) 
+            >= unbreakableTiers[unbreakable.indexOf(mineBlockOre)]
+        )
 		)	{
         if (cause !== "infinity") checkAllAround(x, y);
         else placeLayerAround(x, y);
