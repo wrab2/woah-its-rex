@@ -536,16 +536,6 @@ function displayRecipe(recipe) {
         currentRecipeId = undefined;
         get("scrollableCraft").style.display = "none";
     } else {
-        /*why did I add this here was I trying to do🐈🐈🐈🐈🐈
-        if(Object.keys(johnRewards).includes(currentRecipeId) && !recipes[recipe].pickaxe){
-            
-        //updating john's gear rewards instead of actual recipes 🐈🐈🐈🐈🐈
-            currentRecipeId = recipe
-            addRecipeInformation(currentRecipeId)
-            updateActiveRecipe()
-            return
-        }
-            */
         if (!pinInformation.locked) removeRecipeElements();
         if (currentRecipeId !== undefined ) {
             if(!Object.keys(johnRewards).includes(currentRecipeId)) buttonGradients[`${currentRecipeId}Craft`]["applied"] = false;
@@ -604,7 +594,7 @@ function displayRecipe(recipe) {
                 if (!pinInformation.locked) {
                     addRecipeInformation(currentRecipeId);
                 }
-            } else {
+            } else { //tree of life
                 const treeUpgradeInfo = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`];
                 const treeInfo = pickaxe[player.upgrades["pickaxe27"].level];
                 const nextInfo = pickaxe[player.upgrades["pickaxe27"].level+1];
@@ -618,23 +608,23 @@ function displayRecipe(recipe) {
                 let cons = blocksUsed * treeInfo.luck / pickaxe.rate;
                 consElem.textContent = `${(Math.round(cons*1000)/1000).toLocaleString()} Pickaxe Consistency.`;
                 let curSrc = pickaxe.ability;
-								abilityElem.style.display = "block"
+                abilityElem.style.display = "block"
                 abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
                 let stp = pickaxe.src;
                 stp  = stp.substring(stp.indexOf("src") + 5, stp.indexOf("</img>") - 2);
                 curSrc = stp;
                 if (curSrc === "⛏️") curSrc = 'media/noFile.png';
                 iconElem.src = curSrc;
-                if (!pinInformation.locked && player.upgrades["pickaxe27"].level < 5) {
+                if (!pinInformation.locked && player.upgrades["pickaxe27"].level < 6) {
                     addRecipeInformation(currentRecipeId);
-                } else if (!pinInformation.locked && player.upgrades["pickaxe27"].level === 5) {
+                } else if (!pinInformation.locked && player.upgrades["pickaxe27"].level === 6) {
                     get("newCraftItem").setAttribute("onclick", `craftPickaxe('pickaxe27')`);
                 }
             }
         } else {
             get("extraPickaxeInformation").style.display="none"
             get("craftingContainer").style.top = "0px";
-						get("scrollableCraft").style.flexDirection = "column"
+            get("scrollableCraft").style.flexDirection = "column"
             get("craftingContainer").style.borderBottomLeftRadius = `0.5vw`;
             get("craftingContainer").style.borderTopRightRadius = `0`;
             get("gearHolder").style.display = "";
@@ -943,7 +933,7 @@ function updateActiveRecipe() {
         let currentRarity = 0;
             let recipe = recipes[thisId].recipe;
             if (thisId === "pickaxe27") {
-                if (player.upgrades["pickaxe27"].level > 4) recipe = [];
+                if (player.upgrades["pickaxe27"].level > 5) recipe = [];
                 else recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
             } 
             const elements = get("newCraftingRecipeHolder").children;
@@ -976,7 +966,7 @@ function updateActiveRecipe() {
             }
         let button = get("newCraftItem");
         const type = (thisId.indexOf('pickaxe') > -1) ? "pickaxe" : "gear";
-        if (player.pickaxes[thisId] || player.gears[thisId] || (thisId === "pickaxe27" && player.upgrades["pickaxe27"].level > 4)) {
+        if (player.pickaxes[thisId] || player.gears[thisId] || (thisId === "pickaxe27" && player.upgrades["pickaxe27"].level > 5)) {
             if (!(buttonGradients[`${thisId}Craft`]["applied"])) {
                 button.style.backgroundImage = buttonGradients[`${thisId}Craft`]["gradient"];
                 buttonGradients[`${thisId}Craft`]["applied"] = true;
@@ -1129,7 +1119,7 @@ function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
     const type = (item.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
     if (item === "pickaxe27") {
-        if (currentWorld === 1.1 && player.upgrades["pickaxe27"].level < 5) {
+        if (currentWorld === 1.1 && player.upgrades["pickaxe27"].level < 6) {
             recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
         } else if (currentWorld !== 1.1) {
             if (player.trophyProgress["subrealmOneCompletion"].trophyOwned) {
@@ -1684,18 +1674,18 @@ const upgradeRecipes = {
         },
         "upgrade5" : 
         { 
-            recipe : [   
+            recipe : [
                 {ore: "🏳️‍⚧️", amt: 10000},
-                {ore: "🏁	", amt: 50000},
+                {ore: "🏁", amt: 50000},
                 {ore: "🏳️‍🌈", amt: 500000},
-                {ore: "🇮🇱 ", amt: 1},
+                {ore: "🇮🇱", amt: 1},
                 {ore: "🇭🇰", amt: 1},
                 {ore: "silly", amt: 1},
                 {ore: "masa", amt: 1},
             ],
-            descriptions : [
-                "Luck:<br>40 -> 100",
-                "Ability Size:<br>46,650 -> 54,298"
+            descriptions : [//I don't think this is used anywhere
+                "Luck:<br>100 -> 700",
+                "Ability Size:<br>54,298 -> 2m"
             ]
         },
         //54298 63893
@@ -2135,6 +2125,7 @@ const pickaxeStats = {
         3 : {mined: 37468, revealed: 41654, luck: 20},
         4 : {mined: 46650, revealed: 54781, luck: 40},
         5 : {mined: 54298, revealed: 63893, luck: 100},
+        6 : {mined: 2e6, revealed: 1, luck: 700},
         rate: 500,
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
@@ -2483,7 +2474,11 @@ function ct(john=false) {
         recipe = [{ore:johnQuests[player.john.currentQuest].ore,amt:johnQuests[player.john.currentQuest].amount}]
     } else {
         rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
-        recipe = pickaxeUsing !== "pickaxe27" ? recipes[rId].recipe : player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? "RETURN" : upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
+        recipe = (/*pickaxeUsing !== "pickaxe27"*/false) ? //what was the purpose of this it made it show 0 outside of sr1
+        recipes[rId].recipe : 
+        player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? 
+        "RETURN" : 
+        upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
     }
     if (recipe === "RETURN") return msToTime(0);
     const recipeLayers = {
