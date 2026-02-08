@@ -600,7 +600,7 @@ let oreList = {
     '🤽': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "oreName" : "Jim" },
     '🤽‍♀️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',"oreName" : "Jane" },
     'deepWater':{ 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  'hasImage' : true, "src" : "media/ores/deepWater.png", "oreName" : "deepWater", "oreName" : "Deep Water"},
-	'nebula':{ 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  'hasImage' : true, "src" : "media/ores/nebula (2).png", "oreName" : "Nebula",},
+	'nebula':{ 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  'hasImage' : true, "src" : "media/ores/nebula.png", "oreName" : "Nebula",},
 
     'bitcoin' : { 'decimalRarity': 1 / Infinity, 'numRarity': Infinity, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'erm', 'oreTier': 'Common',  },
     'Nyerd' : { 'decimalRarity': 1 / 450000000000, 'numRarity': 450000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "you're a NYERD!!!", 'oreTier': 'Ethereal',  'hasImage' : true, "src" : "media/ores/NYERD.webp", "oreName" : "nyerd", "eId":"<:nyerd:1232461600087343156>"},
