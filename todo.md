@@ -24,7 +24,7 @@ make the john milestones less buggy maybe
 
 fumo fishing (i have no idea if this will be in this update)
 
-
+fix the fact that john's tab is obtainable in sr1
 
 
 
