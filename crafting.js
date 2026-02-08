@@ -2435,7 +2435,7 @@ const gearInformation = {
         tier: 11,
     },
     "hat": {
-        effect:"idk",
+        effect:"DOUBLES x2 your speed if you aren't going left ⬅️❌ (going anywhere else is more aerodynamic)",
         tier: 12,
     },
     "ring_enabler": {
