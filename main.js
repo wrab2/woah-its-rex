@@ -585,7 +585,11 @@ const calcSpeed = function() {
     if (player.stats.currentPickaxe === "pickaxe12")
         reps++;
     reps += player.gears["gear19"] ? 10 : 0;
-    const extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
+    let extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
+    if (johnRewarded("hat") && curDirection!=="a") {
+        extraSpeed*=2
+        reps*=2
+    }
     if (currentWorld === 1.1) {
         if (debug) return {speed: 5, reps: devReps, extra:0}
         const sr1Level = player.upgrades["pickaxe27"].level;
