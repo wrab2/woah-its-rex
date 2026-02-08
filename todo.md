@@ -2,6 +2,8 @@
 
 IMPORTANT:
 
+randomize layer that events speed up
+
 make gears have abilities
 
 give hypermark checkminator a recipe, ability, luck, etc
