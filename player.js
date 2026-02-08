@@ -177,7 +177,7 @@ class playerTemplate {
         this.upgrades = {
             "pickaxe27" : {
                 level: 0,
-                maxLevel: 5,
+                maxLevel: 6,
                 bought: 0,
                 levelLuck: [1, 3, 10, 20, 40, 100]
             }
