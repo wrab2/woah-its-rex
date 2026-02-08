@@ -302,6 +302,8 @@ function loadContent() {
     musicPlayer.songs["song13"].src = new Audio("audios/song13.mp3");
     musicPlayer.songs["song14"].src = new Audio("audios/song14.mp3");
     musicPlayer.songs["song15"].src = new Audio("audios/song15.mp3");
+    musicPlayer.songs["song16"].src = new Audio("audios/song16.mp3");
+
 
 
     for (let property in musicPlayer.songs) {
