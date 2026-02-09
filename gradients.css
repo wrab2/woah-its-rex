@@ -540,13 +540,37 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#ringOfTheUnknown span{
-    background: linear-gradient(to right,#403330 5%, #000000, #403330 95%);
+#ringOfTheUnknown span{ /* act like it says ring of time */
+    background: linear-gradient(
+        90deg in lch,
+        #e6334b,
+        #feb813,
+        #f4e178,
+        #81c9dc,
+        #1f8cab,
+        #e1b0c5,
+        #d6af08,
+        #983a06,
+        #35450e,
+        #342487,
+        #005f72,
+        #c80679
+    );
+    background-size: 400% 100%;
+    animation: shiftGradient 8s linear infinite;
+
     -webkit-background-clip: text;
-    color: transparent;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
+    display:inline-block;
 }
+
+@keyframes shiftGradient {
+    from { background-position: 0% 50%; }
+    to   { background-position: 100% 50%; }
+}
+
 #ringOfCreation span{
     background: linear-gradient(to right,#403330 5%, #C6D224, #403330 95%);
     -webkit-background-clip: text;
@@ -562,7 +586,7 @@
     -webkit-text-fill-color: transparent;
 }
 #ringOfFire span{
-    background: linear-gradient(to right,#403330 5%, #2B1660, #403330 95%);
+    background: linear-gradient(to right,#403330 5%, #, #403330 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;

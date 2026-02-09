@@ -432,7 +432,7 @@ const recipes = {
         pUnob: true
     },
     "gear43": {
-        name: "Ring of The Unknown",
+        name: "Ring of Time",
         recipe: [{"ore": "orbOfTheUnknown", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
@@ -1104,12 +1104,12 @@ const buttonGradients = {
     "gear40Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
     "gear41Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
     "gear42Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #0A9420, #403330 95%)","applied" : false},
-    "gear43Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #000000, #403330 95%)","applied" : false},
+    "gear43Craft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
     "gear44Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
-    "gear48Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #000000, #403330 95%)","applied" : false},
+    "gear48Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
     
 }
 function craftPickaxe(item) {
@@ -2220,13 +2220,13 @@ const pickaxeStats = {
         luck: 750,
         rate: 600,
         src : `<img class="mineImage" src="media/hypermark checkminator.png"></img>`,
-        ability: "",
+        ability: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9],
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
         tier: 15,
-        icon: "@adrianinoninja",
+        icon: "@adrianinoninja also @wrab's idea",
     },
 }
 const gearInformation = {
