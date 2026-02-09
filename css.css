@@ -3231,6 +3231,7 @@ img.roundcat {
   z-index: 20;
 }
 #navalEventHat{
+  pointer-events: none;
   position: absolute;
   left: -2em;
   top: -13em;

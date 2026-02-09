@@ -56,9 +56,9 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 
 		if(currentLayer === currentNavalEvent.layer){
 			//500ms is base time reduction per update
-			//1000 makes event go by 3x faster
-			player.john.navalEventStartedTime -= 1000
-			navalEventEndTime -= 1000
+			//2000 makes event go by 5x faster
+			player.john.navalEventStartedTime -= 2000
+			navalEventEndTime -= 2000
 
 			battleshipIcon.classList.add("navalGreenFlashing")
 			battleshipIcon.classList.remove("navalRedFlashing")
@@ -100,14 +100,16 @@ const naval = {
 	contribRNG: new Math.seedrandom("hi this is again me john 🤽‍♂️, seeding 🌱🫘 the rng 🔢🤽‍♂️🤽‍♂️"),
 	fastLayers: ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer", "sillyLayer", "cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "deepWaterLayer", "johnLayer", "jimLayer", "starLayer", "nebulaLayer" ],
 	fastLayerRNG: new Math.seedrandom("guess who? hint: 🤽‍♂️"),
+	//I wonder if I need this many different RNGs here
+	timeRNG: new Math.seedrandom("john 🤽‍♂️ of time when we asked him what is he doing in fast line: I'm waiting.")
 }   
 
 class navalEvent {
 	constructor(title, text, winner, loser){
 		naval.eventid++
 		let duration = text.length*60000
-		//30 minutes - 2 hours, change this later
-		duration = Math.min(2*60*60*1000, Math.max(30*60000, duration))
+		//30 minutes + 0 - 30 minutes
+		duration = 1000*60*30 + Math.floor(naval.timeRNG()*1000*60*30)
 		navalEventsList.push({
 			title: title,
 			description: text,
