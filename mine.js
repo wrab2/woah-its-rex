@@ -167,7 +167,7 @@ function aleaRandom() {
 const generateBlock = function(location, wbm) {
     wbm ??= false;
     blocksRevealedThisReset++;
-	if(location["Y"]==200e3-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
+	if(location["Y"]==200e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;
@@ -563,33 +563,52 @@ function rebuildSpecialLayerObject() {
     }
     specialLayerLocations = newLayerObj;
 }
+let wwTeleportsIndex = 0
 function switchDistance(num) {
     const lastLayerInfo = [distanceMulti, layerDistanceY];
     distanceMulti += num;
+    let isThisJohn = false
     const layerNums = allLayers.length - 1; 
 	//what is going on here
-    const specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
-    if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
-    if (distanceMulti < 0) {
-        distanceMulti = layerNums + specialLayerNums;
+    if(currentWorld === 1.2){
+        if(layerDistanceY === 1000) wwTeleportsIndex = 0
+
+        let availableLocations = [{layer:"🌊", distance:1000}]
+        if(playerInventory["deepWater"].normalAmt > 1e9) availableLocations.push({layer:"<img src='media/ors/deepWater.png'>", distance:200000})
+        if(player.john.spokeWith) availableLocations.push({layer:"john", distance:200e6})
+        if(num === 1){
+            wwTeleportsIndex = (wwTeleportsIndex+1) % availableLocations.length
+        } else if(num === -1){
+            wwTeleportsIndex = (wwTeleportsIndex + availableLocations.length - 1) % availableLocations.length
+        }
+        layerDistanceY = availableLocations[wwTeleportsIndex].distance
+        isThisJohn = (availableLocations[wwTeleportsIndex].layer === "john")
     }
-    if (distanceMulti > layerNums + specialLayerNums) {
-        distanceMulti = currentWorld === 2 ? 1 : 0;
-        layerDistanceY = 1000 + (2000 * distanceMulti);
-    } else if (distanceMulti > layerNums && currentWorld === 1) {
-        const layersToIndex = Object.keys(specialLayerLocations);
-        const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
-        const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
-        if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
-        else layerDistanceY = specialTeleportLayer + 5000;
-        if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
-    } else {
-        layerDistanceY = 1000 + (2000 * distanceMulti);
+    else {
+        const specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
+        if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
+        if (distanceMulti < 0) {
+            distanceMulti = layerNums + specialLayerNums;
+        }
+        if (distanceMulti > layerNums + specialLayerNums) {
+            distanceMulti = currentWorld === 2 ? 1 : 0;
+            layerDistanceY = 1000 + (2000 * distanceMulti);
+        } else if (distanceMulti > layerNums && currentWorld === 1) {
+            const layersToIndex = Object.keys(specialLayerLocations);
+            const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
+            const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
+            if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
+            else layerDistanceY = specialTeleportLayer + 5000;
+            if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
+        } else {
+            layerDistanceY = 1000 + (2000 * distanceMulti);
+        }
     }
     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
     let teleportLayer = getLayer(layerDistanceY).layer;
     for (let i = 0; i < teleportLayer.length; i++) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
     let tI;
+    if(isThisJohn) teleportLayer = "🤽‍♂️"
     if (oreList[teleportLayer]["hasImage"]) tI = `<img class="teleportImage" src="${oreList[teleportLayer]["src"]}">`;
     get("meterDisplay").innerHTML = `${tI === undefined ? teleportLayer : tI} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
     get("meterDisplay").setAttribute("title", oreList[teleportLayer]["oreName"]);

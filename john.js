@@ -296,7 +296,7 @@ function rejectQuest(){
 
 function checkJohn(x,y){
 	if (currentWorld!==1.2 || //watr
-		y!==(200-1) || //put it 199, will be at 199,999,999 
+		y!==(200e6-1) || //put it 199, will be at 199,999,999 
 		x!==1e6 //1e6 is actually 0 in game (thats dumb why did amber do that)
 	) { return false }
 	else {

@@ -1,6 +1,6 @@
 # IMPORTANT:
 
-add new layers to teleport lists (this is very important)
+add new layers to teleport lists (this is very important)(checkmark layer in w2, repeating john and jim layers are decently common to not care)
 
 make gears have abilities
 
