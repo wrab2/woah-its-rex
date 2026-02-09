@@ -2227,7 +2227,7 @@ const pickaxeStats = {
         isDimensional: true,
         tier: 15,
         extraInformation: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
-        icon: "markiplier",
+        icon: "markiplier, proof at https://youtu.be/XOY04uw_QPQ",
     },
 }
 const gearInformation = {
