@@ -2067,7 +2067,7 @@ function preventCrash(event) {
 const polyLocations = {
     "orbOfLife" : ["dirtLayer", "dirtLayer2"],
     "orbOfIntelligence" : ["chessLayer"],
-    "orbOfSound" : ["fluteLayer"],
+    "orbOfSound" : ["deepWaterLayer"],
     "orbOfTheUnknown" : ["borderLayer"],
     "orbOfCreation" : ["nebulaLayer"],
     "orbOfFlight" : ["cloudLayer", "cloudLayer2"],

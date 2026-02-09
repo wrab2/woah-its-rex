@@ -534,7 +534,7 @@
     -webkit-text-fill-color: transparent;
 }
 #ringOfSound span{
-    background: linear-gradient(to right,#403330 5%, #0A9420, #403330 95%);
+    background: radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%);    -webkit-background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;

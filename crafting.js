@@ -423,7 +423,7 @@ const recipes = {
         pUnob: true
     },
     "gear42": {
-        name: "Ring of Sound",
+        name: "Ring of Water",
         recipe: [{"ore": "orbOfSound", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
         req: function() {
@@ -1103,7 +1103,7 @@ const buttonGradients = {
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
     "gear40Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
     "gear41Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
-    "gear42Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #0A9420, #403330 95%)","applied" : false},
+    "gear42Craft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
     "gear43Craft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
     "gear44Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
@@ -2400,7 +2400,7 @@ const gearInformation = {
         tier: 12,
     },
     "gear42" : {
-        effect:"Uncapped +0.01x luck for every Hyperdimensional Tier ore owned<br><i>I hear strange music...</i>",
+        effect:"Reduces naval events time by 3ln(naval events completed)</i>",
         tier: 13,
     },
     "gear43" : {
