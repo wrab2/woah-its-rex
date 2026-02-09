@@ -1,8 +1,4 @@
-(overall i think this is all thats left)
- 
-## IMPORTANT:
-
-✅ randomize layer that events speed up
+# IMPORTANT:
 
 add new layers to teleport lists (this is very important)
 
@@ -18,7 +14,7 @@ srwater, (at 19 quests) with all of johns friends, its johns house and also rare
 
 ability to steal johns poker chips
 
-add naval battles: Mid 19th century, Late 19th century, Early 20th century, Mid-20th century, Later 20th century, Early 21st century
+add naval battles: Early 20th century, Mid-20th century, Later 20th century, Early 21st century
 
 ## LESS IMPORTANT:
 
@@ -38,4 +34,14 @@ make every crafting tab visible in sr1
 
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 
-fumo fishing (i have no idea if this will be in this update (YES IT WILL BE))
+fumo fishing (MAKE SURE TO ADD THIS)
+
+#### what the hell since when are there quadruple hastag titles
+
+##### No flipping way
+
+###### meow
+
+####### unbeliavable
+
+-# theres not even this
