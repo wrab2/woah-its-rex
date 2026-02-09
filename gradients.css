@@ -625,12 +625,23 @@
     -webkit-text-fill-color: transparent;
 }
 #hat span{
+    display: block;
     background: linear-gradient(to right,#083c44 5%, #00cfd6, #9ff6ff, #00cfd6, #083c44 95%);
     -webkit-background-clip: text;
-    color: transparent;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
 }
+
+#hat span:nth-child(1){
+    position: absolute;
+    z-index: -1;
+    mix-blend-mode: screen;
+    filter: blur(3px);
+    background-image:none;background-color:cyan;
+}
+    
+
 #ring_enabler span{
     background: linear-gradient(
         90deg in lch,
