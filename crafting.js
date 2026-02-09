@@ -2220,13 +2220,14 @@ const pickaxeStats = {
         luck: 750,
         rate: 600,
         src : `<img class="mineImage" src="media/hypermark checkminator.png"></img>`,
-        ability: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
+        ability: "",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9],
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
         tier: 15,
-        icon: "@adrianinoninja also @wrab's idea",
+        extraInformation: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
+        icon: "@adrianinoninja",
     },
 }
 const gearInformation = {
