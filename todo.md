@@ -1,8 +1,10 @@
 (overall i think this is all thats left)
+ 
+## IMPORTANT:
 
-IMPORTANT:
+✅ randomize layer that events speed up
 
-randomize layer that events speed up
+add new layers to teleport lists (this is very important)
 
 make gears have abilities
 
@@ -18,15 +20,13 @@ ability to steal johns poker chips
 
 add naval battles: Mid 19th century, Late 19th century, Early 20th century, Mid-20th century, Later 20th century, Early 21st century
 
-LESS IMPORTANT:
-
-add new layers to teleport lists
+## LESS IMPORTANT:
 
 add some ores to deep water, Jim jane and john layers (and also jane caves)
 
 add more john quests after all 20 quests which are repeated quests but much harder for a small reward
 
-low importance:
+### low importance:
 
 make the john milestones less buggy (connectors)
 
@@ -34,8 +34,8 @@ add more milestones (checkmark milestones, ring milestones, TOL6 milestone)
 
 bugtest
 
-fix the fact that john's tab is obtainable in sr1
+make every crafting tab visible in sr1
 
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 
-fumo fishing (i have no idea if this will be in this update)
+fumo fishing (i have no idea if this will be in this update (YES IT WILL BE))

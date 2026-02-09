@@ -40,7 +40,7 @@ function fillCurrentEventInfo(){
 
 	let questLayerOre = getLayerMaterial(layerDictionary[currentNavalEvent.layer])
 	get("navalEventLayer").innerHTML = `Mining in ${oreList[questLayerOre].hasImage?
-		'<img src="${oreList[questLayerOre].src}"'
+		`<img src="${oreList[questLayerOre].src}">`
 		:questLayerOre
 	} layer will accelerate the event`
 
@@ -54,7 +54,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 		//update time display
 		get("navalEventTime").textContent = "Remaining time: "+longTime((navalEventEndTime - Date.now()))
 
-		if(currentLayer === currentNavalEvent.layer[0]){
+		if(currentLayer === currentNavalEvent.layer){
 			//500ms is base time reduction per update
 			//1000 makes event go by 3x faster
 			player.john.navalEventStartedTime -= 1000
@@ -95,25 +95,28 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 	}
 }
 
-
-let navaleventtempid = 0
-const contribRNG = new Math.seedrandom("hi this is again me john 🤽‍♂️, seeding 🌱🫘 the rng 🔢🤽‍♂️🤽‍♂️")
+const naval = {
+	eventid: 0,
+	contribRNG: new Math.seedrandom("hi this is again me john 🤽‍♂️, seeding 🌱🫘 the rng 🔢🤽‍♂️🤽‍♂️"),
+	fastLayers: ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer", "sillyLayer", "cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "deepWaterLayer", "johnLayer", "jimLayer", "starLayer", "nebulaLayer" ],
+	fastLayerRNG: new Math.seedrandom("guess who? hint: 🤽‍♂️"),
+}   
 
 class navalEvent {
 	constructor(title, text, winner, loser){
-		navaleventtempid++
+		naval.eventid++
 		let duration = text.length*60000
 		//30 minutes - 2 hours, change this later
 		duration = Math.min(2*60*60*1000, Math.max(30*60000, duration))
 		navalEventsList.push({
 			title: title,
 			description: text,
-			winner:winner,
-			loser:loser,
+			winner: winner,
+			loser: loser,
 			duration: duration,
-			contribution: johnContributions[Math.floor(contribRNG()*johnContributions.length)],
-			id: navaleventtempid,
-			layer: ["waterLayer"]
+			contribution: johnContributions[Math.floor(naval.contribRNG()*johnContributions.length)],
+			id: naval.eventid,
+			layer: naval.fastLayers[Math.floor(naval.fastLayerRNG()*naval.fastLayers.length)]
 		})
 	}
 }
@@ -174,7 +177,6 @@ const johnContributions = [
 ]
 
 
-//example events
 new navalEvent(
 	"Battles of Alashiya",
 	"",
@@ -4900,7 +4902,7 @@ new navalEvent(
 	"deltarune chapter 2 acid tunnel battle",
 	"",
 	"kris and ralsei", "rouxls kaard"
-// i HAD to add this fr
+// i HAD to add this fr //there's no way john was involved
 )
 new navalEvent(
 	"Action of 14 December",
