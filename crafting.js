@@ -2404,7 +2404,7 @@ const gearInformation = {
         tier: 13,
     },
     "gear43" : {
-        effect:"Allows use of Tree of Life in World 2, Watr Watr and Galactica<br><i>I shouldn't be here...</i>",
+        effect:"Allows use of Tree of Life in World 2, Watr Watr and Galactica<br><i>Happy new year</i>",
         tier: 10,
     },
     "gear44" : {
