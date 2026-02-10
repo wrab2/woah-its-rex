@@ -1,6 +1,6 @@
 const recipes = {
     "pickaxe0" : {
-        name: "What do I even name pickaxe 0",
+        name: "The destroyer of all mines.",
         recipe: []
     },
     "pickaxe1" : {
@@ -194,7 +194,7 @@ const recipes = {
         pUnob: true
     },
     "hypermark_checkminator": { //so how is this called bruh 😭😭😭✅✅✅✅✅✅✅😭😭
-        name: "Hyper Checkmarkinator",
+        name: "Hypermark Checkminator",
         recipe: [{"ore": "✅", "amt": 10},{"ore": "🐋", "amt": 10}],
         active : [],
         pUnob: true, // idfk what pUnob does lowkey (me neither)
