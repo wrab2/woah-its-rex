@@ -543,12 +543,17 @@ for (let i = 0; i < 100000; i++) {
 }
 */
 //TELEPORTING
-let specialLayerLocations = {
+let specialLayerLocations = {}
 
-}
+let specialLayerLocationsW2 = []//layer in these objects is only for sorting
+let specialLayerLocationsWW = []
+
 let distanceMulti = 0;
 let layerDistanceY = 1000;
 const specialOrder = ["sillyLayer", "fluteLayer", "unknownLayer", "lastLayer"];
+const specialOrderW2 = ["checkmarkLayer"]
+const specialOrderWW = ["jimLayer","johnLayer"]
+
 function rebuildSpecialLayerObject() {
     const newArray = [];
     for (let layer in specialLayerLocations) newArray[specialOrder.indexOf(layer)] = layer;
@@ -564,6 +569,7 @@ function rebuildSpecialLayerObject() {
     specialLayerLocations = newLayerObj;
 }
 let wwTeleportsIndex = 0
+let w2TeleportsIndex = 0
 function switchDistance(num) {
     const lastLayerInfo = [distanceMulti, layerDistanceY];
     distanceMulti += num;
@@ -573,9 +579,10 @@ function switchDistance(num) {
     if(currentWorld === 1.2){
         if(layerDistanceY === 1000) wwTeleportsIndex = 0
 
-        let availableLocations = [{layer:"🌊", distance:1000}]
-        if(playerInventory["deepWater"].normalAmt > 1e9) availableLocations.push({layer:"<img src='media/ors/deepWater.png'>", distance:200000})
+        let availableLocations = [{distance:1000}]
+        if(playerInventory["deepWater"].normalAmt > 1e9) availableLocations.push({distance:200000})
         if(player.john.spokeWith) availableLocations.push({layer:"john", distance:200e6})
+		availableLocations = availableLocations.concat(specialLayerLocationsWW)
         if(num === 1){
             wwTeleportsIndex = (wwTeleportsIndex+1) % availableLocations.length
         } else if(num === -1){
@@ -585,24 +592,37 @@ function switchDistance(num) {
         isThisJohn = (availableLocations[wwTeleportsIndex].layer === "john")
     }
     else {
-        const specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
-        if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
-        if (distanceMulti < 0) {
-            distanceMulti = layerNums + specialLayerNums;
-        }
-        if (distanceMulti > layerNums + specialLayerNums) {
-            distanceMulti = currentWorld === 2 ? 1 : 0;
-            layerDistanceY = 1000 + (2000 * distanceMulti);
-        } else if (distanceMulti > layerNums && currentWorld === 1) {
-            const layersToIndex = Object.keys(specialLayerLocations);
-            const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
-            const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
-            if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
-            else layerDistanceY = specialTeleportLayer + 5000;
-            if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
-        } else {
-            layerDistanceY = 1000 + (2000 * distanceMulti);
-        }
+        let specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
+		if(currentWorld === 2){
+			if(layerDistanceY === 3000) w2TeleportsIndex = 0
+			
+			let availableLocations = [{distance:3000},{distance:5000},{distance:7000},{distance:9000}]
+			availableLocations = availableLocations.concat(specialLayerLocationsW2)
+			if(num === 1){
+				w2TeleportsIndex = (w2TeleportsIndex+1) % availableLocations.length
+			} else if(num === -1){
+				w2TeleportsIndex = (w2TeleportsIndex + availableLocations.length - 1) % availableLocations.length
+			}
+			layerDistanceY = availableLocations[w2TeleportsIndex].distance
+		} else {
+			if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
+			if (distanceMulti < 0) {
+				distanceMulti = layerNums + specialLayerNums;
+			}
+			if (distanceMulti > layerNums + specialLayerNums) {
+				distanceMulti = currentWorld === 2 ? 1 : 0;
+				layerDistanceY = 1000 + (2000 * distanceMulti);
+			} else if (distanceMulti > layerNums && currentWorld === 1) {
+				const layersToIndex = Object.keys(specialLayerLocations);
+				const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
+				const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
+				if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
+				else layerDistanceY = specialTeleportLayer + 5000;
+				if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
+			} else {
+				layerDistanceY = 1000 + (2000 * distanceMulti);
+			}	
+		}
     }
     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
     let teleportLayer = getLayer(layerDistanceY).layer;
@@ -610,7 +630,7 @@ function switchDistance(num) {
     let tI;
     if(isThisJohn) teleportLayer = "🤽‍♂️"
     if (oreList[teleportLayer]["hasImage"]) tI = `<img class="teleportImage" src="${oreList[teleportLayer]["src"]}">`;
-    get("meterDisplay").innerHTML = `${tI === undefined ? teleportLayer : tI} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
+	get("meterDisplay").innerHTML = `${tI === undefined ? teleportLayer : tI} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
     get("meterDisplay").setAttribute("title", oreList[teleportLayer]["oreName"]);
 }
 

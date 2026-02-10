@@ -858,14 +858,24 @@ function setLayer(y) {
 				if(waterRepeatingLayers[layerNum] == undefined){
 					let newLayer = "deepWaterLayer"
 					let layerRng = Math.random()
-					if(layerRng < 1/10) {
+					if(layerRng < 1/10) { //john
+						if(specialLayerLocationsWW.filter((e)=>e.layer === "johnLayer").length === 0){
+							specialLayerLocationsWW.push({layer:"johnLayer", distance: (layerNum * 100e3 + 1e6 + 50000)})
+							specialLayerLocationsWW.sort( (a, b) => specialOrderWW.indexOf(a.layer) >  specialOrderWW.indexOf(b.layer) )
+						}
 						if(Math.random()<1/20) {
                             newLayer = "johnLayer_CLT"
                             eventSpawn.play()
                         }
 						else newLayer = "johnLayer"
 					}
-					else if(layerRng < 1/3 + 1/10) newLayer = "jimLayer"
+					else if(layerRng < 1/3 + 1/10) {
+						if(specialLayerLocationsWW.filter((e)=>e.layer === "jimLayer").length === 0){
+							specialLayerLocationsWW.push({layer:"jimLayer", distance: (layerNum * 100e3 + 1e6 + 50000)})
+							specialLayerLocationsWW.sort((a, b)=>specialOrderWW.indexOf(a.layer) >  specialOrderWW.indexOf(b.layer))
+						}
+						newLayer = "jimLayer"
+					}
 					waterRepeatingLayers[layerNum] = newLayer
 				}
 				currentLayer = waterRepeatingLayers[layerNum]
@@ -878,7 +888,11 @@ function setLayer(y) {
 		let layerNum = Math.floor((y-1e6)/150e3)
 		if (johnRewarded("hypermark_checkminator")){
 			let layerRng = Math.random()
-			if (layerRng < 1/40) {
+			if (layerRng < 1/40) { //checkmarkLayer
+				if(specialLayerLocationsW2.filter((e)=>e.layer === "checkmarkLayer").length === 0){
+					specialLayerLocationsW2.push({layer:"checkmarkLayer", distance: (layerNum * 150e3 + 1e6 + 75e3)})
+					specialLayerLocationsW2.sort((a, b)=>specialOrderW2.indexOf(a.layer) >  specialOrderW2.indexOf(b.layer))
+				}
 				return w2RepeatingLayers[layerNum] = "checkmarkLayer"
 			}
 		} 
@@ -920,7 +934,7 @@ function getLayer(y) {
             else return layerDictionary[layerIndex.worldTwo[Math.floor(y / 2000)]];
         } else {
             if (y === 10000) return layerDictionary["barrierLayer"];
-            else if (curY < 10000) return layerDictionary["chessLayer"];
+            else if (curY < 10000 && y < 1e6) return layerDictionary["chessLayer"];
             else if (y < 1e6) return layerDictionary["borderLayer"];
 			else {
 				layerNum = Math.floor((y-1e6)/150e3)
