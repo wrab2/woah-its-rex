@@ -464,7 +464,7 @@ const recipes = {
         recipe: [{"ore":"🎁","amt":2500000000},{"ore":"🎮","amt":53100},{"ore":"🎫","amt":44400},{"ore":"🚗","amt":28800},{"ore":"📢","amt":5310},{"ore":"🎑","amt":3960},{"ore":"📿","amt":1310},{"ore":"🎎","amt":600},{"ore":"🗳️","amt":400},{"ore":"⚛️","amt":100},{"ore":"🛢️","amt":30}],
         active : [0.9, 1, 1.2, 1.1, 2],
     },
-    "gear48": {
+    "ring_of_fire": {
         name: "Ring of Fire",
         recipe: [{"ore": "orbOfFire", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
@@ -1109,7 +1109,7 @@ const buttonGradients = {
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
-    "gear48Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
+    "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
     
 }
 function craftPickaxe(item) {
@@ -1205,7 +1205,7 @@ const showOrders = {
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "ring_of_water", "ring_of_time", "ring_of_creation", "gear48"],
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
@@ -2424,8 +2424,8 @@ const gearInformation = {
         effect:"+0.45x offline progress rewards.",
         tier: 0,
     },
-    "gear48" : {
-        effect:"Uncapped Luck * (Session time in minutes * 0.01) +1<br><i>It's so hot here...</i>",
+    "ring_of_fire" : {
+        effect:"cave lucks boosts simulated ability size at reduced rate (1 + cave luck/100) +1<br><i>It's so hot here...</i>",
         tier: 14,
     },
     "heirloom": {

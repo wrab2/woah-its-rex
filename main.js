@@ -2080,7 +2080,7 @@ const polyIds = {
     "orbOfTheUnknown" : "ring_of_time",
     "orbOfCreation" : "ring_of_creation",
     "orbOfFlight" : "pickaxe36",
-    "orbOfFire" : "gear48",
+    "orbOfFire" : "ring_of_fire",
 }
 const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},

@@ -41,15 +41,15 @@ class playerTemplate {
             "gear37": false,
             "gear38": false, 
             "gear39": false, 
-            "ring_of_life": false, //poly 1, 1.5x base luck
-            "ring_of_intelligence": false, //poly 2, 1/10 chance for +500000 simulated amount, applied before simulated amount multipliers
-            "ring_of_water": false, //poly 3, 
-            "ring_of_time": false, //poly 4, allows use of wormhole in sr1
-            "ring_of_creation": false, //poly 5, +50 reps
+            "ring_of_life": false, 
+            "ring_of_intelligence": false,
+            "ring_of_water": false, 
+            "ring_of_time": false, 
+            "ring_of_creation": false, 
             "gear45": false, 
             "gear46": false, 
             "gear47": false, 
-            "gear48": false, //+0.1x luck per minute of session time
+            "ring_of_fire": false,
             
         }
         this.pickaxes = {
