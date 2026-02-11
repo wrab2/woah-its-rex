@@ -2494,9 +2494,10 @@ function ct(john=false) {
     const pickaxeUsing = player.stats.currentPickaxe;
     let abilityMined = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].mined : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
     if (player.settings.simulatedRng || pickaxeStats[pickaxeUsing].isDimensional) {
-        if (player.gears["ring_of_intelligence"]) abilityMined += 50000;
+        //if (player.gears["ring_of_intelligence"]) abilityMined += 50000;
         if (player.gears["gear34"]) abilityMined = Math.floor(abilityMined*2);
         if (player.gears["gear39"]) abilityMined = Math.floor(abilityMined*3);
+        if(player.gears["ring_of_fire"])abilityMined *= (verifiedOres.getCaveLuck()/10 + 1)
     }
     const abilityRevealed = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].revealed : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].revealed;
     let m = 1;
