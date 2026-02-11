@@ -222,6 +222,7 @@ const generateBlock = function(location, wbm) {
     mine[location["Y"]][location["X"]] = blockToGive;
 }
 const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
+    if(cheating){amt*=devspeed}
     const p = player.stats.currentPickaxe;
     if ((p === "pickaxe0" || p === "pickaxe13") && !fromOffline && caveInfo === undefined) return;
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);

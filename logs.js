@@ -1,5 +1,8 @@
 
 const debug = !document.location.href.includes("release") && ((document.location.href.includes("W5EJ")) || (document.location.href.includes('http://127.0.0.1:5500/')));
+const cheating = document.location.href.includes("cheating")
+let devspeed = 1
+
 const logCreated = {}
 class secureLogs {
     #spawnLogs;

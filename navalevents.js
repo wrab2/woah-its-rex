@@ -57,8 +57,8 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 		if(currentLayer === currentNavalEvent.layer){
 			//500ms is base time reduction per update
 			//2000 makes event go by 5x faster
-			player.john.navalEventStartedTime -= 2000
-			navalEventEndTime -= 2000
+			player.john.navalEventStartedTime -= 2000*devspeed
+			navalEventEndTime -= 2000*devspeed
 
 			battleshipIcon.classList.add("navalGreenFlashing")
 			battleshipIcon.classList.remove("navalRedFlashing")
@@ -66,6 +66,10 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 			//wrong layer
 			battleshipIcon.classList.remove("navalGreenFlashing")
 			battleshipIcon.classList.add("navalRedFlashing")
+		}
+		if(cheating){
+			player.john.navalEventStartedTime -= 500*(devspeed-1)
+			navalEventEndTime -= 500*(devspeed-1)
 		}
 		return
 	}

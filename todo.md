@@ -22,6 +22,8 @@ add naval battles: Early 20th century, Mid-20th century, Later 20th century, Ear
 
 ## LESS IMPORTANT:
 
+remove devspeed after balancing
+
 add some ores to deep water (vocaloids, which have a chance to turn into their fumo form), Jim jane and john layers (and also jane caves)
 
 add more john quests after all 20 quests which are repeated quests but much harder for a small reward
