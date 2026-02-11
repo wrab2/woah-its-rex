@@ -64,8 +64,17 @@ SOME way to get limited ores when its not the month of the ore (maybe x1000 rari
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john)
 
-#### what the hell since when are there quadruple hastag titles
+#### horrible ideas:
 
+noadrenaline fusion
+
+index for celestials
+
+auto convert variants (this idea is horrible)
+
+make milestones give SOMETHING
+<div>
+</div>
 ##### No flipping way
 
 ###### meow
@@ -73,3 +82,4 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 ####### unbeliavable
 
 -# theres not even this
+
