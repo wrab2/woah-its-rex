@@ -586,20 +586,27 @@ const calcSpeed = function() {
         reps++;
     reps += player.gears["gear19"] ? 10 : 0;
     let extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
-    if (johnRewarded("hat") && curDirection!=="a") {
-        extraSpeed*=2
-        reps*=2
-    }
     if (currentWorld === 1.1) {
         if (debug) return {speed: 5, reps: devReps, extra:0}
         const sr1Level = player.upgrades["pickaxe27"].level;
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:extraSpeed}
-        else return {speed: 7, reps: Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1)), extra:extraSpeed}
+        else {
+			reps = Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1))
+			if (johnRewarded("hat") && curDirection!=="a") {
+				extraSpeed*=2
+				reps*=2
+			}			
+			return {speed: 7, reps: reps, extra:extraSpeed}
+		}
     }
     if (randBuff.reps) reps += 25;
     //if (player.gears["ring_of_creation"]) reps += 50;
     if (player.gears["gear36"]) reps = Math.round(reps*1.75)
     if (debug) return {speed: 5, reps: devReps, extra:0}
+    if (johnRewarded("hat") && curDirection!=="a") {
+        extraSpeed*=2
+        reps*=2
+    }
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
 }
 function updateSpeed() {
@@ -2074,7 +2081,7 @@ const polyLocations = {
     "orbOfFire" : ["cactusLayer"]
 }
 const polyIds = {
-    "orbOfLife" : "gear40",
+    "orbOfLife" : "ring_of_life",
     "orbOfIntelligence" : "gear41",
     "orbOfSound" : "ring_of_water",
     "orbOfTheUnknown" : "ring_of_time",

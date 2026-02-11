@@ -404,7 +404,7 @@ const recipes = {
     },
     //1.044e17
     //What the hell is this comment for amber
-    "gear40": {
+    "ring_of_life": {
         name: "Ring of Life",
         recipe: [{"ore": "orbOfLife", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
@@ -1101,7 +1101,7 @@ const buttonGradients = {
     "gear37Craft" : {"gradient" : "linear-gradient(to right, #ccff33, #70e000, #008000, #004b23, #007200, #38b000, #9ef01a)","applied" : false},
     "gear38Craft" : {"gradient" : "linear-gradient(to right, #f7cac9, #ffdcdb, #ffffff, #b4c8ea, #91a8d0)","applied" : false},
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
-    "gear40Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
+    "ring_of_lifeCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
     "gear41Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
     "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
     "ring_of_timeCraft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
@@ -1205,7 +1205,7 @@ const showOrders = {
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "gear41", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
@@ -2391,7 +2391,7 @@ const gearInformation = {
         effect:"1/2 Proc Rate, 3x Simulated Generation Amount",
         tier: 10,
     },
-    "gear40" : {
+    "ring_of_life" : {
         effect:"Multiplies base luck by 1.5x<br><i>Where my life began...</i>",
         tier: 11,
     },

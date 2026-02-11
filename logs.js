@@ -12,6 +12,8 @@ class secureLogs {
     #hyperdimensionalCount;
     #playtimeLuck;
     #hyperdimensionalsToAdd;
+	#completionCounter = 0;
+	#totalAmtOfOres = 0;
     constructor() {
         if (logCreated["created"]) location.reload();
         this.#spawnLogs = [];
@@ -237,7 +239,7 @@ class secureLogs {
         baseLuck += player.gears["gear30"] ? 0.3 : 0;
         baseLuck += getRewardTypes("luck", "add");
         baseLuck *= getRewardTypes("luck", "multiply");
-        if (player.gears["gear40"]) baseLuck *= 1.5;
+        if (player.gears["ring_of_life"]) baseLuck *=Math.max(1, 4*this.completionCounter/this.totalAmtOfOres);
         let luck = baseLuck;
         if (currentWorld === 1.1) {
             if (player.gears["ring_of_water"]) luck += (this.#hyperdimensionalCount * 0.01);
@@ -247,7 +249,7 @@ class secureLogs {
             if (randBuff.luck) luck *= 1.4;
             //if (player.gears["ring_of_fire"]) luck *= this.#playtimeLuck;
             //if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) luck += 10000000000 // Im sure this wont cause any problems
-            if (isNaN(luck)) return 1;
+			if (isNaN(luck)) return 1;
             else return luck;
         }
         if (player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) {player.stats.currentPickaxe = "pickaxe0"; baseLuck = 1;}
@@ -364,11 +366,24 @@ class secureLogs {
         }
         this.#hyperdimensionalCount = total;
     }
-    checkSessionTimeForLuck() {
+	
+	setupCompletionCounter(){
+		this.#totalAmtOfOres = Object.keys(oreList).length * 4
+		for (const ore of Object.keys(oreList)){
+			this.#completionCounter += playerInventory[ore].normalAmt ? 1 : 0
+			this.#completionCounter += playerInventory[ore].electrifiedAmt ? 1 : 0
+			this.#completionCounter += playerInventory[ore].radioactiveAmt ? 1 : 0
+			this.#completionCounter += playerInventory[ore].explosiveAmt ? 1 : 0
+		}
+	}
+	newOreForCompletion() {
+		#completionCounter += 1
+	}
+    /*checkSessionTimeForLuck() {
         let playTime = 1 + Math.ceil((Date.now() - verifiedOres.getStartTime()) / 60000) * 0.01
         this.#playtimeLuck = playTime;
         updateAllLayers();
-    }
+    }*/
 }
 const neededProperties = ["block", "genAt", "variant", "luck", "rng", "generationInfo", "variantInfo", "bulkAmt"]
 function encryptLogData(log, saving) {

@@ -243,7 +243,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
 			else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
 			if(player.gears["ring_of_creation"] && oreList[thisTable[i]]["decimalRarity"] >= 0.001) estAmt*=5
         } else {
-			if(player.gears["ring_of_fire"])amt *= (verifiedOres.getCaveLuck()/100 + 1)
+			if(player.gears["ring_of_fire"])amt *= (verifiedOres.getCaveLuck()/10 + 1)
 			let oreRarity = generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])]
             estAmt = amt*oreRarity;
 			if(player.gears["ring_of_creation"] && oreRarity >= 0.001) estAmt*=5
@@ -333,6 +333,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                         else if (Math.random() < 1/10) {estVariantAmt++; wasDuped = true;}
                         estVariantAmt = Math.floor(estVariantAmt);
                     }
+					if(playerInventory[blockToGive][variantInvNames[i]] === 0)verifiedOres.newOreForCompletion()
                     playerInventory[blockToGive][variantInvNames[i]] += estVariantAmt;
                     if (playerInventory[blockToGive][variantInvNames[i]] > 1e308) playerInventory[blockToGive][variantInvNames[i]] = 1e308;
                     if (messageIncluded(oreList[blockToGive]["oreTier"])) {

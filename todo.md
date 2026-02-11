@@ -6,7 +6,9 @@ change these rings:
 
 ☑️ ring of water (old name was ring of sound) = reduces naval event time by 5+3ln(amount of events) percents
 
-> ring of fire = boosts normal ability size by 1+(cave luck)/10 
+☑️ ring of fire = boosts normal ability size by 1+(cave luck)/10 
+
+ling of intelligence sucks I don't want to implement that :(
 
 > ring of intelligence = gives all powerups an upgrade: 
 
@@ -20,17 +22,17 @@ change these rings:
 
     paradoxical progression: makes it so you can get anything from paradoxical not just pre watr !
 
-> ring of life = % overall completion (aka how many ores you have, goes up to 400% if you somehow get every variant of every ore) boosts uncapped luck (idfk what uncapped luck is but other rings mentioned it so ., ill mention it!)
+☑️ ring of life = % overall completion (aka how many ores you have, goes up to 400% if you somehow get every variant of every ore) boosts uncapped luck (idfk what uncapped luck is but other rings mentioned it so ., ill mention it!)
 
 > give these rings a gradient
 
-FIX THE HAT EFFECT
+✅ FIX THE HAT EFFECT
 
 put all the fumos in the index
 
 fumo fishing
 
-make gears have abilities
+make gears have abilities (????)
 
 give hypermark checkminator a recipe, ability, luck, etc
 
