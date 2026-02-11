@@ -597,7 +597,7 @@ const calcSpeed = function() {
         else return {speed: 7, reps: Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1)), extra:extraSpeed}
     }
     if (randBuff.reps) reps += 25;
-    if (player.gears["gear44"]) reps += 50;
+    //if (player.gears["ring_of_creation"]) reps += 50;
     if (player.gears["gear36"]) reps = Math.round(reps*1.75)
     if (debug) return {speed: 5, reps: devReps, extra:0}
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
@@ -937,7 +937,7 @@ function updateInventory(m = true) {
 
     //Make Sure TOL Isn't on when you can't use it, Make sure TOL is in SR1
     if (player.stats.currentPickaxe === "pickaxe27" && currentWorld !== 1.1) {
-        if (currentWorld !== 1 && !player.gears["gear43"]) {
+        if (currentWorld !== 1 && !player.gears["ring_of_time"]) {
             player.stats.currentPickaxe = "pickaxe0"; 
             utilitySwitchActions();
         } else if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) {
@@ -2076,18 +2076,18 @@ const polyLocations = {
 const polyIds = {
     "orbOfLife" : "gear40",
     "orbOfIntelligence" : "gear41",
-    "orbOfSound" : "gear42",
-    "orbOfTheUnknown" : "gear43",
-    "orbOfCreation" : "gear44",
+    "orbOfSound" : "ring_of_water",
+    "orbOfTheUnknown" : "ring_of_time",
+    "orbOfCreation" : "ring_of_creation",
     "orbOfFlight" : "pickaxe36",
     "orbOfFire" : "gear48",
 }
 const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
+    "orbOfCreation" : ()=>{return johnRewarded("heirloom")},
     "orbOfLife" : ()=>{return false},
     "orbOfIntelligence" : ()=>{return false},
     "orbOfSound" : ()=>{return false},
-    "orbOfCreation" : ()=>{return false},
     "orbOfFlight" : ()=>{return false},
     "orbOfFire" : ()=>{return false},
 }

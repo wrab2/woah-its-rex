@@ -240,7 +240,7 @@ class secureLogs {
         if (player.gears["gear40"]) baseLuck *= 1.5;
         let luck = baseLuck;
         if (currentWorld === 1.1) {
-            if (player.gears["gear42"]) luck += (this.#hyperdimensionalCount * 0.01);
+            if (player.gears["ring_of_water"]) luck += (this.#hyperdimensionalCount * 0.01);
             if (player.gears["gear20"]) luck *= ((baseLuck * 0.05) + 1);
             if (player.gears["gear37"]) luck = luck ** 1.035;
             luck *= 1.5;
@@ -252,7 +252,7 @@ class secureLogs {
         }
         if (player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) {player.stats.currentPickaxe = "pickaxe0"; baseLuck = 1;}
         luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
-        if (player.gears["gear42"]) luck += (this.#hyperdimensionalCount * 0.01);
+        if (player.gears["ring_of_water"]) luck += (this.#hyperdimensionalCount * 0.01);
         if (currentWorld < 2) luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         if (player.gears["gear20"]) luck *= (baseLuck * 0.05) + 1;
         if (player.gears["gear37"]) luck = luck ** 1.035;

@@ -41,11 +41,11 @@ class playerTemplate {
             "gear37": false,
             "gear38": false, 
             "gear39": false, 
-            "gear40": false, //poly 1, 1.5x base luck
-            "gear41": false, //poly 2, 1/10 chance for +500000 simulated amount, applied before simulated amount multipliers
-            "gear42": false, //poly 3, 
-            "gear43": false, //poly 4, allows use of wormhole in sr1
-            "gear44": false, //poly 5, +50 reps
+            "ring_of_life": false, //poly 1, 1.5x base luck
+            "ring_of_intelligence": false, //poly 2, 1/10 chance for +500000 simulated amount, applied before simulated amount multipliers
+            "ring_of_water": false, //poly 3, 
+            "ring_of_time": false, //poly 4, allows use of wormhole in sr1
+            "ring_of_creation": false, //poly 5, +50 reps
             "gear45": false, 
             "gear46": false, 
             "gear47": false, 

@@ -422,7 +422,7 @@ const recipes = {
         },
         pUnob: true
     },
-    "gear42": {
+    "ring_of_water": {
         name: "Ring of Water",
         recipe: [{"ore": "orbOfSound", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
@@ -431,7 +431,7 @@ const recipes = {
         },
         pUnob: true
     },
-    "gear43": {
+    "ring_of_time": {
         name: "Ring of Time",
         recipe: [{"ore": "orbOfTheUnknown", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
@@ -440,7 +440,7 @@ const recipes = {
         },
         pUnob: true
     },
-    "gear44": {
+    "ring_of_creation": {
         name: "Ring of Creation",
         recipe: [{"ore": "orbOfCreation", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
@@ -1103,9 +1103,9 @@ const buttonGradients = {
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
     "gear40Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
     "gear41Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
-    "gear42Craft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
-    "gear43Craft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
-    "gear44Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
+    "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
+    "ring_of_timeCraft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
+    "ring_of_creationCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
@@ -1205,7 +1205,7 @@ const showOrders = {
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "gear42", "gear43", "gear44", "gear48"],
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "ring_of_water", "ring_of_time", "ring_of_creation", "gear48"],
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
@@ -2399,16 +2399,17 @@ const gearInformation = {
         effect:"10% Chance for +500,000 Simulated Ability Amount<br><i>Am I smart enough to be here...</i>",
         tier: 12,
     },
-    "gear42" : {
+    "ring_of_water" : {
         effect:"Reduces naval events time by 3ln(naval events completed)</i>",
         tier: 13,
     },
-    "gear43" : {
+    "ring_of_time" : {
         effect:"Allows use of Tree of Life in World 2, Watr Watr and Galactica<br><i>Happy new year</i>",
         tier: 10,
     },
-    "gear44" : {
-        effect:"+50 Movement Repetitions<br><i>This place birthed the stars in the sky...</i>",
+    "ring_of_creation" : {
+		//this is mildly incomprehensible, reword this
+        effect:"x5 ores from caves and abilities from simulated rng if they're at 1/1000 chance or more<br><i>This place birthed the stars in the sky...</i>",
         tier: 14,
     },
     "gear45" : {
