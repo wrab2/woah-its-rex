@@ -84,7 +84,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 		return
 	}
 	//chance is 1/3600 every 500ms which is ~2/hour to get any uncompleted event
-	if(availableNavalEvents.length > 0 && Math.random()<1/1){
+	if(availableNavalEvents.length > 0 && Math.random()<1/3600){
 		//start the event
 		currentNavalEvent = availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
 
@@ -109,6 +109,7 @@ const naval = {
 	fastLayers: ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer", "sillyLayer", "cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "deepWaterLayer", "johnLayer", "jimLayer", "starLayer", "nebulaLayer" ],
 	fastLayerRNG: new Math.seedrandom("guess who? hint: 🤽‍♂️"),
 	//I wonder if I need this many different RNGs here
+	//of coruse
 	timeRNG: new Math.seedrandom("john 🤽‍♂️ of time when we asked him what is he doing in fast line: I'm waiting.")
 }   
 

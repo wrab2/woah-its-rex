@@ -1,7 +1,5 @@
 # IMPORTANT:
 
-give rings a gradient
-
 come up with better requirements for each orb
 
 put all the fumos in the index
@@ -30,6 +28,8 @@ add more john quests after all 20 quests which are repeated quests but much hard
 
 make the john milestones less buggy (connectors)
 
+give rings a gradient
+
 ### low importance:
 
 fix non touhou fumos (they look like shit)
@@ -43,3 +43,31 @@ make every crafting tab visible in sr1
 SOME way to get limited ores when its not the month of the ore (maybe x1000 rarity in SRwatr?)
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
+
+# PROGRESSION:
+
+tier 0 john quests
+
+israel flag
+
+tol 6
+
+ring of time
+
+naval events
+
+tier 1 and 2 john quests (up to hypermark checkminator)
+
+checkmark gears (maybe?)
+
+a few more rings maybe
+
+second john related pickaxe
+
+POF
+
+srwater (19 quests)
+
+FISHING!!!!!
+
+last john related pickaxe (maybe related to fishing too)
