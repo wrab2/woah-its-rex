@@ -1191,7 +1191,7 @@ function craftPickaxe(item) {
     if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
     if (player.gears["gear45"]) showEventOptions();
     else hideEventOptions();
-    if(player.gears["ring_of_unknown"])pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
+    if(player.gears["ring_of_time"])pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
     updateActiveRecipe();
     utilitySwitchActions();
 }

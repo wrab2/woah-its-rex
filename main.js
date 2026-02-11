@@ -125,13 +125,16 @@ function init() {
           });
     }
     johnActivateQuest()
-		if(!cloudsaving.ongalaxy){
-			get('displayCloudIcon').style.backgroundColor = "#a51010"
-			get('cloudStatus').innerText = "Error"
-			get('cloudLastSave').innerHTML = "Please Login to Galaxy for Cloud autosave. <a href='https://galaxy.click/' target='_blank'>Login Here.</a>"
-		}
+    if(!cloudsaving.ongalaxy){
+        get('displayCloudIcon').style.backgroundColor = "#a51010"
+        get('cloudStatus').innerText = "Error"
+        get('cloudLastSave').innerHTML = "Please Login to Galaxy for Cloud autosave. <a href='https://galaxy.click/' target='_blank'>Login Here.</a>"
+    }
     
-    if(player.gears["ring_of_unknown"])pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
+    if(player.gears["ring_of_time"]){
+        pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
+        verifiedOres.checkPickaxe()
+    }
     verifiedOres.setupCompletionCounter()
 }
 function finishInit() {

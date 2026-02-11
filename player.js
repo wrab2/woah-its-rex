@@ -239,6 +239,14 @@ class playerTemplate {
         this.galacticaEntered = false,
         this.sr1Entered = false,
         this.unlockedEvents = Array.from({length: Object.keys(events).length}, () => false)
+        this.john = {
+		    spokeWith: false,
+		    questsCompleted: [],
+		    currentQuest: 0,
+		    navalEvents: [],
+		    navalEventStartedTime:0,
+		    currentNavalEventId:-1,
+	    }
     }
 }
 let player = new playerTemplate();
@@ -846,6 +854,7 @@ function loadNewData(data) {
                 }
             }
         }
+        player.john = {...playerTemplate.john, ...data.john??{}}
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
