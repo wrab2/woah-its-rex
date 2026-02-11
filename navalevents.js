@@ -83,6 +83,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 	if(availableNavalEvents.length > 0 && Math.random()<1/1){
 		//start the event
 		currentNavalEvent = availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
+		if(player.gears["ring_of_water"]) currentNavalEvent.duration = currentNavalEvent.duration * Math.min(1, (1 - (( 5+3*Math.log(player.john.navalEvents.length) )/100)) )
 		player.john.currentNavalEvent = currentNavalEvent.id
 		player.john.navalEventStartedTime = Date.now()
 		navalEventEndTime = Date.now() + currentNavalEvent.duration

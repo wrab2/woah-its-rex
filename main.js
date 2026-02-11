@@ -2084,10 +2084,10 @@ const polyIds = {
 }
 const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
+    "orbOfSound" : ()=>{return player.john.spokeWith},
     "orbOfCreation" : ()=>{return johnRewarded("heirloom")},
     "orbOfLife" : ()=>{return false},
     "orbOfIntelligence" : ()=>{return false},
-    "orbOfSound" : ()=>{return false},
     "orbOfFlight" : ()=>{return false},
     "orbOfFire" : ()=>{return false},
 }

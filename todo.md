@@ -4,7 +4,7 @@ change these rings:
 
 ☑️ ring of creation = 5x ores <1/1000 rarity
 
-> ring of water (old name was ring of sound) = reduces naval event time by 5+3ln(amount of events)
+☑️ ring of water (old name was ring of sound) = reduces naval event time by 5+3ln(amount of events) percents
 
 > ring of fire = boosts normal ability size by 1+(cave luck)/10 
 
