@@ -10,7 +10,6 @@ class secureLogs {
     #canGenCaves;
     #isLoaded;
     #hyperdimensionalCount;
-    #playtimeLuck;
     #hyperdimensionalsToAdd;
 	#completionCounter = 0;
 	#totalAmtOfOres = 0;
@@ -30,7 +29,6 @@ class secureLogs {
         this.#canGenCaves = false;
         this.#hyperdimensionalCount = 0;
         this.#hyperdimensionalsToAdd = 0;
-        this.#playtimeLuck = 1;
         this.#onLoad()
     }
     createLog(r, c, intended, obj, fromCave, gnums, vnums) {
@@ -239,7 +237,7 @@ class secureLogs {
         baseLuck += player.gears["gear30"] ? 0.3 : 0;
         baseLuck += getRewardTypes("luck", "add");
         baseLuck *= getRewardTypes("luck", "multiply");
-        if (player.gears["ring_of_life"]) baseLuck *=Math.max(1, 4*this.completionCounter/this.totalAmtOfOres);
+        if (player.gears["ring_of_life"]) baseLuck *=Math.max(1, 4*this.#completionCounter/this.#totalAmtOfOres);
         let luck = baseLuck;
         if (currentWorld === 1.1) {
             if (player.gears["ring_of_water"]) luck += (this.#hyperdimensionalCount * 0.01);
@@ -247,8 +245,6 @@ class secureLogs {
             if (player.gears["gear37"]) luck = luck ** 1.035;
             luck *= 1.5;
             if (randBuff.luck) luck *= 1.4;
-            //if (player.gears["ring_of_fire"]) luck *= this.#playtimeLuck;
-            //if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) luck += 10000000000 // Im sure this wont cause any problems
 			if (isNaN(luck)) return 1;
             else return luck;
         }
@@ -260,7 +256,6 @@ class secureLogs {
         if (player.gears["gear37"]) luck = luck ** 1.035;
         luck *= 1.5;
         if (randBuff.luck) luck *= 1.4;
-        if (player.gears["ring_of_fire"]) luck *= this.#playtimeLuck;
         if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) luck += 10000000000 // john would never smh
         if (isNaN(luck)) return 1;
         else return luck;
@@ -377,13 +372,8 @@ class secureLogs {
 		}
 	}
 	newOreForCompletion() {
-		#completionCounter += 1
+		this.#completionCounter += 1
 	}
-    /*checkSessionTimeForLuck() {
-        let playTime = 1 + Math.ceil((Date.now() - verifiedOres.getStartTime()) / 60000) * 0.01
-        this.#playtimeLuck = playTime;
-        updateAllLayers();
-    }*/
 }
 const neededProperties = ["block", "genAt", "variant", "luck", "rng", "generationInfo", "variantInfo", "bulkAmt"]
 function encryptLogData(log, saving) {

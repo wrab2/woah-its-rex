@@ -130,6 +130,9 @@ function init() {
 			get('cloudStatus').innerText = "Error"
 			get('cloudLastSave').innerHTML = "Please Login to Galaxy for Cloud autosave. <a href='https://galaxy.click/' target='_blank'>Login Here.</a>"
 		}
+    
+    if(player.gears["ring_of_unknown"])pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
+    verifiedOres.setupCompletionCounter()
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
@@ -1048,12 +1051,6 @@ function updateInventory(m = true) {
 
     //Apply luck if you found any new hypers
     verifiedOres.applyHyperdimensionalLuck()
-
-    //Increase luck based on session time with the poly
-    if (Date.now() > ChangeSessionLuck) {
-        verifiedOres.checkSessionTimeForLuck();
-        ChangeSessionLuck = Date.now() + 60000;
-    }
 
     //Silly ore!
     if (Math.random() < 1/10000000) {
@@ -2082,7 +2079,7 @@ const polyLocations = {
 }
 const polyIds = {
     "orbOfLife" : "ring_of_life",
-    "orbOfIntelligence" : "gear41",
+    "orbOfIntelligence" : "ring_of_intelligence",
     "orbOfSound" : "ring_of_water",
     "orbOfTheUnknown" : "ring_of_time",
     "orbOfCreation" : "ring_of_creation",
@@ -2093,10 +2090,10 @@ const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
     "orbOfSound" : ()=>{return player.john.spokeWith},
     "orbOfCreation" : ()=>{return johnRewarded("heirloom")},
-    "orbOfLife" : ()=>{return false},
-    "orbOfIntelligence" : ()=>{return false},
+    "orbOfLife" : ()=>{return true},
+    "orbOfIntelligence" : ()=>{return true},
     "orbOfFlight" : ()=>{return false},
-    "orbOfFire" : ()=>{return false},
+    "orbOfFire" : ()=>{return true},
 }
 function checkPolys() {
     const polys = Object.keys(polyLocations);

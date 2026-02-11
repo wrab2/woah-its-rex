@@ -1,188 +1,224 @@
 const recipes = {
     "pickaxe0" : {
         name: "The destroyer of all mines.",
-        recipe: []
+        recipe: [],
+        pickaxe: true
     },
     "pickaxe1" : {
         name : "Mulch Mallet",
         recipe : [{ore:"🟫", amt:5000},{ore:"🟧", amt:160},{ore:"🟡", amt:30},{ore:"🔴", amt:17},{ore:"⚫", amt:7}],
         active : [],
+        pickaxe: true
     },
     "pickaxe2" : {
         name : "Mud Sickle",
         recipe : [{ore:"🟫", amt:25000},{ore:"🟥", amt:750},{ore:"🔵", amt:300},{ore:"🟣", amt:60},{ore:"🧧", amt:15}],
         active : [],
+        pickaxe: true
     },
     "pickaxe3" : {
         name : "Dirt Ravager",
         recipe : [{ore:"🟫", amt:100000},{ore:"🟧", amt:4000},{ore:"🟢", amt:1800},{ore:"🟠", amt:650},{ore:"🟤", amt:240},{ore:"⬜", amt:30},{ore:"🟨", amt:2}],
         active : [],
+        pickaxe: true
     },
     "pickaxe28" : {
         name: "Crystalline Excavator",
         recipe : [{ore:"🌫️", amt:250000},{ore:"🟪", amt:6900},{ore:"🟡", amt:2500},{ore:"◽", amt:480},{ore:"🔲", amt:3},{ore:"🔘", amt:2},{ore:"🔻", amt:1},{ore:"💚", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe29" : {
         name: "Ballast Breaker",
         recipe : [{ore:"🌫️", amt:500000},{ore:"🟧", amt:25000},{ore:"🔵", amt:8500},{ore:"⚫", amt:1300},{ore:"⬛", amt:70},{ore:"🟦", amt:25},{ore:"🔺", amt:2},{ore:"🔹", amt:1},{ore:"💙", amt:2},{ore:"🤎", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe30" : {
         name: "Tropical Carver",
         recipe : [{ore:"🌫️", amt:1250000},{ore:"🟥", amt:52000},{ore:"🟢", amt:28000},{ore:"⬜", amt:500},{ore:"🔲", amt:15},{ore:"🔻", amt:5},{ore:"🔸", amt:2},{ore:"🔷", amt:3},{ore:"💚", amt:3},{ore:"❤️", amt:2},{ore:"🤍", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe4" : {
         name : "Void Crusher",
         recipe : [{ore:"📰", amt:2000000},{ore:"🟪", amt:68000},{ore:"◽", amt:4750},{ore:"⬛", amt:270},{ore:"🟨", amt:60},{ore:"🔘", amt:15},{ore:"🔹", amt:7},{ore:"🔶", amt:5},{ore:"💙", amt:10},{ore:"❤️", amt:8},{ore:"🤍", amt:4},{ore:"⚙️", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe5" : {
         name : "Geode Staff",
         recipe : [{ore:"🪨", amt:2500000},{ore:"🟠", amt:32500},{ore:"🟣", amt:12000},{ore:"◾", amt:6900},{ore:"⬜", amt:1000},{ore:"🟦", amt:160},{ore:"🔺", amt:5},{ore:"🔹", amt:8},{ore:"💜", amt:8},{ore:"🖤", amt:5},{ore:"💠", amt:1},{ore:"🥏", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe6" : {
         name : "Earth Soiler",
         recipe : [{ore:"🟫", amt:3000000},{ore:"🟧", amt:290000},{ore:"🔵", amt:87500},{ore:"🟤", amt:13500},{ore:"🔻", amt:20},{ore:"🔶", amt:8},{ore:"❤️", amt:20},{ore:"🤍", amt:10},{ore:"🍁", amt:2},{ore:"🎄", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe7" : {
         name : "Crypt Smasher",
         recipe : [{ore:"🌵", amt:4000000},{ore:"🌊", amt:1500000},{ore:"🟢", amt:185000},{ore:"🟤", amt:27750},{ore:"🟨", amt:150},{ore:"🔸", amt:20},{ore:"🔷", amt:20},{ore:"🖍️", amt:2},{ore:"⚱️", amt:2},{ore:"🤿", amt:1},{ore:"🫧", amt:1},{ore:"🎀", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe8" : {
         name : "Labyrinthian Tide",
         recipe : [{ore:"🧱", amt:5000000},{ore:"🌊", amt:5000000},{ore:"☢️", amt:5000000},{ore:"🟪", amt:470000},{ore:"🧧", amt:15000},{ore:"🟨", amt:700},{ore:"🔺", amt:65},{ore:"🔶", amt:30},{ore:"🗿", amt:2},{ore:"🪙", amt:2},{ore:"🔔", amt:2},{ore:"🧩", amt:2},{ore:"⛵", amt:3},{ore:"🎣", amt:3},{ore:"🎇", amt:1},{ore:"🧲", amt:1},{ore:"👑", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe9" : {
         name : "77 Leaf Destroyer",
         recipe : [{ore:"📰", amt:15000000},{ore:"🧱", amt:15000000},{ore:"🟥", amt:1400000},{ore:"🟣", amt:115000},{ore:"⬜", amt:13500},{ore:"🔘", amt:280},{ore:"🔹", amt:100},{ore:"✂️", amt:20},{ore:"🎲", amt:18},{ore:"🪜", amt:17},{ore:"🪚", amt:15},{ore:"🏆", amt:4},{ore:"🧨", amt:5},{ore:"🔗", amt:6},{ore:"📝", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe10" : {
         name : "Planet Buster",
         recipe : [{ore:"🟫", amt:75000000},{ore:"🟧", amt:4150000},{ore:"🟡", amt:920000},{ore:"◾", amt:135000},{ore:"🔲", amt:1200},{ore:"🔸", amt:200},{ore:"🔷", amt:180},{ore:"🍁", amt:50},{ore:"🌻", amt:45},{ore:"🪵", amt:45},{ore:"🎄", amt:35},{ore:"🎍", amt:15},{ore:"🎃", amt:6},{ore:"🌲", amt:6},{ore:"🌏", amt:2},{ore:"🌪️", amt:2},{ore:"🥗", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe11" : {
         name : "Whirlpool of Fate",
         recipe : [{ore:"🌊", amt:225000000},{ore:"🔴", amt:1200000},{ore:"◽", amt:450000},{ore:"🟨", amt:5300},{ore:"🔻", amt:1000},{ore:"🔶", amt:470},{ore:"⛵", amt:325},{ore:"🎣", amt:315},{ore:"🤿", amt:300},{ore:"🫧", amt:300},{ore:"🐟", amt:100},{ore:"👑", amt:40},{ore:"🔱", amt:35},{ore:"🌀", amt:5},{ore:"👿", amt:4},{ore:"🪩", amt:3},{ore:"💫", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe12" : {
         name : "Wings of Glory",
         recipe : [{ore:"🧱", amt:150000000},{ore:"🪨", amt:150000000},{ore:"🌫️", amt:150000000},{ore:"🔵", amt:8000000},{ore:"🟠", amt:4000000},{ore:"⚫", amt:1230000},{ore:"🧧", amt:390000},{ore:"🟦", amt:22900},{ore:"🔺", amt:1900},{ore:"💚", amt:1500},{ore:"🤍", amt:750},{ore:"🧵", amt:70},{ore:"❄️", amt:40},{ore:"🥉", amt:35},{ore:"🧊", amt:25},{ore:"💸", amt:20},{ore:"👁️", amt:7},{ore:"🌈", amt:5},{ore:"🌇", amt:3}],
         active : [],
+        pickaxe: true
     },
     "pickaxe13" : {
         name : "The Key",
         recipe :  [{ore:"🟫", amt:10000000},{ore:"🧱", amt:10000000},{ore:"🌫️", amt:10000000},{ore:"🌊", amt:10000000},{ore:"🪨", amt:10000000},{ore:"☢️", amt:10000000},{ore:"🌵", amt:10000000},{ore:"📰", amt:10000000},{ore:"🌏", amt:1},{ore:"🔩", amt:1},{ore:"🧵", amt:1},{ore:"🌀", amt:1},{ore:"❄️", amt:1},{ore:"🥀", amt:1},{ore:"🔥", amt:1},{ore:"📝", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe14" : {
         name : "Extreme Echolocator",
         recipe : [{ore:"📺", amt:50000},{ore:"🔃", amt:500},{ore:"↘️", amt:10},{ore:"⏬", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe15" : {
         name : "Corundum Caver",
         recipe : [{ore:"🚪", amt:400000},{ore:"🔁", amt:1800},{ore:"⬇️", amt:150},{ore:"⏫", amt:18},{ore:"▶️", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe16" : {
         name : "Starborne Slasher",
         recipe : [{ore:"🌐", amt:1000000},{ore:"⤵️", amt:1900},{ore:"↪️", amt:960},{ore:"🔽", amt:95},{ore:"⏮️", amt:15},{ore:"📕", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe17" : {
         name : "Nyabomb",
         recipe : [{ore:"♟️", amt:3000000},{ore:"🔂", amt:16000},{ore:"⏺️", amt:40},{ore:"⏏️", amt:10},{ore:"📗", amt:5},{ore:"📘", amt:3},{ore:"✏️", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe18" : {
         name : "Lunar Lightsabre",
         recipe : [{ore:"☁️", amt:7500000},{ore:"⬅️", amt:6000},{ore:"↖️", amt:1300},{ore:"➡️", amt:1150},{ore:"📙", amt:6},{ore:"🌧️", amt:2},{ore:"🌤️", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe19" : {
         name : "Gemstone Engraver",
         recipe : [{ore:"♟️", amt:12500000},{ore:"⬆️", amt:9750},{ore:"◀️", amt:1200},{ore:"⏯️", amt:275},{ore:"⏸️", amt:130},{ore:"📗", amt:15},{ore:"🧠", amt:2},{ore:"📐", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe20" : {
         name : "Gambler's Fallacy",
         recipe : [{ore:"❌", amt:2000000},{ore:"📺", amt:35000000},{ore:"🔼", amt:4850},{ore:"⏪", amt:1400},{ore:"✴️", amt:3},{ore:"📙", amt:20},{ore:"🛡️", amt:20},{ore:"🪃", amt:10},{ore:"🪓", amt:3},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe21" : {
         name : "Exponential Centrifuge",
         recipe : [{ore:"☁️", amt:37500000},{ore:"🚪", amt:37500000},{ore:"🔃", amt:2160000},{ore:"⏏️", amt:70},{ore:"📘", amt:50},{ore:"🔑", amt:20},{ore:"🌨️", amt:10},{ore:"🖇️", amt:10},{ore:"⛈️", amt:3},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe22" : {
         name : "Singularity Slammer",
         recipe : [{ore:"❌", amt:75000000},{ore:"📺", amt:100000000},{ore:"🔄", amt:2230000},{ore:"↪️", amt:260000},{ore:"⏬", amt:7800},{ore:"⏯️", amt:2100},{ore:"📗", amt:35},{ore:"📕", amt:30},{ore:"📙", amt:25},{ore:"📘", amt:20},{ore:"🛡️", amt:30},{ore:"🪃", amt:25},{ore:"🪓", amt:5},{ore:"🔕", amt:2},{ore:"🔨", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe23" : {
         name : "Staff of Binding",
         recipe : [{ore:"🚪", amt:200000000},{ore:"↘️", amt:148000},{ore:"➡️", amt:73000},{ore:"🔽", amt:49000},{ore:"🔒", amt:125},{ore:"🔑", amt:100},{ore:"🖇️", amt:35},{ore:"🔏", amt:5},{ore:"⛓️", amt:4},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe24" : {
         name : "SSS",
         recipe : [{ore:"☁️", amt:625000000},{ore:"🔃", amt:16175000},{ore:"⤵️", amt:2440000},{ore:"⏬", amt:28900},{ore:"⏺️", amt:18300},{ore:"📙", amt:7500},{ore:"📘", amt:6000},{ore:"🌨️", amt:300},{ore:"🪁", amt:200},{ore:"⛈️", amt:120},{ore:"🌩️", amt:45},{ore:"🪶", amt:4},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe25" : {
         name : "Coronary Catastrophe",
         recipe : [{ore:"🌐", amt:1500000000},{ore:"🔂", amt:17825000},{ore:"⬇️", amt:1480000},{ore:"◀️", amt:220000},{ore:"⏫", amt:178000},{ore:"🖱️", amt:2300},{ore:"💔", amt:200},{ore:"🔪", amt:50},{ore:"🧂", amt:20},{ore:"📽️", amt:10},{ore:"💘", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe26" : {
         name : "Null Chroma",
         recipe : [{ore:"❌", amt:44444444444},{ore:"🕳️", amt:2600000},{ore:"✴️", amt:260},{ore:"⚙️", amt:1750000},{ore:"💠", amt:1460000},{ore:"🫧", amt:1000000},{ore:"💍", amt:584000},{ore:"🎍", amt:240000},{ore:"👑", amt:140000},{ore:"💎", amt:51500},{ore:"🌟", amt:34000},{ore:"💥", amt:23360},{ore:"🌀", amt:14175},{ore:"🪐", amt:12350},{ore:"🥗", amt:10950},{ore:"🪩", amt:8750},{ore:"📌", amt:275},{ore:"🚧", amt:320},{ore:"💫", amt:4350},{ore:"⛏️", amt:1},{ore:"☯️", amt:1},{ore:"🌳", amt:30},{ore:"🏰", amt:30},{ore:"🚿", amt:30},{ore:"🏔️", amt:30},{ore:"⚠️", amt:30},{ore:"🐪", amt:30},{ore:"🐋", amt:1095},{ore:"💵", amt:30},{ore:"🍃", amt:25},{ore:"👾", amt:15},{ore:"🪡", amt:15},{ore:"🚽", amt:15},{ore:"🎓", amt:15},{ore:"⚡", amt:15},{ore:"💘", amt:30},{ore:"💢", amt:50},{ore:"🪽", amt:2},{ore:"🗝️", amt:2},{ore:"🚫", amt:2},{ore:"♨️", amt:1},]        ,
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe27" : {
         name: "The Tree of Life",
         recipe : [],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe31" : {
         name: "Undersea Eviscerator",
         recipe : [{ore:"🌊", amt:500000000000},{"ore":"⛵","amt":336000000},{"ore":"🎣","amt":322000000},{"ore":"🤿","amt":306000000},{"ore":"🫧","amt":303000000},{"ore":"🐟","amt":102000000},{"ore":"👑","amt":40800000},{"ore":"🔱","amt":37900000},{"ore":"🌀","amt":4290000},{"ore":"👿","amt":3540000},{"ore":"🪩","amt":2650000},{"ore":"💫","amt":1320000},{"ore":"🐋","amt":331000},{"ore":"⚓","amt":3540},{ore:"🪸", amt:1000},{ore:"HD 160529", amt:1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe32" : {
         name: "Dimensional Slicer",
         recipe : [{ore:"australiumIngot", amt:7500000},{ore: "⚠️", amt:175000},{ore: "🐪", amt:150000},{ore: "🐋", amt:145000},{ore: "🏰", amt:131500},{ore: "💵", amt:131500},{ore: "🌳", amt:125000},{ore: "🦴", amt:6700},{ore: "🦚", amt:4800},{ore: "🎩", amt:3900},{ore: "🏯", amt:2725},{ore: "🍓", amt:2095},{ore: "🤖", amt:1830},{ore: "Bismuth", amt:1140},{ore: "mutatedGrowth", amt:320},{ore: "godOfTheMine", amt:5},{ore: "unstableCore", amt:1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe33" : {
         name: "Wormhole Exterminator",
         recipe : [{ore:"australiumIngot", amt:66000000},{"ore":"⚙️","amt":250000000},{"ore":"🃏","amt":250000000},{"ore":"🖍️","amt":250000000},{"ore":"✂️","amt":250000000},{"ore":"⚱️","amt":250000000},{"ore":"🎲","amt":250000000},{"ore":"📟","amt":250000000},{"ore":"🗡️","amt":250000000},{"ore":"🎀","amt":250000000},{"ore":"🏆","amt":250000000},{"ore":"🗜️","amt":250000000},{"ore":"⌚","amt":206000000},{"ore":"⭐","amt":152000000},{"ore":"🔆","amt":143000000},{"ore":"🔥","amt":67200000},{"ore":"📝","amt":53800000},{"ore":"🌟","amt":41800000},{"ore":"💥","amt":28600000},{"ore":"🪐","amt":15100000},{"ore":"👀","amt":11200000},{"ore":"🏵️","amt":4130000},{"ore":"🪅","amt":3310000},{"ore":"🐪","amt":1370000},{"ore":"💵","amt":1200000},{"ore":"🦴","amt":61400},{"ore":"🎩","amt":35800},{"ore":"J1407b","amt":1},{"ore":"ascendedArtifact","amt":1}],
         active : [],
         pUnob: true,
+        pickaxe: true
     },
     "pickaxe34" : {
         name: "Supercluster Capsizer",
         recipe : [{"ore":"🎮","amt":1250000000},{"ore":"🎫","amt":1250000000},{"ore":"🚗","amt":1250000000},{"ore":"📢","amt":1250000000},{"ore":"🎑","amt":1010000000},{"ore":"📿","amt":336000000},{"ore":"🎎","amt":159000000},{"ore":"🗳️","amt":113000000},{"ore":"⚛️","amt":28100000},{"ore":"🛢️","amt":8200000},{"ore":"💽","amt":323000},{"ore":"🍭","amt":37500},{"ore":"singularityEgg","amt":1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe35" : {
         name: "Galactic Engulfer",
         recipe : [{"ore":"nebula","amt":25000000000000},{"ore":"J1407b","amt":45},{"ore":"ascendedArtifact","amt":33},{"ore":"otherside","amt":17},{"ore":"noradrenaline","amt":1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe36": {
         name: "Pickaxe of Flight",
@@ -191,7 +227,8 @@ const recipes = {
         req: function() {
             return player.p.orbOfFlight;
         },
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "hypermark_checkminator": { //so how is this called bruh 😭😭😭✅✅✅✅✅✅✅😭😭
         name: "Hypermark Checkminator",
@@ -413,7 +450,7 @@ const recipes = {
         },
         pUnob: true
     },
-    "gear41": {
+    "ring_of_intelligence": {
         name: "Ring of Intelligence",
         recipe: [{"ore": "orbOfIntelligence", "amt": 1}],
         active : [0.9, 1, 1.2, 1.1, 2],
@@ -477,21 +514,25 @@ const recipes = {
         name: "John's Family Heirloom",
         recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["heirloom"]}],
         active : [0.9, 1, 1.2, 1.1, 2],
+        pUnob: true
     },
     "water_polo_ball": {
         name: "Stolen Water Polo Ball",
         recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["water_polo_ball"]}],
         active : [0.9, 1, 1.2, 1.1, 2],
+        pUnob: true
     },
     "hat": {
         name: "John's Hat",
         recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["hat"]}],
         active : [0.9, 1, 1.2, 1.1, 2],
+        pUnob: true
     },
     "ring_enabler": {
         name: "John's Ring Enabler",
         recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["ring_enabler"]}],
         active : [0.9, 1, 1.2, 1.1, 2],
+        pUnob: true
     },
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
@@ -1102,7 +1143,7 @@ const buttonGradients = {
     "gear38Craft" : {"gradient" : "linear-gradient(to right, #f7cac9, #ffdcdb, #ffffff, #b4c8ea, #91a8d0)","applied" : false},
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
     "ring_of_lifeCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
-    "gear41Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
+    "ring_of_intelligenceCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
     "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
     "ring_of_timeCraft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
     "ring_of_creationCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
@@ -1114,7 +1155,7 @@ const buttonGradients = {
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
-    const type = (item.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
+    const type = (recipes[item].pickaxe || recipe.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
     if (item === "pickaxe27") {
         if (currentWorld === 1.1 && player.upgrades["pickaxe27"].level < 6) {
             recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
@@ -1160,6 +1201,7 @@ function craftPickaxe(item) {
     if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
     if (player.gears["gear45"]) showEventOptions();
     else hideEventOptions();
+    if(player.gears["ring_of_unknown"])pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
     updateActiveRecipe();
     utilitySwitchActions();
 }
@@ -1205,7 +1247,7 @@ const showOrders = {
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "gear41", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "ring_of_intelligence", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
@@ -2125,7 +2167,7 @@ const pickaxeStats = {
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
         canSpawnCaves:[1, 1.1],
-        canMineIn:[1, 1.1, 1.2, 2, 0.9],
+        canMineIn:[1, 1.1],
         tier: 8,
         icon: "",
     }, 
@@ -2395,7 +2437,7 @@ const gearInformation = {
         effect:"Multiplies base luck by 1.5x<br><i>Where my life began...</i>",
         tier: 11,
     },
-    "gear41" : {
+    "ring_of_intelligence" : {
         effect:"10% Chance for +500,000 Simulated Ability Amount<br><i>Am I smart enough to be here...</i>",
         tier: 12,
     },
@@ -2452,7 +2494,7 @@ function ct(john=false) {
     const pickaxeUsing = player.stats.currentPickaxe;
     let abilityMined = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].mined : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
     if (player.settings.simulatedRng || pickaxeStats[pickaxeUsing].isDimensional) {
-        if (player.gears["gear41"]) abilityMined += 50000;
+        if (player.gears["ring_of_intelligence"]) abilityMined += 50000;
         if (player.gears["gear34"]) abilityMined = Math.floor(abilityMined*2);
         if (player.gears["gear39"]) abilityMined = Math.floor(abilityMined*3);
     }

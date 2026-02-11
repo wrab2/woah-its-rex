@@ -2,11 +2,11 @@
 
 change these rings:
 
-☑️ ring of creation = 5x ores <1/1000 rarity
+✅ ring of creation = 5x ores <1/1000 rarity
 
-☑️ ring of water (old name was ring of sound) = reduces naval event time by 5+3ln(amount of events) percents
+✅ ring of water (old name was ring of sound) = reduces naval event time by 5+3ln(amount of events) percents
 
-☑️ ring of fire = boosts normal ability size by 1+(cave luck)/10 
+✅ ring of fire = boosts normal ability size by 1+(cave luck)/10 
 
 ling of intelligence sucks I don't want to implement that :(
 
@@ -22,7 +22,7 @@ ling of intelligence sucks I don't want to implement that :(
 
     paradoxical progression: makes it so you can get anything from paradoxical not just pre watr !
 
-☑️ ring of life = % overall completion (aka how many ores you have, goes up to 400% if you somehow get every variant of every ore) boosts uncapped luck (idfk what uncapped luck is but other rings mentioned it so ., ill mention it!)
+✅ ring of life = % overall completion (aka how many ores you have, goes up to 400% if you somehow get every variant of every ore) boosts uncapped luck (idfk what uncapped luck is but other rings mentioned it so ., ill mention it!)(it means luck)
 
 > give these rings a gradient
 
