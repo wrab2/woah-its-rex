@@ -23,7 +23,6 @@ async function rollAbilities(force) {
             let bulkAmt = 0;
             if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
             else bulkAmt = pickaxe.mined;
-            if (player.gears["ring_of_intelligence"] && Math.random() < 1/10) bulkAmt += 500000;
             if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
             if (player.gears["gear39"]) bulkAmt = Math.floor(bulkAmt*3);
             bulkGenerate(curY, bulkAmt, undefined, false)

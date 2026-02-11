@@ -450,15 +450,6 @@ const recipes = {
         },
         pUnob: true
     },
-    "ring_of_intelligence": {
-        name: "Ring of Intelligence",
-        recipe: [{"ore": "orbOfIntelligence", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
-        req: function() {
-            return polyRequirements.orbOfIntelligence();
-        },
-        pUnob: true
-    },
     "ring_of_water": {
         name: "Ring of Water",
         recipe: [{"ore": "orbOfSound", "amt": 1}],
@@ -1143,7 +1134,6 @@ const buttonGradients = {
     "gear38Craft" : {"gradient" : "linear-gradient(to right, #f7cac9, #ffdcdb, #ffffff, #b4c8ea, #91a8d0)","applied" : false},
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
     "ring_of_lifeCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
-    "ring_of_intelligenceCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
     "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
     "ring_of_timeCraft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
     "ring_of_creationCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
@@ -1247,7 +1237,7 @@ const showOrders = {
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "ring_of_intelligence", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
@@ -2437,10 +2427,6 @@ const gearInformation = {
         effect:"Multiplies base luck by 1.5x<br><i>Where my life began...</i>",
         tier: 11,
     },
-    "ring_of_intelligence" : {
-        effect:"10% Chance for +500,000 Simulated Ability Amount<br><i>Am I smart enough to be here...</i>",
-        tier: 12,
-    },
     "ring_of_water" : {
         effect:"Reduces naval events time by 3ln(naval events completed)</i>",
         tier: 13,
@@ -2494,7 +2480,6 @@ function ct(john=false) {
     const pickaxeUsing = player.stats.currentPickaxe;
     let abilityMined = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].mined : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
     if (player.settings.simulatedRng || pickaxeStats[pickaxeUsing].isDimensional) {
-        //if (player.gears["ring_of_intelligence"]) abilityMined += 50000;
         if (player.gears["gear34"]) abilityMined = Math.floor(abilityMined*2);
         if (player.gears["gear39"]) abilityMined = Math.floor(abilityMined*3);
         if(player.gears["ring_of_fire"])abilityMined *= (verifiedOres.getCaveLuck()/10 + 1)

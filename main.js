@@ -2079,7 +2079,6 @@ const polyLocations = {
 }
 const polyIds = {
     "orbOfLife" : "ring_of_life",
-    "orbOfIntelligence" : "ring_of_intelligence",
     "orbOfSound" : "ring_of_water",
     "orbOfTheUnknown" : "ring_of_time",
     "orbOfCreation" : "ring_of_creation",
@@ -2090,10 +2089,10 @@ const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
     "orbOfSound" : ()=>{return player.john.spokeWith},
     "orbOfCreation" : ()=>{return johnRewarded("heirloom")},
-    "orbOfLife" : ()=>{return true},
-    "orbOfIntelligence" : ()=>{return true},
-    "orbOfFlight" : ()=>{return false},
-    "orbOfFire" : ()=>{return true},
+    "orbOfLife" : ()=>{return player.john.spokeWith},
+    "orbOfIntelligence" : ()=>{return player.john.spokeWith},
+    "orbOfFlight" : ()=>{return player.john.spokeWith},
+    "orbOfFire" : ()=>{return player.john.spokeWith},
 }
 function checkPolys() {
     const polys = Object.keys(polyLocations);

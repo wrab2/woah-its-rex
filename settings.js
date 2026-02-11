@@ -576,7 +576,6 @@ function createIndexCards(layer) {
                 let pickaxe = pickaxeStats[player.stats.currentPickaxe];
                 if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
                 else bulkAmt = pickaxe.mined;
-                if (player.gears["ring_of_intelligence"]) bulkAmt += 50000;
                 if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
                 if (player.gears["gear39"]) bulkAmt = Math.floor(bulkAmt*3);
                 const rarity = oreList[ore]["decimalRarity"] * bulkAmt;
