@@ -573,6 +573,7 @@ let oreList = {
     'heavenlyJohn' : { 'decimalRarity': 1 / 5e18, 'numRarity': 5e18, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: do you think he accepts bribes', 'oreTier': 'Johnical',  'hasImage' : true, "src" : "media/ores/heavenly_john.png", "oreName" : "Heavenly John"},
 
     'stars' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/stars.png", "oreName": "Stars"},
+    "🟩": { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🟫': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🧱': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '🌫️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
@@ -664,15 +665,30 @@ let oreList = {
     'Star Core':{ 'decimalRarity': 1 / 950000000000000, 'numRarity': 950000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "The gears spin and spin, generating the energy to make the star's radiant glow...", 'oreTier': 'Imaginary',  'hasImage' : true, "src" : "media/ores/starcore.png", "oreName" : "Star Core",},
 	'🚁':{ 'decimalRarity': 1 / 1e24, 'numRarity': 1e24, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'What. The. Hell. ?!?! HOW', 'oreTier': 'Polychromatical'},
 
+    'neru' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'neru is lowk boring we have too many yellow vocaloids', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/neru.png", "oreName" : "Akita Neru"},
+    'miku' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'very niche vocaloid not many know her', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/miku.png", "oreName" : "Hatsune Miku"},
+    'teto' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'i was debating putting teto because i dont think anyone likes her (this is a joke)', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/teto.png", "oreName" : "Kasane Teto"},
+    'hitori' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'the pink one from bocchi the rock (and the show is also named after her) lowk like 2nd best out of the band', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/hitori_gotoh.png", "oreName" : "Hitori Gotoh"},
+    'ryou' : { 'decimalRarity': 1 / 9e14, 'numRarity': 9e14, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'I LOVE RYOU YAMADA SO MUCH SHES SO GOATED!!!', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/ryou_yamada.png", "oreName" : "Ryou Yamada"},
+    'nijika' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'yellow one from bocchi the rock lowk', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/nijika_ijichi.png", "oreName" : "Nijika Ijichi"},
+    'kita' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'red one from bocchi the rock and shes like EVIL and yuriful', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/ikuyo_kita.png", "oreName" : "Ikuyo Kita"},
+    'rei' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'adachi rei is goated asf !!! shes so :3', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/adachi_rei.png", "oreName" : "Adachi Rei"},
+    'rin' : { 'decimalRarity': 1 / 1e15, 'numRarity': 1e15, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'kagamine rin... more like KETAMINE rin :rofl:', 'oreTier': 'Hyperdimensional',  'hasImage' : true, "src" : "media/fumo_fishing/kagamine_rin.png", "oreName" : "Kagamine Rin"},
+
     
     "☯️" : { 'decimalRarity': 1 / 987656789, 'numRarity': 987656789, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Through light and darkness, only one may guide you to the truth...', 'oreTier': 'Celestial',  },
     "⛏️": { 'decimalRarity': 1 / 10000000, 'numRarity': 10000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'Thoughts of what lies on the other side cloud your mind until.. a mirror image appears..?', 'oreTier': 'Celestial',  },
     "⚪": { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
-    "🟩": { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     "🩶": { 'decimalRarity': 1 / 10000, 'numRarity': 10000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Celestial',  },
-    "🩷": { 'decimalRarity': 1 / 10000, 'numRarity': 10000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Celestial',  }
+    "🩷": { 'decimalRarity': 1 / 10000, 'numRarity': 10000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Celestial',  },
+
+
+//vocaloids
+
+
 }
 const playerInventory = {
+
     
 }
 let variantInvNames = ["normalAmt", "electrifiedAmt", "radioactiveAmt", "explosiveAmt"];
@@ -713,7 +729,7 @@ const layerList = {
 "catcatLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳'],
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
-"deepWaterLayer" : ["🚁"/*don't know what to put here*/,"deepWater"],
+"deepWaterLayer" : ["miku", "teto", "neru", "rei", "rin", "hitori", "nijika", "kita", "ryou", "deepWater"],
 "jimLayer":["sillyMiner",'🤽'], 
 "johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"],
 "johnLayer_CLT":['🤽‍♂️'],

@@ -36,9 +36,9 @@ give rings a gradient
 
 add the other fumos
 
-fix non touhou fumos (they look like shit)
+add vocaloid fumo variants
 
-add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fishing, naval event % completed)
+add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fishing, naval event % completed, vocaloid fumo transformation thingies)
 
 bugtest
 
@@ -50,28 +50,22 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 
 # PROGRESSION:
 
-tier 0 john quests
+quest 1
 
-israel flag
+(optional) hat
 
-tol 6
+either: tol6 & orb of the unknown (orb of time) OR naval events, orb of water
 
-ring of time
+other paths that you didnt go
 
-naval events
+q5-10
 
-tier 1 and 2 john quests (up to hypermark checkminator)
+hypermark checkminator and orbs OR PoF
 
-checkmark gears (maybe?)
+other path
 
-a few more rings maybe
+john pick 2 (name pending)
 
-second john related pickaxe
+Fishing OR ???
 
-POF
-
-srwater (19 quests)
-
-FISHING!!!!!
-
-last john related pickaxe (maybe related to fishing too)
+winner :crown:
