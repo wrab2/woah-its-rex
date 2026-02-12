@@ -16,7 +16,7 @@ srwater, (at 19 quests) with all of johns friends, its johns house and also rare
 
 ability to steal johns poker chips
 
-add naval battles: Early 20th century, Mid-20th century, Later 20th century, Early 21st century
+add john contributions to naval events
 
 ## LESS IMPORTANT:
 
