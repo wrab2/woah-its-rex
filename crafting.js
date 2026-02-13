@@ -1467,7 +1467,7 @@ const oreRecipes = {
         "multiplier" : 1
     },
     "israelCraft" : {
-        "cost" : [{"ore":"⚙️", "amt":250000000}, {"ore":"bitcoin", "amt":100000}, {"ore":"🐰", "amt":1}, {"ore":"✡️", "amt":1}, {"ore":"🧨", "amt":100000000}, {"ore":"💸", "amt":1000000000}, {"ore":"🇫🇷", "amt":10000000}, {"ore":"🇺🇸", "amt":10000000}, {"ore":"🛢️", "amt":10000000},{"ore":"evilJohn", "amt":1}, {"ore":"singularityEgg", "amt":1}],
+        "cost" : [{"ore":"⚙️", "amt":250000000}, {"ore":"bitcoin", "amt":5000}, {"ore":"🐰", "amt":1}, {"ore":"✡️", "amt":1}, {"ore":"🧨", "amt":100000000}, {"ore":"💸", "amt":1000000000}, {"ore":"🇫🇷", "amt":50e3}, {"ore":"🇺🇸", "amt":120e3}, {"ore":"🛢️", "amt":40e6},{"ore":"evilJohn", "amt":1}, {"ore":"singularityEgg", "amt":1}],
         "result" : [{"ore":"🇮🇱", "amt":1}],
         "multiplier" : 1
     },
@@ -1702,9 +1702,9 @@ const upgradeRecipes = {
         "upgrade5" : 
         { 
             recipe : [
-                {ore: "🏳️‍⚧️", amt: 10000},
-                {ore: "🏁", amt: 50000},
-                {ore: "🏳️‍🌈", amt: 500000},
+                {ore: "🏳️‍⚧️", amt: 1},
+                {ore: "🏁", amt: 50},
+                {ore: "🏳️‍🌈", amt: 70000},
                 {ore: "🇮🇱", amt: 1},
                 {ore: "🇭🇰", amt: 1},
                 {ore: "silly", amt: 1},
