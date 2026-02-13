@@ -446,7 +446,7 @@ let caveList = {
 "axCave" : ['🇧🇶', '🇸🇭', '🇳🇺', '🇬🇮', '🇬🇫', '🇧🇲', '🇦🇽'],
 "foCave" : ['🇭🇰', '🇮🇲', '🇵🇲', '🇬🇸', '🇳🇫', '🇫🇰', '🇰🇾', '🇫🇴'],
 "watrCave" : ["eternalCoral", "🌊"],
-"janeCave" : ["🤽🏾‍♀️","🤽‍♀️"],
+"janeCave" : ["real","🤽‍♀️"],
 }
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 let oolProbabilities = {

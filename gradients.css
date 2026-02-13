@@ -519,13 +519,21 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#ringOfLife span{
-    background: linear-gradient(to right,#403330 5%, #9A2910, #403330 95%);
+#ringoflife span {
+    background: linear-gradient(180deg in lch, #1e2d10, #6c8c07, #c2b671, #e4e8dd, #9f7d5c, #463a2c);
+    background-size: 600% 600%;
+    animation: ringoflife 20s ease infinite;
     -webkit-background-clip: text;
-    color: transparent;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
 }
+@keyframes ringoflife {
+    0%   { background-position: 50% 0%; }
+    50%  { background-position: 51% 100%; }
+    100% { background-position: 50% 0%; }
+}
+
 #ringOfIntelligence span{
     background: linear-gradient(to right,#403330 5%, #1662A4, #403330 95%);
     -webkit-background-clip: text;
@@ -586,7 +594,7 @@
     -webkit-text-fill-color: transparent;
 }
 #ringOfFire span{
-    background: linear-gradient(to right,#403330 5%, #, #403330 95%);
+    background: linear-gradient(to right,#403330 5%, #FF0000, #403330 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
@@ -689,7 +697,6 @@
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-}
 }
 #casinoChips span{
     background: linear-gradient(to right,#1a1a1a 5%, #ff2d95, #ffd700, #00e5ff, #9b5cff, #1a1a1a 95%);
