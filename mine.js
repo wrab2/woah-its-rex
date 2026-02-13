@@ -167,7 +167,7 @@ function aleaRandom() {
 const generateBlock = function(location, wbm) {
     wbm ??= false;
     blocksRevealedThisReset++;
-	if(location["Y"]==200e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
+	if(location["Y"]==20e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;
@@ -587,7 +587,7 @@ function switchDistance(num) {
 
         let availableLocations = [{distance:1000}]
         if(playerInventory["deepWater"].normalAmt > 1e9) availableLocations.push({distance:200000})
-        if(player.john.spokeWith) availableLocations.push({layer:"john", distance:200e6})
+        if(player.john.spokeWith) availableLocations.push({layer:"john", distance:20e6})
 		availableLocations = availableLocations.concat(specialLayerLocationsWW)
         if(num === 1){
             wwTeleportsIndex = (wwTeleportsIndex+1) % availableLocations.length

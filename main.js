@@ -299,7 +299,6 @@ function loadContent() {
     musicPlayer.songs["song4"].src = new Audio("audios/mooing_audio_1.mp3");
     musicPlayer.songs["song5"].src = new Audio("audios/song5fakeMIDI.mp3");
     musicPlayer.songs["song6"].src = new Audio("audios/song6.mp3");
-    musicPlayer.songs["song7"].src = new Audio("audios/song7.mp3");
     musicPlayer.songs["song8"].src = new Audio("audios/song8.mp3");
     musicPlayer.songs["song9"].src = new Audio("audios/song9.mp3");
     musicPlayer.songs["song10"].src = new Audio("audios/song10.mp3");
@@ -2073,7 +2072,6 @@ function preventCrash(event) {
 }
 const polyLocations = {
     "orbOfLife" : ["dirtLayer", "dirtLayer2"],
-    "orbOfIntelligence" : ["chessLayer"],
     "orbOfSound" : ["deepWaterLayer"],
     "orbOfTheUnknown" : ["borderLayer"],
     "orbOfCreation" : ["nebulaLayer"],
@@ -2090,10 +2088,9 @@ const polyIds = {
 }
 const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
-    "orbOfSound" : ()=>{return player.john.spokeWith},
-    "orbOfCreation" : ()=>{return johnRewarded("heirloom")},
-    "orbOfLife" : ()=>{return player.john.spokeWith},
-    "orbOfIntelligence" : ()=>{return player.john.spokeWith},
+    "orbOfSound" : ()=>{return johnRewarded("heirloom")},
+    "orbOfCreation" : ()=>{player.pickaxes["hypermarkCheckminator"]},
+    "orbOfLife" : ()=>{return johnRewarded("hat")},
     "orbOfFlight" : ()=>{return player.john.spokeWith},
     "orbOfFire" : ()=>{return player.john.spokeWith},
 }

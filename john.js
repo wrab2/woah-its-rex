@@ -18,7 +18,14 @@ function johnRewarded(reward) {
 	if(player.john.questsCompleted.length >= johnRewards[reward]) return true
 	return false
 }
-
+const QuestTiers = [
+	"Antique",
+	"Flawless",
+	"Metaversal",
+	"Hyperdimensional",
+	"polychromatic",
+    "Johnical"
+]
 const johnQuests = [
 	{
 		story:"my old coworker johan, please go find him, hes currently taking care of all the doors, but he forgot to give me back my 20 bucks so please bring back 5 of him (so i get 120 dollars 🤑)",
@@ -27,7 +34,8 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["doorLayer"],
-		order:1  
+		order:1,
+		tier: 0
 	},
 	{
 		story:"please help me find jackson, i need to tell him about the WCP, get me 2 of him, (so that i can get his reaction twice)",
@@ -36,7 +44,8 @@ const johnQuests = [
 		amount:2,
 		cave: false,
 		layers:["vaLayer"],
-		order:2  
+		order:2,
+		tier: 0
 	},
 		{
 		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 10 of him though because 10 is better than 1",
@@ -45,7 +54,8 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:["chessLayer"],
-		order:3  
+		order:3,
+		tier: 0
 	},
 		{
 		story:"help me find ron, im pretty sure hes still sleeping at his house, ever since i kicked him out of the WCP he became a alcoholic (get me 10 of him so i can make fun of him tenfold)",
@@ -54,16 +64,18 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:["tvLayer"],
-		order:4  
+		order:4,
+		tier: 0
 	},
 		{
 		story:"get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)",
-		ore_stry:"johan is found in the barrier layer (the black X) in W2",
+		ore_stry:"johan is found in the barrier layer (the black X (✖️)) in W2",
 		ore:"🤽🏿",
 		amount:5,
 		cave: false,
 		layers:["barrierLayer"],
-		order:5  
+		order:5,
+		tier: QuestTiers.indexOf("Antique")
 	},
 		{
 		story:"im really hungry right now so can you get me 10 shawns, theyre currently holding a party, i need to ask them if they can give me a spare slice of cake",
@@ -72,7 +84,8 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:["sillyLayer"],
-		order:6  
+		order:6,
+		tier: 0
 	},
 		{
 		story:"i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer (like any true cactus monarch #reference), thankfully though you only need one as hes a dictator he does not have anyone else in power other than him",
@@ -81,7 +94,8 @@ const johnQuests = [
 		amount:1,
 		cave: false,
 		layers:["cactusLayer"],
-		order:7  
+		order:7,
+		tier: 0
 	},
 		{
 		story:"pick up 5 rowans please, i need them for a very important deal",
@@ -90,7 +104,8 @@ const johnQuests = [
 		amount:5,
 		cave: false,
 		layers:["jimLayer"],
-		order:8  
+		order:8,
+		tier: 0
 	},
 		{
 		story:"i need you to find me 5 hundred dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
@@ -99,7 +114,8 @@ const johnQuests = [
 		amount:500,
 		cave: false,
 		layers:["radioactiveLayer"],
-		order:9  
+		order:9,
+		tier: 0
 	},
 		{
 		story:"find me jordan (not the country), they need to show up to my housewarming party get me 10 of them though because thats not a power of 3",
@@ -108,7 +124,8 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:["scLayer"],
-		order:10  
+		order:10,
+		tier: 0
 	},
 		{
 		story:"janine is my sister (jane)'s bestie, please find 1 of her",
@@ -117,7 +134,8 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["bacteriaCave"],
-		order:11 
+		order:11,
+		tier: 0
 	},
 		{
 		story:"me and joan were planning on going to the new adachi rei concert, please Find her so she can give me my ticket",
@@ -126,7 +144,8 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["musicCave"],
-		order:12 
+		order:12,
+		tier: 0
 	},
 		{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
@@ -135,7 +154,8 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["abysstoneCave"],
-		order:13 
+		order:13,
+		tier: 0
 	},
 		{
 		story:"i was jocelyns successor in the WCP, so please get me her",
@@ -144,7 +164,8 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["janeCave"],
-		order:14 
+		order:14,
+		tier: 0
 	},
 		{
 		story:"this is rowen's cousin, please get me 1 of her",
@@ -153,7 +174,8 @@ const johnQuests = [
 		amount:1,
 		cave: true,
 		layers:["biohazardCave"],
-		order:15 
+		order:15,
+		tier: 0
 	},
 		{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
@@ -162,7 +184,8 @@ const johnQuests = [
 		amount:1,
 		cave: false,
 		layers:[""], // Hes in the forge
-		order:16 
+		order:16,
+		tier: 0
 	},
 		{
 		story:"please get me uhh... who the hell is this?",
@@ -171,7 +194,8 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:[""], // Hes a CLT from denying 5 john requests, but once you get him you can get him anytime (so you dont get softlocked)
-		order:17 
+		order:17,
+		tier: 0
 	},
 		{
 		story:"i lost my roomate, i cant find him anywhere so you gotta find him for me",
@@ -180,7 +204,8 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:["johnLayer_CLT"], // repeating john layer CLT
-		order:18 
+		order:18,
+		tier: 0
 	},
 		{
 		story:"i dropped my wallet yesterday, can you go get jack (hes the one who got my wallet)",
@@ -189,7 +214,8 @@ const johnQuests = [
 		amount:1,
 		cave: false,
 		layers:["deepWaterLayer"],
-		order:19 
+		order:19,
+		tier: 0
 	},
 		{
 		story:"please get me 10 heavenly johns, i need to attone for my sins",
@@ -198,7 +224,8 @@ const johnQuests = [
 		amount:10,
 		cave: false,
 		layers:["cloudLayer", "cloudLayer2"],
-		order:20 
+		order:20,
+		tier: 0
 	},
 ]
 
@@ -287,7 +314,7 @@ function rejectQuest(){
 
 function checkJohn(x,y){
 	if (currentWorld!==1.2 || //watr
-		y!==(200e6-1) || //put it 199, will be at 199,999,999 
+		y!==(20e6-1) || //put it 199, will be at 199,999,999 
 		x!==1e6 //1e6 is actually 0 in game (thats dumb why did amber do that)
 	) { return false }
 	else {
