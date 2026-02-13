@@ -854,7 +854,7 @@ function loadNewData(data) {
                 }
             }
         }
-        player.john = {...playerTemplate.john, ...data.john??{}}
+        player.john = {...player.john, ...data.john??{}}
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
