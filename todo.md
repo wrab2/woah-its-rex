@@ -18,7 +18,7 @@ srwater, (at 19 quests) with all of johns friends, its johns house and also rare
 
 ability to steal johns poker chips
 
-add john contributions to naval events
+add more of johns contributions to naval events
 
 ## LESS IMPORTANT:
 
@@ -50,22 +50,20 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 
 # PROGRESSION:
 
-quest 1
+quest 1 (12 hours)
 
-(optional) hat
+quest 2-3 (2 days)
 
-either: tol6 & orb of the unknown (orb of time) OR naval events, orb of water
+Path 1: tol6 (7 days or 3.5 days if done second), ring of time (2 days or 1 day if done second)
 
-other paths that you didnt go
+Path 2: quest 4-5 (15 days or 7 days if done second), ring of water (7 days or 2 days if done second)
 
-q5-10
+paths merge
 
-hypermark checkminator and orbs OR PoF
+Path 1: Ring of creation (4 days)
 
-other path
+Path 2: q6-10 (10 days)
 
-john pick 2 (name pending)
+Hypermark checkminator (5 days or 25 days without roc)
 
-Fishing OR ???
-
-winner :crown:
+Ring of life (3 days)

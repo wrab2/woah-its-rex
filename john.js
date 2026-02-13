@@ -23,7 +23,7 @@ const QuestTiers = [
 	"Flawless",
 	"Metaversal",
 	"Hyperdimensional",
-	"polychromatic",
+	"Polychromatic",
     "Johnical"
 ]
 const johnQuests = [
