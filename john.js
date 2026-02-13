@@ -69,11 +69,11 @@ const johnQuests = [
 	},
 		{
 		story:"get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)",
-		ore_stry:"johan is found in the barrier layer (the black X (✖️)) in W2",
+		ore_stry:"johan is is a multidimensional beeing found in the grass layer in W2 and W1",
 		ore:"🤽🏿",
 		amount:5,
 		cave: false,
-		layers:["barrierLayer"],
+		layers:["grassLayer"],
 		order:5,
 		tier: QuestTiers.indexOf("Antique")
 	},
