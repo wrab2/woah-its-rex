@@ -865,37 +865,36 @@ function setLayer(y) {
         tempNum = tempNum > allLayers.length - 1 ? allLayers.length - 1 : tempNum;
         currentLayer = layerIndex.subrealmOne[tempNum];
     } 
-	else if (currentWorld === 1.2) {
-		if(y < 100e3) currentLayer = "waterLayer";
-		else {
-			currentLayer = "deepWaterLayer";
-			if(player.john.spokeWith && y>1e6){
-				let layerNum = Math.floor((y-1e6)/100e3)
-				if(waterRepeatingLayers[layerNum] == undefined){
-					let newLayer = "deepWaterLayer"
-					let layerRng = Math.random()
-					if(layerRng < 1/10) { //john
-						if(specialLayerLocationsWW.filter((e)=>e.layer === "johnLayer").length === 0){
-							specialLayerLocationsWW.push({layer:"johnLayer", distance: (layerNum * 100e3 + 1e6 + 50000)})
-							specialLayerLocationsWW.sort( (a, b) => specialOrderWW.indexOf(a.layer) >  specialOrderWW.indexOf(b.layer) )
-						}
-						if(Math.random()<1/20) {
-                            newLayer = "johnLayer_CLT"
+    else if (currentWorld === 1.2) {
+        if(y < 100e3) currentLayer = "waterLayer";
+        else {
+            currentLayer = "deepWaterLayer";
+            if(y >= 1e6){
+                let layerNum = Math.floor((y-1e6)/100e3)
+                if(waterRepeatingLayers[layerNum] !== undefined) return
+                if(player.john.spokeWith){ // post-john meetup layers
+                    let layerRng = Math.random()
+                    if(layerRng < 1/10) { //john
+                        if(specialLayerLocationsWW.filter((e)=>e.layer === "johnLayer").length === 0){
+                            specialLayerLocationsWW.push({layer:"johnLayer", distance: (layerNum * 100e3 + 1e6 + 50000)})
+                            specialLayerLocationsWW.sort( (a, b) => specialOrderWW.indexOf(a.layer) >  specialOrderWW.indexOf(b.layer) )
+                        }
+                        if(Math.random()<1/20) {
+                            currentLayer = "johnLayer_CLT"
                             eventSpawn.play()
                         }
-						else newLayer = "johnLayer"
-					}
-					else if(layerRng < 1/3 + 1/10) {
-						if(specialLayerLocationsWW.filter((e)=>e.layer === "jimLayer").length === 0){
-							specialLayerLocationsWW.push({layer:"jimLayer", distance: (layerNum * 100e3 + 1e6 + 50000)})
-							specialLayerLocationsWW.sort((a, b)=>specialOrderWW.indexOf(a.layer) >  specialOrderWW.indexOf(b.layer))
-						}
-						newLayer = "jimLayer"
-					}
-					waterRepeatingLayers[layerNum] = newLayer
-				}
-				currentLayer = waterRepeatingLayers[layerNum]
-			}			
+                        else currentLayer = "johnLayer"
+                    }
+                    else if(layerRng < 1/3 + 1/10) {
+                        if(specialLayerLocationsWW.filter((e)=>e.layer === "jimLayer").length === 0){
+                            specialLayerLocationsWW.push({layer:"jimLayer", distance: (layerNum * 100e3 + 1e6 + 50000)})
+                            specialLayerLocationsWW.sort((a, b)=>specialOrderWW.indexOf(a.layer) >  specialOrderWW.indexOf(b.layer))
+                        }
+                        currentLayer = "jimLayer"
+                    }
+                }
+                waterRepeatingLayers[layerNum] = currentLayer
+            }
 		}
     } 
 	else if (currentWorld === 2){
@@ -970,7 +969,7 @@ function getLayer(y) {
         
     } else if (currentWorld === 1.2) {
         if (y < 100000) return layerDictionary["waterLayer"];
-		else if(y > 1e6) {
+		else if(y >= 1e6) {
             const layerNum = Math.floor((y-1e6)/100e3)
 			if(waterRepeatingLayers[layerNum] == undefined)setLayer(y)
 
