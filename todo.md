@@ -20,6 +20,8 @@ ability to steal johns poker chips
 
 add more of johns contributions to naval events
 
+don't forget to uncomment this incredible line after testing const give = 1//Math.round(Math.random() * 2);
+
 ## LESS IMPORTANT:
 
 remove devspeed after balancing

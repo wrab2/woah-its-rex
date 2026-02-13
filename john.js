@@ -107,7 +107,7 @@ const johnQuests = [
 		order:8,
 		tier: 0
 	},
-		{
+		{//1d 9h average
 		story:"i need you to find me 5 hundred dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
 		ore_stry:"don is found in the radioactive layer in W1",
 		ore:"🤽🏾‍♂️",
@@ -115,7 +115,7 @@ const johnQuests = [
 		cave: false,
 		layers:["radioactiveLayer"],
 		order:9,
-		tier: 0
+		tier: QuestTiers.indexOf("Flawless")
 	},
 		{
 		story:"find me jordan (not the country), they need to show up to my housewarming party get me 10 of them though because thats not a power of 3",
@@ -193,9 +193,9 @@ const johnQuests = [
 		ore:"evilJohn",
 		amount:10,
 		cave: false,
-		layers:[""], // Hes a CLT from denying 5 john requests, but once you get him you can get him anytime (so you dont get softlocked)
+		layers:[""], // Hes a CLT from denying 50 john requests, but once you get him you can get him anytime (so you dont get softlocked(no you can't but you will not get softlocked anyways))
 		order:17,
-		tier: 0
+		tier: QuestTiers.indexOf("Flawless")
 	},
 		{
 		story:"i lost my roomate, i cant find him anywhere so you gotta find him for me",
