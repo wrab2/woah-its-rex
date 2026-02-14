@@ -306,14 +306,14 @@ function randomFunction(ore, cause, elem) {
             return;
         if (ore === "🕳️")
             return;
-				if (["singularityEgg", '🇮🇱', '🐃'].includes(ore)){
+				if (["singularityEgg", 'evilFlag', '🐃'].includes(ore)){
                     const crafts = {
-                        '🇮🇱':'israelCraft',
+                        'evilFlag':'evilFlagCraft',
                         'singularityEgg':'wtfCraft',
                         '🐃':'waterbuffaloCraft'
                     }
 					if(!toggleLounge.toggled)toggleLounge()
-					if(!showLoungeScreen.current === 'loungeForgeAndVariants') get("forge").click()
+					if(showLoungeScreen.current !== 'loungeForgeAndVariants') get("forge").click()
 					displayOreRecipe(crafts[ore])
 					return;
 				}
