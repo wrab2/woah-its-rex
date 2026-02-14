@@ -1294,12 +1294,12 @@ function switchWorldCraftables(world=currentWorld) {
 }
 function setWorldSelectors() {
     const er = {
-        "0.9" : function() {return player.galacticaUnlocked && currentWorld !== 1.1;},
-        "1" : function() {return true && currentWorld !== 1.1;},
-        "2" : function() {return player.pickaxes["pickaxe13"] && currentWorld !== 1.1;},
+        "0.9" : function() {return player.galacticaUnlocked;},
+        "1" : function() {return true;},
+        "2" : function() {return player.pickaxes["pickaxe13"];},
         "1.1" : function() {return player.sr1Unlocked;},
-        "1.2" : function() {return player.watrEntered && currentWorld !== 1.1;},
-        "???" : function() {return player.trophyProgress["subrealmOneCompletion"].trophyOwned && player.trophyProgress["worldOneCompletion"].trophyOwned && player.trophyProgress["worldTwoCompletion"].trophyOwned && currentWorld !== 1.1;},
+        "1.2" : function() {return player.watrEntered;},
+        "???" : function() {return player.trophyProgress["subrealmOneCompletion"].trophyOwned && player.trophyProgress["worldOneCompletion"].trophyOwned && player.trophyProgress["worldTwoCompletion"].trophyOwned;},
         "john": ()=>{return player.john.spokeWith},
     }
     const e = document.getElementsByClassName("worldCraftSelector");
