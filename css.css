@@ -5239,6 +5239,9 @@ background-size: 100%;
 #john-quest-progress {
   font-size: x-large;
 }
+#john-quest-tier {
+  font-weight: 1000;
+}
 #john-quest-eta{
   font-size: small;
 	border-bottom: 2px solid #329fd1;

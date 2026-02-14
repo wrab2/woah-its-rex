@@ -2087,12 +2087,12 @@ const polyIds = {
     "orbOfFire" : "ring_of_fire",
 }
 const polyRequirements = {
-    "orbOfTheUnknown" : ()=>{return !!indexHasOre("noradrenaline")},
-    "orbOfSound" : ()=>{return johnRewarded("heirloom")},
+    "orbOfTheUnknown" : ()=>{return johnRewarded("heirloom")}, //makes tol6 usable everywhere
+    "orbOfSound" : ()=>{return johnRewarded("heirloom")}, //makes naval events quicker
+    "orbOfLife" : ()=>{return johnRewarded("hat")}, //boost based on ore completion
     "orbOfCreation" : ()=>{player.pickaxes["hypermarkCheckminator"]},
-    "orbOfLife" : ()=>{return johnRewarded("hat")},
-    "orbOfFlight" : ()=>{return player.john.spokeWith},
-    "orbOfFire" : ()=>{return player.john.spokeWith},
+    "orbOfFlight" : ()=>{return false},
+    "orbOfFire" : ()=>{return false},
 }
 function checkPolys() {
     const polys = Object.keys(polyLocations);

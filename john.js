@@ -8,11 +8,11 @@ const john = { //this doesn't presist between refreshes
 const johnRewards = { //shortcut for how many quests you need to complete to get it
 	"naval events": 1,
 	"heirloom": 3,
-	"water_polo_ball" :5,
+	"hat": 5,
 	"hypermark_checkminator": 10,
-	"hat" : 15,
-	"house keys" : 19,
-	"ring_enabler" : 20,
+	"water_polo_ball": 15,
+	"house keys": 19,
+	"ring_enabler": 20,
 }
 function johnRewarded(reward) {
 	if(player.john.questsCompleted.length >= johnRewards[reward]) return true
@@ -47,17 +47,17 @@ const johnQuests = [
 		order:2,
 		tier: QuestTiers.indexOf("Flawless")
 	},
-		{
-		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 10 of him though because 10 is better than 1",
+	{
+		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 5 of him though because 5 is better than 1",
 		ore_stry:"noah is found in the chess layer in W2",
 		ore:"🤽🏽",
-		amount:10,
+		amount:5,
 		cave: false,
 		layers:["chessLayer"],
 		order:3,
-		tier: 0
+		tier: QuestTiers.indexOf("Metaversal")
 	},
-		{
+	{
 		story:"help me find ron, im pretty sure hes still sleeping at his house, ever since i kicked him out of the WCP he became a alcoholic (get me 10 of him so i can make fun of him tenfold)",
 		ore_stry:"ron is found in the tv layer in W2",
 		ore:"🤽🏾",
@@ -65,9 +65,9 @@ const johnQuests = [
 		cave: false,
 		layers:["tvLayer"],
 		order:4,
-		tier: 0
+		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
-		{
+	{
 		story:"get me johan, i need to ask him if he still has the receipt for the suit he bought me (get me 5 of him though because he might not have the full receipt)",
 		ore_stry:"johan is is a multidimensional beeing found in the grass layer in W2 and W1",
 		ore:"🤽🏿",
@@ -77,7 +77,7 @@ const johnQuests = [
 		order:5,
 		tier: QuestTiers.indexOf("Antique")
 	},
-		{
+	{
 		story:"im really hungry right now so can you get me 10 shawns, theyre currently holding a party, i need to ask them if they can give me a spare slice of cake",
 		ore_stry:"shawn is found in the cake (silly) layer in W1",
 		ore:"🤽🏻‍♂️",
@@ -85,9 +85,9 @@ const johnQuests = [
 		cave: false,
 		layers:["sillyLayer"],
 		order:6,
-		tier: 0
+		tier: QuestTiers.indexOf("Metaversal")
 	},
-		{
+	{
 		story:"i want to catch up with jay, after i took over the feline empire they went off to conquer the cactus layer (like any true cactus monarch #reference), thankfully though you only need one as hes a dictator he does not have anyone else in power other than him",
 		ore_stry:"jay is found in the cactus layer in W1",
 		ore:"🤽🏼‍♂️",
@@ -95,9 +95,9 @@ const johnQuests = [
 		cave: false,
 		layers:["cactusLayer"],
 		order:7,
-		tier: 0
+		tier: QuestTiers.indexOf("Metaversal")
 	},
-		{
+	{
 		story:"pick up 5 rowans please, i need them for a very important deal",
 		ore_stry:"rowan is found in the jim layer in watr world",
 		ore:"🤽🏽‍♂️",
@@ -105,9 +105,9 @@ const johnQuests = [
 		cave: false,
 		layers:["jimLayer"],
 		order:8,
-		tier: 0
+		tier: QuestTiers.indexOf("Metaversal")
 	},
-		{//1d 9h average
+	{
 		story:"i need you to find me 5 hundred dons, NOW, my nuclear reactors are not functioning correctly without them nearby (they are highly radioactive)",
 		ore_stry:"don is found in the radioactive layer in W1",
 		ore:"🤽🏾‍♂️",
@@ -117,7 +117,7 @@ const johnQuests = [
 		order:9,
 		tier: QuestTiers.indexOf("Flawless")
 	},
-		{
+	{
 		story:"find me jordan (not the country), they need to show up to my housewarming party get me 10 of them though because thats not a power of 3",
 		ore_stry:"jordan is found in the seychelles layer (africa) in SR1",
 		ore:"🤽🏿‍♂️",
@@ -125,9 +125,9 @@ const johnQuests = [
 		cave: false,
 		layers:["scLayer"],
 		order:10,
-		tier: 0
+		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
-		{
+	{
 		story:"janine is my sister (jane)'s bestie, please find 1 of her",
 		ore_stry:"janine is found in the bacteria caves",
 		ore:"🤽🏻‍♀️",
@@ -135,9 +135,9 @@ const johnQuests = [
 		cave: true,
 		layers:["bacteriaCave"],
 		order:11,
-		tier: 0
+		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
-		{
+	{
 		story:"me and joan were planning on going to the new adachi rei concert, please Find her so she can give me my ticket",
 		ore_stry:"joan is found in the music caves",
 		ore:"🤽🏼‍♀️",
@@ -147,7 +147,7 @@ const johnQuests = [
 		order:12,
 		tier: 0
 	},
-		{
+	{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
 		ore_stry:"johanna is found in the abysstone caves",
 		ore:"🤽🏽‍♀️",
@@ -157,7 +157,7 @@ const johnQuests = [
 		order:13,
 		tier: 0
 	},
-		{
+	{
 		story:"i was jocelyns successor in the WCP, so please get me her",
 		ore_stry:"jocelyn is found in the jane caves (found in watr world)",
 		ore:"🤽🏾‍♀️",
@@ -167,7 +167,7 @@ const johnQuests = [
 		order:14,
 		tier: 0
 	},
-		{
+	{
 		story:"this is rowen's cousin, please get me 1 of her",
 		ore_stry:"rowhen is found in the biohazard caves",
 		ore:"🤽🏿‍♀️",
@@ -177,7 +177,7 @@ const johnQuests = [
 		order:15,
 		tier: 0
 	},
-		{
+	{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
 		ore_stry:"water buffalo 🐃 is found in the forge, you might want to do this one last as its the hardest by far (and you cant do it before 10 requests)",
 		ore:"🐃",
@@ -185,9 +185,9 @@ const johnQuests = [
 		cave: false,
 		layers:[""], // Hes in the forge
 		order:16,
-		tier: 0
+		tier: QuestTiers.indexOf("Johnical")
 	},
-		{
+	{
 		story:"please get me uhh... who the hell is this?",
 		ore_stry:"Evil John is found in ??? (you might want to check milestones)",
 		ore:"evilJohn",
@@ -197,7 +197,7 @@ const johnQuests = [
 		order:17,
 		tier: QuestTiers.indexOf("Flawless")
 	},
-		{
+	{
 		story:"i lost my roomate, i cant find him anywhere so you gotta find him for me",
 		ore_stry:"josh is found in the john layer (sometimes)",
 		ore:"josh",
@@ -205,9 +205,9 @@ const johnQuests = [
 		cave: false,
 		layers:["johnLayer_CLT"], // repeating john layer CLT
 		order:18,
-		tier: 0
+		tier: QuestTiers.indexOf("Metaversal")
 	},
-		{
+	{
 		story:"i dropped my wallet yesterday, can you go get jack (hes the one who got my wallet)",
 		ore_stry:"jack is found in the deep water layer",
 		ore:"jack",
@@ -217,7 +217,7 @@ const johnQuests = [
 		order:19,
 		tier: 0
 	},
-		{
+	{
 		story:"please get me 10 heavenly johns, i need to attone for my sins",
 		ore_stry:"heavenly john is found in the cloud layer",
 		ore:"heavenlyJohn",
@@ -352,6 +352,9 @@ function johnRefresh() { //updates values in john window
 	get("top-john-speech-bubble").textContent=`${quest.story}`
 	get("john-ore-story").textContent=`${quest.ore_stry}`
 	get("john-quest-progress").innerHTML = (oreList[quest.ore].hasImage ? `<img src=${oreList[quest.ore].src}>`: quest.ore) + `${playerInventory[quest.ore].normalAmt}/${quest.amount}`
+	let colors = oreInformation.getColors(QuestTiers[quest.tier]);
+	get("john-quest-tier").innerHTML = ` ${QuestTiers[quest.tier]}`
+	get("john-quest-tier").style.color = colors.backgroundColor
 	estimateJohnQuestTime()
 }
 

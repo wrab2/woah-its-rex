@@ -1,8 +1,10 @@
 # IMPORTANT:
 
-come up with better requirements for each orb
+☑️come up with better requirements for each orb (orb of flight and fire)
 
 put all the fumos in the index
+
+make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes
 
 fumo fishing:
 
@@ -50,20 +52,62 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 
 # PROGRESSION:
 
-quest 1 (12 hours)
+### Antique
 
-quest 2-3 (2 days)
+✅johan 0.5 d
 
-Path 1: tol6 (7 days or 3.5 days if done second), ring of time (2 days or 1 day if done second)
+===NAVAL EVENTS
 
-Path 2: quest 4-5 (15 days or 7 days if done second), ring of water (7 days or 2 days if done second)
+### Flawless
+✅don 1.5d
 
-paths merge
+✅evil john 1d
 
-Path 1: Ring of creation (4 days)
+===HEIRLOOM > unlocks orb of time and orb of water (tol6 everywhere, faster naval events)
 
-Path 2: q6-10 (10 days)
+✅ jackson 1d
 
-Hypermark checkminator (5 days or 25 days without roc)
+==tol 6 here probably, makes everything maybe 3.5x easier? or 4x or even 8x idk, following numbers do not reflect tol 6
 
-Ring of life (3 days)
+==orb of life is unlocked but too hoard to get
+
+### Metaversal
+
+✅jay: 21 d
+
+=== HAT (makes the rest 2x easier, following numbers DO reflect that)
+
+✅josh: 8 d (his CLT might be way too rare)
+
+✅noah: 9 d
+
+✅rowan: 8 d
+
+✅shawn: 7.5d
+
+### Hyperdimensional 
+
+✅ janine: 3 days with 350 events (you'll have more at this point probably but it's gonna be softcapped)
+
+=== HYPERMARK CHECKMINATOR (straight up 10+ times better pick than tol 6 because why not and maybe it boosts caves even more than wormhole and perhaps can mine in sr1
+
+hc and onwards will be able to mine in sr1)
+
+= ool here probably and obtainable in like 1 day
+
+(following numbers don't reflect hc either !!)
+
+✅jordan: 1 y 76d
+
+✅ron: 1 y 79d
+
+no point in balancing anything further right now
+
+joan: 118 years
+jocelyn: 3397 years
+rowhen: 67 years
+
+### Polychromatic
+johanna: 339 hours
+heavenly john: 19 days
+jack: 9 days
