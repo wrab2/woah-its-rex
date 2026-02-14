@@ -59,7 +59,7 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 ===NAVAL EVENTS
 
 ### Flawless
-✅don 1.5d
+✅don(e) 1.5d
 
 ✅evil john 1d
 
@@ -77,7 +77,7 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 
 === HAT (makes the rest 2x easier, following numbers DO reflect that)
 
-✅josh: 8 d (his CLT might be way too rare)
+✅josh: 8 d (his CLT might be way too rare) (it isnt)
 
 ✅noah: 9 d
 
@@ -97,9 +97,9 @@ hc and onwards will be able to mine in sr1)
 
 (following numbers don't reflect hc either !!)
 
-✅jordan: 1 y 76d
+✅jordan: 1 y 76d (with heirloom???)
 
-✅ron: 1 y 79d
+✅ron: 1 y 79d (with heirloom !?!?!?!@?!@?!@?)
 
 no point in balancing anything further right now
 
@@ -112,3 +112,7 @@ jonah
 johanna: 339 hours
 heavenly john: 19 days
 jack: 9 days
+
+### Johnical
+
+water buffalo: a lot of time probably
