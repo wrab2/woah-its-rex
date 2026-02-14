@@ -212,7 +212,7 @@ let oreList = {
     '🗳️': { 'decimalRarity': 1 / 824900725, 'numRarity': 824900725, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A mysterious box, able to change reality at will through enough votes, appears next to you...', 'oreTier': 'Interstellar',  },
     '⚛️': { 'decimalRarity': 1 / 3333333333, 'numRarity': 3333333333, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'The discovery of the Atom shakes the mine to its core...', 'oreTier': 'Metaversal',  },
     '🛢️': { 'decimalRarity': 1 / 11430000000, 'numRarity': 11430000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'oil..? DID SOMEOME ASK FOR SOME FREEDOM???...', 'oreTier': 'Sacred',  },
-    '💽': { 'decimalRarity': 1 / 290000000000, 'numRarity': 290000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A disc containing all the wonders of humanity emerges from one of the gifts around you...', 'oreTier': 'Ethereal',  },
+    '💽': { 'decimalRarity': 1 / 290000000000, 'numRarity': 290000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'this IS the kessosu band vinyl', 'oreTier': 'Ethereal',  },
     '🍭': { 'decimalRarity': 1 / 2500000000000, 'numRarity': 2500000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'A sweet treat that you have been craving for centuries is finally unearthed...', 'oreTier': 'Imaginary', },
 
     // 
@@ -296,7 +296,20 @@ let oreList = {
     '🧠': { 'decimalRarity': 1 / 15500000, 'numRarity': 15500000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '🧠 Has Spawned!', 'oreTier': 'Mystical',  },
     '✏️': { 'decimalRarity': 1 / 8200000, 'numRarity': 8200000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '✏️ Has Spawned!', 'oreTier': 'Mystical',  },
     
-    
+
+    '🍹' : { 'decimalRarity': 1 / 2650000000000, 'numRarity': 2650000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "this drink has so much vanilla that the 2% alcohol in it WILL make you blackout drunk", 'oreTier': 'Imaginary', },
+    "🧜": { 'decimalRarity': 1 / 345000000000, 'numRarity': 345000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'this tower SUCKS in btd6', 'oreTier': 'Ethereal',  },
+    '🚰': { 'decimalRarity': 1 / 652000000, 'numRarity': 652000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'mraow :3', 'oreTier': 'Flawless',  },
+    '🚱': { 'decimalRarity': 1 / 213321000000, 'numRarity': 213321000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'oh man im really thirsty, the evil non drinkable water sign:', 'oreTier': 'Ethereal',  },
+    '💆': { 'decimalRarity': 1 / 5321000000, 'numRarity': 5321000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'jim is currently getting a massage', 'oreTier': 'Metaversal',  },
+    //john      
+    '⛵': { 'decimalRarity': 1 / 6330000, 'numRarity': 6330000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '⛵ Has Spawned! (why do you have mystical alerts this far into the game)', 'oreTier': 'Mystical',  },
+    '🚢' : { 'decimalRarity': 1 / 6666666666666, 'numRarity': 6666666666666, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "this brings you back to when john caused two thousand naval events", 'oreTier': 'Imaginary', },
+    '🚣': { 'decimalRarity': 1 / 97000000000, 'numRarity': 97000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'swimming emoji', 'oreTier': 'Sacred',  },
+    '🛀': { 'decimalRarity': 1 / 587650200, 'numRarity': 587650200, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'meowww :3333', 'oreTier': 'Flawless',  },
+    '🚤': { 'decimalRarity': 1 / 5321000000, 'numRarity': 5321000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'a deadly vessel, even without its inhibitants its presence still scares you or something idk', 'oreTier': 'Metaversal',  },
+    '🏊': { 'decimalRarity': 1 / 166000000, 'numRarity': 166000000, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'its a shame sr1 has One singular spawn message', 'oreTier': 'Interstellar', },
+
     
     '🩸': { 'decimalRarity': 1 / 13000000000000, 'numRarity': 13000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "So be it.. take your blood trophy..! You.. are truly the bane of this world aren't you...- \nMay.. the clover be our final saving grace... from the wielder of the void.....-", 'oreTier': 'Imaginary',  },
     '♨️': { 'decimalRarity': 1 / 6700000000000, 'numRarity': 6700000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "..I see what you want. I'm in no state to object.. and yet I will do everything in my power to make your life hell...", 'oreTier': 'Imaginary',  },
@@ -730,11 +743,13 @@ const layerList = {
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["miku", "teto", "neru", "rei", "rin", "hitori", "nijika", "kita", "ryou", "deepWater"],
-"jimLayer":["sillyMiner",'🤽'], 
-"johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa"],
+"jimLayer":["sillyMiner","💆","🚱","🚰","🧜","🍹",'🤽'], 
+"johnLayer":["sillyMiner",'🤽‍♂️', "silly", "masa","⛵","🚢","🚣","🛀","🚤","🏊"],
 "johnLayer_CLT":['🤽‍♂️'],
 "johnMetaLayer":['🤽🏻','🤽🏼','🤽🏽','🤽🏾','🤽🏿','🤽🏻‍♂️','🤽🏼‍♂️','🤽🏽‍♂️','🤽🏾‍♂️','🤽🏿‍♂️','🤽🏻‍♀️','🤽🏼‍♀️','🤽🏽‍♀️','🤽🏾‍♀️','🤽🏿‍♀️','🐃','evilJohn','josh', '🤽', '🤽‍♀️', '🤽‍♂️', "heavenlyJohn", "jack"],
 }
+
+
 layerList.johnLayer_CLT = structuredClone(layerList.johnLayer)
 
 const createdLayers = {

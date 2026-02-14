@@ -445,8 +445,8 @@ let caveList = {
 "ggCave" : ['🇧🇱', '🇬🇱', '🇲🇸', '🇮🇪', '🇦🇼', '🇬🇬'],
 "axCave" : ['🇧🇶', '🇸🇭', '🇳🇺', '🇬🇮', '🇬🇫', '🇧🇲', '🇦🇽'],
 "foCave" : ['🇭🇰', '🇮🇲', '🇵🇲', '🇬🇸', '🇳🇫', '🇫🇰', '🇰🇾', '🇫🇴'],
-"watrCave" : ["eternalCoral", "🌊"],
-"janeCave" : ["real","🤽‍♀️"],
+"watrCave" : ["real", "eternalCoral", "🌊"],
+"janeCave" : ["🤽‍♀️"],
 }
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 let oolProbabilities = {
