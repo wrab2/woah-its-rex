@@ -5619,11 +5619,6 @@ new navalEvent(
 	"Israel \"allegedly\"","Freedom Flotilla Coalition"
 )
 new navalEvent(
-	"charlie kirk got shot",
-	"heartbreaking story, we shall carry the flame",
-	"the shooter","'kirk"
-)
-new navalEvent(
 	"Novorossiysk drone attack",
 	"Ukrainian sea drones severely damage a Russian Kilo-class submarine.",
 	"Ukraine","Russia"
