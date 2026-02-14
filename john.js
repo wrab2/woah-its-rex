@@ -23,7 +23,7 @@ const QuestTiers = [
 	"Flawless",
 	"Metaversal",
 	"Hyperdimensional",
-	"Polychromatic",
+	"Polychromatical",
     "Johnical"
 ]
 const johnQuests = [
@@ -35,7 +35,7 @@ const johnQuests = [
 		cave: false,
 		layers:["doorLayer"],
 		order:1,
-		tier: 0
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 	{
 		story:"please help me find jackson, i need to tell him about the WCP, get me 2 of him, (so that i can get his reaction twice)",
@@ -145,7 +145,7 @@ const johnQuests = [
 		cave: true,
 		layers:["musicCave"],
 		order:12,
-		tier: 0
+		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
 	{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
@@ -155,7 +155,7 @@ const johnQuests = [
 		cave: true,
 		layers:["abysstoneCave"],
 		order:13,
-		tier: 0
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 	{
 		story:"i was jocelyns successor in the WCP, so please get me her",
@@ -165,7 +165,7 @@ const johnQuests = [
 		cave: true,
 		layers:["janeCave"],
 		order:14,
-		tier: 0
+		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
 	{
 		story:"this is rowen's cousin, please get me 1 of her",
@@ -175,7 +175,7 @@ const johnQuests = [
 		cave: true,
 		layers:["biohazardCave"],
 		order:15,
-		tier: 0
+		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
 	{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
@@ -215,7 +215,7 @@ const johnQuests = [
 		cave: false,
 		layers:["deepWaterLayer"],
 		order:19,
-		tier: 0
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 	{
 		story:"please get me 10 heavenly johns, i need to attone for my sins",
@@ -225,7 +225,7 @@ const johnQuests = [
 		cave: false,
 		layers:["cloudLayer", "cloudLayer2"],
 		order:20,
-		tier: 0
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 ]
 
@@ -249,6 +249,32 @@ function johnStopQuest() {
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
 		removeFromLayers({"ore":thisQuest.ore, "layers":thisQuest.layers})
+	}
+}
+function selectNextQuest(){
+	let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
+	questPool.splice(player.john.currentQuest,1)
+	if(questPool.length === 1){
+		player.john.currentQuest = johnQuests.indexOf(questPool[0])
+		return
+	} else if (questPool.length === 0) return
+	questPool.sort((a,b)=>a.tier - b.tier)
+	let weights = []
+	let totalWeight = 0
+	for(const q of questPool){
+		let weight = (10 - (q.tier*1.2))**5
+		totalWeight += weight
+		weights.push(weight)
+	}
+	let rng = Math.random()*totalWeight
+	for(let i=0; i<questPool.length; i++){
+		if(rng < weights[0]){
+			player.john.currentQuest = johnQuests.indexOf(questPool[i])
+			return 
+		}else{
+			rng -= weights[0]
+			weights.shift()
+		}
 	}
 }
 
@@ -284,11 +310,8 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["ring_enabler"]){
 			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome gear that'll let you progress further")
 		}
-		let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
-		if (questPool.length > 0){
-			let nextQuest =  questPool[Math.floor(Math.random()*questPool.length)]
-			player.john.currentQuest = johnQuests.indexOf(nextQuest)
-		}
+
+		selectNextQuest()
 		playSound("Johnical")
 	}
 	johnActivateQuest()
@@ -303,11 +326,7 @@ function rejectQuest(){
 		insertIntoLayers({"ore":"evilJohn", "layers":["johnLayer","johnLayer_CLT"], "useLuck":true});
 	}
 	johnStopQuest()
-	let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
-	if (questPool.length > 0){
-		let nextQuest =  questPool[Math.floor(Math.random()*questPool.length)]
-		player.john.currentQuest = johnQuests.indexOf(nextQuest)
-	}
+	selectNextQuest()
 	johnActivateQuest()
 	johnRefresh()
 }
@@ -365,15 +384,12 @@ function johnSay(johnsWisdom){
 
 function estimateJohnQuestTime(){
 	let thisQuest = johnQuests[player.john.currentQuest]
-	let amount = thisQuest.amount
-	if(true){}
-	let time
 	if (thisQuest.ore === "🐃") time = 0
 	else if(thisQuest.cave){
-		time = 1000*caveOreEstimatedTime(thisQuest.ore)*thisQuest.amount
+		let time = 1000*caveOreEstimatedTime(thisQuest.ore)*thisQuest.amount
+		get("john-quest-eta").textContent=`Estimated time: ${longTime(time)}`
 	} else {
 		get("john-quest-eta").textContent=`Estimated time: ${ct(true)}`
 		return 
 	}
-	get("john-quest-eta").textContent=`Estimated time: ${longTime(time)}`
 }
