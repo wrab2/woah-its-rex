@@ -45,7 +45,7 @@ const johnQuests = [
 		cave: false,
 		layers:["vaLayer"],
 		order:2,
-		tier: 0
+		tier: QuestTiers.indexOf("Flawless")
 	},
 		{
 		story:"locate noah, he was really nice to me when i visited his library and i want to thank him for introducing me to checkmarxism, get me 10 of him though because 10 is better than 1",
