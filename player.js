@@ -176,9 +176,7 @@ class playerTemplate {
         this.upgrades = {
             "pickaxe27" : {
                 level: 0,
-                maxLevel: 6,
-                bought: 0,
-                levelLuck: [1, 3, 10, 20, 40, 100, 700]
+                maxLevel: 6
             }
         },
         this.wasUsing = undefined;
@@ -754,7 +752,7 @@ function loadNewData(data) {
             }
         }
         if (data.upgrades !== undefined) {
-            if (data.upgrades["pickaxe27"] !== undefined) {player.upgrades["pickaxe27"].level = data.upgrades["pickaxe27"].level; player.upgrades["pickaxe27"].bought = data.upgrades["pickaxe27"].bought}
+            if (data.upgrades["pickaxe27"] !== undefined) {player.upgrades["pickaxe27"].level = data.upgrades["pickaxe27"].level;}
         }
         data.sr1Unlocked ??= false;
         player.sr1Unlocked = data.sr1Unlocked;

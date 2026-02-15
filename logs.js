@@ -265,8 +265,7 @@ class secureLogs {
     }
     getBaseLuck(pickaxe) {
         if (pickaxe === "pickaxe27") {
-            const pickaxe = player.upgrades["pickaxe27"];
-            return pickaxe.levelLuck[pickaxe.level];
+            return pickaxeStats.pickaxe27[player.upgrades.pickaxe27.level].luck
         }
         return pickaxeStats[pickaxe].luck;
     }

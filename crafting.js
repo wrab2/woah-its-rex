@@ -1177,7 +1177,6 @@ function craftPickaxe(item) {
         }
         if (item === "pickaxe27") {
             player.upgrades["pickaxe27"].level++;
-            player.upgrades["pickaxe27"].bought++;
             displayRecipe(currentRecipeId);
             displayRecipe("pickaxe27");
         }
@@ -2152,7 +2151,7 @@ const pickaxeStats = {
         3 : {mined: 37468, revealed: 41654, luck: 20},
         4 : {mined: 46650, revealed: 54781, luck: 40},
         5 : {mined: 54298, revealed: 63893, luck: 100},
-        6 : {mined: 2e6, revealed: 1, luck: 700},
+        6 : {mined: 7.2e6, revealed: 1, luck: 444},
         rate: 500,
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
