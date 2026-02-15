@@ -802,16 +802,16 @@ function collapseRecipe() {
     if (pinInformation.collapsed) {
       //fold
         pinInformation.collapsed = false;
-        get("newCraftingRecipeHolder").style.height = "min(29.2vh,14.6vw)";
-        get("pinnedRecipeHolder").style.height = "min(42vh, 21vw)";
+        get("newCraftingRecipeHolder").classList.remove("unfoldedRecipeHolder");
+        get("newCraftingRecipeHolder").classList.add("foldedRecipeHolder");
         get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/downone.png')";
         const textEdit = get("collapseRecipe").children[0];
         textEdit.innerHTML = textEdit.innerHTML.replace("Collapse", "Expand");
     } else {
       //unfold
         pinInformation.collapsed = true;
-        get("newCraftingRecipeHolder").style.height = "100%";
-        get("pinnedRecipeHolder").style.height = "min-content";
+        get("newCraftingRecipeHolder").classList.remove("foldedRecipeHolder");
+        get("newCraftingRecipeHolder").classList.add("unfoldedRecipeHolder");
         get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/upone.png')";
         const textEdit = get("collapseRecipe").children[0];
         textEdit.innerHTML = textEdit.innerHTML.replace("Expand", "Collapse");
