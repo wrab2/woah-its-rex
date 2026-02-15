@@ -4,7 +4,7 @@
 
 put all the fumos in the index
 
-make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes
+make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes (heh... zoom out (/j))
 
 fumo fishing:
 
@@ -16,7 +16,7 @@ give hypermark checkminator a recipe, ability, luck, etc
 
 a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
 
-srwater, (at 19 quests) with all of johns friends, its johns house and also rare ores such as 🏚️ 🏡 🏘️, he gives you your fishing pole somewhere also
+srwater, (at 19 quests) , its johns house, he gives you your fishing pole somewhere also, i alr made the layer its plankLayer using ambers old sprite
 
 ability to steal johns poker chips
 
