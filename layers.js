@@ -765,9 +765,9 @@ let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "ro
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
 let galacticaLayers = ["starLayer", "nebulaLayer"]
 let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer",];
-let waterWorldLayers = ["waterLayer"] // i feel like jim should be here
+let waterWorldLayers = ["waterLayer"] // i feel like jim should be here //idk it doesn't seem to affect enything
 let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer", "johnLayer", "checkmarkLayer"]
-let allLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"]; // this does NOT look like every layer
+let allLayers = structuredClone(worldOneLayers)
 
 const unbreakable = ["✖️","❔","⛏️","deepWater", "✅"]
 //required tier to break the unbreakable

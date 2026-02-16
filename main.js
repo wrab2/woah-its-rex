@@ -631,7 +631,7 @@ function displayArea() {
             let grass = 0;
             if (currentWorld === 2)
                 grass = 2000;
-            if ([1.2, 0.9, 1.3].includes(currentWorld)) grass = -1;
+            if ([1.2, 0.9, 3].includes(currentWorld)) grass = -1;
             let i = 0;
             for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) mine[r] ??= [];
             let ore;
