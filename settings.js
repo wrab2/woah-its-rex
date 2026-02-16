@@ -1121,11 +1121,11 @@ const portalLocations = {
     },
 	3: {
 		title: "john's house",
-		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br>Mbr> unlock req: Get house keys from john (a friendly fella in watr watr who wants nothing more than the reunion *one winged angel starts playing*)",
+		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br><br>All Gears work here!<br><br>Hypermark Checkminator and above work here!<br><br>Unlock Requirement: Get the house keys from john (a friendly fella in watr watr who wants nothing more than the reunion *Deltarune chapter 3+4 soundtrack number 78 \"a concert for you\" starts playing*)<br><br>\"<i>Please stop stealing my stuff<i>\" - John",
 		req: ()=>{return johnRewarded("house_keys")},
 		to: 3,
-		hue: "10deg",  //idk
-		url: "noFile.png"//"johnHouseImage.png"
+		hue: "10deg",  //idk this is the portal's colour i THINK !?
+		url: "johnsHouseImage.png"//"johnsHouseImage.png.png"
 	}
 }
 function displayWorldInformation(world) {

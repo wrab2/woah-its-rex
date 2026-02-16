@@ -771,7 +771,7 @@ let allLayers = structuredClone(worldOneLayers)
 
 const unbreakable = ["✖️","❔","⛏️","deepWater", "✅"]
 //required tier to break the unbreakable
-const unbreakableTiers = [20, 20, 20, 13, 15]
+const unbreakableTiers = [20, 20, 20, 13, 14]
 //SETTING LAYERS
 const layerDictionary = {
     //{layer : [], num : 0}

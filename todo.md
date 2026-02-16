@@ -8,8 +8,6 @@ put all the fumos in the index
 
 make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes (heh... zoom out (/j))
 
-✅ make john take away his friends and family from you
-
 fumo fishing:
 
 > once you reach johns house you meet one of johns friends (or a fumo idfk) and they will give you a fishing pole, the more quests you complete the stronger your fishing rod gets, you also get coins which can be spent on bait (target specific fumos) or hooks (extra stats aka like double hook chance)
@@ -22,8 +20,6 @@ give hypermark checkminator a recipe, ability, luck, etc
 
 a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
 
-✅(at 19 quests) , its johns house, he gives you your fishing pole somewhere also, i alr made the layer its plankLayer using ambers old sprite
-
 ability to steal johns poker chips
 
 add more of johns contributions to naval events
@@ -34,13 +30,13 @@ don't forget to uncomment this incredible line after testing const give = 1//Mat
 
 remove devspeed after balancing
 
-add some ores to deep water (vocaloids, which have a chance to turn into their fumo form), Jim jane and john layers (and also jane caves)
-
-add more john quests after all 20 quests which are repeated quests but much harder for a small reward
+add ores to jane caves
 
 make the john milestones less buggy (connectors)
 
 give rings a gradient
+
+fix the plank offset (nevermind)
 
 ### low importance:
 
@@ -55,6 +51,10 @@ bugtest
 SOME way to get limited ores when its not the month of the ore, x1000 rarity in SRwatr, also maybe some way for 🐱, your reward, hyper, first anniversary cake, sakura so you can get 100% completion
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
+
+#### bad idea of the day
+
+perhaps give infinity collector 2 a use
 
 # PROGRESSION:
 
@@ -75,7 +75,7 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 
 ==tol 6 here probably, makes everything maybe 3.5x easier? or 4x or even 8x idk, following numbers do not reflect tol 6
 
-==orb of life is unlocked but too hoard to get
+==orb of life is unlocked but too difficult to get
 
 ### Metaversal
 
