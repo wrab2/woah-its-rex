@@ -724,7 +724,8 @@ function attemptSwitchWorld(to) {
     if (to === 1 && currentWorld !== 1) {switchWorld(1); return;}
     if (to === 1.2 && currentWorld !== 1.2) {switchWorld(1.2); return;}
     if (to === 0.9 && (player.galacticaUnlocked || indexHasOre("Omnipotent God of The Mine") > 0)) {switchWorld(0.9); return;}
-    if (to === 11252023) {
+	if (to === 3 && johnRewarded("house_keys")) return switchWorld(3);
+	if (to === 11252023) {
         goToAnniversary();
     }
 }
@@ -735,14 +736,16 @@ function switchWorld(to) {
         resetForSwitch();
         if (currentWorld === 1.1) sr1Helper(false);
         currentWorld = to;
-        if (currentWorld === 2) {
-            prepareWorldTwo();
-        } else if (currentWorld < 2) {
-            if (currentWorld === 1) prepareWorldOne();
-            else if (currentWorld === 1.1) prepareSR1();
-            else if (currentWorld === 1.2) prepareWatr();
-            else if (currentWorld === 0.9) prepareGalactica();
-        }
+		const worldPreparations = {
+			1: ()=>prepareWorldOne(),
+			2: ()=>prepareWorldTwo(),
+			3: ()=>prepareJohnHouse(),
+			1.1: ()=>prepareSR1(),
+			1.2: ()=>prepareWatr(),
+			0.9: ()=>prepareGalactica()
+		}
+        worldPreparations[currentWorld]()
+
         switchDistance(0);
         displayArea();
         utilitySwitchActions();
@@ -827,6 +830,15 @@ function prepareWatr() {
     curY = 0; 
     layerNum = 0;
     player.watrEntered = true;
+    createMine();
+}
+function prepareJohnHouse() {
+	allLayers = waterWorldLayers;
+    distanceMulti = 0;
+    y = 1000;
+    curX = 1000000;
+    curY = 0; 
+    layerNum = 0;
     createMine();
 }
 function prepareWorldTwo() {

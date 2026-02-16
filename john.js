@@ -11,7 +11,7 @@ const johnRewards = { //shortcut for how many quests you need to complete to get
 	"hat": 5,
 	"hypermark_checkminator": 10,
 	"water_polo_ball": 15,
-	"house keys": 19,
+	"house_keys": 19,
 	"ring_enabler": 20,
 }
 function johnRewarded(reward) {

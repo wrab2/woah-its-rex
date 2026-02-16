@@ -824,7 +824,10 @@ const layerIndex = {
 	galacticaLayers : {
 		0 : "starLayer",
 		1 : "nebulaLayer",
-	}
+	},
+	johnHouse: [
+		"plankLayer",
+	]
 }
 let lastRepeatedLayer = -1;
 let currentLayer = "dirtLayer";
@@ -934,6 +937,9 @@ function setLayer(y) {
 		} 
 		return w2RepeatingLayers[layerNum] = "borderLayer"
 	}
+	else if (currentWorld === 3){//john's house
+		//nothing
+	}
     else {
         let tempNum = y;
         if (tempNum < 10000) {
@@ -1008,7 +1014,9 @@ function getLayer(y) {
         if (y === 0) return layerDictionary["starLayer"];
         if (y < galacticaLayers.length*2000) return layerDictionary[layerIndex.galacticaLayers[Math.floor(y / 2000)]];
         else return layerDictionary[layerIndex.galacticaLayers[galacticaLayers.length-1]];
-    }
+    } else if (currentWorld === 3){//john's house
+		return layerDictionary["plankLayer"]
+	}
 }
 let layerIsTriggered = false
 function a87(num, force, g) {
@@ -1134,7 +1142,7 @@ function createAllLayers() {
     for (let i = 0; i < subRealmOneLayers.length; i++) layerDictionary[subRealmOneLayers[i]] = {layer: createLayer([layerList[subRealmOneLayers[i]]]), probabilities: [], layerMat: layerFromArr(layerList[subRealmOneLayers[i]])};
     for (let i = 0; i < galacticaLayers.length; i++) layerDictionary[galacticaLayers[i]] = {layer: createLayer([layerList[galacticaLayers[i]]]), probabilities: [], layerMat: layerFromArr(layerList[galacticaLayers[i]])};
     for (let i = 0; i < specialLayers.length; i++) layerDictionary[specialLayers[i]] = {layer: layerList[specialLayers[i]], probabilities: [], layerMat: layerFromArr(layerList[specialLayers[i]])};
-    layerDictionary["dirtLayer2"] = {layer: createLayer([layerList["dirtLayer2"], layerList["worldOneCommons"]]), probabilities: [], layerMat: layerFromArr(layerList["dirtLayer"])};
+ 	layerDictionary["dirtLayer2"] = {layer: createLayer([layerList["dirtLayer2"], layerList["worldOneCommons"]]), probabilities: [], layerMat: layerFromArr(layerList["dirtLayer"])};
     layerDictionary["dirtLayer3"] = {layer: createLayer([layerList["dirtLayer3"], layerList["worldOneCommons"]]), probabilities: [], layerMat: layerFromArr(layerList["dirtLayer"])};
     layerDictionary["cloudLayer2"] = {layer: createLayer([layerList["cloudLayer2"], layerList["worldTwoCommons"]]), probabilities: [], layerMat: layerFromArr(layerList["cloudLayer"])};
     layerDictionary["deepWaterLayer"] = {layer: createLayer([layerList["deepWaterLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["deepWaterLayer"])};
@@ -1142,7 +1150,8 @@ function createAllLayers() {
 	layerDictionary["johnLayer"] = {layer: createLayer([layerList["johnLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer"])};
     layerDictionary["johnMetaLayer"] = {layer: createLayer([layerList["johnMetaLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnMetaLayer"])};
     layerDictionary["johnLayer_CLT"] = {layer: createLayer([layerList["johnLayer_CLT"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer_CLT"])};
-    let tier = "Uncommon";
+    for (const i of layerIndex.johnHouse) layerDictionary[i] = {layer: createLayer([layerList[i]]), probabilities: [], layerMat: layerFromArr(layerList[i])};
+	let tier = "Uncommon";
     let arr = [];
     while (!(oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Antique"}))) {
         let tierOres = oreInformation.getOresByTier(tier);

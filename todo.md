@@ -2,13 +2,19 @@
 
 ☑️come up with better requirements for each orb (orb of flight and fire)
 
+test if the game crashes with tol6 and sim rng disabled (it probably does)
+
 put all the fumos in the index
 
 make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes (heh... zoom out (/j))
 
+make john take away his friends and family from you
+
 fumo fishing:
 
 > once you reach johns house you meet one of johns friends (or a fumo idfk) and they will give you a fishing pole, the more quests you complete the stronger your fishing rod gets, you also get coins which can be spent on bait (target specific fumos) or hooks (extra stats aka like double hook chance)
+
+> add infinitely repeating john quests that give you fumo bait for fishing, you can't reject them and they get harder the more of them you complete
 
 make gears have abilities (casino chips !!)
 
@@ -16,7 +22,7 @@ give hypermark checkminator a recipe, ability, luck, etc
 
 a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
 
-srwater, (at 19 quests) , its johns house, he gives you your fishing pole somewhere also, i alr made the layer its plankLayer using ambers old sprite
+✅(at 19 quests) , its johns house, he gives you your fishing pole somewhere also, i alr made the layer its plankLayer using ambers old sprite
 
 ability to steal johns poker chips
 
@@ -97,9 +103,9 @@ hc and onwards will be able to mine in sr1)
 
 (following numbers don't reflect hc either !!)
 
-✅jordan: 1 y 76d (with heirloom???)
+✅jordan: 1 y 76d (with heirloom???(this is not a cave ore))
 
-✅ron: 1 y 79d (with heirloom !?!?!?!@?!@?!@?)
+✅ron: 1 y 79d (with heirloom !?!?!?!@?!@?!@?(this is not either))
 
 no point in balancing anything further right now
 

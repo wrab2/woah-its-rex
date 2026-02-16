@@ -1119,6 +1119,14 @@ const portalLocations = {
         hue: "150deg",
         url: "watrWorldImage.webp"
     },
+	3: {
+		title: "john's house",
+		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br>Mbr> unlock req: Get house keys from john (a friendly fella in watr watr who wants nothing more than the reunion *one winged angel starts playing*)",
+		req: ()=>{return johnRewarded("house_keys")},
+		to: 3,
+		hue: "10deg",  //idk
+		url: "noFile.png"//"johnHouseImage.png"
+	}
 }
 function displayWorldInformation(world) {
     const info = portalLocations[world];
