@@ -606,7 +606,7 @@ function switchDistance(num) {
 		if(currentWorld === 2){
 			if(layerDistanceY === 3000) w2TeleportsIndex = 0
 			
-			let availableLocations = [{distance:3000},{distance:5000},{distance:7000},{distance:9000}]
+			let availableLocations = [{distance:3000},{distance:5000},{distance:7000},{distance:9000},{distance:980000}]
 			availableLocations = availableLocations.concat(specialLayerLocationsW2)
 			if(num === 1){
 				w2TeleportsIndex = (w2TeleportsIndex+1) % availableLocations.length

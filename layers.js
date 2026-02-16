@@ -762,7 +762,7 @@ const createdLayers = {
 
 }
 let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"];
-let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer"];
+let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "borderLayer"];
 let galacticaLayers = ["starLayer", "nebulaLayer"]
 let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer",];
 let waterWorldLayers = ["waterLayer"] // i feel like jim should be here //idk it doesn't seem to affect enything
@@ -923,8 +923,10 @@ function setLayer(y) {
     } 
 	else if (currentWorld === 2){
 		if (y>10e3 && y<1e6) return layerDictionary["borderLayer"]
+		else if(y<=10e3)return currentLayer = allLayers[Math.floor(y / 2000)]
 		//150k depth per layer
 		let layerNum = Math.floor((y-1e6)/150e3)
+		if(w2RepeatingLayers[layerNum] !== undefined)return
 		if (johnRewarded("hypermark_checkminator")){
 			let layerRng = Math.random()
 			if (layerRng < 1/40) { //checkmarkLayer
