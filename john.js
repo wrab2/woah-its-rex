@@ -268,12 +268,11 @@ function selectNextQuest(){
 	}
 	let rng = Math.random()*totalWeight
 	for(let i=0; i<questPool.length; i++){
-		if(rng < weights[0]){
+		if(rng < weights[i]){
 			player.john.currentQuest = johnQuests.indexOf(questPool[i])
 			return 
 		}else{
-			rng -= weights[0]
-			weights.shift()
+			rng -= weights[i]
 		}
 	}
 }
@@ -282,9 +281,10 @@ function completeQuest(){
 	const thisQuest = johnQuests[player.john.currentQuest]//johnQuests.filter((e)=> e.order === player.john.currentQuest)
 	const thisOre = playerInventory[thisQuest.ore]
 	
-	const count = (thisOre.normalAmt + thisOre.electrifiedAmt + thisOre.radioactiveAmt + thisOre.explosiveAmt) || 0
-	if(true || count >= thisQuest.amount){
+	if(thisOre.normalAmt >= thisQuest.amount){
 		//yay quest is completed :DDD
+		thisOre.normalAmt -= thisQuest.amount
+		inventoryObj[thisQuest.ore] = 0 //updates inventory
         
 		player.john.questsCompleted.push(thisQuest.order)
 		johnStopQuest()

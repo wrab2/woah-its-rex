@@ -8,7 +8,7 @@ put all the fumos in the index
 
 make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes (heh... zoom out (/j))
 
-make john take away his friends and family from you
+✅ make john take away his friends and family from you
 
 fumo fishing:
 
