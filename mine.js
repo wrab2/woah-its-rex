@@ -167,7 +167,11 @@ function aleaRandom() {
 const generateBlock = function(location, wbm) {
     wbm ??= false;
     blocksRevealedThisReset++;
-	if(location["Y"]==20e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
+	if(currentWorld === 1.2){
+		if(location["Y"]==20e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
+		else if(location["Y"]==100e3) return mine[location["Y"]][location["X"]] = "deepWater"
+	}
+
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;
