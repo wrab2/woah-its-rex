@@ -1726,7 +1726,7 @@ const milestoneList = {
         },
             "jp2.3" : {
             title: "checkmarxism",
-            description: "recieve the recepie for the hypermark checkminator\r\n(obtained after fulfilling 10 quests)",
+            description: "recieve the recepie for the hypermark checkminator\r\nand unlock the checkmark layer\r\n(obtained after fulfilling 10 quests)",
             check: function() {
                 return johnRewarded("hypermark_checkminator")
             },
@@ -1953,7 +1953,7 @@ const milestoneList = {
             owned: false,
             distH: 10,
             distV: 28,
-            unlocks: [],
+            unlocks: ['gap4.1'],
             connector: [],
             element: undefined
         },
@@ -1961,7 +1961,7 @@ const milestoneList = {
     "galacticaPath2" : {
         pathUnlocked : false,
         "gap2.1" : {
-            title: "community mad if main path :/",
+            title: "read the extra info...",
             description: "Craft Wormhole Exterminator!",
             check: function() {
                 return player.pickaxes["pickaxe33"];
@@ -1987,6 +1987,63 @@ const milestoneList = {
             distV: 29,
             unlocks: [],
             connector: [],
+            element: undefined
+        },
+    },
+    "galacticaPath4" : {
+        pathUnlocked: false,
+        "gap4.1" : {
+            title: "i <3 warcrimes",
+            description: "complete 10 naval events\r\n(meet john to unlock naval events)",
+            check: function() {
+                return true // add func
+            },
+            owned: false,
+            distH: 10,
+            distV: 27,
+            unlocks: ['gap5.1','gap4.2'],
+            connector: [],
+            element: undefined
+        },
+        "gap4.2" : {
+            title: "free will",
+            description: "Craft the Ring of Water\r\nspeeds up naval events",
+            check: function() {
+                return player.gears["ring_of_water"] && player.powerupVariables.fakeEquipped.item !== "ring_of_water";
+            },
+            owned: false,
+            distH: 10,
+            distV: 26,
+            unlocks: [],
+            connector: [],
+            element: undefined
+        },
+    },
+    "galacticaPath5" : {
+        "gap5.1" : {
+            title: "free will..",
+            description: "Craft The Tree of Life Upgrade 6!",
+            check: function() {
+                return player.upgrades["pickaxe27"].level > 5;
+            },
+            owned: false,
+            distH: 11,
+            distV: 27,
+            unlocks: ['gap5.2'],
+            connector: [],
+            element: undefined
+        },
+        "gap5.2" : {
+            title: "meh old year",
+            description: "Craft The Ring of Time\r\nAllows you to use TOL6 in every world",
+            check: function() {
+                return player.gears["ring_of_time"] && player.powerupVariables.fakeEquipped.item !== "ring_of_time";
+            },
+            owned: false,
+            distH: 11,
+            distV: 26,
+            unlocks: ['gap4.2'], // ??????????????????????????????????/ why is it BACKWARDS this system fucking SUCKS
+            connector: [], //this is intentionally confusing its meant to be left blank i think??
             element: undefined
         },
     },
