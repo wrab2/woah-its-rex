@@ -1221,10 +1221,12 @@ function applyLuckToLayer(layer, luck) {
             baseValue = specialOreValues[layer[i]].newBaseRarity;
         }
         let newRarity = (listEntry["noLuck"] || listEntry["oreTier"] === "Layer") ? listEntry["numRarity"] : (baseValue / layerluck);
-        if (commons.indexOf(listEntry["oreTier"]) < 0)
-            if (listEntry["oreTier"] === "Layer" || 1/newRarity <= 1/1000) listEntry["decimalRarity"] = (1/newRarity);
-            else listEntry["decimalRarity"] = (1/1000);
-        else {
+        if (commons.indexOf(listEntry["oreTier"]) < 0){
+			let cap = 1000
+			if(johnRewarded("water_polo_ball")) cap = 333
+            if (listEntry["oreTier"] === "Layer" || 1/newRarity <= 1/cap) listEntry["decimalRarity"] = (1/newRarity);
+            else listEntry["decimalRarity"] = (1/cap);
+		} else {
             if (player.powerupVariables.commonsAffected.state) listEntry["decimalRarity"] = 1/((listEntry["numRarity"] * oreInformation.commonMultiplier) / (layerluck >= 3.5 ? 3.5 : layerluck));
             else listEntry["decimalRarity"] = 1/(listEntry["numRarity"] * oreInformation.commonMultiplier)
         }

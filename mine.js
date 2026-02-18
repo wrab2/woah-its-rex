@@ -246,12 +246,12 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
             if (caveInfo.type === "abysstoneCave") estAmt = amt*(1/oreList[thisTable[i]]["numRarity"])
 			else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*curCaveLuck);
 			else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
-			if(player.gears["ring_of_creation"] && oreList[thisTable[i]]["decimalRarity"] >= 0.001) estAmt*=5
+			if(player.gears["ring_of_creation"] && oreList[thisTable[i]]["decimalRarity"] > 0.001) estAmt*=5
         } else {
 			if(player.gears["ring_of_fire"])amt *= (verifiedOres.getCaveLuck()/10 + 1)
 			let oreRarity = generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])]
             estAmt = amt*oreRarity;
-			if(player.gears["ring_of_creation"] && oreRarity >= 0.001) estAmt*=5
+			if(player.gears["ring_of_creation"] && oreRarity > 0.001) estAmt*=5
 		}
         let oldEst = estAmt;
         const aleaVals = {rand: aleaRandom(), count: gameInfo.overallCount, seed: gameInfo.seed};
