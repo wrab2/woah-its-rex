@@ -2261,7 +2261,7 @@ const pickaxeStats = {
         tier: 13,
         icon: "@verrdant",
     },
-    "pickaxe36" : {
+    "pickaxe36" : { //pickaxe of flight
         mined: 7500000,
         revealed: 1,
         luck: 1500,

@@ -3721,16 +3721,10 @@ button, .col-3 > div > button {
   font-weight: 800;
 }
 #mainLower {
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
   width: 100%;
   position: relative;
-}
-#lowerChild {
-  min-height: 0; 
-  max-height: 1000vh; 
-  overflow-y: auto; 
-  overflow-x: hidden;
 }
 ::-webkit-scrollbar {
   width: 0;

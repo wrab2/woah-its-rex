@@ -579,11 +579,11 @@ let devReps = 100;
 const calcSpeed = function() {
     let miningSpeed = baseSpeed;
     let reps = 1;
-    if (currentWorld < 2 && player.gears["gear31"])
+    if (recipes["gear31"].active.includes(currentWorld))
         miningSpeed = baseSpeed - 5;
-    if (currentWorld < 2 && player.gears["gear2"])
+    if (recipes["gear2"].active.includes(currentWorld))
         miningSpeed = baseSpeed - 10;
-    if (currentWorld < 2 && player.gears["gear6"])
+    if (recipes["gear6"].active.includes(currentWorld))
         miningSpeed = baseSpeed - 15;
     if (currentWorld === 2 || (player.gears["gear11"] && player.gears["gear16"] && player.gears["gear19"]))
         miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear16"] ? 5 : 0) - (player.gears["gear19"] ? 8 : 0);
