@@ -18,8 +18,8 @@ async function rollAbilities(force) {
     }
     if (debug && force) m = 10000000;
     const pickaxe = pickaxeStats[player.stats.currentPickaxe]
-    if (Math.random() <= (m/pickaxe.rate)) {
-        if ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) && !ca) {
+    if ((Math.random() <= (m/pickaxe.rate)) || force) {
+        if ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional ) && !ca) {
             let bulkAmt = 0;
             if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
             else bulkAmt = pickaxe.mined;
@@ -814,6 +814,10 @@ const treeLevels = {
     summerBranch: []
 }
 function pickaxeAbility27(x, y, overrideLevel) {
+	if(player.upgrades["pickaxe27"].level >= 6){
+		pickaxeStats.pickaxe27.isDimensional = true
+		return rollAbilities(true)
+	}
     let eX = x;
     eX -= 37;
     let eY = y;

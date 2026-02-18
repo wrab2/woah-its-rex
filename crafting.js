@@ -2172,7 +2172,7 @@ const pickaxeStats = {
         rate: 500,
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
-        canSpawnCaves:[1, 1.1],
+        canSpawnCaves:[1, 1.1, 1.2, 2, 0.9],
         canMineIn:[1, 1.1],
         tier: 8,
         icon: "",
