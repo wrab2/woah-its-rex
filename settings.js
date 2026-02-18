@@ -1113,7 +1113,7 @@ const portalLocations = {
         url: "galacticaImage.png"
     },
     1.2: {
-        title: "watr watr",
+        title: "Water World",
         desc: "watr watr!<br><br>All gears work here!<br><br>Null Chroma, Galactica Pickaxes work here!<br><br>Unlock Requirement: Visit Watr Once!<br><br>\"<i>All I have to say is watr watr watr watr</i>\" - Remsy",
         req: function() {return player.watrEntered;},
         to: 1.2,
@@ -1121,7 +1121,7 @@ const portalLocations = {
         url: "watrWorldImage.webp"
     },
 	3: {
-		title: "john's house",
+		title: "Subrealm Water",
 		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br><br>All Gears work here!<br><br>Hypermark Checkminator and above work here!<br><br>Unlock Requirement: Get the house keys from john (a friendly fella in watr watr who wants nothing more than the reunion *Deltarune chapter 3+4 soundtrack number 78 \"a concert for you\" starts playing*)<br><br>\"<i>Please stop stealing my stuff<i>\" - John",
 		req: ()=>{return johnRewarded("house_keys")},
 		to: 3,
