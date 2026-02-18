@@ -57,8 +57,8 @@
 }
 #inventoryDisplay {
   overflow-y: scroll;
-  min-height: 75vh;
-  max-height: 75vh;
+  min-height: 75%;
+  max-height: 75%;
   border-style: solid;
   border-color: var(--main-border-color);
   border-left: none;
@@ -3665,8 +3665,8 @@ button, .col-3 > div > button {
   overscroll-behavior-y: contain;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100%;
+  max-height: 100%;
   width: 50%;
   float: left;
   text-align: center;
@@ -3695,7 +3695,7 @@ button, .col-3 > div > button {
   overflow-x: hidden!important;
   max-width: 25%;
   width: 25%;
-  height: 100vh;
+  height: 100%;
   max-height: 100vh;
   background-color: var(--main-bg-color);
   border-top: 0;
@@ -3732,7 +3732,7 @@ button, .col-3 > div > button {
 .col-3 {
   width: 25%;
   height: 100%;
-  max-height: 100vh;
+  max-height: 100%;
   padding: 0px;
   background-color: var(--main-bg-color);
 }
