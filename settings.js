@@ -502,7 +502,8 @@ function createIndexCards(layer) {
     createIndexCards.indexing = layer;
     const h = get("loungeCardHolder");
     const ic = layer.indexOf("Commons") > -1
-    while (h.firstChild) h.firstChild.remove();
+	h.textContent=""
+    //while (h.firstChild) h.firstChild.remove();
     let list;
     if (caveList[layer] === undefined) {
         if (ic) list = [...layerList[layer]];
@@ -524,7 +525,7 @@ function createIndexCards(layer) {
             }
         }
         else list = [...layerDictionary[layer].layer];
-
+		if(!ic)list = list.filter((e)=>!layerList.worldTwoCommons.includes(e) && !layerList.worldOneCommons.includes(e))
         for (let i = list.length - 1; i >= 0; i--) {
             const ore = list[i];
             const tier = oreList[ore]["oreTier"];
