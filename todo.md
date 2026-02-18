@@ -2,7 +2,7 @@
 
 ☑️come up with better requirements for each orb (orb of flight and fire)
 
-test if the game crashes with tol6 and sim rng disabled (it probably does)
+fix gradient of "equip" button on hc
 
 put all the fumos in the index
 

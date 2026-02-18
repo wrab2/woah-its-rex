@@ -232,7 +232,20 @@ const recipes = {
     },
     "hypermark_checkminator": {
         name: "Hypermark Checkminator",
-        recipe: [{"ore": "✅", "amt": 10},{"ore": "🐋", "amt": 10}],
+        recipe: [
+			{"ore": "✅", "amt": 10},
+			{"ore": "📰", "amt": 10},
+			{"ore": "HD 160529", "amt": 10},
+			{"ore": "Real Scribbal", "amt": 10},
+			{"ore": "🚬", "amt": 10},
+			{"ore": "💽", "amt": 10},
+			{"ore": "📽️", "amt": 10},
+			{"ore": "🗳️", "amt": 10},
+			{"ore": "🪞", "amt": 10},
+			{"ore": "🪓", "amt": 10},
+			{"ore": "🛡️", "amt": 10},
+		
+		],
         active : [],
         pUnob: true,
         pickaxe: true
@@ -1010,7 +1023,7 @@ function updateActiveRecipe() {
                 }
             }
         let button = get("newCraftItem");
-        const type = (thisId.indexOf('pickaxe') > -1) ? "pickaxe" : "gear";
+        const type = (thisId.indexOf('pickaxe') > -1 || recipes[thisId].pickaxe) ? "pickaxe" : "gear";
         if (player.pickaxes[thisId] || player.gears[thisId] || (thisId === "pickaxe27" && player.upgrades["pickaxe27"].level > 5)) {
             if (!(buttonGradients[`${thisId}Craft`]["applied"])) {
                 button.style.backgroundImage = buttonGradients[`${thisId}Craft`]["gradient"];

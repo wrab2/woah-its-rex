@@ -780,6 +780,9 @@ const repeatingLayers = {
 
 }
 const waterRepeatingLayers = []
+waterRepeatingLayers[189] = "deepWaterLayer"
+waterRepeatingLayers[190] = "deepWaterLayer"
+//^ to prevent refresh exploit to get celestial layer trigger
 const w2RepeatingLayers = []
 const layerIndex = {
     worldOne : {
