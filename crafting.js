@@ -222,7 +222,7 @@ const recipes = {
     },
     "pickaxe36": {
         name: "Pickaxe of Flight",
-        recipe: [{"ore": "orbOfFlight", "amt": 1}],
+        recipe: [{"ore": "orbOfFlight", "amt": 1}, {"ore": "eternalCoral", "amt": 1}],
         active : [],
         req: function() {
             return player.p.orbOfFlight;

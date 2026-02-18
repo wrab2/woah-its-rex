@@ -178,7 +178,7 @@ const johnQuests = [
 		tier: QuestTiers.indexOf("Hyperdimensional")
 	},
 	{
-		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternally greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
+		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternal (coral)ly greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
 		ore_stry:"water buffalo 🐃 is found in the forge, you might want to do this one last as its the hardest by far (and you cant do it before 10 requests)",
 		ore:"🐃",
 		amount:1,
