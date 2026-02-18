@@ -535,6 +535,12 @@ const recipes = {
         active : [0.9, 1, 1.1, 1.2, 2, 3],
         pUnob: true
     },
+	"memory_potion":{
+		name: "Memory Potion",
+		recipe: [{"ore":"✅", "amt":1e15}],
+		active: [0.9, 1, 1.1, 1.2, 2, 3],
+		//let's make it obtainable with pp it's a cool gear
+	}
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
     let layer = [];
@@ -1151,7 +1157,8 @@ const buttonGradients = {
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
-    
+    "memory_potionCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false}, //pls change it 
+	
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
@@ -1250,7 +1257,7 @@ const showOrders = {
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
-    "gjohn": ["heirloom","water_polo_ball","hat","ring_enabler"],
+    "gjohn": ["heirloom","water_polo_ball","hat","ring_enabler","memory_potion"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -2466,7 +2473,7 @@ const gearInformation = {
         tier: 14,
     },
     "heirloom": {
-        effect:"cave luck * 1.03^naval events completed",
+        effect:"cave luck * 1.03^naval events completed (slows down after 250 naval events)",
         tier: 11,
     },
     "water_polo_ball": {
@@ -2481,6 +2488,10 @@ const gearInformation = {
         effect:"john allows you to progress further",
         tier: 0,
     },
+	"memory_potion": {
+		effect:"by checking 1 quadrillion of checkmarks you train your brain and can beter remember Forgotten Rose Quartz Shell and make all of its effeects active at all times",
+		tier: 15,
+	}
 }
 function ct(john=false) {
     const nums = calcSpeed();

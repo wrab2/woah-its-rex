@@ -49,6 +49,7 @@ class playerTemplate {
             "gear46": false, 
             "gear47": false, 
             "ring_of_fire": false,
+			"memory_potion": false,
             
         }
         this.pickaxes = {

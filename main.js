@@ -1006,7 +1006,12 @@ function updateInventory(m = true) {
             randBuff.proc = false;
             randBuff.reps = false;
             const give = 1//Math.round(Math.random() * 2);
-            if (give === 0) randBuff.luck = true;
+			if(player.gears["memory_potion"]){
+				randBuff.luck = true;
+				randBuff.proc = true;
+				randBuff.reps = true;
+			}
+            else if (give === 0) randBuff.luck = true;
             else if (give === 1) randBuff.proc = true;
             else if (give === 2) randBuff.reps = true;
             utilitySwitchActions();

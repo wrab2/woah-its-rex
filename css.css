@@ -589,9 +589,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding:0px;
 }
 .worldCraftSelector:hover {
   background-color: var(--main-hl-color);
+}
+.worldCraftSelector img {
+	width:100%;
 }
 .worldSelectStyles {
   border-width: 0.2vw 0;
@@ -2198,7 +2202,7 @@
   overflow-y: visible;
   overflow-x: visible;
   overscroll-behavior-y: contain;
-  height: 100%;
+  height: fit-content;
 }
 
 .craftingAmountsDisplay {
