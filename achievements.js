@@ -643,7 +643,7 @@ const milestoneList = {
             owned: false,
             distH: 9,
             distV: 3,
-            unlocks: ["tp2.2"],
+            unlocks: [],
             connector: [],
             element: undefined
         },
@@ -2042,7 +2042,7 @@ const milestoneList = {
             owned: false,
             distH: 11,
             distV: 26,
-            unlocks: ['gap4.2'], // ??????????????????????????????????/ why is it BACKWARDS this system fucking SUCKS
+            unlocks: [], // ??????????????????????????????????/ why is it BACKWARDS this system fucking SUCKS
             connector: [], //this is intentionally confusing its meant to be left blank i think??
             element: undefined
         },
