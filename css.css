@@ -1589,6 +1589,9 @@
   flex-wrap: wrap;
   padding-bottom: min(20vh, 10vw);
 }
+#forgeRecipeInformation img {
+  width: 1.5em;
+}
 #forgeCost {
   width: 40%;
   height: 100%;
@@ -1710,6 +1713,9 @@
   border-left: 0.1vw solid var(--main-border-color);
   overflow-y: auto;
   overscroll-behavior: contain;
+}
+#oreCraftList :nth-child(2n), #oreFissionList :nth-child(2n) {
+  border-right:0.1vw solid var(--main-border-color);
 }
 .forgeType {
   width: 100%;
@@ -4416,7 +4422,7 @@ button {
   height: auto;
 }
 .forgeCraftingButton {
-  width: 100%;
+  width: 50%;
   height: min(4vh, 2vw);
   margin: 0;
   font-size: min(1vw, 2vh);

@@ -6,8 +6,6 @@ fix gradient of "equip" button on hc
 
 put all the fumos in the index
 
-make crafts ui better somehow, maybe a scrollbar because you can't scroll down to the evil flag on certain window sizes (heh... zoom out (/j))
-
 fumo fishing:
 
 > once you reach johns house you meet one of johns friends (or a fumo idfk) and they will give you a fishing pole, the more quests you complete the stronger your fishing rod gets, you also get coins which can be spent on bait (target specific fumos) or hooks (extra stats aka like double hook chance)
