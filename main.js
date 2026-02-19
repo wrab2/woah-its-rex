@@ -597,7 +597,8 @@ const calcSpeed = function() {
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:extraSpeed}
         else {
 			reps = Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1))
-			if (johnRewarded("hat") && curDirection!=="a") {
+            if (player.gears["memory_potion"]) reps += 25
+            if (johnRewarded("hat") && curDirection!=="a") {
 				extraSpeed*=2
 				reps*=2
 			}			
@@ -2093,9 +2094,9 @@ const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return johnRewarded("heirloom")}, //makes tol6 usable everywhere
     "orbOfSound" : ()=>{return johnRewarded("heirloom")}, //makes naval events quicker
     "orbOfLife" : ()=>{return johnRewarded("hat")}, //boost based on ore completion
-    "orbOfCreation" : ()=>{player.pickaxes["hypermark_checkminator"]},
+    "orbOfCreation" : ()=>{return player.pickaxes["hypermark_checkminator"]},
     "orbOfFlight" : ()=>{return false},
-    "orbOfFire" : ()=>{return false},
+    "orbOfFire" : ()=>{return player.gears["ring_of_life"]},
 }
 function checkPolys() {
     const polys = Object.keys(polyLocations);

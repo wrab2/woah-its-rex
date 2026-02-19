@@ -550,7 +550,7 @@ const recipes = {
     },
 	"memory_potion":{
 		name: "Memory Potion",
-		recipe: [{"ore":"✅", "amt":1e15}],
+		recipe: [{"ore":"✅", "amt":4e15}],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		//let's make it obtainable with pp it's a cool gear
 	}
@@ -2276,10 +2276,10 @@ const pickaxeStats = {
         icon: "",
     },
     "hypermark_checkminator" : {
-        mined: 2000000,
+        mined: 15e6,
         revealed: 1,
-        luck: 750,
-        rate: 600,
+        luck: 1000,
+        rate: 650,
         src : `<img class="mineImage" src="media/hypermark checkminator.png"></img>`,
         ability: "",
         doAbility: function(x, y) {},
@@ -2453,7 +2453,7 @@ const gearInformation = {
         tier: 10,
     },
     "ring_of_life" : {
-        effect:"Multiplies base luck by 1.5x<br><i>Where my life began...</i>",
+        effect:"Multiplies luck based on total amount of unique ores and variants in your inventory up to 4x<br><i>Where my life began...</i>",
         tier: 11,
     },
     "ring_of_water" : {
@@ -2502,7 +2502,7 @@ const gearInformation = {
         tier: 0,
     },
 	"memory_potion": {
-		effect:"by checking 1 quadrillion of checkmarks you train your brain and can beter remember Forgotten Rose Quartz Shell and make all of its effeects active at all times",
+		effect:"by checking 1 quadrillion of checkmarks you train your brain and can beter remember Forgotten Rose Quartz Shell and make all of its effeects active at all times even in sr1",
 		tier: 15,
 	}
 }

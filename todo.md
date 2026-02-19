@@ -92,17 +92,21 @@ perhaps give infinity collector 2 a use
 
 ✅ janine: 3 days with 350 events (you'll have more at this point probably but it's gonna be softcapped)
 
-=== HYPERMARK CHECKMINATOR (straight up 10+ times better pick than tol 6 because why not and maybe it boosts caves even more than wormhole and perhaps can mine in sr1
+=== HYPERMARK CHECKMINATOR 
 
-hc and onwards will be able to mine in sr1)
+=✅ ool - 4 days
 
-= ool here probably and obtainable in like 1 day
+=✅ ooc (5 days) 
+
+=✅and memory potion - (28 days / 7 days with ooc) 
+
+= and ring of fire here (unlocks after ool, unknown time rn) before continuing with the quests
 
 (following numbers don't reflect hc either !!)
 
-✅jordan: 1 y 76d (with heirloom???(this is not a cave ore))
+☑️jordan: 1 y 76d (with heirloom???(this is not a cave ore))
 
-✅ron: 1 y 79d (with heirloom !?!?!?!@?!@?!@?(this is not either))
+☑️ron: 1 y 79d (with heirloom !?!?!?!@?!@?!@?(this is not either))
 
 no point in balancing anything further right now
 
