@@ -252,8 +252,7 @@ function johnStopQuest() {
 	}
 }
 function selectNextQuest(){
-	let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order))
-	questPool.splice(player.john.currentQuest,1)
+	let questPool = johnQuests.filter((e)=>!player.john.questsCompleted.includes(e.order) && e.order-1 !== player.john.currentQuest)
 	if(questPool.length === 1){
 		player.john.currentQuest = johnQuests.indexOf(questPool[0])
 		return
