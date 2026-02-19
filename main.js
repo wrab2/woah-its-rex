@@ -2093,7 +2093,7 @@ const polyRequirements = {
     "orbOfTheUnknown" : ()=>{return johnRewarded("heirloom")}, //makes tol6 usable everywhere
     "orbOfSound" : ()=>{return johnRewarded("heirloom")}, //makes naval events quicker
     "orbOfLife" : ()=>{return johnRewarded("hat")}, //boost based on ore completion
-    "orbOfCreation" : ()=>{player.pickaxes["hypermarkCheckminator"]},
+    "orbOfCreation" : ()=>{player.pickaxes["hypermark_checkminator"]},
     "orbOfFlight" : ()=>{return false},
     "orbOfFire" : ()=>{return false},
 }

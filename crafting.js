@@ -1120,7 +1120,7 @@ const buttonGradients = {
     "pickaxe34Craft" : {"gradient" : "linear-gradient(to right, #2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769)","applied" : false},
     "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
     "pickaxe36Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
-    "hypermark_checkminatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447 #ffffff #7fb447", "applied": false},
+    "hypermark_checkminatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447, #ffffff, #7fb447)", "applied": false},
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "gear1Craft" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
@@ -1163,7 +1163,7 @@ const buttonGradients = {
     "gear38Craft" : {"gradient" : "linear-gradient(to right, #f7cac9, #ffdcdb, #ffffff, #b4c8ea, #91a8d0)","applied" : false},
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
     "ring_of_lifeCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
-    "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%))","applied" : false},
+    "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, #94bbe9 0%, #092354 25%, #0042e8 50%, #092354 75%, #94bbe9 100%)","applied" : false},
     "ring_of_timeCraft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
     "ring_of_creationCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
