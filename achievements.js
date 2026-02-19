@@ -2392,7 +2392,7 @@ function createMilestones() {
                             const val = elem.style.left.substring(4, elem.style.left.length - 3).replace(" ", "").split(",");
                             val[0] = val[0].substring(0, val[0].length - 2);
                             val[0] = Number(val[0]);
-                            if (unlockedMilestone.distH < 0) {
+                            if (unlockedMilestone.distH <= 0) {
                                 l = val[0]-7;
                                 connector.style.left = `min(${l}vh,${0.5*l}vw)`;
                             } else if (unlockedMilestone.distH > 0) {

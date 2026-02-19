@@ -1319,16 +1319,15 @@ function logFind(type, x, y, variant, atMined, fromReset, amt, fromCave, bulkRar
 }
 const suffixes = ["", "k", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", "QnV", "SeV", "SPG", "OVG", "NVG", "TGN", "UTG", "DTG", "tsTG", "qtTG", "QnTG", "ssTG", "SpTG", "OcTg", "NoTG", "QdDR", "uQDR", "dQDR", "tQDR", "qdQDR", "QnQDR", "sxQDR", "SpQDR", "OQDDr", "NQDDr", "qQGNT", "uQGNT", "dQGNT", "tQGNT", "qdQGNT", "QnQGNT", "sxQGNT", "SpQGNT", "OQQGNT", "NQQGNT", "SXGNTL", "USXGNTL", "DSXGNTL", "TSXGNTL", "QTSXGNTL", "QNSXGNTL", "SXSXGNTL", "SPSXGNTL", "OSXGNTL", "NVSXGNTL", "SPTGNTL", "USPTGNTL", "DSPTGNTL", "TSPTGNTL", "QTSPTGNTL", "QNSPTGNTL", "SXSPTGNTL", "SPSPTGNTL", "OSPTGNTL", "NVSPTGNTL", "OTGNTL", "UOTGNTL", "DOTGNTL", "TOTGNTL", "QTOTGNTL", "QNOTGNTL", "SXOTGNTL", "SPOTGNTL", "OTOTGNTL", "NVOTGNTL", "NONGNTL", "UNONGNTL", "DNONGNTL", "TNONGNTL", "QTNONGNTL", "QNNONGNTL", "SXNONGNTL", "SPNONGNTL", "OTNONGNTL", "NONONGNTL", "CENT", "UCENT"];
 function formatNumber(num, topoint) {
-    num = Math.round(num)
     topoint ??= 1;
     if (topoint < 1) topoint = 1;
     topoint = Math.pow(10, topoint);
     if (num < 1000) {
-        return num;
+        return String((Math.round(num*topoint))/topoint)
     }
     if (num >= Infinity) return Infinity;
     let tenMulti = Math.floor(Math.log10(num) / 3);
-    return Math.floor(num / Math.pow(1000, (tenMulti)) * topoint) / topoint + suffixes[tenMulti];
+    return Math.round(num / Math.pow(1000, (tenMulti)) * topoint) / topoint + suffixes[tenMulti];
 }
 function getAngleBetweenPoints(obj) {
     let x = obj.x - curX;

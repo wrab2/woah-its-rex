@@ -33,12 +33,15 @@
         <input type="text" id="catText" autocomplete="off">
         <button id="catSubmit" onclick="sillyKittyCat(get('catText').value)">Meow!</button>
     </div>
-    <div id="loungeHolder" style="display: none;">
-        <div id="loungeHeader">
+    <table id="loungeHolder" style="display: none;">
+	  <tr id="upperLounge">
+        <td id="loungeHeader">
             <p id="loungeTitle">Silly Lounge!</p>
             <button id="loungeExit" onclick="toggleLounge()">Exit</button>
-        </div>
-        <div id="loungeMenuList">
+        </td>
+	  </tr>
+	  <tr id="lowerLounge">
+        <td id="loungeMenuList">
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeGameSettings', this)">Game Settings</button>
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeAudioSettings', this)">Audio Settings</button>
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWebhookSettings', this)">Webhook Settings</button>
@@ -50,8 +53,8 @@
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeEventIndex', this)">Event Index</button>
             <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeMilestones', this);">Milestones</button>
             <button id="forge" class="loungeMenuLocationButton"onclick="showLoungeScreen('loungeForgeAndVariants', this)">Forge/Variants</button>
-        </div>
-        <div id="loungeMenuLocation">
+        </td>
+        <td id="loungeMenuLocation">
             <div id="loungeGameSettings" style="display: none;">
                 <div class="inputAndButton">
                     <button class="stopOnRareButton" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
@@ -586,8 +589,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="loungeRight">
+        </td>
+        <td id="loungeRight">
             <div id="loungeStatistics">
                 <p class="loungeStatisticText" id="updateLuck">1x Luck</p>
                 <p class="loungeStatisticText" id="updateGenerations">0 Generations/Min</p>
@@ -606,8 +609,9 @@
                 <button class="loungeSettingButton" onclick="toggleUpdates(this)">Update Elements</button>
                 <button class="loungeSettingButton" onclick="toggleUnused(this)">Delete Unused Elements</button>
             </div>
-        </div>
-    </div>
+        </td>
+      </tr>
+	</table>
     <p class="latestFind htmlTemplate" style="display: none;"></p>
     <noscript>
         <div id="noscript">

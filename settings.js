@@ -1270,7 +1270,7 @@ function toggleHideCompleted() {
 function updateLoungeStats() {
     const settings = player.loungeSettings;
     if (settings.updateElements) {
-        get("updateLuck").textContent = `${player.displayStatistics.luck.toLocaleString()}x Luck`;
+        get("updateLuck").textContent = `${formatNumber(verifiedOres.getCurrentLuck(),2)}x Luck`;
         const blocks = getAvgBlockSpeed();
         get("updateGenerations").textContent = `${formatNumber(blocks, 2)} Generations/Min`;
         get("updateLayer").textContent = `Mining In: ${getLayer(curY).layerMat + (layerIsTriggered?"*":"")}`
@@ -1285,7 +1285,7 @@ function updateLoungeStats() {
         const cl = verifiedOres.getCaveLuck();
         const ctl = verifiedOres.getCaveTypeLuck();
         const cm = verifiedOres.getCaveModifier();
-        get("updateCL").textContent = `${cl}x Cave Luck`;
+        get("updateCL").textContent = `${formatNumber(cl, 2)}x Cave Luck`;
         get("updateCTL").textContent = `${ctl}x Cave Type Luck`;
         get("updateCM").textContent = `${cm} Cave Modifier`;
         const list = player.powerupCooldowns;
