@@ -49,9 +49,9 @@ SOME way to get limited ores when its not the month of the ore, x1000 rarity in 
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
 
-#### bad idea of the day
+#### GREAT and AWESOME idea of the day
 
-perhaps give infinity collector 2 a use
+make memory potion also give energy siphoner's effect so we can make the yellow vocaloid a HD again
 
 # PROGRESSION:
 
@@ -104,9 +104,9 @@ perhaps give infinity collector 2 a use
 
 (following numbers don't reflect hc either !!)
 
-☑️jordan: 1 y 76d (with heirloom???(this is not a cave ore))
+☑️jordan: 1 y 76d (#whoops
 
-☑️ron: 1 y 79d (with heirloom !?!?!?!@?!@?!@?(this is not either))
+☑️ron: 1 y 79d (#whoops
 
 no point in balancing anything further right now
 

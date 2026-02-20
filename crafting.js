@@ -2482,15 +2482,15 @@ const gearInformation = {
         tier: 0,
     },
     "ring_of_fire" : {
-        effect:"cave lucks boosts simulated ability size at reduced rate (1 + cave luck/100) +1<br><i>It's so hot here...</i>",
+        effect:"Cave lucks boosts simulated ability size at reduced rate (1 + cave luck/100) +1<br><i>It's so hot here...</i>",
         tier: 14,
     },
     "heirloom": {
-        effect:"cave luck * 1.03^naval events completed (slows down after 250 naval events)",
+        effect:"Cave luck * 1.03^naval events completed (slows down after 250 naval events)",
         tier: 11,
     },
     "water_polo_ball": {
-        effect:"increases minimum rng for finding ores from 1/1000 to 1/333",
+        effect:"Increases minimum rng for finding ores from 1/1000 to 1/333",
         tier: 11,
     },
     "hat": {
@@ -2498,11 +2498,11 @@ const gearInformation = {
         tier: 12,
     },
     "ring_enabler": {
-        effect:"john allows you to progress further",
+        effect:"John enables you to progress further",
         tier: 0,
     },
 	"memory_potion": {
-		effect:"by checking 1 quadrillion of checkmarks you train your brain and can beter remember Forgotten Rose Quartz Shell and make all of its effeects active at all times even in sr1",
+		effect:"Compressing Quadrillions of checkmarks into a solution made out of pure checkmarkium (real element) your brain is able to enhance thus making you remember forgotten rose quartz shell and letting you have all of its effects active at the same time",
 		tier: 15,
 	}
 }
