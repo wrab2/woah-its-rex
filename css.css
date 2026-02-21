@@ -3880,7 +3880,7 @@ button, .col-3 > div > button {
 .spawnVolume:hover {
   opacity: 1; 
 }
-.spawnVolume::-webkit-slider-thumb {
+.spawnVolume::-webkit-slider-thumb, #musicVolume::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 2vw;
@@ -3888,13 +3888,15 @@ button, .col-3 > div > button {
   background: white;
   cursor: pointer;
 }
-.spawnVolume::-moz-range-thumb {
+.spawnVolume::-moz-range-thumb, #musicVolume::-moz-range-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 3vw;
-  height: 2vw;
+  width: 2vw;
+  height: 100%;
   background: white;
   cursor: pointer;
+  border-radius: 0;
+  border: none;
 }
 
 .settingsSeparator {
