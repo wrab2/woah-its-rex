@@ -607,47 +607,56 @@ function showSpawnMessage(card){
 	card.firstChild.style.opacity = (current+1)%2
 }
 function createEventCards(world, button) {
-	const buttons = get('loungeEventWorldsHolder').children
-	let req = Object.keys(portalLocations)
-	req.splice(req.indexOf("11252023"),1)
-	for(let i=0; i<buttons.length; i++){
-		if(!portalLocations[req[i]].req()){
-			buttons[i].disabled = true
-			buttons[i].textContent = "[Research Required]"
-		}
-		else {
-			buttons[i].disabled = false
-			buttons[i].textContent = portalLocations[req[i]].title
+	const buttons = get("loungeEventWorldsHolder").children;
+	for (b of buttons) {
+		let key = b.attributes.world.value;
+		if (!portalLocations[key].req()) {
+			b.disabled = true;
+			b.textContent = "[Research Required]";
+		} else {
+			b.disabled = false;
+			b.textContent = portalLocations[key].title;
 		}
 	}
 
-	if(world !== createEventCards.indexing){
-		document.getElementsByClassName("currentEventWorld")[0]?.classList.remove("currentEventWorld")
-		button?.classList.add("currentEventWorld")
+	if (world !== createEventCards.indexing) {
+		document
+			.getElementsByClassName("currentEventWorld")[0]
+			?.classList.remove("currentEventWorld");
+		button?.classList.add("currentEventWorld");
 	}
-	createEventCards.indexing = world
-	get('loungeEventHolder').innerText=""
-	const worldEvents = collectWorldEvents(world).sort((a,b) => events[b].rate - events[a].rate)
-	for (const i of worldEvents){
-		const hidden = !player.unlockedEvents[i]
-		const copying = get("eventCardCopy").cloneNode(true)
-		copying.id = ""
-		get('loungeEventHolder').prepend(copying)
+	createEventCards.indexing = world;
+	get("loungeEventHolder").innerText = "";
+	const worldEvents = collectWorldEvents(world).sort(
+		(a, b) => events[b].rate - events[a].rate
+	);
+	for (const i of worldEvents) {
+		const hidden = !player.unlockedEvents[i];
+		const copying = get("eventCardCopy").cloneNode(true);
+		copying.id = "";
+		get("loungeEventHolder").prepend(copying);
 		if (hidden) {
-			document.getElementsByClassName("eventCardOre")[0].textContent = "?"
-		
-		}
-		else {
-			if (events[i].ore.length < 5) document.getElementsByClassName("eventCardOre")[0].textContent = events[i].ore
+			document.getElementsByClassName("eventCardOre")[0].textContent = "?";
+		} else {
+			if (events[i].ore.length < 5)
+				document.getElementsByClassName("eventCardOre")[0].textContent =
+					events[i].ore;
 			else {
-				document.getElementsByClassName("eventCardOre")[0].innerHTML = `<img src=${oreList[events[i].ore].src}>`
+				document.getElementsByClassName("eventCardOre")[0].innerHTML =
+					`<img src=${oreList[events[i].ore].src}>`;
 			}
-			document.getElementsByClassName("eventSpawnMessage")[0].innerHTML = events[i].message
-			document.getElementsByClassName("eventDuration")[0].innerHTML = "Duration: "+msToTime(events[i].duration)
-			document.getElementsByClassName("eventEffect")[0].innerHTML = "Ore boost: x"+events[i].boost
-			if(events[i].specialText!=="N/A")document.getElementsByClassName("eventSideEffect")[0].innerHTML = "Side effect: "+events[i].specialText
+			document.getElementsByClassName("eventSpawnMessage")[0].innerHTML =
+				events[i].message;
+			document.getElementsByClassName("eventDuration")[0].innerHTML =
+				"Duration: " + msToTime(events[i].duration);
+			document.getElementsByClassName("eventEffect")[0].innerHTML =
+				"Ore boost: x" + events[i].boost;
+			if (events[i].specialText !== "N/A")
+				document.getElementsByClassName("eventSideEffect")[0].innerHTML =
+					"Side effect: " + events[i].specialText;
 		}
-		document.getElementsByClassName("eventSpawnRate")[0].textContent = "Rate: 1/"+formatNumber(1/events[i].rate)+" every 500ms"
+		document.getElementsByClassName("eventSpawnRate")[0].textContent =
+			"Rate: 1/" + formatNumber(1 / events[i].rate) + " every 500ms";
 	}
 }
 

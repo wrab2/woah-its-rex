@@ -1808,6 +1808,7 @@
 }
 #lowerLounge {
 	display: flex;
+  width: 100%;
 	height: calc(100% - min(10vh, 5vw));
 	justify-content: space-between;
 	align-content: flex-start;

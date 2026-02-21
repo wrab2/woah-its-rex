@@ -33,585 +33,582 @@
         <input type="text" id="catText" autocomplete="off">
         <button id="catSubmit" onclick="sillyKittyCat(get('catText').value)">Meow!</button>
     </div>
-    <table id="loungeHolder" style="display: none;">
-	  <tr id="upperLounge">
-        <td id="loungeHeader">
-            <p id="loungeTitle">Silly Lounge!</p>
-            <button id="loungeExit" onclick="toggleLounge()">Exit</button>
-        </td>
-	  </tr>
-	  <tr id="lowerLounge">
-        <td id="loungeMenuList">
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeGameSettings', this)">Game Settings</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeAudioSettings', this)">Audio Settings</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWebhookSettings', this)">Webhook Settings</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeData', this)">Data</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeLogs', this)">Logs</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOverallStatistics', this)">Overall Statistics</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOreIndex', this)">Ore Index</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWorlds', this)">Worlds</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeEventIndex', this)">Event Index</button>
-            <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeMilestones', this);">Milestones</button>
-            <button id="forge" class="loungeMenuLocationButton"onclick="showLoungeScreen('loungeForgeAndVariants', this)">Forge/Variants</button>
-        </td>
-        <td id="loungeMenuLocation">
-            <div id="loungeGameSettings" style="display: none;">
-                <div class="inputAndButton">
-                    <button class="stopOnRareButton" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
-                    <button class="stopOnRareSelector" onclick="toggleStopRareList()" id="stopOnRareDisplay">Show Tiers</button>
-                    <div id="stopOnRareList" style="display: none;">
-                        <span class="stopOnRareTierDivider"></span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Antique</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Mystical</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Divine</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Flawless</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Interstellar</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Metaversal</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Sacred</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Ethereal</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Imaginary</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Celestial</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Hyperdimensional</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Infinitesimal</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Johnical</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Polychromatical</span>
-                    </div>
-                  </div>
-                  <div class="inputAndButton" id="spawnMessageHolder">
-                    <button class="gameSetting" onclick="toggleSpawnMessageList()" id="changeSMrarityDisplay">Show Spawn Message Tiers</button>
-                    <div id="spawnTierList" style="display: none;">
-                        <span class="spawnMessageTierDivider"></span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Antique</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Mystical</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Divine</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Flawless</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Interstellar</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Metaversal</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Sacred</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Ethereal</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Imaginary</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Celestial</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Hyperdimensional</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Infinitesimal</span>
-                        <span class="stopOnRareTier" onclick="allowList(this.textContent)">Johnical</span>
-                        <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Polychromatical</span>
-                    </div>
-                </div>
-                  <div class="inputAndButton">
-                    <input autocomplete ="off" type="text" class="textInput" id="mineCapacitySetter" placeholder="Default: 250000, >= 250">
-                    <button class="inputButton" onclick="updateCapacity(document.getElementById('mineCapacitySetter'))">Update Capacity</button>
-                  </div>
-                  <div class="inputAndButton">
-                    <input autocomplete ="off" type="text" class="textInput" id="latestSetter" placeholder="1-999">
-                    <button class="inputButton" onclick="changeLatestMax(document.getElementById('latestSetter'))">Latest Ores Length</button>
-                  </div>
-                  <div class="inputAndButton">
-                    <input autocomplete ="off" type="text" class="textInput" id="automineUpdate" placeholder="Default: 25, > 0">
-                    <button class="inputButton" onclick="updateAutomineUpdateSpeed(document.getElementById('automineUpdate'))">Change Block Update Speed</button>
-                  </div>
-                  <div class="inputAndButton">
-                    <input autocomplete ="off" type="text" class="textInput" id="logRarityInput" placeholder="Default: 1, >= 1">
-                    <button class="inputButton" onclick="switchHighRarity(get('logRarityInput'))">Set Minimum Log RNG</button>
-                </div>
-                <button class="gameSetting toggledOff" onclick="toggleSimulatedRng(this)" id="simulatedRng">Toggle Simulated RNG</button>
-                <button class="gameSetting toggledOff" onclick="toggleAccurateSpeed(this);" id="toggleAccurateSpeed">Accurate Speed</button>
-                <button class="gameSetting toggledOn" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
-                <button class="gameSetting toggledOn" onclick="switchToIndex(this, 1)" id="craftIndex">Travel to layer index on crafting click</button>
-                <button class="gameSetting toggledOff" onclick="switchFont();" id="switchFont">Use Different Emojis (for improper display)</button>
-                <button class="gameSetting toggledOn" onclick="toggleSpawnEffects(this);" id="spawnEffects">Spawn Effects</button>
-                <button class="gameSetting toggledOff" onclick="toggleNyerd(this);" id="toggleNyerd">Nyerd</button>
-                <button class="gameSetting toggledOff" onclick="AFKmode(this);">AFK Mode</button>
-            </div>
-            <div id="loungeAudioSettings" style="display: none;">
-                <div id="musicStuff">
-                    <button id="musicButton" onclick="toggleMusic()">Mute Music</button>
-                    <label class="slidecontainer">
-                        <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
-                    </label>
-                </div>
-                <div id="musicSettings">
-                    <div id="disguisedChillHolder">
-                        <button class="toggleDisplay otherAudio" onclick="enableDisguisedChills();" id="disguisedChills" style="background-color: #FF3D3D; float: left;">Disguised Chills</button>
-                        <button class="toggleDisplay otherAudio" onclick="switchMusicType(this);" id="newMusic" style="background-color: #6BC267; float: right;">Use New Music</button>
-                    </div>
-                </div>
-
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Antique', this)" id="muteAntique">Mute Antiques</button>
-                        <button class="testButton" onclick="testSound('Antique', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Antique')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #5A865A 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Mystical', this)"id="muteMystical">Mute Mysticals</button>
-                        <button class="testButton" onclick="testSound('Mystical', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value,  'Mystical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6F40B0 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Divine', this)"id="muteDivine">Mute Divines</button>
-                        <button class="testButton" onclick="testSound('Divine', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Divine')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFFEAB 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Flawless', this)"id="muteFlawless">Mute Flawless</button>
-                        <button class="testButton" onclick="testSound('Flawless', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Flawless')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #31E8FF 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Interstellar', this)"id="muteInterstellar">Mute Interstellars</button>
-                        <button class="testButton" onclick="testSound('Interstellar', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Interstellar')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFA124 50%);">
-                        </label>
-                    </div>
-                    
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Metaversal', this)"id="muteMetaversal">Mute Metaversals</button>
-                        <button class="testButton" onclick="testSound('Metaversal', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Metaversal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #3BD216 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Sacred', this)"id="muteSacred">Mute Sacreds</button>
-                        <button class="testButton" onclick="testSound('Sacred', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Sacred')" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, #FF3C3C  50%);">
-                        </label> 
-                    </div>
-                    
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Ethereal', this)"id="muteEthereal">Mute Ethereals</button>
-                        <button class="testButton" onclick="testSound('Ethereal', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="30" value="15" onchange="changeSpawnVolume(this.value, 'Ethereal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ac47ff 50%);">
-                        </label>
-                    </div>
-                    
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Celestial', this)"id="muteCelestial">Mute Celestials</button>
-                        <button class="testButton" onclick="testSound('Celestial', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Celestial')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #870000 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Imaginary', this)"id="muteImaginary">Mute Imaginaries</button>
-                        <button class="testButton" onclick="testSound('Imaginary', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Imaginary')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #41FF6D 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Hyperdimensional', this)"id="muteHyperdimensional">Mute Hyperdimensionals</button>
-                        <button class="testButton" onclick="testSound('Hyperdimensional', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Hyperdimensional')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #041407 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Infinitesimal', this)"id="muteInfinitesimal">Mute Infinitesimals</button>
-                        <button class="testButton" onclick="testSound('Infinitesimal', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Infinitesimal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #021752 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Polychromatical', this)"id="mutePolychromatical">Mute Polychromaticals</button>
-                        <button class="testButton" onclick="testSound('Polychromatical', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Polychromatical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ff0526 50%);">
-                        </label>
-                    </div>
-                </div>
-                <div class="spawnSoundSettings">
-                    <div class="soundMuteButtonHolder">
-                        <button class="muteButton" onclick="changeCanPlay('Johnical', this)"id="muteJohnical">Mute Johnical</button>
-                        <button class="testButton" onclick="testSound('Johnical', this)">Preview</button>
-                    </div>
-                    <div class="soundSliderHolder">
-                        <label class="spawnSoundContainer">
-                            <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Johnical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #9cc7ff 50%);">
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div id="loungeData" style="display: none;">
-                <div class="dataDiv">
-                    <button class="dataButton" id="dataExport" onclick="exportData()">Export Data</button>
-                    <input type="text" id="dataText">
-                    <button class="dataButton" id="dataImport" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
-                    <label for="dataFileUpload" id="dataFileLabel" class="dataButton">
-                        Upload Save File
-                    </label>
-                    <input type="file" id="dataFileUpload" accept=".txt">
-                    <button class="dataButton" id="hardReset" onclick="importData('', true)">Hard Reset</button>
-                </div>
-            </div>
-            <div id="loungeLogs" style="display: none;">
-                <div id="logsButtons">
-                    <button onclick="verifiedOres.showLogs()" id="logsButton">Generate Ore Logs</button>
-                    <select name="sortType" id="logSort">
-                        <option value="All">All</option>
-                        <option value="Cave">Cave</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Electrified">Electrified</option>
-                        <option value="Radioactive">Radioactive</option>
-                        <option value="Explosive">Explosive</option>
-                    </select>
-                    <button onclick="verifiedOres.displaySavedLogs()" id="savedLogsButton">Generate Saved Logs (Ignores Sort)</button>
-                    <form style="margin: 0px;" onsubmit="event.preventDefault(); verifiedOres.filterByRarity(this.children[0].value); this.children[0].value = ''">
-                        <input type="text" class="logFilters" placeholder="Delete logs below rarity (num > 0)" >
-                    </form>
-                </div>
-                <div id="logHolder">
-                    
-                </div>
-            </div>
-            <div id="loungeOverallStatistics" style="display: none;">
-                <div id="statisticsHolder">
-                    <div id="tierStatSelectors">
-                        <button class="tierSelector" style="background-color: #31E8FF;" onclick="showTierStats(this.textContent)">Flawless</button>
-                        <button class="tierSelector" style="background-color: #FF8041;" onclick="showTierStats(this.textContent)">Interstellar</button>
-                        <button class="tierSelector" style="background-color: #3BD216;" onclick="showTierStats(this.textContent)">Metaversal</button>
-                        <button class="tierSelector" style="background-color: #FF3C3C;" onclick="showTierStats(this.textContent)">Sacred</button>
-                        <button class="tierSelector" style="background-color: #AC47FF;" onclick="showTierStats(this.textContent)">Ethereal</button>
-                        <button class="tierSelector" style="background-color: #41FF6D;" onclick="showTierStats(this.textContent)">Imaginary</button>
-                        <button class="tierSelector" style="background-color: #041407;" onclick="showTierStats(this.textContent)">Hyperdimensional</button>
-                        <button class="tierSelector" style="background-color: #9cc7ff;" onclick="showTierStats(this.textContent)">Johnical</button>
-                        <button class="tierSelector" style="background-color: #FF0526;" onclick="showTierStats(this.textContent)">Polychromatical</button>
-                        <button class="tierSelector" style="background-color: #6C0000;" onclick="showTierStats(this.textContent)">Celestial</button>
-                        <button class="tierSelector" style="background-color: #021752;" onclick="showTierStats(this.textContent)">Infinitesimal</button>
-                        <button class="tierSelector" onclick="updateTimes()">Player Stats</button>
-                    </div>
-                    <div id="tierStatsHolder" style="display: none;">
-                        <table id="currentTierInformation" style="display: none;">
-                            <tr class="tierInfoRow">
-                                <td>Variant Statistics For: </td>
-                            </tr>
-                            <tr class="tierInfoRow">
-                                <td>Normal Amount:</td>
-                            </tr>
-                            <tr class="tierInfoRow">
-                                <td>Electrified Amount:</td>
-                            </tr>
-                            <tr class="tierInfoRow">
-                                <td>Radioactive Amount:</td>
-                            </tr>
-                            <tr class="tierInfoRow">
-                                <td>Explosive Amount:</td>
-                            </tr>
-                            <tr class="tierInfoRow">
-                                <td>Completion Progress: 0% at 0/0 Found</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="playerStatisticsHolder" style="display: none;">
-                        <p class="playerStat" id="statsTotalTime">Total Time</p>
-                        <p class="playerStat" id="statsSessionTime">Session Time</p>
-                        <p class="playerStat" id="statsCavesGenerated">Caves Generated</p>
-                        <p class="playerStat"id="statsBlocksMined">Blocks Mined</p>
-                        <p class="playerStat" id="statsSessionReset">Session Resets</p>
-                        <p class="playerStat" id="sessionMined">Mined</p>
-                        <p class="playerStat" id="statsReset">Resets</p>
-                        <p class="playerStat" id="furthestPosX">Resets</p>
-                        <p class="playerStat" id="furthestNegX">Resets</p>
-                        <p class="playerStat" id="furthestY">Resets</p>
-                    </div>
-                </div>
-            </div>
-            <div id="loungeOreIndex" style="display: none;">
-                <div id="worldIndexTop">
-                    <button class="switchIndexWorld" id="worldIndexLeft" onclick="nextLayers(-1)"></button>
-                    <div id="loungeLayersHolder">
-                        
-                    </div>
-                    <button class="switchIndexWorld" id="worldIndexRight" onclick="nextLayers(1)"></button>
-                </div>
-                <div id="loungeIndexCards">
-                    <div id="loungeCardHolder">
-
-                    </div>
-                    <div class="indexCard" id="indexCardCopy" onclick="showSpawnMessage(this)">
-                        <span class="indexCardBackground"></span>
-                        <p class="indexCardText indexCardOre">😭</p>
-                        <div class="indexCardTop">
-                            <p class="indexCardText indexCardTier">Tier:<span style="color:#FF0526;" class="indexTierSpan">Polychromatical</span></p>
-                            <p class="indexCardText indexCardFound">Found On: Jan 1st, 2024</p>
+    <table>
+        <tbody id="loungeHolder" style="display: none;">
+            <tr id="upperLounge">
+                <td id="loungeHeader">
+                    <p id="loungeTitle">Silly Lounge!</p>
+                    <button id="loungeExit" onclick="toggleLounge()">Exit</button>
+                </td>
+            </tr>
+            <tr id="lowerLounge">
+                <td id="loungeMenuList">
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeGameSettings', this)">Game Settings</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeAudioSettings', this)">Audio Settings</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWebhookSettings', this)">Webhook Settings</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeData', this)">Data</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeLogs', this)">Logs</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOverallStatistics', this)">Overall Statistics</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeOreIndex', this)">Ore Index</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeWorlds', this)">Worlds</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeEventIndex', this)">Event Index</button>
+                    <button class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeMilestones', this);">Milestones</button>
+                    <button id="forge" class="loungeMenuLocationButton" onclick="showLoungeScreen('loungeForgeAndVariants', this)">Forge/Variants</button>
+                </td>
+                <td id="loungeMenuLocation">
+                    <div id="loungeGameSettings" style="display: none;">
+                        <div class="inputAndButton">
+                            <button class="stopOnRareButton" onclick="changeStopOnRare(this)" id="stopOnRare" style="background-color: #6BC267;">Stop On Rare</button>
+                            <button class="stopOnRareSelector" onclick="toggleStopRareList()" id="stopOnRareDisplay">Show Tiers</button>
+                            <div id="stopOnRareList" style="display: none;">
+                                <span class="stopOnRareTierDivider"></span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Antique</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Mystical</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Divine</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Flawless</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Interstellar</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Metaversal</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Sacred</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Ethereal</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Imaginary</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Celestial</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Hyperdimensional</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Infinitesimal</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Johnical</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Polychromatical</span>
+                            </div>
                         </div>
-                        <!---i think i need to put johnical somewhere here (this is like the stats i think?) but i have no clue where so ive left it unchanged-->
-                        <p class="indexCardText indexCardLuck" style="border-top:0.1vw solid var(--main-border-color)">1/1,000,000,000,000,000,000 Base Rarity</p>
-                        <p class="indexCardText indexCardLuck indexCardRng" style="border-bottom:0.1vw solid var(--main-border-color)">1/1,000,000,000,000,000,000 With Luck</p>
-                        <p class="indexCardText indexCardVariants">😭😭😭😭</p>
-                        <p class="indexCardText indexCardEvent"></p>
+                        <div class="inputAndButton" id="spawnMessageHolder">
+                            <button class="gameSetting" onclick="toggleSpawnMessageList()" id="changeSMrarityDisplay">Show Spawn Message Tiers</button>
+                            <div id="spawnTierList" style="display: none;">
+                                <span class="spawnMessageTierDivider"></span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Antique</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Mystical</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Divine</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Flawless</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Interstellar</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Metaversal</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Sacred</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Ethereal</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Imaginary</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Celestial</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Hyperdimensional</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Infinitesimal</span>
+                                <span class="stopOnRareTier" onclick="allowList(this.textContent)">Johnical</span>
+                                <span class="spawnMessageTier" onclick="allowMessage(this.textContent)">Polychromatical</span>
+                            </div>
+                        </div>
+                        <div class="inputAndButton">
+                            <input autocomplete="off" type="text" class="textInput" id="mineCapacitySetter" placeholder="Default: 250000, >= 250">
+                            <button class="inputButton" onclick="updateCapacity(document.getElementById('mineCapacitySetter'))">Update Capacity</button>
+                        </div>
+                        <div class="inputAndButton">
+                            <input autocomplete="off" type="text" class="textInput" id="latestSetter" placeholder="1-999">
+                            <button class="inputButton" onclick="changeLatestMax(document.getElementById('latestSetter'))">Latest Ores Length</button>
+                        </div>
+                        <div class="inputAndButton">
+                            <input autocomplete="off" type="text" class="textInput" id="automineUpdate" placeholder="Default: 25, > 0">
+                            <button class="inputButton" onclick="updateAutomineUpdateSpeed(document.getElementById('automineUpdate'))">Change Block Update Speed</button>
+                        </div>
+                        <div class="inputAndButton">
+                            <input autocomplete="off" type="text" class="textInput" id="logRarityInput" placeholder="Default: 1, >= 1">
+                            <button class="inputButton" onclick="switchHighRarity(get('logRarityInput'))">Set Minimum Log RNG</button>
+                        </div>
+                        <button class="gameSetting toggledOff" onclick="toggleSimulatedRng(this)" id="simulatedRng">Toggle Simulated RNG</button>
+                        <button class="gameSetting toggledOff" onclick="toggleAccurateSpeed(this);" id="toggleAccurateSpeed">Accurate Speed</button>
+                        <button class="gameSetting toggledOn" onclick="switchToIndex(this, 0)" id="invIndex">Travel to layer index on inventory click</button>
+                        <button class="gameSetting toggledOn" onclick="switchToIndex(this, 1)" id="craftIndex">Travel to layer index on crafting click</button>
+                        <button class="gameSetting toggledOff" onclick="switchFont();" id="switchFont">Use Different Emojis (for improper display)</button>
+                        <button class="gameSetting toggledOn" onclick="toggleSpawnEffects(this);" id="spawnEffects">Spawn Effects</button>
+                        <button class="gameSetting toggledOff" onclick="toggleNyerd(this);" id="toggleNyerd">Nyerd</button>
+                        <button class="gameSetting toggledOff" onclick="AFKmode(this);">AFK Mode</button>
                     </div>
-                </div>
-            </div>
-
-            <div id="loungeEventIndex" style="display: none;">
-                <div id="eventIndexTop">
-                    <div id="loungeEventWorldsHolder">
-                        <button class="loungeEventSelector" onclick="createEventCards(1, this)">World One</button>
-                        <button class="loungeEventSelector" onclick="createEventCards(2, this)">World Two</button>
-                        <button class="loungeEventSelector" onclick="createEventCards(1.1, this)">Subrealm One</button>
-                        <button class="loungeEventSelector" onclick="createEventCards(0.9, this)">Galactica</button>
-                        <button class="loungeEventSelector" onclick="createEventCards(1.2, this)">watr watr</button>	
+                    <div id="loungeAudioSettings" style="display: none;">
+                        <div id="musicStuff">
+                            <button id="musicButton" onclick="toggleMusic()">Mute Music</button>
+                            <label class="slidecontainer">
+                                <input type="range" min="0" max="100" value="100" onchange="changeMusicVolume(this.value)" id="musicVolume">
+                            </label>
+                        </div>
+                        <div id="musicSettings">
+                            <div id="disguisedChillHolder">
+                                <button class="toggleDisplay otherAudio" onclick="enableDisguisedChills();" id="disguisedChills" style="background-color: #FF3D3D; float: left;">Disguised Chills</button>
+                                <button class="toggleDisplay otherAudio" onclick="switchMusicType(this);" id="newMusic" style="background-color: #6BC267; float: right;">Use New Music</button>
+                            </div>
+                        </div>
+    
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Antique', this)" id="muteAntique">Mute Antiques</button>
+                                <button class="testButton" onclick="testSound('Antique', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Antique')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #5A865A 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Mystical', this)" id="muteMystical">Mute Mysticals</button>
+                                <button class="testButton" onclick="testSound('Mystical', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value,  'Mystical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #6F40B0 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Divine', this)" id="muteDivine">Mute Divines</button>
+                                <button class="testButton" onclick="testSound('Divine', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Divine')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFFEAB 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Flawless', this)" id="muteFlawless">Mute Flawless</button>
+                                <button class="testButton" onclick="testSound('Flawless', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Flawless')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #31E8FF 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Interstellar', this)" id="muteInterstellar">Mute Interstellars</button>
+                                <button class="testButton" onclick="testSound('Interstellar', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Interstellar')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #FFA124 50%);">
+                                </label>
+                            </div>
+    
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Metaversal', this)" id="muteMetaversal">Mute Metaversals</button>
+                                <button class="testButton" onclick="testSound('Metaversal', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Metaversal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #3BD216 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Sacred', this)" id="muteSacred">Mute Sacreds</button>
+                                <button class="testButton" onclick="testSound('Sacred', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Sacred')" class="spawnVolume" style="background-image:linear-gradient(to right, #000000, #FF3C3C  50%);">
+                                </label>
+                            </div>
+    
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Ethereal', this)" id="muteEthereal">Mute Ethereals</button>
+                                <button class="testButton" onclick="testSound('Ethereal', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="30" value="15" onchange="changeSpawnVolume(this.value, 'Ethereal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ac47ff 50%);">
+                                </label>
+                            </div>
+    
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Celestial', this)" id="muteCelestial">Mute Celestials</button>
+                                <button class="testButton" onclick="testSound('Celestial', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="50" onchange="changeSpawnVolume(this.value, 'Celestial')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #870000 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Imaginary', this)" id="muteImaginary">Mute Imaginaries</button>
+                                <button class="testButton" onclick="testSound('Imaginary', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Imaginary')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #41FF6D 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Hyperdimensional', this)" id="muteHyperdimensional">Mute Hyperdimensionals</button>
+                                <button class="testButton" onclick="testSound('Hyperdimensional', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Hyperdimensional')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #041407 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Infinitesimal', this)" id="muteInfinitesimal">Mute Infinitesimals</button>
+                                <button class="testButton" onclick="testSound('Infinitesimal', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Infinitesimal')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #021752 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Polychromatical', this)" id="mutePolychromatical">Mute Polychromaticals</button>
+                                <button class="testButton" onclick="testSound('Polychromatical', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Polychromatical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #ff0526 50%);">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="spawnSoundSettings">
+                            <div class="soundMuteButtonHolder">
+                                <button class="muteButton" onclick="changeCanPlay('Johnical', this)" id="muteJohnical">Mute Johnical</button>
+                                <button class="testButton" onclick="testSound('Johnical', this)">Preview</button>
+                            </div>
+                            <div class="soundSliderHolder">
+                                <label class="spawnSoundContainer">
+                                    <input type="range" min="0" max="100" value="75" onchange="changeSpawnVolume(this.value, 'Johnical')" class="spawnVolume" style="background-image:linear-gradient(to right, black, #9cc7ff 50%);">
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div id="loungeEventCards">
-                    <div id="loungeEventHolder"></div>
-                        <div class="eventCard" id="eventCardCopy">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="eventCardOre"></td>
-                                        <td class="eventTexts">
-                                            <div class="eventSpawnMessage"></div><br>
-                                            <div class="eventEffect"></div>
-                                            <div class="eventSideEffect"></div><br>
-                                            <div class="eventSpawnRate"></div>
-                                            <div class="eventDuration"></div>
-                                        </td>
+                    <div id="loungeData" style="display: none;">
+                        <div class="dataDiv">
+                            <button class="dataButton" id="dataExport" onclick="exportData()">Export Data</button>
+                            <input type="text" id="dataText">
+                            <button class="dataButton" id="dataImport" onclick="importData(document.getElementById('dataText').value)">Import Data</button>
+                            <label for="dataFileUpload" id="dataFileLabel" class="dataButton">
+                                Upload Save File
+                            </label>
+                            <input type="file" id="dataFileUpload" accept=".txt">
+                            <button class="dataButton" id="hardReset" onclick="importData('', true)">Hard Reset</button>
+                        </div>
+                    </div>
+                    <div id="loungeLogs" style="display: none;">
+                        <div id="logsButtons">
+                            <button onclick="verifiedOres.showLogs()" id="logsButton">Generate Ore Logs</button>
+                            <select name="sortType" id="logSort">
+                                <option value="All">All</option>
+                                <option value="Cave">Cave</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Electrified">Electrified</option>
+                                <option value="Radioactive">Radioactive</option>
+                                <option value="Explosive">Explosive</option>
+                            </select>
+                            <button onclick="verifiedOres.displaySavedLogs()" id="savedLogsButton">Generate Saved Logs (Ignores Sort)</button>
+                            <form style="margin: 0px;" onsubmit="event.preventDefault(); verifiedOres.filterByRarity(this.children[0].value); this.children[0].value = ''">
+                                <input type="text" class="logFilters" placeholder="Delete logs below rarity (num > 0)">
+                            </form>
+                        </div>
+                        <div id="logHolder">
+    
+                        </div>
+                    </div>
+                    <div id="loungeOverallStatistics" style="display: none;">
+                        <div id="statisticsHolder">
+                            <div id="tierStatSelectors">
+                                <button class="tierSelector" style="background-color: #31E8FF;" onclick="showTierStats(this.textContent)">Flawless</button>
+                                <button class="tierSelector" style="background-color: #FF8041;" onclick="showTierStats(this.textContent)">Interstellar</button>
+                                <button class="tierSelector" style="background-color: #3BD216;" onclick="showTierStats(this.textContent)">Metaversal</button>
+                                <button class="tierSelector" style="background-color: #FF3C3C;" onclick="showTierStats(this.textContent)">Sacred</button>
+                                <button class="tierSelector" style="background-color: #AC47FF;" onclick="showTierStats(this.textContent)">Ethereal</button>
+                                <button class="tierSelector" style="background-color: #41FF6D;" onclick="showTierStats(this.textContent)">Imaginary</button>
+                                <button class="tierSelector" style="background-color: #041407;" onclick="showTierStats(this.textContent)">Hyperdimensional</button>
+                                <button class="tierSelector" style="background-color: #9cc7ff;" onclick="showTierStats(this.textContent)">Johnical</button>
+                                <button class="tierSelector" style="background-color: #FF0526;" onclick="showTierStats(this.textContent)">Polychromatical</button>
+                                <button class="tierSelector" style="background-color: #6C0000;" onclick="showTierStats(this.textContent)">Celestial</button>
+                                <button class="tierSelector" style="background-color: #021752;" onclick="showTierStats(this.textContent)">Infinitesimal</button>
+                                <button class="tierSelector" onclick="updateTimes()">Player Stats</button>
+                            </div>
+                            <div id="tierStatsHolder" style="display: none;">
+                                <table id="currentTierInformation" style="display: none;">
+                                    <tr class="tierInfoRow">
+                                        <td>Variant Statistics For: </td>
                                     </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-              	</div>
-
-            <div id="loungeMilestones" class="milestoneParent" style="display: none;">
-                <div id="milestoneWrapper">
-                    <div id="milestonesHolder">
-                        <div class="horizontalConnector" id="connectorCopy">
-                            <div class="horizontalConnectorLight redConnector"></div>
-                        </div>
-                        <div class="verticalConnector" id="connector2Copy">
-                            <div class="verticalConnectorLight redConnector"></div>
-                        </div>
-                        <div class="milestoneInfoHolder" id="copyMilestone">
-                            <p class="milestoneInfoTitle"></p>
-                            <p class="milestoneInfoDescription"></p>
-                            <p class="milestoneInfoCompleted"></p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="loungeWorlds" style="display: none;">
-                <div id="loungeWorldImage"></div>
-                <div id="worldInformation">
-                    <p id="worldTitle"></p>
-                    <p id="worldDescription"></p>
-                </div>
-                <div id="teleportHolder" onmousewheel="switchPortal(event);">
-                    <button class="scrollTeleport" id="teleportUp" onclick="switchPortal({deltaY: -100})"></button>
-                    <img id="portalLock" src="media/portalChain.png">
-                    <div id="worldPortalHolder">
-                        <button id="worldPortal" onclick="attemptSwitchWorld(switchPortal.currentPortal)"></button>
-                    </div>
-                    <button class="scrollTeleport" id="teleportDown" onclick="switchPortal({deltaY: 100})"></button>
-                </div>
-            </div>
-            <div id="loungeForgeAndVariants">
-                <p class="loungeMenuTitle">Variant Conversions</p>
-                <div id="variantActions">
-                    <button class="variantActionButton" onclick="convertVariant('Electrified')">Convert All Electrified But 1</button>
-                    <button class="variantActionButton" onclick="convertVariant('Radioactive')">Convert All Radioactive But 1</button>
-                    <button class="variantActionButton" onclick="convertVariant('Explosive')">Convert All Explosive But 1</button>
-                </div>
-                <div id="mainVariantArea">
-                    <input type="text" class="variantInput" id="variantInputName" placeholder="Click an Ore in a Variant Inventory!" autocomplete="off">
-                    <input type="text" class="variantInput" id="variantInputAmt" placeholder="Enter Amount to Convert!" autocomplete="off">
-                    <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Electrified')">Convert Electrified</button>
-                    <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Radioactive')">Convert Radioactive</button>
-                    <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Explosive')">Convert Explosive</button>
-                    <button class="variantType" onclick="allButOne(get('variantInputName').value)">Convert All But 1</button>
-                </div>
-                <p class="loungeMenuTitle">Ore Forge</p>
-                <div id="forgeRecipeHolder">
-                    <div id="forgeCost">
-
-                    </div>
-                    <div id="forgeCenterHolder">
-
-                        <img id="forgeArrow" src="media/rightone.png">
-                        <p id="forgeMultiplier">
-                            1x
-                        </p>
-                        <button id="forgeOre"><span id="forgeHover" onclick="craftOre()">Forge!</span></button>
-                        <div id="forgeSetMulti">
-                            <input type="text" id="forgeMultiInput" placeholder="Enter Multiplier!">
-                            <button id="forgeChangeMulti" onclick="multiplyRecipe(Number(get('forgeMultiInput').value))">Set Multi!</button>
-                        </div>
-                    </div>
-                    <div id="forgeOutput">
-
-                    </div>
-                </div>
-                <div id="forgeRecipeInformation">
-                    <div id="oreFissionList">
-                        <p class="forgeType">Fissions</p>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">💚</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">💙</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowFission')">💛</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeFission')">🧡</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redFission')">❤️</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleFission')">💜</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownFission')">🤎</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackFission')">🖤</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteFission')">🤍</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">💎</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">🧵</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('circleFission')">⭕</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bellFission')">🛎️</button>
-                    </div>
-                    <div id="oreCraftList">
-                        <p class="forgeType">Crafts</p>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('greenCraft')">💚</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blueCraft')">💙</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowCraft')">💛</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeCraft')">🧡</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('redCraft')">❤️</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleCraft')">💜</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('brownCraft')">🤎</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('blackCraft')">🖤</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteCraft')">🤍</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('frisbeeCraft')">🥏</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('diamondCraft')">💠</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('gearCraft')">⚙️</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bowCraft')">🎀</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('batteryCraft')">🔋</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('bambooCraft')">🎍</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('fishCraft')">🐟</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('maracasCraft')">🪇</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('dnaCraft')">🧬</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('telescopeCraft')">🔭</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('spiderwebCraft')">🕸️</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('hotspringCraft')">♨️</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('wtfCraft')"><img src="media/ores/singularityegg.webp"></button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('waterbuffaloCraft')">🐃</button>
-                        <button class="forgeCraftingButton" onclick="displayOreRecipe('evilFlagCraft')"><img src="media/ores/evil_flag.png"></button>
-
-                    </div>
-                </div>
-            </div>
-            <div id="loungeWebhookSettings" style="display: none;">
-                <div id="webhookSettings">
-                    <span id="webhookDescription">To create custom webhooks, click on the "new" button.<br>Enter the name you would like to use in the first box.<br>Enter the rarity you want to webhook in the next box, just type a number above 7 to represent the rarity.<br>In the last box, enter the webhook integration link from the Discord channel you want to send finds to.</span>
-                    <span class="createdWebhooksLabel">Create Custom Webhook</span>
-                    <br>
-                    <button id="createNewWebhook" onclick="addToNew()">New</button>
-                    <div id="customHookContainer">
-                        <div class="webhookInfoInputSection" id="newHookCopyable">
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Name">
+                                    <tr class="tierInfoRow">
+                                        <td>Normal Amount:</td>
+                                    </tr>
+                                    <tr class="tierInfoRow">
+                                        <td>Electrified Amount:</td>
+                                    </tr>
+                                    <tr class="tierInfoRow">
+                                        <td>Radioactive Amount:</td>
+                                    </tr>
+                                    <tr class="tierInfoRow">
+                                        <td>Explosive Amount:</td>
+                                    </tr>
+                                    <tr class="tierInfoRow">
+                                        <td>Completion Progress: 0% at 0/0 Found</td>
+                                    </tr>
+                                </table>
                             </div>
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Rarity">
-                            </div>
-                            <div class="webhookInfoSection" style="display:none">
-                                <input autocomplete ="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Id">
-                            </div>
-                            <div class="webhookInfoSection">
-                                <input autocomplete ="off" type="text" class="webhookInfo"  placeholder="Link">
-                            </div>
-                            <div class="webhookInfoSection">
-                                <button class="webhookInfo createButton" onclick="createWebhookId(this.parentElement.parentElement)">Create!</button>
+                            <div id="playerStatisticsHolder" style="display: none;">
+                                <p class="playerStat" id="statsTotalTime">Total Time</p>
+                                <p class="playerStat" id="statsSessionTime">Session Time</p>
+                                <p class="playerStat" id="statsCavesGenerated">Caves Generated</p>
+                                <p class="playerStat" id="statsBlocksMined">Blocks Mined</p>
+                                <p class="playerStat" id="statsSessionReset">Session Resets</p>
+                                <p class="playerStat" id="sessionMined">Mined</p>
+                                <p class="playerStat" id="statsReset">Resets</p>
+                                <p class="playerStat" id="furthestPosX">Resets</p>
+                                <p class="playerStat" id="furthestNegX">Resets</p>
+                                <p class="playerStat" id="furthestY">Resets</p>
                             </div>
                         </div>
                     </div>
-                    <div id="createdWebhooks">
-                        <span class="createdWebhooksLabel">Created Webhoook Ids</span>
-                        <div class="createdHookDisplay" id="createdHookCopyable">
-                            <span class="createdHookInfo">Name</span>
-                            <span class="createdHookInfo">Rarity</span>
-                            <span class="createdHookInfo" style="display:none">Id</span>
-                            <button class="createdHookInfo deleteHookButton" onclick="removeWebhookId(this.parentElement)">Delete</button>
+                    <div id="loungeOreIndex" style="display: none;">
+                        <div id="worldIndexTop">
+                            <button class="switchIndexWorld" id="worldIndexLeft" onclick="nextLayers(-1)"></button>
+                            <div id="loungeLayersHolder">
+    
+                            </div>
+                            <button class="switchIndexWorld" id="worldIndexRight" onclick="nextLayers(1)"></button>
+                        </div>
+                        <div id="loungeIndexCards">
+                            <div id="loungeCardHolder">
+    
+                            </div>
+                            <div class="indexCard" id="indexCardCopy" onclick="showSpawnMessage(this)">
+                                <span class="indexCardBackground"></span>
+                                <p class="indexCardText indexCardOre">😭</p>
+                                <div class="indexCardTop">
+                                    <p class="indexCardText indexCardTier">Tier:<span style="color:#FF0526;" class="indexTierSpan">Polychromatical</span></p>
+                                    <p class="indexCardText indexCardFound">Found On: Jan 1st, 2024</p>
+                                </div>
+                                <!---i think i need to put johnical somewhere here (this is like the stats i think?) but i have no clue where so ive left it unchanged-->
+                                <p class="indexCardText indexCardLuck" style="border-top:0.1vw solid var(--main-border-color)">1/1,000,000,000,000,000,000 Base Rarity</p>
+                                <p class="indexCardText indexCardLuck indexCardRng" style="border-bottom:0.1vw solid var(--main-border-color)">1/1,000,000,000,000,000,000 With Luck</p>
+                                <p class="indexCardText indexCardVariants">😭😭😭😭</p>
+                                <p class="indexCardText indexCardEvent"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </td>
-        <td id="loungeRight">
-            <div id="loungeStatistics">
-                <p class="loungeStatisticText" id="updateLuck">1x Luck</p>
-                <p class="loungeStatisticText" id="updateGenerations">0 Generations/Min</p>
-                <p class="loungeStatisticText" id="updateLayer">Mining in: N/A</p>
-                <p class="loungeStatisticText" id="updateDirection">Current Direction: N/A</p>
-                <p class="loungeStatisticText" id="updateCL">1x Cave Luck</p>
-                <p class="loungeStatisticText" id="updateCTL">1x Cave Type Luck</p>
-                <p class="loungeStatisticText" id="updateCM">0 Cave Modifier</p>
-                <p class="loungeStatisticText" id="updatePowerups">0 Powerups Ready</p>
-                <p class="loungeStatisticText" id="updateSpeed">0/0 Speed</p>
-                <p class="loungeStatisticText" id="updateOreCount">No Ores Yet (Will be Ore Spawn Count: 0-Inf when ores spawn)</p>
-                <p class="loungeStatisticText" id="updateEvent">Current Event: None</p>
-                <p class="loungeStatisticText" id="updateLastOre">Last Ore Spawned: N/A</p>
-            </div>
-            <div id="loungeSettings">
-                <button class="loungeSettingButton" onclick="toggleUpdates(this)">Update Elements</button>
-                <button class="loungeSettingButton" onclick="toggleUnused(this)">Delete Unused Elements</button>
-            </div>
-        </td>
-      </tr>
-	</table>
+    
+                    <div id="loungeEventIndex" style="display: none;">
+                        <div id="eventIndexTop">
+                            <div id="loungeEventWorldsHolder">
+                                <button class="loungeEventSelector" world="1" onclick="createEventCards(1, this)">World One</button>
+                                <button class="loungeEventSelector" world="2" onclick="createEventCards(2, this)">World Two</button>
+                                <button class="loungeEventSelector" world="1.1" onclick="createEventCards(1.1, this)">Subrealm One</button>
+                                <button class="loungeEventSelector" world="0.9" onclick="createEventCards(0.9, this)">Galactica</button>
+                                <button class="loungeEventSelector" world="1.2" onclick="createEventCards(1.2, this)">watr watr</button>
+                            </div>
+                        </div>
+                        <div id="loungeEventCards">
+                            <div id="loungeEventHolder"></div>
+                            <div class="eventCard" id="eventCardCopy">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="eventCardOre"></td>
+                                            <td class="eventTexts">
+                                                <div class="eventSpawnMessage"></div><br>
+                                                <div class="eventEffect"></div>
+                                                <div class="eventSideEffect"></div><br>
+                                                <div class="eventSpawnRate"></div>
+                                                <div class="eventDuration"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="loungeMilestones" class="milestoneParent" style="display: none;">
+                        <div id="milestoneWrapper">
+                            <div id="milestonesHolder">
+                                <div class="horizontalConnector" id="connectorCopy">
+                                    <div class="horizontalConnectorLight redConnector"></div>
+                                </div>
+                                <div class="verticalConnector" id="connector2Copy">
+                                    <div class="verticalConnectorLight redConnector"></div>
+                                </div>
+                                <div class="milestoneInfoHolder" id="copyMilestone">
+                                    <p class="milestoneInfoTitle"></p>
+                                    <p class="milestoneInfoDescription"></p>
+                                    <p class="milestoneInfoCompleted"></p>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div id="loungeWorlds" style="display: none;">
+                        <div id="loungeWorldImage"></div>
+                        <div id="worldInformation">
+                            <p id="worldTitle"></p>
+                            <p id="worldDescription"></p>
+                        </div>
+                        <div id="teleportHolder" onmousewheel="switchPortal(event);">
+                            <button class="scrollTeleport" id="teleportUp" onclick="switchPortal({deltaY: -100})"></button>
+                            <img id="portalLock" src="media/portalChain.png">
+                            <div id="worldPortalHolder">
+                                <button id="worldPortal" onclick="attemptSwitchWorld(switchPortal.currentPortal)"></button>
+                            </div>
+                            <button class="scrollTeleport" id="teleportDown" onclick="switchPortal({deltaY: 100})"></button>
+                        </div>
+                    </div>
+                    <div id="loungeForgeAndVariants">
+                        <p class="loungeMenuTitle">Variant Conversions</p>
+                        <div id="variantActions">
+                            <button class="variantActionButton" onclick="convertVariant('Electrified')">Convert All Electrified But 1</button>
+                            <button class="variantActionButton" onclick="convertVariant('Radioactive')">Convert All Radioactive But 1</button>
+                            <button class="variantActionButton" onclick="convertVariant('Explosive')">Convert All Explosive But 1</button>
+                        </div>
+                        <div id="mainVariantArea">
+                            <input type="text" class="variantInput" id="variantInputName" placeholder="Click an Ore in a Variant Inventory!" autocomplete="off">
+                            <input type="text" class="variantInput" id="variantInputAmt" placeholder="Enter Amount to Convert!" autocomplete="off">
+                            <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Electrified')">Convert Electrified</button>
+                            <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Radioactive')">Convert Radioactive</button>
+                            <button class="variantType" onclick="convertOre(get('variantInputName').value, get('variantInputAmt').value, 'Explosive')">Convert Explosive</button>
+                            <button class="variantType" onclick="allButOne(get('variantInputName').value)">Convert All But 1</button>
+                        </div>
+                        <p class="loungeMenuTitle">Ore Forge</p>
+                        <div id="forgeRecipeHolder">
+                            <div id="forgeCost"></div>
+                            <div id="forgeCenterHolder">
+    
+                                <img id="forgeArrow" src="media/rightone.png">
+                                <p id="forgeMultiplier">1x</p>
+                                <button id="forgeOre"><span id="forgeHover" onclick="craftOre()">Forge!</span></button>
+                                <div id="forgeSetMulti">
+                                    <input type="text" id="forgeMultiInput" placeholder="Enter Multiplier!">
+                                    <button id="forgeChangeMulti" onclick="multiplyRecipe(Number(get('forgeMultiInput').value))">Set Multi!</button>
+                                </div>
+                            </div>
+                            <div id="forgeOutput">
+    
+                            </div>
+                        </div>
+                        <div id="forgeRecipeInformation">
+                            <div id="oreFissionList">
+                                <p class="forgeType">Fissions</p>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('greenFission')">💚</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('blueFission')">💙</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowFission')">💛</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeFission')">🧡</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('redFission')">❤️</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleFission')">💜</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('brownFission')">🤎</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('blackFission')">🖤</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteFission')">🤍</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('idoliumFission')">💎</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('cylinderFission')">🧵</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('circleFission')">⭕</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('bellFission')">🛎️</button>
+                            </div>
+                            <div id="oreCraftList">
+                                <p class="forgeType">Crafts</p>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('greenCraft')">💚</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('blueCraft')">💙</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('yellowCraft')">💛</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('orangeCraft')">🧡</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('redCraft')">❤️</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('purpleCraft')">💜</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('brownCraft')">🤎</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('blackCraft')">🖤</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('whiteCraft')">🤍</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('frisbeeCraft')">🥏</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('diamondCraft')">💠</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('gearCraft')">⚙️</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('bowCraft')">🎀</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('batteryCraft')">🔋</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('bambooCraft')">🎍</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('fishCraft')">🐟</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('maracasCraft')">🪇</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('dnaCraft')">🧬</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('telescopeCraft')">🔭</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('spiderwebCraft')">🕸️</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('hotspringCraft')">♨️</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('wtfCraft')"><img src="media/ores/singularityegg.webp"></button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('waterbuffaloCraft')">🐃</button>
+                                <button class="forgeCraftingButton" onclick="displayOreRecipe('evilFlagCraft')"><img src="media/ores/evil_flag.png"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loungeWebhookSettings" style="display: none;">
+                        <div id="webhookSettings">
+                            <span id="webhookDescription">To create custom webhooks, click on the "new" button.<br>Enter the name you would like to use in the first box.<br>Enter the rarity you want to webhook in the next box, just type a number above 7 to represent the rarity.<br>In the last box, enter the webhook integration link from the Discord channel you want to send finds to.</span>
+                            <span class="createdWebhooksLabel">Create Custom Webhook</span>
+                            <br>
+                            <button id="createNewWebhook" onclick="addToNew()">New</button>
+                            <div id="customHookContainer">
+                                <div class="webhookInfoInputSection" id="newHookCopyable">
+                                    <div class="webhookInfoSection">
+                                        <input autocomplete="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Name">
+                                    </div>
+                                    <div class="webhookInfoSection">
+                                        <input autocomplete="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Rarity">
+                                    </div>
+                                    <div class="webhookInfoSection" style="display:none">
+                                        <input autocomplete="off" type="text" class="webhookInfo" id="webhookLinkSet" placeholder="Id">
+                                    </div>
+                                    <div class="webhookInfoSection">
+                                        <input autocomplete="off" type="text" class="webhookInfo" placeholder="Link">
+                                    </div>
+                                    <div class="webhookInfoSection">
+                                        <button class="webhookInfo createButton" onclick="createWebhookId(this.parentElement.parentElement)">Create!</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="createdWebhooks">
+                                <span class="createdWebhooksLabel">Created Webhoook Ids</span>
+                                <div class="createdHookDisplay" id="createdHookCopyable">
+                                    <span class="createdHookInfo">Name</span>
+                                    <span class="createdHookInfo">Rarity</span>
+                                    <span class="createdHookInfo" style="display:none">Id</span>
+                                    <button class="createdHookInfo deleteHookButton" onclick="removeWebhookId(this.parentElement)">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td id="loungeRight">
+                    <div id="loungeStatistics">
+                        <p class="loungeStatisticText" id="updateLuck">1x Luck</p>
+                        <p class="loungeStatisticText" id="updateGenerations">0 Generations/Min</p>
+                        <p class="loungeStatisticText" id="updateLayer">Mining in: N/A</p>
+                        <p class="loungeStatisticText" id="updateDirection">Current Direction: N/A</p>
+                        <p class="loungeStatisticText" id="updateCL">1x Cave Luck</p>
+                        <p class="loungeStatisticText" id="updateCTL">1x Cave Type Luck</p>
+                        <p class="loungeStatisticText" id="updateCM">0 Cave Modifier</p>
+                        <p class="loungeStatisticText" id="updatePowerups">0 Powerups Ready</p>
+                        <p class="loungeStatisticText" id="updateSpeed">0/0 Speed</p>
+                        <p class="loungeStatisticText" id="updateOreCount">No Ores Yet (Will be Ore Spawn Count: 0-Inf when ores spawn)</p>
+                        <p class="loungeStatisticText" id="updateEvent">Current Event: None</p>
+                        <p class="loungeStatisticText" id="updateLastOre">Last Ore Spawned: N/A</p>
+                    </div>
+                    <div id="loungeSettings">
+                        <button class="loungeSettingButton" onclick="toggleUpdates(this)">Update Elements</button>
+                        <button class="loungeSettingButton" onclick="toggleUnused(this)">Delete Unused Elements</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <p class="latestFind htmlTemplate" style="display: none;"></p>
     <noscript>
         <div id="noscript">
