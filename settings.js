@@ -1131,7 +1131,7 @@ const portalLocations = {
     },
 	3: {
 		title: "Subrealm Water",
-		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br><br>All Gears work here!<br><br>Hypermark Checkminator and above work here!<br><br>Unlock Requirement: Get the house keys from john (a friendly fella in the water world who wants nothing more than the reunion one winged angel starts playing*)<br><br>\"<i>Please stop stealing my stuff<i>\" - John",
+		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br><br>All Gears work here!<br><br>Hypermark Checkminator and above work here!<br><br>Unlock Requirement: Get the house keys from john (a friendly fella in the water world who wants nothing more than the reunion *one winged angel starts playing*)<br><br>\"<i>Please stop stealing my stuff<i>\" - John",
 		req: ()=>{return johnRewarded("house_keys")},
 		to: 3,
 		hue: "10deg",  //idk this is the portal's colour i THINK !?
