@@ -307,7 +307,7 @@ function completeQuest(){
 			johnSay("thank you thank you thank you so so so much, i dont have anything else to give to you though other than my house.... eh whatever its fine i trust you enough just dont steal anything thanks")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["ring_enabler"]){
-			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome gear that'll let you progress further")
+			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome tool that'll let you fish up fumos! you can visit me at my house to bring me fish for further rewards")
 		}
 
 		selectNextQuest()

@@ -712,3 +712,30 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#memory_potion span {
+    background: linear-gradient(
+        90deg in lch,
+        #f7cac9,
+        #ffdcdb,
+        #ffffff,
+        #00c853,
+        #b2ff59,
+        lime, /*i did not expect this to work why does lime work*/
+        #b4c8ea,
+        #91a8d0,
+        #f7cac9
+    );
+    background-size: 400% 400%;
+    animation: shiftGradient 8s ease-in-out infinite;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes shiftGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

@@ -1170,7 +1170,7 @@ const buttonGradients = {
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
-    "memory_potionCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false}, //pls change it 
+    "memory_potionCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, // you'e wlecome 
 	
 }
 function craftPickaxe(item) {
@@ -2498,11 +2498,11 @@ const gearInformation = {
         tier: 12,
     },
     "ring_enabler": {
-        effect:"John enables you to progress further",
+        effect:"John enables you to fish fumos",
         tier: 0,
     },
 	"memory_potion": {
-		effect:"Compressing Quadrillions of checkmarks into a solution made out of pure checkmarkium (real element) your brain is able to enhance thus making you remember forgotten rose quartz shell and letting you have all of its effects active at the same time",
+		effect:"Compressing quadrillions of checkmarks into a unified solution composed entirely of pure checkmarkium (new element) thereby enabling cognitive enhancement. This process restores access to Forgotten Rose Quartz Shell's full power and permits all of its effects to remain simultaneously active.",
 		tier: 15,
 	}
 }

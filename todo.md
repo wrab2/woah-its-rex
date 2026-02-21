@@ -13,8 +13,6 @@ fumo fishing:
 
 make gears have abilities (casino chips !!)
 
-give hypermark checkminator a recipe, ability, luck, etc
-
 a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
 
 ability to steal johns poker chips
