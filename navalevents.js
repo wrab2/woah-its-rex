@@ -106,7 +106,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 const naval = {
 	eventid: 0,
 	contribRNG: new Math.seedrandom("hi this is again me john 🤽‍♂️, seeding 🌱🫘 the rng 🔢🤽‍♂️🤽‍♂️"),
-	fastLayers: ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer", "sillyLayer", "cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "deepWaterLayer", "johnLayer", "jimLayer", "starLayer", "nebulaLayer" ],
+	fastLayers: ["dirtLayer", "brickLayer", "foggyLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer", "sillyLayer", "cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "deepWaterLayer", "johnLayer", "jimLayer", "starLayer", "nebulaLayer" ],
 	fastLayerRNG: new Math.seedrandom("guess who? hint: 🤽‍♂️"),
 	//I wonder if I need this many different RNGs here
 	//of coruse

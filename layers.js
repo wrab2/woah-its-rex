@@ -716,7 +716,8 @@ const layerList = {
 "dirtLayer3" : ["mutatedGrowth", "sillyMiner", "🍓", "🌳", "💐", "🤫", "🥗", "🌪️", "🌏", "🌲", "🎃", "🎍", "🎄", "🪵", "🌻", "🍁", "🟫"],
 "brickLayer" : ["sillyMiner", "🏯", "🏰", "🌇", "🥉", "🪞", "🔩", "🧲", "🪬", "🧨", "🔗", "🪙", "🗿", "🪚", "🪜", "🧱"],
 "foggyLayer" : ["sillyMiner", "🦚", "🚿", "👁️", "💸", "⌛", "🧵", "🕯️", "🕋", "🎨", "🎴", "🥽", "🪄", "🎭", "🌫️"],
-"waterLayer" : ["HD 160529", "sillyMiner", "⚓", "🐋", "💫", "🪩", "👿", "🌀", "🔱", "👑", "🐟", "🫧", "🤿", "🎣", "⛵", "🌊"],
+"waterLayer" : ["sillyMiner", "⚓", "🐋", "💫", "🪩", "👿", "🌀", "🔱", "👑", "🐟", "🫧", "🤿", "🎣", "⛵", "🌊"],
+"waterLayer2" : ["HD 160529", "sillyMiner", "⚓", "🐋", "💫", "🪩", "👿", "🌀", "🔱", "👑", "🐟", "🫧", "🤿", "🎣", "⛵", "🌊"],
 "rockLayer" : ["apatite", "Star Core", "sillyMiner", "variousMinerals", "🪤", "🏔️", "🌈", "🧊", "❄️", "💎", "☄️", "🔮", "🔋", "💍", "🥏", "⚜️", "💠", "🪨"],
 "radioactiveLayer" : ["sillyMiner", "Bismuth", "🤖", "⚠️", "🎆", "🧀", "🌌", "🥀", "🎇", "🔳", "⏹️", "🧩", "🔔", "⚗️", "🧪", "☢️"],
 "cactusLayer" : ["sillyMiner", "🦴", "🐪", "🏵️", "🪐", "💥", "🔥", "🔆", "⭐", "🎀", "🗡️", "📟", "⚱️", "🖍️", "🌵", ],
@@ -765,13 +766,13 @@ let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "ro
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "borderLayer"];
 let galacticaLayers = ["starLayer", "nebulaLayer"]
 let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer",];
-let waterWorldLayers = ["waterLayer"] // i feel like jim should be here //idk it doesn't seem to affect enything
+let waterWorldLayers = ["waterLayer2"] // i feel like jim should be here //idk it doesn't seem to affect enything
 let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer", "johnLayer", "checkmarkLayer"]
 let allLayers = structuredClone(worldOneLayers)
 
 const unbreakable = ["✖️","❔","⛏️","deepWater", "✅"]
 //required tier to break the unbreakable
-const unbreakableTiers = [20, 20, 20, 13, 14]
+const unbreakableTiers = [20, 20, 20, 13, 15]
 //SETTING LAYERS
 const layerDictionary = {
     //{layer : [], num : 0}
@@ -818,12 +819,13 @@ const layerIndex = {
         5 : "ocLayer",
         6 : "catcatLayer"
     },
-    waterWorld: {
-        0 : "waterLayer",
-		1 : "deepWaterLayer",
-		2 : "johnLayer",
-		3 : "jimLayer"
-    },
+    waterWorld: [
+        "waterLayer2",
+		"deepWaterLayer",
+		"johnLayer",
+		"jimLayer",
+        "johnLayer_CLT"
+    ],
 	galacticaLayers : {
 		0 : "starLayer",
 		1 : "nebulaLayer",
@@ -893,7 +895,7 @@ function setLayer(y) {
         currentLayer = layerIndex.subrealmOne[tempNum];
     } 
     else if (currentWorld === 1.2) {
-        if(y < 100e3) currentLayer = "waterLayer";
+        if(y < 100e3) currentLayer = "waterLayer2";
         else {
             currentLayer = "deepWaterLayer";
             if(y >= 1e6){
@@ -925,16 +927,16 @@ function setLayer(y) {
 		}
     } 
 	else if (currentWorld === 2){
-		if (y>10e3 && y<1e6) return layerDictionary["borderLayer"]
+		if (y>10e3 && y<1.002e6) return layerDictionary["borderLayer"]
 		else if(y<=10e3)return currentLayer = allLayers[Math.floor(y / 2000)]
 		//150k depth per layer
-		let layerNum = Math.floor((y-1e6)/150e3)
+		let layerNum = Math.floor((y-1.002e6)/150e3)
 		if(w2RepeatingLayers[layerNum] !== undefined)return
 		if (johnRewarded("hypermark_checkminator")){
 			let layerRng = Math.random()
-			if (layerRng < 1/40) { //checkmarkLayer
+			if (layerRng < 1/1) { //checkmarkLayer
 				if(specialLayerLocationsW2.filter((e)=>e.layer === "checkmarkLayer").length === 0){
-					specialLayerLocationsW2.push({layer:"checkmarkLayer", distance: (layerNum * 150e3 + 1e6 + 75e3)})
+					specialLayerLocationsW2.push({layer:"checkmarkLayer", distance: (layerNum * 150e3 + 1.002e6 + 75e3)})
 					specialLayerLocationsW2.sort((a, b)=>specialOrderW2.indexOf(a.layer) >  specialOrderW2.indexOf(b.layer))
 				}
 				return w2RepeatingLayers[layerNum] = "checkmarkLayer"
@@ -981,10 +983,10 @@ function getLayer(y) {
             else return layerDictionary[layerIndex.worldTwo[Math.floor(y / 2000)]];
         } else {
             if (y === 10000) return layerDictionary["barrierLayer"];
-            else if (curY < 10000 && y < 1e6) return layerDictionary["chessLayer"];
-            else if (y < 1e6) return layerDictionary["borderLayer"];
+            else if (curY < 10000 && y < 1.002e6) return layerDictionary["chessLayer"];
+            else if (y < 1.002e6) return layerDictionary["borderLayer"];
 			else {
-				layerNum = Math.floor((y-1e6)/150e3)
+				layerNum = Math.floor((y-1.002e6)/150e3)
 				if (w2RepeatingLayers[layerNum] === undefined){
 					setLayer(y)
 				}
@@ -1000,7 +1002,7 @@ function getLayer(y) {
         }
         
     } else if (currentWorld === 1.2) {
-        if (y < 100000) return layerDictionary["waterLayer"];
+        if (y < 100000) return layerDictionary["waterLayer2"];
 		else if(y >= 1e6) {
             const layerNum = Math.floor((y-1e6)/100e3)
 			if(waterRepeatingLayers[layerNum] == undefined)setLayer(y)
@@ -1025,7 +1027,7 @@ function getLayer(y) {
 }
 let layerIsTriggered = false
 function a87(num, force, g) {
-    force ??= false;
+    force ??= true;
     let added = false;
     let korone = false;
     switch (num) {
@@ -1053,7 +1055,7 @@ function a87(num, force, g) {
         case 3:
             if (Math.random() < 1/40 || force) {
                 if (g) return "waterLayer";
-                insertIntoLayers({"ore":"🪸", "layers":["waterLayer"], "useLuck":true});
+                insertIntoLayers({"ore":"🪸", "layers":["waterLayer", "waterLayer2"], "useLuck":true});
                 added = true;
             }
             break;
@@ -1155,6 +1157,7 @@ function createAllLayers() {
 	layerDictionary["johnLayer"] = {layer: createLayer([layerList["johnLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer"])};
     layerDictionary["johnMetaLayer"] = {layer: createLayer([layerList["johnMetaLayer"]]), probabilities: [], layerMat: layerFromArr(layerList["johnMetaLayer"])};
     layerDictionary["johnLayer_CLT"] = {layer: createLayer([layerList["johnLayer_CLT"]]), probabilities: [], layerMat: layerFromArr(layerList["johnLayer_CLT"])};
+    for (const i of layerIndex.waterWorld) layerDictionary[i] = {layer: createLayer([layerList[i]]), probabilities: [], layerMat: layerFromArr(layerList[i])};
     for (const i of layerIndex.johnHouse) layerDictionary[i] = {layer: createLayer([layerList[i]]), probabilities: [], layerMat: layerFromArr(layerList[i])};
 	let tier = "Uncommon";
     let arr = [];
@@ -1358,12 +1361,12 @@ const limitedOres = {
         "timeValues" : [5, 6, 7]
     },
     "🐙": {
-        "layers" : ["waterLayer"],
+        "layers" : ["waterLayer", "waterLayer2"],
         "timeType" : "month",
         "timeValues" : [5, 6, 7]
     },
     "🐬": {
-        "layers" : ["waterLayer"],
+        "layers" : ["waterLayer", "waterLayer2"],
         "timeType" : "month",
         "timeValues" : [5, 6, 7]
     },
@@ -1378,7 +1381,7 @@ const limitedOres = {
         "timeValues" : [5, 6, 7]
     },
     "🏄‍♂️": {
-        "layers" : ["waterLayer"],
+        "layers" : ["waterLayer", "waterLayer2"],
         "timeType" : "month",
         "timeValues" : [5, 6, 7]
     },

@@ -68,35 +68,38 @@ make memory potion also give energy siphoner's effect so we can make the yellow 
 
 ✅ jackson 1d
 
-==tol 6 here probably, makes everything maybe 3.5x easier? or 4x or even 8x idk, following numbers do not reflect tol 6
+(4 days into john dlc here)
 
-==orb of life is unlocked but too difficult to get
+==tol 6 here 4x speed, takes untested amount of time
 
 ### Metaversal
 
-✅jay: 21 d
+✅jay: 5.5 d
 
 === HAT (makes the rest 2x easier, following numbers DO reflect that)
 
-✅josh: 8 d (his CLT might be way too rare) (it isnt)
+✅josh: 2 d (his CLT might be way too rare) (it isnt)
 
-✅noah: 9 d
+✅noah: 2 d
 
-✅rowan: 8 d
+✅rowan: 2 d
 
-✅shawn: 7.5d
+✅shawn: 2 d
 
 ### Hyperdimensional 
 
 ✅ janine: 3 days with 350 events (you'll have more at this point probably but it's gonna be softcapped)
 
-=== HYPERMARK CHECKMINATOR 
 
-=✅ ool - 4 days
+(21 days + however long tol6 takes into john dlc here)
 
-=✅ ooc (5 days) 
+===✅ HYPERMARK CHECKMINATOR ~7.5 days + 8h offline time cast in checkmark layer
 
-=✅and memory potion - (28 days / 7 days with ooc) 
+=✅ ool 4 days
+
+=✅ ooc 5 days
+
+=✅and memory potion  28 days / 7 days with ooc
 
 = and ring of fire here (unlocks after ool, unknown time rn) before continuing with the quests
 

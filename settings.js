@@ -412,7 +412,7 @@ const indexOrder = {
         "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"], req: function() {return player.sr1Unlocked}},
     },
     1.2: {
-        "watrWatr" : {l: ["waterLayer"], req: function() {return player.john.spokeWith}},
+        "watrWatr" : {l: ["waterLayer2"], req: function() {return true}},
         "watrWatrDeep" : {l: ["deepWaterLayer"], req: function() {return indexHasOre("deepWater")}},
         "watrWatrJohn" : {l: ["johnMetaLayer","johnLayer","jimLayer"], req: function() {return player.john.spokeWith}},
     },

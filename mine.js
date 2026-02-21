@@ -755,8 +755,6 @@ function switchWorld(to) {
         utilitySwitchActions();
         removeFromLayers({"ore":"🐢","layers":["paperLayer"]})
         removeFromLayers({"ore":"🐰","layers":["paperLayer"]});
-        if (currentWorld === 1.2) insertIntoLayers({"ore":"HD 160529","layers":["waterLayer"], "useLuck":true});
-        else removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
         verifiedOres.checkPickaxe();
         verifiedOres.checkCaves();
         document.getElementById("teleportButton").disabled = false;

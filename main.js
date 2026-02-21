@@ -72,7 +72,6 @@ function init() {
     assignImageNames();
     createAllLayers();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
-    removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
     if (Math.random() < 1/1000) insertIntoLayers({"ore":"intercept", "layers":["globeLayer"], "useLuck":true})
     document.getElementById('dataText').value = "";
     if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
@@ -1766,9 +1765,9 @@ const events = [
         specialText: "watr",
         specialEffect: function(state) {
             if (state) {
-                insertIntoLayers({"ore":"🪸", "layers":["waterLayer"], "useLuck":true});
+                insertIntoLayers({"ore":"🪸", "layers":["waterLayer2"], "useLuck":true});
             }
-            else removeFromLayers({"ore":"🪸", "layers":["waterLayer"]});
+            else removeFromLayers({"ore":"🪸", "layers":["waterLayer2"]});
         }
     },
     {
@@ -1841,9 +1840,9 @@ function getCurrentEventOre() {
     return events[currentActiveEvent.name].ore;
 }
 function rollEvent() {
-    const arr = Object.keys(events);
+    let arr = Object.keys(events);
     arr.sort((a,b)=>events[arr[a]].rate-events[arr[b]].rate)
-    for (let i = arr.length - 1; i >= 0; i--) if (currentWorld !== events[arr[i]].world) arr.splice(i, 1);
+    arr = arr.filter((e)=>events[e].world === currentWorld)
     const chosenValue = Math.random();
     let sum = 0;
     for (let i = 0; i < arr.length; i++) {

@@ -233,18 +233,17 @@ const recipes = {
     "hypermark_checkminator": {
         name: "Hypermark Checkminator",
         recipe: [
-			{"ore": "✅", "amt": 10},
-			{"ore": "📰", "amt": 10},
-			{"ore": "HD 160529", "amt": 10},
-			{"ore": "Real Scribbal", "amt": 10},
-			{"ore": "🚬", "amt": 10},
-			{"ore": "💽", "amt": 10},
-			{"ore": "📽️", "amt": 10},
-			{"ore": "🗳️", "amt": 10},
-			{"ore": "🪞", "amt": 10},
-			{"ore": "🪓", "amt": 10},
-			{"ore": "🛡️", "amt": 10},
-		
+			{"ore": "✅", "amt": 4e12},
+			{"ore": "📰", "amt": 700e12},
+			{"ore": "🛡️", "amt": 25e9},
+			{"ore": "🪓", "amt": 25e9},
+			{"ore": "🪞", "amt": 15e9},
+			{"ore": "🗳️", "amt": 150e9},
+			{"ore": "📽️", "amt": 10e9},
+			{"ore": "💽", "amt": 400e6},
+			{"ore": "🚬", "amt": 200e6},
+			{"ore": "HD 160529", "amt": 30000},
+			{"ore": "Real Scribbal", "amt": 50000},
 		],
         active : [],
         pUnob: true,
@@ -552,7 +551,7 @@ const recipes = {
 		name: "Memory Potion",
 		recipe: [{"ore":"✅", "amt":4e15}],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
-		//let's make it obtainable with pp it's a cool gear
+		pUnob: true //nvm
 	}
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
@@ -2286,7 +2285,7 @@ const pickaxeStats = {
         canSpawnCaves:[1, 1.2, 2, 0.9, 3],
         canMineIn:[1, 1.2, 2, 0.9, 3],
         isDimensional: true,
-        tier: 14,
+        tier: 15,
         extraInformation: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
         icon: "markiplier, proof at https://youtu.be/XOY04uw_QPQ",
     },
