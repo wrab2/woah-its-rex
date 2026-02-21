@@ -1734,7 +1734,7 @@ const upgradeRecipes = {
                 {ore: "🏁", amt: 50},
                 {ore: "🏳️‍🌈", amt: 70000},
                 {ore: "evilFlag", amt: 1},
-                {ore: "🇭🇰", amt: 1},
+                {ore: "🇼🇫", amt: 1},
                 {ore: "silly", amt: 1},
                 {ore: "masa", amt: 1},
             ],
