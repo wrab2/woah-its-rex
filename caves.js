@@ -431,6 +431,7 @@ let caveTypes = {
     "foCave" : {rarity: 1/28, multi: 28},
     "watrCave" : {rarity: 1/25, multi:25},
     "janeCave" : {rarity: 1/100000, multi:100000},
+    "timeCave" : {rarity: 1/10000000, multi:10000000}, 
 
 }
 let caveList = {
@@ -447,6 +448,7 @@ let caveList = {
 "foCave" : ['🇭🇰', '🇮🇲', '🇵🇲', '🇬🇸', '🇳🇫', '🇫🇰', '🇰🇾', '🇫🇴'],
 "watrCave" : ["real", "eternalCoral", "🌊"],
 "janeCave" : ["🤽‍♀️"],
+"timeCave": ["🏐","🌴","🐙","🐬","🍧","🏖️","🏄‍♂️","🎋","☀️","💗","❤️‍🔥","✨","🏝️", 'aFleetingSoul',"🕰️"],
 }
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 let oolProbabilities = {
@@ -476,6 +478,9 @@ function getWorldCaveTypes(world) {
             break;
         case 0.9:
             toGive = ["abysstoneCave"];
+            break;
+        case 3.0:
+            toGive = ["abysstoneCave", "timeCave", "janeCave"];
             break;
         default:
             toGive = [];

@@ -425,6 +425,7 @@ const indexOrder = {
         "caves3" : {l: ["watrCave"], req: function() {return player.pickaxes["pickaxe26"]}},
         "caves4" : {l: ["abysstoneCave"], req: function() {return indexHasOre("🕳️") > 100000}},
         "caves5" : {l: ["janeCave"], req: function() {return indexHasOre("🤽‍♀️") > 10}},
+        "caves6" : {l: ["timeCave"], req: function() {return indexHasOre("🕰️") > 10}},
     },
     "events" : {
         "events1" : {l: ["event"], req: function() {return true;}}

@@ -50,7 +50,6 @@ let oreList = {
     'aFleetingSoul' : { 'decimalRarity': 1 / 6666000000000000, 'numRarity': 6666000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "Hollowed souls howl from their buried tomb, echoing the death of a civilization long lost. The pained cry dissipating as abruptly as it started...", 'oreTier': 'Hyperdimensional', "hasImage":true, "src" : "media/ores/aFleetingSoul.png", "oreName":"A Fleeting Soul", "eId":"<:aFleetingSoul:1267216891777253417>"},
     
     //summer event fuck i forgot my bad chat 
-    //Dont worry
     //🏐🌴🐙🐬🍧🏖️🏄‍♂️🎋☀️
     '🏐' : { 'decimalRarity': 1 / 1475000, 'numRarity': 1475000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': "🏐 Has Spawned!", 'oreTier': 'Antique', },
     '🌴' : { 'decimalRarity': 1 / 10400000, 'numRarity': 10400000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': "🌴 Has Spawned!", 'oreTier': 'Mystical', },
@@ -609,6 +608,7 @@ let oreList = {
     '✖️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '❌': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     '✅': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
+    '🕰️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer',  },
     'planks' : { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer', "hasImage":true, "src": "media/ores/plankTexture.jpg", "oreName": "Planks"},
     '🕳️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer',   },
     '🤽‍♂️': { 'decimalRarity': 1 / 1, 'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Layer','hasImage' : true, "src" : "media/john/john.svg", "oreName" : "John" },
