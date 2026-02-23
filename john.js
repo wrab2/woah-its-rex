@@ -10,7 +10,7 @@ const johnRewards = { //shortcut for how many quests you need to complete to get
 	"heirloom": 3,
 	"hat": 5,
 	"hypermark_checkminator": 10,
-	"water_polo_ball": 15,
+	"water_polo_ball": 12,
 	"house_keys": 19,
 	"ring_enabler": 20,
 }
@@ -125,7 +125,7 @@ const johnQuests = [
 		cave: false,
 		layers:["scLayer"],
 		order:10,
-		tier: QuestTiers.indexOf("Hyperdimensional")
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 	{
 		story:"janine is my sister (jane)'s bestie, please find 1 of her",

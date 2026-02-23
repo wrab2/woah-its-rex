@@ -2102,7 +2102,7 @@ function checkPolys() {
     for (const poly of polys) {
         if(polyRequirements[poly]()){
             insertIntoLayers({"ore":`${poly}`, "layers":polyLocations[`${poly}`], "useLuck":true});
-            if (currentWorld === 0.9) showItem(polyIds[poly]);
+            if (toggleCraftingWorld.world === 0.9) showItem(polyIds[poly]);
         }
     }
 }

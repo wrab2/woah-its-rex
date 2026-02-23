@@ -549,7 +549,7 @@ const recipes = {
     },
 	"memory_potion":{
 		name: "Memory Potion",
-		recipe: [{"ore":"✅", "amt":4e15}],
+		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"🐈", "amt":4e15}, {"ore":"🤯", "amt":4e15}],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true //nvm
 	}
@@ -2481,7 +2481,7 @@ const gearInformation = {
         tier: 0,
     },
     "ring_of_fire" : {
-        effect:"Cave lucks boosts simulated ability size at reduced rate (1 + cave luck/100) +1<br><i>It's so hot here...</i>",
+        effect:"Cave lucks boosts cave and ability size at reduced rate (1 + cave luck/100) +1<br><i>It's so hot here...</i>",
         tier: 14,
     },
     "heirloom": {
@@ -2600,13 +2600,15 @@ function ct(john=false) {
 function caveOreEstimatedTime(ore){
     //this function takes one ore as a string
     let result = 0
-    const oreRarity = oreList[ore].numRarity
+    //const oreRarity = oreList[ore].numRarity
+    const oreRarity = 1/oreList[ore].decimalRarity
     const speed = calcSpeed().reps * (1000/calcSpeed().speed) + calcSpeed().extra
     let caveRate = 500
     if (player.powerupVariables.caveBoosts.active) caveRate = caveRate/2
     const caveRarity = getCaveMultiFromOre(ore)
-    const caveSize = (400*(verifiedOres.getCaveModifier()/150))
-    const caveLuck = verifiedOres.getCaveLuck()
+    let caveSize = (400*(verifiedOres.getCaveModifier()/150))
+    if(player.gears.ring_of_fire)caveSize *= Math.max(verifiedOres.getCaveLuck()/100, 1) 
+    const caveLuck = 1//verifiedOres.getCaveLuck()
     const caveTypeLuck = verifiedOres.getCaveTypeLuck()
     result = (oreRarity/caveLuck)/caveSize *caveRate *caveRarity  /caveTypeLuck /speed
     return result // seconds

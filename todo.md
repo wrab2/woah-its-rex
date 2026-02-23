@@ -21,6 +21,8 @@ add more of johns contributions to naval events
 
 don't forget to uncomment this incredible line after testing const give = 1//Math.round(Math.random() * 2);
 
+make estimated time account for the polo ball and ring of fire
+
 ## LESS IMPORTANT:
 
 remove devspeed after balancing
@@ -88,37 +90,42 @@ make memory potion also give energy siphoner's effect so we can make the yellow 
 
 ### Hyperdimensional 
 
-✅ janine: 3 days with 350 events (you'll have more at this point probably but it's gonna be softcapped)
-
+☑️ (this is probably wrong because of the stupid caves I hate caves I just realized) janine: 3 days with 350 events (you'll have more at this point probably but it's gonna be softcapped)
 
 (21 days + however long tol6 takes into john dlc here)
 
+---
+
 ===✅ HYPERMARK CHECKMINATOR ~7.5 days + 8h offline time cast in checkmark layer
 
-=✅ ool 4 days
+=✅ ool 4 days, ooc 5 days
 
-=✅ ooc 5 days
+everything after this moment sucks I am lost and I need help I can not do this by myself :( :( :( :( and I think naval events luck is not being applied properly because decimal rarity of cave ores is not being changed but to be fair it never gets changed EXCEPT somethimes it does what is it ! wtf is all of this related to caves! 
 
-=✅and memory potion  28 days / 7 days with ooc
+✅ ron: 4d
+
+☑️ rowhen: 2 days with 700 events but this is also wrong because cave ore
+
+===polo ball (x15 of common ores and x5 layer materials)
+
+= memory potion  28 days / 7 days with ooc but idk about other ores besides ✅ so it's unbalanced now
 
 = and ring of fire here (unlocks after ool, unknown time rn) before continuing with the quests
 
-(following numbers don't reflect hc either !!)
+joan: 
 
-☑️jordan: 1 y 76d (#whoops
-
-☑️ron: 1 y 79d (#whoops
-
-no point in balancing anything further right now
-
-joan: 118 years
-jocelyn: 3397 years
-rowhen: 67 years
+jocelyn: 
 
 ### Polychromatic
+
+☑️jordan: 1 y 76d (will be obtainable after memory potion and maybe another gear that boosts caves)
+
 jonah
+
 johanna: 339 hours
+
 heavenly john: 19 days
+
 jack: 9 days
 
 ### Johnical

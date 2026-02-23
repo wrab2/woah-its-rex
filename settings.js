@@ -580,6 +580,7 @@ function createIndexCards(layer) {
                 else bulkAmt = pickaxe.mined;
                 if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
                 if (player.gears["gear39"]) bulkAmt = Math.floor(bulkAmt*3);
+                if(oreList[ore]["decimalRarity"] >= 1/1000 && player.gears["memory_potion"])bulkAmt = Math.floor(bulkAmt * 5)
                 const rarity = oreList[ore]["decimalRarity"] * bulkAmt;
                 if (rarity > 1) document.querySelector(".indexCardRng").textContent = `${hide ? "Guaranteed ??? With Simulated" : `Guaranteed ${formatNumber(Math.floor(rarity))}x With Simulated.`}`;
                 else document.querySelector(".indexCardRng").textContent = `${hide ? "1/??? With Simulated" : `1/${formatIndexNum(Math.floor(1/oreList[ore]["decimalRarity"]))} With Simulated.`}`;

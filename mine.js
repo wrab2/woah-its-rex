@@ -227,6 +227,7 @@ const generateBlock = function(location, wbm) {
 }
 const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     if(cheating){amt*=devspeed}
+    if(player.gears["ring_of_fire"])amt *= Math.max(verifiedOres.getCaveLuck()/100, 1)
     const p = player.stats.currentPickaxe;
     if ((p === "pickaxe0" || p === "pickaxe13") && !fromOffline && caveInfo === undefined) return;
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);
@@ -248,7 +249,6 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
 			else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
 			if(player.gears["ring_of_creation"] && oreList[thisTable[i]]["decimalRarity"] > 0.001) estAmt*=5
         } else {
-			if(player.gears["ring_of_fire"])amt *= (verifiedOres.getCaveLuck()/10 + 1)
 			let oreRarity = generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])]
             estAmt = amt*oreRarity;
 			if(player.gears["ring_of_creation"] && oreRarity > 0.001) estAmt*=5
