@@ -1,5 +1,7 @@
 # IMPORTANT:
 
+add silly satori
+
 ☑️come up with better requirements for each orb (orb of flight and fire)
 
 
