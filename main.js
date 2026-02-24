@@ -944,6 +944,7 @@ function updateInventory(m = true) {
     if (player.powerupVariables.caveBoosts.active && Date.now() >= player.powerupVariables.caveBoosts.removeAt) {
         player.powerupVariables.caveBoosts.removeAt = Infinity;
         player.powerupVariables.caveBoosts.active = false;
+		updateAllCaves()
     }
 
     //Make Sure TOL Isn't on when you can't use it, Make sure TOL is in SR1

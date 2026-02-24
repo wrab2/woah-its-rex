@@ -521,4 +521,26 @@ function getCaveMultiFromOre(ore) {
     }
     return 1;
 }
-//generateCave(curX, curY, 0, 0);
+
+function updateAllCaves() {
+    const luck = verifiedOres.getCaveLuck();
+    for (const cave of Object.keys(caveList)) {
+        if(cave !== "abysstoneCave"){
+            applyLuckToCave(caveList[cave], luck);
+        }
+    }
+    //createGenerationProbabilities();
+}
+
+function applyLuckToCave(cave, luck) {
+	for (const ore of cave){
+		const listEntry = oreList[ore]
+		let numRarity = listEntry.numRarity
+		let cap = 1000
+		if(johnRewarded("water_polo_ball")) cap = 333
+		if(listEntry.oreTier === "Layer") cap = 1
+		listEntry.decimalRarity = (numRarity / luck < cap) ? 1/cap : 1/(numRarity / luck)
+	}
+	return
+}
+

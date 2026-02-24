@@ -565,12 +565,11 @@ function createIndexCards(layer) {
         let e = document.querySelector(".indexCardTier").children[0];
         e.style.color = oreInformation.getColors(tier)["backgroundColor"];
         e.innerHTML = e.innerHTML.replace("Polychromatical", tier);
-        //johnical maybe somewhere here???????????
         const f = playerInventory[ore]["foundAt"];
         document.querySelector(".indexCardFound").textContent = `${hide || (indexHasOre(ore) === 0 && f === undefined) ? "Never Found!" : (f === undefined ? "No Date Detected!" : new Date(f).toUTCString())}`;
         if (caveList[layer] !== undefined) {
             document.querySelector(".indexCardLuck").textContent = `${hide ? "1/??? Base Rarity" : `1/${(oolProbabilities[ore] !== undefined ? formatIndexNum(1/oolProbabilities[ore]) : formatIndexNum(oreList[ore]["numRarity"]))} Base Rarity`}`;
-            document.querySelector(".indexCardRng").textContent = `${hide ? "1/??? Adjusted" : `1/${(oolProbabilities[ore] !== undefined ? formatIndexNum(1/oolProbabilities[ore] * getCaveMulti(layer)) : formatIndexNum(oreList[ore]["numRarity"] * getCaveMulti(layer)))} Adjusted`}`;
+            document.querySelector(".indexCardRng").textContent = `${hide ? "1/??? Adjusted" : `1/${(oolProbabilities[ore] !== undefined ? formatIndexNum(1/oolProbabilities[ore] * getCaveMulti(layer)) : formatIndexNum(1/oreList[ore]["decimalRarity"] * getCaveMulti(layer)))} Adjusted`}`;
         } else {
             document.querySelector(".indexCardLuck").textContent = `${hide ? "1/??? Base Rarity" : `1/${formatIndexNum(oreList[ore]["numRarity"])} Base Rarity`}`;
             if (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) {

@@ -64,6 +64,7 @@ function powerup2() {
         player.powerupCooldowns["powerup2"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
         player.powerupVariables.caveBoosts.removeAt = Date.now() + (player.gears["gear24"] ? 150000 * 1.5 : 150000);
         player.powerupVariables.caveBoosts.active = true;
+		updateAllCaves()
     }
 }
 

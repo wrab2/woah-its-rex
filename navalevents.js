@@ -75,6 +75,7 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 	}
 	else if(navalEventEndTime !== 0) { //event is over, reward applies now
 		player.john.navalEvents.push(currentNavalEvent.id)
+		updateAllCaves()
 		availableNavalEvents = availableNavalEvents.filter((e)=>e.id !== currentNavalEvent.id)
 		currentNavalEvent = {}
 		player.john.currentNavalEvent = -1

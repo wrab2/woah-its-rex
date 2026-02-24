@@ -1239,6 +1239,7 @@ function utilitySwitchActions() {
     if (toAdd) toAdd.classList.add("equippedOutline");
     changeLayerOres();
     updateAllLayers();
+	updateAllCaves()
     if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     verifiedOres.checkPickaxe();
     verifiedOres.checkCaves();
