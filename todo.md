@@ -1,9 +1,10 @@
-# IMPORTANT:
+-# (its like higher than # because its negative and the smaller the number is makes it bigger so this is like a super title) REALLY IMPORTANT:
 
 add silly satori
 
-☑️come up with better requirements for each orb (orb of flight and fire)
+# IMPORTANT:
 
+☑️come up with better requirements for each orb (orb of flight and fire)
 
 put all the fumos in the index
 
@@ -103,6 +104,8 @@ make memory potion also give energy siphoner's effect so we can make the yellow 
 =✅ ool 4 days, ooc 5 days
 
 everything after this moment sucks I am lost and I need help I can not do this by myself :( :( :( :( and I think naval events luck is not being applied properly because decimal rarity of cave ores is not being changed but to be fair it never gets changed EXCEPT somethimes it does what is it ! wtf is all of this related to caves! 
+
+insert a bugcat gif here
 
 ✅ ron: 4d
 
