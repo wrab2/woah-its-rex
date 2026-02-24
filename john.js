@@ -1,5 +1,3 @@
-
-
 const john = { //this doesn't presist between refreshes
 	opened: false,
 	rejectedQuests: 0,
@@ -233,7 +231,9 @@ function johnActivateQuest() {
 	if(player.john.spokeWith && player.john.currentQuest !== undefined){
 		const thisQuest = johnQuests[player.john.currentQuest]
 		if(thisQuest.cave){
-			return insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":true});
+			insertIntoCaves({"ore":thisQuest.ore, "layers":thisQuest.layers, "useLuck":true});
+			utilitySwitchActions()
+			return
 		}
 		if (thisQuest.ore === "🐃") return
 		if (thisQuest.ore === "evilJohn") return
@@ -385,7 +385,7 @@ function estimateJohnQuestTime(){
 	let thisQuest = johnQuests[player.john.currentQuest]
 	if (thisQuest.ore === "🐃") time = 0
 	else if(thisQuest.cave){
-		let time = 1000*caveOreEstimatedTime(thisQuest.ore)*thisQuest.amount
+		let time = caveOreEstimatedTime(thisQuest.ore)*thisQuest.amount
 		get("john-quest-eta").textContent=`Estimated time: ${longTime(time)}`
 	} else {
 		get("john-quest-eta").textContent=`Estimated time: ${ct(true)}`

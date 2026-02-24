@@ -529,7 +529,6 @@ function updateAllCaves() {
             applyLuckToCave(caveList[cave], luck);
         }
     }
-    //createGenerationProbabilities();
 }
 
 function applyLuckToCave(cave, luck) {

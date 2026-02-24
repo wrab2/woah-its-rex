@@ -1239,7 +1239,6 @@ function utilitySwitchActions() {
     if (toAdd) toAdd.classList.add("equippedOutline");
     changeLayerOres();
     updateAllLayers();
-	updateAllCaves()
     if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
     verifiedOres.checkPickaxe();
     verifiedOres.checkCaves();
@@ -1248,6 +1247,7 @@ function utilitySwitchActions() {
     updateSpeed();
     a89();
     updateGearFaq();
+	updateAllCaves()
 }
 function updateGearFaq() {
     let output = ``;
@@ -2603,14 +2603,14 @@ function caveOreEstimatedTime(ore){
     let result = 0
     //const oreRarity = oreList[ore].numRarity
     const oreRarity = 1/oreList[ore].decimalRarity
+    console.log(oreList[ore].decimalRarity)
     const speed = calcSpeed().reps * (1000/calcSpeed().speed) + calcSpeed().extra
     let caveRate = 500
     if (player.powerupVariables.caveBoosts.active) caveRate = caveRate/2
     const caveRarity = getCaveMultiFromOre(ore)
     let caveSize = (400*(verifiedOres.getCaveModifier()/150))
     if(player.gears.ring_of_fire)caveSize *= Math.max(verifiedOres.getCaveLuck()/100, 1) 
-    const caveLuck = 1//verifiedOres.getCaveLuck()
     const caveTypeLuck = verifiedOres.getCaveTypeLuck()
-    result = (oreRarity/caveLuck)/caveSize *caveRate *caveRarity  /caveTypeLuck /speed
-    return result // seconds
+    result = (oreRarity)/caveSize *caveRate *caveRarity  /caveTypeLuck /speed
+    return result*1000 // ms
 }

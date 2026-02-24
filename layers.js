@@ -1295,7 +1295,7 @@ function insertIntoCaves(obj) {
             for (let j =0; j<cave.length; j++){
                 if (oreList[cave[j]]["numRarity"] < oreList[ore]["numRarity"]) {
                     cave.splice(j, 0, ore);
-                    updateAllLayers();
+                    updateAllCaves();
                     break;  
                 }
             }
@@ -1308,7 +1308,7 @@ function removeFromCaves(obj) {
     for (let i = 0; i < caves.length; i++) {
         if (caveList[caves[i]].includes(ore)) {
             caveList[caves[i]].splice(caveList[caves[i]].indexOf(ore), 1);
-            updateAllLayers();
+            updateAllCaves();
         }
     }
 }

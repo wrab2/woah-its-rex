@@ -944,7 +944,7 @@ function updateInventory(m = true) {
     if (player.powerupVariables.caveBoosts.active && Date.now() >= player.powerupVariables.caveBoosts.removeAt) {
         player.powerupVariables.caveBoosts.removeAt = Infinity;
         player.powerupVariables.caveBoosts.active = false;
-		updateAllCaves()
+		utilitySwitchActions()
     }
 
     //Make Sure TOL Isn't on when you can't use it, Make sure TOL is in SR1
@@ -1063,7 +1063,8 @@ function updateInventory(m = true) {
     if (Math.random() < 1/10000000) {
         spawnCatEye();
     }
-
+    
+    if (john.opened) johnRefresh()
     rollNavalEvent()
 }
 function spawnCatEye() {
