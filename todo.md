@@ -28,6 +28,8 @@ make estimated time account for the polo ball and ring of fire
 
 ## LESS IMPORTANT:
 
+gear or something that completely removes wormhole exterminator and gives you its effects 
+
 remove devspeed after balancing
 
 add ores to jane caves
