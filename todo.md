@@ -4,6 +4,10 @@ add silly satori
 
 # IMPORTANT:
 
+balance the cave quests now that they can be balanced
+
+add mobile phone to open john any time (a gear after like a heirloom)
+
 ☑️come up with better requirements for each orb (orb of flight and fire)
 
 put all the fumos in the index
