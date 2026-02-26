@@ -291,8 +291,11 @@ function completeQuest(){
 			johnSay("did you hear 👂👂👂👂 that, it looks like my past sins (war crimes) have come back to haunt me and all the naval events i have participated in have come back")
 			setupNavalEvents()
 		}
+		else if(player.john.questsCompleted.length === 2){
+			johnSay("thank you for helping me I would like to share with you more events from my past (93 more max naval events for every quest completed to be precise)")
+		}
 		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
-			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around 11,000x cave luck (the formula is 1.03 ^ (events completed) cave luck but softcaps after 250)")
+			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around a lot of cave luck (the formula is 1.01 ^ (events completed) cave luck)")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
 			johnSay("one of my friends that you gave to me dropped their water polo ball, honestly you can keep it !")

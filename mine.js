@@ -240,7 +240,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     if (sm) caveInfo = undefined;
     const isCave = (!sm && caveInfo !== undefined);
     const results = {};
-    const curCaveLuck = verifiedOres.getCaveLuck();
+    const curCaveLuck = isCave ? verifiedOres.getCaveLuck() : 1;
     for (let i = 0; i < thisTable.length; i++) {
         let estAmt;
         if (isCave) {

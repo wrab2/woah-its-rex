@@ -14,10 +14,14 @@ function setupNavalEvents(){ //only runs on startup and after getting naval even
 	fillCurrentEventInfo()
 }
 
+function getMaxEvents(){
+	return Math.min( player.john.questsCompleted.length * 93, availableNavalEvents.length )
+}
+
 function fillCurrentEventInfo(){
 	const battleshipIcon = get("displayShipIcon")
 	get("navalProgressBar").style.width = player.john.navalEvents.length / navalEventsList.length * 10+"%"
-	get("navalProgressBarText").textContent = `${player.john.navalEvents.length}/${navalEventsList.length}`
+	get("navalProgressBarText").textContent = `${player.john.navalEvents.length}/${getMaxEvents()}`
 	
 	if(navalEventEndTime === 0){//there is no event no event
 		battleshipIcon.classList.remove("navalGreenFlashing")
@@ -84,8 +88,8 @@ function rollNavalEvent(){ //this runs on every inventory (2 times a second)
 		fillCurrentEventInfo()
 		return
 	}
-	//chance is 1/3600 every 500ms which is ~2/hour to get any uncompleted event
-	if(availableNavalEvents.length > 0 && Math.random()<1/3600){
+	//~3/hour to get any uncompleted event
+	if(player.john.navalEvents.length < getMaxEvents() && availableNavalEvents.length > 0 && Math.random()<1/2400){
 		//start the event
 		currentNavalEvent = availableNavalEvents[Math.floor(Math.random() * availableNavalEvents.length)]
 

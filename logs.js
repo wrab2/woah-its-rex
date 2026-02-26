@@ -324,8 +324,7 @@ class secureLogs {
         if(johnRewarded("heirloom")){
             let navalEventsAmt = player.john.navalEvents.length
             //softcap
-            if(navalEventsAmt > 250)navalEventsAmt = 250 + ((navalEventsAmt-250)**0.7)
-            tempLuck *= (1.03**navalEventsAmt) || 1
+            tempLuck *= (1.01**navalEventsAmt) || 1
         }
         return tempLuck;
     }
