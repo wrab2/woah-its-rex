@@ -50,6 +50,8 @@ add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fish
 
 bugtest
 
+fumos to redo: kita, kagamine rin, miku, teto
+
 SOME way to get limited ores when its not the month of the ore, x1000 rarity in SRwatr, also maybe some way for 🐱, your reward, hyper, first anniversary cake, sakura so you can get 100% completion
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
