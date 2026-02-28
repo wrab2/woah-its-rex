@@ -177,7 +177,7 @@ const johnQuests = [
 	},
 	{
 		story:"can you please please please please please get me my water buffalo back, hes our family pet, i miss him so much i would be eternal (coral)ly greatful if you did, i remember all my good times with him, we always called him water buffalo 🐃",
-		ore_stry:"water buffalo 🐃 is found in the forge, you might want to do this one last as its the hardest by far (and you cant do it before 10 requests)",
+		ore_stry:"water buffalo (🐃) is found in the forge",
 		ore:"🐃",
 		amount:1,
 		cave: false,
@@ -187,7 +187,7 @@ const johnQuests = [
 	},
 	{
 		story:"please get me uhh... who the hell is this?",
-		ore_stry:"Evil John is found in ??? (you might want to check milestones)",
+		ore_stry:"evil John is found in ??? (you might want to check milestones)",
 		ore:"evilJohn",
 		amount:10,
 		cave: false,
@@ -294,17 +294,29 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === 2){
 			johnSay("thank you for helping me I would like to share with you more events from my past (93 more max naval events for every quest completed to be precise)")
 		}
+		else if(player.john.questsCompleted.length === 3){
+			johnSay('<img src="media/john/story0.png" style="height: 6em"> back in the day, even before i played water polo i had a water buffalo, sadly i lost him to a bullet train accident, i still miss him')
+		}
+		else if(player.john.questsCompleted.length === 4){
+			johnSay('<img src="media/john/story1.png" style="height: 6em"> i remember when my evil doppleganger took over tsc, he wanted to add microtransactions, heres what it would\'ve looked like')
+		}
 		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
 			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around a lot of cave luck (the formula is 1.01 ^ (events completed) cave luck)")
 		}
+		else if(player.john.questsCompleted.length === 6){
+			johnSay('<img src="media/john/story2.png" style="height: 6em"> i used to be a gambling FIEND. me, evil john, and a mirror all hit up the casinos, i still have so many casino chips at my home i hope no one steals them!')
+		}
 		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
-			johnSay("one of my friends that you gave to me dropped their water polo ball, honestly you can keep it !")
+			johnSay("jim when we were playing water polo yesterday lost his hat when i knocked it off with my water polo ball, and he has not realized yet, so you can keep it")
+		}
+		else if(player.john.questsCompleted.length === 7){
+			johnSay('<img src="media/john/story3.png" style="height: 6em"> josh (my roomate) used to gatekeep the awesome site known as \'quiz.qwq.re\' from EVIL people (such as the :cat2 emoji)')
 		}
 		else if(player.john.questsCompleted.length === johnRewards["hypermark_checkminator"]){
 			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer (1m blocks or lower)")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["hat"]){
-			johnSay("my current hat is getting pretty worn out from all this swimming, here. take it !")
+			johnSay("my current hat is getting pretty worn out from all this swimming, here. take it ! (i stole it off of jim hopefully he does not notice!)")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["house keys"]){
 			johnSay("thank you thank you thank you so so so much, i dont have anything else to give to you though other than my house.... eh whatever its fine i trust you enough just dont steal anything thanks")
@@ -380,7 +392,7 @@ function johnRefresh() { //updates values in john window
 }
 
 function johnSay(johnsWisdom){
-	get("right-john-speech-bubble").textContent = johnsWisdom
+	get("right-john-speech-bubble").innerHTML = johnsWisdom
 	get("sayings-bubble-container").style.visibility = "visible"
 }
 
