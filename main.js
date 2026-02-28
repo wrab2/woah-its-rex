@@ -298,6 +298,7 @@ function loadContent() {
     musicPlayer.songs["song4"].src = new Audio("audios/mooing_audio_1.mp3");
     musicPlayer.songs["song5"].src = new Audio("audios/song5fakeMIDI.mp3");
     musicPlayer.songs["song6"].src = new Audio("audios/song6.mp3");
+    musicPlayer.songs["song7"].src = new Audio("audios/song7.mp3");
     musicPlayer.songs["song8"].src = new Audio("audios/song8.mp3");
     musicPlayer.songs["song9"].src = new Audio("audios/song9.mp3");
     musicPlayer.songs["song10"].src = new Audio("audios/song10.mp3");
