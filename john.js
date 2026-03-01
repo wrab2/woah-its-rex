@@ -322,7 +322,7 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["hat"]){
 			johnSay("my current hat is getting pretty worn out from all this swimming, here. take it ! (i stole it off of jim hopefully he does not notice!)")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["house keys"]){
+		else if(player.john.questsCompleted.length === johnRewards["house_keys"]){
 			johnSay("thank you thank you thank you so so so much, i dont have anything else to give to you though other than my house.... eh whatever its fine i trust you enough just dont steal anything thanks")
 		}
 		else if(player.john.questsCompleted.length === johnRewards["ring_enabler"]){
