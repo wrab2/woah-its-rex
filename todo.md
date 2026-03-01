@@ -60,9 +60,7 @@ SOME way to get limited ores when its not the month of the ore, x1000 rarity in 
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
 
-#### GREAT and AWESOME idea of the day
-
-make memory potion also give energy siphoner's effect so we can make the yellow vocaloid a HD again
+make green chemicals also give energy siphoner's effect so we can make the yellow vocaloid a HD again
 
 # PROGRESSION:
 
@@ -121,7 +119,7 @@ nvm!
 
 ===polo ball (x15 of common ores and x5 layer materials)
 
-✅ = memory potion  2 days and 6 hours after getting polo ball and an impossibly long amount of time before then I don't care enough to check
+✅ = green chemicals  2 days and 6 hours after getting polo ball and an impossibly long amount of time before then I don't care enough to check
 
 = and ring of fire here (unlocks after ool, unknown time rn) before continuing with the quests
 
@@ -132,7 +130,7 @@ joan:
 jocelyn: 
 
 
-☑️jordan: 1 y 76d (will be obtainable after memory potion and maybe another gear that boosts caves)
+☑️jordan: 1 y 76d (will be obtainable after green chemicals and maybe another gear that boosts caves)
 
 jonah
 

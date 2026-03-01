@@ -712,7 +712,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#memory_potion span {
+#green_chemicals span {
     background: linear-gradient(
         90deg in lch,
         #f7cac9,

@@ -597,7 +597,7 @@ const calcSpeed = function() {
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:extraSpeed}
         else {
 			reps = Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1))
-            if (player.gears["memory_potion"]) reps += 25
+            if (player.gears["green_chemicals"]) reps += 25
             if (johnRewarded("hat") && curDirection!=="a") {
 				extraSpeed*=2
 				reps*=2
@@ -1008,7 +1008,7 @@ function updateInventory(m = true) {
             randBuff.proc = false;
             randBuff.reps = false;
             const give = 1//Math.round(Math.random() * 2);
-			if(player.gears["memory_potion"]){
+			if(player.gears["green_chemicals"]){
 				randBuff.luck = true;
 				randBuff.proc = true;
 				randBuff.reps = true;

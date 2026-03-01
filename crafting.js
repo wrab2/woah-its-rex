@@ -547,8 +547,8 @@ const recipes = {
         active : [0.9, 1, 1.1, 1.2, 2, 3],
         pUnob: true
     },
-	"memory_potion":{
-		name: "Memory Potion",
+	"green_chemicals":{
+		name: "Green Chemicals",
 		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"😹", "amt":3e12}, {"ore":"🐈", "amt":15e6}, {"ore":"🤯", "amt":15e6}, {"ore":"🐈‍⬛", "amt":10000},],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true //nvm
@@ -1169,7 +1169,7 @@ const buttonGradients = {
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
-    "memory_potionCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, // you'e wlecome 
+    "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, // you'e wlecome 
 	
 }
 function craftPickaxe(item) {
@@ -1270,7 +1270,7 @@ const showOrders = {
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
-    "gjohn": ["heirloom","water_polo_ball","hat","ring_enabler","memory_potion"],
+    "gjohn": ["heirloom","water_polo_ball","hat","ring_enabler","green_chemicals"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -2501,7 +2501,7 @@ const gearInformation = {
         effect:"John enables you to fish fumos",
         tier: 0,
     },
-	"memory_potion": {
+	"green_chemicals": {
 		effect:"Compressing quadrillions of checkmarks into a unified solution composed entirely of pure checkmarkium (new element) thereby enabling cognitive enhancement. This process restores access to Forgotten Rose Quartz Shell's full power and permits all of its effects to remain simultaneously active.",
 		tier: 15,
 	}
