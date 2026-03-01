@@ -2603,7 +2603,6 @@ function caveOreEstimatedTime(ore){
     let result = 0
     //const oreRarity = oreList[ore].numRarity
     const oreRarity = 1/oreList[ore].decimalRarity
-    console.log(oreList[ore].decimalRarity)
     const speed = calcSpeed().reps * (1000/calcSpeed().speed) + calcSpeed().extra
     let caveRate = 500
     if (player.powerupVariables.caveBoosts.active) caveRate = caveRate/2
