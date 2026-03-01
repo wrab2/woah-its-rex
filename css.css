@@ -5338,7 +5338,6 @@ background-size: 100%;
   padding: 4px;
   max-height: 170px;
   min-height: 40px;
-  
 }
 
 #right-john-speech-bubble:after  {
@@ -5354,7 +5353,11 @@ background-size: 100%;
 	border-bottom: 0;
 	margin-top: -10px;
 	margin-left: -40px;
-
+}
+#right-john-speech-bubble img:nth-child(1) {
+  height: 6em;
+  float: left;
+  margin-right: 1%;
 }
 
 #john-quest-progress img{
