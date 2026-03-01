@@ -121,7 +121,7 @@ nvm!
 
 ===polo ball (x15 of common ores and x5 layer materials)
 
-= memory potion  28 days / 7 days with ooc but idk about other ores besides ✅ so it's unbalanced now
+✅ = memory potion  2 days and 6 hours after getting polo ball and an impossibly long amount of time before then I don't care enough to check
 
 = and ring of fire here (unlocks after ool, unknown time rn) before continuing with the quests
 

@@ -160,7 +160,7 @@ let oreList = {
     '⚗️': {  'numRarity': 9750000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '⚗️ Has Spawned!', 'oreTier': 'Mystical',  },
     '🧪': {  'numRarity': 7500000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '🧪 Has Spawned!', 'oreTier': 'Mystical',  },
     
-    '😹': {  'numRarity': 1000000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'my cat got merged with the joy emoji :cry:', 'oreTier': 'Imaginary',  },
+    '😹': {  'numRarity': 950e6, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'my cat got merged with the joy emoji :cry:', 'oreTier': 'Flawless',  },
     '🐈': {  'numRarity': 33333333333333, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'meyuriow old year :3', 'oreTier': 'Imaginary',  },
     '🤯': {  'numRarity': 33333333333333, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'happy new year', 'oreTier': 'Imaginary',  },
     '🫃': {  'numRarity': 10000000000005, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'after being kicked from the silly layer, they moved to the checkmark layer...', 'oreTier': 'Imaginary',  },

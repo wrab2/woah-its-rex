@@ -549,7 +549,7 @@ const recipes = {
     },
 	"memory_potion":{
 		name: "Memory Potion",
-		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"🐈", "amt":4e15}, {"ore":"🤯", "amt":4e15}],
+		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"😹", "amt":3e12}, {"ore":"🐈", "amt":15e6}, {"ore":"🤯", "amt":15e6}, {"ore":"🐈‍⬛", "amt":10000},],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true //nvm
 	}
@@ -2550,15 +2550,9 @@ function ct(john=false) {
                 recipeLayers.commons ??= {ore: ore, highestProcs : 0, amt:0}
                 currentOreLayer = "commons";
             } else {
-                for (let layer in layerDictionary) {
-                    if(layer!=="johnMetaLayer"){
-                        if (layerDictionary[layer].layer.includes(ore)) {
-                            recipeLayers[layer] ??= {ore: ore, highestProcs : 0, amt:0}
-                            currentOreLayer = layer;
-                            break;
-                        }
-                    }
-                }
+                currentOreLayer = Object.keys(layerDictionary).find((e)=> e!=="johnMetaLayer" && layerDictionary[e].layer.includes('✅'))
+                recipeLayers[currentOreLayer] ??= {ore: ore, highestProcs : 0, amt:0}
+
                 if (currentOreLayer === undefined) {
                     const toCheck = ["🐞","🥈","🚬","🪸","🪦","🚨","🍖","📜","🐸"];
                     let isLayer = a87(toCheck.indexOf(ore), true, true)
@@ -2570,7 +2564,8 @@ function ct(john=false) {
             let have = playerInventory[ore]["normalAmt"];
             have = have >= needed ? needed : have;
             needed -= have;
-            const rarity = 1/oreList[ore]["decimalRarity"];
+            let rarity = 1/oreList[ore]["decimalRarity"];
+            if(rarity<1000 && player.gears.ring_of_creation) rarity = rarity/5
             const totalOreRarity = (rarity * needed);
             let totalProcsNeeded;
             if (needed > 0) {
@@ -2592,6 +2587,8 @@ function ct(john=false) {
     let commonAdd = 0;
     if (recipeLayers["commons"] !== undefined) {commonAdd = recipeLayers["commons"].highestProcs / recipeLayers["commons"].amt; delete recipeLayers["commons"]}
     for (let layer in recipeLayers) {
+        let commonOreDivider = 1
+        if(player.gears.ring_of_creation)commonOreDivider *= 5
         if (recipeLayers[layer].amt > 0) totalProcs += (recipeLayers[layer].highestProcs/recipeLayers[layer].amt)
     }
     let timeForProcs = (Math.floor(totalProcs) * abilityRate) / speed;
