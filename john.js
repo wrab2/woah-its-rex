@@ -143,7 +143,7 @@ const johnQuests = [
 		cave: true,
 		layers:["musicCave"],
 		order:12,
-		tier: QuestTiers.indexOf("Hyperdimensional")
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 	{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
@@ -163,7 +163,7 @@ const johnQuests = [
 		cave: true,
 		layers:["janeCave"],
 		order:14,
-		tier: QuestTiers.indexOf("Hyperdimensional")
+		tier: QuestTiers.indexOf("Polychromatical")
 	},
 	{
 		story:"this is rowen's cousin, please get me 1 of her",
@@ -287,6 +287,7 @@ function completeQuest(){
         
 		player.john.questsCompleted.push(thisQuest.order)
 		johnStopQuest()
+		fillCurrentEventInfo()
 		if(player.john.questsCompleted.length === johnRewards["naval events"]){
 			johnSay("did you hear 👂👂👂👂 that, it looks like my past sins (war crimes) have come back to haunt me and all the naval events i have participated in have come back")
 			setupNavalEvents()
@@ -310,7 +311,7 @@ function completeQuest(){
 			johnSay('<img src="media/john/story3.png"> josh (my roomate) used to gatekeep the awesome site known as \'quiz.qwq.re\' from EVIL people (such as the :cat2 emoji)')
 		}
 		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
-			johnSay("jim when we were playing water polo yesterday lost his hat when i knocked it off with my water polo ball, and he has not realized yet, so you can keep it")
+			johnSay("LOWkey this is not a description for the water pollo ball; jim when we were playing water polo yesterday lost his hat when i knocked it off with my water polo ball, and he has not realized yet, so you can keep it")
 		}
 		else if(player.john.questsCompleted.length === 8){
 			johnSay('<img src="media/john/story4.png"> this was the finals of the water polo championhip of 2000, i remember when jim 8 was able to do a double dunk by jumping on jim 4\'s head')

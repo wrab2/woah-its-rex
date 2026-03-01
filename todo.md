@@ -83,7 +83,7 @@ make memory potion also give energy siphoner's effect so we can make the yellow 
 
 (4 days into john dlc here)
 
-==tol 6 here 4x speed, takes untested amount of time
+==tol 6 here 4x speed, takes A LOT of time but it's ok
 
 ### Metaversal
 
@@ -101,7 +101,9 @@ make memory potion also give energy siphoner's effect so we can make the yellow 
 
 ### Hyperdimensional 
 
-☑️ (this is probably wrong because of the stupid caves I hate caves I just realized) janine: 3 days with 350 events (you'll have more at this point probably but it's gonna be softcapped)
+837 quests completed
+
+✅ janine: 2 d
 
 (21 days + however long tol6 takes into john dlc here)
 
@@ -111,13 +113,11 @@ make memory potion also give energy siphoner's effect so we can make the yellow 
 
 =✅ ool 4 days, ooc 5 days
 
-everything after this moment sucks I am lost and I need help I can not do this by myself :( :( :( :( and I think naval events luck is not being applied properly because decimal rarity of cave ores is not being changed but to be fair it never gets changed EXCEPT somethimes it does what is it ! wtf is all of this related to caves! 
+nvm!
 
-insert a bugcat gif here
+✅ ron: 3 d
 
-✅ ron: 4d
-
-☑️ rowhen: 2 days with 700 events but this is also wrong because cave ore
+✅ rowhen: 3.5 d (1021 events)
 
 ===polo ball (x15 of common ores and x5 layer materials)
 
@@ -125,11 +125,12 @@ insert a bugcat gif here
 
 = and ring of fire here (unlocks after ool, unknown time rn) before continuing with the quests
 
+### Polychromatical
+
 joan: 
 
 jocelyn: 
 
-### Polychromatic
 
 ☑️jordan: 1 y 76d (will be obtainable after memory potion and maybe another gear that boosts caves)
 
