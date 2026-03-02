@@ -560,8 +560,8 @@ const recipes = {
 		pUnob: true
 	},
 	"phone": {
-		name: "Better Call Johm",
-		recipe: [{"ore":"neru", "amt":3e2}, {"ore":"miku", "amt":3e2}, {"ore":"teto", "amt":3e2}],
+		name: "Better Call John",
+		recipe: [{"ore":"🤽‍♂️", "amt":1e12}, {"ore":"🤽", "amt":1e12}, {"ore":"neru", "amt":3e2}, {"ore":"miku", "amt":3e2}, {"ore":"teto", "amt":3e2}],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true
 	}
@@ -1236,7 +1236,7 @@ function craftPickaxe(item) {
     if (player.gears["gear45"]) showEventOptions();
     else hideEventOptions();
     if(player.gears["ring_of_time"])pickaxeStats.pickaxe27.canMineIn = [1, 1.1, 1.2, 2, 0.9]
-    if(player.gears["phone"])get("phoneButton").style.display = block
+    if(player.gears["phone"])get("phoneButton").style.display = "flex"
 	updateActiveRecipe();
     utilitySwitchActions();
 }
@@ -1299,7 +1299,7 @@ function showPickaxes() {
     if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
     else {
 		document.getElementById("sillyRecipe").style.display = "none";
-		document.getElementById("checkmark_teleporterRecipe").style.display = "none";
+		document.getElementById("checkmark_teleporter").style.display = "none";
 		
 	}
 }
@@ -1340,8 +1340,8 @@ function switchWorldCraftables(world=currentWorld) {
     if (!["???","john"].includes(world)) {
         if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
 		else get("sillyRecipe").style.display = "none";
-        if (indexHasOre('🫃') && toggleCraftingWorld.world === 2) document.getElementById("checkmark_teleporterRecipe").style.display = "flex";
-		else get("checkmark_teleporterRecipe").style.display = "none";
+        if (indexHasOre('🫃') && toggleCraftingWorld.world === 2) document.getElementById("checkmark_teleporter").style.display = "flex";
+		else get("checkmark_teleporter").style.display = "none";
     }
 }
 function setWorldSelectors() {
@@ -2529,7 +2529,7 @@ const gearInformation = {
 		tier: 15,
 	},
 	"checkmark_teleporter": {
-		effect: "Generates a Checkmark Layer at a random position in the Repeating Layers below 1 Million Meters in W2",
+		effect: "Finds a Checkmark Layer in the W2",
 		tier: 0,
 	},
 	"phone": {

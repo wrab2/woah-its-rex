@@ -2,8 +2,6 @@
 
 add svg for jim ore like there is one for john because windows emojis look bad
 
-fix cell phone and ore tracker title overlapping
-
 (part of the balancing)come up with better requirements for each orb (orb of flight and fire)
 
 fumo fishing: (probably not what's written below tbh)  (this is true but the ideas for fumo fishing shift every week)
@@ -22,7 +20,9 @@ make estimated time account for the ring of fire
 
 ## LESS IMPORTANT:
 
-gear or something that completely removes wormhole exterminator and gives you its effects 
+add event index page(s) for naval events
+
+gear or something that completely removes wormhole exterminator and gives you its effects (but then people will use wog instead which is even worsem I think it's fine to leave wormhole be and instead add a better cave pick after pof?)
 
 remove devspeed after balancing
 

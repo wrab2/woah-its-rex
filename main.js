@@ -136,7 +136,7 @@ function init() {
     }
     verifiedOres.setupCompletionCounter()
 	if(player.gears["phone"]){
-		get("phoneButton").style.display = "block"
+		get("phoneButton").style.display = "flex"
 	}
 }
 function finishInit() {

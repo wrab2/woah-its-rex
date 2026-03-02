@@ -3477,6 +3477,20 @@ img.roundcat {
   width: 1vw;
   height: 1vw;
 }
+#phoneButton {
+  position: absolute;
+  display: flex;
+  flex-direction:column-reverse;
+  bottom: 100%;
+  right: 0;
+  width: 100%;
+  padding: 0.5em 0;
+  background-color: inherit;
+  border: 0.2vw solid var(--main-border-color);
+  border-right: none;
+  box-sizing: content-box;
+  font-weight: bold;
+}
 #oreTrackerButton {
   height: 2vw;
   width: 100%;
@@ -3487,7 +3501,7 @@ img.roundcat {
   text-align: center;
   font-weight: bold;
 }
-#oreTrackerButton:hover {
+#oreTrackerButton:hover, #phoneButton:hover {
   background-color: var(--main-shadow-color);
 }
 #oreTrackerHolder {
