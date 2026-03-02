@@ -51,6 +51,7 @@ class playerTemplate {
             "ring_of_fire": false,
 			"green_chemicals": false,
 			"checkmark_teleporter": false,
+			"phone":false,
             
         }
         this.pickaxes = {

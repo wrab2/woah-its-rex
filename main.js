@@ -135,6 +135,9 @@ function init() {
         verifiedOres.checkPickaxe()
     }
     verifiedOres.setupCompletionCounter()
+	if(player.gears["phone"]){
+		get("phoneButton").style.display = "block"
+	}
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
@@ -1007,7 +1010,7 @@ function updateInventory(m = true) {
             randBuff.luck = false;
             randBuff.proc = false;
             randBuff.reps = false;
-            const give = 1//Math.round(Math.random() * 2);
+            const give = Math.round(Math.random() * 2);
 			if(player.gears["green_chemicals"]){
 				randBuff.luck = true;
 				randBuff.proc = true;

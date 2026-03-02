@@ -4,15 +4,15 @@ add silly satori
 
 # IMPORTANT:
 
-balance the cave quests now that they can be balanced
+add svg for jim ore like there is one for john because windows emojis look bad
 
-add mobile phone to open john any time (a gear after like a heirloom)
+☑️ add mobile phone to open john any time (a gear after like a heirloom)
 
 (part of the balancing)come up with better requirements for each orb (orb of flight and fire)
 
 (don't)put all the fumos in the index
 
-fumo fishing:
+fumo fishing: (probably not what's written below tbh)
 
 > once you reach johns house you meet one of johns friends (or a fumo idfk) and they will give you a fishing pole, the more quests you complete the stronger your fishing rod gets, you also get coins which can be spent on bait (target specific fumos) or hooks (extra stats aka like double hook chance)
 
@@ -22,13 +22,9 @@ add casino chips gear to john's house
 
 ✅(checkmark teleporter, green chemicals and hc is good enough probably)a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
 
-ability to steal johns poker chips
-
 add more of johns contributions to naval events
 
-don't forget to uncomment this incredible line after testing const give = 1//Math.round(Math.random() * 2);
-
-make estimated time account for the polo ball and ring of fire
+make estimated time account for the ring of fire
 
 ## LESS IMPORTANT:
 
@@ -38,9 +34,7 @@ remove devspeed after balancing
 
 add ores to jane caves
 
-make the john milestones less buggy (connectors)
-
-give rings a gradient
+give gears and pickaxes a COOL gradient
 
 fix the plank offset (nevermind)
 

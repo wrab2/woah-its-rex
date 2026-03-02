@@ -547,16 +547,22 @@ const recipes = {
         active : [0.9, 1, 1.1, 1.2, 2, 3],
         pUnob: true
     },
-	"green_chemicals":{
+	"green_chemicals": {
 		name: "Green Chemicals",
 		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"😹", "amt":3e12}, {"ore":"🐈", "amt":15e6}, {"ore":"🤯", "amt":15e6}, {"ore":"🐈‍⬛", "amt":10000},],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true
 	},
-	"checkmark_teleporter":{
+	"checkmark_teleporter": {
 		name: "Checkmark teleporter",
 		recipe: [{"ore":"🫃", "amt":1e6}],
 		active: [2],
+		pUnob: true
+	},
+	"phone": {
+		name: "Better Call Johm",
+		recipe: [{"ore":"🤽‍♂️", "amt":1e12}, {"ore":"🤽", "amt":1e12}],
+		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true
 	}
 }
@@ -1176,8 +1182,9 @@ const buttonGradients = {
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
-    "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, // you'e wlecome 
+    "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, 
 	"checkmark_teleporterCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, //:pleading_face:
+	"phoneCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, //:pleading_face2:
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
@@ -1228,8 +1235,9 @@ function craftPickaxe(item) {
     if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
     if (player.gears["gear45"]) showEventOptions();
     else hideEventOptions();
-    if(player.gears["ring_of_time"])pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
-    updateActiveRecipe();
+    if(player.gears["ring_of_time"])pickaxeStats.pickaxe27.canMineIn = [1, 1.1, 1.2, 2, 0.9]
+    if(player.gears["phone"])get("phoneButton").style.display = block
+	updateActiveRecipe();
     utilitySwitchActions();
 }
 function getButtonByName(item) {
@@ -1279,7 +1287,7 @@ const showOrders = {
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
     "pjohn": ["hypermark_checkminator"],
-    "gjohn": ["heirloom","water_polo_ball","hat","ring_enabler","green_chemicals"],
+    "gjohn": ["phone","heirloom","water_polo_ball","hat","ring_enabler","green_chemicals"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -2522,6 +2530,10 @@ const gearInformation = {
 	},
 	"checkmark_teleporter": {
 		effect: "yummers (finds a checkmark layer in w2 for you)",
+		tier: 0,
+	},
+	"phone": {
+		effect: "allows you to call and have a nice chat with john from anywhere through the ore tracker tab",
 		tier: 0,
 	}
 }
