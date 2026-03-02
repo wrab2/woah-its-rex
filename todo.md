@@ -2,13 +2,13 @@
 
 add svg for jim ore like there is one for john because windows emojis look bad
 
-☑️ add mobile phone to open john any time (a gear after like a heirloom)
+fix cell phone and ore tracker title overlapping
 
 (part of the balancing)come up with better requirements for each orb (orb of flight and fire)
 
-fumo fishing: (probably not what's written below tbh)
+fumo fishing: (probably not what's written below tbh)  (this is true but the ideas for fumo fishing shift every week)
 
-> once you reach johns house you meet one of johns friends (or a fumo idfk) and they will give you a fishing pole, the more quests you complete the stronger your fishing rod gets, you also get coins which can be spent on bait (target specific fumos) or hooks (extra stats aka like double hook chance)
+> once you reach johns house and get the fishing pole you can meet jim by mining left, he no longer has his hat or water polo ball :( and then he asks you for fumos or smth and they give tiny bonuses so its not mandatory its just a lategame timesink
 
 > add infinitely repeating john quests that give you fumo bait for fishing, you can't reject them and they get harder the more of them you complete
 

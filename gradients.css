@@ -746,3 +746,10 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#checkmark_teleporter span {
+    background: linear-gradient(to right,#FFEFD8, #40D739, #56F97F, #40D739, #FFEFD8);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

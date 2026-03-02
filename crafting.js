@@ -554,14 +554,14 @@ const recipes = {
 		pUnob: true
 	},
 	"checkmark_teleporter": {
-		name: "Checkmark teleporter",
+		name: "WHIMSYYYY",
 		recipe: [{"ore":"🫃", "amt":1e6}],
 		active: [2],
 		pUnob: true
 	},
 	"phone": {
 		name: "Better Call Johm",
-		recipe: [{"ore":"🤽‍♂️", "amt":1e12}, {"ore":"🤽", "amt":1e12}],
+		recipe: [{"ore":"neru", "amt":3e2}, {"ore":"miku", "amt":3e2}, {"ore":"teto", "amt":3e2}],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
 		pUnob: true
 	}
@@ -1183,7 +1183,7 @@ const buttonGradients = {
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
     "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, 
-	"checkmark_teleporterCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, //:pleading_face:
+    "checkmark_teleporterCraft" : {"gradient" : "linear-gradient(to right, #FFEFD8, #40D739, #56F97F, #40D739, #FFEFD8)","applied" : false},
 	"phoneCraft" : {"gradient" : "linear-gradient(to right, #f7c033, #509eb2, #eb5679)","applied" : false},
 }
 function craftPickaxe(item) {
@@ -2529,7 +2529,7 @@ const gearInformation = {
 		tier: 15,
 	},
 	"checkmark_teleporter": {
-		effect: "yummers (finds a checkmark layer in w2 for you)",
+		effect: "Generates a Checkmark Layer at a random position in the Repeating Layers below 1 Million Meters in W2",
 		tier: 0,
 	},
 	"phone": {

@@ -311,7 +311,7 @@ function completeQuest(){
 			johnSay('<img src="media/john/story3.png"> josh (my roomate) used to gatekeep the awesome site known as \'quiz.qwq.re\' from EVIL people (such as the :cat2 emoji)')
 		}
 		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
-			johnSay("jim when we were playing water polo yesterday lost his hat when i knocked it off with my water polo ball, and he has not realized yet, so you can keep it, it lowers the minimum ore rng from 1/1000 to 1/333 (because it bounces around the mine)")
+			johnSay("jim when we were playing water polo yesterday accidentally threw his water polo ball into the mariana trench, but thankfully i was able to get it, but i dont want to return it to him so you can keep it")
 		}
 		else if(player.john.questsCompleted.length === 8){
 			johnSay('<img src="media/john/story4.png"> this was the finals of the water polo championhip of 2000, i remember when jim 8 was able to do a double dunk by jumping on jim 4\'s head')
