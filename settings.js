@@ -414,7 +414,7 @@ const indexOrder = {
     1.2: {
         "watrWatr" : {l: ["waterLayer2"], req: function() {return true}},
         "watrWatrDeep" : {l: ["deepWaterLayer"], req: function() {return indexHasOre("deepWater")}},
-        "watrWatrJohn" : {l: ["johnMetaLayer","johnLayer","jimLayer"], req: function() {return player.john.spokeWith}},
+        "watrWatrJohn" : {l: ["johnLayer","jimLayer"], req: function() {return player.john.spokeWith}},
     },
     0.9: {
         "galactica" : {l: ["starLayer", "nebulaLayer"], req: function() {return player.galacticaUnlocked}},
@@ -428,7 +428,8 @@ const indexOrder = {
         "caves6" : {l: ["timeCave"], req: function() {return indexHasOre("🕰️") > 10}},
     },
     "events" : {
-        "events1" : {l: ["event"], req: function() {return true;}}
+        "events1" : {l: ["event"], req: function() {return true;}},
+        "johnMeta" : {l: ["johnMetaLayer"], req: function() {return player.john.spokeWith}},
     }
 }
 function addIndexLayers(world) {
@@ -452,7 +453,7 @@ function addIndexLayers(world) {
                 if (layer.indexOf("worldOneSpecial") === -1) {
                     if (world === "caves") button.textContent = `${thisMatImage} 0-∞m`;
                     else if (list[i].indexOf("Commons") > -1) button.textContent = `${allOres[allOres.length-1]} 0-${(world === "2")?'7999m':'∞m'}`;
-                    else if (list[i] === "event") button.textContent = "Limited Ores"
+                    
                     else if (world === "2") {
                         if (thisMat === "✖️") button.textContent = `${thisMatImage} 8000m`
                         else if (thisMat === "❌") button.textContent = `${thisMatImage} 8001-∞m`
@@ -463,6 +464,10 @@ function addIndexLayers(world) {
                         if (thisMat === "🌊") button.innerHTML = `${thisMat} 0m`
                         if (thisMat === "deepWater") button.innerHTML = `${thisMatImage} 100,000m`
                         if (["🤽‍♂️","🤽"].includes(thisMat)) button.innerHTML = `${thisMatImage} ???m`
+                    }
+                    else if(world === "events"){
+                        if (list[i] === "event") button.textContent = "Limited Ores"
+                        if (list[i] === "johnMetaLayer") button.textContent = "🤽‍♂️'s F&F"
                     }
                     else button.innerHTML = `${thisMatImage} ${i * 2000}m`
                 } else {
