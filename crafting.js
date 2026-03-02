@@ -1184,7 +1184,7 @@ const buttonGradients = {
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
     "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, 
 	"checkmark_teleporterCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, //:pleading_face:
-	"phoneCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, //:pleading_face2:
+	"phoneCraft" : {"gradient" : "linear-gradient(to right, #f7c033, #509eb2, #eb5679)","applied" : false},
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
@@ -2517,7 +2517,7 @@ const gearInformation = {
         tier: 11,
     },
     "hat": {
-        effect:"DOUBLES x2 your speed if you aren't going left ⬅️❌ (going anywhere else is more aerodynamic)",
+        effect:"x2 your speed if you aren't going left ⬅️❌ (going anywhere else is more aerodynamic)",
         tier: 12,
     },
     "ring_enabler": {
@@ -2533,7 +2533,7 @@ const gearInformation = {
 		tier: 0,
 	},
 	"phone": {
-		effect: "allows you to call and have a nice chat with john from anywhere through the ore tracker tab",
+		effect: "Summon john to your location by calling them via the ore tracker menu",
 		tier: 0,
 	}
 }

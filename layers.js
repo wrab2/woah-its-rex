@@ -320,7 +320,7 @@ let oreList = {
     '🛑': {  'numRarity': 1000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'Curious.. very curious.. you found what you came for, now leave...', 'oreTier': 'Interstellar',  },
     '⭕': {  'numRarity': 600000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "You're still here? Very well. Do not say you were never warned...", 'oreTier': 'Flawless',  },
     '🔕': {  'numRarity': 225000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "You shouldn't be here. Turn back while you still can...", 'oreTier': 'Flawless',  },
-    'real': {  'numRarity': 6666666, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'this cat is d...', 'oreTier': 'Hyperdimensional', 'hasImage' : true, "src" : "media/ores/real.webp" },
+    'curry': {  'numRarity': 6666666, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'not as good as lebron james', 'oreTier': 'Hyperdimensional', 'hasImage' : true, "src" : "media/ores/curry.png" },
     '✡️': {  'numRarity': 6666666, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': 'In a magical zone where all things intertwine, the star of creation itself shines bright...', 'oreTier': 'Celestial',  },
     '🇮🇴': {  'numRarity': 1, 'hasLog': false,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Layer', },
     '🇻🇬': {  'numRarity': 3130500, 'hasLog': true,  'caveExclusive': true, 'spawnMessage': '', 'oreTier': 'Mystical', },

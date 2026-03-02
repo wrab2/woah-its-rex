@@ -739,3 +739,10 @@
     50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+#phone span {
+    background: linear-gradient(to right,#f7c033, #509eb2, #eb5679);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

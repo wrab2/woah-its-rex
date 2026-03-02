@@ -1,7 +1,3 @@
--# (its like higher than # because its negative and the smaller the number is makes it bigger so this is like a super title) REALLY IMPORTANT:
-
-add silly satori
-
 # IMPORTANT:
 
 add svg for jim ore like there is one for john because windows emojis look bad
@@ -9,8 +5,6 @@ add svg for jim ore like there is one for john because windows emojis look bad
 ☑️ add mobile phone to open john any time (a gear after like a heirloom)
 
 (part of the balancing)come up with better requirements for each orb (orb of flight and fire)
-
-(don't)put all the fumos in the index
 
 fumo fishing: (probably not what's written below tbh)
 
@@ -20,7 +14,7 @@ fumo fishing: (probably not what's written below tbh)
 
 add casino chips gear to john's house
 
-✅(checkmark teleporter, green chemicals and hc is good enough probably)a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
+add a pickaxe better than pof
 
 add more of johns contributions to naval events
 
@@ -53,8 +47,6 @@ fumos to redo: kita, kagamine rin, miku, teto
 SOME way to get limited ores when its not the month of the ore, x1000 rarity in SRwatr, also maybe some way for 🐱, your reward, hyper, first anniversary cake, sakura so you can get 100% completion
 
 remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
-
-make green chemicals also give energy siphoner's effect so we can make the yellow vocaloid a HD again
 
 # PROGRESSION:
 

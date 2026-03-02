@@ -259,7 +259,6 @@ class secureLogs {
         if (player.gears["gear37"]) luck = luck ** 1.035;
         luck *= 1.5;
         if (randBuff.luck) luck *= 1.4;
-        if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) luck += 10000000000 // john would never smh
         if (isNaN(luck)) return 1;
         else return luck;
     }
