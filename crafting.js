@@ -551,7 +551,13 @@ const recipes = {
 		name: "Green Chemicals",
 		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"😹", "amt":3e12}, {"ore":"🐈", "amt":15e6}, {"ore":"🤯", "amt":15e6}, {"ore":"🐈‍⬛", "amt":10000},],
 		active: [0.9, 1, 1.1, 1.2, 2, 3],
-		pUnob: true //nvm
+		pUnob: true
+	},
+	"checkmark_teleporter":{
+		name: "Checkmark teleporter",
+		recipe: [{"ore":"🫃", "amt":1e6}],
+		active: [2],
+		pUnob: true
 	}
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
@@ -1036,6 +1042,7 @@ function updateActiveRecipe() {
                 else button.innerText = "Equip!";
             } else {
                 if (thisId === "gear9") button.innerText = "SILLIFY!";
+                if (thisId === "checkmark_teleporter") button.innerText = "CHECKMARKIFY!";
                 else button.innerText = "Owned!";
             }
         } else {
@@ -1170,7 +1177,7 @@ const buttonGradients = {
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
     "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
     "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, // you'e wlecome 
-	
+	"checkmark_teleporterCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, //:pleading_face:
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
@@ -1215,6 +1222,8 @@ function craftPickaxe(item) {
     if (type === "pickaxe") player.stats.currentPickaxe = item;
     if (currentWorld === 1 && item === "gear9")
         gearAbility2();
+	if (currentWorld === 2 && item === "checkmark_teleporter")
+		findCheckmark()
     if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
     if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
     if (player.gears["gear45"]) showEventOptions();
@@ -1260,7 +1269,7 @@ const showOrders = {
     "p1" : ["pickaxe1", "pickaxe2", "pickaxe3", "pickaxe29", "pickaxe30", "pickaxe28", "pickaxe4", "pickaxe5", "pickaxe6", "pickaxe7", "pickaxe8", "pickaxe9", "pickaxe10", "pickaxe11", "pickaxe12", "pickaxe13"],
     "p2" : ["pickaxe13", "pickaxe14", "pickaxe15", "pickaxe16", "pickaxe17", "pickaxe18", "pickaxe19", "pickaxe20", "pickaxe21", "pickaxe22", "pickaxe23", "pickaxe24", "pickaxe25"],
     "g1" : ["gear30", "gear31", "gear46", "gear0", "gear1", "gear2", "gear7", "gear8", "gear45", "gear3", "gear4", "gear5", "gear6", "gear9", "gear29", "gear47"],
-    "g2" : ["gear32", "gear10", "gear11", "gear12", "gear33", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20"],
+    "g2" : ["gear32", "gear10", "gear11", "gear12", "gear33", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "checkmark_teleporter"],
     "p1.1" : ["pickaxe27"],
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
@@ -1280,7 +1289,11 @@ function showPickaxes() {
         showItem(list[i]);
     }
     if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
-    else document.getElementById("sillyRecipe").style.display = "none";
+    else {
+		document.getElementById("sillyRecipe").style.display = "none";
+		document.getElementById("checkmark_teleporterRecipe").style.display = "none";
+		
+	}
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
@@ -1318,7 +1331,9 @@ function switchWorldCraftables(world=currentWorld) {
     for (let i = 0; i < pickaxeList.length; i++) showItem(pickaxeList[i]);
     if (!["???","john"].includes(world)) {
         if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
-        else document.getElementById("sillyRecipe").style.display = "none";
+		else get("sillyRecipe").style.display = "none";
+        if (indexHasOre('🫃') && toggleCraftingWorld.world === 2) document.getElementById("checkmark_teleporterRecipe").style.display = "flex";
+		else get("checkmark_teleporterRecipe").style.display = "none";
     }
 }
 function setWorldSelectors() {
@@ -2504,6 +2519,10 @@ const gearInformation = {
 	"green_chemicals": {
 		effect:"Compressing quadrillions of checkmarks into a unified solution composed entirely of pure checkmarkium (new element) thereby enabling cognitive enhancement. This process restores access to Forgotten Rose Quartz Shell's full power and permits all of its effects to remain simultaneously active.",
 		tier: 15,
+	},
+	"checkmark_teleporter": {
+		effect: "yummers (finds a checkmark layer in w2 for you)",
+		tier: 0,
 	}
 }
 function ct(john=false) {

@@ -50,6 +50,7 @@ class playerTemplate {
             "gear47": false, 
             "ring_of_fire": false,
 			"green_chemicals": false,
+			"checkmark_teleporter": false,
             
         }
         this.pickaxes = {

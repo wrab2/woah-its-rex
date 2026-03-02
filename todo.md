@@ -8,9 +8,9 @@ balance the cave quests now that they can be balanced
 
 add mobile phone to open john any time (a gear after like a heirloom)
 
-☑️come up with better requirements for each orb (orb of flight and fire)
+(part of the balancing)come up with better requirements for each orb (orb of flight and fire)
 
-put all the fumos in the index
+(don't)put all the fumos in the index
 
 fumo fishing:
 
@@ -18,9 +18,9 @@ fumo fishing:
 
 > add infinitely repeating john quests that give you fumo bait for fishing, you can't reject them and they get harder the more of them you complete
 
-make gears have abilities (casino chips !!)
+add casino chips gear to john's house
 
-a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
+✅(checkmark teleporter, green chemicals and hc is good enough probably)a few checkmark gears like 1-2 (one for teleporting to checkmark like a silly layer maybe), and a pickaxe better than pof, (at the checkmark layer of course)
 
 ability to steal johns poker chips
 

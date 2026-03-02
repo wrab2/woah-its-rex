@@ -938,7 +938,7 @@ function setLayer(y) {
 		if(w2RepeatingLayers[layerNum] !== undefined)return
 		if (johnRewarded("hypermark_checkminator")){
 			let layerRng = Math.random()
-			if (layerRng < 1/1) { //checkmarkLayer
+			if (layerRng < 1/40) { //checkmarkLayer
 				if(specialLayerLocationsW2.filter((e)=>e.layer === "checkmarkLayer").length === 0){
 					specialLayerLocationsW2.push({layer:"checkmarkLayer", distance: (layerNum * 150e3 + 1.002e6 + 75e3)})
 					specialLayerLocationsW2.sort((a, b)=>specialOrderW2.indexOf(a.layer) >  specialOrderW2.indexOf(b.layer))

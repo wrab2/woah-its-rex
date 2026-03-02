@@ -197,6 +197,15 @@ function gearAbility2() {
     }
 }
 
+function findCheckmark() {
+	if (currentWorld !== 2) return
+	let layerDepth = 1e6+2e3
+	while(true){
+		if(getLayer(layerDepth).layerMat === "✅") return
+		layerDepth+=150e3
+	}
+}
+
 let pickaxe1Nums = [];
 function pickaxeAbility1(x, y) {
     x -= 7;
