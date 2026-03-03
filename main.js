@@ -326,7 +326,8 @@ function loadContent() {
 //MOVEMENT
 function movePlayer(dir, reps, type) {
     if (player.gears["gear29"] && Math.random() < 1/(player.settings.simulatedRng ? 175 : 250) && type !== "single") reps += 50;
-    for (let i = 0; i < reps; i++) {
+    if(currentWorld===3 && spawnJim()) return
+	for (let i = 0; i < reps; i++) {
         if (canMine) {
             if (verifiedOres.isRightPickaxe()) {
                 if (dir.y < 0 && !(curY > 0)) {
@@ -524,6 +525,13 @@ function goDirection(direction) {
         let movements = {x:0, y:0, key:direction};
         movements.x = (direction === "a" ? -1 : (direction === "d" ? 1 : 0));
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
+		if( currentWorld === 3){
+			if(direction === "a"){
+				tryingJim()
+			}else{
+				tryingJim(true)
+			}	
+		}
         miningSpeed ??= 25;
         if (player.settings.accurateSpeed) {
             let inSec = 0;

@@ -874,6 +874,7 @@ function stopMining() {
     clearInterval(displayTimer);
     displayTimer = null;
     canMine = stopped;
+	tryingJim(true)
 }
 let beforeEntering;
 function sr1Helper(state) {
