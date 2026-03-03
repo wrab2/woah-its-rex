@@ -1,7 +1,5 @@
 # IMPORTANT:
 
-add svg for jim ore like there is one for john because windows emojis look bad
-
 (part of the balancing)come up with better requirements for each orb (orb of flight and fire)
 
 fumo fishing: (probably not what's written below tbh)  (this is true but the ideas for fumo fishing shift every week)
