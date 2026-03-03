@@ -5196,7 +5196,7 @@ background-size: 100%;
   margin: 0.5em 0 -0.5em 0
 }
 
-#john-window-main{
+#john-window-main, #jim-window-main{
 	visibility: hidden;
 	position: absolute;
 	display: flex;
@@ -5208,38 +5208,51 @@ background-size: 100%;
 	background-color: #00a2ff40;
 	z-index: 15000
 }
-.john-background{
-	width: 50vw;
+#john-window-main {
+	background-color: #00a2ff40;
 }
+#jim-window-main {
+	background-color: #ff800040
+}
+/*I wonder what was this for
+.john-background {
+	width: 50vw;
+}*/
 #john-name {
-  position: absolute;
+	position: absolute;
 	width: 200px;
 	font-size: 30px;
 	top: 30vh;
-  left: min(100px, 5vw);
+	left: min(100px, 5vw);
 	color: white;
 	font-weight:bolder;
 	background-color: #0a0a0a;
 	border: 2px solid gray;
 	border-radius: 10px;
 	margin: 0 auto 0 auto;
-  animation-duration: 2s;
+	animation-duration: 2s;
 }
 @keyframes john-name-up {
   0% { opacity: 0;}
   50% { opacity: 0;}
   100% { opacity: 1;}
 }
-#john-portrait{
+#john-portrait, #jim-portrait{
 	position: absolute;
 	top: calc(50px + 30vh);
-  left: min(100px, 5vw);
+	left: min(100px, 5vw);
 	width: 200px;
-  height: 200px;
+	height: 200px;
 	font-size: min(30vw, 80vh);
 	margin: 0 auto 0 auto;
-  background-image: url("/media/john/john.svg");
-  animation-duration: 2s;
+	background-image: url("/media/john/john.svg");
+	animation-duration: 2s;
+}
+#john-portrait{
+	background-image: url("/media/john/john.svg");
+}
+#jim-portrait{
+	background-image: url("/media/john/hatless_jim.svg");
 }
 @keyframes john-swim-up {
   from { margin-top: 500px;}
@@ -5248,12 +5261,12 @@ background-size: 100%;
 .john-background-water{
 	position:absolute;
 	top: calc(50px + 30vh);
-  left: calc( min(100px, 5vw) - 200px );
+	left: calc( min(100px, 5vw) - 200px );
 	margin:0;
 	width: 150vw;
-  height: 200px;
+	height: 200px;
 	overflow: hidden;
-  background-image: url("/media/john/water\ tile.svg");
+	background-image: url("/media/john/water\ tile.svg");
 }
 .john-water-blue {
   background-color: #29b6f6;
@@ -5385,3 +5398,4 @@ background-size: 100%;
   background-color: #292929;
   border-radius: 5%;
 }
+
