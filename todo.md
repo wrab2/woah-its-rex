@@ -36,13 +36,11 @@ fix the plank offset (nevermind)
 
 add the other fumos
 
-add vocaloid fumo variants
+add vocaloid fumo variants like make them actually ores
 
 add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fishing, naval event % completed, vocaloid fumo transformation thingies)
 
 bugtest
-
-fumos to redo: kita, kagamine rin, miku, teto
 
 SOME way to get limited ores when its not the month of the ore, x1000 rarity in SRwatr, also maybe some way for 🐱, your reward, hyper, first anniversary cake, sakura so you can get 100% completion
 

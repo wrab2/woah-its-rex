@@ -316,6 +316,9 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === 8){
 			johnSay('<img src="media/john/story4.png"> this was the finals of the water polo championhip of 2000, i remember when jim 8 was able to do a double dunk by jumping on jim 4\'s head')
 		}
+		else if(player.john.questsCompleted.length === 9){
+			johnSay('<img src="media/john/story5.png"> We dont talk about what happened in this image')
+		}
 		else if(player.john.questsCompleted.length === johnRewards["hypermark_checkminator"]){
 			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer (1m blocks or lower)")
 		}
