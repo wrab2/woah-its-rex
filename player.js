@@ -225,7 +225,6 @@ class playerTemplate {
         this.offlineProgress = 0;
         this.p = {
             "orbOfLife": false,
-            "orbOfIntelligence": false,
             "orbOfSound": false,
             "orbOfTheUnknown": false,
             "orbOfCreation": false,

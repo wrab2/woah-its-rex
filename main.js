@@ -299,7 +299,8 @@ function loadContent() {
     musicPlayer.songs["song2"].src = new Audio("audios/ely_audio_2.mp3");
     musicPlayer.songs["song3"].src = new Audio("audios/ely_audio_3.mp3");
     musicPlayer.songs["song4"].src = new Audio("audios/mooing_audio_1.mp3");
-    musicPlayer.songs["song5"].src = new Audio("audios/song5fakeMIDI.mp3");
+    musicPlayer.songs["song5"].src = new Audio(Math.random() < 0.5 ? "audios/song5fakeMIDI.mp3" : "audios/song5.mp3");
+    console.log(musicPlayer.songs["song5"].src.src.includes("fakeMIDI") ? "john (This is a secret code message)" : "jim (this is a secret code message)");
     musicPlayer.songs["song6"].src = new Audio("audios/song6.mp3");
     musicPlayer.songs["song7"].src = new Audio("audios/song7.mp3");
     musicPlayer.songs["song8"].src = new Audio("audios/song8.mp3");

@@ -5631,4 +5631,4 @@ new navalEvent(
 	"",
 	"",
 	"",""
-) // make sure to leave this blank event in 
+) // make sure to leave this blank event in (1 in 1 1500 easter egg!!)

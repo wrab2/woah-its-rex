@@ -93,8 +93,6 @@ remove all the debug thingies? (aka being able to tp to join instantly ! we need
 
 =✅ ool 4 days, ooc 5 days
 
-nvm!
-
 ✅ ron: 3 d
 
 ✅ rowhen: 3.5 d (1021 events)
@@ -107,6 +105,10 @@ nvm!
 
 ### Polychromatical
 
+✅ heavenly john: 7 days
+
+✅ jack: 6 days
+
 joan: 
 
 jocelyn: 
@@ -117,10 +119,6 @@ jocelyn:
 jonah
 
 johanna: 339 hours
-
-heavenly john: 19 days
-
-jack: 9 days
 
 ### Johnical
 
