@@ -18,10 +18,6 @@ make estimated time account for the ring of fire
 
 ## LESS IMPORTANT:
 
-add event index page(s) for naval events
-
-gear or something that completely removes wormhole exterminator and gives you its effects (but then people will use wog instead which is even worsem I think it's fine to leave wormhole be and instead add a better cave pick after pof?)
-
 remove devspeed after balancing
 
 add ores to jane caves
@@ -29,6 +25,8 @@ add ores to jane caves
 give gears and pickaxes a COOL gradient
 
 fix the plank offset (nevermind)
+
+make water buffalo harder (part of balancing)
 
 ### low importance:
 
@@ -40,11 +38,11 @@ add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fish
 
 bugtest
 
-SOME way to get limited ores when its not the month of the ore, x1000 rarity in SRwatr, also maybe some way for 🐱, your reward, hyper, first anniversary cake, sakura so you can get 100% completion
-
-remove all the debug thingies? (aka being able to tp to join instantly ! we need to gatekeep access to the great john) - pretty I didn't add anything but i don't remember
+some way for 🐱, your reward, hyper, first anniversary cake, sakura, evil flag, water buffalo, and singularity egg (not from forging) so you can get 400% completion
 
 # PROGRESSION:
+
+## Pre Fishing
 
 ### Antique
 
@@ -123,3 +121,13 @@ johanna: 339 hours
 ### Johnical
 
 water buffalo: a lot of time probably
+
+## Post fishing
+
+Pof
+
+some fishing quests
+
+final pickaxe
+
+more fishing
