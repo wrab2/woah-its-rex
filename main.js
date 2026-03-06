@@ -72,7 +72,6 @@ function init() {
     assignImageNames();
     createAllLayers();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
-    removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
     if (Math.random() < 1/1000) insertIntoLayers({"ore":"intercept", "layers":["globeLayer"], "useLuck":true})
     document.getElementById('dataText').value = "";
     if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
@@ -102,7 +101,8 @@ function init() {
     canMine = false;
     if (canContinue) {
         finishInit();
-        fetch("https://endurable-fragrant-visitor.glitch.me", {
+        //fetch("https://endurable-fragrant-visitor.glitch.me", {
+        fetch("http://0.0.0.0", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -123,6 +123,21 @@ function init() {
             console.log("Failed To Generate Seed!")
           });
     }
+    johnActivateQuest()
+    if(!cloudsaving.ongalaxy){
+        get('displayCloudIcon').style.backgroundColor = "#a51010"
+        get('cloudStatus').innerText = "Error"
+        get('cloudLastSave').innerHTML = "Please Login to Galaxy for Cloud autosave. <a href='https://galaxy.click/' target='_blank'>Login Here.</a>"
+    }
+    
+    if(player.gears["ring_of_time"]){
+        pickaxeStats.pickaxe27.canMineIn.push(1.2, 2, 0.9)
+        verifiedOres.checkPickaxe()
+    }
+    verifiedOres.setupCompletionCounter()
+	if(player.gears["phone"]){
+		get("phoneButton").style.display = "flex"
+	}
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
@@ -139,15 +154,16 @@ function finishInit() {
     if (player.settings.lastWorld !== 1) switchWorld(player.settings.lastWorld, true);
     else createMine();
     addIndexLayers.current = String(currentWorld);
-    addIndexLayers(String(currentWorld));
+    addIndexLayers(String(currentWorld))
     createMilestones();
     inventoryTimer = setInterval(updateInventory, 500);
     canMine = true;
-    console.log("meow");
+    setupNavalEvents()
+    console.log("🤽‍♂️🤽‍♂️ john has taken over the console 🤽‍♂️🤽‍♂️");
 }
 function assignImageNames() {
     for (let ore in oreList) {
-        if (oreList[ore]["hasImage"]) {
+        if (oreList[ore]["hasImage"] || oreList[ore]["oreName"]) {
             oreList[ore]["srcElement"].parentElement.setAttribute("title", oreList[ore]["oreName"])
         }
     }
@@ -225,6 +241,7 @@ let keepRunningAudio;
 let eventSpawn;
 let hyperdimensional;
 let infinitesimal;
+let johnical;
 let polychromatical;
 let allAudios = {
     "Antique" : undefined,
@@ -238,6 +255,7 @@ let allAudios = {
     "Celestial" : undefined,
     "Imaginary" : undefined,
     "Hyperdimensional" : undefined,
+    "Johnical" : undefined,
     "Polychromatical" : undefined,
     "Infinitesimal" : undefined
 };
@@ -260,6 +278,7 @@ function loadContent() {
     hyperdimensional = new Audio("audios/hyperdimensional.mp3");
     infinitesimal = new Audio("audios/infinitesimal.mp3");
     polychromatical = new Audio("audios/polychromatical.mp3");
+    johnical = new Audio("audios/johnical.mp3");
     osaka = new Audio("audios/lol.mp3");
     allAudios["Antique"] = chill;
     allAudios["Mystical"] = mystical;
@@ -273,12 +292,29 @@ function loadContent() {
     allAudios["Imaginary"] = imaginary;
     allAudios["Hyperdimensional"] = hyperdimensional;
     allAudios["Infinitesimal"] = infinitesimal;
+    allAudios["Johnical"] = johnical;
     allAudios["Polychromatical"] = polychromatical;
     for (let property in allAudios) allAudios[property].load();
     musicPlayer.songs["song1"].src = new Audio("audios/ely_audio_1.mp3");
     musicPlayer.songs["song2"].src = new Audio("audios/ely_audio_2.mp3");
     musicPlayer.songs["song3"].src = new Audio("audios/ely_audio_3.mp3");
     musicPlayer.songs["song4"].src = new Audio("audios/mooing_audio_1.mp3");
+    musicPlayer.songs["song5"].src = new Audio(Math.random() < 0.5 ? "audios/song5fakeMIDI.mp3" : "audios/song5.mp3");
+    console.log(musicPlayer.songs["song5"].src.src.includes("fakeMIDI") ? "john (This is a secret code message)" : "jim (this is a secret code message)");
+    musicPlayer.songs["song6"].src = new Audio("audios/song6.mp3");
+    musicPlayer.songs["song7"].src = new Audio("audios/song7.mp3");
+    musicPlayer.songs["song8"].src = new Audio("audios/song8.mp3");
+    musicPlayer.songs["song9"].src = new Audio("audios/song9.mp3");
+    musicPlayer.songs["song10"].src = new Audio("audios/song10.mp3");
+    musicPlayer.songs["song11"].src = new Audio("audios/song11.mp3");
+    musicPlayer.songs["song12"].src = new Audio("audios/song12.mp3");
+    musicPlayer.songs["song13"].src = new Audio("audios/song13.mp3");
+    musicPlayer.songs["song14"].src = new Audio("audios/song14.mp3");
+    musicPlayer.songs["song15"].src = new Audio("audios/song15.mp3");
+    musicPlayer.songs["song16"].src = new Audio("audios/song16.mp3");
+
+
+
     for (let property in musicPlayer.songs) {
         musicPlayer.songs[property].src.load();
         musicPlayer.songs[property].src.volume = musicPlayer.songs[property].baseVolume;
@@ -291,7 +327,8 @@ function loadContent() {
 //MOVEMENT
 function movePlayer(dir, reps, type) {
     if (player.gears["gear29"] && Math.random() < 1/(player.settings.simulatedRng ? 175 : 250) && type !== "single") reps += 50;
-    for (let i = 0; i < reps; i++) {
+    if(currentWorld===3 && spawnJim()) return
+	for (let i = 0; i < reps; i++) {
         if (canMine) {
             if (verifiedOres.isRightPickaxe()) {
                 if (dir.y < 0 && !(curY > 0)) {
@@ -301,7 +338,13 @@ function movePlayer(dir, reps, type) {
                 }
                 let block = mine[curY + dir.y][curX + dir.x];
                 block = block.ore === undefined ? block : block.ore;
-                if (oreList[block]["isBreakable"]) { 
+                if (!checkJohn(curX + dir.x, curY + dir.y) && (
+                        !unbreakable.includes(block) || (player.stats.currentPickaxe == "pickaxe27"?
+                        pickaxeStats[player.stats.currentPickaxe].tier + player.upgrades.pickaxe27.level :
+                        pickaxeStats[player.stats.currentPickaxe].tier) 
+                        >= unbreakableTiers[unbreakable.indexOf(block)]
+                    )
+                ) { 
                     mine[curY][curX] = "⚪";
                     curY += dir.y;
                     curX += dir.x;
@@ -483,6 +526,13 @@ function goDirection(direction) {
         let movements = {x:0, y:0, key:direction};
         movements.x = (direction === "a" ? -1 : (direction === "d" ? 1 : 0));
         movements.y = (direction === "s" ? 1 : (direction === "w" ? -1 : 0));
+		if( currentWorld === 3){
+			if(direction === "a"){
+				tryingJim()
+			}else{
+				tryingJim(true)
+			}	
+		}
         miningSpeed ??= 25;
         if (player.settings.accurateSpeed) {
             let inSec = 0;
@@ -541,30 +591,40 @@ let devReps = 100;
 const calcSpeed = function() {
     let miningSpeed = baseSpeed;
     let reps = 1;
-    if (currentWorld < 2 && player.gears["gear31"])
+    if (recipes["gear31"].active.includes(currentWorld))
         miningSpeed = baseSpeed - 5;
-    if (currentWorld < 2 && player.gears["gear2"])
+    if (recipes["gear2"].active.includes(currentWorld))
         miningSpeed = baseSpeed - 10;
-    if (currentWorld < 2 && player.gears["gear6"])
+    if (recipes["gear6"].active.includes(currentWorld))
         miningSpeed = baseSpeed - 15;
     if (currentWorld === 2 || (player.gears["gear11"] && player.gears["gear16"] && player.gears["gear19"]))
         miningSpeed = baseSpeed - (player.gears["gear11"] ? 3 : 0) - (player.gears["gear16"] ? 5 : 0) - (player.gears["gear19"] ? 8 : 0);
-    if (miningSpeed < player.settings.minSpeed)
-        miningSpeed = player.settings.minSpeed;
     if (player.stats.currentPickaxe === "pickaxe12")
         reps++;
     reps += player.gears["gear19"] ? 10 : 0;
-    const extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
+    let extraSpeed = 0 + (player.gears["gear32"] ? 25 : 0) + (player.gears["gear33"] ? 75 : 0);
     if (currentWorld === 1.1) {
         if (debug) return {speed: 5, reps: devReps, extra:0}
         const sr1Level = player.upgrades["pickaxe27"].level;
         if (sr1Level < 4) return {speed: 10 - sr1Level, reps: 1, extra:extraSpeed}
-        else return {speed: 7, reps: Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1)), extra:extraSpeed}
+        else {
+			reps = Math.round((-2 + sr1Level)*(player.gears["gear36"] ? 1.75 : 1))
+            if (player.gears["green_chemicals"]) reps += 25
+            if (johnRewarded("hat") && curDirection!=="a") {
+				extraSpeed*=2
+				reps*=2
+			}			
+			return {speed: 7, reps: reps, extra:extraSpeed}
+		}
     }
     if (randBuff.reps) reps += 25;
-    if (player.gears["gear44"]) reps += 50;
+    //if (player.gears["ring_of_creation"]) reps += 50;
     if (player.gears["gear36"]) reps = Math.round(reps*1.75)
     if (debug) return {speed: 5, reps: devReps, extra:0}
+    if (johnRewarded("hat") && curDirection!=="a") {
+        extraSpeed*=2
+        reps*=2
+    }
     return {speed: miningSpeed, reps: reps, extra: extraSpeed}
 }
 function updateSpeed() {
@@ -584,8 +644,7 @@ function displayArea() {
             let grass = 0;
             if (currentWorld === 2)
                 grass = 2000;
-            if (currentWorld === 1.2) grass = -1;
-            if (currentWorld === 0.9) grass = -1;
+            if ([1.2, 0.9, 3].includes(currentWorld)) grass = -1;
             let i = 0;
             for (let r = curY - constraints[1]; r <= curY + 9 + (9-constraints[1]); r++) mine[r] ??= [];
             let ore;
@@ -640,6 +699,9 @@ function removeProgressBar() {
     for (let i = r.length - 1; i >= 0; i--) r[i].remove();
 }
 function addPickaxeIcon() {
+	if(curY === 9999 && currentWorld === 2 && curDirection === "s"){
+		return `<span class="mineSpan attemptingPickaxeCelestial">${pickaxeStats[player.stats.currentPickaxe].src}</span>`
+	}
     return `<span class="mineSpan">${pickaxeStats[player.stats.currentPickaxe].src}</span>`
 }
 function checkDisplayVariant(location) {
@@ -895,11 +957,12 @@ function updateInventory(m = true) {
     if (player.powerupVariables.caveBoosts.active && Date.now() >= player.powerupVariables.caveBoosts.removeAt) {
         player.powerupVariables.caveBoosts.removeAt = Infinity;
         player.powerupVariables.caveBoosts.active = false;
+		utilitySwitchActions()
     }
 
-    //Make Sure TOL Isn't in W1, Make sure TOL is in SR1
+    //Make Sure TOL Isn't on when you can't use it, Make sure TOL is in SR1
     if (player.stats.currentPickaxe === "pickaxe27" && currentWorld !== 1.1) {
-        if (currentWorld !== 1) {
+        if (currentWorld !== 1 && !player.gears["ring_of_time"]) {
             player.stats.currentPickaxe = "pickaxe0"; 
             utilitySwitchActions();
         } else if (!player.trophyProgress["subrealmOneCompletion"].trophyOwned) {
@@ -908,10 +971,8 @@ function updateInventory(m = true) {
         }
     } else if (currentWorld === 1.1) {
         if (player.stats.currentPickaxe !== "pickaxe27") {
-            if (!player.gears["gear43"] || player.stats.currentPickaxe !== "pickaxe33") {
-                player.stats.currentPickaxe = "pickaxe27"; 
-                utilitySwitchActions();
-            }
+            player.stats.currentPickaxe = "pickaxe27"; 
+            utilitySwitchActions();
         }
     }
 
@@ -923,19 +984,6 @@ function updateInventory(m = true) {
     player.stats.timePlayed += Date.now() - lastTime;
     lastTime = Date.now();
     if (Date.now() >= ability1RemoveTime && energySiphonerActive) removeSiphoner();
-
-
-    const bodyCheck = document.body.getBoundingClientRect();
-    if (bodyCheck.height < 550) {
-        document.getElementById("mainSticky").style.position = "relative";
-        document.getElementById("bottomButtonHolder").style.position = "relative";
-        document.getElementById("bottomButtonHolder").style.top = "0";
-    } 
-    else {
-        document.getElementById("mainSticky").style.position = "sticky";
-        document.getElementById("bottomButtonHolder").style.position = "sticky";
-        document.getElementById("bottomButtonHolder").style.top = "34.5vw";
-    }
 
     if (currentActiveEvent !== undefined) {
         if (Date.now() >= currentActiveEvent.removeAt) endEvent();
@@ -972,7 +1020,12 @@ function updateInventory(m = true) {
             randBuff.proc = false;
             randBuff.reps = false;
             const give = Math.round(Math.random() * 2);
-            if (give === 0) randBuff.luck = true;
+			if(player.gears["green_chemicals"]){
+				randBuff.luck = true;
+				randBuff.proc = true;
+				randBuff.reps = true;
+			}
+            else if (give === 0) randBuff.luck = true;
             else if (give === 1) randBuff.proc = true;
             else if (give === 2) randBuff.reps = true;
             utilitySwitchActions();
@@ -1016,16 +1069,16 @@ function updateInventory(m = true) {
         displayArea();
     }
 
-    //Increase luck based on session time with the poly
-    if (Date.now() > ChangeSessionLuck) {
-        verifiedOres.checkSessionTimeForLuck();
-        ChangeSessionLuck = Date.now() + 60000;
-    }
+    //Apply luck if you found any new hypers
+    verifiedOres.applyHyperdimensionalLuck()
 
     //Silly ore!
     if (Math.random() < 1/10000000) {
         spawnCatEye();
     }
+    
+    if (john.opened) johnRefresh()
+    rollNavalEvent()
 }
 function spawnCatEye() {
     let v = rollVariant();
@@ -1281,16 +1334,15 @@ function logFind(type, x, y, variant, atMined, fromReset, amt, fromCave, bulkRar
 }
 const suffixes = ["", "k", "M", "B", "T", "qd", "Qn", "sx", "Sp", "O", "N", "de", "Ud", "DD", "tdD", "qdD", "QnD", "sxD", "SpD", "OcD", "NvD", "Vgn", "UVg", "DVg", "TVg", "qtV", "QnV", "SeV", "SPG", "OVG", "NVG", "TGN", "UTG", "DTG", "tsTG", "qtTG", "QnTG", "ssTG", "SpTG", "OcTg", "NoTG", "QdDR", "uQDR", "dQDR", "tQDR", "qdQDR", "QnQDR", "sxQDR", "SpQDR", "OQDDr", "NQDDr", "qQGNT", "uQGNT", "dQGNT", "tQGNT", "qdQGNT", "QnQGNT", "sxQGNT", "SpQGNT", "OQQGNT", "NQQGNT", "SXGNTL", "USXGNTL", "DSXGNTL", "TSXGNTL", "QTSXGNTL", "QNSXGNTL", "SXSXGNTL", "SPSXGNTL", "OSXGNTL", "NVSXGNTL", "SPTGNTL", "USPTGNTL", "DSPTGNTL", "TSPTGNTL", "QTSPTGNTL", "QNSPTGNTL", "SXSPTGNTL", "SPSPTGNTL", "OSPTGNTL", "NVSPTGNTL", "OTGNTL", "UOTGNTL", "DOTGNTL", "TOTGNTL", "QTOTGNTL", "QNOTGNTL", "SXOTGNTL", "SPOTGNTL", "OTOTGNTL", "NVOTGNTL", "NONGNTL", "UNONGNTL", "DNONGNTL", "TNONGNTL", "QTNONGNTL", "QNNONGNTL", "SXNONGNTL", "SPNONGNTL", "OTNONGNTL", "NONONGNTL", "CENT", "UCENT"];
 function formatNumber(num, topoint) {
-    num = Math.round(num)
     topoint ??= 1;
     if (topoint < 1) topoint = 1;
     topoint = Math.pow(10, topoint);
     if (num < 1000) {
-        return num;
+        return String((Math.round(num*topoint))/topoint)
     }
     if (num >= Infinity) return Infinity;
     let tenMulti = Math.floor(Math.log10(num) / 3);
-    return Math.floor(num / Math.pow(1000, (tenMulti)) * topoint) / topoint + suffixes[tenMulti];
+    return Math.round(num / Math.pow(1000, (tenMulti)) * topoint) / topoint + suffixes[tenMulti];
 }
 function getAngleBetweenPoints(obj) {
     let x = obj.x - curX;
@@ -1423,8 +1475,8 @@ let currentActiveEvent;
 specialOreValues = {
 
 }
-const events = {
-    "event1" : {
+const events = [
+    {
         rate: 1/5000,
         duration: 1500000,
         boost: 1.5,
@@ -1449,7 +1501,7 @@ const events = {
             }
         },
     },
-    "event2" : {
+    {
         rate: 1/2500,
         duration: 3000000,
         boost: 2,
@@ -1462,7 +1514,7 @@ const events = {
             else return;
         }
     },
-    "event3" : {
+    {
         rate: 1/4000,
         duration: 1800000,
         boost: 1.375,
@@ -1475,7 +1527,7 @@ const events = {
             else return;
         }
     },
-    "event4" : {
+    {
         rate: 1/12500,
         duration: 1800000,
         boost: 1.25,
@@ -1495,7 +1547,7 @@ const events = {
             }
         }
     },
-    "event5" : {
+    {
         rate: 1/3000,
         duration: 1800000,
         boost: 2,
@@ -1512,14 +1564,14 @@ const events = {
             }
         }
     },
-    "event6" : {
+    {
         rate: 1/10000,
         duration: 900000,
         boost: 1.15,
         ore: "⌛",
         message: `<i><span style="background-image:linear-gradient(to right, #c2842d, #edae26, #d45419, #8a1b0c);" class="eventGradient">The passage of time seems to speed up as it's source is unearthed...</span></i>`,
         world: 1,
-        specialText: "Decreases base mining speed by 1",
+        specialText: "Decreases base mining speed by 1ms",
         specialEffect: function(state) {
             if (state) {
                 baseSpeed--;
@@ -1531,7 +1583,7 @@ const events = {
             }
         }
     },
-    "event7" : {
+    {
         rate: 1/15000,
         duration: 1200000,
         boost: 1.3,
@@ -1558,7 +1610,7 @@ const events = {
             }
         }
     },
-    "event8" : {
+    {
         rate: 1/3500,
         duration: 3000000,
         boost: 1.75,
@@ -1575,7 +1627,7 @@ const events = {
             }
         }
     },
-    "event9" : {
+    {
         rate: 1/5000,
         duration: 2700000,
         boost: 1.25,
@@ -1592,14 +1644,14 @@ const events = {
             }
         }
     },
-    "event10" : {
+    {
         rate: 1/1000000,
         duration: 9000000,
         boost: 1,
         ore: "✈️",
         message: `<i><span class="rainbowBackground">Lyle! Lyle, wake up! You gotta wake up, please!...</span></i>`,
         world: 1,
-        specialText: "Makes ✈️ obtainable",
+        specialText: "Makes ✈️ obtainable in 🎂 layer",
         specialEffect: function(state) {
             if (state) {
                 insertIntoLayers({"ore":"✈️", "layers":["sillyLayer"], "useLuck":true});
@@ -1614,7 +1666,7 @@ const events = {
             }
         }
     },
-    "event11" : {
+    {
         rate: 1/4000,
         duration: 2700000,
         boost: 1.25,
@@ -1627,7 +1679,7 @@ const events = {
             else return;
         }
     },
-    "event12" : {
+    {
         rate: 1/15000,
         duration: 180000,
         boost: 5,
@@ -1645,7 +1697,7 @@ const events = {
             else delete specialOreValues["🖱️"];
         }
     },
-    "event13" : {
+    {
         rate: 1/22000,
         duration: 1200000,
         boost: 1.13,
@@ -1663,7 +1715,7 @@ const events = {
             else delete specialOreValues["🪶"];
         }
     },
-    "event14" : {
+    {
         rate: 1/12500,
         duration: 900000,
         boost: 1.4,
@@ -1681,7 +1733,7 @@ const events = {
             else delete specialOreValues["🏹"];
         }
     },
-    "event15" : {
+    {
         rate: 1/30000,
         duration: 600000,
         boost: 1.5,
@@ -1703,22 +1755,22 @@ const events = {
             }
         }
     },
-    "event16" : {
+    {
         rate: 1/50000,
         duration: 2700000,
         boost: 1.17,
         ore: "🇵🇫",
         message: `<i>Is this from where the french national team comes from?...</i>`,
         world: 1.1,
-        specialText: "Reduces game brightness to 50%",
+        specialText: "Reduces game brightness to 95%",
         specialEffect: function(state) {
             if (state) {
-                document.body.style.filter = "brightness(0.5)";
+                document.body.style.filter = "brightness(0.95)";
             }
             else document.body.style.filter = "";
         }
     },
-    "event16" : {
+    {
         rate: 1/1250,
         duration: 1800000,
         boost: 1,
@@ -1728,12 +1780,12 @@ const events = {
         specialText: "watr",
         specialEffect: function(state) {
             if (state) {
-                insertIntoLayers({"ore":"🪸", "layers":["waterLayer"], "useLuck":true});
+                insertIntoLayers({"ore":"🪸", "layers":["waterLayer2"], "useLuck":true});
             }
-            else removeFromLayers({"ore":"🪸", "layers":["waterLayer"]});
+            else removeFromLayers({"ore":"🪸", "layers":["waterLayer2"]});
         }
     },
-    "event17" : {
+    {
         rate: 1/5000,
         duration: 3600000,
         boost: 2.75,
@@ -1748,7 +1800,7 @@ const events = {
             else return;
         }
     },
-    "event18" : {
+    {
         rate: 1/19000,
         duration: 2700000,
         boost: 2,
@@ -1763,7 +1815,7 @@ const events = {
             else return;
         }
     },
-    "event19" : {
+    {
         rate: 1/75000,
         duration: 1350000,
         boost: 2.5,
@@ -1778,9 +1830,10 @@ const events = {
             else return;
         }
     },
-}
+]
 function activateEvent(name) {
     if (name === undefined) return;
+    player.unlockedEvents[name] = true
     currentActiveEvent = {name: name, removeAt: Date.now() + events[name].duration, extraBoost: 0}
     events[name].specialEffect(true);
     const text = events[name].message;
@@ -1802,20 +1855,14 @@ function getCurrentEventOre() {
     return events[currentActiveEvent.name].ore;
 }
 function rollEvent() {
-    const arr = Object.keys(events);
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr.length - i - 1; j++) {
-            if (events[arr[j]].rate > events[arr[j + 1]].rate) {
-                let lesser = arr[j + 1];
-                arr[j + 1] = arr[j];
-                arr[j] = lesser;
-            }
-        }
-    }
-    for (let i = arr.length - 1; i >= 0; i--) if (currentWorld !== events[arr[i]].world) arr.splice(i, 1);
+    let arr = Object.keys(events);
+    arr.sort((a,b)=>events[arr[a]].rate-events[arr[b]].rate)
+    arr = arr.filter((e)=>events[e].world === currentWorld)
     const chosenValue = Math.random();
+    let sum = 0;
     for (let i = 0; i < arr.length; i++) {
-        if (chosenValue < events[arr[i]].rate) return arr[i]
+        sum+=events[arr[i]].rate;
+        if (chosenValue < sum) return arr[i]
     }
     return undefined;
 }
@@ -1841,10 +1888,10 @@ function eventActions(input) {
     if (input === "c") {
         endEvent();
         const toChoose = collectWorldEvents(currentWorld);
-        if (toChoose.indexOf("event10") > -1) toChoose.splice(toChoose.indexOf("event10"), 1)
-        const selector = Math.round(Math.random() * (toChoose.length - 1));
+        if (toChoose.includes("9")) toChoose.splice(toChoose.indexOf("9"), 1)
+        const selector = Math.floor(Math.random() * toChoose.length);
         const chosen = toChoose[selector];
-        if (chosen === undefined) return;
+        if (chosen === undefined) return ;
         activateEvent(chosen);
         player.eventManager.cooldown = Date.now() + 900000;
         wasUsed = true;
@@ -1960,7 +2007,9 @@ function toggleSideMenu(id) {
         "oreTrackerHolder" : "Tracker",
         "offlineHolder" : "Offline",
         "eventActionHolder" : "EventActions",
-        "powerupHolder" : "Powerup"
+        "powerupHolder" : "Powerup",
+        "cloudSaving": "EventActions",
+        "navalEventInfo": "EventActions"
     }
     const thisAnimation = animations[id];
     if (thisAnimation === undefined) return;
@@ -2040,43 +2089,35 @@ function preventCrash(event) {
     if (event.key === "Enter") event.preventDefault();
 }
 const polyLocations = {
-    "orbOfLife" : "dirtLayer",
-    "orbOfIntelligence" : "chessLayer",
-    "orbOfSound" : "fluteLayer",
-    "orbOfTheUnknown" : "borderLayer",
-    "orbOfCreation" : "nebulaLayer",
-    "orbOfFlight" : "cloudLayer",
-    "orbOfFire" : "cactusLayer"
+    "orbOfLife" : ["dirtLayer", "dirtLayer2"],
+    "orbOfSound" : ["deepWaterLayer"],
+    "orbOfTheUnknown" : ["borderLayer"],
+    "orbOfCreation" : ["nebulaLayer"],
+    "orbOfFlight" : ["cloudLayer", "cloudLayer2"],
+    "orbOfFire" : ["cactusLayer"]
 }
 const polyIds = {
-    "orbOfLife" : "gear40",
-    "orbOfIntelligence" : "gear41",
-    "orbOfSound" : "gear42",
-    "orbOfTheUnknown" : "gear43",
-    "orbOfCreation" : "gear44",
+    "orbOfLife" : "ring_of_life",
+    "orbOfSound" : "ring_of_water",
+    "orbOfTheUnknown" : "ring_of_time",
+    "orbOfCreation" : "ring_of_creation",
     "orbOfFlight" : "pickaxe36",
-    "orbOfFire" : "gear48",
+    "orbOfFire" : "ring_of_fire",
+}
+const polyRequirements = {
+    "orbOfTheUnknown" : ()=>{return johnRewarded("heirloom")}, //makes tol6 usable everywhere
+    "orbOfSound" : ()=>{return johnRewarded("heirloom")}, //makes naval events quicker
+    "orbOfLife" : ()=>{return johnRewarded("hat")}, //boost based on ore completion
+    "orbOfCreation" : ()=>{return player.pickaxes["hypermark_checkminator"]},
+    "orbOfFlight" : ()=>{return false},
+    "orbOfFire" : ()=>{return player.gears["ring_of_life"]},
 }
 function checkPolys() {
     const polys = Object.keys(polyLocations);
-    for (let i = 0; i < polys.length; i++) {
-        const poly = polys[i];
-        if (player.p[poly]) {
-            insertIntoLayers({"ore":`${poly}`, "layers":[polyLocations[`${poly}`]], "useLuck":true});
-            if (currentWorld === 0.9) showItem(polyIds[`${poly}`]);
-        }
-        else {
-            if (!player.p["orbOfLife"] && indexHasOre("noradrenaline") > 0) {
-                player.p["orbOfLife"] = true;
-                insertIntoLayers({"ore":"orbOfLife", "layers":["dirtLayer"], "useLuck":true});
-            }
-            if (i > 0) {
-                if (indexHasOre(polys[i - 1]) > 0) {
-                    insertIntoLayers({"ore":`${polys[i - 1]}`, "layers":[polyLocations[`${polys[i - 1]}`]], "useLuck":true});
-                    player.p[poly] = true;
-                    switchWorldCraftables();
-                }
-            }
+    for (const poly of polys) {
+        if(polyRequirements[poly]()){
+            insertIntoLayers({"ore":`${poly}`, "layers":polyLocations[`${poly}`], "useLuck":true});
+            if (toggleCraftingWorld.world === 0.9) showItem(polyIds[poly]);
         }
     }
 }

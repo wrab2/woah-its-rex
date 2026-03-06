@@ -161,7 +161,9 @@ function mineCaveBlock(c, r, type, cause, luck) {
             return;
         }
         let caveMulti = getCaveMulti(type);
-        if (oreList[block]["isBreakable"]) {
+        if (!unbreakable.includes(block) || 
+			pickaxeStats[player.stats.currentPickaxe].tier > unbreakableTiers[unbreakable.indexOf(block)] 
+		) {
             //{type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant}
             if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock({type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant, amt:1});
             else giveBlock({type: block, x:c, y:r, variant: variant, amt:1});
@@ -217,7 +219,7 @@ function mineCaveBlock(c, r, type, cause, luck) {
     }
 }
 function getCaveMaterial(type) {
-    return caveList[type].slice(-1);
+    return caveList[type].at(-1);
 }
 function sortCaveRarities(type) {
     let arr = caveList[type];
@@ -427,7 +429,10 @@ let caveTypes = {
     "ggCave" : {rarity: 1/49, multi: 49},
     "axCave" : {rarity: 1/29, multi: 29},
     "foCave" : {rarity: 1/28, multi: 28},
-    "watrCave" : {rarity: 1/25, multi:25}
+    "watrCave" : {rarity: 1/25, multi:25},
+    "janeCave" : {rarity: 1/100000, multi:100000},
+    "timeCave" : {rarity: 1/10000000, multi:10000000}, 
+
 }
 let caveList = {
 "mysteryCave" : ["🌙", "🪔", "💫", "🩺", "💱", "🌟", "☄️", "⭐", "🔆", "🔭", "📡", "❓"],
@@ -441,7 +446,9 @@ let caveList = {
 "ggCave" : ['🇧🇱', '🇬🇱', '🇲🇸', '🇮🇪', '🇦🇼', '🇬🇬'],
 "axCave" : ['🇧🇶', '🇸🇭', '🇳🇺', '🇬🇮', '🇬🇫', '🇧🇲', '🇦🇽'],
 "foCave" : ['🇭🇰', '🇮🇲', '🇵🇲', '🇬🇸', '🇳🇫', '🇫🇰', '🇰🇾', '🇫🇴'],
-"watrCave" : ["eternalCoral", "🌊"],
+"watrCave" : ["curry", "eternalCoral", "🌊"],
+"janeCave" : ["🤽‍♀️"],
+"timeCave": ["🏐","🌴","🐙","🐬","🍧","🏖️","🏄‍♂️","🎋","☀️","💗","❤️‍🔥","✨","🏝️", 'aFleetingSoul',"🕰️"],
 }
 let oolOres = "🥀💫⚠️💸🪩🌟🧵☄️⭐🔆";
 let oolProbabilities = {
@@ -467,10 +474,13 @@ function getWorldCaveTypes(world) {
             toGive = ["abysstoneCave", "ggCave", "ioCave", "axCave", "foCave", "moCave", "ccCave"];
             break;
         case 1.2:
-            toGive = ["abysstoneCave", "watrCave"];
+            toGive = ["abysstoneCave", "watrCave", "janeCave"];
             break;
         case 0.9:
             toGive = ["abysstoneCave"];
+            break;
+        case 3.0:
+            toGive = ["abysstoneCave", "timeCave", "janeCave"];
             break;
         default:
             toGive = [];
@@ -511,4 +521,25 @@ function getCaveMultiFromOre(ore) {
     }
     return 1;
 }
-//generateCave(curX, curY, 0, 0);
+
+function updateAllCaves() {
+    const luck = verifiedOres.getCaveLuck();
+    for (const cave of Object.keys(caveList)) {
+        if(cave !== "abysstoneCave"){
+            applyLuckToCave(caveList[cave], luck);
+        }
+    }
+}
+
+function applyLuckToCave(cave, luck) {
+	for (const ore of cave){
+		const listEntry = oreList[ore]
+		let numRarity = listEntry.numRarity
+		let cap = 1000
+		if(johnRewarded("water_polo_ball")) cap = 333
+		if(listEntry.oreTier === "Layer") cap = 1
+		listEntry.decimalRarity = (numRarity / luck < cap) ? 1/cap : 1/(numRarity / luck)
+	}
+	return
+}
+

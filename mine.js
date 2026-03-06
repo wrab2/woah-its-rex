@@ -46,7 +46,12 @@ function mineBlock(x, y, cause) {
         mineBlockVariant = undefined;
     }
     if (mineBlockOre === "⚪") return;
-    if (oreList[mineBlockOre]["isBreakable"]) {
+    if ((!unbreakable.includes(mineBlockOre) || (player.stats.currentPickaxe == "pickaxe27"?
+            pickaxeStats[player.stats.currentPickaxe].tier + player.upgrades.pickaxe27.level :
+            pickaxeStats[player.stats.currentPickaxe].tier) 
+            >= unbreakableTiers[unbreakable.indexOf(mineBlockOre)]
+        )
+		)	{
         if (cause !== "infinity") checkAllAround(x, y);
         else placeLayerAround(x, y);
         if (oreList[mineBlockOre]["numRarity"] >= 750000) {
@@ -162,6 +167,11 @@ function aleaRandom() {
 const generateBlock = function(location, wbm) {
     wbm ??= false;
     blocksRevealedThisReset++;
+	if(currentWorld === 1.2){
+		if(location["Y"]==20e6-1 && location["X"]==1e6)return mine[location["Y"]][location["X"]] ="🤽‍♂️"
+		else if(location["Y"]==100e3) return mine[location["Y"]][location["X"]] = "deepWater"
+	}
+
     mainProbabilityTable = getLayer(location["Y"]);
     mainGenerationTable = mainProbabilityTable.probabilities;
     let arr = mainProbabilityTable.layer;
@@ -180,7 +190,6 @@ const generateBlock = function(location, wbm) {
     }
     let blockToGive = arr[low];
     let oreRarity = oreList[blockToGive]["numRarity"];
-    mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
         let vInfo = rollVariant();
         if (player.gears["gear25"] && vInfo.v === 1) vInfo = rollVariant();
@@ -213,9 +222,12 @@ const generateBlock = function(location, wbm) {
         if (currentActiveEvent !== undefined) {
             if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();
         } 
-    }
+    } else 
+    mine[location["Y"]][location["X"]] = blockToGive;
 }
 const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
+    if(cheating){amt*=devspeed}
+    if(player.gears["ring_of_fire"])amt *= Math.max(verifiedOres.getCaveLuck()/100, 1)
     const p = player.stats.currentPickaxe;
     if ((p === "pickaxe0" || p === "pickaxe13") && !fromOffline && caveInfo === undefined) return;
     player.stats.blocksMined += (caveInfo === undefined ? amt : 0);
@@ -228,16 +240,19 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     if (sm) caveInfo = undefined;
     const isCave = (!sm && caveInfo !== undefined);
     const results = {};
-    const curCaveLuck = verifiedOres.getCaveLuck();
+    const curCaveLuck = isCave ? verifiedOres.getCaveLuck() : 1;
     for (let i = 0; i < thisTable.length; i++) {
         let estAmt;
         if (isCave) {
             if (caveInfo.type === "abysstoneCave") estAmt = amt*(1/oreList[thisTable[i]]["numRarity"])
-            else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*curCaveLuck);
-            else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
+			else if (oolProbabilities[thisTable[i]] !== undefined) estAmt = amt*(oolProbabilities[thisTable[i]]*curCaveLuck);
+			else estAmt = amt*oreList[thisTable[i]]["decimalRarity"];
+			if(player.gears["ring_of_creation"] && oreList[thisTable[i]]["decimalRarity"] > 0.001) estAmt*=5
         } else {
-            estAmt = amt*generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])];
-        }
+			let oreRarity = generationInfo.probabilities[generationInfo.layer.indexOf(thisTable[i])]
+            estAmt = amt*oreRarity;
+			if(player.gears["ring_of_creation"] && oreRarity > 0.001) estAmt*=5
+		}
         let oldEst = estAmt;
         const aleaVals = {rand: aleaRandom(), count: gameInfo.overallCount, seed: gameInfo.seed};
         if (aleaVals.rand < estAmt%1) estAmt++;
@@ -323,6 +338,7 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
                         else if (Math.random() < 1/10) {estVariantAmt++; wasDuped = true;}
                         estVariantAmt = Math.floor(estVariantAmt);
                     }
+					if(playerInventory[blockToGive][variantInvNames[i]] === 0)verifiedOres.newOreForCompletion()
                     playerInventory[blockToGive][variantInvNames[i]] += estVariantAmt;
                     if (playerInventory[blockToGive][variantInvNames[i]] > 1e308) playerInventory[blockToGive][variantInvNames[i]] = 1e308;
                     if (messageIncluded(oreList[blockToGive]["oreTier"])) {
@@ -486,12 +502,18 @@ const checkSpecials = function(block, get) {
             case "🏔️" : 
             block = "🌋";
             break;
+            case "☑️" : 
+            block = "✔️";
+            break;     
             case "💔" : 
             if (curDirection === "")
                 block = "❤️‍🩹";
             break;
             case "🩸" : 
             block = "💧";
+            break;
+            case "🤣" : 
+            block = "🚁";
             break;
             case "🔮" :
             if (curDirection === "") {
@@ -531,12 +553,17 @@ for (let i = 0; i < 100000; i++) {
 }
 */
 //TELEPORTING
-let specialLayerLocations = {
+let specialLayerLocations = {}
 
-}
+let specialLayerLocationsW2 = []//layer in these objects is only for sorting
+let specialLayerLocationsWW = []
+
 let distanceMulti = 0;
 let layerDistanceY = 1000;
 const specialOrder = ["sillyLayer", "fluteLayer", "unknownLayer", "lastLayer"];
+const specialOrderW2 = ["checkmarkLayer"]
+const specialOrderWW = ["jimLayer","johnLayer"]
+
 function rebuildSpecialLayerObject() {
     const newArray = [];
     for (let layer in specialLayerLocations) newArray[specialOrder.indexOf(layer)] = layer;
@@ -551,34 +578,69 @@ function rebuildSpecialLayerObject() {
     }
     specialLayerLocations = newLayerObj;
 }
+let wwTeleportsIndex = 0
+let w2TeleportsIndex = 0
 function switchDistance(num) {
     const lastLayerInfo = [distanceMulti, layerDistanceY];
     distanceMulti += num;
-    const layerNums = allLayers.length - 1;
-    const specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
-    if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
-    if (distanceMulti < 0) {
-        distanceMulti = layerNums + specialLayerNums;
+    let isThisJohn = false
+    const layerNums = allLayers.length - 1; 
+	//what is going on here
+    if(currentWorld === 1.2){
+        if(layerDistanceY === 1000) wwTeleportsIndex = 0
+
+        let availableLocations = [{distance:1000}]
+        if(playerInventory["deepWater"].normalAmt > 1e9) availableLocations.push({distance:200000})
+        if(player.john.spokeWith) availableLocations.push({layer:"john", distance:20e6})
+		availableLocations = availableLocations.concat(specialLayerLocationsWW)
+        if(num === 1){
+            wwTeleportsIndex = (wwTeleportsIndex+1) % availableLocations.length
+        } else if(num === -1){
+            wwTeleportsIndex = (wwTeleportsIndex + availableLocations.length - 1) % availableLocations.length
+        }
+        layerDistanceY = availableLocations[wwTeleportsIndex].distance
+        isThisJohn = (availableLocations[wwTeleportsIndex].layer === "john")
     }
-    if (distanceMulti > layerNums + specialLayerNums) {
-        distanceMulti = currentWorld === 2 ? 1 : 0;
-        layerDistanceY = 1000 + (2000 * distanceMulti);
-    } else if (distanceMulti > layerNums && currentWorld === 1) {
-        const layersToIndex = Object.keys(specialLayerLocations);
-        const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
-        const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
-        if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
-        else layerDistanceY = specialTeleportLayer + 5000;
-        if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
-    } else {
-        layerDistanceY = 1000 + (2000 * distanceMulti);
+    else {
+        let specialLayerNums = currentWorld === 1 ? Object.keys(specialLayerLocations).length : 0;
+		if(currentWorld === 2){
+			if(layerDistanceY === 3000) w2TeleportsIndex = 0
+			
+			let availableLocations = [{distance:3000},{distance:5000},{distance:7000},{distance:9000}]
+			availableLocations = availableLocations.concat(specialLayerLocationsW2)
+			if(num === 1){
+				w2TeleportsIndex = (w2TeleportsIndex+1) % availableLocations.length
+			} else if(num === -1){
+				w2TeleportsIndex = (w2TeleportsIndex + availableLocations.length - 1) % availableLocations.length
+			}
+			layerDistanceY = availableLocations[w2TeleportsIndex].distance
+		} else {
+			if (currentWorld === 2 && distanceMulti === 0) distanceMulti += num;
+			if (distanceMulti < 0) {
+				distanceMulti = layerNums + specialLayerNums;
+			}
+			if (distanceMulti > layerNums + specialLayerNums) {
+				distanceMulti = currentWorld === 2 ? 1 : 0;
+				layerDistanceY = 1000 + (2000 * distanceMulti);
+			} else if (distanceMulti > layerNums && currentWorld === 1) {
+				const layersToIndex = Object.keys(specialLayerLocations);
+				const decidingNum = (-1 * layerNums) + (distanceMulti - 1);
+				const specialTeleportLayer = specialLayerLocations[layersToIndex[decidingNum]];
+				if (layersToIndex[decidingNum] === "lastLayer") layerDistanceY = specialTeleportLayer.y + 5000;
+				else layerDistanceY = specialTeleportLayer + 5000;
+				if (layerDistanceY === lastLayerInfo[1]) switchDistance(num);
+			} else {
+				layerDistanceY = 1000 + (2000 * distanceMulti);
+			}	
+		}
     }
     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
     let teleportLayer = getLayer(layerDistanceY).layer;
     for (let i = 0; i < teleportLayer.length; i++) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
     let tI;
+    if(isThisJohn) teleportLayer = "🤽‍♂️"
     if (oreList[teleportLayer]["hasImage"]) tI = `<img class="teleportImage" src="${oreList[teleportLayer]["src"]}">`;
-    get("meterDisplay").innerHTML = `${tI === undefined ? teleportLayer : tI} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
+	get("meterDisplay").innerHTML = `${tI === undefined ? teleportLayer : tI} ${(currentWorld === 2 ? layerDistanceY - 2000 : layerDistanceY).toLocaleString()}m`;
     get("meterDisplay").setAttribute("title", oreList[teleportLayer]["oreName"]);
 }
 
@@ -666,7 +728,8 @@ function attemptSwitchWorld(to) {
     if (to === 1 && currentWorld !== 1) {switchWorld(1); return;}
     if (to === 1.2 && currentWorld !== 1.2) {switchWorld(1.2); return;}
     if (to === 0.9 && (player.galacticaUnlocked || indexHasOre("Omnipotent God of The Mine") > 0)) {switchWorld(0.9); return;}
-    if (to === 11252023) {
+	if (to === 3 && johnRewarded("house_keys")) return switchWorld(3);
+	if (to === 11252023) {
         goToAnniversary();
     }
 }
@@ -677,21 +740,21 @@ function switchWorld(to) {
         resetForSwitch();
         if (currentWorld === 1.1) sr1Helper(false);
         currentWorld = to;
-        if (currentWorld === 2) {
-            prepareWorldTwo();
-        } else if (currentWorld < 2) {
-            if (currentWorld === 1) prepareWorldOne();
-            else if (currentWorld === 1.1) prepareSR1();
-            else if (currentWorld === 1.2) prepareWatr();
-            else if (currentWorld === 0.9) prepareGalactica();
-        }
+		const worldPreparations = {
+			1: ()=>prepareWorldOne(),
+			2: ()=>prepareWorldTwo(),
+			3: ()=>prepareJohnHouse(),
+			1.1: ()=>prepareSR1(),
+			1.2: ()=>prepareWatr(),
+			0.9: ()=>prepareGalactica()
+		}
+        worldPreparations[currentWorld]()
+
         switchDistance(0);
         displayArea();
         utilitySwitchActions();
         removeFromLayers({"ore":"🐢","layers":["paperLayer"]})
         removeFromLayers({"ore":"🐰","layers":["paperLayer"]});
-        if (currentWorld === 1.2) insertIntoLayers({"ore":"HD 160529","layers":["waterLayer"], "useLuck":true});
-        else removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
         verifiedOres.checkPickaxe();
         verifiedOres.checkCaves();
         document.getElementById("teleportButton").disabled = false;
@@ -771,6 +834,15 @@ function prepareWatr() {
     player.watrEntered = true;
     createMine();
 }
+function prepareJohnHouse() {
+	allLayers = waterWorldLayers;
+    distanceMulti = 0;
+    y = 1000;
+    curX = 1000000;
+    curY = 0; 
+    layerNum = 0;
+    createMine();
+}
 function prepareWorldTwo() {
     distanceMulti = 1;
     y = 1000;
@@ -802,6 +874,7 @@ function stopMining() {
     clearInterval(displayTimer);
     displayTimer = null;
     canMine = stopped;
+	tryingJim(true)
 }
 let beforeEntering;
 function sr1Helper(state) {

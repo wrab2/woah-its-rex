@@ -134,19 +134,40 @@ const musicPlayer = {
         "song1" : {baseVolume: 0.05, src: "1"},
         "song2" : {baseVolume: 0.05, src: "1"},
         "song3" : {baseVolume: 0.05, src: "1"},
-        "song4" : {baseVolume: 0.15, src: "1"}
+        "song4" : {baseVolume: 0.15, src: "1"},
+        "song5" : {baseVolume: 0.15, src: "1"},
+        "song6" : {baseVolume: 0.15, src: "1"},
+        "song7" : {baseVolume: 0.15, src: "1"},
+        "song8" : {baseVolume: 0.15, src: "1"},
+        "song9" : {baseVolume: 0.15, src: "1"},
+        "song10" : {baseVolume: 0.15, src: "1"},
+        "song11" : {baseVolume: 0.15, src: "1"},
+        "song12" : {baseVolume: 0.15, src: "1"},
+        "song13" : {baseVolume: 0.15, src: "1"},
+        "song14" : {baseVolume: 0.15, src: "1"},
+        "song15" : {baseVolume: 0.15, src: "1"},
+        "song16" : {baseVolume: 0.10, src: "1"},
     },
     currentSong : ""
 }
 function selectSong() {
-    for (let property in musicPlayer.songs) if (!musicPlayer.songs[property].src.paused) {
-        const editingSong = musicPlayer.songs[property].src;
-        editingSong.onended = "";
-        editingSong.pause();
-        editingSong.currentTime = 0;
+    for (let property in musicPlayer.songs) {
+        if (!musicPlayer.songs[property].src.paused) {
+            const editingSong = musicPlayer.songs[property].src;
+            editingSong.onended = "";
+            editingSong.pause();
+            editingSong.currentTime = 0;
+        }
     }
+
+    const songKeys = Object.keys(musicPlayer.songs);
     let selectedSong = musicPlayer.currentSong;
-    while (selectedSong === musicPlayer.currentSong) selectedSong = `song${Math.round((Math.random() * 3)) + 1}`;
+
+    while (selectedSong === musicPlayer.currentSong) {
+        const randomIndex = Math.floor(Math.random() * songKeys.length);
+        selectedSong = songKeys[randomIndex];
+    }
+
     musicPlayer.currentSong = selectedSong;
     const song = musicPlayer.songs[selectedSong].src;
     song.currentTime = 0;

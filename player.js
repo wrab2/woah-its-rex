@@ -41,15 +41,17 @@ class playerTemplate {
             "gear37": false,
             "gear38": false, 
             "gear39": false, 
-            "gear40": false, //poly 1, 1.5x base luck
-            "gear41": false, //poly 2, 1/10 chance for +500000 simulated amount, applied before simulated amount multipliers
-            "gear42": false, //poly 3, 
-            "gear43": false, //poly 4, allows use of wormhole in sr1
-            "gear44": false, //poly 5, +50 reps
+            "ring_of_life": false,
+            "ring_of_water": false, 
+            "ring_of_time": false, 
+            "ring_of_creation": false, 
             "gear45": false, 
             "gear46": false, 
             "gear47": false, 
-            "gear48": false, //+0.1x luck per minute of session time
+            "ring_of_fire": false,
+			"green_chemicals": false,
+			"checkmark_teleporter": false,
+			"phone":false,
             
         }
         this.pickaxes = {
@@ -88,7 +90,8 @@ class playerTemplate {
             "pickaxe33" : false,
             "pickaxe34" : false,
             "pickaxe35" : false,
-            "pickaxe36": false,
+            "pickaxe36" : false,
+            "hypermark_checkminator" : false
         }
         this.settings = {
             audioSettings: {
@@ -104,7 +107,8 @@ class playerTemplate {
                 "Imaginary": {canPlay: true, volume: 50},
                 "Hyperdimensional" : {canPlay: true, volume:50},
                 "Infinitesimal" : {canPlay: true, volume:50},
-                "Polychromatical" : {canPlay: true, volume:50}
+                "Polychromatical" : {canPlay: true, volume:50},
+                "Johnical" : {canPlay: true, volume:50}
             },
             musicSettings: {
                 active: true,
@@ -112,11 +116,10 @@ class playerTemplate {
             },
             baseMineCapacity: 250000,
             minSpeed: 0,
-            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"]},
+            stopOnRare: {active: true, allowList: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal",]},
             useNumbers: false,
             inventorySettings: {invToIndex: true, craftingToIndex: true},
             usePathBlocks: true,
-            cavesEnabled: true,
             useDisguisedChills: false,
             usingNewEmojis: false,
             minRarityNum: 0,
@@ -126,7 +129,7 @@ class playerTemplate {
             useNewMusic: true,
             useNyerd: false,
             automineUpdate: 25,
-            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"],
+            spawnMessageTiers: ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal"],
             lastWorld: 1,
             simulatedRng: false,
             hideCompleted: false,
@@ -176,9 +179,7 @@ class playerTemplate {
         this.upgrades = {
             "pickaxe27" : {
                 level: 0,
-                maxLevel: 5,
-                bought: 0,
-                levelLuck: [1, 3, 10, 20, 40, 100]
+                maxLevel: 6
             }
         },
         this.wasUsing = undefined;
@@ -224,7 +225,6 @@ class playerTemplate {
         this.offlineProgress = 0;
         this.p = {
             "orbOfLife": false,
-            "orbOfIntelligence": false,
             "orbOfSound": false,
             "orbOfTheUnknown": false,
             "orbOfCreation": false,
@@ -237,7 +237,16 @@ class playerTemplate {
         this.completedMilestones = [],
         this.watrEntered = false,
         this.galacticaEntered = false,
-        this.sr1Entered = false
+        this.sr1Entered = false,
+        this.unlockedEvents = Array.from({length: Object.keys(events).length}, () => false)
+        this.john = {
+		    spokeWith: false,
+		    questsCompleted: [],
+		    currentQuest: 0,
+		    navalEvents: [],
+		    navalEventStartedTime:0,
+		    currentNavalEventId:-1,
+	    }
     }
 }
 let player = new playerTemplate();
@@ -267,7 +276,7 @@ const randBuff = {
 const powerupList = {
     "powerup1" : {
         title: "Terrestrial Terror",
-        description: "Mines a 101x101 area around the player, the size growing the more blocks mined you have. Has a cooldown of 15 minutes.",
+        description: `Mines a 101x101 area around the player, the size growing the more blocks mined you have. Has a cooldown of 15 minutes.`,
         cooldown: 900000,
         gradient: "linear-gradient(to right, #00ffff, #ff00ff, #ffff00)",
         checkRequirements: function() {
@@ -393,7 +402,12 @@ function displayPowerup(num) {
     const powerup = powerupList[powerupOrder[num]];
     get("powerupName").children[0].textContent = powerup.title;
     get("powerupName").children[0].style = `background:${powerup.gradient}; -webkit-background-clip: text; color: transparent; background-clip: text; -webkit-text-fill-color: transparent;`;
-    get("powerupDescription").textContent = powerup.description;
+    let description = powerup.description
+    if(num==0){
+        let mult = Math.floor(Math.log10((player.stats.blocksMined+1)/500000)) + 1
+        description = powerup.description.replace(/101x101/, 100*mult+"x"+100*mult)
+    }
+    get("powerupDescription").textContent = description;
     get("activatePowerup").setAttribute("onclick", `${powerupList[currentPowerupDisplayed].doAbility}`);
     updatePowerupCooldowns();
     checkAllConditions();
@@ -540,9 +554,6 @@ function oldDataToNew(data) {
         if (data[3][4] != undefined) {
             newData.player.settings.baseMineCapacity = data[3][4];    
         }
-        if (data[3][5] != undefined) {
-            newData.player.settings.minSpeed = data[3][5];
-        }
         if (data[3][6] != undefined) {
             newData.player.settings.stopOnRare.active = data[3][6];
         }
@@ -563,9 +574,6 @@ function oldDataToNew(data) {
         }
         if (data[3][16] != undefined) {
             newData.player.settings.usePathBlocks = data[3][16];
-        }
-        if (data[3][17] != undefined) {
-            newData.player.settings.cavesEnabled = data[3][17];
         }
         if (data[3][18] != undefined) {
             newData.player.settings.useDisguisedChills = data[3][18]
@@ -682,17 +690,14 @@ function loadNewData(data) {
         mineCapacity = mineCapacity < 250 ? 250 : mineCapacity;
         document.getElementById("resetNumber").innerText = `0 Revealed.`;
         data.settings.cavesEnabled ??= true;
-        if (!data.settings.cavesEnabled) toggleCaves(document.getElementById("caveToggle"));
         data.settings.inventorySettings ??= {invToIndex: true, craftingToIndex: true};
         if (!data.settings.inventorySettings.invToIndex) switchToIndex(document.getElementById("invIndex"), 0);
         if (!data.settings.inventorySettings.craftingToIndex) switchToIndex(document.getElementById("craftIndex"), 1);
-        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"];
+        data.settings.spawnMessageTiers ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal"];
         player.settings.spawnMessageTiers = data.settings.spawnMessageTiers.concat(tierConcat);
         applySpawnMessageData();
         data.settings.automineUpdate ??= 25;
         player.settings.automineUpdate = data.settings.automineUpdate;
-        data.settings.minSpeed ??= 0;
-        player.settings.minSpeed = data.settings.minSpeed;
         data.settings.useNewMusic ??= true;
         if (!data.settings.useNewMusic) switchMusicType();
         player.settings.musicSettings.volume = data.settings.musicSettings.volume;
@@ -702,7 +707,7 @@ function loadNewData(data) {
         data.settings.musicSettings ??= {active: true, volume: 100};
         if (!data.settings.musicSettings.active) document.getElementById("musicButton").click();
         data.settings.stopOnRare ??= {active: true, allowList: []};
-        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Polychromatical", "Infinitesimal"];
+        data.settings.stopOnRare.allowList ??= ["Antique","Mystical","Divine","Flawless","Interstellar","Metaversal","Sacred","Celestial","Ethereal","Imaginary", "Hyperdimensional", "Johnical", "Polychromatical", "Infinitesimal"];
         player.settings.stopOnRare.allowList = data.settings.stopOnRare.allowList.concat(tierConcat);
         player.settings.stopOnRare.active = data.settings.stopOnRare.active;
         if (!player.settings.stopOnRare.active) document.getElementById("stopOnRare").style.backgroundColor = "#FF3D3D";
@@ -749,7 +754,7 @@ function loadNewData(data) {
             }
         }
         if (data.upgrades !== undefined) {
-            if (data.upgrades["pickaxe27"] !== undefined) {player.upgrades["pickaxe27"].level = data.upgrades["pickaxe27"].level; player.upgrades["pickaxe27"].bought = data.upgrades["pickaxe27"].bought}
+            if (data.upgrades["pickaxe27"] !== undefined) {player.upgrades["pickaxe27"].level = data.upgrades["pickaxe27"].level;}
         }
         data.sr1Unlocked ??= false;
         player.sr1Unlocked = data.sr1Unlocked;
@@ -832,6 +837,8 @@ function loadNewData(data) {
         player.galacticaEntered = data.galacticaEntered;
         data.sr1Entered ??= false;
         player.sr1Entered = data.sr1Entered;
+        data.unlockedEvents ??= Array.from({length: Object.keys(events).length}, () => false)
+        player.unlockedEvents = data.unlockedEvents;
         data.completedMilestones ??= [];
         player.completedMilestones = [...data.completedMilestones];
         data.loungeSettings ??= {updateElements: true, deleteUnusedElements: true}
@@ -847,6 +854,7 @@ function loadNewData(data) {
                 }
             }
         }
+        player.john = {...player.john, ...data.john??{}}
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
@@ -867,18 +875,12 @@ function loadNewData(data) {
         }
         verifiedOres.countHyperdimensionalOres();
         updateInventory(false);
-        
-        try {
-            beSilly.init();
-        } catch (err) {
-
-        }
 }
 function smallVariantRoll() {
     let variantRoll = Math.random();
     if (variantRoll < 1/30) return 3;
-    else if (variantRoll < 1/15) return 2;
-    else if (variantRoll < 1/3) return 1;
+    else if (variantRoll < 3/30) return 2;
+    else if (variantRoll < 13/30) return 1;
     return 0;
 }
 beSilly = {
@@ -902,10 +904,6 @@ beSilly = {
         generateCave = () => 0;
         createGenerationProbabilities();
     },
-    init() {
-        if (beSilly.isPlayer("Tetrati0n") || beSilly.isPlayer("Lima Bean")) beSilly.tetraTroll();
-        delete beSilly;
-    }
 }
 function applyStopOnRareData() {
     const elementList = document.getElementsByClassName("stopOnRareTier");

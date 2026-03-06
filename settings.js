@@ -11,6 +11,7 @@ function showLoungeScreen(id, button) {
         showLoungeScreen.cButton = undefined;
         showLoungeScreen.current = undefined;
         get(cid).style.display = "none";
+        return
     } else {
         get(id).style.display = "inline-flex";
         get(showLoungeScreen.current).style.display = "none";
@@ -19,6 +20,12 @@ function showLoungeScreen(id, button) {
         button.classList.add("selectedLoungeArea");
         showLoungeScreen.current = id;  
     }
+		if(id === "loungeGameSettings"){
+			get("mineCapacitySetter").value = player.settings.baseMineCapacity
+			get("latestSetter").value = player.settings.latestLength
+			get("automineUpdate").value = player.settings.automineUpdate
+			get("logRarityInput").value = player.settings.minLogRarity
+		}
     checkMilestoneStatus();
     checkIndexStatus();
 }
@@ -72,14 +79,23 @@ function checkInventoryStatus() {
 checkInventoryStatus.created = true;
 function checkIndexStatus() {
     if (toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current !== "loungeOreIndex") {
-        const h = get("loungeCardHolder");
-        while (h.firstChild) h.firstChild.remove();
+        get("loungeCardHolder").innerText = ""
     }
     else if (!toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current === "loungeOreIndex") {
-        const h = get("loungeCardHolder");
-        while (h.firstChild) h.firstChild.remove();
-    } else if (toggleLounge.toggled && get("loungeCardHolder").children.length === 0 && showLoungeScreen.current === "loungeOreIndex" && createIndexCards.indexing !== undefined) {
+        get("loungeCardHolder").innerText = ""
+    } 
+    else if (toggleLounge.toggled && get("loungeCardHolder").children.length === 0 && showLoungeScreen.current === "loungeOreIndex" && createIndexCards.indexing !== undefined) {
         createIndexCards(createIndexCards.indexing);
+    } 
+    //event index
+    if (toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current !== "loungeEventIndex") {
+        get("loungeEventHolder").innerText = ""
+    }
+    else if (!toggleLounge.toggled && player.loungeSettings.deleteUnusedElements && showLoungeScreen.current === "loungeEventIndex") {
+        get("loungeEventHolder").innerText = ""
+    } 
+    else if (toggleLounge.toggled && get("loungeEventHolder").children.length === 0 && showLoungeScreen.current === "loungeEventIndex") {
+        createEventCards(createEventCards.indexing)
     }
 }
 function toggleUnused(b) {
@@ -187,7 +203,6 @@ function flashRed(element) {
     element.style.animation = "flashRed 1s linear 1";
     element.onanimationend = () => {
         element.style.animation = "";
-        element.value = "";
         element.onanimationend = undefined;
     }
 }
@@ -195,7 +210,6 @@ function flashGreen(element) {
     element.style.animation = "flashGreen 1s linear 1";
     element.onanimationend = () => {
         element.style.animation = "";
-        element.value = "";
         element.onanimationend = undefined;
     }
 }
@@ -223,33 +237,6 @@ function changeSpawnVolume(percent, name) {
 }
 
 let minMiningSpeed = 0;
-
-function changeMinMiningSpeed(element) {
-    elementValue = element.value;
-    let num = elementValue === "" ? "none" : elementValue;
-    num = Number(num);
-    if (!isNaN(num)) {
-        if (num > 25)
-            num = 25;
-        if (num < 0)
-            num = 0;
-        player.settings.minSpeed = num;
-        flashGreen(element);
-    } else {
-        flashRed(element);
-    }
-}
-
-function toggleCaves() {
-    if (player.settings.cavesEnabled) {
-        player.settings.cavesEnabled = false;
-        document.getElementById("caveToggle").style.backgroundColor = "#FF3D3D";
-    }
-    else {
-        player.settings.cavesEnabled = true;
-        document.getElementById("caveToggle").style.backgroundColor = "#6BC267";
-    }
-}
 
 function updateCapacity(element) {
     elementValue = element.value;
@@ -319,24 +306,38 @@ function randomFunction(ore, cause, elem) {
             return;
         if (ore === "🕳️")
             return;
-        if (!shouldIgnore(ore) || indexHasOre(ore)) {
+				if (["singularityEgg", 'evilFlag', '🐃'].includes(ore)){
+                    const crafts = {
+                        'evilFlag':'evilFlagCraft',
+                        'singularityEgg':'wtfCraft',
+                        '🐃':'waterbuffaloCraft'
+                    }
+					if(!toggleLounge.toggled)toggleLounge()
+					if(showLoungeScreen.current !== 'loungeForgeAndVariants') get("forge").click()
+					displayOreRecipe(crafts[ore])
+					return;
+				}
+          if (!shouldIgnore(ore) || indexHasOre(ore)) {
+            let fromcave = oreList[ore].caveExclusive
             for (const worldList in indexOrder) {
-                if (worldList !== "events") {
-                    const list = indexOrder[worldList];
-                    for (const layerIndex in list) {
-                        const toSearch = list[layerIndex].l;
-                        for (let i = 0; i < toSearch.length; i++) {
-                            if (caveList[toSearch[i]] !== undefined) {
-                                if (caveList[toSearch[i]].indexOf(ore) > -1 && ((ore === "estrogen???" || ore === "✡️") && toSearch[i] === "abysstoneCave")) {
+                if (!fromcave || (fromcave && worldList == "caves")){
+                    if (worldList !== "events") {
+                        const list = indexOrder[worldList];
+                        for (const layerIndex in list) {
+                            const toSearch = list[layerIndex].l;
+                            for (let i = 0; i < toSearch.length; i++) {
+                                if (caveList[toSearch[i]] !== undefined) {
+                                    if ((fromcave && caveList[toSearch[i]].indexOf(ore) > -1) || (((ore === "estrogen???" || ore === "✡️") && toSearch[i] === "abysstoneCave"))) {
+                                        layer = toSearch[i];
+                                        world = worldList;
+                                        break;
+                                    }
+                                }
+                                else if (layerList[toSearch[i]].indexOf(ore) > -1) {
                                     layer = toSearch[i];
                                     world = worldList;
                                     break;
                                 }
-                            }
-                            else if (layerList[toSearch[i]].indexOf(ore) > -1) {
-                                layer = toSearch[i];
-                                world = worldList;
-                                break;
                             }
                         }
                     }
@@ -346,7 +347,7 @@ function randomFunction(ore, cause, elem) {
                 for (const s in indexOrder) {
                     for (const l in indexOrder[s]) {
                         if ((indexOrder[s][l].l.includes(layer)) && indexOrder[s][l].req()) {
-                            toggleLounge();
+                            if(!toggleLounge.toggled)toggleLounge();
                             if (showLoungeScreen.current !== "loungeOreIndex") showLoungeScreen("loungeOreIndex", document.querySelectorAll(".loungeMenuLocationButton")[6]);
                             addIndexLayers.current = String(world);
                             addIndexLayers(addIndexLayers.current);
@@ -361,7 +362,7 @@ function randomFunction(ore, cause, elem) {
 }
 
 function indexHasOre(ore) {
-    return (playerInventory[ore]["normalAmt"] || playerInventory[ore]["electrifiedAmt"] || playerInventory[ore]["radioactiveAmt"] || playerInventory[ore]["explosiveAmt"]);
+    return (playerInventory[ore]["normalAmt"] || playerInventory[ore]["electrifiedAmt"] || playerInventory[ore]["radioactiveAmt"] || playerInventory[ore]["explosiveAmt"] || (playerInventory[ore]["foundAt"]??0));
 }
 function indexVariants(ore) { 
     let imageOutput = "";
@@ -405,9 +406,15 @@ const indexOrder = {
         "worldTwoCommons" : {l: ["worldTwoCommons"], req: function() {return true;}},
         "worldTwoSpecial1" : {l: ["barrierLayer"], req: function() {return indexHasOre("✴️") > 0}},
         "worldTwoSpecial2" : {l: ["borderLayer"], req: function() {return indexHasOre("❌") > 1000000}},
+        "worldTwoSpecial3" : {l: ["checkmarkLayer"], req: function() {return indexHasOre("✅") > 10}},
     },
     1.1: {
         "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"], req: function() {return player.sr1Unlocked}},
+    },
+    1.2: {
+        "watrWatr" : {l: ["waterLayer2"], req: function() {return true}},
+        "watrWatrDeep" : {l: ["deepWaterLayer"], req: function() {return indexHasOre("deepWater")}},
+        "watrWatrJohn" : {l: ["johnLayer","jimLayer"], req: function() {return player.john.spokeWith}},
     },
     0.9: {
         "galactica" : {l: ["starLayer", "nebulaLayer"], req: function() {return player.galacticaUnlocked}},
@@ -417,9 +424,12 @@ const indexOrder = {
         "caves2" : {l: ["ccCave", "moCave", "foCave", "axCave", "ioCave", "ggCave"], req: function() {return player.sr1Unlocked}},
         "caves3" : {l: ["watrCave"], req: function() {return player.pickaxes["pickaxe26"]}},
         "caves4" : {l: ["abysstoneCave"], req: function() {return indexHasOre("🕳️") > 100000}},
+        "caves5" : {l: ["janeCave"], req: function() {return indexHasOre("🤽‍♀️") > 10}},
+        "caves6" : {l: ["timeCave"], req: function() {return indexHasOre("🕰️") > 10}},
     },
     "events" : {
-        "events1" : {l: ["event"], req: function() {return true;}}
+        "events1" : {l: ["event"], req: function() {return true;}},
+        "johnMeta" : {l: ["johnMetaLayer"], req: function() {return player.john.spokeWith}},
     }
 }
 function addIndexLayers(world) {
@@ -437,17 +447,31 @@ function addIndexLayers(world) {
                 else if (world === "events") {allOres = ["🟩"]}
                 else allOres = layerList[list[i]];
                 const thisMat = getIndexLayerOre(allOres);
+                let thisMatImage
+                if(oreList[thisMat] && oreList[thisMat].hasImage){ thisMatImage = "<img src="+oreList[thisMat].src+">"}
+                else thisMatImage = thisMat
                 if (layer.indexOf("worldOneSpecial") === -1) {
-                    if (world === "caves") button.textContent = `${thisMat} 0-∞m`;
-                    else if (list[i].indexOf("Commons") > -1) button.textContent = `${allOres[allOres.length-1]} 0-∞m`;
-                    else if (list[i] === "event") button.textContent = "Limited Ores"
+                    if (world === "caves") button.textContent = `${thisMatImage} 0-∞m`;
+                    else if (list[i].indexOf("Commons") > -1) button.textContent = `${allOres[allOres.length-1]} 0-${(world === "2")?'7999m':'∞m'}`;
+                    
                     else if (world === "2") {
-                        if (thisMat === "✖️") button.textContent = `${thisMat} ${8000}m`
-                        else if (thisMat === "❌") button.textContent = `${thisMat} ${8001}-∞m`
-                        else button.textContent = `${thisMat} ${(i - 1) * 2000}m`
-                    } else button.textContent = `${thisMat} ${i * 2000}m`
+                        if (thisMat === "✖️") button.textContent = `${thisMatImage} 8000m`
+                        else if (thisMat === "❌") button.textContent = `${thisMatImage} 8001-∞m`
+                        else if (thisMat === "✅") button.textContent = `${thisMatImage} ????m`
+                        else button.innerHTML = `${thisMatImage} ${(i - 1) * 2000}m`
+                    } 
+                    else if (world === "1.2"){
+                        if (thisMat === "🌊") button.innerHTML = `${thisMat} 0m`
+                        if (thisMat === "deepWater") button.innerHTML = `${thisMatImage} 100,000m`
+                        if (["🤽‍♂️","🤽"].includes(thisMat)) button.innerHTML = `${thisMatImage} ???m`
+                    }
+                    else if(world === "events"){
+                        if (list[i] === "event") button.textContent = "Limited Ores"
+                        if (list[i] === "johnMetaLayer") button.textContent = "🤽‍♂️'s F&F"
+                    }
+                    else button.innerHTML = `${thisMatImage} ${i * 2000}m`
                 } else {
-                    button.textContent = `${thisMat} ????m`
+                    button.innerHTML = `${thisMat} ????m`
                 }
                 button.setAttribute("onclick", `createIndexCards("${list[i]}")`);
                 button.classList.add(`indexButton${list[i]}`);
@@ -484,7 +508,8 @@ function createIndexCards(layer) {
     createIndexCards.indexing = layer;
     const h = get("loungeCardHolder");
     const ic = layer.indexOf("Commons") > -1
-    while (h.firstChild) h.firstChild.remove();
+	h.textContent=""
+    //while (h.firstChild) h.firstChild.remove();
     let list;
     if (caveList[layer] === undefined) {
         if (ic) list = [...layerList[layer]];
@@ -506,7 +531,7 @@ function createIndexCards(layer) {
             }
         }
         else list = [...layerDictionary[layer].layer];
-
+		if(!ic)list = list.filter((e)=>!layerList.worldTwoCommons.includes(e) && !layerList.worldOneCommons.includes(e))
         for (let i = list.length - 1; i >= 0; i--) {
             const ore = list[i];
             const tier = oreList[ore]["oreTier"];
@@ -522,11 +547,21 @@ function createIndexCards(layer) {
     }
     for (key in list) {
         const copying = get("indexCardCopy").cloneNode(true);
-        copying.id = "";
-        get("loungeCardHolder").prepend(copying);
         const ore = list[key];
         const tier = oreList[ore]["oreTier"];
         const hide = (oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Sacred"}) && oreList[ore]["foundAt"] === undefined) && indexHasOre(ore) === 0;
+        copying.id = "";
+        let msg = oreList[ore]['spawnMessage']
+        if(msg !== ""){
+            let spawnMessage = document.createElement('span');
+            spawnMessage.classList.add('oreIndexSpawnMessage');
+            spawnMessage.style.opacity=0;
+            if (hide) spawnMessage.textContent = "???";
+            else spawnMessage.textContent = msg
+            copying.prepend(spawnMessage);
+        }
+
+        get("loungeCardHolder").prepend(copying);
         if (oreList[ore]["hasImage"]) {
             document.querySelector(".indexCardOre").innerHTML = `<span class="indexCardImageOre ${hide ? "indexCardBlackout" : ""}"><img src="${oreList[ore]["src"]}"></span>`;
         } else {
@@ -539,7 +574,7 @@ function createIndexCards(layer) {
         document.querySelector(".indexCardFound").textContent = `${hide || (indexHasOre(ore) === 0 && f === undefined) ? "Never Found!" : (f === undefined ? "No Date Detected!" : new Date(f).toUTCString())}`;
         if (caveList[layer] !== undefined) {
             document.querySelector(".indexCardLuck").textContent = `${hide ? "1/??? Base Rarity" : `1/${(oolProbabilities[ore] !== undefined ? formatIndexNum(1/oolProbabilities[ore]) : formatIndexNum(oreList[ore]["numRarity"]))} Base Rarity`}`;
-            document.querySelector(".indexCardRng").textContent = `${hide ? "1/??? Adjusted" : `1/${(oolProbabilities[ore] !== undefined ? formatIndexNum(1/oolProbabilities[ore] * getCaveMulti(layer)) : formatIndexNum(oreList[ore]["numRarity"] * getCaveMulti(layer)))} Adjusted`}`;
+            document.querySelector(".indexCardRng").textContent = `${hide ? "1/??? Adjusted" : `1/${(oolProbabilities[ore] !== undefined ? formatIndexNum(1/oolProbabilities[ore] * getCaveMulti(layer)) : formatIndexNum(1/oreList[ore]["decimalRarity"] * getCaveMulti(layer)))} Adjusted`}`;
         } else {
             document.querySelector(".indexCardLuck").textContent = `${hide ? "1/??? Base Rarity" : `1/${formatIndexNum(oreList[ore]["numRarity"])} Base Rarity`}`;
             if (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) {
@@ -547,9 +582,9 @@ function createIndexCards(layer) {
                 let pickaxe = pickaxeStats[player.stats.currentPickaxe];
                 if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
                 else bulkAmt = pickaxe.mined;
-                if (player.gears["gear41"]) bulkAmt += 50000;
                 if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
                 if (player.gears["gear39"]) bulkAmt = Math.floor(bulkAmt*3);
+                if(oreList[ore]["decimalRarity"] >= 1/1000 && player.gears["green_chemicals"])bulkAmt = Math.floor(bulkAmt * 5)
                 const rarity = oreList[ore]["decimalRarity"] * bulkAmt;
                 if (rarity > 1) document.querySelector(".indexCardRng").textContent = `${hide ? "Guaranteed ??? With Simulated" : `Guaranteed ${formatNumber(Math.floor(rarity))}x With Simulated.`}`;
                 else document.querySelector(".indexCardRng").textContent = `${hide ? "1/??? With Simulated" : `1/${formatIndexNum(Math.floor(1/oreList[ore]["decimalRarity"]))} With Simulated.`}`;
@@ -567,10 +602,70 @@ function createIndexCards(layer) {
     }
 }
 createIndexCards.indexing = undefined;
+createEventCards.indexing = undefined
 function formatIndexNum(num) {
     if (num >= 1000000000000000) return formatNumber(num, 2);
     else return num.toLocaleString();
 }
+function showSpawnMessage(card){
+	if (!card.firstChild.classList) return
+	let current = Number(card.firstChild.style.opacity)
+	card.firstChild.style.opacity = (current+1)%2
+}
+function createEventCards(world, button) {
+	const buttons = get("loungeEventWorldsHolder").children;
+	for (b of buttons) {
+		let key = b.attributes.world.value;
+		if (!portalLocations[key].req()) {
+			b.disabled = true;
+			b.textContent = "[Research Required]";
+		} else {
+			b.disabled = false;
+			b.textContent = portalLocations[key].title;
+		}
+	}
+
+	if (world !== createEventCards.indexing) {
+		document
+			.getElementsByClassName("currentEventWorld")[0]
+			?.classList.remove("currentEventWorld");
+		button?.classList.add("currentEventWorld");
+	}
+	createEventCards.indexing = world;
+	get("loungeEventHolder").innerText = "";
+	const worldEvents = collectWorldEvents(world).sort(
+		(a, b) => events[b].rate - events[a].rate
+	);
+	for (const i of worldEvents) {
+		const hidden = !player.unlockedEvents[i];
+		const copying = get("eventCardCopy").cloneNode(true);
+		copying.id = "";
+		get("loungeEventHolder").prepend(copying);
+		if (hidden) {
+			document.getElementsByClassName("eventCardOre")[0].textContent = "?";
+		} else {
+			if (events[i].ore.length < 5)
+				document.getElementsByClassName("eventCardOre")[0].textContent =
+					events[i].ore;
+			else {
+				document.getElementsByClassName("eventCardOre")[0].innerHTML =
+					`<img src=${oreList[events[i].ore].src}>`;
+			}
+			document.getElementsByClassName("eventSpawnMessage")[0].innerHTML =
+				events[i].message;
+			document.getElementsByClassName("eventDuration")[0].innerHTML =
+				"Duration: " + msToTime(events[i].duration);
+			document.getElementsByClassName("eventEffect")[0].innerHTML =
+				"Ore boost: x" + events[i].boost;
+			if (events[i].specialText !== "N/A")
+				document.getElementsByClassName("eventSideEffect")[0].innerHTML =
+					"Side effect: " + events[i].specialText;
+		}
+		document.getElementsByClassName("eventSpawnRate")[0].textContent =
+			"Rate: 1/" + formatNumber(1 / events[i].rate) + " every 500ms";
+	}
+}
+
 let testSoundTimeout = null;
 function testSound(name, element) {
     if (allAudios[name].currentTime === 0) {
@@ -608,11 +703,11 @@ function enableDisguisedChills() {
 function switchFont() {
     if (player.settings.usingNewEmojis) {
         player.settings.usingNewEmojis = false;
-        document.body.style.fontFamily = "";
+        document.body.classList.remove("emoji");
         document.getElementById("switchFont").style.backgroundColor = "#FF3D3D";
     } else {
         player.settings.usingNewEmojis = true;
-        document.body.style.fontFamily = `system-ui, Tahoma, Verdana, sans-serif, Noto Color Emoji`;
+        document.body.classList.add("emoji");
         document.getElementById("switchFont").style.backgroundColor = "#6BC267";
     }
 }
@@ -689,17 +784,13 @@ function longTime(milliseconds) {
     let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
     let days = Math.floor((milliseconds / 1000 / 60 / 60 / 24) % 365);
     let years = Math.floor((milliseconds / 1000 / 60 / 60 / 24 / 365));
-    const finalTime = [
-        years.toString().padStart(20, "0"),
-        days.toString().padStart(3, "0"),
-        hours.toString().padStart(2, "0"),
-        minutes.toString().padStart(2, "0"),
-        seconds.toString().padStart(2, "0")
-    ].join(":");
-    for (let i = 0; i < finalTime.indexOf(":") + 1; i++) if (finalTime[i] !== "0") {
-        return (finalTime[i] === ":" ? finalTime.substring(i + 1) : finalTime.substring(i));
-    }
-    return finalTime;
+    let str = ""
+    str += years===0? "" : years+":"
+    str += (str===""&&days===0) ? "" : String(days).padStart(3, "0")+":"
+    str += String(hours).padStart(2, "0")+":"
+        +String(minutes).padStart(2, "0")+":"
+        +String(seconds).padStart(2, "0")
+    return str
 }
 function switchHighRarity(element) {
     const value = Number(element.value);
@@ -723,7 +814,7 @@ function createWebhookId(parent) {
     const children = parent.children;
     const webhookName = children[0].children[0].value;
     const rarityNum = Number(children[1].children[0].value);
-    const idName = children[2].children[0].value;
+    const idName = String(Date.now())
     const webhookLink = children[3].children[0].value;
     if (isNaN(rarityNum) || webhookLink === undefined || idName === undefined || webhookName === undefined) return;
     if (player.webHook.ids[idName] !== undefined) {
@@ -805,6 +896,10 @@ function convertOre(ore, amt, type) {
         hasConverted = true;
     }
     resetVariantVals();
+    if(oreList[ore].oreTier == "Hyperdimensional"){
+        verifiedOres.countHyperdimensionalOres()
+        verifiedOres.applyHyperdimensionalLuck(true)
+    }
 }
 function allButOne(ore) {
     if (playerInventory[ore] === undefined) {oreNotFound(); return;}
@@ -818,6 +913,10 @@ function allButOne(ore) {
         }
     }
     resetVariantVals();
+    if(oreList[ore].oreTier == "Hyperdimensional"){
+        verifiedOres.countHyperdimensionalOres()
+        verifiedOres.applyHyperdimensionalLuck(true)
+    }
 }
 function resetVariantVals() {
     get("variantInputName").value = "";
@@ -844,11 +943,11 @@ function notEnoughOre() {
     }, 1000);
 }
 function timeSinceLastAutosave() {
-    let milliseconds = (cloudsaving.save_interval - (cloudsaving.next_save_time - Date.now()));
+    let milliseconds = (Date.now() - cloudsaving.last_save_success);
     let seconds = Math.floor((milliseconds / 1000) % 60);
     let minutes = Math.floor((milliseconds / 1000 / 60) % 60);
     let hours = Math.floor((milliseconds / 1000 / 60 / 60) % 24);
-    document.getElementById("lastAutosave").innerHTML = `Time Since Last Galaxy Cloud Save: ${[
+    document.getElementById("cloudLastSave").innerText = `Time Since Last Galaxy Cloud Save: ${[
         hours.toString().padStart(2, "0"),
         minutes.toString().padStart(2, "0"),
         seconds.toString().padStart(2, "0")
@@ -1014,7 +1113,7 @@ const portalLocations = {
     },
     1.1: {
         title: "Subrealm One",
-        desc: "The World of Flags!<br><br>Ore Tracker, Abyssal Leaper, Statistical Amplifier, Structural Service, Infinity Collector work here!<br><br>Tree of Life works here!<br><br>Unlock Requirement: 1 Flawless Tier Ore!<br><br>\"<i>The dreaded world of flags, the only good one being the trans flag</i>\" - Remsy",
+        desc: "The World of Flags!<br><br>Ore Tracker, Abyssal Leaper, Statistical Amplifier, Infinity Collector work here!<br><br>Tree of Life works here!<br><br>Unlock Requirement: 1 Flawless Tier Ore!<br><br>\"<i>The dreaded world of flags, the only good one being the trans flag</i>\" - Remsy",
         req: function() {return player.sr1Unlocked;},
         to: 1.1,
         hue: "40deg",
@@ -1029,13 +1128,21 @@ const portalLocations = {
         url: "galacticaImage.png"
     },
     1.2: {
-        title: "watr watr",
+        title: "Water World",
         desc: "watr watr!<br><br>All gears work here!<br><br>Null Chroma, Galactica Pickaxes work here!<br><br>Unlock Requirement: Visit Watr Once!<br><br>\"<i>All I have to say is watr watr watr watr</i>\" - Remsy",
         req: function() {return player.watrEntered;},
         to: 1.2,
         hue: "150deg",
         url: "watrWorldImage.webp"
     },
+	3: {
+		title: "Subrealm Water",
+		desc: "john's humble infinitely large house 🤽‍♂️ 🤽‍♂️ 🤽‍♂️ !<br><br>All Gears work here!<br><br>Hypermark Checkminator and above work here!<br><br>Unlock Requirement: Get the house keys from john (a friendly fella in the water world who wants nothing more than the reunion *one winged angel starts playing*)<br><br>\"<i>Please stop stealing my stuff<i>\" - John",
+		req: ()=>{return johnRewarded("house_keys")},
+		to: 3,
+		hue: "10deg",  //idk this is the portal's colour i THINK !?
+		url: "johnsHouseImage.png"//"johnsHouseImage.png.png"
+	}
 }
 function displayWorldInformation(world) {
     const info = portalLocations[world];
@@ -1064,7 +1171,7 @@ switchPortal.currentPortal = 1;
 function isUnlocked(portal) {
     return portalLocations[portal].req();
 }
-//SILLINESS BELOW!!!!!!!
+//SILLINESS BELOW!!!!!!! (well, this sure was a SILLY cavern !)
 function showCatText() {
     get("catStuff").style.display = "flex";
 }
@@ -1178,10 +1285,10 @@ function toggleHideCompleted() {
 function updateLoungeStats() {
     const settings = player.loungeSettings;
     if (settings.updateElements) {
-        get("updateLuck").textContent = `${player.displayStatistics.luck.toLocaleString()}x Luck`;
+        get("updateLuck").textContent = `${formatNumber(verifiedOres.getCurrentLuck(),2)}x Luck`;
         const blocks = getAvgBlockSpeed();
         get("updateGenerations").textContent = `${formatNumber(blocks, 2)} Generations/Min`;
-        get("updateLayer").textContent = `Mining In: ${getLayer(curY).layerMat}`
+        get("updateLayer").textContent = `Mining In: ${getLayer(curY).layerMat + (layerIsTriggered?"*":"")}`
         const dir = curDirection;
         let selDir;
         if (curDirection === "w") selDir = "Up";
@@ -1193,7 +1300,7 @@ function updateLoungeStats() {
         const cl = verifiedOres.getCaveLuck();
         const ctl = verifiedOres.getCaveTypeLuck();
         const cm = verifiedOres.getCaveModifier();
-        get("updateCL").textContent = `${cl}x Cave Luck`;
+        get("updateCL").textContent = `${formatNumber(cl, 2)}x Cave Luck`;
         get("updateCTL").textContent = `${ctl}x Cave Type Luck`;
         get("updateCM").textContent = `${cm} Cave Modifier`;
         const list = player.powerupCooldowns;

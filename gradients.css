@@ -320,9 +320,6 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#oblivionFracturer {
-    margin-top: 5vw;
-}
 #oblivionFracturer span {
     display: inline-flex;
     align-items: center;
@@ -333,12 +330,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#nullChroma {
-    height: 26vw;
+#nullChroma,  #oblivionFracturer{
+    height: 20em;
     padding-top: 0;
 }
 #nullChroma span {
-    padding-top: 7vw;
     display: inline-flex;
     align-items: center;
     height: 100%;
@@ -523,34 +519,58 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#ringOfLife span{
-    background: linear-gradient(to right,#403330 5%, #9A2910, #403330 95%);
+#ringoflife span {
+    background: linear-gradient(180deg in lch, #1e2d10, #6c8c07, #c2b671, #e4e8dd, #9f7d5c, #463a2c);
+    background-size: 600% 600%;
+    animation: ringoflife 20s ease infinite;
     -webkit-background-clip: text;
-    color: transparent;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
 }
-#ringOfIntelligence span{
-    background: linear-gradient(to right,#403330 5%, #1662A4, #403330 95%);
-    -webkit-background-clip: text;
-    color: transparent;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+@keyframes ringoflife {
+    0%   { background-position: 50% 0%; }
+    50%  { background-position: 51% 100%; }
+    100% { background-position: 50% 0%; }
 }
 #ringOfSound span{
-    background: linear-gradient(to right,#403330 5%, #0A9420, #403330 95%);
+    background: radial-gradient(circle, rgba(148, 187, 233, 1) 0%, rgba(9, 35, 84, 1) 25%, rgba(0, 66, 232, 1) 50%, rgba(9, 35, 84, 1) 75%, rgba(148, 187, 233, 1) 100%);    -webkit-background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#ringOfTheUnknown span{
-    background: linear-gradient(to right,#403330 5%, #000000, #403330 95%);
+#ringOfTheUnknown span{ /* act like it says ring of time */
+    background: linear-gradient(
+        90deg in lch,
+        #e6334b,
+        #feb813,
+        #f4e178,
+        #81c9dc,
+        #1f8cab,
+        #e1b0c5,
+        #d6af08,
+        #983a06,
+        #35450e,
+        #342487,
+        #005f72,
+        #c80679
+    );
+    background-size: 400% 100%;
+    animation: shiftGradient 8s linear infinite;
+
     -webkit-background-clip: text;
-    color: transparent;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
+    display:inline-block;
 }
+
+@keyframes shiftGradient {
+    from { background-position: 0% 50%; }
+    to   { background-position: 100% 50%; }
+}
+
 #ringOfCreation span{
     background: linear-gradient(to right,#403330 5%, #C6D224, #403330 95%);
     -webkit-background-clip: text;
@@ -559,14 +579,14 @@
     -webkit-text-fill-color: transparent;
 }
 #pickaxeOfFlight span{
-    background: linear-gradient(to right,#403330 5%, #2c8769, #403330 95%);
+    background: linear-gradient(to right,#403330 5%, #2C8769, #403330 95%);  /* why are the colours sometimes capitalized and sometimes not smh this game SUCKS */
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 #ringOfFire span{
-    background: linear-gradient(to right,#403330 5%, #2b1660, #403330 95%);
+    background: linear-gradient(to right,#403330 5%, #FF0000, #403330 95%);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;
@@ -607,8 +627,119 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+#hypermark_checkminator span{
+    background: linear-gradient(to right, #0b7f3f, #4dff9a, #ffffff, #4dff9a, #0b7f3f);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#heirloom span{
+    background: linear-gradient(to right,#0b2a3d 5%, #1e6fa3, #a7d8f0, #1e6fa3, #0b2a3d 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#water_polo_ball span{
+    background: linear-gradient(to right,#0a0a0a 5%, #ff7a00, #ffb347, #ff7a00, #0a0a0a 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#hat span{
+    display: block;
+    background: linear-gradient(to right,#083c44 5%, #00cfd6, #9ff6ff, #00cfd6, #083c44 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+#hat span:nth-child(1){
+    position: absolute;
+    z-index: -1;
+    mix-blend-mode: screen;
+    filter: blur(3px);
+    background-image:none;background-color:cyan;
+}
+    
+
+#ring_enabler span{
+    background: linear-gradient(
+        90deg in lch,
+        #403330,
+        #1662A4,
+        #0A9420,
+        #C6D224,
+        #2b1660,
+        #403330
+    );
+    background-size: 400% 400%;
+    animation: shiftGradient 8s ease-in-out infinite;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes shiftGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+#casinoChips span{
+    background: linear-gradient(to right,#1a1a1a 5%, #ff2d95, #ffd700, #00e5ff, #9b5cff, #1a1a1a 95%);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 #text span{
     background: linear-gradient(to right,);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#green_chemicals span {
+    background: linear-gradient(
+        90deg in lch,
+        #f7cac9,
+        #ffdcdb,
+        #ffffff,
+        #00c853,
+        #b2ff59,
+        lime, /*i did not expect this to work why does lime work*/
+        #b4c8ea,
+        #91a8d0,
+        #f7cac9
+    );
+    background-size: 400% 400%;
+    animation: shiftGradient 8s ease-in-out infinite;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes shiftGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+#phone span {
+    background: linear-gradient(to right,#f7c033, #509eb2, #eb5679);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#checkmark_teleporter span {
+    background: linear-gradient(to right,#FFEFD8, #40D739, #56F97F, #40D739, #FFEFD8);
     -webkit-background-clip: text;
     color: transparent;
     background-clip: text;

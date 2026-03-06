@@ -1,205 +1,259 @@
 const recipes = {
     "pickaxe0" : {
-        name: "What do I even name pickaxe 0",
-        recipe: []
+        name: "The destroyer of all mines.",
+        recipe: [],
+        pickaxe: true
     },
     "pickaxe1" : {
         name : "Mulch Mallet",
         recipe : [{ore:"🟫", amt:5000},{ore:"🟧", amt:160},{ore:"🟡", amt:30},{ore:"🔴", amt:17},{ore:"⚫", amt:7}],
         active : [],
+        pickaxe: true
     },
     "pickaxe2" : {
         name : "Mud Sickle",
         recipe : [{ore:"🟫", amt:25000},{ore:"🟥", amt:750},{ore:"🔵", amt:300},{ore:"🟣", amt:60},{ore:"🧧", amt:15}],
         active : [],
+        pickaxe: true
     },
     "pickaxe3" : {
         name : "Dirt Ravager",
         recipe : [{ore:"🟫", amt:100000},{ore:"🟧", amt:4000},{ore:"🟢", amt:1800},{ore:"🟠", amt:650},{ore:"🟤", amt:240},{ore:"⬜", amt:30},{ore:"🟨", amt:2}],
         active : [],
+        pickaxe: true
     },
     "pickaxe28" : {
         name: "Crystalline Excavator",
         recipe : [{ore:"🌫️", amt:250000},{ore:"🟪", amt:6900},{ore:"🟡", amt:2500},{ore:"◽", amt:480},{ore:"🔲", amt:3},{ore:"🔘", amt:2},{ore:"🔻", amt:1},{ore:"💚", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe29" : {
         name: "Ballast Breaker",
         recipe : [{ore:"🌫️", amt:500000},{ore:"🟧", amt:25000},{ore:"🔵", amt:8500},{ore:"⚫", amt:1300},{ore:"⬛", amt:70},{ore:"🟦", amt:25},{ore:"🔺", amt:2},{ore:"🔹", amt:1},{ore:"💙", amt:2},{ore:"🤎", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe30" : {
         name: "Tropical Carver",
         recipe : [{ore:"🌫️", amt:1250000},{ore:"🟥", amt:52000},{ore:"🟢", amt:28000},{ore:"⬜", amt:500},{ore:"🔲", amt:15},{ore:"🔻", amt:5},{ore:"🔸", amt:2},{ore:"🔷", amt:3},{ore:"💚", amt:3},{ore:"❤️", amt:2},{ore:"🤍", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe4" : {
         name : "Void Crusher",
         recipe : [{ore:"📰", amt:2000000},{ore:"🟪", amt:68000},{ore:"◽", amt:4750},{ore:"⬛", amt:270},{ore:"🟨", amt:60},{ore:"🔘", amt:15},{ore:"🔹", amt:7},{ore:"🔶", amt:5},{ore:"💙", amt:10},{ore:"❤️", amt:8},{ore:"🤍", amt:4},{ore:"⚙️", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe5" : {
         name : "Geode Staff",
         recipe : [{ore:"🪨", amt:2500000},{ore:"🟠", amt:32500},{ore:"🟣", amt:12000},{ore:"◾", amt:6900},{ore:"⬜", amt:1000},{ore:"🟦", amt:160},{ore:"🔺", amt:5},{ore:"🔹", amt:8},{ore:"💜", amt:8},{ore:"🖤", amt:5},{ore:"💠", amt:1},{ore:"🥏", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe6" : {
         name : "Earth Soiler",
         recipe : [{ore:"🟫", amt:3000000},{ore:"🟧", amt:290000},{ore:"🔵", amt:87500},{ore:"🟤", amt:13500},{ore:"🔻", amt:20},{ore:"🔶", amt:8},{ore:"❤️", amt:20},{ore:"🤍", amt:10},{ore:"🍁", amt:2},{ore:"🎄", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe7" : {
         name : "Crypt Smasher",
         recipe : [{ore:"🌵", amt:4000000},{ore:"🌊", amt:1500000},{ore:"🟢", amt:185000},{ore:"🟤", amt:27750},{ore:"🟨", amt:150},{ore:"🔸", amt:20},{ore:"🔷", amt:20},{ore:"🖍️", amt:2},{ore:"⚱️", amt:2},{ore:"🤿", amt:1},{ore:"🫧", amt:1},{ore:"🎀", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe8" : {
         name : "Labyrinthian Tide",
         recipe : [{ore:"🧱", amt:5000000},{ore:"🌊", amt:5000000},{ore:"☢️", amt:5000000},{ore:"🟪", amt:470000},{ore:"🧧", amt:15000},{ore:"🟨", amt:700},{ore:"🔺", amt:65},{ore:"🔶", amt:30},{ore:"🗿", amt:2},{ore:"🪙", amt:2},{ore:"🔔", amt:2},{ore:"🧩", amt:2},{ore:"⛵", amt:3},{ore:"🎣", amt:3},{ore:"🎇", amt:1},{ore:"🧲", amt:1},{ore:"👑", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe9" : {
         name : "77 Leaf Destroyer",
         recipe : [{ore:"📰", amt:15000000},{ore:"🧱", amt:15000000},{ore:"🟥", amt:1400000},{ore:"🟣", amt:115000},{ore:"⬜", amt:13500},{ore:"🔘", amt:280},{ore:"🔹", amt:100},{ore:"✂️", amt:20},{ore:"🎲", amt:18},{ore:"🪜", amt:17},{ore:"🪚", amt:15},{ore:"🏆", amt:4},{ore:"🧨", amt:5},{ore:"🔗", amt:6},{ore:"📝", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe10" : {
         name : "Planet Buster",
         recipe : [{ore:"🟫", amt:75000000},{ore:"🟧", amt:4150000},{ore:"🟡", amt:920000},{ore:"◾", amt:135000},{ore:"🔲", amt:1200},{ore:"🔸", amt:200},{ore:"🔷", amt:180},{ore:"🍁", amt:50},{ore:"🌻", amt:45},{ore:"🪵", amt:45},{ore:"🎄", amt:35},{ore:"🎍", amt:15},{ore:"🎃", amt:6},{ore:"🌲", amt:6},{ore:"🌏", amt:2},{ore:"🌪️", amt:2},{ore:"🥗", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe11" : {
         name : "Whirlpool of Fate",
         recipe : [{ore:"🌊", amt:225000000},{ore:"🔴", amt:1200000},{ore:"◽", amt:450000},{ore:"🟨", amt:5300},{ore:"🔻", amt:1000},{ore:"🔶", amt:470},{ore:"⛵", amt:325},{ore:"🎣", amt:315},{ore:"🤿", amt:300},{ore:"🫧", amt:300},{ore:"🐟", amt:100},{ore:"👑", amt:40},{ore:"🔱", amt:35},{ore:"🌀", amt:5},{ore:"👿", amt:4},{ore:"🪩", amt:3},{ore:"💫", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe12" : {
         name : "Wings of Glory",
         recipe : [{ore:"🧱", amt:150000000},{ore:"🪨", amt:150000000},{ore:"🌫️", amt:150000000},{ore:"🔵", amt:8000000},{ore:"🟠", amt:4000000},{ore:"⚫", amt:1230000},{ore:"🧧", amt:390000},{ore:"🟦", amt:22900},{ore:"🔺", amt:1900},{ore:"💚", amt:1500},{ore:"🤍", amt:750},{ore:"🧵", amt:70},{ore:"❄️", amt:40},{ore:"🥉", amt:35},{ore:"🧊", amt:25},{ore:"💸", amt:20},{ore:"👁️", amt:7},{ore:"🌈", amt:5},{ore:"🌇", amt:3}],
         active : [],
+        pickaxe: true
     },
     "pickaxe13" : {
         name : "The Key",
         recipe :  [{ore:"🟫", amt:10000000},{ore:"🧱", amt:10000000},{ore:"🌫️", amt:10000000},{ore:"🌊", amt:10000000},{ore:"🪨", amt:10000000},{ore:"☢️", amt:10000000},{ore:"🌵", amt:10000000},{ore:"📰", amt:10000000},{ore:"🌏", amt:1},{ore:"🔩", amt:1},{ore:"🧵", amt:1},{ore:"🌀", amt:1},{ore:"❄️", amt:1},{ore:"🥀", amt:1},{ore:"🔥", amt:1},{ore:"📝", amt:1}],
         active : [],
+        pickaxe: true
     },
     "pickaxe14" : {
         name : "Extreme Echolocator",
         recipe : [{ore:"📺", amt:50000},{ore:"🔃", amt:500},{ore:"↘️", amt:10},{ore:"⏬", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe15" : {
         name : "Corundum Caver",
         recipe : [{ore:"🚪", amt:400000},{ore:"🔁", amt:1800},{ore:"⬇️", amt:150},{ore:"⏫", amt:18},{ore:"▶️", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe16" : {
         name : "Starborne Slasher",
         recipe : [{ore:"🌐", amt:1000000},{ore:"⤵️", amt:1900},{ore:"↪️", amt:960},{ore:"🔽", amt:95},{ore:"⏮️", amt:15},{ore:"📕", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe17" : {
         name : "Nyabomb",
         recipe : [{ore:"♟️", amt:3000000},{ore:"🔂", amt:16000},{ore:"⏺️", amt:40},{ore:"⏏️", amt:10},{ore:"📗", amt:5},{ore:"📘", amt:3},{ore:"✏️", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe18" : {
         name : "Lunar Lightsabre",
         recipe : [{ore:"☁️", amt:7500000},{ore:"⬅️", amt:6000},{ore:"↖️", amt:1300},{ore:"➡️", amt:1150},{ore:"📙", amt:6},{ore:"🌧️", amt:2},{ore:"🌤️", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe19" : {
         name : "Gemstone Engraver",
         recipe : [{ore:"♟️", amt:12500000},{ore:"⬆️", amt:9750},{ore:"◀️", amt:1200},{ore:"⏯️", amt:275},{ore:"⏸️", amt:130},{ore:"📗", amt:15},{ore:"🧠", amt:2},{ore:"📐", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe20" : {
         name : "Gambler's Fallacy",
         recipe : [{ore:"❌", amt:2000000},{ore:"📺", amt:35000000},{ore:"🔼", amt:4850},{ore:"⏪", amt:1400},{ore:"✴️", amt:3},{ore:"📙", amt:20},{ore:"🛡️", amt:20},{ore:"🪃", amt:10},{ore:"🪓", amt:3},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe21" : {
         name : "Exponential Centrifuge",
         recipe : [{ore:"☁️", amt:37500000},{ore:"🚪", amt:37500000},{ore:"🔃", amt:2160000},{ore:"⏏️", amt:70},{ore:"📘", amt:50},{ore:"🔑", amt:20},{ore:"🌨️", amt:10},{ore:"🖇️", amt:10},{ore:"⛈️", amt:3},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe22" : {
         name : "Singularity Slammer",
         recipe : [{ore:"❌", amt:75000000},{ore:"📺", amt:100000000},{ore:"🔄", amt:2230000},{ore:"↪️", amt:260000},{ore:"⏬", amt:7800},{ore:"⏯️", amt:2100},{ore:"📗", amt:35},{ore:"📕", amt:30},{ore:"📙", amt:25},{ore:"📘", amt:20},{ore:"🛡️", amt:30},{ore:"🪃", amt:25},{ore:"🪓", amt:5},{ore:"🔕", amt:2},{ore:"🔨", amt:1}],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe23" : {
         name : "Staff of Binding",
         recipe : [{ore:"🚪", amt:200000000},{ore:"↘️", amt:148000},{ore:"➡️", amt:73000},{ore:"🔽", amt:49000},{ore:"🔒", amt:125},{ore:"🔑", amt:100},{ore:"🖇️", amt:35},{ore:"🔏", amt:5},{ore:"⛓️", amt:4},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe24" : {
         name : "SSS",
         recipe : [{ore:"☁️", amt:625000000},{ore:"🔃", amt:16175000},{ore:"⤵️", amt:2440000},{ore:"⏬", amt:28900},{ore:"⏺️", amt:18300},{ore:"📙", amt:7500},{ore:"📘", amt:6000},{ore:"🌨️", amt:300},{ore:"🪁", amt:200},{ore:"⛈️", amt:120},{ore:"🌩️", amt:45},{ore:"🪶", amt:4},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe25" : {
         name : "Coronary Catastrophe",
         recipe : [{ore:"🌐", amt:1500000000},{ore:"🔂", amt:17825000},{ore:"⬇️", amt:1480000},{ore:"◀️", amt:220000},{ore:"⏫", amt:178000},{ore:"🖱️", amt:2300},{ore:"💔", amt:200},{ore:"🔪", amt:50},{ore:"🧂", amt:20},{ore:"📽️", amt:10},{ore:"💘", amt:1},],
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe26" : {
         name : "Null Chroma",
         recipe : [{ore:"❌", amt:44444444444},{ore:"🕳️", amt:2600000},{ore:"✴️", amt:260},{ore:"⚙️", amt:1750000},{ore:"💠", amt:1460000},{ore:"🫧", amt:1000000},{ore:"💍", amt:584000},{ore:"🎍", amt:240000},{ore:"👑", amt:140000},{ore:"💎", amt:51500},{ore:"🌟", amt:34000},{ore:"💥", amt:23360},{ore:"🌀", amt:14175},{ore:"🪐", amt:12350},{ore:"🥗", amt:10950},{ore:"🪩", amt:8750},{ore:"📌", amt:275},{ore:"🚧", amt:320},{ore:"💫", amt:4350},{ore:"⛏️", amt:1},{ore:"☯️", amt:1},{ore:"🌳", amt:30},{ore:"🏰", amt:30},{ore:"🚿", amt:30},{ore:"🏔️", amt:30},{ore:"⚠️", amt:30},{ore:"🐪", amt:30},{ore:"🐋", amt:1095},{ore:"💵", amt:30},{ore:"🍃", amt:25},{ore:"👾", amt:15},{ore:"🪡", amt:15},{ore:"🚽", amt:15},{ore:"🎓", amt:15},{ore:"⚡", amt:15},{ore:"💘", amt:30},{ore:"💢", amt:50},{ore:"🪽", amt:2},{ore:"🗝️", amt:2},{ore:"🚫", amt:2},{ore:"♨️", amt:1},]        ,
-        active : []
+        active : [],
+        pickaxe: true
     },
     "pickaxe27" : {
         name: "The Tree of Life",
         recipe : [],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe31" : {
         name: "Undersea Eviscerator",
         recipe : [{ore:"🌊", amt:500000000000},{"ore":"⛵","amt":336000000},{"ore":"🎣","amt":322000000},{"ore":"🤿","amt":306000000},{"ore":"🫧","amt":303000000},{"ore":"🐟","amt":102000000},{"ore":"👑","amt":40800000},{"ore":"🔱","amt":37900000},{"ore":"🌀","amt":4290000},{"ore":"👿","amt":3540000},{"ore":"🪩","amt":2650000},{"ore":"💫","amt":1320000},{"ore":"🐋","amt":331000},{"ore":"⚓","amt":3540},{ore:"🪸", amt:1000},{ore:"HD 160529", amt:1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe32" : {
         name: "Dimensional Slicer",
         recipe : [{ore:"australiumIngot", amt:7500000},{ore: "⚠️", amt:175000},{ore: "🐪", amt:150000},{ore: "🐋", amt:145000},{ore: "🏰", amt:131500},{ore: "💵", amt:131500},{ore: "🌳", amt:125000},{ore: "🦴", amt:6700},{ore: "🦚", amt:4800},{ore: "🎩", amt:3900},{ore: "🏯", amt:2725},{ore: "🍓", amt:2095},{ore: "🤖", amt:1830},{ore: "Bismuth", amt:1140},{ore: "mutatedGrowth", amt:320},{ore: "godOfTheMine", amt:5},{ore: "unstableCore", amt:1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe33" : {
         name: "Wormhole Exterminator",
         recipe : [{ore:"australiumIngot", amt:66000000},{"ore":"⚙️","amt":250000000},{"ore":"🃏","amt":250000000},{"ore":"🖍️","amt":250000000},{"ore":"✂️","amt":250000000},{"ore":"⚱️","amt":250000000},{"ore":"🎲","amt":250000000},{"ore":"📟","amt":250000000},{"ore":"🗡️","amt":250000000},{"ore":"🎀","amt":250000000},{"ore":"🏆","amt":250000000},{"ore":"🗜️","amt":250000000},{"ore":"⌚","amt":206000000},{"ore":"⭐","amt":152000000},{"ore":"🔆","amt":143000000},{"ore":"🔥","amt":67200000},{"ore":"📝","amt":53800000},{"ore":"🌟","amt":41800000},{"ore":"💥","amt":28600000},{"ore":"🪐","amt":15100000},{"ore":"👀","amt":11200000},{"ore":"🏵️","amt":4130000},{"ore":"🪅","amt":3310000},{"ore":"🐪","amt":1370000},{"ore":"💵","amt":1200000},{"ore":"🦴","amt":61400},{"ore":"🎩","amt":35800},{"ore":"J1407b","amt":1},{"ore":"ascendedArtifact","amt":1}],
         active : [],
         pUnob: true,
-        req: function() {
-            return (toggleCraftingWorld.world === 1.1 || toggleCraftingWorld.world === 1.1) ? player.gears["gear43"] : true;
-        }
+        pickaxe: true
     },
     "pickaxe34" : {
         name: "Supercluster Capsizer",
         recipe : [{"ore":"🎮","amt":1250000000},{"ore":"🎫","amt":1250000000},{"ore":"🚗","amt":1250000000},{"ore":"📢","amt":1250000000},{"ore":"🎑","amt":1010000000},{"ore":"📿","amt":336000000},{"ore":"🎎","amt":159000000},{"ore":"🗳️","amt":113000000},{"ore":"⚛️","amt":28100000},{"ore":"🛢️","amt":8200000},{"ore":"💽","amt":323000},{"ore":"🍭","amt":37500},{"ore":"singularityEgg","amt":1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe35" : {
         name: "Galactic Engulfer",
         recipe : [{"ore":"nebula","amt":25000000000000},{"ore":"J1407b","amt":45},{"ore":"ascendedArtifact","amt":33},{"ore":"otherside","amt":17},{"ore":"noradrenaline","amt":1}],
         active : [],
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
     },
     "pickaxe36": {
         name: "Pickaxe of Flight",
-        recipe: [{"ore": "orbOfFlight", "amt": 1}],
+        recipe: [{"ore": "orbOfFlight", "amt": 1}, {"ore": "eternalCoral", "amt": 1}],
         active : [],
         req: function() {
             return player.p.orbOfFlight;
         },
-        pUnob: true
+        pUnob: true,
+        pickaxe: true
+    },
+    "hypermark_checkminator": {
+        name: "Hypermark Checkminator",
+        recipe: [
+			{"ore": "✅", "amt": 4e12},
+			{"ore": "📰", "amt": 700e12},
+			{"ore": "🛡️", "amt": 25e9},
+			{"ore": "🪓", "amt": 25e9},
+			{"ore": "🪞", "amt": 15e9},
+			{"ore": "🗳️", "amt": 150e9},
+			{"ore": "📽️", "amt": 10e9},
+			{"ore": "💽", "amt": 400e6},
+			{"ore": "🚬", "amt": 200e6},
+			{"ore": "HD 160529", "amt": 30000},
+			{"ore": "Real Scribbal", "amt": 50000},
+		],
+        active : [],
+        pUnob: true,
+        pickaxe: true
     },
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear1" : {
         name : "Real Candilium",
@@ -249,225 +303,268 @@ const recipes = {
     "gear10" : {
         name : "Logical Randomiser",
         recipe : [{ore:"🌐", amt:2500000},{ore:"🔄", amt:18500},{ore:"🔀", amt:6500},{ore:"➡️", amt:325},{ore:"⏫", amt:130},{ore:"⏏️", amt:10},{ore:"📕", amt:10},{ore:"📙", amt:10},{ore:"💻", amt:1},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear11" : {
         name : "Storm Sneakers",
         recipe : [{ore:"☁️", amt:5500000},{ore:"🔁", amt:25000},{ore:"↘️", amt:1750},{ore:"⏪", amt:140},{ore:"⏯️", amt:50},{ore:"📗", amt:30},{ore:"📘", amt:20},{ore:"🌧️", amt:3},{ore:"🌥️", amt:1},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear12" : {
         name : "Artifice Annihilator",
         recipe : [{ore:"🚪", amt:8750000},{ore:"⤴️", amt:17500},{ore:"⬅️", amt:10000},{ore:"⏬", amt:350},{ore:"⏏️", amt:45},{ore:"🔒", amt:4},{ore:"🔑", amt:3},{ore:"🖇️", amt:1},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear13" : {
         name : "Repurposed Replicator",
         recipe : [{ore:"🌐", amt:15000000},{ore:"🔃", amt:317500},{ore:"⤴️", amt:15000},{ore:"➡️", amt:2925},{ore:"⏺️", amt:325},{ore:"💻", amt:15},{ore:"🖱️", amt:5},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear14" : {
         name : "Cavern Capacitator",
         recipe : [{ore:"♟️", amt:22500000},{ore:"🔂", amt:280000},{ore:"↩️", amt:57500},{ore:"▶️", amt:450},{ore:"✏️", amt:10},{ore:"🧠", amt:6},{ore:"📖", amt:5},{ore:"📐", amt:2},{ore:"📚", amt:2},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear15" : {
         name : "High Powered Vacuum",
         recipe : [{ore:"☁️", amt:6000000},{ore:"📺", amt:6000000},{ore:"🚪", amt:6000000},{ore:"🌐", amt:6000000},{ore:"♟️", amt:6000000},{ore:"🔄", amt:690000},{ore:"⬆️", amt:49750},{ore:"◀️", amt:6200},{ore:"⏺️", amt:1400},{ore:"📗", amt:60},{ore:"📕", amt:50},{ore:"📙", amt:40},{ore:"📘", amt:30},{ore:"🛡️", amt:15},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear16" : {
         name : "Unlocked Speedcap",
         recipe : [{ore:"🌐", amt:60000000},{ore:"➡️", amt:19650},{ore:"⏩", amt:3250},{ore:"⏭️", amt:2500},{ore:"▶️", amt:915},{ore:"🖱️", amt:30},{ore:"🍆", amt:5},{ore:"💔", amt:2},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear17" : {
         name : "Infinity Collector II",
         recipe : [{ore:"♟️", amt:100000000},{ore:"⤵️", amt:530000},{ore:"🔽", amt:26500},{ore:"🔼", amt:23000},{ore:"⏸️", amt:2000},{ore:"✏️", amt:70},{ore:"🧠", amt:35},{ore:"📖", amt:35},{ore:"📐", amt:15},{ore:"📚", amt:10},{ore:"🖊️", amt:3}],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear18" : {
         name : "Clovers Undoing",
         recipe : [{ore:"📺", amt:250000000},{ore:"🔀", amt:1650000},{ore:"⬅️", amt:470000},{ore:"⏩", amt:8750},{ore:"⏮️", amt:11225},{ore:"⏸️", amt:2200},{ore:"🛡️", amt:275},{ore:"🪃", amt:235},{ore:"🪓", amt:35},{ore:"🔨", amt:5},{ore:"💣", amt:3},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear19" : {
         name : "Structural Service",
         recipe : [{ore:"🚪", amt:1500000000},{ore:"⤴️", amt:3400000},{ore:"↪️", amt:2300000},{ore:"⏪", amt:57000},{ore:"⏯️", amt:19500},{ore:"🔒", amt:4200},{ore:"🖇️", amt:1300},{ore:"⛓️", amt:100},{ore:"🚧", amt:30},{ore:"🛎️", amt:5},],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear20" : {
         name : "Statistical Amplifier",
         recipe : [{ore:"♟️", amt:4500000000},{ore:"↩️", amt:9000000},{ore:"⬆️", amt:4450000},{ore:"↖️", amt:1250000},{ore:"⏭️", amt:120000},{ore:"✏️", amt:10000},{ore:"📐", amt:3000},{ore:"🔎", amt:150},{ore:"📌", amt:75},{ore:"📍", amt:15},{ore:"🎓", amt:9}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear21" : {
         name : "Oblivion Fracturer",
         recipe : [{ore:"🦠", amt:70000000},{ore:"☣️", amt:40000000},{ore:"🎵", amt:20000000},{ore:"❓", amt:15000000},{ore:"🪇", amt:1},{ore:"🧬", amt:1},{ore:"🔭", amt:1},{ore:"🕸️", amt:1},],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear22" : {
         name : "Replicator Prototype",
         recipe : [{ore:"🇿🇦", amt:110}, {ore:"🇹🇿", amt:100}, {ore:"🇨🇩", amt:75}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear23" : {
         name : "Hyperdrive Accelerator",
         recipe : [{ore:"🇯🇵", amt:25}, {ore:"🇧🇩", amt:25}, {ore:"🇵🇰", amt:15}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear24" : {
         name : "Superenergetic Automaton",
         recipe : [{ore:"🇨🇺", amt:15}, {ore:"🇭🇹", amt:13}, {ore:"🇬🇹", amt:10}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear25" : {  
         name : "Alteration Reiterator",
         recipe : [{ore:"🇪🇸", amt:15}, {ore:"🇮🇹", amt:13}, {ore:"🇫🇷", amt:10}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear26" : {  
         name : "Stratum Nonillonator",
         recipe : [{ore:"🇪🇨", amt:18}, {ore:"🇨🇱", amt:15}, {ore:"🇻🇪", amt:12}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear27" : {  
         name : "Biome Enchanter",
         recipe : [{ore:"🇻🇺", amt:6}, {ore:"🇫🇲", amt:5}, {ore:"🇸🇧", amt:4}, {ore:"🇰🇾", amt:3}, {ore:"🇨🇰", amt:1}, {ore:"🇫🇰", amt:1}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear28" : {  
         name : "Celestian Reaper",
         recipe : [{ore:"🇸🇩", amt:740000},{ore:"🇳🇬", amt:37500},{ore:"🇨🇳", amt:6600},{ore:"🇭🇳", amt:1800},{ore:"🇺🇸", amt:600},{ore:"🇷🇺", amt:180},{ore:"🇧🇷", amt:18},{ore:"🇫🇯", amt:1},{ore:"🇳🇿", amt:1},],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear29" : {  
         name : "Abyssal Leaper",
         recipe : [{ore:"📰", amt:1000000000},{ore:"🎲", amt:9000},{ore:"🏆", amt:1900},{ore:"🗜️", amt:1700},{ore:"⌚", amt:1400},{ore:"📝", amt:350},{ore:"🌟", amt:250},{ore:"👀", amt:70},{ore:"🪅", amt:20},{ore:"💵", amt:6}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear30" : {  
         name : "RNG Manipulator",
         recipe : [{ore:"🌫️", amt:350000},{ore:"◾", amt:350},{ore:"🧧", amt:175},{ore:"🔻", amt:1},{ore:"🤍", amt:2}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear31" : {  
         name : "Makeshift Accelerator",
         recipe : [{ore:"☢️", amt:600000},{ore:"🔵", amt:9000},{ore:"🟨", amt:10},{ore:"🔘", amt:3},{ore:"🔸", amt:2},{ore:"💙", amt:5},{ore:"❤️", amt:4}],
-        active : [0.9, 1, 1.2, 2]
+        active : [0.9, 1, 1.2, 2, 3]
+
     },
     "gear32" : {  
         name : "Quantum Entangler",
         recipe : [{ore:"📺", amt:750000},{ore:"🔃", amt:7500},{ore:"🔂", amt:3000},{ore:"⤵️", amt:1000},{ore:"🔽", amt:50},{ore:"📗", amt:25},{ore:"📘", amt:10}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear33" : {  
         name : "Subatomic Superpositioner",
         recipe : [{ore:"🚪", amt:45000000},{ore:"🔁", amt:25000},{ore:"⬅️", amt:4400},{ore:"🔼", amt:440},{ore:"⏺️", amt:75},{ore:"🔒", amt:10},{ore:"🔑", amt:10},{ore:"🖇️", amt:3}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear34": {
         name : "Potentiality Multiplier",
         recipe : [{ore:"australiumIngot", amt:250000},{ore:"🥇", amt:17600},{ore:"Fox", amt:3911},{ore:"⛔", amt:1735},{ore:"Nyerd", amt:1730},{ore:"🔈", amt:666},{ore:"🧌", amt:1120},{ore:"🎉", amt:782},{ore:"🫶", amt:782},{ore:"🚫", amt:267},{ore:"♨️", amt:66},{ore:"kaleidoscope", amt:85},{ore:"🩸", amt:34},{ore:"mushroomCats", amt:55},{ore:"qrCode", amt:2}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear35": {
         name : "Electrifying Propagator",
         recipe : [{ore:"australiumIngot", amt:750000},{"ore":"💠","amt":150000000},{"ore":"⚜️","amt":150000000},{"ore":"🥏","amt":150000000},{"ore":"💍","amt":150000000},{"ore":"🔋","amt":130000000},{"ore":"🔮","amt":78200000},{"ore":"☄️","amt":64700000},{"ore":"💎","amt":27600000},{"ore":"❄️","amt":12100000},{"ore":"🧊","amt":8050000},{"ore":"🌈","amt":1700000},{"ore":"apatite","amt":1440000},{"ore":"🏔️","amt":853000},{"ore":"🪦","amt":12100},{"ore":"🪤","amt":5860},{"ore":"variousMinerals","amt":2290}],
-        active : [0.9, 1, 1.1, 1.2, 2]
+        active : [0.9, 1, 1.1, 1.2, 2, 3]
     },
     "gear36": {
         name: "Lightspeed Emulator",
         recipe: [{"ore":"✏️","amt":32700000},{"ore":"🧠","amt":17300000},{"ore":"📖","amt":16800000},{"ore":"📐","amt":7900000},{"ore":"📚","amt":5580000},{"ore":"🖊️","amt":1620000},{"ore":"🔎","amt":370000},{"ore":"📌","amt":218000},{"ore":"📍","amt":62200},{"ore":"🎓","amt":34000},{"ore":"🌱","amt":3230},{"ore":"⚖️","amt":2180}],
-        active : [0.9, 1, 1.2, 1.1, 2]
+        active : [0.9, 1, 1.2, 1.1, 2, 3]
     },
     "gear37": {
         name: "Increased Exponentiality",
         recipe: [{"ore":"🎐","amt":215000000},{"ore":"🌧️","amt":215000000},{"ore":"🌤️","amt":215000000},{"ore":"🌥️","amt":215000000},{"ore":"🌨️","amt":152000000},{"ore":"🪂","amt":127000000},{"ore":"🪁","amt":84000000},{"ore":"⛈️","amt":51600000},{"ore":"🌩️","amt":21800000},{"ore":"🌦️","amt":13800000},{"ore":"starglint","amt":5700000},{"ore":"🪶","amt":1850000},{"ore":"🍃","amt":283000},{"ore":"⚡","amt":39800},{"ore":"🪽","amt":14700}],
-        active : [0.9, 1, 1.2, 1.1, 2]
+        active : [0.9, 1, 1.2, 1.1, 2, 3]
     },
     "gear38": {
         name: "Forgotten Rose Quartz Shell",
         recipe: [{"ore":"🔕","amt":464000000},{"ore":"⭕","amt":174000000},{"ore":"🛑","amt":104000000},{"ore":"🔇","amt":31600000},{"ore":"💢","amt":4010000},{"ore":"⛔","amt":408000},{"ore":"🔈","amt":156000},{"ore":"🚫","amt":62900},{"ore":"♨️","amt":15500},{"ore":"🩸","amt":8030}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         pUnob: true
     },
     "gear39": {
         name: "Armband of Endless Dreams",
         recipe: [{"ore":"💻","amt":2750000000},{"ore":"⌨️","amt":2750000000},{"ore":"🖱️","amt":2750000000},{"ore":"🍆","amt":1640000000},{"ore":"💔","amt":741000000},{"ore":"🔪","amt":181000000},{"ore":"matrix","amt":113000000},{"ore":"🧂","amt":85900000},{"ore":"📽️","amt":30400000},{"ore":"🚽","amt":5670000},{"ore":"💘","amt":3280000},{"ore":"💞","amt":1190000},{"ore":"💰","amt":134000},{"ore":"☘️","amt":5940},{"ore":"🍀","amt":300}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         pUnob: true
     },
-    //1.044e17
-    "gear40": {
+    "ring_of_life": {
         name: "Ring of Life",
         recipe: [{"ore": "orbOfLife", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         req: function() {
-            return player.p.orbOfLife;
+            return polyRequirements.orbOfLife();
         },
         pUnob: true
     },
-    "gear41": {
-        name: "Ring of Intelligence",
-        recipe: [{"ore": "orbOfIntelligence", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
-        req: function() {
-            return player.p.orbOfIntelligence;
-        },
-        pUnob: true
-    },
-    "gear42": {
-        name: "Ring of Sound",
+    "ring_of_water": {
+        name: "Ring of Water",
         recipe: [{"ore": "orbOfSound", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         req: function() {
-            return player.p.orbOfSound;
+            return polyRequirements.orbOfSound();
         },
         pUnob: true
     },
-    "gear43": {
-        name: "Ring of The Unknown",
+    "ring_of_time": {
+        name: "Ring of Time",
         recipe: [{"ore": "orbOfTheUnknown", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         req: function() {
-            return player.p.orbOfTheUnknown;
+            return polyRequirements.orbOfTheUnknown();
         },
         pUnob: true
     },
-    "gear44": {
+    "ring_of_creation": {
         name: "Ring of Creation",
         recipe: [{"ore": "orbOfCreation", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         req: function() {
-            return player.p.orbOfCreation;
+            return polyRequirements.orbOfCreation();
         },
         pUnob: true
     },
     "gear45": {
         name: "Event Manager",
         recipe: [{"ore":"🎁","amt":60000000},{"ore":"🎮","amt":65},{"ore":"🎫","amt":55},{"ore":"🚗","amt":35},{"ore":"📢","amt":6},{"ore":"🎑","amt":5}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
     },
     "gear46": {
         name: "Time Destabilizer",
         recipe: [{"ore": "🎁", "amt": 750000},{"ore": "🟥", "amt": 750},{"ore": "🟦", "amt": 45},{"ore": "🔶", "amt": 2},{"ore": "💚", "amt": 3},{"ore": "🎮", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
     },
     "gear47": {
         name: "Disengaged Incrementer",
         recipe: [{"ore":"🎁","amt":2500000000},{"ore":"🎮","amt":53100},{"ore":"🎫","amt":44400},{"ore":"🚗","amt":28800},{"ore":"📢","amt":5310},{"ore":"🎑","amt":3960},{"ore":"📿","amt":1310},{"ore":"🎎","amt":600},{"ore":"🗳️","amt":400},{"ore":"⚛️","amt":100},{"ore":"🛢️","amt":30}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
     },
-    "gear48": {
+    "ring_of_fire": {
         name: "Ring of Fire",
         recipe: [{"ore": "orbOfFire", "amt": 1}],
-        active : [0.9, 1, 1.2, 1.1, 2],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
         req: function() {
-            return player.p.orbOfFire;
+            return polyRequirements.orbOfFire();
         },
         pUnob: true
     },
+    "heirloom": {
+        name: "John's Family Heirloom",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["heirloom"]}],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
+        pUnob: true
+    },
+    "water_polo_ball": {
+        name: "Stolen Water Polo Ball",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["water_polo_ball"]}],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
+        pUnob: true
+    },
+    "hat": {
+        name: "John's Hat",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["hat"]}],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
+        pUnob: true
+    },
+    "ring_enabler": {
+        name: "John's Ring Enabler",
+        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["ring_enabler"]}],
+        active : [0.9, 1, 1.1, 1.2, 2, 3],
+        pUnob: true
+    },
+	"green_chemicals": {
+		name: "Green Chemicals",
+		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"😹", "amt":3e12}, {"ore":"🐈", "amt":15e6}, {"ore":"🤯", "amt":15e6}, {"ore":"🐈‍⬛", "amt":10000},],
+		active: [0.9, 1, 1.1, 1.2, 2, 3],
+		pUnob: true
+	},
+	"checkmark_teleporter": {
+		name: "WHIMSYYYY",
+		recipe: [{"ore":"🫃", "amt":1e6}],
+		active: [2],
+		pUnob: true
+	},
+	"phone": {
+		name: "Better Call John",
+		recipe: [{"ore":"🤽‍♂️", "amt":1e12}, {"ore":"🤽", "amt":1e12}, {"ore":"neru", "amt":3e2}, {"ore":"miku", "amt":3e2}, {"ore":"teto", "amt":3e2}],
+		active: [0.9, 1, 1.1, 1.2, 2, 3],
+		pUnob: true
+	}
 }
 function calcLayerEstimates(obj/*l: [layers], e: [excluded tiers], a: layer amount, v: luck, c: search for celestial*/) {
     let layer = [];
@@ -509,8 +606,8 @@ function displayRecipe(recipe) {
         get("scrollableCraft").style.display = "none";
     } else {
         if (!pinInformation.locked) removeRecipeElements();
-        if (currentRecipeId !== undefined) {
-            buttonGradients[`${currentRecipeId}Craft`]["applied"] = false;
+        if (currentRecipeId !== undefined ) {
+            if(!Object.keys(johnRewards).includes(currentRecipeId)) buttonGradients[`${currentRecipeId}Craft`]["applied"] = false;
             getButtonByName(currentRecipeId).classList.remove("selectedOutline");
         }
         else get("scrollableCraft").style.display = "inline-flex";
@@ -528,13 +625,13 @@ function displayRecipe(recipe) {
         const consElem = get("newCraftingCons");
         const abilityElem = get("newCraftingAbilityImage");
         const iconElem = get("newCraftingPickaxeIcon");
-        if (recipe.indexOf("pickaxe") > -1) {
+        if (recipe.indexOf("pickaxe") > -1 || recipes[recipe].pickaxe) {
+            get("extraPickaxeInformation").style.display=""
             get("gearHolder").style.display = "none";
             get("pickaxeHolder").style.display = "";
             let pickaxe = pickaxeStats[recipe];
-            get("newCraftingHolder").style.height = "min(52.9vh,26.45vw)";
             get("craftingContainer").style.top = `min(${2 * origins["pickaxe"].top}vh,${origins["pickaxe"].top}vw)`;
-            get("craftingContainer").style.left = `min(${2 *origins["pickaxe"].left}vh,${origins["pickaxe"].left}vw)`;
+            get("scrollableCraft").style.flexDirection = "row"
             get("craftingContainer").style.borderBottomLeftRadius = `0`;
             get("craftingContainer").style.borderTopRightRadius = `0.5vw`;
             extraInfo.innerHTML = pickaxeStats[recipe].extraInformation;
@@ -550,9 +647,14 @@ function displayRecipe(recipe) {
                 luckElem.textContent = `${pickaxe.luck.toLocaleString()}x Luck.`;
                 let blocksUsed = (pickaxe.mined > pickaxe.revealed ? pickaxe.mined : pickaxe.revealed);
                 let cons = blocksUsed * pickaxe.luck / pickaxe.rate;
-                consElem.textContent = `${(Math.round(cons*1000)/1000).toLocaleString()} Pickaxe Consistency.`;
+                consElem.textContent = `${formatNumber(cons, 2)} Pickaxe Consistency.`;
                 let curSrc = pickaxe.ability;
-                abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
+                if(pickaxe.revealed === 1){
+                  abilityElem.style.display = "none"
+                } else{
+                  abilityElem.style.display = "block"
+                  abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
+                }
                 let stp = pickaxe.src;
                 stp  = stp.substring(stp.indexOf("src") + 5, stp.indexOf("</img>") - 2);
                 curSrc = stp;
@@ -561,7 +663,7 @@ function displayRecipe(recipe) {
                 if (!pinInformation.locked) {
                     addRecipeInformation(currentRecipeId);
                 }
-            } else {
+            } else { //tree of life
                 const treeUpgradeInfo = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`];
                 const treeInfo = pickaxe[player.upgrades["pickaxe27"].level];
                 const nextInfo = pickaxe[player.upgrades["pickaxe27"].level+1];
@@ -575,22 +677,23 @@ function displayRecipe(recipe) {
                 let cons = blocksUsed * treeInfo.luck / pickaxe.rate;
                 consElem.textContent = `${(Math.round(cons*1000)/1000).toLocaleString()} Pickaxe Consistency.`;
                 let curSrc = pickaxe.ability;
+                abilityElem.style.display = "block"
                 abilityElem.src = curSrc ? curSrc : 'media/noFile.png';
                 let stp = pickaxe.src;
                 stp  = stp.substring(stp.indexOf("src") + 5, stp.indexOf("</img>") - 2);
                 curSrc = stp;
                 if (curSrc === "⛏️") curSrc = 'media/noFile.png';
                 iconElem.src = curSrc;
-                if (!pinInformation.locked && player.upgrades["pickaxe27"].level < 5) {
+                if (!pinInformation.locked && player.upgrades["pickaxe27"].level < 6) {
                     addRecipeInformation(currentRecipeId);
-                } else if (!pinInformation.locked && player.upgrades["pickaxe27"].level === 5) {
+                } else if (!pinInformation.locked && player.upgrades["pickaxe27"].level === 6) {
                     get("newCraftItem").setAttribute("onclick", `craftPickaxe('pickaxe27')`);
                 }
             }
         } else {
-            get("newCraftingHolder").style.height = "min(26vh,13vw)";
-            get("craftingContainer").style.top = `min(${2*origins["gear"].top}vh,${origins["gear"].top}vw)`;
-            get("craftingContainer").style.left = `min(${2*origins["gear"].left}vh,${origins["gear"].left}vw)`;
+            get("extraPickaxeInformation").style.display="none"
+            get("craftingContainer").style.top = "0px";
+            get("scrollableCraft").style.flexDirection = "column"
             get("craftingContainer").style.borderBottomLeftRadius = `0.5vw`;
             get("craftingContainer").style.borderTopRightRadius = `0`;
             get("gearHolder").style.display = "";
@@ -614,6 +717,7 @@ function addRecipeInformation(recipe) {
     let thisRecipe = recipes[recipe].recipe;
     if (recipe === "pickaxe27") thisRecipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
     const append = get("newCraftingRecipeHolder");
+    append.textContent=""
     for (let i = 0; i < thisRecipe.length; i++) {
         const ore = thisRecipe[i].ore;
         const have = playerInventory[ore]["normalAmt"];
@@ -738,16 +842,16 @@ function collapseRecipe() {
     if (pinInformation.collapsed) {
       //fold
         pinInformation.collapsed = false;
-        get("newCraftingRecipeHolder").style.height = "min(29.2vh,14.6vw)";
-        get("pinnedRecipeHolder").style.height = "min(42vh, 21vw)";
+        get("newCraftingRecipeHolder").classList.remove("unfoldedRecipeHolder");
+        get("newCraftingRecipeHolder").classList.add("foldedRecipeHolder");
         get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/downone.png')";
         const textEdit = get("collapseRecipe").children[0];
         textEdit.innerHTML = textEdit.innerHTML.replace("Collapse", "Expand");
     } else {
       //unfold
         pinInformation.collapsed = true;
-        get("newCraftingRecipeHolder").style.height = "100%";
-        get("pinnedRecipeHolder").style.height = "min-content";
+        get("newCraftingRecipeHolder").classList.remove("foldedRecipeHolder");
+        get("newCraftingRecipeHolder").classList.add("unfoldedRecipeHolder");
         get("collapseRecipe").children[0].children[0].style.backgroundImage = "url('media/upone.png')";
         const textEdit = get("collapseRecipe").children[0];
         textEdit.innerHTML = textEdit.innerHTML.replace("Expand", "Collapse");
@@ -792,8 +896,10 @@ function dragElement(elmnt) {
   }
 }
 function removeRecipeElements() {
-    const t = get("newCraftingRecipeHolder").children;
-    for (let i = t.length - 1; i >= 0; i--) t[i].remove();
+    get("newCraftingRecipeHolder").textContent=""
+    //huh???
+    //const t = get("newCraftingRecipeHolder").children;
+    //for (let i = t.length - 1; i >= 0; i--) t[i].remove();
 }
 const cwnames = {
     "0.9" : "G",
@@ -801,7 +907,8 @@ const cwnames = {
     "2" : "W2",
     "1.1" : "SR1",
     "1.2" : "WW",
-    "???" : "???"
+    "???" : "???",
+    "john": '<img src="media/john/john.svg">',
 } 
 function toggleCraftingWorld() {
     setWorldSelectors();
@@ -814,16 +921,18 @@ function toggleCraftingWorld() {
         vars.visible = true;
     }
     showSelectedWorld();
-    const text = getWorldText();
-    get("worldSelectButton").textContent = `Items From World: ${cwnames[vars.world]}`;
+    //const text = getWorldText();
+    get("worldSelectButton").innerHTML = `Items From World: ${cwnames[vars.world]}`;
     switchWorldCraftables(vars.world)
 }
 function selectCraftingWorld(num) {
-    if (num !== "???") {
+    if (!["???","john"].includes(num) ) {
         toggleCraftingWorld.world = Number(worldFromName(num));
         toggleCraftingWorld(1);
     } else {
-        switchWorldCraftables("???");
+        toggleCraftingWorld.world = num
+        switchWorldCraftables(num);
+        toggleCraftingWorld()
     }
 }
 function worldFromName(x) {
@@ -859,6 +968,30 @@ function idFromName(name) {
 }
 let lastCount = -1;
 function updateActiveRecipe() {
+    if(Object.keys(johnRewards).includes(currentRecipeId) && !recipes[currentRecipeId].pickaxe){
+        //this isn't a recipe this is john's reward durr 🤯🤯🤯🤯🤯🤯
+        get("pinAndCraft").style.visibility = "hidden"
+        get("craftingContainer").style.visibility = "hidden"
+        if(johnRewarded(currentRecipeId)){
+            //have gear
+            get("newCraftingGearEffect").style.visibility = "visible"
+            get("newCraftingGearEffect").textContent = gearInformation[currentRecipeId].effect
+            get("johnGearLocked").style.display = "none"
+        } else {
+            //don't
+            get("newCraftingGearEffect").style.visibility = "hidden"
+            get("johnGearLocked").innerHTML = `${player.john.questsCompleted.length} / ${(recipes[currentRecipeId].recipe[0].amt)} quests completed. 
+            Speak 🗣️🗣️ with john <img src=media/john/john.svg width="15em"> to learn more!`
+            //I don't know why but font size here is apparently 1px ??? ^
+            get("johnGearLocked").style.display = "block"
+        }
+        return
+    } else {
+        get("pinAndCraft").style.visibility = "visible"
+        get("craftingContainer").style.visibility = "visible"
+        get("newCraftingGearEffect").style.visibility = "visible"
+        get("johnGearLocked").style.display = "none"
+    }
     let totalCount = 0;
     let count = 0;
     let thisId = currentRecipeId;
@@ -869,7 +1002,7 @@ function updateActiveRecipe() {
         let currentRarity = 0;
             let recipe = recipes[thisId].recipe;
             if (thisId === "pickaxe27") {
-                if (player.upgrades["pickaxe27"].level > 4) recipe = [];
+                if (player.upgrades["pickaxe27"].level > 5) recipe = [];
                 else recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
             } 
             const elements = get("newCraftingRecipeHolder").children;
@@ -883,8 +1016,8 @@ function updateActiveRecipe() {
                     if (oreList[ore]["oreTier"] !== "Infinitesimal") totalRarity += oreList[ore]["numRarity"] * needed;
                     toChange.innerHTML = `${oreList[ore]["hasImage"] ? `<span class="craftingImage"><img src="${oreList[ore]["src"]}"></span>` : ore} ${amtOwned > 1000000000000 ? formatNumber(amtOwned, 3) : amtOwned.toLocaleString()}/${needed > 1000000000000 ? formatNumber(needed, 3) : needed.toLocaleString()}`;
                     if(amtOwned >= needed) {
+												count++;
                         if (oreList[ore]["oreTier"] !== "Infinitesimal") {
-                            count++;
                             currentRarity += oreList[ore]["numRarity"] * needed;
                         }
                         toChange.style.color = "#6BC267";
@@ -901,8 +1034,8 @@ function updateActiveRecipe() {
                 }
             }
         let button = get("newCraftItem");
-        const type = (thisId.indexOf('pickaxe') > -1) ? "pickaxe" : "gear";
-        if (player.pickaxes[thisId] || player.gears[thisId] || (thisId === "pickaxe27" && player.upgrades["pickaxe27"].level > 4)) {
+        const type = (thisId.indexOf('pickaxe') > -1 || recipes[thisId].pickaxe) ? "pickaxe" : "gear";
+        if (player.pickaxes[thisId] || player.gears[thisId] || (thisId === "pickaxe27" && player.upgrades["pickaxe27"].level > 5)) {
             if (!(buttonGradients[`${thisId}Craft`]["applied"])) {
                 button.style.backgroundImage = buttonGradients[`${thisId}Craft`]["gradient"];
                 buttonGradients[`${thisId}Craft`]["applied"] = true;
@@ -915,6 +1048,7 @@ function updateActiveRecipe() {
                 else button.innerText = "Equip!";
             } else {
                 if (thisId === "gear9") button.innerText = "SILLIFY!";
+                if (thisId === "checkmark_teleporter") button.innerText = "CHECKMARKIFY!";
                 else button.innerText = "Owned!";
             }
         } else {
@@ -998,6 +1132,7 @@ const buttonGradients = {
     "pickaxe34Craft" : {"gradient" : "linear-gradient(to right, #2c8769, #085e7e, #2b1660, #520276, #920042, #520276, #2b1660, #085e7e, #2c8769)","applied" : false},
     "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
     "pickaxe36Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
+    "hypermark_checkminatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447, #ffffff, #7fb447)", "applied": false},
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "gear1Craft" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
@@ -1039,22 +1174,23 @@ const buttonGradients = {
     "gear37Craft" : {"gradient" : "linear-gradient(to right, #ccff33, #70e000, #008000, #004b23, #007200, #38b000, #9ef01a)","applied" : false},
     "gear38Craft" : {"gradient" : "linear-gradient(to right, #f7cac9, #ffdcdb, #ffffff, #b4c8ea, #91a8d0)","applied" : false},
     "gear39Craft" : {"gradient" : "linear-gradient(to right, #c4c5ff, #e1d3ff, #fce9ff, #e1d3ff, #c4c5ff)","applied" : false},
-    "gear40Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
-    "gear41Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #1662A4, #403330 95%)","applied" : false},
-    "gear42Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #0A9420, #403330 95%)","applied" : false},
-    "gear43Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #000000, #403330 95%)","applied" : false},
-    "gear44Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
+    "ring_of_lifeCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #9A2910, #403330 95%)","applied" : false},
+    "ring_of_waterCraft" : {"gradient" : "radial-gradient(circle, #94bbe9 0%, #092354 25%, #0042e8 50%, #092354 75%, #94bbe9 100%)","applied" : false},
+    "ring_of_timeCraft" : {"gradient" : "linear-gradient(to right, #e6334b, #feb813, #f4e178, #81c9dc, #1f8cab, #e1b0c5, #d6af08, #983a06, #35450e, #342487, #005f72, #c80679)","applied" : false},
+    "ring_of_creationCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
     "gear45Craft" : {"gradient" : "linear-gradient(to right, #D67AB1, #9E643C, #C2F8CB)","applied" : false},
     "gear46Craft" : {"gradient" : "linear-gradient(to right, #FB6376, #6DD6DA, #EFD6AC)","applied" : false},
     "gear47Craft" : {"gradient" : "linear-gradient(to right, #555B6E, #679436, #FFED65)","applied" : false},
-    "gear48Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #000000, #403330 95%)","applied" : false},
-    
+    "ring_of_fireCraft" : {"gradient" : "linear-gradient(to right, #403330 5%, #2B1660, #403330 95%)","applied" : false},
+    "green_chemicalsCraft" : {"gradient" : "linear-gradient(to right, #6dcff6, #ffc0cb, #ffffff, #ffc0cb, #6dcff6)","applied" : false}, 
+    "checkmark_teleporterCraft" : {"gradient" : "linear-gradient(to right, #FFEFD8, #40D739, #56F97F, #40D739, #FFEFD8)","applied" : false},
+	"phoneCraft" : {"gradient" : "linear-gradient(to right, #f7c033, #509eb2, #eb5679)","applied" : false},
 }
 function craftPickaxe(item) {
     let recipe = recipes[item].recipe;
-    const type = (item.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
+    const type = (recipes[item].pickaxe || recipe.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
     if (item === "pickaxe27") {
-        if (currentWorld === 1.1 && player.upgrades["pickaxe27"].level < 5) {
+        if (currentWorld === 1.1 && player.upgrades["pickaxe27"].level < 6) {
             recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
         } else if (currentWorld !== 1.1) {
             if (player.trophyProgress["subrealmOneCompletion"].trophyOwned) {
@@ -1084,7 +1220,6 @@ function craftPickaxe(item) {
         }
         if (item === "pickaxe27") {
             player.upgrades["pickaxe27"].level++;
-            player.upgrades["pickaxe27"].bought++;
             displayRecipe(currentRecipeId);
             displayRecipe("pickaxe27");
         }
@@ -1094,11 +1229,15 @@ function craftPickaxe(item) {
     if (type === "pickaxe") player.stats.currentPickaxe = item;
     if (currentWorld === 1 && item === "gear9")
         gearAbility2();
+	if (currentWorld === 2 && item === "checkmark_teleporter")
+		findCheckmark()
     if (player.gears["gear0"]) document.getElementById("trackerLock").style.display = "none";
     if (player.gears["gear24"]) get("allowAutoPowerup").style.display = "block";
     if (player.gears["gear45"]) showEventOptions();
     else hideEventOptions();
-    updateActiveRecipe();
+    if(player.gears["ring_of_time"])pickaxeStats.pickaxe27.canMineIn = [1, 1.1, 1.2, 2, 0.9]
+    if(player.gears["phone"])get("phoneButton").style.display = "flex"
+	updateActiveRecipe();
     utilitySwitchActions();
 }
 function getButtonByName(item) {
@@ -1125,6 +1264,7 @@ function utilitySwitchActions() {
     updateSpeed();
     a89();
     updateGearFaq();
+	updateAllCaves()
 }
 function updateGearFaq() {
     let output = ``;
@@ -1135,45 +1275,49 @@ function updateGearFaq() {
 let m87 = 0;
 const showOrders = {
     "p1" : ["pickaxe1", "pickaxe2", "pickaxe3", "pickaxe29", "pickaxe30", "pickaxe28", "pickaxe4", "pickaxe5", "pickaxe6", "pickaxe7", "pickaxe8", "pickaxe9", "pickaxe10", "pickaxe11", "pickaxe12", "pickaxe13"],
-    "p2" : ["pickaxe13", "pickaxe14", "pickaxe15", "pickaxe16", "pickaxe17", "pickaxe18", "pickaxe19", "pickaxe20", "pickaxe21", "pickaxe22", "pickaxe23", "pickaxe24", "pickaxe25", "pickaxe26"],
+    "p2" : ["pickaxe13", "pickaxe14", "pickaxe15", "pickaxe16", "pickaxe17", "pickaxe18", "pickaxe19", "pickaxe20", "pickaxe21", "pickaxe22", "pickaxe23", "pickaxe24", "pickaxe25"],
     "g1" : ["gear30", "gear31", "gear46", "gear0", "gear1", "gear2", "gear7", "gear8", "gear45", "gear3", "gear4", "gear5", "gear6", "gear9", "gear29", "gear47"],
-    "g2" : ["gear32", "gear10", "gear11", "gear12", "gear33", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "gear21"],
-    "p1.1" : ["pickaxe27", "pickaxe33"],
+    "g2" : ["gear32", "gear10", "gear11", "gear12", "gear33", "gear13", "gear14", "gear15", "gear16", "gear17", "gear18", "gear19", "gear20", "checkmark_teleporter"],
+    "p1.1" : ["pickaxe27"],
     "g1.1" : ["gear22", "gear23", "gear24", "gear25", "gear26", "gear27", "gear28"],
     "p1.2" : ["pickaxe31"],
     "g1.2" : ["gear36", "gear37"],
     "p0.9": ["pickaxe32", "pickaxe33", "pickaxe34", "pickaxe35", "pickaxe36"],
-    "g0.9": ["gear34", "gear35", "gear38", "gear39", "gear40", "gear41", "gear42", "gear43", "gear44", "gear48"]
+    "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
+    "p???": ["pickaxe26"],
+    "g???": ["gear21"],
+    "pjohn": ["hypermark_checkminator"],
+    "gjohn": ["phone","heirloom","water_polo_ball","hat","ring_enabler","green_chemicals"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
     disappear(document.getElementById("gearCrafts"));
-    let list = showOrders[`g${toggleCraftingWorld.world}`];
+    let list = showOrders[`p${toggleCraftingWorld.world}`];
     for (let i = 0; i < list.length; i++) {
         showItem(list[i]);
     }
     if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
-    else document.getElementById("sillyRecipe").style.display = "none";
-    document.getElementById("oblivionFracturer").style.display = "none";
-    if (toggleCraftingWorld.world === 1.1 && !player.gears["gear43"]) getButtonByName("pickaxe33").style.display = "none";
-    get("nullChroma").style.display = "none";
-    setListHeight();
+    else {
+		document.getElementById("sillyRecipe").style.display = "none";
+		document.getElementById("checkmark_teleporter").style.display = "none";
+		
+	}
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
     appear(document.getElementById("gearCrafts"));
-    m87++;
-    if (m87 === 3 && toggleCraftingWorld.world === 2) document.getElementById("oblivionFracturer").style.display = "flex";
-    else if (m87 > 3) m87 = 0;
     let list;
-    list = showOrders[`p${toggleCraftingWorld.world}`]
+    list = showOrders[`g${toggleCraftingWorld.world}`]
     for (let i = 0; i < list.length; i++) {
         showItem(list[i])
     }
     get("nullChroma").style.display = "none";
-    setListHeight();
 }
 function showItem(id) {
+    if(Object.keys(johnRewards).includes(id)){
+        getButtonByName(id).style.display = "flex";
+        return
+    }
     let canCont = true;
     if (recipes[id].req !== undefined) {
         if (!recipes[id].req()) canCont = false;
@@ -1185,58 +1329,38 @@ function showItem(id) {
     }
 }
 function switchWorldCraftables(world=currentWorld) {
-    if (world !== "???") {
-        let gearList;
-        let pickaxeList;
-        const elements = document.getElementsByClassName("craftingButton");
-        for (let i = 0; i < elements.length; i++) elements[i].style.display = "none";
-        pickaxeList = showOrders[`p${world}`];
-        gearList = showOrders[`g${world}`];
-        for (let i = 0; i < gearList.length; i++) showItem(gearList[i]);
-        for (let i = 0; i < pickaxeList.length; i++) showItem(pickaxeList[i]);
-        document.getElementById("nullChroma").style.display = "none";
-        document.getElementById("oblivionFracturer").style.display = "none";
+    let gearList;
+    let pickaxeList;
+    const elements = document.getElementsByClassName("craftingButton");
+    for (let i = 0; i < elements.length; i++) elements[i].style.display = "none";
+    pickaxeList = showOrders[`p${world}`];
+    gearList = showOrders[`g${world}`];
+    for (let i = 0; i < gearList.length; i++) showItem(gearList[i]);
+    for (let i = 0; i < pickaxeList.length; i++) showItem(pickaxeList[i]);
+    if (!["???","john"].includes(world)) {
         if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
-        else document.getElementById("sillyRecipe").style.display = "none";
-        if (toggleCraftingWorld.world === 1.1 && !player.gears["gear43"]) getButtonByName("pickaxe33").style.display = "none";
-        setListHeight();
-    } else {
-        const elements = document.getElementsByClassName("craftingButton");
-        for (let i = 0; i < elements.length; i++) elements[i].style.display = "none";
-        showPickaxes();
-        document.getElementById("nullChroma").style.display = "flex";
-        get("worldSelectables").style.display = "none";
+		else get("sillyRecipe").style.display = "none";
+        if (indexHasOre('🫃') && toggleCraftingWorld.world === 2) document.getElementById("checkmark_teleporter").style.display = "flex";
+		else get("checkmark_teleporter").style.display = "none";
     }
 }
 function setWorldSelectors() {
     const er = {
-        "0.9" : function() {return player.galacticaUnlocked && currentWorld !== 1.1;},
-        "1" : function() {return true && currentWorld !== 1.1;},
-        "2" : function() {return player.pickaxes["pickaxe13"] && currentWorld !== 1.1;},
+        "0.9" : function() {return player.galacticaUnlocked;},
+        "1" : function() {return true;},
+        "2" : function() {return player.pickaxes["pickaxe13"];},
         "1.1" : function() {return player.sr1Unlocked;},
-        "1.2" : function() {return player.watrEntered && currentWorld !== 1.1;},
-        "???" : function() {return player.trophyProgress["subrealmOneCompletion"].trophyOwned && player.trophyProgress["worldOneCompletion"].trophyOwned && player.trophyProgress["worldTwoCompletion"].trophyOwned && currentWorld !== 1.1;},
+        "1.2" : function() {return player.watrEntered;},
+        "???" : function() {return player.trophyProgress["subrealmOneCompletion"].trophyOwned && player.trophyProgress["worldOneCompletion"].trophyOwned && player.trophyProgress["worldTwoCompletion"].trophyOwned;},
+        "john": ()=>{return player.john.spokeWith},
     }
     const e = document.getElementsByClassName("worldCraftSelector");
     for (let i = 0; i < e.length; i++) {
-        if (er[worldFromName(e[i].textContent)]()) e[i].style.display = "flex";
+        if (er[worldFromName(e[i].innerHTML)]()) e[i].style.display = "flex";
         else e[i].style.display = "none";
     }
 }
-function setListHeight() {
-    return;
-    let search;
-    if (get("pickaxeCrafts").classList.contains("hidden")) {
-         search = get("gearCrafts").children;
-    } else {
-        search = get("pickaxeCrafts").children;
-    }
-    let count = 0;
-    for (let i = 0; i < search.length; i++) {
-        if (search[i].style.display === "flex") count++;
-    }
-    get("mainLower").style.height = `${19 + (count*2.3)}vw`;
-}
+
 let currentOreRecipe;
 const oreRecipes = {
     "frisbeeCraft" : {
@@ -1389,11 +1513,41 @@ const oreRecipes = {
         "result" : [{"ore":"🚧", "amt":5}, {"ore":"⛓️", "amt":10}, {"ore":"🖇️", "amt":200}, {"ore":"🔒", "amt":500}, {"ore":"🚪", "amt":250000000}],
         "multiplier" : 1
     },
+    "waterbuffaloCraft" : {
+        "cost" : [{"ore":"🤽‍♂️", "amt":20000000000000}, {"ore":"🤽🏻", "amt":100e10}, {"ore":"🤽🏼", "amt":100e10}, {"ore":"🤽🏽", "amt":100}, {"ore":"🤽🏾", "amt":100}, {"ore":"🤽🏿", "amt":100}, {"ore":"🤽", "amt":25000000000000}, {"ore":"🤽🏻‍♂️", "amt":1}, {"ore":"🤽🏼‍♂️", "amt":100}, {"ore":"🤽🏽‍♂️", "amt":100}, {"ore":"🤽🏾‍♂️", "amt":100}, {"ore":"🤽🏿‍♂️", "amt":1}, {"ore":"🤽‍♀️", "amt":1e6}, {"ore":"🤽🏻‍♀️", "amt":1000}, {"ore":"🤽🏼‍♀️", "amt":1}, {"ore":"🤽🏽‍♀️", "amt":10}, {"ore":"🤽🏾‍♀️", "amt":1}, {"ore":"🤽🏿‍♀️", "amt":1000}],
+        "result" : [{"ore":"🐃", "amt":1}],
+        "multiplier" : 1
+    },
+    "evilFlagCraft" : {
+        "cost" : [{"ore":"⚙️", "amt":250000000}, {"ore":"bitcoin", "amt":5000}, {"ore":"🐰", "amt":1}, {"ore":"✡️", "amt":1}, {"ore":"🧨", "amt":100000000}, {"ore":"💸", "amt":1000000000}, {"ore":"🇫🇷", "amt":50e3}, {"ore":"🇺🇸", "amt":120e3}, {"ore":"🛢️", "amt":40e6},{"ore":"evilJohn", "amt":1}, {"ore":"singularityEgg", "amt":1}],
+        "result" : [{"ore":"evilFlag", "amt":1}],
+        "multiplier" : 1
+    },
     "wtfCraft" : {
         "cost" : [{"ore":"⚙️","amt":250000000},{"ore":"🃏","amt":250000000},{"ore":"💠","amt":250000000},{"ore":"⚜️","amt":250000000},{"ore":"🖍️","amt":250000000},{"ore":"✂️","amt":250000000},{"ore":"⚱️","amt":250000000},{"ore":"🧪","amt":250000000},{"ore":"🎭","amt":250000000},{"ore":"🎲","amt":250000000},{"ore":"⛵","amt":250000000},{"ore":"🪜","amt":250000000},{"ore":"🥏","amt":250000000},{"ore":"🎣","amt":250000000},{"ore":"🤿","amt":250000000},{"ore":"🫧","amt":250000000},{"ore":"📟","amt":250000000},{"ore":"🍁","amt":250000000},{"ore":"🪄","amt":250000000},{"ore":"🌻","amt":250000000},{"ore":"🪚","amt":250000000},{"ore":"⚗️","amt":250000000},{"ore":"🪵","amt":250000000},{"ore":"🗿","amt":250000000},{"ore":"🔔","amt":250000000},{"ore":"🥽","amt":250000000},{"ore":"🎄","amt":250000000},{"ore":"🗡️","amt":250000000},{"ore":"🎴","amt":250000000},{"ore":"🧩","amt":250000000},{"ore":"💍","amt":250000000},{"ore":"🪙","amt":250000000},{"ore":"🔗","amt":250000000},{"ore":"🐟","amt":250000000},{"ore":"⏹️","amt":250000000},{"ore":"🎀","amt":250000000},{"ore":"🧨","amt":250000000},{"ore":"🎍","amt":250000000},{"ore":"🔋","amt":250000000},{"ore":"🪬","amt":250000000},{"ore":"🏆","amt":250000000},{"ore":"🗜️","amt":250000000},{"ore":"🧲","amt":250000000},{"ore":"🎨","amt":250000000},{"ore":"🔳","amt":250000000},{"ore":"⌚","amt":250000000},{"ore":"🕋","amt":250000000},{"ore":"🔮","amt":250000000},{"ore":"🕯️","amt":250000000},{"ore":"👑","amt":250000000},{"ore":"🎇","amt":250000000},{"ore":"🎃","amt":250000000},{"ore":"🔱","amt":250000000},{"ore":"⭐","amt":250000000},{"ore":"🌲","amt":250000000},{"ore":"☄️","amt":250000000},{"ore":"🔆","amt":250000000},{"ore":"🔥","amt":117000000},{"ore":"💎","amt":110000000},{"ore":"📝","amt":93800000},{"ore":"🧵","amt":93300000},{"ore":"🌏","amt":87900000},{"ore":"🌪️","amt":75900000},{"ore":"🌟","amt":72900000},{"ore":"💥","amt":50000000},{"ore":"❄️","amt":48500000},{"ore":"🔩","amt":44500000},{"ore":"🪞","amt":43900000},{"ore":"🥉","amt":42200000},{"ore":"🥀","amt":34800000},{"ore":"🌌","amt":34100000},{"ore":"🧊","amt":32100000},{"ore":"🧀","amt":30300000},{"ore":"🌀","amt":30300000},{"ore":"🪐","amt":26400000},{"ore":"👿","amt":25000000},{"ore":"⌛","amt":25000000},{"ore":"💸","amt":24800000},{"ore":"🥗","amt":23400000},{"ore":"👀","amt":19600000},{"ore":"🪩","amt":18700000},{"ore":"👁️","amt":9770000},{"ore":"💫","amt":9380000},{"ore":"🏵️","amt":7210000},{"ore":"🌈","amt":6820000},{"ore":"🎆","amt":6250000},{"ore":"apatite","amt":5770000},{"ore":"🪅","amt":5770000},{"ore":"💐","amt":5000000},{"ore":"🌇","amt":4360000},{"ore":"🏔️","amt":3410000},{"ore":"🚿","amt":3120000},{"ore":"⚠️","amt":2810000},{"ore":"🐪","amt":2400000},{"ore":"🐋","amt":2340000},{"ore":"🏰","amt":2110000},{"ore":"💵","amt":2100000},{"ore":"🌳","amt":2020000},{"ore":"🦴","amt":107000},{"ore":"🦚","amt":76500},{"ore":"🎩","amt":62400},{"ore":"🏯","amt":43600},{"ore":"🍓","amt":33500},{"ore":"🤖","amt":29300},{"ore":"⚓","amt":25000},{"ore":"🪤","amt":23400},{"ore":"Bismuth","amt":22500},{"ore":"variousMinerals","amt":9160},{"ore":"mutatedGrowth","amt":5110}],
         "result" : [{"ore":"singularityEgg", "amt":1}],
         "multiplier" : 1
-    }
+    },
+    "maracasCraft" : {
+      "cost" : [{"ore":"🎵", "amt":1e7}, {"ore":"🕸️", "amt":1}, {"ore":"🧬", "amt":1}, {"ore":"🔭", "amt":1}],
+      "result" : [{"ore":"🪇", "amt":1}],
+      "multiplier" : 1
+    },
+    "dnaCraft" : {
+      "cost" : [{"ore":"🦠", "amt":1e7}, {"ore":"🪇", "amt":1}, {"ore":"🕸️", "amt":1}, {"ore":"🔭", "amt":1}],
+      "result" : [{"ore":"🧬", "amt":1}],
+      "multiplier" : 1
+    },
+    "telescopeCraft" : {
+      "cost" : [{"ore":"❓", "amt":1e7}, {"ore":"🪇", "amt":1}, {"ore":"🧬", "amt":1}, {"ore":"🕸️", "amt":1}],
+      "result" : [{"ore":"🔭", "amt":1}],
+      "multiplier" : 1
+    },
+    "spiderwebCraft" : {
+      "cost" : [{"ore":"☣️", "amt":1e7}, {"ore":"🪇", "amt":1}, {"ore":"🧬", "amt":1}, {"ore":"🔭", "amt":1}],
+      "result" : [{"ore":"🕸️", "amt":1}],
+      "multiplier" : 1
+    },
 }
 function getRecipeById(id) {
     return oreRecipes[id];
@@ -1595,6 +1749,22 @@ const upgradeRecipes = {
             descriptions : [
                 "Luck:<br>40 -> 100",
                 "Ability Size:<br>46,650 -> 54,298"
+            ]
+        },
+        "upgrade5" : 
+        { 
+            recipe : [
+                {ore: "🏳️‍⚧️", amt: 1},
+                {ore: "🏁", amt: 50},
+                {ore: "🏳️‍🌈", amt: 70000},
+                {ore: "evilFlag", amt: 1},
+                {ore: "🇼🇫", amt: 1},
+                {ore: "silly", amt: 1},
+                {ore: "masa", amt: 1},
+            ],
+            descriptions : [//I don't think this is used anywhere
+                "Luck:<br>100 -> 700",
+                "Ability Size:<br>54,298 -> 2m"
             ]
         },
         //54298 63893
@@ -1839,7 +2009,7 @@ const pickaxeStats = {
         canMineIn:[1],
         extraInformation: "Mines 2 blocks at once when using automine.<br>Has 2x special cave type luck and slightly increased cave size.",
         tier: 7,
-        icon: "@marcelacoplao",
+        icon: "@verrdant",
 },
     
     "pickaxe13": {
@@ -1851,6 +2021,7 @@ const pickaxeStats = {
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 2],
         canMineIn:[1, 2],
+        extraInformation: "Unlocks World 2",
         tier: 0,
         icon: "@marcelacoplao",
 },
@@ -2033,10 +2204,11 @@ const pickaxeStats = {
         3 : {mined: 37468, revealed: 41654, luck: 20},
         4 : {mined: 46650, revealed: 54781, luck: 40},
         5 : {mined: 54298, revealed: 63893, luck: 100},
+        6 : {mined: 7.2e6, revealed: 1, luck: 444},
         rate: 500,
         src : "⛏️",
         doAbility: function(x, y) {pickaxeAbility27(x, y)},
-        canSpawnCaves:[1, 1.1],
+        canSpawnCaves:[1, 1.1, 1.2, 2, 0.9],
         canMineIn:[1, 1.1],
         tier: 8,
         icon: "",
@@ -2079,8 +2251,10 @@ const pickaxeStats = {
         canSpawnCaves:[1, 1.1, 1.2, 2, 0.9],
         canMineIn:[1, 1.1, 1.2, 2, 0.9],
         isDimensional: true,
+        extraInformation: "+1.5 cave luck, x2.25 cave type luck, x3 cave size",
         tier: 10,
         icon: "@wrab",
+				
     },
     "pickaxe34" : {
         mined: 180000,
@@ -2101,16 +2275,16 @@ const pickaxeStats = {
         revealed: 1,
         luck: 650,
         rate: 300,
-        src : "⛏️",
+        src : `<img class="mineImage" src="media/galacticEngulfer.png"></img>`,
         ability: "",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9],
         canMineIn:[1, 1.2, 2, 0.9],
         isDimensional: true,
         tier: 13,
-        icon: "",
+        icon: "@verrdant",
     },
-    "pickaxe36" : {
+    "pickaxe36" : { //pickaxe of flight
         mined: 7500000,
         revealed: 1,
         luck: 1500,
@@ -2118,11 +2292,26 @@ const pickaxeStats = {
         src : "⛏️",
         ability: "",
         doAbility: function(x, y) {},
-        canSpawnCaves:[1, 1.2, 2, 0.9],
-        canMineIn:[1, 1.2, 2, 0.9],
+        canSpawnCaves:[1, 1.2, 2, 0.9, 3],
+        canMineIn:[1, 1.2, 2, 0.9, 3],
         isDimensional: true,
-        tier: 14,
+        tier: 15,
         icon: "",
+    },
+    "hypermark_checkminator" : {
+        mined: 15e6,
+        revealed: 1,
+        luck: 1000,
+        rate: 650,
+        src : `<img class="mineImage" src="media/hypermark checkminator.png"></img>`,
+        ability: "",
+        doAbility: function(x, y) {},
+        canSpawnCaves:[1, 1.2, 2, 0.9, 3],
+        canMineIn:[1, 1.2, 2, 0.9, 3],
+        isDimensional: true,
+        tier: 15,
+        extraInformation: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
+        icon: "markiplier, proof at https://youtu.be/XOY04uw_QPQ",
     },
 }
 const gearInformation = {
@@ -2286,24 +2475,21 @@ const gearInformation = {
         effect:"1/2 Proc Rate, 3x Simulated Generation Amount",
         tier: 10,
     },
-    "gear40" : {
-        effect:"Multiplies base luck by 1.5x<br><i>Where my life began...</i>",
+    "ring_of_life" : {
+        effect:"Multiplies luck based on total amount of unique ores and variants in your inventory up to 4x<br><i>Where my life began...</i>",
         tier: 11,
     },
-    "gear41" : {
-        effect:"10% Chance for +500,000 Simulated Ability Amount<br><i>Am I smart enough to be here...</i>",
-        tier: 12,
-    },
-    "gear42" : {
-        effect:"Uncapped +0.01x luck for every Hyperdimensional Tier ore owned<br><i>I hear strange music...</i>",
+    "ring_of_water" : {
+        effect:"Reduces naval events time by 3ln(naval events completed)</i>",
         tier: 13,
     },
-    "gear43" : {
-        effect:"Allows use of Wormhole Exterminator in Subrealm 1<br><i>I shouldn't be here...</i>",
+    "ring_of_time" : {
+        effect:"Allows use of Tree of Life in World 2, Watr Watr and Galactica<br><i>Happy new year</i>",
         tier: 10,
     },
-    "gear44" : {
-        effect:"+50 Movement Repetitions<br><i>This place birthed the stars in the sky...</i>",
+    "ring_of_creation" : {
+		//this is mildly incomprehensible, reword this
+        effect:"x5 ores from caves and abilities from simulated rng if they are more common tha 1/1000<br><i>This place birthed the stars in the sky...</i>",
         tier: 14,
     },
     "gear45" : {
@@ -2318,21 +2504,49 @@ const gearInformation = {
         effect:"+0.45x offline progress rewards.",
         tier: 0,
     },
-    "gear48" : {
-        effect:"Uncapped Luck * (Session time in minutes * 0.01) +1<br><i>It's so hot here...</i>",
+    "ring_of_fire" : {
+        effect:"Cave lucks boosts cave and ability size at reduced rate (1 + cave luck/100) +1<br><i>It's so hot here...</i>",
         tier: 14,
     },
+    "heirloom": {
+        effect:"Cave luck * 1.03^naval events completed (slows down after 250 naval events)",
+        tier: 11,
+    },
+    "water_polo_ball": {
+        effect:"Increases minimum rng for finding ores from 1/1000 to 1/333",
+        tier: 11,
+    },
+    "hat": {
+        effect:"x2 your speed if you aren't going left ⬅️❌ (going anywhere else is more aerodynamic)",
+        tier: 12,
+    },
+    "ring_enabler": {
+        effect:"John enables you to fish fumos",
+        tier: 0,
+    },
+	"green_chemicals": {
+		effect:"Compressing quadrillions of checkmarks into a unified solution composed entirely of pure checkmarkium (new element) thereby enabling cognitive enhancement. This process restores access to Forgotten Rose Quartz Shell's full power and permits all of its effects to remain simultaneously active.",
+		tier: 15,
+	},
+	"checkmark_teleporter": {
+		effect: "Finds a Checkmark Layer in the W2",
+		tier: 0,
+	},
+	"phone": {
+		effect: "Summon john to your location by calling them via the ore tracker menu",
+		tier: 0,
+	}
 }
-function ct() {
+function ct(john=false) {
     const nums = calcSpeed();
     nums.speed = nums.speed < 1 ? 0 : nums.speed;
     const speed = (1000 / nums.speed) * nums.reps + nums.extra;
     const pickaxeUsing = player.stats.currentPickaxe;
     let abilityMined = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].mined : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].mined;
     if (player.settings.simulatedRng || pickaxeStats[pickaxeUsing].isDimensional) {
-        if (player.gears["gear41"]) abilityMined += 50000;
         if (player.gears["gear34"]) abilityMined = Math.floor(abilityMined*2);
         if (player.gears["gear39"]) abilityMined = Math.floor(abilityMined*3);
+        if(player.gears["ring_of_fire"])abilityMined *= (verifiedOres.getCaveLuck()/10 + 1)
     }
     const abilityRevealed = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].revealed : pickaxeStats["pickaxe27"][player.upgrades["pickaxe27"].level].revealed;
     let m = 1;
@@ -2343,8 +2557,19 @@ function ct() {
     if (randBuff.proc) m *= 2;
     if (player.gears["gear39"]) m *= 0.5;
     const abilityRate = pickaxeUsing !== "pickaxe27" ? pickaxeStats[pickaxeUsing].rate/m : 500/m;
-    const rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
-    const recipe = pickaxeUsing !== "pickaxe27" ? recipes[rId].recipe : player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel ? "RETURN" : upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe;
+    let rId
+    let recipe
+    if(john){
+        recipe = [{ore:johnQuests[player.john.currentQuest].ore,amt:johnQuests[player.john.currentQuest].amount}]
+    } else {
+        rId = currentRecipeId === undefined ? pinInformation.pinned : currentRecipeId;
+        if(rId === "pickaxe27"){
+            if(player.upgrades["pickaxe27"].level === player.upgrades["pickaxe27"].maxLevel) recipe = "RETURN"
+            else recipe = upgradeRecipes["pickaxe27"][`upgrade${player.upgrades["pickaxe27"].level}`].recipe
+        } else {
+            recipe = recipes[rId].recipe
+        }
+    }
     if (recipe === "RETURN") return msToTime(0);
     const recipeLayers = {
     }
@@ -2356,13 +2581,9 @@ function ct() {
                 recipeLayers.commons ??= {ore: ore, highestProcs : 0, amt:0}
                 currentOreLayer = "commons";
             } else {
-                for (let layer in layerDictionary) {
-                    if (layerDictionary[layer].layer.includes(ore)) {
-                        recipeLayers[layer] ??= {ore: ore, highestProcs : 0, amt:0}
-                        currentOreLayer = layer;
-                        break;
-                    }
-                }
+                currentOreLayer = Object.keys(layerDictionary).find((e)=> e!=="johnMetaLayer" && layerDictionary[e].layer.includes('✅'))
+                recipeLayers[currentOreLayer] ??= {ore: ore, highestProcs : 0, amt:0}
+
                 if (currentOreLayer === undefined) {
                     const toCheck = ["🐞","🥈","🚬","🪸","🪦","🚨","🍖","📜","🐸"];
                     let isLayer = a87(toCheck.indexOf(ore), true, true)
@@ -2374,7 +2595,8 @@ function ct() {
             let have = playerInventory[ore]["normalAmt"];
             have = have >= needed ? needed : have;
             needed -= have;
-            const rarity = 1/oreList[ore]["decimalRarity"];
+            let rarity = 1/oreList[ore]["decimalRarity"];
+            if(rarity<1000 && player.gears.ring_of_creation) rarity = rarity/5
             const totalOreRarity = (rarity * needed);
             let totalProcsNeeded;
             if (needed > 0) {
@@ -2396,8 +2618,26 @@ function ct() {
     let commonAdd = 0;
     if (recipeLayers["commons"] !== undefined) {commonAdd = recipeLayers["commons"].highestProcs / recipeLayers["commons"].amt; delete recipeLayers["commons"]}
     for (let layer in recipeLayers) {
+        let commonOreDivider = 1
+        if(player.gears.ring_of_creation)commonOreDivider *= 5
         if (recipeLayers[layer].amt > 0) totalProcs += (recipeLayers[layer].highestProcs/recipeLayers[layer].amt)
     }
     let timeForProcs = (Math.floor(totalProcs) * abilityRate) / speed;
     return longTime(timeForProcs * 1000);
+}
+
+function caveOreEstimatedTime(ore){
+    //this function takes one ore as a string
+    let result = 0
+    //const oreRarity = oreList[ore].numRarity
+    const oreRarity = 1/oreList[ore].decimalRarity
+    const speed = calcSpeed().reps * (1000/calcSpeed().speed) + calcSpeed().extra
+    let caveRate = 500
+    if (player.powerupVariables.caveBoosts.active) caveRate = caveRate/2
+    const caveRarity = getCaveMultiFromOre(ore)
+    let caveSize = (400*(verifiedOres.getCaveModifier()/150))
+    if(player.gears.ring_of_fire)caveSize *= Math.max(verifiedOres.getCaveLuck()/100, 1) 
+    const caveTypeLuck = verifiedOres.getCaveTypeLuck()
+    result = (oreRarity)/caveSize *caveRate *caveRarity  /caveTypeLuck /speed
+    return result*1000 // ms
 }

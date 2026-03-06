@@ -1,5 +1,8 @@
 
-const debug = (document.location.href.includes("W5EJ")) || (document.location.href.includes('http://127.0.0.1:5500/'));
+const debug = !document.location.href.includes("release") && ((document.location.href.includes("W5EJ")) || (document.location.href.includes('http://127.0.0.1:5500/')));
+const cheating = document.location.href.includes("cheating")
+let devspeed = 1
+
 const logCreated = {}
 class secureLogs {
     #spawnLogs;
@@ -10,7 +13,9 @@ class secureLogs {
     #canGenCaves;
     #isLoaded;
     #hyperdimensionalCount;
-    #playtimeLuck;
+    #hyperdimensionalsToAdd;
+	#completionCounter = 0;
+	#totalAmtOfOres = 0;
     constructor() {
         if (logCreated["created"]) location.reload();
         this.#spawnLogs = [];
@@ -26,7 +31,7 @@ class secureLogs {
         this.#isRightPickaxe = true;
         this.#canGenCaves = false;
         this.#hyperdimensionalCount = 0;
-        this.#playtimeLuck = 1;
+        this.#hyperdimensionalsToAdd = 0;
         this.#onLoad()
     }
     createLog(r, c, intended, obj, fromCave, gnums, vnums) {
@@ -235,36 +240,31 @@ class secureLogs {
         baseLuck += player.gears["gear30"] ? 0.3 : 0;
         baseLuck += getRewardTypes("luck", "add");
         baseLuck *= getRewardTypes("luck", "multiply");
-        if (player.gears["gear40"]) baseLuck *= 1.5;
+        if (player.gears["ring_of_life"]) baseLuck *=Math.max(1, 4*this.#completionCounter/this.#totalAmtOfOres);
         let luck = baseLuck;
         if (currentWorld === 1.1) {
-            if (player.gears["gear42"]) luck += (this.#hyperdimensionalCount * 0.01);
+            //if (player.gears["ring_of_water"]) luck += (this.#hyperdimensionalCount * 0.01);
             if (player.gears["gear20"]) luck *= ((baseLuck * 0.05) + 1);
             if (player.gears["gear37"]) luck = luck ** 1.035;
             luck *= 1.5;
             if (randBuff.luck) luck *= 1.4;
-            if (player.gears["gear48"]) luck *= this.#playtimeLuck;
-            if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) luck += 10000000000
-            if (isNaN(luck)) return 1;
+			if (isNaN(luck)) return 1;
             else return luck;
         }
         if (player.stats.currentPickaxe === "pickaxe27" && !player.trophyProgress["subrealmOneCompletion"].trophyOwned) {player.stats.currentPickaxe = "pickaxe0"; baseLuck = 1;}
         luck += (player.gears["gear18"] ? 2.5 : 0) + (player.gears["gear12"] ? 0.35 : 0) + (player.gears["gear10"] ? 0.25 : 0);
-        if (player.gears["gear42"]) luck += (this.#hyperdimensionalCount * 0.01);
+        //if (player.gears["ring_of_water"]) luck += (this.#hyperdimensionalCount * 0.01);
         if (currentWorld < 2) luck *= (player.gears["gear1"] ? 1.1 : 1) * (player.gears["gear5"] ? 1.6 : 1);
         if (player.gears["gear20"]) luck *= (baseLuck * 0.05) + 1;
         if (player.gears["gear37"]) luck = luck ** 1.035;
         luck *= 1.5;
         if (randBuff.luck) luck *= 1.4;
-        if (player.gears["gear48"]) luck *= this.#playtimeLuck;
-        if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) luck += 10000000000
         if (isNaN(luck)) return 1;
         else return luck;
     }
     getBaseLuck(pickaxe) {
         if (pickaxe === "pickaxe27") {
-            const pickaxe = player.upgrades["pickaxe27"];
-            return pickaxe.levelLuck[pickaxe.level];
+            return pickaxeStats.pickaxe27[player.upgrades.pickaxe27.level].luck
         }
         return pickaxeStats[pickaxe].luck;
     }
@@ -320,7 +320,11 @@ class secureLogs {
         let tempLuck = 1;
         if (player.powerupVariables.caveBoosts.active) tempLuck++;
         if (player.stats.currentPickaxe === "pickaxe33") tempLuck += 1.5;
-        if ((player.name == "Glaci" || player.name == "Clone" || player.name == "Flareon" || player.name == "WrgamingReal" || player.name == "mayflooer") && Date.now() < 1737167434828) tempLuck += 1000000000
+        if(johnRewarded("heirloom")){
+            let navalEventsAmt = player.john.navalEvents.length
+            //softcap
+            tempLuck *= (1.01**navalEventsAmt) || 1
+        }
         return tempLuck;
     }
     getCaveTypeLuck() {
@@ -330,7 +334,7 @@ class secureLogs {
         if (player.gears["gear27"]) tempLuck *= 1.75;
         return tempLuck;
     }
-    getCaveModifier() {
+    getCaveModifier() { //cave size
         let caveRateModifier = 150;
         if (player.gears["gear14"]) caveRateModifier += 100;
         if (player.stats.currentPickaxe === "pickaxe12") caveRateModifier += 50;
@@ -339,9 +343,15 @@ class secureLogs {
         return caveRateModifier;
     }
     addHyperdimensionalCount(amt) {
-        this.#hyperdimensionalCount += amt;
+        this.#hyperdimensionalsToAdd += amt;
+    }
+    applyHyperdimensionalLuck(force=false){
+      if(this.#hyperdimensionalsToAdd > 0 || force){
+        this.#hyperdimensionalCount += this.#hyperdimensionalsToAdd;
+        this.#hyperdimensionalsToAdd = 0;
         player.displayStatistics.luck = Math.floor(verifiedOres.getCurrentLuck())
         updateAllLayers();
+      }
     }
     countHyperdimensionalOres() {
         const ores = oreInformation.getOresByTier("Hyperdimensional")
@@ -351,11 +361,19 @@ class secureLogs {
         }
         this.#hyperdimensionalCount = total;
     }
-    checkSessionTimeForLuck() {
-        let playTime = 1 + Math.ceil((Date.now() - verifiedOres.getStartTime()) / 60000) * 0.01
-        this.#playtimeLuck = playTime;
-        updateAllLayers();
-    }
+	
+	setupCompletionCounter(){
+		this.#totalAmtOfOres = Object.keys(oreList).length * 4
+		for (const ore of Object.keys(oreList)){
+			this.#completionCounter += playerInventory[ore].normalAmt ? 1 : 0
+			this.#completionCounter += playerInventory[ore].electrifiedAmt ? 1 : 0
+			this.#completionCounter += playerInventory[ore].radioactiveAmt ? 1 : 0
+			this.#completionCounter += playerInventory[ore].explosiveAmt ? 1 : 0
+		}
+	}
+	newOreForCompletion() {
+		this.#completionCounter += 1
+	}
 }
 const neededProperties = ["block", "genAt", "variant", "luck", "rng", "generationInfo", "variantInfo", "bulkAmt"]
 function encryptLogData(log, saving) {
@@ -465,7 +483,8 @@ function serverWebhook(log, mined, key) {
     if (log.variantInfo !== undefined) {
         logObj["varVerification"] = {"rand": log.variantInfo.r, "count": log.variantInfo.c, "seed": log.variantInfo.s};
     }
-    fetch("https://endurable-fragrant-visitor.glitch.me", {
+    //fetch("https://endurable-fragrant-visitor.glitch.me", {
+    fetch("http://0.0.0.0", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

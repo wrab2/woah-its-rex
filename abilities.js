@@ -11,19 +11,18 @@ async function rollAbilities(force) {
     if (player.gears["gear39"]) m *= 0.5;
     if (verifiedOres.canGenerateCaves()) {
         const caveRate = player.powerupVariables.caveBoosts.active ? 1/250 : 1/500;
-        if (Math.random() <= caveRate && player.settings.cavesEnabled) {
+        if ( Math.random() <= caveRate) {
             player.stats.cavesGenerated++;
             generateCave();
         }
     }
     if (debug && force) m = 10000000;
     const pickaxe = pickaxeStats[player.stats.currentPickaxe]
-    if (Math.random() <= (m/pickaxe.rate)) {
-        if ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) && !ca) {
+    if ((Math.random() <= (m/pickaxe.rate)) || force) {
+        if ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional ) && !ca) {
             let bulkAmt = 0;
             if (player.stats.currentPickaxe === "pickaxe27") bulkAmt = pickaxe[player.upgrades["pickaxe27"].level].mined;
             else bulkAmt = pickaxe.mined;
-            if (player.gears["gear41"] && Math.random() < 1/10) bulkAmt += 500000;
             if (player.gears["gear34"]) bulkAmt = Math.floor(bulkAmt*2);
             if (player.gears["gear39"]) bulkAmt = Math.floor(bulkAmt*3);
             bulkGenerate(curY, bulkAmt, undefined, false)
@@ -45,7 +44,7 @@ function getTestAvg() {
 function powerup1(x, y) {
     if (!pickaxeStats[player.stats.currentPickaxe].canMineIn.includes(currentWorld)) return;
     if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
-        const multiplier = Math.floor(Math.log10(player.stats.blocksMined/500000)) + 1;
+        const multiplier = Math.floor(Math.log10((player.stats.blocksMined+1)/500000)) + 1;
         const amt = (100*multiplier)*(100*multiplier);
         if (amt > 1000000 || player.settings.simulatedRng) bulkGenerate(curY, amt, undefined, false);
         else {
@@ -65,6 +64,7 @@ function powerup2() {
         player.powerupCooldowns["powerup2"].cooldown = Date.now() + (player.gears["gear24"] ? 900000 * 0.75 : 900000);
         player.powerupVariables.caveBoosts.removeAt = Date.now() + (player.gears["gear24"] ? 150000 * 1.5 : 150000);
         player.powerupVariables.caveBoosts.active = true;
+		utilitySwitchActions()
     }
 }
 
@@ -162,7 +162,7 @@ function gearAbility1() {
         const time = Date.now();
         if (ability1Stacks === 0 && time >= energySiphonerCooldown) {
             energySiphonerActive = true;
-            ability1RemoveTime = time + 1000;
+            ability1RemoveTime = time + 10000; //live :3
             ability1Stacks++;
             activateSiphoner();
             return;
@@ -195,6 +195,15 @@ function gearAbility2() {
         repeatingLayers[reps] = {layer: 7777, force: forceKorone};
         specialLayerLocations["sillyLayer"] ??= 18000 + (10000 * reps);
     }
+}
+
+function findCheckmark() {
+	if (currentWorld !== 2) return
+	let layerDepth = 1e6+2e3
+	while(true){
+		if(getLayer(layerDepth).layerMat === "✅") return
+		layerDepth+=150e3
+	}
 }
 
 let pickaxe1Nums = [];
@@ -815,6 +824,10 @@ const treeLevels = {
     summerBranch: []
 }
 function pickaxeAbility27(x, y, overrideLevel) {
+	if(player.upgrades["pickaxe27"].level >= 6){
+		pickaxeStats.pickaxe27.isDimensional = true
+		return rollAbilities(true)
+	}
     let eX = x;
     eX -= 37;
     let eY = y;
