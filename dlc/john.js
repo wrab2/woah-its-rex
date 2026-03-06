@@ -280,7 +280,7 @@ function completeQuest(){
 	const thisQuest = johnQuests[player.john.currentQuest]//johnQuests.filter((e)=> e.order === player.john.currentQuest)
 	const thisOre = playerInventory[thisQuest.ore]
 	
-	if(true || thisOre.normalAmt >= thisQuest.amount){
+	if(thisOre.normalAmt >= thisQuest.amount){
 		//yay quest is completed :DDD
 		//thisOre.normalAmt -= thisQuest.amount
 		inventoryObj[thisQuest.ore] = 0 //updates inventory
