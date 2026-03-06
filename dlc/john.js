@@ -147,11 +147,11 @@ const johnQuests = [
 	},
 	{
 		story:"holdon i brb rq my cat can tell you about johanna (joans sister) JHhhhhhhhhhHHN BNJHU8I97U0-OI999999999999999999999,fssssssssssssssssssssssssssssssssssswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww99999999999999999999999999999999999999999999999999999999UUUUUUUUUUUUUUUUUUUUUUUUUUUU",
-		ore_stry:"johanna is found in the abysstone caves",
+		ore_stry:"johanna is found in the water caves",
 		ore:"🤽🏽‍♀️",
 		amount:1,
 		cave: true,
-		layers:["abysstoneCave"],
+		layers:["waterCave"],
 		order:13,
 		tier: QuestTiers.indexOf("Polychromatical")
 	},
