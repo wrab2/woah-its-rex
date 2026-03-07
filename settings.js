@@ -306,9 +306,10 @@ function randomFunction(ore, cause, elem) {
             return;
         if (ore === "🕳️")
             return;
-				if (["singularityEgg", 'evilFlag', '🐃'].includes(ore)){
+				if (["singularityEgg", 'evilFlag', 'heartAmalgamation', '🐃'].includes(ore)){
                     const crafts = {
                         'evilFlag':'evilFlagCraft',
+                        'heartAmalgamation':'heartAmalgamationCraft',
                         'singularityEgg':'wtfCraft',
                         '🐃':'waterbuffaloCraft'
                     }

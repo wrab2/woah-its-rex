@@ -295,13 +295,11 @@ let oreList = {
     '🧠': {  'numRarity': 15500000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '🧠 Has Spawned!', 'oreTier': 'Mystical',  },
     '✏️': {  'numRarity': 8200000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '✏️ Has Spawned!', 'oreTier': 'Mystical',  },
     
-
     '🍹' : {  'numRarity': 2650000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "this drink has so much vanilla that the 2% alcohol in it WILL make you blackout drunk", 'oreTier': 'Imaginary', },
     "🧜": {  'numRarity': 345000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'this tower SUCKS in btd6', 'oreTier': 'Ethereal',  },
     '🚰': {  'numRarity': 652000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'mraow :3', 'oreTier': 'Flawless',  },
     '🚱': {  'numRarity': 213321000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'oh man im really thirsty, the evil non drinkable water sign:', 'oreTier': 'Ethereal',  },
     '💆': {  'numRarity': 5321000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'jim is currently getting a massage', 'oreTier': 'Metaversal',  },
-    //john      
     '⛵': {  'numRarity': 6330000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '⛵ Has Spawned! (why do you have mystical alerts this far into the game)', 'oreTier': 'Mystical',  },
     '🚢' : {  'numRarity': 6666666666666, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': "this brings you back to when john caused two thousand naval events", 'oreTier': 'Imaginary', },
     '🚣': {  'numRarity': 97000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'swimming emoji', 'oreTier': 'Sacred',  },
@@ -557,10 +555,20 @@ let oreList = {
     '🔂': {  'numRarity': 250, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🔄': {  'numRarity': 175, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     '🔃': {  'numRarity': 100, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
+
+
     '☑️': {  'numRarity': 500000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Godly',  }, // this isnt a w2 common but it fits in with the rest
     '🛄': {  'numRarity': 450000000000, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Ethereal',  }, //nether is ts
-    //😹🐈🐈‍⬛🤯🫃😂🤣
-
+    //slop hearts cause i LOVE slop 
+    '💖': {  'numRarity': 6000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'ai :sparkles: plus heart', 'oreTier': 'Hyperdimensional',  },
+    '💝': {  'numRarity': 2000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'oh man i wonder whats in my christmas present! the beating heart inside:', 'oreTier': 'Hyperdimensional',  },
+    '♥️': {  'numRarity': 10000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'NOT to be confused with ❤️', 'oreTier': 'Polychromatic',  }, //i swear this is different from :heart:
+    '💓': {  'numRarity': 3000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'vibrating heart', 'oreTier': 'Hyperdimensional',  },
+    '🫀': {  'numRarity': 5000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'tsc rtx on 🤣🤣🤣', 'oreTier': 'Hyperdimensional',  },
+    '❣️': {  'numRarity': 4000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'bleeding heart (tetrio quick play reference)', 'oreTier': 'Hyperdimensional',  },
+    '💟': {  'numRarity': 1000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'oversimplified heart', 'oreTier': 'Hyperdimensional',  },
+    '💕': {  'numRarity': 9000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'heart mitosis...', 'oreTier': 'Hyperdimensional',  },
+    'heartAmalgamation': {  'numRarity': Infinity, 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'evil and hidden spawn message...', 'oreTier': 'Infinitesimal','hasImage' : true, "src" : "media/ores/heart_amalgamation.png","oreName": "Heart Amalgamation" },
 
     
     '🤽🏻': {  'numRarity': (1e18-1), 'hasLog': true,  'caveExclusive': false, 'spawnMessage': 'John: oh man you found my good buddy Jonah (not to be confused with johan, i remember that one time we went to home depot and we accidentally bought twenty thousand doors, turns out they were mitosing door, ', 'oreTier': 'Johnical', "oreName" : "Jonah"},
@@ -696,11 +704,6 @@ let oreList = {
     "⚪": {  'numRarity': 1, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common',  },
     "🩶": {  'numRarity': 10000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Celestial',  },
     "🩷": {  'numRarity': 10000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Celestial',  },
-
-
-//vocaloids
-
-
 }
 for (const ore of Object.keys(oreList)){
     oreList[ore].decimalRarity = 1/oreList[ore].numRarity
@@ -727,7 +730,7 @@ const layerList = {
 "giftLayer": ["sillyMiner", "🍭", "💽", "🛢️", "⚛️", "🗳️", "🎎", "📿", "🎑", "📢", "🚗", "🎫", "🎮", "🎁"],
 "worldOneCommons" : ["godOfTheMine", "🤍", "🖤", "🤎", "💜", "❤️", "🧡", "💛", "💙", "💚", "🔶", "🔷", "🔸", "🔹", "🔺", "🔻", "🔘", "🔲", "🟨", "🟦", "⬛", "⬜", "🧧", "◾", "◽", "⚫", "🟤", "🟣", "🔴", "🟠", "🟡", "🔵", "🟢", "🟪", "🟥", "🟧"],
 "sillyLayer" : ["ah!SoSorgy!", "Pasta", "sillyMiner", "UHD", "qrCode", "kaleidoscope", "🎉", "🧌", "Nyerd", "Fox", "♾️", "💅", "😁", "🪢", "🎂"],
-"fluteLayer" : ["sillyMiner", "mushroomCats", "🫶", "🪈"],
+"fluteLayer" : ["sillyMiner", "💖","💝","♥️","💓","🫀","❣️","💟","💕","mushroomCats", "🫶", "🪈"],
 "cloudLayer" : ["TheHowlingMoon", "starglint", "sillyMiner",  "🪽", "⚡", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
 "cloudLayer2" : ["TheHowlingMoon", "🖐", "starglint", "sillyMiner",  "🪽", "⚡", "🍃", "🪶", "🌦️", "🌩️", "⛈️", "🪁", "🪂", "🌨️", "🌥️", "🌤️", "🌧️", "🎐", "☁️"],
 "tvLayer" : ["sillyMiner", "🔫", "👾", "🏹", "💣", "🔨", "🪓", "🪃", "🛡️", "📺"],

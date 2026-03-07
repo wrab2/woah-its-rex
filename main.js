@@ -35,6 +35,8 @@ const birthdays = {
     "12/23" : "Amber",
     "8/8" : "Korone",
     "4/8" : "REEKY",
+    "10/27" : "Silly (adrian's cat)",
+    "6/8" : "Masa (wrab's cat)",
 }
 //IMPORTANT
 const date = new Date();
