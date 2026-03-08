@@ -2514,7 +2514,7 @@ const gearInformation = {
         tier: 14,
     },
     "heirloom": {
-        effect:"Cave luck * 1.03^naval events completed (slows down after 250 naval events)",
+        effect:"Years and years of john's family history lead you to get cave luck * 1.01^naval events completed",
         tier: 11,
     },
     "water_polo_ball": {
