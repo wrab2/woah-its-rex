@@ -151,7 +151,7 @@ const johnQuests = [
 		ore:"🤽🏽‍♀️",
 		amount:1,
 		cave: true,
-		layers:["waterCave"],
+		layers:["watrCave"],
 		order:13,
 		tier: QuestTiers.indexOf("Polychromatical")
 	},
