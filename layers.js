@@ -562,7 +562,7 @@ let oreList = {
     //slop hearts cause i LOVE slop 
     '💖': {  'numRarity': 6000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'ai :sparkles: plus heart', 'oreTier': 'Hyperdimensional',  },
     '💝': {  'numRarity': 2000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'oh man i wonder whats in my christmas present! the beating heart inside:', 'oreTier': 'Hyperdimensional',  },
-    '♥️': {  'numRarity': 10000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'NOT to be confused with ❤️', 'oreTier': 'Polychromatic',  }, //i swear this is different from :heart:
+    '♥️': {  'numRarity': 10000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'NOT to be confused with ❤️', 'oreTier': 'Polychromatical',  }, //i swear this is different from :heart:
     '💓': {  'numRarity': 3000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'vibrating heart', 'oreTier': 'Hyperdimensional',  },
     '🫀': {  'numRarity': 5000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'tsc rtx on 🤣🤣🤣', 'oreTier': 'Hyperdimensional',  },
     '❣️': {  'numRarity': 4000000000000000, 'hasLog': false,  'caveExclusive': false, 'spawnMessage': 'bleeding heart (tetrio quick play reference)', 'oreTier': 'Hyperdimensional',  },

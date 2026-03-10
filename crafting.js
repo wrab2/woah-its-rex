@@ -1296,12 +1296,6 @@ function showPickaxes() {
     for (let i = 0; i < list.length; i++) {
         showItem(list[i]);
     }
-    if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
-    else {
-		document.getElementById("sillyRecipe").style.display = "none";
-		document.getElementById("checkmark_teleporter").style.display = "none";
-		
-	}
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
@@ -1312,6 +1306,11 @@ function showGears() {
         showItem(list[i])
     }
     get("nullChroma").style.display = "none";
+    if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
+    else document.getElementById("sillyRecipe").style.display = "none";
+
+    if (indexHasOre('🫃') && toggleCraftingWorld.world === 2) document.getElementById("checkmark_teleporter").style.display = "flex";
+    else document.getElementById("checkmark_teleporter").style.display = "none";
 }
 function showItem(id) {
     if(Object.keys(johnRewards).includes(id)){
