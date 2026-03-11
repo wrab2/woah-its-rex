@@ -2250,6 +2250,7 @@
   margin: 0;
   width: 100%;
   white-space: pre;
+  overflow: hidden;
 }
 #displayRecipe {
   margin-top: -0.25vw;

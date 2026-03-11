@@ -10,7 +10,7 @@ const johnRewards = { //shortcut for how many quests you need to complete to get
 	"hypermark_checkminator": 10,
 	"water_polo_ball": 12,
 	"house_keys": 19,
-	"ring_enabler": 20,
+	"fishing_pole": 20,
 }
 function johnRewarded(reward) {
 	if(player.john.questsCompleted.length >= johnRewards[reward]) return true
@@ -328,8 +328,8 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === johnRewards["house_keys"]){
 			johnSay("thank you thank you thank you so so so much, i dont have anything else to give to you though other than my house.... eh whatever its fine i trust you enough just dont steal anything thanks")
 		}
-		else if(player.john.questsCompleted.length === johnRewards["ring_enabler"]){
-			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome tool that'll let you fish up fumos!")
+		else if(player.john.questsCompleted.length === johnRewards["fishing_pole"]){
+			johnSay("yay!! yippie!! 🥳🥳🥳🎉🎉🎉🎈🎈🎈 all of my friends and family (and water buffalo) are back together again!! here, take this awesome tool that'll let you fish up fumos! you should HIGhkey 👆🔑 steal to the left ⏮ in my home 🏠 to see what happens (🤽🤽🤽🤽) maybe I should be saying that in milestones instead")
 		}
 
 		selectNextQuest()
