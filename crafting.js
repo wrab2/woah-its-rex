@@ -1299,6 +1299,8 @@ function showPickaxes() {
     for (let i = 0; i < list.length; i++) {
         showItem(list[i]);
     }
+	if (johnRewarded("fishing_pole") && toggleCraftingWorld.world === 3) document.getElementById("fishing_pole").style.display = "flex";
+    else document.getElementById("fishing_pole").style.display = "none";
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
