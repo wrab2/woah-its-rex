@@ -5246,14 +5246,14 @@ background-size: 100%;
 	height: 200px;
 	font-size: min(30vw, 80vh);
 	margin: 0 auto 0 auto;
-	background-image: url("/media/john/john.svg");
+	background-image: url("media/john/john.svg");
 	animation-duration: 2s;
 }
 #john-portrait{
-	background-image: url("/media/john/john.svg");
+	background-image: url("media/john/john.svg");
 }
 #jim-portrait{
-	background-image: url("/media/john/hatless_jim.svg");
+	background-image: url("media/john/hatless_jim.svg");
 }
 @keyframes john-swim-up {
   from { margin-top: 500px;}
@@ -5267,7 +5267,7 @@ background-size: 100%;
 	width: 150vw;
 	height: 200px;
 	overflow: hidden;
-	background-image: url("/media/john/water\ tile.svg");
+	background-image: url("media/john/water\ tile.svg");
 }
 .john-water-blue {
   background-color: #29b6f6;
