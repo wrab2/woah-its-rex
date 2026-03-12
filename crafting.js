@@ -249,6 +249,14 @@ const recipes = {
         pUnob: true,
         pickaxe: true
     },
+    "fishing_pole": {
+        name: "Fishing Pole🇵🇱",
+        recipe: [],
+        active : [],
+        pUnob: true,
+        pickaxe: true
+    },
+
     "gear0" : {
         name : "Ore Tracker",
         recipe : [{ore:"🪨", amt:1000000},{ore:"🟠", amt:9750},{ore:"◽", amt:2400},{ore:"🔲", amt:15},{ore:"🔶", amt:2},{ore:"🔋", amt:1},],
@@ -541,12 +549,6 @@ const recipes = {
         active : [0.9, 1, 1.1, 1.2, 2, 3],
         pUnob: true
     },
-    "ring_enabler": {
-        name: "John's Ring Enabler",
-        recipe: [{"ore": "🤽‍♂️", "amt": johnRewards["ring_enabler"]}],
-        active : [0.9, 1, 1.1, 1.2, 2, 3],
-        pUnob: true
-    },
 	"green_chemicals": {
 		name: "Green Chemicals",
 		recipe: [{"ore":"✅", "amt":4e15}, {"ore":"😹", "amt":3e12}, {"ore":"🐈", "amt":15e6}, {"ore":"🤯", "amt":15e6}, {"ore":"🐈‍⬛", "amt":10000},],
@@ -724,7 +726,7 @@ function addRecipeInformation(recipe) {
         const need = thisRecipe[i].amt;
         append.appendChild(createOreElement(have, need, ore));
     }
-    append.children[append.children.length - 1].style.borderBottom = "0.1vw solid var(--main-border-color)";
+    //append.children[append.children.length - 1].style.borderBottom = "0.1vw solid var(--main-border-color)";
     get("newCraftItem").setAttribute("onclick", `craftPickaxe('${recipe}')`);
 }
 function hideElem(elem) {
@@ -1133,6 +1135,7 @@ const buttonGradients = {
     "pickaxe35Craft" : {"gradient" : "linear-gradient(to right, #000d6f, #8cd4ff, #0092ff, #7200ea, #0b517c, #7200ea, #0092ff, #8cd4ff, #000d6f)","applied" : false},
     "pickaxe36Craft" : {"gradient" : "linear-gradient(to right, #403330 5%, #C6D224, #403330 95%)","applied" : false},
     "hypermark_checkminatorCraft" : {"gradient" : "linear-gradient(to right, #7fb447, #ffffff, #7fb447)", "applied": false},
+    "fishing_poleCraft" : {"gradient" : "linear-gradient(to right, #7fb447, #ffffff, #7fb447)", "applied": false}, //lowk why does every name here needs Craft
 
     "gear0Craft" : {"gradient" : "linear-gradient(to right, #005820, #00FF23","applied" : false},
     "gear1Craft" : {"gradient" : "linear-gradient(to right, #FFF1C0, #FF9E40","applied" : false},
@@ -1286,8 +1289,8 @@ const showOrders = {
     "g0.9": ["gear34", "gear35", "gear38", "gear39", "ring_of_life", "ring_of_water", "ring_of_time", "ring_of_creation", "ring_of_fire"],
     "p???": ["pickaxe26"],
     "g???": ["gear21"],
-    "pjohn": ["hypermark_checkminator"],
-    "gjohn": ["phone","heirloom","water_polo_ball","hat","ring_enabler","green_chemicals"],
+    "pjohn": ["hypermark_checkminator", "fishing_pole"],
+    "gjohn": ["phone","heirloom","water_polo_ball","hat","green_chemicals"],
 }
 function showPickaxes() {
     appear(document.getElementById("pickaxeCrafts"));
@@ -1296,12 +1299,8 @@ function showPickaxes() {
     for (let i = 0; i < list.length; i++) {
         showItem(list[i]);
     }
-    if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
-    else {
-		document.getElementById("sillyRecipe").style.display = "none";
-		document.getElementById("checkmark_teleporter").style.display = "none";
-		
-	}
+	if (johnRewarded("fishing_pole") && toggleCraftingWorld.world === 3) document.getElementById("fishing_pole").style.display = "flex";
+    else document.getElementById("fishing_pole").style.display = "none";
 }
 function showGears() {
     disappear(document.getElementById("pickaxeCrafts"));
@@ -1312,6 +1311,11 @@ function showGears() {
         showItem(list[i])
     }
     get("nullChroma").style.display = "none";
+    if (indexHasOre("🎂") && toggleCraftingWorld.world === 1) document.getElementById("sillyRecipe").style.display = "flex";
+    else document.getElementById("sillyRecipe").style.display = "none";
+
+    if (indexHasOre('🫃') && toggleCraftingWorld.world === 2) document.getElementById("checkmark_teleporter").style.display = "flex";
+    else document.getElementById("checkmark_teleporter").style.display = "none";
 }
 function showItem(id) {
     if(Object.keys(johnRewards).includes(id)){
@@ -1519,8 +1523,13 @@ const oreRecipes = {
         "multiplier" : 1
     },
     "evilFlagCraft" : {
-        "cost" : [{"ore":"⚙️", "amt":250000000}, {"ore":"bitcoin", "amt":5000}, {"ore":"🐰", "amt":1}, {"ore":"✡️", "amt":1}, {"ore":"🧨", "amt":100000000}, {"ore":"💸", "amt":1000000000}, {"ore":"🇫🇷", "amt":50e3}, {"ore":"🇺🇸", "amt":120e3}, {"ore":"🛢️", "amt":40e6},{"ore":"evilJohn", "amt":1}, {"ore":"singularityEgg", "amt":1}],
+        "cost" : [{"ore":"⚙️", "amt":250000000}, {"ore":"bitcoin", "amt":5000}, {"ore":"🐰", "amt":1}, {"ore":"🧨", "amt":100000000}, {"ore":"💸", "amt":1000000000}, {"ore":"🇫🇷", "amt":50e3}, {"ore":"🇺🇸", "amt":120e3}, {"ore":"🛢️", "amt":40e6},{"ore":"evilJohn", "amt":1}, {"ore":"singularityEgg", "amt":1}],
         "result" : [{"ore":"evilFlag", "amt":1}],
+        "multiplier" : 1
+    },
+    "amalgamationCraft" : {
+        "cost": [{"ore":"💗", "amt":1}, {"ore":"💓", "amt":1}, {"ore":"💕", "amt":1}, {"ore":"💞", "amt":1}, {"ore":"🤎", "amt":1}, {"ore":"💝", "amt":1}, {"ore":"💚", "amt":1}, {"ore":"🩶", "amt":1}, {"ore":"🩵", "amt":1}, {"ore":"❤️‍🩹", "amt":1}, {"ore":"🧡", "amt":1}, {"ore":"💜", "amt":1}, {"ore":"💖", "amt":1}, {"ore":"🤍", "amt":1}, {"ore":"💛", "amt":1}, {"ore":"💙", "amt":1}, {"ore":"🖤", "amt":1}, {"ore":"🫀", "amt":1}, {"ore":"♥️", "amt":1}, {"ore":"❤️‍🔥", "amt":1}, {"ore":"🫶", "amt":1}, {"ore":"❣️", "amt":1}, {"ore":"💟", "amt":1}, {"ore":"💔", "amt":1}, {"ore":"❤️", "amt":1}, {"ore":"🩷", "amt":1}, {"ore":"😻", "amt":1}, {"ore":"💘", "amt":1}],
+        "result" : [{"ore":"heartAmalgamation", "amt":1}],
         "multiplier" : 1
     },
     "wtfCraft" : {
@@ -2313,6 +2322,20 @@ const pickaxeStats = {
         extraInformation: "this AWESOME Pickaxe lets you mine in the ✅✅✅ layer",
         icon: "markiplier, proof at https://youtu.be/XOY04uw_QPQ",
     },
+    "fishing_pole" : {
+        mined: 1,
+        revealed: 1,
+        luck: 1,
+        rate: 999999,
+        src : `<img class="mineImage" src="media/fishing_pole.png"></img>`,
+        ability: "",
+        doAbility: function(x, y) {},
+        canSpawnCaves:[1, 1.2, 2, 0.9, 3],
+        canMineIn:[1, 1.2, 2, 0.9, 3],
+        isDimensional: true,
+        tier: 16, //because your desire to fish is stronger than checkmark layer
+        icon: "it wasn't me I swear don't look at git blame",
+    },
 }
 const gearInformation = {
     "gear0" : {
@@ -2509,7 +2532,7 @@ const gearInformation = {
         tier: 14,
     },
     "heirloom": {
-        effect:"Cave luck * 1.03^naval events completed (slows down after 250 naval events)",
+        effect:"Years and years of john's family history lead you to get cave luck * 1.01^naval events completed",
         tier: 11,
     },
     "water_polo_ball": {
@@ -2519,10 +2542,6 @@ const gearInformation = {
     "hat": {
         effect:"x2 your speed if you aren't going left ⬅️❌ (going anywhere else is more aerodynamic)",
         tier: 12,
-    },
-    "ring_enabler": {
-        effect:"John enables you to fish fumos",
-        tier: 0,
     },
 	"green_chemicals": {
 		effect:"Compressing quadrillions of checkmarks into a unified solution composed entirely of pure checkmarkium (new element) thereby enabling cognitive enhancement. This process restores access to Forgotten Rose Quartz Shell's full power and permits all of its effects to remain simultaneously active.",
