@@ -948,6 +948,9 @@ const dailyMessages = {
     },
     "theAnniversary" : {
         showUntil : "December 31, 2024",
+    },
+    "johnUpdate" : {
+        showUntil : "Sometime 01, 2026",
     }
 }
 function checkMessages(message) {

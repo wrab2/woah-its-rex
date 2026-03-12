@@ -1024,7 +1024,7 @@ function goToConvert(ore, variant) {
 let inafk = false
 function AFKmode(button){
     if(!inafk){
-        get("loungeExit").textContent = "bnack";
+        get("loungeExit").textContent = "flee";
         button.style.backgroundColor = "var(--better-green)"
     } else {
         get("loungeExit").textContent = "Exit";

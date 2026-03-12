@@ -30,13 +30,15 @@ make water buffalo harder (part of balancing)
 
 ### low importance:
 
+put a DATE for "johnUpdate" and write about it
+
 add the other fumos
 
 add vocaloid fumo variants like make them actually ores
 
 add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fishing, naval event % completed, vocaloid fumo transformation thingies)
 
-bugtest
+bugtest (work in progress!)
 
 some way for 🐱, your reward, hyper, first anniversary cake, sakura, evil flag, water buffalo, and singularity egg (not from forging) so you can get 400% completion
 
