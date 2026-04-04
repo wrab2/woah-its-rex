@@ -950,7 +950,7 @@ const dailyMessages = {
         showUntil : "December 31, 2024",
     },
     "johnUpdate" : {
-        showUntil : "Sometime 01, 2026",
+        showUntil : "litteraly never lmfao 01, 2030",
     }
 }
 function checkMessages(message) {
