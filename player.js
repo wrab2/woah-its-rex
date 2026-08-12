@@ -246,7 +246,10 @@ class playerTemplate {
 		    navalEvents: [],
 		    navalEventStartedTime:0,
 		    currentNavalEventId:-1,
-	    }
+	    },
+        this.jim = {
+            spokeWith: false,
+        }
     }
 }
 let player = new playerTemplate();
