@@ -17,6 +17,11 @@
     <script src="abilities.js"></script>
     <script src="dlc/john.js"></script>
     <script src="dlc/jim.js"></script>
+    <script src="dlc/jerry.js"></script>
+    <script src="dlc/oliver.js"></script>
+    <script src="dlc/jimmothy.js"></script>
+    <script src="dlc/daniel.js"></script>
+    <script src="dlc/clark.js"></script>
     <script src="crafting.js"></script>
     <script src="player.js"></script>
     <script src="data.js"></script>
@@ -815,6 +820,9 @@
                     <button onclick="handleMovement('w', this)" class="movementButton verticalArrow" id="upAutoMine"></button>
                     <button onclick="handleMovement('d', this)" class="movementButton horizontalArrow" id="rightAutoMine"></button>
                     <button onclick="teleport()" class="secondaryButton"id="teleportButton">Teleport!</button>
+                    <button onclick="jimmothyOpen()" class="secondaryButton" id="jimmothyButton" style="background-color: #FFD700; color: #000;">💰 Jimmothy™</button>
+                    <button onclick="danielOpen()" class="secondaryButton" id="danielButton" style="background-color: #2A0000; color: #FF0000;">👻 Daniel</button>
+                    <button onclick="clarkOpen()" class="secondaryButton" id="clarkButton" style="background-color: #4A90E2; color: #87CEEB;">🏗️ Clark</button>
                     <p id="messageType" class="secondaryButton">Current Message: N/A</p>
                     <button onclick="toggleMainDisplay()" id="toggleMainDisplay" class="secondaryButton">Display: Enabled</button>
                     <button onclick="switchMovementType()" id="switchMovementType" class="secondaryButton">Mining: Auto</button>
@@ -903,6 +911,7 @@
 								</p>
 						</div>
 						<button id="phoneButton" onclick="johnOpen()" style="display:none">Call ☎️ john!</button>
+						<button id="jerryButton" onclick="jerryOpen()" style="display:none">Call ☎️ Jerry!</button>
 						<button id="oreTrackerButton" onclick="checkExistingOres()">Track Ores!</button>
 						<p id="trackerOre">Ore: N/A</p>
 						<p id="trackerX">X: N/A</p>
@@ -1058,6 +1067,113 @@
                     <button onclick="johnClose()">YES john LET'S GO GAMBLING (accept quest)</button><br><br>
                     <button onclick="completeQuest()">complete quest ✅</button>  
                     <button onclick="rejectQuest()">decline quest❌</button> 
+                </div>
+			</div>
+		</div>
+
+		<div id="jerry-window-main">
+			<div class="jerry-background">
+                <div id="jerry-name">Jerry</div>
+				<div id="jerry-portrait"></div>
+				<div class="john-background-water"></div>
+				<div class="john-water-blue"></div>
+			</div>
+			<div class="john-quest-window">
+				<div id="jerry-dialogue">Jerry: hey, I heard you were mining the weird stuff.</div>
+				<div id="jerry-status">Jerry • 1/4</div>
+				<div id="jerry-skill-tree" style="display:none;">
+					<div id="jerry-skill-buttons"></div>
+					<div id="jerry-skill-title">Mining • Level 1</div>
+					<div id="jerry-skill-description">Makes mining feel smoother and more rewarding.</div>
+					<div id="jerry-skill-progress-bar-wrapper">
+						<div id="jerry-skill-bar"></div>
+					</div>
+					<div id="jerry-skill-progress">0/100 XP</div>
+					<div id="jerry-skill-controls">
+						<button id="jerry-skill-train-button" onclick="jerryTrainSelectedSkill()">Train Mining</button>
+						<button onclick="jerryToggleSkillTree()">Close Tree</button>
+					</div>
+				</div>
+				<div id="jerry-quest-controls">
+                    <button onclick="jerryNext()">Next Message</button>
+                    <button onclick="jerryToggleSkillTree()">Open Skill Tree</button>
+                    <button onclick="jerryClose()">Close</button>
+                </div>
+			</div>
+		</div>
+
+		<div id="oliver-window-main">
+			<div class="jerry-background">
+                <div id="oliver-name">Oliver</div>
+				<div id="oliver-portrait"></div>
+				<div class="john-background-water"></div>
+				<div class="john-water-blue"></div>
+			</div>
+			<div class="john-quest-window">
+				<div id="oliver-dialogue">Oliver: I’m Oliver M. Emerald, and I’m here to keep the mine feeling a little more human.</div>
+				<div id="oliver-status">Oliver • 1/4</div>
+				<div id="oliver-quest-controls">
+                    <button onclick="oliverNext()">Next Message</button>
+                    <button onclick="oliverClose()">Close</button>
+                </div>
+			</div>
+		</div>
+
+		<div id="jimmothy-window-main">
+			<div class="jerry-background">
+                <div id="jimmothy-name">Jimmothy™</div>
+				<div id="jimmothy-portrait"></div>
+				<div class="john-background-water"></div>
+				<div class="john-water-blue"></div>
+			</div>
+			<div class="john-quest-window">
+				<div id="jimmothy-dialogue">Jimmothy: *twitches caffeinated* Hello there, I'm Jimmothy! Want to automate EVERYTHING?</div>
+				<div id="jimmothy-status">Jimmothy • 1/4</div>
+				<div id="jimmothy-message" style="visibility: hidden; color: #FFD700; font-weight: bold; margin: 1vh 0;">Jimmothy: Welcome!</div>
+				<div id="jimmothy-quest-controls">
+                    <button id="jimmothy-subscribe-button" onclick="jimmothySubscribe()" style="background-color: #FF3D3D;">Subscribe ($5.99/month)</button><br><br>
+                    <button id="jimmothy-toggle-button" onclick="jimmothyToggleAutomation()" style="display: none;">🤖 Automation: OFF</button>
+                    <button onclick="jimmothyNext()">Next Message</button>
+                    <button onclick="jimmothyClose()">Close</button>
+                </div>
+			</div>
+		</div>
+
+		<div id="daniel-window-main">
+			<div class="jerry-background">
+                <div id="daniel-name">Daniel</div>
+				<div id="daniel-portrait"></div>
+				<div class="john-background-water"></div>
+				<div class="john-water-blue"></div>
+			</div>
+			<div class="john-quest-window">
+				<div id="daniel-dialogue">Daniel: Welcome... to the REAL mine.</div>
+				<div id="daniel-status">Daniel • 1/4</div>
+				<div id="daniel-message" style="visibility: hidden; color: #FF0000; font-weight: bold; margin: 1vh 0; text-shadow: 0 0 10px #8B0000;">Daniel: The darkness awaits...</div>
+				<div id="daniel-quest-controls">
+                    <button id="daniel-horror-button" onclick="danielToggleHorror()" style="background-color: #2A0000; color: #FF6666;">👻 ENABLE HORROR MODE</button><br><br>
+                    <button onclick="danielNext()">Next Message</button>
+                    <button onclick="danielClose()">Close</button>
+                </div>
+			</div>
+		</div>
+
+		<div id="clark-window-main">
+			<div class="jerry-background">
+                <div id="clark-name">Clark</div>
+				<div id="clark-portrait"></div>
+				<div class="john-background-water"></div>
+				<div class="john-water-blue"></div>
+			</div>
+			<div class="john-quest-window">
+				<div id="clark-dialogue">Clark: Greetings, I'm Clark, the architect of this mine. Glad you made it down here.</div>
+				<div id="clark-status">Clark • 1/20</div>
+				<div id="clark-progress" style="color: #87CEEB; font-weight: bold; margin: 0.5vh 0;">Lines Read: 0/20</div>
+				<div id="clark-boost-status" style="visibility: hidden; color: #FFD700; font-weight: bold; margin: 0.5vh 0; text-shadow: 0 0 10px #FFD700;">✨ BOOST ACTIVE ✨</div>
+				<div id="clark-message" style="visibility: hidden; color: #87CEEB; font-weight: bold; margin: 1vh 0;">Clark: Welcome, friend.</div>
+				<div id="clark-quest-controls">
+                    <button id="clark-next-button" onclick="clarkNext()">Next Line</button>
+                    <button onclick="clarkClose()">Close</button>
                 </div>
 			</div>
 		</div>

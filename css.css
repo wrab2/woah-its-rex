@@ -5197,7 +5197,7 @@ background-size: 100%;
   margin: 0.5em 0 -0.5em 0
 }
 
-#john-window-main, #jim-window-main{
+#john-window-main, #jim-window-main, #jerry-window-main, #oliver-window-main, #jimmothy-window-main, #daniel-window-main, #clark-window-main{
 	visibility: hidden;
 	position: absolute;
 	display: flex;
@@ -5215,11 +5215,23 @@ background-size: 100%;
 #jim-window-main {
 	background-color: #ff800040
 }
+#jerry-window-main {
+	background-color: #6a1b9a40
+}
+#jimmothy-window-main {
+	background-color: #FFD70040
+}
+#daniel-window-main {
+	background-color: #2A000080
+}
+#clark-window-main {
+	background-color: #4A90E240
+}
 /*I wonder what was this for
 .john-background {
 	width: 50vw;
 }*/
-#john-name {
+#john-name, #jerry-name, #jim-name, #oliver-name, #jimmothy-name, #daniel-name, #clark-name {
 	position: absolute;
 	width: 200px;
 	font-size: 30px;
@@ -5238,7 +5250,7 @@ background-size: 100%;
   50% { opacity: 0;}
   100% { opacity: 1;}
 }
-#john-portrait, #jim-portrait{
+#john-portrait, #jim-portrait, #jerry-portrait, #oliver-portrait, #jimmothy-portrait, #daniel-portrait, #clark-portrait{
 	position: absolute;
 	top: calc(50px + 30vh);
 	left: min(100px, 5vw);
@@ -5249,11 +5261,72 @@ background-size: 100%;
 	background-image: url("media/john/john.svg");
 	animation-duration: 2s;
 }
+
+#jerry-skill-tree {
+	margin-top: 12px;
+	padding: 10px;
+	background: rgba(0,0,0,0.35);
+	border: 1px solid #7a7a7a;
+	border-radius: 8px;
+	color: white;
+}
+
+#jerry-skill-buttons {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 6px;
+	margin-bottom: 8px;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.jerry-skill-button, #jerry-skill-controls button {
+	background: #1b1b1b;
+	color: white;
+	border: 1px solid #7a7a7a;
+	border-radius: 6px;
+	padding: 4px 8px;
+	text-align: left;
+}
+
+#jerry-skill-title {
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+#jerry-skill-description {
+	margin-bottom: 8px;
+	font-size: 0.95em;
+}
+
+#jerry-skill-progress-bar-wrapper {
+	width: 100%;
+	height: 10px;
+	background: #444;
+	border-radius: 999px;
+	overflow: hidden;
+	margin-bottom: 6px;
+}
+
+#jerry-skill-bar {
+	height: 100%;
+	width: 0%;
+	background: #7ec8ff;
+	border-radius: 999px;
+}
+
+#jerry-skill-progress {
+	font-size: 0.9em;
+	margin-bottom: 8px;
+}
 #john-portrait{
 	background-image: url("media/john/john.svg");
 }
 #jim-portrait{
 	background-image: url("media/john/hatless_jim.svg");
+}
+#jerry-portrait{
+	background-image: url("media/john/john.svg");
 }
 @keyframes john-swim-up {
   from { margin-top: 500px;}
@@ -5399,4 +5472,70 @@ background-size: 100%;
   background-color: #292929;
   border-radius: 5%;
 }
+
+/* Daniel Horror Keyframes */
+@keyframes danielAppear {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes danielGlitch {
+  0%, 100% { transform: translateX(0); opacity: 1; }
+  25% { transform: translateX(-2px); opacity: 0.8; }
+  50% { transform: translateX(2px); opacity: 1; }
+  75% { transform: translateX(-1px); opacity: 0.8; }
+}
+
+@keyframes danielFlash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes danielFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes danielFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes danielShake {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-5px) translateY(-5px); }
+  50% { transform: translateX(5px) translateY(5px); }
+  75% { transform: translateX(-5px) translateY(5px); }
+}
+
+@keyframes danielGlitchFlash {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes danielRotateText {
+  0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.05; }
+  50% { opacity: 0.15; }
+  100% { transform: translate(-50%, -50%) rotate(360deg); opacity: 0.05; }
+}
+
+@keyframes danielInvert {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes danielPop {
+  0% { opacity: 0; transform: scale(0); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+/* Clark Architecture Keyframes */
+@keyframes clarkFadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 

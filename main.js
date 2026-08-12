@@ -126,6 +126,7 @@ function init() {
           });
     }
     johnActivateQuest()
+    jerryRefresh()
     if(!cloudsaving.ongalaxy){
         get('displayCloudIcon').style.backgroundColor = "#a51010"
         get('cloudStatus').innerText = "Error"
@@ -139,6 +140,7 @@ function init() {
     verifiedOres.setupCompletionCounter()
 	if(player.gears["phone"]){
 		get("phoneButton").style.display = "flex"
+		get("jerryButton").style.display = "flex"
 	}
 }
 function finishInit() {

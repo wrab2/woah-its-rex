@@ -833,6 +833,10 @@ function prepareWatr() {
     layerNum = 0;
     player.watrEntered = true;
     createMine();
+    if (!player.oliver.spokeWith && currentWorld === 1.2) {
+        player.oliver.spokeWith = true;
+        oliverOpen();
+    }
 }
 function prepareJohnHouse() {
 	allLayers = waterWorldLayers;

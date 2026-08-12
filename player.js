@@ -246,6 +246,46 @@ class playerTemplate {
 		    navalEvents: [],
 		    navalEventStartedTime:0,
 		    currentNavalEventId:-1,
+		    boostActive: false,
+		    questRewardMultiplier: 1.0
+	    }
+        this.jerry = {
+		    spokeWith: false,
+		    stage: 0,
+		    activeSkill: "mining",
+		    boostActive: false,
+		    skills: {
+			    mining: {level: 1, xp: 0},
+			    gathering: {level: 1, xp: 0},
+			    silliness: {level: 1, xp: 0},
+			    discovery: {level: 1, xp: 0}
+		    }
+	    }
+        this.oliver = {
+		    spokeWith: false,
+		    stage: 0,
+		    boostActive: false
+	    }
+        this.jimmothy = {
+		    spokeWith: false,
+		    stage: 0,
+		    subscribed: false,
+		    automationEnabled: false,
+		    boostActive: false
+	    }
+        this.daniel = {
+		    spokeWith: false,
+		    stage: 0,
+		    horrorEnabled: false,
+		    horrorInterval: null,
+		    boostActive: false,
+		    horrorEffectFrequency: 5000
+	    }
+        this.clark = {
+		    spokeWith: false,
+		    stage: 0,
+		    linesRead: [],
+		    boostActive: false
 	    }
     }
 }
@@ -855,6 +895,7 @@ function loadNewData(data) {
             }
         }
         player.john = {...player.john, ...data.john??{}}
+        player.jerry = {...player.jerry, ...data.jerry??{}}
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
