@@ -74,7 +74,7 @@ function openFumodex(tab=null){
 	}
 	get("fumodex").style.display="block"
 
-	jimSay(`by the way have you seen my hat and my polo ball they got stolen recently"`)
+	jimSay(`by the way have you seen my hat and my polo ball they got stolen recently`)
 }
 
 function closeFumodex(){
