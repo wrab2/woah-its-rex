@@ -29,13 +29,13 @@ function jimOpen(){
 	setTimeout(()=>playSound("Johnical"), 1000)
 	jim.opened = true
 	if(!player.jim.spokeWith) {
-		jimSay("hi i'm JIM a brother of john and I LIKE TTO fish by the way have you seen my hat and my polo ball they got stolen")
+		jimSay("hi im JIM im sure you've heard about me im a brother of john, and i like TTO fish")
 		player.jim.spokeWith = true
 	}
 }
 
 function jimHelpMe() {
-	jimSay("yeah m8 so you click on fumodex and look 👀👀👀👀 at all the fumos you have found isn't it crazy right I know also they have their level in horribly colored blue circle you get progress towards it when you find that fumo isn't it cool ikr ikr also unrelated why does this message have orange hue I think it's being drawn behind the background I'll fix it later")
+	jimSay("the fumodex is quite simple, theres 3 categories (each one levels up a different part of the skill tree, music is important early on), you can see the fumo levels with the circle above them, it increases each time you collect it")
 }
 
 //fumodex
@@ -74,9 +74,7 @@ function openFumodex(tab=null){
 	}
 	get("fumodex").style.display="block"
 
-	jimSay(`you looked AT YOUR FUMOS 👀👀👀👀 
-		MADE YOU LOOK
-		look 👀👀👀👀look 👀👀👀👀`)
+	jimSay(`by the way have you seen my hat and my polo ball they got stolen recently"`)
 }
 
 function closeFumodex(){

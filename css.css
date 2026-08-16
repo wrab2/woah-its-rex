@@ -5457,13 +5457,40 @@ background-size: 100%;
   height: 200px;
   margin: 5px;
   padding: 0;
-  border: 2px solid red;
+
   border-radius: 10px;
-    background: #0000FF;
-  background: radial-gradient(circle, rgba(0, 0, 255, 1) 0%, rgba(0, 255, 255, 1) 50%, rgba(255, 255, 0, 1) 100%);
+
+  background: linear-gradient(
+    45deg,
+    #D0E69E,
+    #E0F1BB,
+    #FEFFE2,
+    #FDE4DE,
+    #FFC2C3,
+    #fa92b1,
+    #FFC2C3,
+    #FDE4DE,
+    #FEFFE2,
+    #E0F1BB,
+    #D0E69E
+  );
+
+  background-size: 300% 100%;
+  animation: gradientShift 15s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .fumo-name {
-  border-bottom: 2px solid red;
   height: 15%;
   max-height: 2em;
 }
@@ -5475,7 +5502,7 @@ background-size: 100%;
   width: 2em;
   height: 2em;
   margin-bottom: -2em;
-  border: 1em solid blue;
+  border: 1em solid whitesmoke;
   border-radius: 50%;
   text-shadow: rgb(255, 255, 255) -0.05em -0.05em 0px, rgb(255, 255, 255) 0.05em -0.05em 0px, rgb(255, 255, 255) -0.05em 0.05em 0px, rgb(255, 255, 255) 0.05em 0.05em 0px;
 }
