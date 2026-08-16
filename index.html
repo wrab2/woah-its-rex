@@ -1050,16 +1050,27 @@
 				<div class="john-background-water"></div>
 				<div class="john-water-blue"></div>
 			</div>
-			<div class="john-quest-window"><!--window with quests and stories-->
-				<div id="john-ore-story">you find me this ore blah blah blah placeholder who cares</div>
-				<span id="john-quest-progress">🐃0/10</span><span id="john-quest-tier">tier: 🤯</span>
-                <div id="john-quest-eta">10 million billion years</div>
-				<div id="john-quest-controls">
-                    <button onclick="johnClose()">YES john LET'S GO GAMBLING (accept quest)</button><br><br>
-                    <button onclick="completeQuest()">complete quest ✅</button>  
-                    <button onclick="rejectQuest()">decline quest❌</button> 
-                </div>
+			<div class="jim-menu-window"><!--window with quests and stories-->
+                <button onclick="jimHelpMe()">jim, buddy, what the hell am i lowk (short for lowkey) looking at rn (this button will be used for help to explain stuff because how else would you do that)</button>
+                <button onclick="openFumodex()">fumodex</button>
+                <button>skill tree</button>
+                <button>shop</button>
 			</div>
+            <div id="fumodex" style="display: none;">
+                <div class="fumodex-tab-select">
+                    <button onclick="openFumodex('music')">music</button>
+                    <button onclick="openFumodex('gacha')">gacha</button>
+                    <button onclick="openFumodex('touhou')">touhou</button>
+                    <button onclick="closeFumodex()">CLOSE FUMODEX</button>
+                </div>
+                <div id="fumo-card-copy" class="fumo-card">
+                    <div class="fumo-name">Yuyuko Saigyouji</div>
+                    <div class="fumo-level">0</div>
+                    <img class="fumo-image" src="">
+                    <div class="fumo-location">found in 🟫</div>
+                </div>
+                <div id="fumo-card-container"></div>
+            </div>
 		</div>
 
 		<div id="dailyMessages">
