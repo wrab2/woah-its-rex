@@ -180,7 +180,11 @@ class playerTemplate {
             "pickaxe27" : {
                 level: 0,
                 maxLevel: 6
-            }
+            },
+			"fishing_rod" : {
+				level: 0,
+				//some skill tree upgrades will go here as well probably
+			}
         },
         this.wasUsing = undefined;
         this.sr1Unlocked = false;
@@ -250,6 +254,7 @@ class playerTemplate {
         this.jim = {
             spokeWith: false,
         }
+		this.fumos = playerFumoObject
     }
 }
 let player = new playerTemplate();

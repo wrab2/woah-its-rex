@@ -1,0 +1,755 @@
+let fumosByType = {}
+let fumosByName = {}
+
+let playerFumoObject = {}
+
+class Fumo {
+	constructor(object){
+		this.name = object.name
+		this.layer = object.layer
+		this.tier = object.tier
+		this.type = object.type
+		
+		fumosByName[this.name] = self
+		
+		fumosByType[this.type]??=[]
+		fumosByType[this.type].push(self)
+		fumosByType[this.type] = fumosByType[this.type].sort((a,b)=>a.tier - b.tier)
+		
+		playerFumoObject[this.name] = {
+			level: 0,
+			xp: 0,
+			owned: 0,
+			found: 0
+		}
+	}
+}
+
+
+new Fumo({
+	name: "Agir",
+	layer: ["radioactiveLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Akagi",
+	layer: ["foggyLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Atago",
+	layer: ["foggyLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Azuma",
+	layer: ["foggyLayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Baltimore",
+	layer: ["globeLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Belfast",
+	layer: ["deepWaterLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Bremerton",
+	layer: ["globeLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Cheshire",
+	layer: ["deepWaterLayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Formidable",
+	layer: ["waterLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Kaga",
+	layer: ["foggyLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Kashino",
+	layer: ["waterLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Laffey",
+	layer: ["tvLayer"],
+	tier: 1,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Le_Malin",
+	layer: ["brickLayer"],
+	tier: 1,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Musashi",
+	layer: ["rockLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "New_Jersey",
+	layer: ["globeLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Shimakaze",
+	layer: ["foggyLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Noshiro",
+	layer: ["cactusLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Owari",
+	layer: ["giftLayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Sheffield",
+	layer: ["waterLayer", "waterLayer2"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Shinano",
+	layer: ["jimLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Prinz_Eugen",
+	layer: ["radioactiveLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Taihou",
+	layer: ["brickLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Takao",
+	layer: ["rockLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "China_Kuramoto",
+	layer: ["brickLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Dorothy",
+	layer: ["paperLayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Hiro_Shinosawa",
+	layer: ["doorlayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Kotone_Fujita",
+	layer: ["chessLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Lilja_Katsuragi",
+	layer: ["cloudlayer", "cloudLayer2"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Mao_Arimura",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Misuzu_Hataya",
+	layer: ["tvlayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Modernia",
+	layer: ["cactusLayer"],
+	tier: 5,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Rapunzel",
+	layer: ["paperLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Red_Hood",
+	layer: ["giftLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Rinami_Himesaki",
+	layer: ["waterLayer","waterLayer2"],
+	tier: 1,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Saki_Hanami",
+	layer: ["chessLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Scarlet",
+	layer: ["cactusLayer"],
+	tier: 3,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Sena_Juo",
+	layer: ["brickLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Snow_White",
+	layer: ["rockLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Sumika_Shiun",
+	layer: ["giftLayer"],
+	tier: 1,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Temari_Tsukimura",
+	layer: ["foggyLayer"],
+	tier: 2,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Tsubame_Amaya",
+	layer: ["radioactiveLayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+new Fumo({
+	name: "Ume_Hanami",
+	layer: ["brickLayer"],
+	tier: 4,
+	type: "gacha"
+}) 
+
+
+
+
+new Fumo({
+	name: "Hatsune_Miku",
+	layer: ,
+	tier: 5,
+	type: "music"
+}) 
+new Fumo({
+	name: "Hitori_Gotoh",
+	layer: ,
+	tier: 3,
+	type: "music"
+}) 
+new Fumo({
+	name: "Ikuyo_Kita",
+	layer: ,
+	tier: 1,
+	type: "music"
+}) 
+new Fumo({
+	name: "Kagamine_Rin",
+	layer: ,
+	tier: 4,
+	type: "music"
+}) 
+new Fumo({
+	name: "Kaito",
+	layer: ,
+	tier: 1,
+	type: "music"
+}) 
+new Fumo({
+	name: "Len_Kagamine",
+	layer: ,
+	tier: 4,
+	type: "music"
+}) 
+new Fumo({
+	name: "Megurine_Luka",
+	layer: ,
+	tier: 2,
+	type: "music"
+})
+new Fumo({
+	name: "Meiko",
+	layer: ,
+	tier: 1,
+	type: "music"
+})
+new Fumo({
+	name: "Nijika_Ijichi",
+	layer: ,
+	tier: 3,
+	type: "music"
+})
+new Fumo({
+	name: "Ryo_Yamada",
+	layer: ,
+	tier: 3,
+	type: "music"
+})
+
+
+
+new Fumo({
+	name: "Cirno",
+	layer: ["waterLayer","waterLayer2"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Daiyousei",
+	layer: ["waterLayer","waterLayer2"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Chen",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Clownpiece",
+	layer: ["starLayer"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Doremy_Sweet",
+	layer: ["starLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Aya_Shameimaru",
+	layer: ["globeLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Byakuren_Hijiri",
+	layer: ["brickLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Alice_Margatroid",
+	layer: ["foggyLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Patchouli",
+	layer: ["foggyLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Koakuma",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Chimata_Tenkyuu",
+	layer: ["cactusLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Eirin_Yagokoro",
+	layer: ["cactusLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Flandre_Scarlet",
+	layer: ["foggyLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Remilia_Scarlet",
+	layer: ["foggyLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Koishi_Komeiji",
+	layer: ["deepWaterLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Hecatia_Lapislazuli",
+	layer: ["johnLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Hong_Meiling",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Fujiwara_no_Mokou",
+	layer: ["giftLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Hanyasushin_Keiki",
+	layer: ["doorLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Hina_Kagiyama",
+	layer: ["globeLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Hong_Meiling",
+	layer: ["chessLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Joon_Yorigami",
+	layer: ["tvLayer"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Junko",
+	layer: ["nebulaLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Sagume_Kishin",
+	layer: ["nebulaLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Sakuya_Izayoi",
+	layer: ["borderLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Satori_Komeiji",
+	layer: ["deepWaterLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Ran_Yakumo",
+	layer: ["jimLayer"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Nue_Houjuu",
+	layer: ["nebulaLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Kaguya_Houraisan",
+	layer: ["cloudLayer", "cloudLayer2"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Kasen_Ibaraki",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Kogasa_Tatara",
+	layer: ["waterLayer", "waterLayer2"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Kokoro_Hatano",
+	layer: ["rockLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Komachi_Onozuka",
+	layer: ["doorLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Okina_Matara",
+	layer: ["doorLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Nazrin",
+	layer: ["radioactiveLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Utsuho_Reiuzi",
+	layer: ["radioactiveLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Minamitsu_Murasa",
+	layer: ["jimLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Yukari_Yakumo",
+	layer: ["doorLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Marisa_Kirisame",
+	layer: ["cloudLayer","cloudLayer2"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Maribel_Hearn",
+	layer: ["brickLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Megumu",
+	layer: ["paperLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Momiji_Inubashiri",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Mononobe_no_Futo",
+	layer: ["paperLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Nitori_Kawashiro",
+	layer: ["deepWaterLayer"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Parsee_Mizuhashi",
+	layer: ["borderLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Patchouli",
+	layer: ["chessLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Reimu_Hakurei",
+	layer: ["cloudlayer", "cloudLayer2"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Reisen_Udongein",
+	layer: ["nebulaLayer"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Renko_Usami",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Rin_Kaenbyou",
+	layer: ["checkmarkLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Sanae_Kochiya",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Rinnosuke",
+	layer: ["cactusLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Rumia",
+	layer: ["paperLayer"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Seiga_Kaku",
+	layer: ["waterLayer","waterLayer2"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Seiga_Kaku",
+	layer: ["waterLayer","waterLayer2"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Seija_Kijin",
+	layer: ["paperLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Shikieiki",
+	layer: ["cloudlayer", "cloudLayer2"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Shion_Yorigami",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 3,
+	type: "touhou"
+})
+new Fumo({
+	name: "Suika_Ibuki",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Suwako_Moriya",
+	layer: ["dirtLayer","dirtLayer2","dirtLayer3"],
+	tier: 1,
+	type: "touhou"
+})
+new Fumo({
+	name: "Tenshi_Hinanawi",
+	layer: ["radioactiveLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Tewi_Inaba",
+	layer: ["radioactiveLayer"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Miko",
+	layer: ["tvLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Tsukasa_Kudamaki",
+	layer: ["globeLayer"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Youmu_Konpaku",
+	layer: ["cloudLayer", "cloudLayer2"],
+	tier: 4,
+	type: "touhou"
+})
+new Fumo({
+	name: "Yuyuko_Saigyouji",
+	layer: ["cloudLayer", "cloudLayer2"],
+	tier: 5,
+	type: "touhou"
+})
+new Fumo({
+	name: "Yuka_Kazami",
+	layer: ["brickLayer"],
+	tier: 2,
+	type: "touhou"
+})
+new Fumo({
+	name: "Yuuma_Toutetsu",
+	layer: ["giftLayer"],
+	tier: 4,
+	type: "touhou"
+})
