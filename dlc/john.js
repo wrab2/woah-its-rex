@@ -295,29 +295,29 @@ function completeQuest(){
 		else if(player.john.questsCompleted.length === 2){
 			johnSay("thank you for helping me I would like to share with you more events from my past (93 more max naval events for every quest completed to be precise)")
 		}
-		else if(player.john.questsCompleted.length === 3){
-			johnSay('<img src="media/john/story0.png"> back in the day, even before i played water polo i had a water buffalo, sadly i lost him to a bullet train accident, i still miss him')
+		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
+			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around a lot of cave luck (the formula is 1.01 ^ (events completed) cave luck)")
 		}
 		else if(player.john.questsCompleted.length === 4){
 			johnSay('<img src="media/john/story1.png"> i remember when my evil doppleganger took over tsc, he wanted to add microtransactions, heres what it would\'ve looked like')
-		}
-		else if(player.john.questsCompleted.length === johnRewards["heirloom"]){
-			johnSay("this is my family's treasure that for thousands of years we passed from one generation to another. But I don't care you can have it. for every naval event you complete it will make it stronger, up to the max of around a lot of cave luck (the formula is 1.01 ^ (events completed) cave luck)")
 		}
 		else if(player.john.questsCompleted.length === 6){
 			johnSay('<img src="media/john/story2.png"> i used to be a gambling FIEND. me, evil john, and a mirror all hit up the casinos, i still have so many casino chips at my home i hope no one steals them!')
 		}
 		else if(player.john.questsCompleted.length === 7){
-			johnSay('<img src="media/john/story3.png"> josh (my roomate) used to gatekeep the awesome site known as \'quiz.qwq.re\' from EVIL people (such as the :cat2 emoji)')
+			johnSay('<img src="media/john/story3.png"> josh (my roomate) used to gatekeep the awesome site known as \'quiz.qwq.re\' from EVIL people (such as the :cat2: emoji)')
+		}
+		else if(player.john.questsCompleted.length === 8){
+			johnSay('<img src="media/john/story4.png"> this was the finals of the water polo championchip of 2000, i remember when jim 8 was able to do a double dunk by jumping on jim 4\'s head')
+		}
+		else if(player.john.questsCompleted.length === 9){
+			johnSay('<img src="media/john/story5.png"> we dont talk about what happened in this image !')
+		}
+		else if(player.john.questsCompleted.length === 10){
+			johnSay('<img src="media/john/story0.png"> back in the day, even before i played water polo i had a water buffalo, sadly i lost him to a bullet train accident, i still miss him')
 		}
 		else if(player.john.questsCompleted.length === johnRewards["water_polo_ball"]){
 			johnSay("jim when we were playing water polo yesterday accidentally threw his water polo ball into the mariana trench, but thankfully i was able to get it, but i dont want to return it to him so you can keep it")
-		}
-		else if(player.john.questsCompleted.length === 8){
-			johnSay('<img src="media/john/story4.png"> this was the finals of the water polo championhip of 2000, i remember when jim 8 was able to do a double dunk by jumping on jim 4\'s head')
-		}
-		else if(player.john.questsCompleted.length === 9){
-			johnSay('<img src="media/john/story5.png"> We dont talk about what happened in this image')
 		}
 		else if(player.john.questsCompleted.length === johnRewards["hypermark_checkminator"]){
 			johnSay("my buddy, feller, I put a special something deep down in world 2. But you can't mine it. my pet water buffalo 🐃 will be mildly upset if you use offline time to ignore unbreakability of that layer (1m blocks or lower)")
