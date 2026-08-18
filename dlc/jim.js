@@ -58,12 +58,12 @@ function openFumodex(tab=null){
 
 	const card = get("fumo-card-copy")
 	get("fumo-card-container").textContent=""
-	for (const fumo of fumosByType[this.tab]){
+	for (const fumo of fumos.byType[this.tab]){
 		let thisCard = card.cloneNode(true)
 		thisCard.removeAttribute("id")
 		thisCard.getElementsByClassName("fumo-name")[0].textContent = fumo.name.replace(/_/g, " ")
-		thisCard.getElementsByClassName("fumo-level")[0].textContent = player[fumo.name].level
-		thisCard.getElementsByClassName("fumo-image")[0].src = `media/fumo_fishing/${this.tab}/${fumo}.webp`
+		thisCard.getElementsByClassName("fumo-level")[0].textContent = player.fumos[fumo.name][fumoStats.level]
+		thisCard.getElementsByClassName("fumo-image")[0].src = `media/fumo_fishing/${this.tab}/${fumo.name}.webp`
 		thisCard.getElementsByClassName("fumo-location")[0].innerHTML = `found in ${fumo.layer}`
 
 		get("fumo-card-container").append(thisCard)

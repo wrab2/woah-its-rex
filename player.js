@@ -863,6 +863,8 @@ function loadNewData(data) {
             }
         }
         player.john = {...player.john, ...data.john??{}}
+        //player.jim = {...player.jim, ...data.jim??{}}
+        player.fumos = Object.assign(player.fumos, data.fumos)
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();
