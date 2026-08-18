@@ -749,7 +749,7 @@ const layerList = {
 "vaLayer" : ["sillyMiner", '🇷🇺', '🇩🇪', '🇬🇧', '🇫🇷', '🇮🇹', '🇪🇸', '🇵🇱', '🇺🇦', '🇷🇴', '🇳🇱', '🇻🇦'],
 "srLayer" : ["sillyMiner", '🇧🇷', '🇨🇴', '🇦🇷', '🇵🇪', '🇻🇪', '🇨🇱', '🇪🇨', '🇧🇴', '🇵🇾', '🇺🇾', '🇸🇷'],
 "ocLayer" : ["sillyMiner", '🇦🇺', '🇵🇬', '🇳🇿', '🇫🇯', '🇸🇧', '🇫🇲', '🇻🇺', '🇵🇫', '🇳🇨', '🇼🇸', '🇹🇻'],
-"catcatLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳'],
+"internationalLayer" : [ '🏳️‍⚧️', '🏁', '🇺🇳'],
 "starLayer" : ["Koreosensei", "Panselinos", "txtfile", "cosmicIridium", "unstableCore", "pleiades", "australiumIngot", "stars"],
 "nebulaLayer" : ["Koreosensei", "noradrenaline", "Desolation", "otherside", "ascendedArtifact", "J1407b", "Charybdis", "nebula"],
 "deepWaterLayer" : ["miku", "teto", "neru", "rei", "rin", "hitori", "nijika", "kita", "ryou", "deepWater"],
@@ -770,7 +770,7 @@ const createdLayers = {
 let worldOneLayers = ["dirtLayer", "brickLayer", "foggyLayer", "waterLayer", "rockLayer", "radioactiveLayer", "cactusLayer", "paperLayer", "giftLayer"];
 let worldTwoLayers = ["cloudLayer", "tvLayer", "doorLayer", "globeLayer", "chessLayer", "borderLayer"];
 let galacticaLayers = ["starLayer", "nebulaLayer"]
-let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer",];
+let subRealmOneLayers = ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "internationalLayer",];
 let waterWorldLayers = ["waterLayer2"] // i feel like jim should be here //idk it doesn't seem to affect enything
 let specialLayers = ["sillyLayer", "fluteLayer", "grassLayer", "dirtLayer2", "dirtLayer3", "barrierLayer", "borderLayer", "johnLayer", "checkmarkLayer"]
 let allLayers = structuredClone(worldOneLayers)
@@ -822,7 +822,7 @@ const layerIndex = {
         3 : "vaLayer",
         4 : "srLayer",
         5 : "ocLayer",
-        6 : "catcatLayer"
+        6 : "internationalLayer"
     },
     waterWorld: [
         "waterLayer2",

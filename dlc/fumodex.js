@@ -173,19 +173,19 @@ new Fumo({
 
 new Fumo({
 	name: "Belfast",
-	layer: ["deepWaterLayer"],
+	layer: ["checkmarkLayer"],
 	tier: 2,
 	type: "gacha"
 })
 new Fumo({
 	name: "Azuma",
-	layer: ["deepWaterLayer"],
+	layer: ["checkmarkLayer"],
 	tier: 3,
 	type: "gacha"
 })
 new Fumo({
 	name: "Cheshire",
-	layer: ["deepWaterLayer"],
+	layer: ["checkmarkLayer"],
 	tier: 4,
 	type: "gacha"
 })
@@ -303,25 +303,25 @@ new Fumo({
 
 new Fumo({
 	name: "Hatsune_Miku",
-	layer: ["waterLayer","waterLayer2"],
+	layer: ["deepWaterLayer"],
 	tier: 5,
 	type: "music"
 })
 new Fumo({
 	name: "Ikuyo_Kita",
-	layer: ["johnLayer"],
+	layer: ["deepWaterLayer"],
 	tier: 1,
 	type: "music"
 })
 new Fumo({
 	name: "Hitori_Gotoh",
-	layer: ["johnLayer"],
+	layer: ["deepWaterLayer"],
 	tier: 3,
 	type: "music"
 })
 new Fumo({
 	name: "Kagamine_Rin",
-	layer: ["jimLayer"],
+	layer: ["deepWaterLayer"],
 	tier: 4,
 	type: "music"
 })
@@ -333,31 +333,31 @@ new Fumo({
 })
 new Fumo({
 	name: "Len_Kagamine",
-	layer: ["borderLayer"],
+	layer: ["deepWaterLayer"],
 	tier: 4,
 	type: "music"
 })
 new Fumo({
 	name: "Meiko",
-	layer: ["tvLayer"],
+	layer: ["radioactiveLayer"],
 	tier: 1,
 	type: "music"
 })
 new Fumo({
 	name: "Megurine_Luka",
-	layer: ["tvLayer"],
+	layer: ["johnLayer"],
 	tier: 2,
 	type: "music"
 })
 new Fumo({
 	name: "Nijika_Ijichi",
-	layer: ["rockLayer"],
+	layer: ["deepWaterLayer"],
 	tier: 3,
 	type: "music"
 })
 new Fumo({
 	name: "Ryo_Yamada",
-	layer: ["radioactiveLayer"],
+	layer: ["deepWaterLayer"],
 	tier: 3,
 	type: "music"
 })
@@ -543,19 +543,19 @@ new Fumo({
 
 new Fumo({
 	name: "Nitori_Kawashiro",
-	layer: ["deepWaterLayer"],
+	layer: ["johnLayer"],
 	tier: 2,
 	type: "touhou"
 })
 new Fumo({
 	name: "Koishi_Komeiji",
-	layer: ["deepWaterLayer"],
+	layer: ["jimLayer"],
 	tier: 3,
 	type: "touhou"
 })
 new Fumo({
 	name: "Satori_Komeiji",
-	layer: ["deepWaterLayer"],
+	layer: ["internationalLayer"],
 	tier: 5,
 	type: "touhou"
 })

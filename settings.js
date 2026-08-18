@@ -410,7 +410,7 @@ const indexOrder = {
         "worldTwoSpecial3" : {l: ["checkmarkLayer"], req: function() {return indexHasOre("✅") > 10}},
     },
     1.1: {
-        "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "catcatLayer"], req: function() {return player.sr1Unlocked}},
+        "subrealmOne" : {l: ["scLayer", "bnLayer", "knLayer", "vaLayer", "srLayer", "ocLayer", "internationalLayer"], req: function() {return player.sr1Unlocked}},
     },
     1.2: {
         "watrWatr" : {l: ["waterLayer2"], req: function() {return true}},
