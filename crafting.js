@@ -2335,7 +2335,7 @@ const pickaxeStats = {
         revealed: 1,
         luck: 1e-12, //we're using FISHING POWER arond here but every ore being a trillion times more rare is also cool probably
         rate: Infinity,
-        src : `<img class="mineImage" src="media/fishing_pole.png"></img>`,
+        src : `<img class="mineImage" src="media/fishingrodtier0.png"></img>`,
         ability: "",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9, 3],
