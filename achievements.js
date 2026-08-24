@@ -1208,8 +1208,8 @@ const milestoneList = {
             element: undefined
         },
         "wtp1.2" : {
-            title: "what does this name mean-",
-            description: "Craft Corundum Caver!",
+            title: "great name",
+            description: "Craft Conundrum Caver!",
             check: function() {
                 return player.pickaxes["pickaxe15"] && player.powerupVariables.fakeEquipped.item !== "pickaxe15";
             },

@@ -107,7 +107,7 @@ const recipes = {
         pickaxe: true
     },
     "pickaxe15" : {
-        name : "Corundum Caver",
+        name : "Conundrum Caver",
         recipe : [{ore:"🚪", amt:400000},{ore:"🔁", amt:1800},{ore:"⬇️", amt:150},{ore:"⏫", amt:18},{ore:"▶️", amt:1},],
         active : [],
         pickaxe: true
@@ -2060,7 +2060,7 @@ const pickaxeStats = {
         revealed: 140,
         luck: 1.075,
         rate: 75,
-        src: "⛏️",
+        src: `<img class="mineImage" src="media/conundrumCaverIcon.png"></img>`,
         ability: "media/abilityImages/corundumCaverAbility.png",
         doAbility: function(x, y) { pickaxeAbility15(x, y) },
         canSpawnCaves:[1, 2],
@@ -2140,7 +2140,7 @@ const pickaxeStats = {
         revealed: 4489,
         luck: 2,
         rate: 75,
-        src: "⛏️",
+        src: `<img class="mineImage" src="media/exponentialCentrifugeIcon.png"></img>`,
         ability: "media/abilityImages/exponentialCentrifugeAbility.png",
         doAbility: function(x, y) { pickaxeAbility21(x, y) },
         canSpawnCaves:[1, 2],
