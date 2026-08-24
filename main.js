@@ -708,14 +708,23 @@ function checkDisplayVariant(location) {
     let oreToAdd;
     let includeSize;
     let specialVariant;
+	let tier
+	let oreListEntry
     const ore = location.ore !== undefined ? location.ore : location;
-    const tier = oreList[ore]["oreTier"];
+	if(location.type === "fumo"){
+		tier = "fumo"
+		oreListEntry = fumos.byName[location.ore].generateListEntry()
+	}
+    else {
+		oreListEntry = oreList[ore]
+		tier = oreListEntry["oreTier"];
+	}
     let isRare = (tier !== "Layer" && commons.indexOf(tier) === -1);
-    if (oreList[ore]["hasImage"]) {
-        let isLarge = tier === "Hyperdimensional" || tier === "Infinitesimal" || oreList[ore]["numRarity"] >= 1000000000000000;
+    if (oreListEntry["hasImage"]) {
+        let isLarge = ["Hyperdimensional", "Infinitesimal", "fumo"].includes(tier) || oreListEntry["numRarity"] >= 1000000000000000;
         let isMassive = ore === "noradrenaline"
-        if (isRare) oreToAdd = `<img class="${isMassive ? "hugeMineImage" : isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[ore]["src"]}"></img>`;
-        else return `<span class="mineSpan"><img class="mineImage" src="${oreList[ore]["src"]}"></img></span>`;
+        if (isRare) oreToAdd = `<img class="${isMassive ? "hugeMineImage" : isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreListEntry["src"]}"></img>`;
+        else return `<span class="mineSpan"><img class="mineImage" src="${oreListEntry["src"]}"></img></span>`;
         includeSize = "";
         specialVariant = "Img";
     } else {

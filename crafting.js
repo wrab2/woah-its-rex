@@ -1190,6 +1190,14 @@ const buttonGradients = {
 	"phoneCraft" : {"gradient" : "linear-gradient(to right, #f7c033, #509eb2, #eb5679)","applied" : false},
 }
 function craftPickaxe(item) {
+	if(item === "fishing_pole"){
+		player.stats.currentPickaxe = "fishing_pole"
+		
+		return
+	}
+
+
+
     let recipe = recipes[item].recipe;
     const type = (recipes[item].pickaxe || recipe.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
     if (item === "pickaxe27") {
@@ -2325,15 +2333,15 @@ const pickaxeStats = {
     "fishing_pole" : {
         mined: 1,
         revealed: 1,
-        luck: 1,
-        rate: 999999,
+        luck: 1e-12, //we're using FISHING POWER arond here but every ore being a trillion times more rare is also cool probably
+        rate: Infinity,
         src : `<img class="mineImage" src="media/fishing_pole.png"></img>`,
         ability: "",
         doAbility: function(x, y) {},
         canSpawnCaves:[1, 1.2, 2, 0.9, 3],
         canMineIn:[1, 1.2, 2, 0.9, 3],
-        isDimensional: true,
-        tier: 16, //because your desire to fish is stronger than checkmark layer
+        isDimensional: false,
+        tier: 16, //because your desire to fish is stronger than the checkmark layer
         icon: "it wasn't me I swear don't look at git blame",
     },
 }

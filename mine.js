@@ -37,15 +37,26 @@ function checkAllAround(x, y) {
 function mineBlock(x, y, cause) {
     let mineBlockOre;
     let mineBlockVariant;
+	let isFumo
     if (mine[y][x].ore !== undefined) {
         if (mine[y][x].isPlaced) {mine[y][x] = "⚪"; checkAllAround(x, y); return;}
         mineBlockOre = mine[y][x].ore;
         mineBlockVariant = mine[y][x].variant;
+		isFumo = mine[y][x].type === "fumo"
     } else {
         mineBlockOre = mine[y][x];
         mineBlockVariant = undefined;
     }
     if (mineBlockOre === "⚪") return;
+
+	if (isFumo) {
+		fumos.byName[mineBlockOre].addFumo(mineBlockVariant)
+        mine[y][x] = "⚪";
+        player.stats.blocksMined++;
+		checkAllAround(x, y);
+		return
+	}
+
     if ((!unbreakable.includes(mineBlockOre) || (player.stats.currentPickaxe == "pickaxe27"?
             pickaxeStats[player.stats.currentPickaxe].tier + player.upgrades.pickaxe27.level :
             pickaxeStats[player.stats.currentPickaxe].tier) 
@@ -189,6 +200,12 @@ const generateBlock = function(location, wbm) {
         }
     }
     let blockToGive = arr[low];
+	if (fumos.nameList.has(blockToGive)){
+		let variant = fumos.byName[blockToGive].getVariant()
+		mine[location["Y"]][location["X"]] = {ore: blockToGive, variant: variant, type: "fumo"};
+		//autocollect goes here
+		return
+	}
     let oreRarity = oreList[blockToGive]["numRarity"];
     if (oreRarity >= 750000) {
         let vInfo = rollVariant();
@@ -636,7 +653,7 @@ function switchDistance(num) {
     }
     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
     let teleportLayer = getLayer(layerDistanceY).layer;
-    for (let i = 0; i < teleportLayer.length; i++) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
+    for (let i = teleportLayer.length-1; i > 0; i--) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
     let tI;
     if(isThisJohn) teleportLayer = "🤽‍♂️"
     if (oreList[teleportLayer]["hasImage"]) tI = `<img class="teleportImage" src="${oreList[teleportLayer]["src"]}">`;

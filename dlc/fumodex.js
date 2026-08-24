@@ -1,32 +1,85 @@
 let fumos = {
-	byType: []
+	byType: [],
+	byName: [],
+	all: [],
+	nameList: new Set(),
 }
+
+function insertFumosIntoLayers() {
+	for(const fumo of fumos.all){
+		for (const x of fumo.layer) {
+			let layer = layerDictionary[x]
+			if (!layer.layer.includes(fumo.name)){
+				for (let i=0; i<layer.layer.length; i++){
+					if(fumo.getRarity() < layer.probabilities[i]){
+						layer.layer.splice(i, 0, fumo.name);
+						break;
+					}
+				}
+			}
+		}
+		updateAllLayers();
+	}
+}
+
 
 let playerFumoObject = {}
 
 let fumoStats = {
 	//this is for access like player.fumos[fumo.name][fumoStats.level]
 	level: 0,
-	xp: 0,
-	owned: 0,
-	found: 0,
+	xp: 1,
+	found: 2,
+	owned: 3,
 }
 class Fumo {
-	//this probably should be a function but whatever
 	constructor(FUMO){
-		playerFumoObject[FUMO.name] = [0,0,0,0]
-		let fumoObj = {
-			name: FUMO.name,
-			layer: FUMO.layer,
-			tier: FUMO.tier,
-			type: FUMO.type,
-			//player: playerFumoObject[FUMO.name]
-		}
-		fumos[FUMO.name] = fumoObj
+		this.name = FUMO.name
+		this.layer = FUMO.layer
+		this.tier = FUMO.tier
+		this.type = FUMO.type
+
+		playerFumoObject[this.name] = [0,0,0,0]
 		
-		fumos.byType[FUMO.type]??=[]
-		fumos.byType[FUMO.type].push(fumoObj)
-		fumos.byType[FUMO.type] = fumos.byType[FUMO.type].sort((a,b)=>a.tier - b.tier)
+		fumos.byName[FUMO.name] = this
+		fumos.all.push(this)
+		fumos.nameList.add(this.name)
+		fumos.byType[this.type]??=[]
+		fumos.byType[this.type].push(this)
+		fumos.byType[this.type] = fumos.byType[this.type].sort((a,b)=>a.tier - b.tier)
+	}
+	getRarity(){
+		if(false /*check if it meets tier requirements*/) return 0
+		let baseRarity = 10000
+		let tierExponent = 0.2
+		let rarity = baseRarity
+		//something with fishing power needs to exist
+		rarity = baseRarity ** (1+((this.tier-1)*tierExponent))
+		rarity = 1/rarity
+		return 0.1 //test
+		return rarity
+	}
+	getVariant(){
+		return 1
+	}
+	addFumo(variant){
+		let playerFumo = player.fumos[this.name]
+		playerFumo[fumoStats.owned] += 1
+		playerFumo[fumoStats.found] += 1
+		playerFumo[fumoStats.xp] += 10*variant
+		//level formula, that is 5000*(3^level*1.05) (subject to be changed)
+		if(playerFumo[fumoStats.level]<10 && playerFumo[fumoStats.xp] > 5000 * (3 ** (playerFumo[fumoStats.level]*1.05))){
+			this.levelUp()
+		}
+	}
+	levelUp(){
+		let playerFumo = player.fumos[this.name]
+		playerFumo[fumoStats.level] += 1
+		playerFumo[fumoStats.xp] = 0
+	}
+	generateListEntry(){
+		 this.fakeOreListEntry = {'numRarity': 1/this.getRarity(), 'decimalRarity':this.getRarity(), 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'hasImage' : true, "src" : `media/fumo_fishing/${this.type}/${this.name}.webp`}
+		 return this.fakeOreListEntry
 	}
 }
 
@@ -38,7 +91,7 @@ new Fumo({
 })
 new Fumo({
 	name: "Misuzu_Hataya",
-	layer: ["tvlayer"],
+	layer: ["tvLayer"],
 	tier: 3,
 	type: "gacha"
 })
@@ -114,7 +167,7 @@ new Fumo({
 
 new Fumo({
 	name: "Lilja_Katsuragi",
-	layer: ["cloudlayer", "cloudLayer2"],
+	layer: ["cloudLayer", "cloudLayer2"],
 	tier: 2,
 	type: "gacha"
 })
@@ -134,7 +187,7 @@ new Fumo({
 
 new Fumo({
 	name: "Hiro_Shinosawa",
-	layer: ["doorlayer"],
+	layer: ["doorLayer"],
 	tier: 4,
 	type: "gacha"
 })
@@ -696,7 +749,7 @@ new Fumo({
 
 new Fumo({
 	name: "Shikieiki",
-	layer: ["cloudlayer", "cloudLayer2"],
+	layer: ["cloudLayer", "cloudLayer2"],
 	tier: 2,
 	type: "touhou"
 })
@@ -708,7 +761,7 @@ new Fumo({
 })
 new Fumo({
 	name: "Reimu_Hakurei",
-	layer: ["cloudlayer", "cloudLayer2"],
+	layer: ["cloudLayer", "cloudLayer2"],
 	tier: 3,
 	type: "touhou"
 })

@@ -1198,17 +1198,24 @@ function createGenerationProbabilities() {
         let temp = 0;
         let tempArr = [];
         let tempLayer = layerDictionary[layer].layer;
-        const sim = (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional);
+        const sim = ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) && player.stats.currentPickaxe !== "fishing_pole");
         for (let i = 0; i < tempLayer.length; i++) {
-            if (sim) temp = oreList[tempLayer[i]]["decimalRarity"];
-            else temp += oreList[tempLayer[i]]["decimalRarity"];
+            if (sim) temp = fumos.nameList.has(tempLayer[i])? fumos.byName[tempLayer[i]].getRarity() : oreList[tempLayer[i]]["decimalRarity"];
+            else temp += fumos.nameList.has(tempLayer[i])? fumos.byName[tempLayer[i]].getRarity() : oreList[tempLayer[i]]["decimalRarity"];
             tempArr[i] = temp;
         }
         layerDictionary[layer].probabilities = tempArr;
     }
 }
 function sortLayerRarities(arr) {
-    arr.sort((a,b)=>oreList[a]["decimalRarity"] - oreList[b]["decimalRarity"])
+	if(player.stats.currentPickaxe === "fishing_pole"){
+		arr.sort((a,b)=>
+			(fumos.nameList.has(a)? fumos.byName[a].getRarity() : oreList[a]["decimalRarity"] )- 
+			(fumos.nameList.has(b)? fumos.byName[b].getRarity() : oreList[b]["decimalRarity"] )
+		)}
+	else {
+		arr.sort((a,b)=>oreList[a]["decimalRarity"] - oreList[b]["decimalRarity"])	
+	}
     return arr;
 }
 function sortLayerBase(arr) {
@@ -1218,11 +1225,13 @@ function sortLayerBase(arr) {
 let commons = ["Common","Uncommon","Rare","Legendary","Godly"];
 function applyLuckToLayer(layer, luck) {
     for (let i = 0; i < layer.length; i++) {
-        let layerluck = debug ? cat : luck;
+        let layerluck = debug ? cat : luck;		
+		
         if (player.powerupVariables.currentChosenOre.ore === layer[i])
             layerluck *= 1.5;
         if (currentActiveEvent !== undefined) if (layer[i] === events[currentActiveEvent.name].ore) layerluck *= events[currentActiveEvent.name].boost;
-          let listEntry = oreList[layer[i]]
+		let listEntry = oreList[layer[i]]?oreList[layer[i]] : fumos.byName[layer[i]].generateListEntry()
+		
 
         let baseValue = listEntry["numRarity"];
         if (specialOreValues[layer[i]] !== undefined) {
