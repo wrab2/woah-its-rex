@@ -535,6 +535,7 @@ function createIndexCards(layer) {
 		if(!ic)list = list.filter((e)=>!layerList.worldTwoCommons.includes(e) && !layerList.worldOneCommons.includes(e))
         for (let i = list.length - 1; i >= 0; i--) {
             const ore = list[i];
+			if(fumos.nameList.has(ore))break
             const tier = oreList[ore]["oreTier"];
             if (((!oreInformation.tierGrOrEqTo({"tier1":tier, "tier2": "Mystical"}) && !ic) || tier === "Celestial") && ore !== "✴️") list.splice(i, 1);
         }
@@ -547,8 +548,9 @@ function createIndexCards(layer) {
         }
     }
     for (key in list) {
-        const copying = get("indexCardCopy").cloneNode(true);
         const ore = list[key];
+		if(fumos.nameList.has(ore))break
+        const copying = get("indexCardCopy").cloneNode(true);
         const tier = oreList[ore]["oreTier"];
         const hide = (oreInformation.tierGrOrEqTo({"tier1":tier, "tier2":"Sacred"}) && oreList[ore]["foundAt"] === undefined) && indexHasOre(ore) === 0;
         copying.id = "";

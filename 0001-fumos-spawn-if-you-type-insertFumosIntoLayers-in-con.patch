@@ -1,0 +1,345 @@
+From caac1b34c2f746bceb52ab142f67b3ad47adf784 Mon Sep 17 00:00:00 2001
+From: Wrab <namedj82@gmail.com>
+Date: Mon, 24 Aug 2026 12:04:38 +0000
+Subject: [PATCH] fumos spawn if you type insertFumosIntoLayers() in console
+ but not for long because terrestrial terror scares away all the fumos :fear:
+ and also I set their spawn to constant 20% chance :wave:(see) fomodex.js for
+ more
+
+---
+ crafting.js    | 16 ++++++---
+ dlc/fumodex.js | 97 ++++++++++++++++++++++++++++++++++++++------------
+ layers.js      | 21 +++++++----
+ main.js        | 19 +++++++---
+ mine.js        | 19 +++++++++-
+ 5 files changed, 134 insertions(+), 38 deletions(-)
+
+diff --git a/crafting.js b/crafting.js
+index 6442369..84823c9 100644
+--- a/crafting.js
++++ b/crafting.js
+@@ -1190,6 +1190,14 @@ const buttonGradients = {
+ 	"phoneCraft" : {"gradient" : "linear-gradient(to right, #f7c033, #509eb2, #eb5679)","applied" : false},
+ }
+ function craftPickaxe(item) {
++	if(item === "fishing_pole"){
++		player.stats.currentPickaxe = "fishing_pole"
++		
++		return
++	}
++
++
++
+     let recipe = recipes[item].recipe;
+     const type = (recipes[item].pickaxe || recipe.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";
+     if (item === "pickaxe27") {
+@@ -2325,15 +2333,15 @@ const pickaxeStats = {
+     "fishing_pole" : {
+         mined: 1,
+         revealed: 1,
+-        luck: 1,
+-        rate: 999999,
++        luck: 1e-12, //we're using FISHING POWER arond here but every ore being a trillion times more rare is also cool probably
++        rate: Infinity,
+         src : `<img class="mineImage" src="media/fishing_pole.png"></img>`,
+         ability: "",
+         doAbility: function(x, y) {},
+         canSpawnCaves:[1, 1.2, 2, 0.9, 3],
+         canMineIn:[1, 1.2, 2, 0.9, 3],
+-        isDimensional: true,
+-        tier: 16, //because your desire to fish is stronger than checkmark layer
++        isDimensional: false,
++        tier: 16, //because your desire to fish is stronger than the checkmark layer
+         icon: "it wasn't me I swear don't look at git blame",
+     },
+ }
+diff --git a/dlc/fumodex.js b/dlc/fumodex.js
+index 439ede4..fe586ad 100644
+--- a/dlc/fumodex.js
++++ b/dlc/fumodex.js
+@@ -1,32 +1,85 @@
+ let fumos = {
+-	byType: []
++	byType: [],
++	byName: [],
++	all: [],
++	nameList: new Set(),
+ }
+ 
++function insertFumosIntoLayers() {
++	for(const fumo of fumos.all){
++		for (const x of fumo.layer) {
++			let layer = layerDictionary[x]
++			if (!layer.layer.includes(fumo.name)){
++				for (let i=0; i<layer.layer.length; i++){
++					if(fumo.getRarity() < layer.probabilities[i]){
++						layer.layer.splice(i, 0, fumo.name);
++						break;
++					}
++				}
++			}
++		}
++		updateAllLayers();
++	}
++}
++
++
+ let playerFumoObject = {}
+ 
+ let fumoStats = {
+ 	//this is for access like player.fumos[fumo.name][fumoStats.level]
+ 	level: 0,
+-	xp: 0,
+-	owned: 0,
+-	found: 0,
++	xp: 1,
++	found: 2,
++	owned: 3,
+ }
+ class Fumo {
+-	//this probably should be a function but whatever
+ 	constructor(FUMO){
+-		playerFumoObject[FUMO.name] = [0,0,0,0]
+-		let fumoObj = {
+-			name: FUMO.name,
+-			layer: FUMO.layer,
+-			tier: FUMO.tier,
+-			type: FUMO.type,
+-			//player: playerFumoObject[FUMO.name]
+-		}
+-		fumos[FUMO.name] = fumoObj
++		this.name = FUMO.name
++		this.layer = FUMO.layer
++		this.tier = FUMO.tier
++		this.type = FUMO.type
++
++		playerFumoObject[this.name] = [0,0,0,0]
+ 		
+-		fumos.byType[FUMO.type]??=[]
+-		fumos.byType[FUMO.type].push(fumoObj)
+-		fumos.byType[FUMO.type] = fumos.byType[FUMO.type].sort((a,b)=>a.tier - b.tier)
++		fumos.byName[FUMO.name] = this
++		fumos.all.push(this)
++		fumos.nameList.add(this.name)
++		fumos.byType[this.type]??=[]
++		fumos.byType[this.type].push(this)
++		fumos.byType[this.type] = fumos.byType[this.type].sort((a,b)=>a.tier - b.tier)
++	}
++	getRarity(){
++		if(false /*check if it meets tier requirements*/) return 0
++		let baseRarity = 10000
++		let tierExponent = 0.2
++		let rarity = baseRarity
++		//something with fishing power needs to exist
++		rarity = baseRarity ** (1+((this.tier-1)*tierExponent))
++		rarity = 1/rarity
++		return 0.1 //test
++		return rarity
++	}
++	getVariant(){
++		return 1
++	}
++	addFumo(variant){
++		let playerFumo = player.fumos[this.name]
++		playerFumo[fumoStats.owned] += 1
++		playerFumo[fumoStats.found] += 1
++		playerFumo[fumoStats.xp] += 10*variant
++		//level formula, that is 5000*(3^level*1.05) (subject to be changed)
++		if(playerFumo[fumoStats.level]<10 && playerFumo[fumoStats.xp] > 5000 * (3 ** (playerFumo[fumoStats.level]*1.05))){
++			this.levelUp()
++		}
++	}
++	levelUp(){
++		let playerFumo = player.fumos[this.name]
++		playerFumo[fumoStats.level] += 1
++		playerFumo[fumoStats.xp] = 0
++	}
++	generateListEntry(){
++		 this.fakeOreListEntry = {'numRarity': 1/this.getRarity(), 'decimalRarity':this.getRarity(), 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'hasImage' : true, "src" : `media/fumo_fishing/${this.type}/${this.name}.webp`}
++		 return this.fakeOreListEntry
+ 	}
+ }
+ 
+@@ -38,7 +91,7 @@ new Fumo({
+ })
+ new Fumo({
+ 	name: "Misuzu_Hataya",
+-	layer: ["tvlayer"],
++	layer: ["tvLayer"],
+ 	tier: 3,
+ 	type: "gacha"
+ })
+@@ -114,7 +167,7 @@ new Fumo({
+ 
+ new Fumo({
+ 	name: "Lilja_Katsuragi",
+-	layer: ["cloudlayer", "cloudLayer2"],
++	layer: ["cloudLayer", "cloudLayer2"],
+ 	tier: 2,
+ 	type: "gacha"
+ })
+@@ -134,7 +187,7 @@ new Fumo({
+ 
+ new Fumo({
+ 	name: "Hiro_Shinosawa",
+-	layer: ["doorlayer"],
++	layer: ["doorLayer"],
+ 	tier: 4,
+ 	type: "gacha"
+ })
+@@ -696,7 +749,7 @@ new Fumo({
+ 
+ new Fumo({
+ 	name: "Shikieiki",
+-	layer: ["cloudlayer", "cloudLayer2"],
++	layer: ["cloudLayer", "cloudLayer2"],
+ 	tier: 2,
+ 	type: "touhou"
+ })
+@@ -708,7 +761,7 @@ new Fumo({
+ })
+ new Fumo({
+ 	name: "Reimu_Hakurei",
+-	layer: ["cloudlayer", "cloudLayer2"],
++	layer: ["cloudLayer", "cloudLayer2"],
+ 	tier: 3,
+ 	type: "touhou"
+ })
+diff --git a/layers.js b/layers.js
+index f836d0b..dd5bf02 100644
+--- a/layers.js
++++ b/layers.js
+@@ -1198,17 +1198,24 @@ function createGenerationProbabilities() {
+         let temp = 0;
+         let tempArr = [];
+         let tempLayer = layerDictionary[layer].layer;
+-        const sim = (player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional);
++        const sim = ((player.settings.simulatedRng || pickaxeStats[player.stats.currentPickaxe].isDimensional) && player.stats.currentPickaxe !== "fishing_pole");
+         for (let i = 0; i < tempLayer.length; i++) {
+-            if (sim) temp = oreList[tempLayer[i]]["decimalRarity"];
+-            else temp += oreList[tempLayer[i]]["decimalRarity"];
++            if (sim) temp = fumos.nameList.has(tempLayer[i])? fumos.byName[tempLayer[i]].getRarity() : oreList[tempLayer[i]]["decimalRarity"];
++            else temp += fumos.nameList.has(tempLayer[i])? fumos.byName[tempLayer[i]].getRarity() : oreList[tempLayer[i]]["decimalRarity"];
+             tempArr[i] = temp;
+         }
+         layerDictionary[layer].probabilities = tempArr;
+     }
+ }
+ function sortLayerRarities(arr) {
+-    arr.sort((a,b)=>oreList[a]["decimalRarity"] - oreList[b]["decimalRarity"])
++	if(player.stats.currentPickaxe === "fishing_pole"){
++		arr.sort((a,b)=>
++			(fumos.nameList.has(a)? fumos.byName[a].getRarity() : oreList[a]["decimalRarity"] )- 
++			(fumos.nameList.has(b)? fumos.byName[b].getRarity() : oreList[b]["decimalRarity"] )
++		)}
++	else {
++		arr.sort((a,b)=>oreList[a]["decimalRarity"] - oreList[b]["decimalRarity"])	
++	}
+     return arr;
+ }
+ function sortLayerBase(arr) {
+@@ -1218,11 +1225,13 @@ function sortLayerBase(arr) {
+ let commons = ["Common","Uncommon","Rare","Legendary","Godly"];
+ function applyLuckToLayer(layer, luck) {
+     for (let i = 0; i < layer.length; i++) {
+-        let layerluck = debug ? cat : luck;
++        let layerluck = debug ? cat : luck;		
++		
+         if (player.powerupVariables.currentChosenOre.ore === layer[i])
+             layerluck *= 1.5;
+         if (currentActiveEvent !== undefined) if (layer[i] === events[currentActiveEvent.name].ore) layerluck *= events[currentActiveEvent.name].boost;
+-          let listEntry = oreList[layer[i]]
++		let listEntry = oreList[layer[i]]?oreList[layer[i]] : fumos.byName[layer[i]].generateListEntry()
++		
+ 
+         let baseValue = listEntry["numRarity"];
+         if (specialOreValues[layer[i]] !== undefined) {
+diff --git a/main.js b/main.js
+index 696a839..817cd7f 100644
+--- a/main.js
++++ b/main.js
+@@ -708,14 +708,23 @@ function checkDisplayVariant(location) {
+     let oreToAdd;
+     let includeSize;
+     let specialVariant;
++	let tier
++	let oreListEntry
+     const ore = location.ore !== undefined ? location.ore : location;
+-    const tier = oreList[ore]["oreTier"];
++	if(location.type === "fumo"){
++		tier = "fumo"
++		oreListEntry = fumos.byName[location.ore].generateListEntry()
++	}
++    else {
++		oreListEntry = oreList[ore]
++		tier = oreListEntry["oreTier"];
++	}
+     let isRare = (tier !== "Layer" && commons.indexOf(tier) === -1);
+-    if (oreList[ore]["hasImage"]) {
+-        let isLarge = tier === "Hyperdimensional" || tier === "Infinitesimal" || oreList[ore]["numRarity"] >= 1000000000000000;
++    if (oreListEntry["hasImage"]) {
++        let isLarge = ["Hyperdimensional", "Infinitesimal", "fumo"].includes(tier) || oreListEntry["numRarity"] >= 1000000000000000;
+         let isMassive = ore === "noradrenaline"
+-        if (isRare) oreToAdd = `<img class="${isMassive ? "hugeMineImage" : isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreList[ore]["src"]}"></img>`;
+-        else return `<span class="mineSpan"><img class="mineImage" src="${oreList[ore]["src"]}"></img></span>`;
++        if (isRare) oreToAdd = `<img class="${isMassive ? "hugeMineImage" : isLarge ? 'largeMineImage' : 'mineOre'}" src="${oreListEntry["src"]}"></img>`;
++        else return `<span class="mineSpan"><img class="mineImage" src="${oreListEntry["src"]}"></img></span>`;
+         includeSize = "";
+         specialVariant = "Img";
+     } else {
+diff --git a/mine.js b/mine.js
+index 7805100..f14f5ce 100644
+--- a/mine.js
++++ b/mine.js
+@@ -37,15 +37,26 @@ function checkAllAround(x, y) {
+ function mineBlock(x, y, cause) {
+     let mineBlockOre;
+     let mineBlockVariant;
++	let isFumo
+     if (mine[y][x].ore !== undefined) {
+         if (mine[y][x].isPlaced) {mine[y][x] = "⚪"; checkAllAround(x, y); return;}
+         mineBlockOre = mine[y][x].ore;
+         mineBlockVariant = mine[y][x].variant;
++		isFumo = mine[y][x].type === "fumo"
+     } else {
+         mineBlockOre = mine[y][x];
+         mineBlockVariant = undefined;
+     }
+     if (mineBlockOre === "⚪") return;
++
++	if (isFumo) {
++		fumos.byName[mineBlockOre].addFumo(mineBlockVariant)
++        mine[y][x] = "⚪";
++        player.stats.blocksMined++;
++		checkAllAround(x, y);
++		return
++	}
++
+     if ((!unbreakable.includes(mineBlockOre) || (player.stats.currentPickaxe == "pickaxe27"?
+             pickaxeStats[player.stats.currentPickaxe].tier + player.upgrades.pickaxe27.level :
+             pickaxeStats[player.stats.currentPickaxe].tier) 
+@@ -189,6 +200,12 @@ const generateBlock = function(location, wbm) {
+         }
+     }
+     let blockToGive = arr[low];
++	if (fumos.nameList.has(blockToGive)){
++		let variant = fumos.byName[blockToGive].getVariant()
++		mine[location["Y"]][location["X"]] = {ore: blockToGive, variant: variant, type: "fumo"};
++		//autocollect goes here
++		return
++	}
+     let oreRarity = oreList[blockToGive]["numRarity"];
+     if (oreRarity >= 750000) {
+         let vInfo = rollVariant();
+@@ -636,7 +653,7 @@ function switchDistance(num) {
+     }
+     if (isNaN(layerDistanceY)) {layerDistanceY = 1000; distanceMulti = 0;}
+     let teleportLayer = getLayer(layerDistanceY).layer;
+-    for (let i = 0; i < teleportLayer.length; i++) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
++    for (let i = teleportLayer.length-1; i > 0; i--) if (oreList[teleportLayer[i]]["oreTier"] === "Layer") {teleportLayer = teleportLayer[i]; break;}
+     let tI;
+     if(isThisJohn) teleportLayer = "🤽‍♂️"
+     if (oreList[teleportLayer]["hasImage"]) tI = `<img class="teleportImage" src="${oreList[teleportLayer]["src"]}">`;
+-- 
+2.47.0.windows.2
+

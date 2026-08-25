@@ -300,6 +300,8 @@ const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
         if (results[blockToGive].est > 0) {
             if (results[blockToGive].est > 1e308) results[blockToGive].est = 1e308;
             let rng;
+			let fumo = fumos.nameList.has(blockToGive)
+			if(fumo)break //should it work with bulk gen .?
             if (rngModifier > 1) {
                 rng = results[blockToGive].rand;
                 rng /= originAmt;

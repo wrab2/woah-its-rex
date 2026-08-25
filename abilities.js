@@ -41,12 +41,15 @@ function getTestAvg() {
     }
     return {m: mined/abilityTestAmt, r: revealed/abilityTestAmt};
 }
-function powerup1(x, y) {
+function powerup1(x, y) {//terrestrial terror
     if (!pickaxeStats[player.stats.currentPickaxe].canMineIn.includes(currentWorld)) return;
     if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
-        const multiplier = Math.floor(Math.log10((player.stats.blocksMined+1)/500000)) + 1;
+        let multiplier = Math.floor(Math.log10((player.stats.blocksMined+1)/500000)) + 1;
         const amt = (100*multiplier)*(100*multiplier);
-        if (amt > 1000000 || player.settings.simulatedRng) bulkGenerate(curY, amt, undefined, false);
+		if(player.stats.currentPickaxe === "fishing_pole") {
+			multiplier = 0.01 //will be upgraded in the skill tree !?
+		}
+        if ((amt > 1000000 || player.settings.simulatedRng) && player.stats.currentPickaxe !== "fishing_pole") bulkGenerate(curY, amt, undefined, false);
         else {
             for (let r = y - (50 * multiplier); r < y + (50 * multiplier); r++) {
                 for (let c = x - (50 * multiplier); c < x + (50 * multiplier); c++) {
@@ -72,7 +75,7 @@ function powerup3() {
     if (Date.now() >= player.powerupCooldowns["powerup3"].cooldown && player.powerupCooldowns["powerup3"].unlocked) {
         const layer = layerDictionary[currentLayer].layer;
         const acceptableOres = [];
-        for (let i = 0; i < layer.length; i++) if (!oreInformation.isCommon(oreList[layer[i]]["oreTier"]) && oreList[layer[i]]["oreTier"] !== "Celestial" && oreList[layer[i]]["oreTier"] !== "Antique" && player.powerupVariables.currentChosenOre.lastOre !== layer[i]) acceptableOres.push(layer[i])
+        for (let i = 0; i < layer.length; i++) if (oreList[layer[i]] && (!oreInformation.isCommon(oreList[layer[i]]["oreTier"]) && oreList[layer[i]]["oreTier"] !== "Celestial" && oreList[layer[i]]["oreTier"] !== "Antique" && player.powerupVariables.currentChosenOre.lastOre !== layer[i])) acceptableOres.push(layer[i])
         let chosenOre = acceptableOres[Math.round(Math.random() * (acceptableOres.length - 1))];
         player.powerupVariables.currentChosenOre.lastOre = chosenOre;
         player.powerupVariables.currentChosenOre.ore = chosenOre, 
