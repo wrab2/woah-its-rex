@@ -1192,11 +1192,11 @@ const buttonGradients = {
 function craftPickaxe(item) {
 	if(item === "fishing_pole"){
 		player.stats.currentPickaxe = "fishing_pole"
-		
+		insertFumosIntoLayers()
+		updateActiveRecipe();
+		utilitySwitchActions();
 		return
 	}
-
-
 
     let recipe = recipes[item].recipe;
     const type = (recipes[item].pickaxe || recipe.indexOf("pickaxe") > -1) ? "pickaxe" : "gear";

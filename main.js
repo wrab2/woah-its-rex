@@ -140,6 +140,9 @@ function init() {
 	if(player.gears["phone"]){
 		get("phoneButton").style.display = "flex"
 	}
+	if(player.stats.currentPickaxe === "fishing_pole"){
+		insertFumosIntoLayers()
+	}
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));

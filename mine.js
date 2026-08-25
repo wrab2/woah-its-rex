@@ -778,6 +778,7 @@ function switchWorld(to) {
         verifiedOres.checkCaves();
         document.getElementById("teleportButton").disabled = false;
         canMine = true;
+		if(player.stats.currentPickaxe === "fishing_pole")insertFumosIntoLayers()
         if (debug) adminChangeLuck(verifiedOres.getCurrentLuck());
 }
 function resetForSwitch() {
