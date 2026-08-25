@@ -2650,6 +2650,7 @@ function ct(john=false) {
         if (recipeLayers[layer].amt > 0) totalProcs += (recipeLayers[layer].highestProcs/recipeLayers[layer].amt)
     }
     let timeForProcs = (Math.floor(totalProcs) * abilityRate) / speed;
+	if(isNaN(timeForProcs))return "--"
     return longTime(timeForProcs * 1000);
 }
 
@@ -2666,5 +2667,6 @@ function caveOreEstimatedTime(ore){
     if(player.gears.ring_of_fire)caveSize *= Math.max(verifiedOres.getCaveLuck()/100, 1) 
     const caveTypeLuck = verifiedOres.getCaveTypeLuck()
     result = (oreRarity)/caveSize *caveRate *caveRarity  /caveTypeLuck /speed
+	if(isNaN(result))return "--"
     return result*1000 // ms
 }
