@@ -5,6 +5,7 @@ let jim = {
 	spawnTimeout: 1000,
 	fumodexOpen: false,
 }
+
 function spawnJim(){
 	if (jim.startedTrying === -1) return jim.spawnJimNOW = false
 	if (Date.now() - jim.startedTrying > jim.spawnTimeout) jim.spawnJimNOW = true
@@ -43,7 +44,6 @@ function jimClose(){
 	get("jim-name").style.animationName=""
 }
 
-
 function jimHelpMe() {
 	jimSay("the fumodex is quite simple, theres 3 categories (each one levels up a different part of the skill tree, music is important early on), you can see the fumo levels with the circle above them, it increases each time you collect it")
 }
@@ -77,3 +77,173 @@ function closeFumodex(){
 	jim.fumodexOpen = false
 	jimSay(`by the way have you seen my hat and my polo ball they got stolen recently`)
 }
+
+
+function startSkillTreeDrag(tree) {
+	let totalX=0,totalY=0
+	let cursorPos=[]
+	let totalOffset=[0,0]
+	//element position
+	let rect = tree.getBoundingClientRect()
+console.log(rect)
+	let posX = rect.left
+	let posY = rect.top
+
+	let move = (e) => {
+console.log(e.clientX, e.clientY)
+		if(cursorPos[0] === undefined){
+			cursorPos[0] = e.clientX
+			cursorPos[1] = e.clientY
+		}
+		//drag treshold
+		totalX += Math.abs(e.clientX-cursorPos[0])
+		totalY += Math.abs(e.clientY-cursorPos[1])
+		
+		totalOffset[0]+=e.clientX-cursorPos[0]
+		totalOffset[1]+=e.clientY-cursorPos[1]
+
+		cursorPos[0] = e.clientX
+		cursorPos[1] = e.clientY
+
+		if(totalX>15 || totalY>15){
+			tree.style.left = posX + totalOffset[0]
+			tree.style.top = posY + totalOffset[1]
+		}
+	}
+
+	let leave = ()=>{
+		tree.removeEventListener("pointerup", leave)
+		tree.removeEventListener("pointerleave", leave)
+		tree.removeEventListener("pointermove", move)
+	}
+
+	tree.addEventListener("pointermove", move)
+	tree.addEventListener("pointerleave",leave)
+	tree.addEventListener("pointerup", leave)
+
+}
+
+let playerSkillObj = []
+
+let tempSkills = {
+	skillIdCheck: new Set,
+	boundsX: [0,0],
+	boundsY: [0,0]
+}
+let skillList = []
+
+function resizeSkillTree(){
+	for(const skill of skillList){
+		const card = get("skill-tree-node-copy")
+		let thisCard = card.cloneNode(true)
+		thisCard.removeAttribute("id")
+		thisCard.getElementsByClassName("skill-tree-node-title")[0].textContent = skill.name
+		thisCard.getElementsByClassName("skill-tree-node-level")[0].textContent = "level:0"
+		thisCard.getElementsByClassName("skill-tree-node-cost")[0].innerHTML = "fumofumo:1"
+		thisCard.style=`
+				left: ${400*(skill.position[0]+Math.abs(tempSkills.boundsX[0]))};
+				bottom: ${180*(skill.position[1]+Math.abs(tempSkills.boundsY[0]))}
+		`
+		get("skill-tree-nodes").append(thisCard)
+	}
+
+	//250 and 100 is node dimensions, 400 and 180 is spacing from 5 lines above
+	let width = 250+400*(Math.abs(tempSkills.boundsX[0])+Math.abs(tempSkills.boundsX[1]))+"px"
+	get("skill-tree").style.width = width
+	get("skill-tree-nodes").style.width = width
+	get("skill-tree-lines").style.width = width
+	let height = 100+180*(Math.abs(tempSkills.boundsY[0])+Math.abs(tempSkills.boundsY[1]))+"px"
+	get("skill-tree").style.height = height
+	get("skill-tree-nodes").style.height = height
+	get("skill-tree-lines").style.height = height
+}
+class Skill {
+	constructor(skill){
+		if(tempSkills.skillIdCheck.has(skill.id)){
+			alert(`a very bad thing has happened with skill id ${skill.id} (it's duplicated)`)
+		}
+		playerSkillObj.push(0)
+		this.id = skill.id
+		tempSkills.skillIdCheck.add(this.id)
+		this.name = skill.name
+		this.description = skill.description
+		this.cost = skill.cost
+		this.maxLevel = skill.maxLevel
+		this.position = skill.position
+		this.parents = skill.parents
+
+		tempSkills.boundsX[0] = Math.min(this.position[0], tempSkills.boundsX[0])
+		tempSkills.boundsX[1] = Math.max(this.position[0], tempSkills.boundsX[1])
+		tempSkills.boundsY[0] = Math.min(this.position[1], tempSkills.boundsY[0])
+		tempSkills.boundsY[1] = Math.max(this.position[1], tempSkills.boundsY[1])
+		
+		skillList[this.id] = this
+
+	}
+	drawConnector(){
+		//add lines to the background
+	}
+	lock(){
+		//lock the cell if it's not unlocked
+	}
+	update(){
+		//update currencies and effect displays
+	}
+	open(){
+		//why did I add these empty functions
+	}
+}
+let skills = {
+ 
+}
+
+new Skill({
+	id:0,
+	name: "test0",
+	description:"an amazing description test",
+	maxLevel:1,
+	cost:{
+		"Ikuyo_Kita":1,
+		"Chen":1,
+	},
+	position: [0,0],
+	parents: [],
+})
+new Skill({
+	id:1,
+	name: "test1",
+	description:"an amazing description test 2",
+	maxLevel:1,
+	cost:{
+		"Ikuyo_Kita":1,
+		"Chen":1,
+	},
+	position: [-0.5,1],
+	parents: [[0,1]],
+})
+new Skill({
+	id:2,
+	name: "test2",
+	description:"an amazing description test 3",
+	maxLevel:1,
+	cost:{
+		"Ikuyo_Kita":1,
+		"Chen":1,
+	},
+	position: [0.5,2],
+	parents: [[0,1]],
+})
+new Skill({
+	id:3,
+	name: "test2",
+	description:"an amazing description test 3",
+	maxLevel:1,
+	cost:{
+		"Ikuyo_Kita":1,
+		"Chen":1,
+	},
+	position: [-3,-2],
+	parents: [[0,1]],
+})
+
+if(Math.max(...tempSkills.skillIdCheck)+1 !== tempSkills.skillIdCheck.size )alert("some skill id is missing")

@@ -255,6 +255,7 @@ class playerTemplate {
             spokeWith: false,
         }
 		this.fumos = playerFumoObject
+		this.skills = playerSkillObj
     }
 }
 let player = new playerTemplate();
@@ -864,7 +865,8 @@ function loadNewData(data) {
         }
         player.john = {...player.john, ...data.john??{}}
         //player.jim = {...player.jim, ...data.jim??{}}
-        player.fumos = Object.assign(player.fumos, data.fumos)
+        player.fumos = {...player.fumos, ...data.fumos??{}}
+        player.skills = data.skills ? data.skills : playerSkillObj
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();

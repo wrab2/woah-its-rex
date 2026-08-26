@@ -1076,6 +1076,23 @@
                 </div>
                 <div id="fumo-card-container"></div>
             </div>
+			<div id="skill-tree-window">
+				<div id="skill-tree-description">
+					<button>buy</button>
+					<div>this skill does SO MUCH</div>
+				</div>
+				<div id="skill-tree" onpointerdown="startSkillTreeDrag(this)">
+					<div id="skill-tree-node-copy" class="skill-tree-node">
+						<div class="skill-tree-node-title"></div>
+						<div class="skill-tree-node-body">
+							<div class="skill-tree-node-level">Level 1/10000</div>
+							<div class="skill-tree-node-cost">30 usd paypal</div>
+						</div>
+					</div>
+					<canvas id="skill-tree-lines"></canvas>
+					<div id="skill-tree-nodes"></div>
+				</div>
+			</div>
 		</div>
 
 		<div id="dailyMessages">

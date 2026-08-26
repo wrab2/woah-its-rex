@@ -143,6 +143,7 @@ function init() {
 	if(player.stats.currentPickaxe === "fishing_pole"){
 		insertFumosIntoLayers()
 	}
+	resizeSkillTree()
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));

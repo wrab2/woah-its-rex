@@ -5542,3 +5542,35 @@ background-size: 100%;
   max-height: 70%;
   min-height: 70%;
 }
+
+#skill-tree-window {
+	
+	position:absolute;
+	top:0;
+	
+	width:90vw;
+	height:90vh;
+	background-color: black;
+}
+#skill-tree-description {
+	position:absolute;
+	background-color: brown;
+	border: 2px solid magenta;
+	height:100px;
+	width:100%;
+}
+
+#skill-tree-nodes, #skill-tree-lines, #skill-tree {
+	position:absolute;
+	left:0
+}
+.skill-tree-node {
+	width:250px;
+	height:100px;
+	border: 2px solid blue;
+	position:absolute;
+}
+#skill-tree-node-copy {
+	display:none
+}
+
