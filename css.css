@@ -5544,18 +5544,20 @@ background-size: 100%;
 }
 
 #skill-tree-window {
-	
-	position:absolute;
-	top:0;
-	
-	width:90vw;
-	height:90vh;
-	background-color: black;
+  position: absolute;
+  top: 0;
+/*99 so it mimics the other side where it has a little bit of spacing*/
+  width: 99vw;
+  height: 99vh;
+
+  background-color: black;
+  background-image: url("media/ores/stars.png");
+  background-repeat: repeat;
 }
 #skill-tree-description {
 	position:absolute;
-	background-color: brown;
-	border: 2px solid magenta;
+	background-color: aquamarine;
+	border: 2px solid aquamarine;
 	height:100px;
 	width:100%;
 }
@@ -5567,7 +5569,9 @@ background-size: 100%;
 .skill-tree-node {
 	width:250px;
 	height:100px;
-	border: 2px solid blue;
+	border: 2px solid #FF6A00;
+  /*could possibly use the border to indicate if a skill is bought or not */
+  background-color: white;
 	position:absolute;
 }
 #skill-tree-node-copy {
