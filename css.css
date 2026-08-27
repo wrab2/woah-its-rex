@@ -5546,13 +5546,18 @@ background-size: 100%;
 #skill-tree-window {
   position: absolute;
   top: 0;
+  padding:0;
 /*99 so it mimics the other side where it has a little bit of spacing*/
+/*the humble "margin: 0" :*/
   width: 99vw;
   height: 99vh;
 
   background-color: black;
   background-image: url("media/ores/stars.png");
   background-repeat: repeat;
+  
+  overflow:hidden;
+  display:none;
 }
 #skill-tree-description {
 	position:absolute;
@@ -5560,11 +5565,24 @@ background-size: 100%;
 	border: 2px solid aquamarine;
 	height:100px;
 	width:100%;
+	z-index: 6;
 }
 
-#skill-tree-nodes, #skill-tree-lines, #skill-tree {
+#skill-tree-nodes, #skill-tree-lines {
 	position:absolute;
 	left:0
+}
+#skill-tree {
+	position:absolute;
+	margin-left: calc(50% - 250px);
+	margin-top: calc(50% - 100px);
+	margin-bottom:0;
+	margin-right:0;
+	z-index: 3;
+	border: 2px solid red;
+}
+#skill-tree-lines {
+	transform: scaleY(-1);
 }
 .skill-tree-node {
 	width:250px;

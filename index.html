@@ -1057,7 +1057,7 @@
 			<div class="jim-menu-window"><!--window with quests and stories-->
                 <button onclick="jimHelpMe()">please explain🤔⁉️</button>
                 <button onclick="openFumodex()">💯 fumodex 💯</button>
-                <button>skill 🌲tree🌲</button>
+                <button onclick="openSkillTree()">skill 🌲tree🌲</button>
                 <button>shop 🛒💰🛒</button>
                 <button onclick="jimClose()">flee 🐎🐎🐎</button>
 			</div>
@@ -1076,12 +1076,13 @@
                 </div>
                 <div id="fumo-card-container"></div>
             </div>
-			<div id="skill-tree-window">
+			<div id="skill-tree-window" onpointerdown="startSkillTreeDrag()">
 				<div id="skill-tree-description">
 					<button>Buy</button>
+					<button onclick="closeSkilltree()">close skill tree</button>
 					<div>this skill does SO MUCH</div>
 				</div>
-				<div id="skill-tree" onpointerdown="startSkillTreeDrag(this)">
+				<div id="skill-tree">
 					<div id="skill-tree-node-copy" class="skill-tree-node">
 						<div class="skill-tree-node-title"></div>
 						<div class="skill-tree-node-body">
