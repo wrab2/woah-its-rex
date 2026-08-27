@@ -29,21 +29,21 @@ function startSkillTreeDrag() {
 		cursorPos[0] = e.clientX
 		cursorPos[1] = e.clientY
 
-		/*if(totalX>15 || totalY>15){
+		if(totalX>15 || totalY>15){
 			//this doesn't work very well
-			if( 
-			baseOffset[0]>posX + totalOffset[0] && 
-			rect.width > Math.abs(posX + totalOffset[0] - baseOffset[0])
-			){
+			//if( 
+			//baseOffset[0]>posX + totalOffset[0] && 
+			//rect.width > Math.abs(posX + totalOffset[0] - baseOffset[0])
+			//){
 				tree.style.left = posX + totalOffset[0]
-			}
-			if( 
-			baseOffset[1]>posY + totalOffset[1] && 
-			rect.height > Math.abs(posY + totalOffset[1] - baseOffset[1])
-			){
+			//}
+			//if( 
+			//baseOffset[1]>posY + totalOffset[1] && 
+			//rect.height > Math.abs(posY + totalOffset[1] - baseOffset[1])
+			//){
 				tree.style.top = posY + totalOffset[1]
-			}
-		}*/
+			//}
+		}
 	}
 
 	let leave = ()=>{
