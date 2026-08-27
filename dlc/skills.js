@@ -10,6 +10,7 @@ function startSkillTreeDrag() {
 		Number(window.getComputedStyle(get("skill-tree"), 10).marginLeft.replace("px","")),
 		Number(window.getComputedStyle(get("skill-tree"), 10).marginTop.replace("px",""))
 	]
+	let windowSize = [window.innerWidth, window.innerHeight]
 	let posX = rect.left - baseOffset[0]
 	let posY = rect.top - baseOffset[1]
 
@@ -31,18 +32,17 @@ function startSkillTreeDrag() {
 
 		if(totalX>15 || totalY>15){
 			//this doesn't work very well
-			//if( 
-			//baseOffset[0]>posX + totalOffset[0] && 
-			//rect.width > Math.abs(posX + totalOffset[0] - baseOffset[0])
-			//){
-				tree.style.left = posX + totalOffset[0]
-			//}
-			//if( 
-			//baseOffset[1]>posY + totalOffset[1] && 
-			//rect.height > Math.abs(posY + totalOffset[1] - baseOffset[1])
-			//){
-				tree.style.top = posY + totalOffset[1]
-			//}
+			rect = tree.getBoundingClientRect()
+			if(posX + totalOffset[0] > 0) tree.style.left = 0
+			else if(posX + totalOffset[0] < -1*rect.width) tree.style.left = -1*rect.width
+			else tree.style.left = posX + totalOffset[0]
+			
+			if(posY + totalOffset[1] > 0) tree.style.top = 0
+			else if(posY + totalOffset[1] < -1*rect.height) tree.style.top =  -1*rect.height
+			else tree.style.top = posY + totalOffset[1]
+			/*
+			if(baseOffset[1] < posY + totalOffset[1]) tree.style.top = baseOffset[1]
+			else if(baseOffset[1] > (posY + totalOffset[1])+rect.height) tree.style.top = baseOffset[1]-rect.height*/
 		}
 	}
 
@@ -65,6 +65,10 @@ let tempSkills = {
 	boundsX: [0,0],
 	boundsY: [0,0],
 	ctx: undefined,//defined in init()
+	spacing: {
+		x:400,
+		y:180
+	}
 }
 let skillList = []
 
@@ -77,23 +81,24 @@ function resizeSkillTree(){
 		thisCard.getElementsByClassName("skill-tree-node-level")[0].textContent = "level:0"
 		thisCard.getElementsByClassName("skill-tree-node-cost")[0].innerHTML = "fumofumo:1"
 		thisCard.style=`
-				left: ${400*(skill.position[0]+Math.abs(tempSkills.boundsX[0]))};
-				bottom: ${180*(skill.position[1]+Math.abs(tempSkills.boundsY[0]))}
+			left: ${tempSkills.spacing.x*(skill.position[0]+Math.abs(tempSkills.boundsX[0]))};
+			bottom: ${tempSkills.spacing.y*(skill.position[1]+Math.abs(tempSkills.boundsY[0]))}
 		`
 		get("skill-tree-nodes").append(thisCard)
 	}
 
-	//250 and 100 is node dimensions, 400 and 180 is spacing from 5 lines above
-	let width = 250+400*(Math.abs(tempSkills.boundsX[0])+Math.abs(tempSkills.boundsX[1]))
+	//250 and 100 is node dimensions, 400 and 180 is arbitrarily chosen spacing from 5 lines above
+	let width = 250+tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+Math.abs(tempSkills.boundsX[1]))
 	get("skill-tree-lines").width = width
 	get("skill-tree").style.width = width+"px"
 	get("skill-tree-nodes").style.width = width+"px"
-	let height = 100+180*(Math.abs(tempSkills.boundsY[0])+Math.abs(tempSkills.boundsY[1]))
+	let height = 100+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+Math.abs(tempSkills.boundsY[1]))
 	get("skill-tree-lines").height = height
 	get("skill-tree").style.height = height+"px"
 	get("skill-tree-nodes").style.height = height+"px"
-	get("skill-tree").style.left = `${-1*Math.abs(tempSkills.boundsX[0])*400+125}px`
-	get("skill-tree").style.top = `${-1*Math.abs(tempSkills.boundsY[1])*180}px`
+	//focus on 0,0
+	get("skill-tree").style.left = `${-1*Math.abs(tempSkills.boundsX[0])*tempSkills.spacing.x-125}px`
+	get("skill-tree").style.top = `${-1*Math.abs(tempSkills.boundsY[1])*tempSkills.spacing.y}px`
 }
 
 function updateSkillTreeLines(){
@@ -134,12 +139,12 @@ class Skill {
 			ctx.strokeStyle = "blue"
 			ctx.beginPath()
 			ctx.moveTo(
-				125+400*(Math.abs(tempSkills.boundsX[0])+this.position[0]),
-				-300+180*(Math.abs(tempSkills.boundsY[1])+this.position[1])
+				tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+this.position[0]),
+				tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+this.position[1])
 			)
 			ctx.lineTo(
-				125+400*(Math.abs(tempSkills.boundsX[0])+skillList[parent[0]].position[0]),
-				-300+180*(Math.abs(tempSkills.boundsY[1])+skillList[parent[0]].position[1])
+				tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+skillList[parent[0]].position[0]),
+				tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+skillList[parent[0]].position[1])
 			)
 			ctx.stroke()
 		}

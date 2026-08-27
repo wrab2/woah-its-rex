@@ -5575,8 +5575,8 @@ background-size: 100%;
 }
 #skill-tree {
 	position:absolute;
-	margin-left: calc(50% - 250px);
-	margin-top: calc(50% - 100px);
+	margin-left: 50vw;
+	margin-top: 50vh;
 	margin-bottom:0;
 	margin-right:0;
 	z-index: 3;
