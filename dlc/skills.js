@@ -29,7 +29,7 @@ function startSkillTreeDrag() {
 		cursorPos[0] = e.clientX
 		cursorPos[1] = e.clientY
 
-		if(totalX>15 || totalY>15){
+		/*if(totalX>15 || totalY>15){
 			//this doesn't work very well
 			if( 
 			baseOffset[0]>posX + totalOffset[0] && 
@@ -43,7 +43,7 @@ function startSkillTreeDrag() {
 			){
 				tree.style.top = posY + totalOffset[1]
 			}
-		}
+		}*/
 	}
 
 	let leave = ()=>{

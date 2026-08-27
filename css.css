@@ -5549,6 +5549,7 @@ background-size: 100%;
   padding:0;
 /*99 so it mimics the other side where it has a little bit of spacing*/
 /*the humble "margin: 0" :*/
+/*holy crap*/
   width: 99vw;
   height: 99vh;
 
@@ -5579,7 +5580,8 @@ background-size: 100%;
 	margin-bottom:0;
 	margin-right:0;
 	z-index: 3;
-	border: 2px solid red;
+	border: 2px solid black;
+  /*what is the meaning of this border*/
 }
 #skill-tree-lines {
 	transform: scaleY(-1);
