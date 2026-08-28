@@ -5251,7 +5251,7 @@ background-size: 100%;
 	background-image: url("media/john/john.svg");
 }
 #jim-portrait{
-	background-image: url("media/john/hatless_jim.svg");
+	background-image: url("media/john/balless_jim.svg");
 }
 @keyframes john-swim-up {
   from { margin-top: 500px;}
@@ -5634,7 +5634,7 @@ background-size: 100%;
 	width: 250px;
 	height: 250px;
 	font-size: min(30vw, 80vh);
-	background-image: url("media/john/hatless_jim.svg");
+	background-image: url("media/john/balless_jim.svg");
 	z-index:4;
 }
 

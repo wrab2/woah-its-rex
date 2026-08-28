@@ -2520,7 +2520,7 @@ const gearInformation = {
     },
     "ring_of_creation" : {
 		//this is mildly incomprehensible, reword this
-        effect:"x5 ores from caves and abilities from simulated rng if they are more common tha 1/1000<br><i>This place birthed the stars in the sky...</i>",
+        effect:"x5 ores from caves and abilities from simulated rng if they are more common than 1/1000<br><i>This place birthed the stars in the sky...</i>",
         tier: 14,
     },
     "gear45" : {
