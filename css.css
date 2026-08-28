@@ -5246,6 +5246,7 @@ background-size: 100%;
 	background-image: url("media/john/john.svg");
 	animation-duration: 2s;
 }
+
 #john-portrait{
 	background-image: url("media/john/john.svg");
 }
@@ -5577,6 +5578,22 @@ background-size: 100%;
   bottom: 10px;
 }
 
+#skill-tree-info::after  {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 40px solid transparent;
+  border-right-color: aquamarine;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: -10px;
+  margin-left: -40px;
+  transform: scaleY(-1);
+}
+
 #skill-tree-nodes, #skill-tree-lines {
 	position:absolute;
 	left:0
@@ -5584,7 +5601,7 @@ background-size: 100%;
 #skill-tree {
 	position:absolute;
 	margin-left: 50%;
-	margin-top: 50%;
+	margin-top: 40vh;
 	margin-bottom:0;
 	margin-right:0;
 	z-index: 3;
@@ -5609,5 +5626,15 @@ background-size: 100%;
 }
 #skill-tree-node-copy {
 	display:none
+}
+#skill-tree-jim {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 250px;
+	height: 250px;
+	font-size: min(30vw, 80vh);
+	background-image: url("media/john/hatless_jim.svg");
+	z-index:4;
 }
 
