@@ -5620,7 +5620,7 @@ background-size: 100%;
 	position:absolute;
 }
 .skill-tree-node.st-opened {
-	background-color: purple;
+	background-color: var(--better-green);
 	border-radius: 10px;
 	height: 130px;
 }
