@@ -38,7 +38,7 @@ function startSkillTreeDrag() {
 		cursorPos[0] = e.clientX
 		cursorPos[1] = e.clientY
 
-		if (totalX > 15 || totalY > 15) {
+		if (totalX >= 15 || totalY >= 15) {
 			tempSkills.dragging = true
 
 			rect = tree.getBoundingClientRect()
