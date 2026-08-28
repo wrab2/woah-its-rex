@@ -5206,7 +5206,8 @@ background-size: 100%;
 	top: 0;
 	left: 0;
 	background-color: #00a2ff40;
-	z-index: 15000
+	z-index: 15000;
+	padding: 0px;
 }
 #john-window-main {
 	background-color: #00a2ff40;
@@ -5544,29 +5545,36 @@ background-size: 100%;
 }
 
 #skill-tree-window {
+  display:none;
   position: absolute;
   top: 0;
   padding:0;
-/*99 so it mimics the other side where it has a little bit of spacing*/
-/*the humble "margin: 0" :*/
-/*holy crap*/
-  width: 99vw;
-  height: 99vh;
-
-  background-color: black;
+  width: calc(100vw - min(10vh, 10vw, 40px));
+  height: calc(100vh - min(10vh, 10vw, 40px));
+  margin:min(5vh, 5vw, 20px);
+  border: 5px solid black;
+  border-radius:min(5vh, 5vw, 20px);
+  /*background-color: black;
   background-image: url("media/ores/stars.png");
-  background-repeat: repeat;
-  
+  background-repeat: repeat;*/
+   background: repeating-linear-gradient( 
+   45deg, /*this hurts my eyes but not too much*/
+   #666, 
+   #666 20px, 
+   #333 20px, 
+   #333 40px);
+  filter: drop-shadow(0 0 20px #000);
   overflow:hidden;
-  display:none;
 }
-#skill-tree-description {
-	position:absolute;
-	background-color: aquamarine;
-	border: 2px solid aquamarine;
-	height:100px;
-	width:100%;
-	z-index: 6;
+#skill-tree-info {
+  position: absolute;
+  background-color: aquamarine;
+  border: 2px solid aquamarine;
+  height: 6em;
+  width: 70%;
+  z-index: 6;
+  left: 200px;
+  bottom: 10px;
 }
 
 #skill-tree-nodes, #skill-tree-lines {
@@ -5575,13 +5583,13 @@ background-size: 100%;
 }
 #skill-tree {
 	position:absolute;
-	margin-left: 50vw;
-	margin-top: 50vh;
+	margin-left: 50%;
+	margin-top: 50%;
 	margin-bottom:0;
 	margin-right:0;
 	z-index: 3;
-	border: 2px solid black;
-  /*what is the meaning of this border*/
+	user-select: none;
+	background-clip: content-box
 }
 #skill-tree-lines {
 	transform: scaleY(-1);
@@ -5593,6 +5601,11 @@ background-size: 100%;
   /*could possibly use the border to indicate if a skill is bought or not */
   background-color: white;
 	position:absolute;
+}
+.skill-tree-node.st-opened {
+	background-color: purple;
+	border-radius: 10px;
+	height: 130px;
 }
 #skill-tree-node-copy {
 	display:none

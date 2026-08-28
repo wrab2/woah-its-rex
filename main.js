@@ -143,7 +143,7 @@ function init() {
 	if(player.stats.currentPickaxe === "fishing_pole"){
 		insertFumosIntoLayers()
 	}
-	resizeSkillTree()
+	setupSkillTree()
 	tempSkills.ctx = get("skill-tree-lines").getContext("2d")
 }
 function finishInit() {

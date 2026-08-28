@@ -1,3 +1,15 @@
+let tempSkills = {
+	skillIdCheck: new Set,
+	boundsX: [0,0],
+	boundsY: [0,0],
+	ctx: undefined,//defined in init()
+	spacing: {
+		x:400,
+		y:180
+	},
+	openedNode: undefined,
+	dragging: 0,
+}
 
 function startSkillTreeDrag() {
 	let totalX=0,totalY=0
@@ -6,13 +18,8 @@ function startSkillTreeDrag() {
 	//element position
 	const tree = get("skill-tree")
 	let rect = tree.getBoundingClientRect()
-	let baseOffset = [
-		Number(window.getComputedStyle(get("skill-tree"), 10).marginLeft.replace("px","")),
-		Number(window.getComputedStyle(get("skill-tree"), 10).marginTop.replace("px",""))
-	]
-	let windowSize = [window.innerWidth, window.innerHeight]
-	let posX = rect.left - baseOffset[0]
-	let posY = rect.top - baseOffset[1]
+	let posX = Number(tree.style.left.replace("px",""))
+	let posY = Number(tree.style.top.replace("px",""))
 
 	let move = (e) => {
 		if(cursorPos[0] === undefined){
@@ -31,18 +38,18 @@ function startSkillTreeDrag() {
 		cursorPos[1] = e.clientY
 
 		if(totalX>15 || totalY>15){
-			//this doesn't work very well
+			tempSkills.dragging = true
+
 			rect = tree.getBoundingClientRect()
-			if(posX + totalOffset[0] > 0) tree.style.left = 0
-			else if(posX + totalOffset[0] < -1*rect.width) tree.style.left = -1*rect.width
-			else tree.style.left = posX + totalOffset[0]
+			let left = posX + totalOffset[0]
+			left = Math.min(0, left)
+			left = Math.max(-1*rect.width, left)
+			tree.style.left = left
 			
-			if(posY + totalOffset[1] > 0) tree.style.top = 0
-			else if(posY + totalOffset[1] < -1*rect.height) tree.style.top =  -1*rect.height
-			else tree.style.top = posY + totalOffset[1]
-			/*
-			if(baseOffset[1] < posY + totalOffset[1]) tree.style.top = baseOffset[1]
-			else if(baseOffset[1] > (posY + totalOffset[1])+rect.height) tree.style.top = baseOffset[1]-rect.height*/
+			let top = posY + totalOffset[1]
+			top = Math.min(0, top)
+			top = Math.max(-1*rect.height, top)
+			tree.style.top = top
 		}
 	}
 
@@ -50,6 +57,7 @@ function startSkillTreeDrag() {
 		get("skill-tree-window").removeEventListener("pointerup", leave)
 		get("skill-tree-window").removeEventListener("pointerleave", leave)
 		get("skill-tree-window").removeEventListener("pointermove", move)
+		if(tempSkills.dragging === true)tempSkills.dragging = Date.now()
 	}
 
 	get("skill-tree-window").addEventListener("pointermove", move)
@@ -60,19 +68,9 @@ function startSkillTreeDrag() {
 
 let playerSkillObj = []
 
-let tempSkills = {
-	skillIdCheck: new Set,
-	boundsX: [0,0],
-	boundsY: [0,0],
-	ctx: undefined,//defined in init()
-	spacing: {
-		x:400,
-		y:180
-	}
-}
 let skillList = []
 
-function resizeSkillTree(){
+function setupSkillTree(){
 	for(const skill of skillList){
 		const card = get("skill-tree-node-copy")
 		let thisCard = card.cloneNode(true)
@@ -84,6 +82,7 @@ function resizeSkillTree(){
 			left: ${tempSkills.spacing.x*(skill.position[0]+Math.abs(tempSkills.boundsX[0]))};
 			bottom: ${tempSkills.spacing.y*(skill.position[1]+Math.abs(tempSkills.boundsY[0]))}
 		`
+		thisCard.addEventListener('click', skill.open)
 		get("skill-tree-nodes").append(thisCard)
 	}
 
@@ -98,7 +97,7 @@ function resizeSkillTree(){
 	get("skill-tree-nodes").style.height = height+"px"
 	//focus on 0,0
 	get("skill-tree").style.left = `${-1*Math.abs(tempSkills.boundsX[0])*tempSkills.spacing.x-125}px`
-	get("skill-tree").style.top = `${-1*Math.abs(tempSkills.boundsY[1])*tempSkills.spacing.y}px`
+	get("skill-tree").style.top = `${-1*Math.abs(tempSkills.boundsY[1])*tempSkills.spacing.y-150}px`
 }
 
 function updateSkillTreeLines(){
@@ -129,35 +128,38 @@ class Skill {
 		tempSkills.boundsY[1] = Math.max(this.position[1], tempSkills.boundsY[1])
 		
 		skillList[this.id] = this
-
+		this.open = this.open.bind(this)
 	}
 	drawConnectors(){
-		//add lines to the background
 		let ctx = tempSkills.ctx
 		for(const parent of this.parents){
 			ctx.lineWidth = 25
 			ctx.strokeStyle = "blue"
 			ctx.beginPath()
 			ctx.moveTo(
-				tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+this.position[0]),
-				tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+this.position[1])
+				125+tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+this.position[0]),
+				50+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+this.position[1])
 			)
 			ctx.lineTo(
-				tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+skillList[parent[0]].position[0]),
-				tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+skillList[parent[0]].position[1])
+				125+tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+skillList[parent[0]].position[0]),
+				50+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+skillList[parent[0]].position[1])
 			)
 			ctx.stroke()
 		}
 
+	}
+	open(scope){
+		if(tempSkills.dragging === true || Date.now()-tempSkills.dragging < 50)return
+		if(tempSkills.openedNode) tempSkills.openedNode.classList.remove("st-opened")
+		tempSkills.openedNode = scope.currentTarget
+		scope.currentTarget.classList.add("st-opened")
+		get("skill-tree-description").textContent = this.description
 	}
 	lock(){
 		//lock the cell if it's not unlocked
 	}
 	update(){
 		//update currencies and effect displays
-	}
-	open(){
-		//why did I add these empty functions
 	}
 }
 let skills = {
@@ -166,12 +168,12 @@ let skills = {
 
 new Skill({
 	id:0,
-	name: "test0",
-	description:"an amazing description test",
+	name: "Welcome to fumo fishing",
+	description:"Unlock the shop",
 	maxLevel:1,
 	cost:{
 		"Ikuyo_Kita":1,
-		"Chen":1,
+		"Kaito":1,
 	},
 	position: [0,0],
 	parents: [],
