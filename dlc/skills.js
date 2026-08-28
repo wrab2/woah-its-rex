@@ -9,6 +9,7 @@ let tempSkills = {
 	},
 	openedNode: undefined,
 	dragging: 0,
+	canvasSize: [0,0],
 }
 
 function startSkillTreeDrag() {
@@ -89,10 +90,12 @@ function setupSkillTree(){
 	//250 and 100 is node dimensions, 400 and 180 is arbitrarily chosen spacing from 5 lines above
 	let width = 250+tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+Math.abs(tempSkills.boundsX[1]))
 	get("skill-tree-lines").width = width
+	tempSkills.canvasSize[0] = width
 	get("skill-tree").style.width = width+"px"
 	get("skill-tree-nodes").style.width = width+"px"
 	let height = 100+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+Math.abs(tempSkills.boundsY[1]))
 	get("skill-tree-lines").height = height
+	tempSkills.canvasSize[1] = height
 	get("skill-tree").style.height = height+"px"
 	get("skill-tree-nodes").style.height = height+"px"
 	//focus on 0,0
@@ -133,16 +136,20 @@ class Skill {
 	drawConnectors(){
 		let ctx = tempSkills.ctx
 		for(const parent of this.parents){
+			let center = tempSkills.canvasSize[1]/2
+			let flipOverX = (point) => {
+				return (point-center)*-1+center
+			}
 			ctx.lineWidth = 25
 			ctx.strokeStyle = "blue"
 			ctx.beginPath()
 			ctx.moveTo(
 				125+tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+this.position[0]),
-				50+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+this.position[1])
+				flipOverX(50+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+this.position[1]))
 			)
 			ctx.lineTo(
 				125+tempSkills.spacing.x*(Math.abs(tempSkills.boundsX[0])+skillList[parent[0]].position[0]),
-				50+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+skillList[parent[0]].position[1])
+				flipOverX(50+tempSkills.spacing.y*(Math.abs(tempSkills.boundsY[0])+skillList[parent[0]].position[1]))
 			)
 			ctx.stroke()
 		}

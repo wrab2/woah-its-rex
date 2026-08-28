@@ -5609,7 +5609,7 @@ background-size: 100%;
 	background-clip: content-box
 }
 #skill-tree-lines {
-	transform: scaleY(-1);
+	/*transform: scaleY(-1);*/
 }
 .skill-tree-node {
 	width:250px;
