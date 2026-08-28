@@ -17,6 +17,7 @@
   --main-shadow-color:#42434a;
   --better-red:#FF3D3D;
   --better-green:#6BC267;
+  --skill-tree-scale:1;
 }
 #topMessages {
   height: 3vw;
@@ -5606,10 +5607,10 @@ background-size: 100%;
 	margin-right:0;
 	z-index: 3;
 	user-select: none;
-	background-clip: content-box
-}
-#skill-tree-lines {
-	/*transform: scaleY(-1);*/
+	background-clip: content-box;
+  transform: scale(var(--skill-tree-scale));
+  transform-origin: 0 0;
+  
 }
 .skill-tree-node {
 	width:250px;
@@ -5637,4 +5638,7 @@ background-size: 100%;
 	background-image: url("media/john/balless_jim.svg");
 	z-index:4;
 }
-
+#skill-tree-zoom {
+  position: absolute;
+  z-index: 4
+}
