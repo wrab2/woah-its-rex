@@ -25,5 +25,3 @@ put a DATE for "johnUpdate" and write about it
 add more milestones (checkmark milestones, ring milestones, TOL6 milestone, fishing, naval event % completed, vocaloid fumo transformation thingies)
 
 bugtest
-
-some way for 🐱, your reward, hyper, first anniversary cake, sakura, evil flag, water buffalo, and singularity egg (not from forging) so you can get 400% completion

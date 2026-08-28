@@ -421,4 +421,99 @@ new Skill({
 	position: [0, 8],
 	parents: [[20, 1]],
 })
+new Skill({
+	id: 22,
+	name: "placeholder",
+	description: "bwa",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-4, 6],
+	parents: [[6, 1]],
+})
+new Skill({
+	id: 23,
+	name: "placeholder",
+	description: "bwa",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-5, 7],
+	parents: [[22, 1]],
+})
+new Skill({
+	id: 24,
+	name: "placeholder",
+	description: "bwa",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-6, 8],
+	parents: [[23, 1]],
+})
+new Skill({
+	id: 25,
+	name: "jim's water polo ball",
+	description: "gives jim a brand new hat, increases the number of paths active at once by 1, and unlocks more (optional) upgrades",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-3, 8],
+	parents: [[24, 1],[21, 1]],
+})
+new Skill({
+	id: 26,
+	name: "AWESOME placeholder",
+	description: "cooler placeholder",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-3, 6.5],
+	parents: [[25, 1]],
+})
+new Skill({
+	id: 27,
+	name: "AWESOME placeholder",
+	description: "cooler placeholder",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-3, 9],
+	parents: [[25, 1]],
+})
+new Skill({
+	id: 28,
+	name: "jims revenge",
+	description: "does something idk",
+	maxLevel: 1,
+	cost: {
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+	},
+	position: [-12, 12],
+	parents: [[25, 1],[13,1],[16,1]],
+})
+new Skill({
+	id: 29,
+	name: "???",
+	description: "lets you mine 🐱, your reward, hyper, first anniversary cake, sakura, evil flag, water buffalo, cateye, and singularity egg if you have one of them (other than 🐱 and your reward) in the flute layer",
+	maxLevel: 1,
+	cost: {
+		//lots of fumos
+	},
+	position: [12, -12],
+	parents: [],
+})
 if (Math.max(...tempSkills.skillIdCheck) + 1 !== tempSkills.skillIdCheck.size) alert("some skill id is missing")
