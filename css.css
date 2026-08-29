@@ -5642,3 +5642,19 @@ background-size: 100%;
   position: absolute;
   z-index: 4
 }
+#skill-tree-zoom button {
+color:black;
+background-color: var(--better-green);
+width: 40px;
+height: 40px;
+border-radius: 50%;
+margin-left: 1em;
+margin-top: 1em;
+border:white
+}
+#skill-tree-info button {
+color:black;ok 
+border-radius: 100%;
+position: fixed;
+left: 12em;
+}
