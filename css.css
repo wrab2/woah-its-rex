@@ -5573,7 +5573,7 @@ background-size: 100%;
   height: max-content;
   min-height: 6em;
   width: 500px;
-  max-width: 100%;
+  max-width: calc(100% - min(200px, 20vw));
   z-index: 6;
   left: min(200px, 20vw);
   bottom: 10px;
