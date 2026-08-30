@@ -5435,6 +5435,7 @@ background-size: 100%;
   visibility: hidden;
   top: 0;
   left: calc(min(100px, 5vw) + 210px);
+  width: calc(100vw - (min(100px, 5vw) + 210px));
   height: calc(30vh + 180px);
   display: flex;
   flex-direction: column-reverse;
@@ -5446,9 +5447,9 @@ background-size: 100%;
   background: #ffffff;
   border-radius: .4em;
   width:550px;
-  max-width: calc(100vw - (min(100px, 5vw) + 260px));
+  max-width: 100%;
   padding: 4px;
-  max-height: 170px;
+  max-height: max-content;
   min-height: 40px;
 }
 #jim-speech-bubble:after  {
@@ -5556,15 +5557,12 @@ background-size: 100%;
   margin:min(5vh, 5vw, 20px);
   border: 5px solid black;
   border-radius:min(5vh, 5vw, 20px);
-  /*background-color: black;
-  background-image: url("media/ores/stars.png");
-  background-repeat: repeat;*/
    background: repeating-linear-gradient( 
    45deg, /*this hurts my eyes but not too much*/
-   #666, 
-   #666 20px, 
-   #333 20px, 
-   #333 40px);
+   #404040, 
+   #404040 40px, 
+   #333 40px, 
+   #333 60px);
   filter: drop-shadow(0 0 20px #000);
   overflow:hidden;
 }
@@ -5572,10 +5570,12 @@ background-size: 100%;
   position: absolute;
   background-color: aquamarine;
   border: 2px solid aquamarine;
-  height: 6em;
-  width: 70%;
+  height: max-content;
+  min-height: 6em;
+  width: 500px;
+  max-width: 100%;
   z-index: 6;
-  left: 200px;
+  left: min(200px, 20vw);
   bottom: 10px;
 }
 
@@ -5594,7 +5594,21 @@ background-size: 100%;
   margin-left: -40px;
   transform: scaleY(-1);
 }
-
+#skill-tree-controls {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+#skill-tree-controls button {
+  height: 50px;
+  width: 80px;
+  margin: 5px;
+  background-color: brown;
+  font-size: 1em;
+}
 #skill-tree-nodes, #skill-tree-lines {
 	position:absolute;
 	left:0
@@ -5610,6 +5624,7 @@ background-size: 100%;
 	background-clip: content-box;
   transform: scale(var(--skill-tree-scale));
   transform-origin: 0 0;
+  touch-action: none;
   
 }
 .skill-tree-node {
@@ -5623,7 +5638,6 @@ background-size: 100%;
 .skill-tree-node.st-opened {
 	background-color: var(--better-green);
 	border-radius: 10px;
-	height: 130px;
 }
 #skill-tree-node-copy {
 	display:none
@@ -5640,21 +5654,20 @@ background-size: 100%;
 }
 #skill-tree-zoom {
   position: absolute;
-  z-index: 4
+  z-index: 4;
+  right: 0;
 }
 #skill-tree-zoom button {
-color:black;
-background-color: var(--better-green);
-width: 40px;
-height: 40px;
-border-radius: 50%;
-margin-left: 1em;
-margin-top: 1em;
-border:white
-}
-#skill-tree-info button {
-color:black;ok 
-border-radius: 100%;
-position: fixed;
-left: 12em;
+  color:black;
+  background-color: var(--better-green);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 10px 10px 0 0;
+  border:2px solid white;
+  padding: 0;
+  font-size:200%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

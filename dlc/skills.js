@@ -111,6 +111,9 @@ function updateSkillTreeLines() {
 }
 
 function zoomSkillTree(direction){
+	if(typeof(direction)==="object"){
+		direction = direction.deltaY<0 ? 1 : -1
+	}
 	if(this.scale === undefined)this.scale = 1
 	let values = [0.1, 0.2, 0.5, 0.75, 1, 2 ,3 ,5]
 	let current = values.indexOf(this.scale)
@@ -118,7 +121,6 @@ function zoomSkillTree(direction){
 	current = Math.min(Math.max(current, 0), values.length-1)
 	const tree = get("skill-tree")
 	let ratio = values[current] / this.scale
-	console.log(ratio)
 	tree.style.top = Number(tree.style.top.replace("px","")*ratio)+"px" 
 	tree.style.left = Number(tree.style.left.replace("px","")*ratio)+"px" 
 	this.scale = values[current]

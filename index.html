@@ -1077,18 +1077,18 @@
                 </div>
                 <div id="fumo-card-container"></div>
             </div>
-			<div id="skill-tree-window" onpointerdown="startSkillTreeDrag()">
+			<div id="skill-tree-window" onpointerdown="startSkillTreeDrag()" onmousewheel="zoomSkillTree(event)">
 				<div id="skill-tree-info">
-					<button>Buy</button>
-                        <br>
-                            <br>
-					            <button onclick="closeSkillTree()">close skill tree</button>
+                    <div id="skill-tree-controls">
+					    <button>🛒 Buy</button>
+					    <button onclick="closeSkillTree()">quit ❌</button>
+                    </div>
 					<div id="skill-tree-description">this skill does SO MUCH</div>
 				</div>
+
 				<div id="skill-tree-jim"></div>
                 <div id="skill-tree-zoom">
                     <button onclick="zoomSkillTree(1)">+</button>
-                    <br>
                     <button onclick="zoomSkillTree(-1)">-</button>
                 </div>
 				<div id="skill-tree">
