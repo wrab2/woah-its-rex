@@ -38,7 +38,7 @@ class Fumo {
 		this.layer = FUMO.layer
 		this.tier = FUMO.tier
 		this.type = FUMO.type
-
+		this.imageSrc = `media/fumo_fishing/${this.type}/${this.name}.webp` 
 		playerFumoObject[this.name] = [0,0,0,0]
 		
 		fumos.byName[FUMO.name] = this
@@ -80,6 +80,9 @@ class Fumo {
 	generateListEntry(){
 		 this.fakeOreListEntry = {'numRarity': 1/this.getRarity(), 'decimalRarity':this.getRarity(), 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'hasImage' : true, "src" : `media/fumo_fishing/${this.type}/${this.name}.webp`}
 		 return this.fakeOreListEntry
+	}
+	owned(){
+		return player.fumos[this.name][fumoStats.owned]
 	}
 }
 

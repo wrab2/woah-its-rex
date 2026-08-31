@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+@font-face {
+  font-family: "agent-orange";
+  src: url(media/fonts/agent-orange.regular.ttf);
+}
 
 .emoji {
   font-family: system-ui, "Noto Color Emoji", normal;
@@ -5627,21 +5631,6 @@ background-size: 100%;
   touch-action: none;
   
 }
-.skill-tree-node {
-	width:250px;
-	height:100px;
-	border: 2px solid #FF6A00;
-  /*could possibly use the border to indicate if a skill is bought or not */
-  background-color: white;
-	position:absolute;
-}
-.skill-tree-node.st-opened {
-	background-color: var(--better-green);
-	border-radius: 10px;
-}
-#skill-tree-node-copy {
-	display:none
-}
 #skill-tree-jim {
 	position: absolute;
 	bottom: 0;
@@ -5670,4 +5659,88 @@ background-size: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#skill-tree-node-copy {
+	display:none
+}
+.skill-tree-node {
+	width:250px;
+	height:100px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom: none;
+  /*could possibly use the border to indicate if a skill is bought or not */
+  background: linear-gradient(180deg,
+    #fff 0%, #fff 95%, #ffffff00 100%);
+	position:absolute;
+}
+.skill-tree-node.st-opened {
+	background: var(--better-green);
+}
+.skill-tree-node.st-opened .short {
+  display: none;
+}
+.skill-tree-node.st-closed .expanded, .skill-tree-node.st-closed .stn-progress-bar {
+  display: none;
+}
+
+.stn-progress-bar{
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+  height: 30%;
+  width: 50%;
+  background-color: white;
+  border: 2px solid #000;
+}
+.stn-progress-bar > div {
+  background-color: green;
+  height: 100%;
+}
+.stn-level{
+  position: absolute;
+  font-family: agent-orange;
+  right:-15px;
+  bottom: 0;
+  font-size: 36px;
+  -webkit-text-fill-color: #00FF23;
+}
+
+.stn-fumo-list img {
+  max-width: 45px;
+}
+.stn-fumo-list .short {
+  position: absolute;
+  left:0;
+  bottom: 0;;
+}
+.stn-fumo-list .expanded {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-left: -10%;
+  width:120%;
+  left:0;
+  top:100%;
+  background-color: var(--better-green);
+  border-radius: 20px;
+  padding: 5px;
+}
+.expanded div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.stn-fumo-list .short img {
+  margin-left: -25px;
+}
+.stn-fumo-count {
+  font-family: agent-orange;
+  font-size: 15px;
+  width: 120px;
+  text-align: end;
 }

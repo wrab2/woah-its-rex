@@ -866,7 +866,7 @@ function loadNewData(data) {
         player.john = {...player.john, ...data.john??{}}
         //player.jim = {...player.jim, ...data.jim??{}}
         player.fumos = {...player.fumos, ...data.fumos??{}}
-        player.skills = data.skills ? data.skills : playerSkillObj
+        player.skills = data.skills ? Object.assign(player.skills, data.skills) : playerSkillObj
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();

@@ -76,15 +76,42 @@ function setupSkillTree() {
 		const card = get("skill-tree-node-copy")
 		let thisCard = card.cloneNode(true)
 		thisCard.removeAttribute("id")
-		thisCard.getElementsByClassName("skill-tree-node-title")[0].textContent = skill.name
-		thisCard.getElementsByClassName("skill-tree-node-level")[0].textContent = "level:0"
-		thisCard.getElementsByClassName("skill-tree-node-cost")[0].innerHTML = "fumofumo:1"
+		thisCard.classList.add("st-closed")
+		thisCard.getElementsByClassName("stn-label")[0].textContent = skill.name
+		//thisCard.getElementsByClassName("stn-progress-bar")[0] ~~~ idk
+		thisCard.getElementsByClassName("stn-level")[0].textContent = `${player.skills[skill.id]}/${skill.maxLevel}`
+		//short list of fumos
+		let str = ""
+		let costArr = Object.keys(skill.cost)
+		for(let i=0; i<costArr.length; i++){
+			if(i<3){
+				str+=`<img src=${fumos.byName[costArr[i]].imageSrc}>`
+			} else {
+				str+=`+${costArr.length-3}`
+				break
+			}
+		}
+		thisCard.getElementsByClassName("short")[0].innerHTML = str
+		
+		//long list of fumos** but it's separate from the previous loop because it's likely better to make it on click
+		str = ""
+		for(let i=0; i<costArr.length; i++){
+			str+="<div class=stn-fumo-expanded-row>"
+			str+=`<img src=${fumos.byName[costArr[i]].imageSrc}>`
+			str+=`<span>${costArr[i].replace(/_/g, " ")}</span>`
+			str+=`<span class="stn-fumo-count">${formatNumber(fumos.byName[costArr[i]].owned())}/${formatNumber(skill.cost[costArr[i]])}</span>`
+			str+="</div>"
+		}
+		thisCard.getElementsByClassName("expanded")[0].innerHTML = str
+
+
 		thisCard.style = `
 			left: ${tempSkills.spacing.x * (skill.position[0] + Math.abs(tempSkills.boundsX[0]))};
 			bottom: ${tempSkills.spacing.y * (skill.position[1] + Math.abs(tempSkills.boundsY[0]))}
 		`
 		thisCard.addEventListener('click', skill.open)
 		get("skill-tree-nodes").append(thisCard)
+		skill.update()
 	}
 
 	//250 and 100 is node dimensions, 400 and 180 is arbitrarily chosen spacing from 5 lines above
@@ -175,7 +202,9 @@ class Skill {
 	open(scope) {
 		if (tempSkills.dragging === true || Date.now() - tempSkills.dragging < 50) return
 		if (tempSkills.openedNode) tempSkills.openedNode.classList.remove("st-opened")
+		if (tempSkills.openedNode) tempSkills.openedNode.classList.add("st-closed")
 		tempSkills.openedNode = scope.currentTarget
+		scope.currentTarget.classList.remove("st-closed")
 		scope.currentTarget.classList.add("st-opened")
 		get("skill-tree-description").textContent = this.description
 	}
@@ -197,6 +226,9 @@ new Skill({
 	maxLevel: 1,
 	cost: {
 		"Kaito": 1,
+		"Ikuyo_Kita": 1,
+		"Chen": 1,
+		"Yuyuko_Saigyouji": 100,
 	},
 	position: [0, 0],
 	parents: [],
