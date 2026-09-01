@@ -92,17 +92,6 @@ function setupSkillTree() {
 			}
 		}
 		thisCard.getElementsByClassName("short")[0].innerHTML = str
-		
-		//long list of fumos** but it's separate from the previous loop because it's likely better to make it on click
-		str = ""
-		for(let i=0; i<costArr.length; i++){
-			str+="<div class=stn-fumo-expanded-row>"
-			str+=`<img src=${fumos.byName[costArr[i]].imageSrc}>`
-			str+=`<span>${costArr[i].replace(/_/g, " ")}</span>`
-			str+=`<span class="stn-fumo-count">${formatNumber(fumos.byName[costArr[i]].owned())}/${formatNumber(skill.cost[costArr[i]])}</span>`
-			str+="</div>"
-		}
-		thisCard.getElementsByClassName("expanded")[0].innerHTML = str
 
 
 		thisCard.style = `
@@ -176,6 +165,7 @@ class Skill {
 
 		skillList[this.id] = this
 		this.open = this.open.bind(this)
+		this.deleteExtraTimeout = 0
 	}
 	drawConnectors() {
 		let ctx = tempSkills.ctx
@@ -201,8 +191,29 @@ class Skill {
 	}
 	open(scope) {
 		if (tempSkills.dragging === true || Date.now() - tempSkills.dragging < 50) return
-		if (tempSkills.openedNode) tempSkills.openedNode.classList.remove("st-opened")
-		if (tempSkills.openedNode) tempSkills.openedNode.classList.add("st-closed")
+		//cancel everything if you clicked on the same element
+		if (this.deleteExtraTimeout) return clearTimeout(this.deleteExtraTimeout)
+		//fill extra info
+		let str = ""
+		let costArr = Object.keys(this.cost)
+		for(let i=0; i<costArr.length; i++){
+			str+="<div class=stn-fumo-expanded-row>"
+			str+=`<img src=${fumos.byName[costArr[i]].imageSrc}>`
+			str+=`<span>${costArr[i].replace(/_/g, " ")}</span>`
+			str+=`<span class="stn-fumo-count">${formatNumber(fumos.byName[costArr[i]].owned())}/${formatNumber(this.cost[costArr[i]])}</span>`
+			str+="</div>"
+		}
+		scope.currentTarget.getElementsByClassName("expanded")[0].innerHTML = str
+
+		if (tempSkills.openedNode) {
+			let todelete = tempSkills.openedNode
+			todelete.classList.remove("st-opened")
+			todelete.classList.add("st-closed")
+			this.deleteExtraTimeout = setTimeout(() => {
+				todelete.getElementsByClassName("expanded")[0].textContent=""
+				this.deleteExtraTimeout = 0
+			}, 500);
+		}
 		tempSkills.openedNode = scope.currentTarget
 		scope.currentTarget.classList.remove("st-closed")
 		scope.currentTarget.classList.add("st-opened")
