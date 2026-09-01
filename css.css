@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 @font-face {
   font-family: "agent-orange";
-  src: url(media/fonts/agent-orange.regular.ttf);
+  src: url(media/fonts/AgentOrange.woff2);
 }
 
 .emoji {
@@ -5665,14 +5665,13 @@ background-size: 100%;
 	display:none
 }
 .skill-tree-node {
-	width:250px;
+	width:200px;
 	height:100px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   border-bottom: none;
   /*could possibly use the border to indicate if a skill is bought or not */
-  background: linear-gradient(180deg,
-    #fff 0%, #fff 95%, #ffffff00 100%);
+  background: #9ed8ff;
 	position:absolute;
 }
 .skill-tree-node.st-opened {
@@ -5681,10 +5680,25 @@ background-size: 100%;
 .skill-tree-node.st-opened .short {
   display: none;
 }
-.skill-tree-node.st-closed .expanded, .skill-tree-node.st-closed .stn-progress-bar {
+.skill-tree-node.st-closed .stn-progress-bar {
   display: none;
 }
-
+.skill-tree-node.st-closed .expanded {
+  animation-name: fold-back;
+  animation-fill-mode: forwards;
+}
+@keyframes fold-back {
+  from{ 
+    transform: scaleY(1);
+    display:flex;
+    background-color: #9ed8ff;
+  }
+  to{
+    transform: scaleY(0);
+    display: none;
+    background-color: #9ed8ff;
+  }
+}
 .stn-progress-bar{
   position: absolute;
   left: 2px;
@@ -5702,18 +5716,20 @@ background-size: 100%;
   position: absolute;
   font-family: agent-orange;
   right:-15px;
-  bottom: 0;
+  bottom: 0px;
   font-size: 36px;
+  -webkit-text-stroke: #000 2px;
   -webkit-text-fill-color: #00FF23;
 }
 
-.stn-fumo-list img {
-  max-width: 45px;
-}
 .stn-fumo-list .short {
   position: absolute;
   left:0;
-  bottom: 0;;
+  bottom: -5px;
+}
+.stn-fumo-list .short img {
+  max-width: 55px;
+  margin-left: -30px;
 }
 .stn-fumo-list .expanded {
   position: absolute;
@@ -5726,21 +5742,30 @@ background-size: 100%;
   background-color: var(--better-green);
   border-radius: 20px;
   padding: 5px;
+  animation-duration: 0.5s;
+  animation-name: expand-fumos;
+  transform-origin: 0 0;
 }
-.expanded div {
+@keyframes expand-fumos {
+  from {transform: scaleY(0)}
+  to {transform: scaleY(1)}
+}
+.stn-fumo-expanded-row {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #9c9c9c;
+}
+.stn-fumo-expanded-row:last-child {
+  border-bottom: none;
+}
+.stn-fumo-expanded-row > img {
+  max-width: 45px;
 }
 
-
-.stn-fumo-list .short img {
-  margin-left: -25px;
-}
 .stn-fumo-count {
-  font-family: agent-orange;
-  font-size: 15px;
+  font-size: 20px;
   width: 120px;
   text-align: end;
 }
