@@ -520,7 +520,7 @@ new Skill({
 new Skill({
 	id: 25,
 	name: "jim's water polo ball",
-	description: "gives jim a brand new hat, increases the number of paths active at once by 1, and unlocks more (optional) upgrades",
+	description: "gives jim a brand new water polo ball, increases the number of paths active at once by 1, and unlocks more (optional) upgrades",
 	maxLevel: 1,
 	cost: {
 		"Ikuyo_Kita": 1,
