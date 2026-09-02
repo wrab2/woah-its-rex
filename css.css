@@ -5432,6 +5432,15 @@ background-size: 100%;
 .jim-menu-window button:hover {
   background-image: linear-gradient(to right, #977b00, #00000000);
 }
+#jim-help-options {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 4px 18px;
+}
+#jim-help-options button {
+  font-size: 0.9em;
+  border-width: 2px;
+}
 
 #jim-sayings-bubble-container {
   height: 100%;
@@ -5794,6 +5803,9 @@ background-size: 100%;
   border: none;
   width: 12vw;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #fumo-path-select button {

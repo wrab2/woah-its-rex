@@ -535,9 +535,9 @@ new Skill({
 })
 new Skill({
 	id: 26,
-	name: "AWESOME placeholder",
-	description: "cooler placeholder",
-	maxLevel: 1,
+	name: "fumo wisdom",
+	description: "increases fumo level 50% quicker per tier",
+	maxLevel: 10,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
