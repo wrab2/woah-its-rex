@@ -1271,7 +1271,7 @@ function insertIntoLayers(obj) {
             if (useLuck) oreList[ore]["decimalRarity"] = 1/(oreList[ore]["numRarity"] / luck);
             let layer = layerDictionary[layers[i]].layer;
             for (let j = 0; j < layer.length; j++) {
-                if (oreList[layer[j]]["numRarity"] < oreList[ore]["numRarity"]) {
+                if (!fumos.nameList.has(layer[j]) && oreList[layer[j]]["numRarity"] < oreList[ore]["numRarity"]) {
                     layer.splice(j, 0, ore);
                     updateAllLayers();
                     break;

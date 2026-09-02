@@ -847,7 +847,3 @@ new Fumo({
 	tier: 4,
 	type: "touhou"
 })
-
-
-
-

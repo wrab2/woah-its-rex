@@ -174,8 +174,6 @@ class Skill {
 			let flipOverX = (point) => {
 				return (point - center) * -1 + center
 			}
-			ctx.lineWidth = 25
-			ctx.strokeStyle = "blue"
 			ctx.beginPath()
 			ctx.moveTo(
 				125 + tempSkills.spacing.x * (Math.abs(tempSkills.boundsX[0]) + this.position[0]),
@@ -185,6 +183,12 @@ class Skill {
 				125 + tempSkills.spacing.x * (Math.abs(tempSkills.boundsX[0]) + skillList[parent[0]].position[0]),
 				flipOverX(50 + tempSkills.spacing.y * (Math.abs(tempSkills.boundsY[0]) + skillList[parent[0]].position[1]))
 			)
+
+			ctx.lineWidth = 30
+			ctx.strokeStyle = "white"
+			ctx.stroke()
+			ctx.lineWidth = 25
+			ctx.strokeStyle = player.skills[parent[0]] >= parent[1]? "green" : "red"
 			ctx.stroke()
 		}
 
