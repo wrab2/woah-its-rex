@@ -45,7 +45,30 @@ function jimClose(){
 }
 
 function jimHelpMe() {
-	jimSay("the fumodex is quite simple, theres 3 categories (each one levels up a different part of the skill tree, music is important early on), you can see the fumo levels with the circle above them, it increases each time you collect it")
+	const helpOptions = get("jim-help-options")
+	const helpTopics = {
+		fumodex: "the fumodex keeps track of every fumo youve found, split into music, gacha, and touhou. the circle above a fumo shows its level, which increases when you collect it",
+		skills: "the skill tree has upgrades, you unlock more skills once you hit levels on the skills before them (they cost fumos)",
+		paths: "personally i wouldnt touch that 😨😨😨 but it lets you switch between which fumo path (music, touhou, gacha) you can get, you can increase active paths with the skill tree",
+		stats: "theres many stats for finding fumos out in the wild, we have: fumo fortune (+1% chance for double drops, at 100 its +1% for triple, and so on), fumo power (its just luck), fumo speed (its just speed), and higher tier rods give you abilities like normal pickaxes",
+		shop: "i have no clue what this will do",
+		bait: "we have lots of bait over at the shop or something"
+	}
+
+	if (helpOptions.style.display === "flex") {
+		helpOptions.style.display = "none"
+		return
+	}
+
+	helpOptions.textContent = ""
+	for (const [topic, answer] of Object.entries(helpTopics)) {
+		const button = document.createElement("button")
+		button.textContent = topic === "skillTree" ? "ask about the skill tree" : `ask about ${topic}`
+		button.onclick = () => jimSay(answer)
+		helpOptions.append(button)
+	}
+	helpOptions.style.display = "flex"
+	jimSay("what do you want to know about? click one of these buttons")
 }
 
 function openFumodex(tab=null){
