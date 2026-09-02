@@ -5776,6 +5776,8 @@ background-size: 100%;
   width: 100vw;
   height: 100vh;
   background-color: #000;
+  background-image: url("media/ores/evil_john.png");
+  background-size: 100% 100%;
 }
 #path-container {
   width: 100%;
@@ -5785,4 +5787,24 @@ background-size: 100%;
   color: white;
   font-size: larger;
   height: 3em;
+}
+#fumo-path-select button {
+  color: var(--better-red);
+  background: orange;
+  border: none;
+  width: 12vw;
+  overflow: hidden;
+}
+
+#fumo-path-select button {
+  animation: scroll-text 5s linear infinite;
+}
+
+@keyframes scroll-text {
+  from {
+    transform: translateX(700%);
+  }
+  to {
+    transform: translateX(-700%);
+  }
 }
