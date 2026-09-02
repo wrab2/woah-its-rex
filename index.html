@@ -1055,10 +1055,11 @@
 				<div class="john-background-water"></div>
 				<div class="john-water-blue"></div>
 			</div>
-			<div class="jim-menu-window"><!--window with quests and stories-->
+			<div class="jim-menu-window">
                 <button onclick="jimHelpMe()">please explain🤔⁉️</button>
                 <button onclick="openFumodex()">💯 fumodex 💯</button>
                 <button onclick="openSkillTree()">skill 🌲tree🌲</button>
+                <button onclick="openPathSelect()">fumo affiliation path🌲</button>
                 <button>shop 🛒💰🛒</button>
                 <button onclick="jimClose()">flee 🐎🐎🐎</button>
 			</div>
@@ -1108,6 +1109,13 @@
 					<div id="skill-tree-nodes"></div>
 				</div>
 			</div>
+            <div id="fumo-path-select">
+                <button onclick="openPathSelect(false)">close</button>
+                <table>
+                    <tbody id="path-container">
+                    </tbody>
+                </table>
+            </div>
 		</div>
 
 		<div id="dailyMessages">

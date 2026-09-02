@@ -85,3 +85,54 @@ function openSkillTree(){
 function closeSkillTree(){
 	get("skill-tree-window").style.display = "none"
 }
+function openPathSelect(open=true){
+	get("path-container").textContent = ""
+	if (open) {
+		let row = document.createElement("tr")
+		for(let i=0; i<3; i++){
+			let toggle = document.createElement("td")
+			toggle.class = "fumo-path-toggle"
+			toggle.innerText = player.activePath[i] ? "Disable":"Enable"
+			toggle.onclick = ()=>{toggleFumoPath(i)}
+			row.append(toggle)
+		}
+		get("path-container").append(row)
+		row = document.createElement("tr")
+		function countFumos(path){
+			let x=0
+			fumos.byType[path].forEach(fumo => {
+				x += player.fumos[fumo.name][fumoStats.found]
+			})
+			return x
+		}
+		for(let i=0; i<3; i++){
+			let desc = document.createElement("td")
+			desc.innerHTML = `
+			<div>Path tier: ${player.upgrades2.fishing_rod.fumoPath[i]}</div>
+			<div>total fumos found on this path: ${countFumos(fumos.pathNames[i])}</div>
+			<div class="fumo-path-${player.activePath[i]?'enabled">ON':'disabled">OFF'}</div>
+			`
+			
+			row.append(desc)
+		}
+		get("path-container").append(row)
+		get("fumo-path-select").style.display = "block"
+		return
+	}
+	get("fumo-path-select").style.display = "none"
+}
+function toggleFumoPath(path){
+	let maxPaths = 1
+
+	if(player.activePath[path] === 1){ 
+		player.activePath[path] = 0 
+	}
+	else{
+		let paths = String(player.activePath.join("").match(/1/g))
+		if(paths.length < maxPaths || paths === "null"){
+			player.activePath[path] = 1
+		}
+	}
+	openPathSelect()
+	createGenerationProbabilities();
+}

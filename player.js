@@ -180,12 +180,14 @@ class playerTemplate {
             "pickaxe27" : {
                 level: 0,
                 maxLevel: 6
-            },
-			"fishing_rod" : {
-				level: 0,
-				//some skill tree upgrades will go here as well probably
-			}
+            }
         },
+        this.upgrades2 = { //idk how upgrades 1 work seems to be hardcoded to only work with tol
+            "fishing_rod" : {
+				level: 0,
+				fumoPath: [0,0,0]
+			},
+        }
         this.wasUsing = undefined;
         this.sr1Unlocked = false;
         this.galacticaUnlocked = false;
@@ -256,6 +258,7 @@ class playerTemplate {
         }
 		this.fumos = playerFumoObject
 		this.skills = playerSkillObj
+        this.activePath = [0,0,0]
     }
 }
 let player = new playerTemplate();
@@ -866,7 +869,9 @@ function loadNewData(data) {
         player.john = {...player.john, ...data.john??{}}
         //player.jim = {...player.jim, ...data.jim??{}}
         player.fumos = {...player.fumos, ...data.fumos??{}}
-        player.skills = data.skills ? Object.assign(player.skills, data.skills) : playerSkillObj
+        player.skills = data.skills ? Object.assign(player.skills, data.skills) : player.skills
+        player.upgrades2 = data.upgrades2 ? Object.assign(player.upgrades2, data.upgrades2) : player.upgrades2
+        player.activePath = data.activePath ? Object.assign(player.activePath, data.activePath) : player.activePath
         if (data.faqOffered) player.faqOffered = true;
         for (let message in dailyMessages) checkMessages(message);
         showNextInQueue();

@@ -3,6 +3,7 @@ let fumos = {
 	byName: [],
 	all: [],
 	nameList: new Set(),
+	pathNames: ["music","gacha","touhou"],
 }
 
 function insertFumosIntoLayers() {
@@ -49,6 +50,8 @@ class Fumo {
 		fumos.byType[this.type] = fumos.byType[this.type].sort((a,b)=>a.tier - b.tier)
 	}
 	getRarity(){
+		if(player.stats.currentPickaxe !== "fishing_pole") return 0
+		if(player.activePath[fumos.pathNames.indexOf(this.type)] === 0) return 0 //wrong path
 		if(false /*check if it meets tier requirements*/) return 0
 		let baseRarity = 10000
 		let tierExponent = 0.2
