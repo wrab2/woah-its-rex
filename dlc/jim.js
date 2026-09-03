@@ -70,7 +70,10 @@ function jimHelpMe() {
 	helpOptions.style.display = "flex"
 	jimSay("what do you want to know about? click one of these buttons")
 }
-
+function flipFumoCard(card){
+	card.classList.contains("flipped") ? card.classList.remove("flipped") : card.classList.add("flipped")
+	console.log("ad")
+}
 function openFumodex(tab=null){
 	if (!this.tab){
 		this.tab = "music"
@@ -92,6 +95,7 @@ function openFumodex(tab=null){
 		thisCard.getElementsByClassName("fumo-image")[0].src = `media/fumo_fishing/${this.tab}/${fumo.name}.webp`
 		for (const location of thisCard.getElementsByClassName("fumo-location")) location.innerHTML = fumoLocation
 
+		thisCard.onclick = ()=>{flipFumoCard(thisCard)}
 		get("fumo-card-container").append(thisCard)
 	}
 	get("fumodex").style.display="block"
