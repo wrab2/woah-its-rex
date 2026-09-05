@@ -72,7 +72,6 @@ function jimHelpMe() {
 }
 function flipFumoCard(card){
 	card.classList.contains("flipped") ? card.classList.remove("flipped") : card.classList.add("flipped")
-	console.log("ad")
 }
 function openFumodex(tab=null){
 	if (!this.tab){
@@ -89,11 +88,14 @@ function openFumodex(tab=null){
 		thisCard.removeAttribute("id")
 		const fumoName = fumo.name.replace(/_/g, " ")
 		const fumoLevel = player.fumos[fumo.name][fumoStats.level]
-		const fumoLocation = `found in ${fumo.layer}`
+		let layerOre = layerList[fumo.layer[0]].at(-1)
+		console.log(oreList[layerOre])
+		const fumoLocation ="found in "+ (oreList[layerOre].hasImage ? `<img src="${oreList[layerOre].src}">` : layerOre)
 		for (const name of thisCard.getElementsByClassName("fumo-name")) name.textContent = fumoName
 		for (const level of thisCard.getElementsByClassName("fumo-level")) level.textContent = fumoLevel
 		thisCard.getElementsByClassName("fumo-image")[0].src = `media/fumo_fishing/${this.tab}/${fumo.name}.webp`
 		for (const location of thisCard.getElementsByClassName("fumo-location")) location.innerHTML = fumoLocation
+		thisCard.getElementsByClassName("fumo-tier")[0].textContent = "Tier "+fumo.tier
 
 		thisCard.onclick = ()=>{flipFumoCard(thisCard)}
 		get("fumo-card-container").append(thisCard)
