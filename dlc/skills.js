@@ -75,11 +75,10 @@ function setupSkillTree() {
 	for (const skill of skillList) {
 		const card = get("skill-tree-node-copy")
 		let thisCard = card.cloneNode(true)
+		skill.targetElement = thisCard
 		thisCard.removeAttribute("id")
 		thisCard.classList.add("st-closed")
 		thisCard.getElementsByClassName("stn-label")[0].textContent = skill.name
-		//thisCard.getElementsByClassName("stn-progress-bar")[0] ~~~ idk
-		thisCard.getElementsByClassName("stn-level")[0].textContent = `${player.skills[skill.id]}/${skill.maxLevel}`
 		//short list of fumos
 		let str = ""
 		let costArr = Object.keys(skill.cost)
@@ -92,7 +91,6 @@ function setupSkillTree() {
 			}
 		}
 		thisCard.getElementsByClassName("short")[0].innerHTML = str
-
 
 		thisCard.style = `
 			left: ${tempSkills.spacing.x * (skill.position[0] + Math.abs(tempSkills.boundsX[0]))};
@@ -165,7 +163,9 @@ class Skill {
 
 		skillList[this.id] = this
 		this.open = this.open.bind(this)
+		this.buy = this.buy.bind(this)
 		this.deleteExtraTimeout = 0
+		this.targetElement = ""
 	}
 	drawConnectors() {
 		let ctx = tempSkills.ctx
@@ -193,10 +193,10 @@ class Skill {
 		}
 
 	}
-	open(scope) {
+	open() {
 		if (tempSkills.dragging === true || Date.now() - tempSkills.dragging < 50) return
-		//cancel everything if you clicked on the same element
-		if (this.deleteExtraTimeout) return clearTimeout(this.deleteExtraTimeout)
+		//cancel clearing of this node
+		if (this.deleteExtraTimeout) clearTimeout(this.deleteExtraTimeout)
 		//fill extra info
 		let str = ""
 		let costArr = Object.keys(this.cost)
@@ -207,9 +207,9 @@ class Skill {
 			str+=`<span class="stn-fumo-count">${formatNumber(fumos.byName[costArr[i]].owned())}/${formatNumber(this.cost[costArr[i]])}</span>`
 			str+="</div>"
 		}
-		scope.currentTarget.getElementsByClassName("expanded")[0].innerHTML = str
+		this.targetElement.getElementsByClassName("expanded")[0].innerHTML = str
 
-		if (tempSkills.openedNode) {
+		if (tempSkills.openedNode && tempSkills.openedNode !== this.targetElement) {
 			let todelete = tempSkills.openedNode
 			todelete.classList.remove("st-opened")
 			todelete.classList.add("st-closed")
@@ -218,15 +218,41 @@ class Skill {
 				this.deleteExtraTimeout = 0
 			}, 500);
 		}
-		tempSkills.openedNode = scope.currentTarget
-		scope.currentTarget.classList.remove("st-closed")
-		scope.currentTarget.classList.add("st-opened")
+		tempSkills.openedNode = this.targetElement
+		this.targetElement.classList.remove("st-closed")
+		this.targetElement.classList.add("st-opened")
 		get("skill-tree-description").textContent = this.description
+		get("buy-skill-button").onclick = this.buy
+	}
+	buy() {
+		for(const fumo of Object.keys(this.cost)){
+			if(fumos.byName[fumo].owned < this.cost[fumo]){
+				return //not enough of fumos
+			}
+		}
+		for(const fumo of Object.keys(this.cost)){
+			player.fumos[fumo][fumoStats.owned] -= this.cost[fumo]
+		}
+		player.skills[this.id]++
+		this.update()
 	}
 	lock() {
 		//lock the cell if it's not unlocked
 	}
 	update() {
+		let levelText = ""
+		if(player.skills[this.id] === this.maxLevel) levelText = "MAX."
+		else levelText = `${player.skills[this.id]}/${this.maxLevel}`
+		this.targetElement.getElementsByClassName("stn-level")[0].textContent = levelText
+
+		let progress = 0
+		let costArr = Object.keys(this.cost)
+		for(let i=0; i<costArr.length; i++){
+			const fumo = costArr[i]
+			progress += (Math.min(1, player.fumos[fumo][fumoStats.owned]/this.cost[fumo])) / costArr.length
+		}
+		this.targetElement.getElementsByClassName("stn-progress-bar")[0].childNodes[0].style.width = String(100*progress)+"%"
+		if(tempSkills.openedNode === this.targetElement)this.open() //reconstruct extended fumo list if you're seeing it
 		//update currencies and effect displays
 	}
 }
