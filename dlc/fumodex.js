@@ -23,10 +23,23 @@ function insertFumosIntoLayers() {
 	}
 }
 
+function getFishingPower(recalculate=false){ //fumo luck
+	this.fishingPower??=1
+	if(!recalculate)return this.fishingPower
+	let fishingPower = 1
+	fishingPower *= 1+ 0.01*player.skills[1] //an AMAZING example where skill id 1 gives 1% of fishing power per level except we don't have fishing power skills
+}
 
-let playerFumoObject = {}
+function getFishingFortune(recalculate=false){ //chance for an extra fumo
+	this.fishingFortune??=1
+	if(!recalculate)return this.fishingFortune
+	let fishingFortune = 1
+	fishingFortune += 1 + 0.001*player.skills[2] //we don't seem to have fishing fortune skills either
+}
 
-let fumoStats = {
+const playerFumoObject = {}
+
+const fumoStats = {
 	//this is for access like player.fumos[fumo.name][fumoStats.level]
 	level: 0,
 	xp: 1,
@@ -59,6 +72,7 @@ class Fumo {
 		//something with fishing power needs to exist
 		rarity = baseRarity ** (1+((this.tier-1)*tierExponent))
 		rarity = 1/rarity
+		rarity *= getFishingPower()
 		return 0.1 //test
 		return rarity
 	}
@@ -67,7 +81,10 @@ class Fumo {
 	}
 	addFumo(variant){
 		let playerFumo = player.fumos[this.name]
-		playerFumo[fumoStats.owned] += 1
+		let ff = getFishingFortune()
+		let amountToGive
+		amountToGive = Math.random() < ff%1 ? Math.floor(ff) : Math.ceil(ff) 
+		playerFumo[fumoStats.owned] += amountToGive
 		playerFumo[fumoStats.found] += 1
 		playerFumo[fumoStats.xp] += 10*variant
 		//level formula, that is 5000*(3^level*1.05) (subject to be changed)
@@ -81,8 +98,8 @@ class Fumo {
 		playerFumo[fumoStats.xp] = 0
 	}
 	generateListEntry(){
-		 this.fakeOreListEntry = {'numRarity': 1/this.getRarity(), 'decimalRarity':this.getRarity(), 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'hasImage' : true, "src" : `media/fumo_fishing/${this.type}/${this.name}.webp`}
-		 return this.fakeOreListEntry
+		 const fakeOreListEntry = {'numRarity': 1/this.getRarity(), 'decimalRarity':this.getRarity(), 'hasLog': true,  'caveExclusive': false, 'spawnMessage': '', 'oreTier': 'Common', 'hasImage' : true, "src" : `media/fumo_fishing/${this.type}/${this.name}.webp`}
+		 return fakeOreListEntry
 	}
 	owned(){
 		return player.fumos[this.name][fumoStats.owned]

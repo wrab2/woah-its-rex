@@ -145,6 +145,8 @@ function init() {
 	}
 	setupSkillTree()
 	tempSkills.ctx = get("skill-tree-lines").getContext("2d")
+    getFishingPower(true)
+    getFishingFortune(true)
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
