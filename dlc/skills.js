@@ -278,7 +278,7 @@ new Skill({
 	id: 1,
 	name: "fumo-ical speed",
 	description: "increases your speed by 1.5x while using a fishing rod",
-	maxLevel: 1,
+	maxLevel: 5,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
@@ -300,9 +300,9 @@ new Skill({
 })
 new Skill({
 	id: 3,
-	name: "fumo fortune",
-	description: "1.75x fortune while using a fishing rod",
-	maxLevel: 1,
+	name: "fumo power",
+	description: "1.75x power while using a fishing rod",
+	maxLevel: 10,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
@@ -513,9 +513,9 @@ new Skill({
 })
 new Skill({
 	id: 22,
-	name: "placeholder",
-	description: "bwa",
-	maxLevel: 1,
+	name: "fortunate",
+	description: "+10% fortune (ADDITIVE)",
+	maxLevel: 30,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
@@ -525,27 +525,27 @@ new Skill({
 })
 new Skill({
 	id: 23,
-	name: "placeholder",
-	description: "bwa",
-	maxLevel: 1,
+	name: "fortunater",
+	description: "+5% fortune (MULTIPLICATIVE)",
+	maxLevel: 10,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
 	},
 	position: [-5, 7],
-	parents: [[22, 1]],
+	parents: [[22, 5]],
 })
 new Skill({
 	id: 24,
-	name: "placeholder",
-	description: "bwa",
-	maxLevel: 1,
+	name: "fortunatest",
+	description: "^1.05 fortune",
+	maxLevel: 3,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
 	},
 	position: [-6, 8],
-	parents: [[23, 1]],
+	parents: [[23, 2]],
 })
 new Skill({
 	id: 25,
@@ -573,9 +573,9 @@ new Skill({
 })
 new Skill({
 	id: 27,
-	name: "AWESOME placeholder",
-	description: "cooler placeholder",
-	maxLevel: 1,
+	name: "more fumo power",
+	description: "x1.01 power for every skill level bought",
+	maxLevel: 2,
 	cost: {
 		"Ikuyo_Kita": 1,
 		"Chen": 1,
