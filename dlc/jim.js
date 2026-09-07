@@ -6,6 +6,14 @@ let jim = {
 	fumodexOpen: false,
 }
 
+function setupJim(){
+	setupSkillTree()
+	tempSkills.ctx = get("skill-tree-lines").getContext("2d")
+    getFishingPower(true)
+    getFishingFortune(true)
+    decideOnWhatJimShouldLookLike()
+}
+
 function spawnJim(){
 	if (jim.startedTrying === -1) return jim.spawnJimNOW = false
 	if (Date.now() - jim.startedTrying > jim.spawnTimeout) jim.spawnJimNOW = true
@@ -89,7 +97,6 @@ function openFumodex(tab=null){
 		const fumoName = fumo.name.replace(/_/g, " ")
 		const fumoLevel = player.fumos[fumo.name][fumoStats.level]
 		let layerOre = layerList[fumo.layer[0]].at(-1)
-		console.log(oreList[layerOre])
 		const fumoLocation ="found in "+ (oreList[layerOre].hasImage ? `<img src="${oreList[layerOre].src}">` : layerOre)
 		for (const name of thisCard.getElementsByClassName("fumo-name")) name.textContent = fumoName
 		for (const level of thisCard.getElementsByClassName("fumo-level")) level.textContent = fumoLevel
@@ -167,4 +174,17 @@ function toggleFumoPath(path){
 	}
 	openPathSelect()
 	createGenerationProbabilities();
+}
+
+function decideOnWhatJimShouldLookLike(){
+	let sprite = ""
+	if(player.skills[13] && player.skills[25]) sprite = "joyful_jim"
+	else if(player.skills[13]) sprite = "hatful_jim"
+	else if(player.skills[25]) sprite = "ballful_jim"
+	else if(johnRewarded("water_polo_ball")) sprite = "balless_jim"
+	else if(johnRewarded("hat")) sprite = "ballful_jim"
+	else sprite = "joyful_jim"
+	sprite = `media/john/${sprite}.svg`
+	oreList['🤽'].src = sprite
+	document.documentElement.style.setProperty("--jim-sprite", `url("${sprite}")`)
 }

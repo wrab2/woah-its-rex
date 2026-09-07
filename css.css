@@ -22,6 +22,7 @@
   --better-red:#FF3D3D;
   --better-green:#6BC267;
   --skill-tree-scale:1;
+  --jim-sprite:url("media/john/joyful_jim.svg")
 }
 #topMessages {
   height: 3vw;
@@ -5256,7 +5257,7 @@ background-size: 100%;
 	background-image: url("media/john/john.svg");
 }
 #jim-portrait{
-	background-image: url("media/john/balless_jim.svg");
+	background-image: var(--jim-sprite);
 }
 @keyframes john-swim-up {
   from { margin-top: 500px;}
@@ -5683,7 +5684,7 @@ background-size: 100%;
 	width: 250px;
 	height: 250px;
 	font-size: min(30vw, 80vh);
-	background-image: url("media/john/balless_jim.svg");
+	background-image: var(--jim-sprite);
 	z-index:4;
 }
 #skill-tree-zoom {

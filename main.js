@@ -143,10 +143,7 @@ function init() {
 	if(player.stats.currentPickaxe === "fishing_pole"){
 		insertFumosIntoLayers()
 	}
-	setupSkillTree()
-	tempSkills.ctx = get("skill-tree-lines").getContext("2d")
-    getFishingPower(true)
-    getFishingFortune(true)
+    setupJim()
 }
 function finishInit() {
     rand = new Math.seedrandom(gameInfo.seed + String(gameInfo.loops));
