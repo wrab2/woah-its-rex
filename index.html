@@ -1061,7 +1061,7 @@
                 <button onclick="openFumodex()">💯 fumodex 💯</button>
                 <button onclick="openSkillTree()">skill 🌲tree🌲</button>
                 <button onclick="openPathSelect()">😨 evil john's fumo affiliation path 😨</button>
-                <button>shop 🛒💰🛒</button>
+                <button onclick="openShop()">shop 🛒💰🛒</button>
                 <button onclick="jimClose()">flee 🐎🐎🐎</button>
 			</div>
             <div id="fumodex" style="display: none;">
@@ -1125,6 +1125,23 @@
                     <tbody id="path-container">
                     </tbody>
                 </table>
+            </div>
+            <div id="shop-window">
+                <div id="shop-title">Jim's local small business "unending & insatiable Greed"</div>
+                <div id="shop-description-container">
+                </div>
+                <div id="shop-container">
+                    <div id="shop-tab-select">
+                        <button class="active-shop-tab" onclick='shopSwitchTab(this, "buy")'>Buy</button>
+                        <button onclick='shopSwitchTab(this, "sell")'>Sell</button>
+                        <button onclick='shopSwitchTab(this, "inventory")'>inventory</button>
+                    </div>
+                    <div id="shop-tab-container">
+                        <div id="shop-card-copy" class="shop-card">
+                            hi!
+                        </div>
+                    </div>
+                </div>
             </div>
 		</div>
 

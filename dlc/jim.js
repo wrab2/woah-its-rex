@@ -188,3 +188,16 @@ function decideOnWhatJimShouldLookLike(){
 	oreList['🤽'].src = sprite
 	document.documentElement.style.setProperty("--jim-sprite", `url("${sprite}")`)
 }
+
+function openShop(close=false){
+	if(close){
+		get("shop-window").style.display = "none"
+		return
+	}
+	get("shop-window").style.display = "flex"
+}
+function shopSwitchTab(button, tab){
+	get("shop-tab-select").getElementsByClassName("active-shop-tab")[0].classList.remove("active-shop-tab")
+	button.classList.add("active-shop-tab")
+	//fill shop-tab-container ...
+}
